@@ -1,0 +1,118 @@
+{
+    ".deps_version": 2, 
+    "cmp build/and2.v gold/and2.v": {
+        "build/and2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf", 
+        "gold/and2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf"
+    }, 
+    "cmp build/and2x2.v gold/and2x2.v": {
+        "build/and2x2.v": "input-456b5161b2af06f67c667d3301099d63", 
+        "gold/and2x2.v": "input-456b5161b2af06f67c667d3301099d63"
+    }, 
+    "cmp build/and3.v gold/and3.v": {
+        "build/and3.v": "input-757249e10772156feb705c535216de4c", 
+        "gold/and3.v": "input-757249e10772156feb705c535216de4c"
+    }, 
+    "cmp build/and4.v gold/and4.v": {
+        "build/and4.v": "input-3c07369f3d0ac04404f36fae3101ab51", 
+        "gold/and4.v": "input-3c07369f3d0ac04404f36fae3101ab51"
+    }, 
+    "cmp build/andn2.v gold/andn2.v": {
+        "build/andn2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf", 
+        "gold/andn2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf"
+    }, 
+    "cmp build/buf.v gold/buf.v": {
+        "build/and2x2.v": "input-456b5161b2af06f67c667d3301099d63", 
+        "build/and3.v": "input-757249e10772156feb705c535216de4c", 
+        "build/buf.v": "input-3e4a323114e0211325460b931e3b5853", 
+        "gold/buf.v": "input-3e4a323114e0211325460b931e3b5853"
+    }, 
+    "cmp build/nand2.v gold/nand2.v": {
+        "build/and2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf", 
+        "build/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0", 
+        "gold/and2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf", 
+        "gold/and2x2.v": "input-456b5161b2af06f67c667d3301099d63", 
+        "gold/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0"
+    }, 
+    "cmp build/nor2.v gold/nor2.v": {
+        "and2.py": "input-d2da3ef1f398cfd4402449eb4ff6f3c5", 
+        "build/and4.v": "input-3c07369f3d0ac04404f36fae3101ab51", 
+        "build/nor2.v": "input-546b656d745ca3f5211d6aa794c6d22d", 
+        "gold/and2x2.v": "input-456b5161b2af06f67c667d3301099d63", 
+        "gold/nor2.v": "input-546b656d745ca3f5211d6aa794c6d22d"
+    }, 
+    "cmp build/not.v gold/not.v": {
+        "build/buf.v": "input-3e4a323114e0211325460b931e3b5853", 
+        "build/not.v": "input-0bd55009390948522032d1c39f7a56f2", 
+        "gold/not.v": "input-0bd55009390948522032d1c39f7a56f2"
+    }, 
+    "cmp build/nxor2.v gold/nxor2.v": {
+        "build/nxor2.v": "input-30bc2ad6d31bcdaa10275ee2ab80b832", 
+        "gold/nxor2.v": "input-30bc2ad6d31bcdaa10275ee2ab80b832"
+    }, 
+    "cmp build/or2.v gold/or2.v": {
+        "build/or2.v": "input-e854e2e31401523014bd079bd62c909a", 
+        "gold/or2.v": "input-e854e2e31401523014bd079bd62c909a"
+    }, 
+    "cmp build/xor2.v gold/xor2.v": {
+        "build/xor2.v": "input-f09182f287f8059990e46f44d585c5a4", 
+        "gold/xor2.v": "input-f09182f287f8059990e46f44d585c5a4"
+    }, 
+    "python and2.py build/and2": {
+        "and2.py": "input-d2da3ef1f398cfd4402449eb4ff6f3c5", 
+        "build/and2.v": "output-f9d31df7ac20748b85fbd9ea2d0a8ebf"
+    }, 
+    "python and2x2.py build/and2x2": {
+        "and2x2.py": "input-3a408cc2d1747e24d14e47e39251e978", 
+        "build/and2x2.v": "output-456b5161b2af06f67c667d3301099d63"
+    }, 
+    "python and3.py build/and3": {
+        "and3.py": "input-0ad29e6281f48583aab37dc0cf394262", 
+        "build/and3.v": "output-757249e10772156feb705c535216de4c"
+    }, 
+    "python and4.py build/and4": {
+        "and4.py": "input-6cb3c208306e1771372257182ce731c6", 
+        "build/and4.v": "output-3c07369f3d0ac04404f36fae3101ab51"
+    }, 
+    "python andn2.py build/andn2": {
+        "andn2.py": "input-f39445e5f2f594dfef9a4dd636583acb", 
+        "build/andn2.v": "output-f9d31df7ac20748b85fbd9ea2d0a8ebf"
+    }, 
+    "python buf.py build/buf": {
+        "buf.py": "input-bcef622d58adb08ec5e3f37fea7f5f25", 
+        "build/buf.v": "output-3e4a323114e0211325460b931e3b5853"
+    }, 
+    "python nand2.py build/nand2": {
+        "build/nand2.v": "output-9143a0a4bdcb94032214d50f76fb4af0", 
+        "nand2.py": "input-7db4a8dfd07d5a22f1896edd1e639cad"
+    }, 
+    "python nor2.py build/nor2": {
+        "and2x2.py": "input-3a408cc2d1747e24d14e47e39251e978", 
+        "build/nor2.v": "output-546b656d745ca3f5211d6aa794c6d22d", 
+        "gold/and4.v": "input-3c07369f3d0ac04404f36fae3101ab51", 
+        "nor2.py": "input-97a2d71acaf0f2dcba0624ac8034641c"
+    }, 
+    "python not.py build/not": {
+        "and3.py": "input-0ad29e6281f48583aab37dc0cf394262", 
+        "and4.py": "input-6cb3c208306e1771372257182ce731c6", 
+        "buf.py": "input-bcef622d58adb08ec5e3f37fea7f5f25", 
+        "build/and3.v": "input-757249e10772156feb705c535216de4c", 
+        "build/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0", 
+        "build/not.v": "output-0bd55009390948522032d1c39f7a56f2", 
+        "gold/buf.v": "input-3e4a323114e0211325460b931e3b5853", 
+        "not.py": "input-11e14c521bab402e9c8b92f9d2b97ca8"
+    }, 
+    "python nxor2.py build/nxor2": {
+        "build/nxor2.v": "output-30bc2ad6d31bcdaa10275ee2ab80b832", 
+        "gold/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0", 
+        "gold/nor2.v": "input-546b656d745ca3f5211d6aa794c6d22d", 
+        "nxor2.py": "input-1b3f45b36aada34741a853de39fa6c45"
+    }, 
+    "python or2.py build/or2": {
+        "build/or2.v": "output-e854e2e31401523014bd079bd62c909a", 
+        "or2.py": "input-861fae598af47d0e0b7a87d25690baef"
+    }, 
+    "python xor2.py build/xor2": {
+        "build/xor2.v": "output-f09182f287f8059990e46f44d585c5a4", 
+        "xor2.py": "input-8967ade86c33c4d6ece31708ec085251"
+    }
+}

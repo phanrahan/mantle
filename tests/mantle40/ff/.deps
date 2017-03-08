@@ -1,0 +1,81 @@
+{
+    ".deps_version": 2, 
+    "cmp build/dff.pcf gold/dff.pcf": {
+        "build/dff.pcf": "input-78d904324597ab3921b219d781991be9", 
+        "gold/dff.pcf": "input-78d904324597ab3921b219d781991be9"
+    }, 
+    "cmp build/dff.v gold/dff.v": {
+        "build/dff.v": "input-f1fe1901fd595dc61dd074d469adcdea", 
+        "gold/dff.v": "input-f1fe1901fd595dc61dd074d469adcdea"
+    }, 
+    "cmp build/dffe.pcf gold/dffe.pcf": {
+        "build/dffe.pcf": "input-15e356df1201a8b534ed0375ef0bd8a3", 
+        "gold/dffe.pcf": "input-15e356df1201a8b534ed0375ef0bd8a3"
+    }, 
+    "cmp build/dffe.v gold/dffe.v": {
+        "build/dffe.v": "input-d73593d0e40ffdf78108ca3bf7bd8b82", 
+        "gold/dffe.v": "input-d73593d0e40ffdf78108ca3bf7bd8b82"
+    }, 
+    "cmp build/dffinit.pcf gold/dffinit.pcf": {
+        "build/dffinit.pcf": "input-78d904324597ab3921b219d781991be9", 
+        "gold/dffinit.pcf": "input-78d904324597ab3921b219d781991be9"
+    }, 
+    "cmp build/dffinit.v gold/dffinit.v": {
+        "build/dffinit.v": "input-4985abd9cbf77b43ba7b9132f64e0d66", 
+        "gold/dffinit.v": "input-4985abd9cbf77b43ba7b9132f64e0d66"
+    }, 
+    "cmp build/rsff.pcf gold/rsff.pcf": {
+        "build/rsff.pcf": "input-41a6d996ca530aa2c44bd0a2f7a328b1", 
+        "gold/rsff.pcf": "input-41a6d996ca530aa2c44bd0a2f7a328b1"
+    }, 
+    "cmp build/rsff.v gold/rsff.v": {
+        "build/rsff.v": "input-5ca38194e2f82742ef1c8531ab399508", 
+        "gold/rsff.v": "input-5ca38194e2f82742ef1c8531ab399508"
+    }, 
+    "cmp build/srff.pcf gold/srff.pcf": {
+        "build/srff.pcf": "input-41a6d996ca530aa2c44bd0a2f7a328b1", 
+        "gold/srff.pcf": "input-41a6d996ca530aa2c44bd0a2f7a328b1"
+    }, 
+    "cmp build/srff.v gold/srff.v": {
+        "build/srff.v": "input-0f6f422896755b2327fd099694f73062", 
+        "gold/srff.v": "input-0f6f422896755b2327fd099694f73062"
+    }, 
+    "cmp build/tff.pcf gold/tff.pcf": {
+        "build/tff.pcf": "input-d0f9688b50dbf201786bebcc4e7594d2", 
+        "gold/tff.pcf": "input-d0f9688b50dbf201786bebcc4e7594d2"
+    }, 
+    "cmp build/tff.v gold/tff.v": {
+        "build/tff.v": "input-7068deede494f4076fbb553fb90c7f48", 
+        "gold/tff.v": "input-7068deede494f4076fbb553fb90c7f48"
+    }, 
+    "python dff.py build/dff": {
+        "build/dff.pcf": "output-78d904324597ab3921b219d781991be9", 
+        "build/dff.v": "output-f1fe1901fd595dc61dd074d469adcdea", 
+        "dff.py": "input-d5694d8cd068bc53d8ccfb92a6e4d29b"
+    }, 
+    "python dffe.py build/dffe": {
+        "build/dffe.pcf": "output-15e356df1201a8b534ed0375ef0bd8a3", 
+        "build/dffe.v": "output-d73593d0e40ffdf78108ca3bf7bd8b82", 
+        "dffe.py": "input-9c13a8142f6ff0e2ceb793a6abdfa688"
+    }, 
+    "python dffinit.py build/dffinit": {
+        "build/dffinit.pcf": "output-78d904324597ab3921b219d781991be9", 
+        "build/dffinit.v": "output-4985abd9cbf77b43ba7b9132f64e0d66", 
+        "dffinit.py": "input-798ea3c2b541c91d09c3a8391d47a89f"
+    }, 
+    "python rsff.py build/rsff": {
+        "build/rsff.pcf": "output-41a6d996ca530aa2c44bd0a2f7a328b1", 
+        "build/rsff.v": "output-5ca38194e2f82742ef1c8531ab399508", 
+        "rsff.py": "input-abc754a8ab07d4187dd981fd9b673d4d"
+    }, 
+    "python srff.py build/srff": {
+        "build/srff.pcf": "output-41a6d996ca530aa2c44bd0a2f7a328b1", 
+        "build/srff.v": "output-0f6f422896755b2327fd099694f73062", 
+        "srff.py": "input-c564bcdada3f69956019ae09f1ed705a"
+    }, 
+    "python tff.py build/tff": {
+        "build/tff.pcf": "output-d0f9688b50dbf201786bebcc4e7594d2", 
+        "build/tff.v": "output-7068deede494f4076fbb553fb90c7f48", 
+        "tff.py": "input-a1a65dd0b2f27c800a02333fdef1d46b"
+    }
+}

@@ -1,0 +1,143 @@
+{
+    ".deps_version": 2, 
+    "cmp build/adc1.pcf gold/adc1.pcf": {
+        "build/adc1.pcf": "input-6e589f76ba313544b434162344972b3f", 
+        "build/sbc2.place.blif": "input-640f4a8ff042ee6d1b9037a3f71ab79c", 
+        "gold/adc1.pcf": "input-6e589f76ba313544b434162344972b3f", 
+        "gold/adc2.v": "input-e62581db028c427110ea86ea6da55c17", 
+        "gold/ha.pcf": "input-f47fb999278acec0366a222cd09c2fdd"
+    }, 
+    "cmp build/adc1.v gold/adc1.v": {
+        "build/adc1.v": "input-8c0c049d3d992d0887df849e196d40f5", 
+        "gold/adc1.v": "input-8c0c049d3d992d0887df849e196d40f5", 
+        "gold/add2.v": "input-4813229638a8d3678c45e178f8827be9", 
+        "gold/fa.v": "input-660f3d53fceb419c439511a17fcde1c4", 
+        "gold/neg2.v": "input-5a5aa7968de928c0288715285d75d4bd"
+    }, 
+    "cmp build/adc2.pcf gold/adc2.pcf": {
+        "adc1.py": "input-05a155a50a2c360b124f8990a2326913", 
+        "build/adc2.pcf": "input-64153be394158a7df21ef41ae12f9ba2", 
+        "build/sbc2.place.blif": "input-640f4a8ff042ee6d1b9037a3f71ab79c", 
+        "gold/adc2.pcf": "input-64153be394158a7df21ef41ae12f9ba2", 
+        "gold/adc2.v": "input-e62581db028c427110ea86ea6da55c17"
+    }, 
+    "cmp build/adc2.v gold/adc2.v": {
+        "build/adc2.v": "input-e62581db028c427110ea86ea6da55c17", 
+        "gold/adc2.v": "input-e62581db028c427110ea86ea6da55c17"
+    }, 
+    "cmp build/add1.pcf gold/add1.pcf": {
+        "build/add1.pcf": "input-47fdd7ceb995722ee78158542f00f028", 
+        "gold/adc2.pcf": "input-64153be394158a7df21ef41ae12f9ba2", 
+        "gold/add1.pcf": "input-47fdd7ceb995722ee78158542f00f028"
+    }, 
+    "cmp build/add1.v gold/add1.v": {
+        "build/add1.v": "input-d36c72f022e5e795a9a70f3a5cc53943", 
+        "gold/add1.v": "input-d36c72f022e5e795a9a70f3a5cc53943"
+    }, 
+    "cmp build/add2.pcf gold/add2.pcf": {
+        "build/add2.pcf": "input-7bba77645a6ba57370a43ac7f40039f0", 
+        "gold/add2.pcf": "input-7bba77645a6ba57370a43ac7f40039f0"
+    }, 
+    "cmp build/add2.v gold/add2.v": {
+        "build/add2.v": "input-4813229638a8d3678c45e178f8827be9", 
+        "gold/add2.v": "input-4813229638a8d3678c45e178f8827be9"
+    }, 
+    "cmp build/fa.pcf gold/fa.pcf": {
+        "build/fa.pcf": "input-7bba77645a6ba57370a43ac7f40039f0", 
+        "gold/fa.pcf": "input-7bba77645a6ba57370a43ac7f40039f0"
+    }, 
+    "cmp build/fa.v gold/fa.v": {
+        "build/fa.v": "input-660f3d53fceb419c439511a17fcde1c4", 
+        "gold/fa.v": "input-660f3d53fceb419c439511a17fcde1c4"
+    }, 
+    "cmp build/ha.pcf gold/ha.pcf": {
+        "build/ha.pcf": "input-f47fb999278acec0366a222cd09c2fdd", 
+        "gold/ha.pcf": "input-f47fb999278acec0366a222cd09c2fdd"
+    }, 
+    "cmp build/ha.v gold/ha.v": {
+        "build/ha.v": "input-219708baa5439ade746cde95a627dcee", 
+        "gold/ha.v": "input-219708baa5439ade746cde95a627dcee"
+    }, 
+    "cmp build/neg2.pcf gold/neg2.pcf": {
+        "build/neg2.pcf": "input-8f0f08a7e1d90bece2e269befe44b200", 
+        "gold/neg2.pcf": "input-8f0f08a7e1d90bece2e269befe44b200"
+    }, 
+    "cmp build/neg2.v gold/neg2.v": {
+        "build/neg2.v": "input-5a5aa7968de928c0288715285d75d4bd", 
+        "gold/neg2.v": "input-5a5aa7968de928c0288715285d75d4bd"
+    }, 
+    "cmp build/sbc2.pcf gold/sbc2.pcf": {
+        "build/sbc2.pcf": "input-64153be394158a7df21ef41ae12f9ba2", 
+        "gold/sbc2.pcf": "input-64153be394158a7df21ef41ae12f9ba2"
+    }, 
+    "cmp build/sbc2.v gold/sbc2.v": {
+        "build/sbc2.v": "input-6aa05048cc60b801535527e6682e39b8", 
+        "gold/sbc2.v": "input-6aa05048cc60b801535527e6682e39b8"
+    }, 
+    "cmp build/sub2.pcf gold/sub2.pcf": {
+        "build/sub2.pcf": "input-7bba77645a6ba57370a43ac7f40039f0", 
+        "gold/sub2.pcf": "input-7bba77645a6ba57370a43ac7f40039f0"
+    }, 
+    "cmp build/sub2.v gold/sub2.v": {
+        "build/sub2.v": "input-bc0fb6c3e396524c35aa1d4ddf0ff59a", 
+        "gold/sub2.v": "input-bc0fb6c3e396524c35aa1d4ddf0ff59a"
+    }, 
+    "python adc1.py build/adc1": {
+        "adc1.py": "input-05a155a50a2c360b124f8990a2326913", 
+        "build/adc1.pcf": "output-6e589f76ba313544b434162344972b3f", 
+        "build/adc1.v": "output-8c0c049d3d992d0887df849e196d40f5"
+    }, 
+    "python adc2.py build/adc2": {
+        "adc2.py": "input-0b8f73548f2136cdb8e896b6f8a732bd", 
+        "build/adc2.pcf": "output-64153be394158a7df21ef41ae12f9ba2", 
+        "build/adc2.v": "output-e62581db028c427110ea86ea6da55c17", 
+        "build/sbc2.bin": "input-869f90926a6f294c2baed30b394c0221", 
+        "build/sbc2.blif": "input-452d524d9179c62890bc4b6143951df4", 
+        "gold/adc1.v": "input-8c0c049d3d992d0887df849e196d40f5", 
+        "gold/add2.v": "input-4813229638a8d3678c45e178f8827be9", 
+        "gold/neg2.v": "input-5a5aa7968de928c0288715285d75d4bd", 
+        "neg2.py": "input-61e85120dd8d2d96878d791848ebf22a", 
+        "sub2.py": "input-5b5ac928f89cbb9e65471caf3c05a4e9"
+    }, 
+    "python add1.py build/add1": {
+        "add1.py": "input-ca7acbbc2c9c0ef71daafd5124fe8567", 
+        "add2.py": "input-c9cee9e2bf94c7dd94f99d81ead45dc1", 
+        "build/adc1.pcf": "input-6e589f76ba313544b434162344972b3f", 
+        "build/add1.pcf": "output-47fdd7ceb995722ee78158542f00f028", 
+        "build/add1.v": "output-d36c72f022e5e795a9a70f3a5cc53943", 
+        "build/sbc2.place.blif": "input-640f4a8ff042ee6d1b9037a3f71ab79c", 
+        "gold/adc1.v": "input-8c0c049d3d992d0887df849e196d40f5", 
+        "gold/adc2.v": "input-e62581db028c427110ea86ea6da55c17", 
+        "gold/add2.v": "input-4813229638a8d3678c45e178f8827be9"
+    }, 
+    "python add2.py build/add2": {
+        "add2.py": "input-c9cee9e2bf94c7dd94f99d81ead45dc1", 
+        "build/add2.pcf": "output-7bba77645a6ba57370a43ac7f40039f0", 
+        "build/add2.v": "output-4813229638a8d3678c45e178f8827be9"
+    }, 
+    "python fa.py build/fa": {
+        "build/fa.pcf": "output-7bba77645a6ba57370a43ac7f40039f0", 
+        "build/fa.v": "output-660f3d53fceb419c439511a17fcde1c4", 
+        "fa.py": "input-9f6a5e4e389dcee4dd4082e36db89c82"
+    }, 
+    "python ha.py build/ha": {
+        "build/ha.pcf": "output-f47fb999278acec0366a222cd09c2fdd", 
+        "build/ha.v": "output-219708baa5439ade746cde95a627dcee", 
+        "ha.py": "input-daaca456bcde7967d4f7a4702673a613"
+    }, 
+    "python neg2.py build/neg2": {
+        "build/neg2.pcf": "output-8f0f08a7e1d90bece2e269befe44b200", 
+        "build/neg2.v": "output-5a5aa7968de928c0288715285d75d4bd", 
+        "neg2.py": "input-61e85120dd8d2d96878d791848ebf22a"
+    }, 
+    "python sbc2.py build/sbc2": {
+        "build/sbc2.pcf": "output-64153be394158a7df21ef41ae12f9ba2", 
+        "build/sbc2.v": "output-6aa05048cc60b801535527e6682e39b8", 
+        "sbc2.py": "input-4bf9c5ecde9a597cdef60d8bf2a4f28e"
+    }, 
+    "python sub2.py build/sub2": {
+        "build/sub2.pcf": "output-7bba77645a6ba57370a43ac7f40039f0", 
+        "build/sub2.v": "output-bc0fb6c3e396524c35aa1d4ddf0ff59a", 
+        "sub2.py": "input-5b5ac928f89cbb9e65471caf3c05a4e9"
+    }
+}

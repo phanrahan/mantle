@@ -1,0 +1,9 @@
+set_io J1[0] 112
+set_io J1[1] 113
+set_io J1[2] 114
+set_io J1[3] 115
+set_io J1[4] 116
+set_io J1[5] 117
+set_io J1[6] 118
+set_io J1[7] 119
+set_io D0 62

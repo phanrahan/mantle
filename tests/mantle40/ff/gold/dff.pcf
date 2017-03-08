@@ -1,0 +1,3 @@
+set_io SWITCH 112
+set_io D1 99
+set_io CLKIN 21

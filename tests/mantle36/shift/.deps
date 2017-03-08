@@ -1,0 +1,81 @@
+{
+    ".deps_version": 2, 
+    "cmp build/johnson.ucf gold6/johnson.ucf": {
+        "build/johnson.ucf": "input-de10485e54ddb321eff5c952712e63fc", 
+        "gold6/johnson.ucf": "input-de10485e54ddb321eff5c952712e63fc"
+    }, 
+    "cmp build/johnson.v gold6/johnson.v": {
+        "build/johnson.v": "input-bdc6a5791f7fc296d9cf5bacebdfc124", 
+        "gold6/johnson.v": "input-bdc6a5791f7fc296d9cf5bacebdfc124"
+    }, 
+    "cmp build/pipo.ucf gold6/pipo.ucf": {
+        "build/pipo.ucf": "input-adf2a5f1f9389dfae34f7a30c3a64955", 
+        "gold6/pipo.ucf": "input-adf2a5f1f9389dfae34f7a30c3a64955"
+    }, 
+    "cmp build/pipo.v gold6/pipo.v": {
+        "build/pipo.v": "input-0bfe8381410ed2ca098f90e11d82e80a", 
+        "gold6/pipo.v": "input-0bfe8381410ed2ca098f90e11d82e80a"
+    }, 
+    "cmp build/piso.ucf gold6/piso.ucf": {
+        "build/piso.ucf": "input-da4a368ce341fe0c58b68079dedb2fa3", 
+        "gold6/piso.ucf": "input-da4a368ce341fe0c58b68079dedb2fa3"
+    }, 
+    "cmp build/piso.v gold6/piso.v": {
+        "build/piso.v": "input-b1fe31313ee896ff1354e05916c40906", 
+        "gold6/piso.v": "input-b1fe31313ee896ff1354e05916c40906"
+    }, 
+    "cmp build/ring.ucf gold6/ring.ucf": {
+        "build/ring.ucf": "input-de10485e54ddb321eff5c952712e63fc", 
+        "gold6/ring.ucf": "input-de10485e54ddb321eff5c952712e63fc"
+    }, 
+    "cmp build/ring.v gold6/ring.v": {
+        "build/ring.v": "input-fa5966eadba1dd18cb84962dfc94bd94", 
+        "gold6/ring.v": "input-fa5966eadba1dd18cb84962dfc94bd94"
+    }, 
+    "cmp build/sipo.ucf gold6/sipo.ucf": {
+        "build/sipo.ucf": "input-de10485e54ddb321eff5c952712e63fc", 
+        "gold6/sipo.ucf": "input-de10485e54ddb321eff5c952712e63fc"
+    }, 
+    "cmp build/sipo.v gold6/sipo.v": {
+        "build/sipo.v": "input-48a2f07e0362b76a1bfb2fe3c642fe36", 
+        "gold6/sipo.v": "input-48a2f07e0362b76a1bfb2fe3c642fe36"
+    }, 
+    "cmp build/siso.ucf gold6/siso.ucf": {
+        "build/siso.ucf": "input-5dbfed6590f0e2371a81a1071d2ebd53", 
+        "gold6/siso.ucf": "input-5dbfed6590f0e2371a81a1071d2ebd53"
+    }, 
+    "cmp build/siso.v gold6/siso.v": {
+        "build/siso.v": "input-3e5a5edb6533714dcdf81fb641a06ce4", 
+        "gold6/siso.v": "input-3e5a5edb6533714dcdf81fb641a06ce4"
+    }, 
+    "python johnson.py build/johnson": {
+        "build/johnson.ucf": "output-de10485e54ddb321eff5c952712e63fc", 
+        "build/johnson.v": "output-bdc6a5791f7fc296d9cf5bacebdfc124", 
+        "johnson.py": "input-3d548f3b3bf69a909643d0d09bf8177d"
+    }, 
+    "python pipo.py build/pipo": {
+        "build/pipo.ucf": "output-adf2a5f1f9389dfae34f7a30c3a64955", 
+        "build/pipo.v": "output-0bfe8381410ed2ca098f90e11d82e80a", 
+        "pipo.py": "input-b0e03be0e997c49d96022f47074a6afb"
+    }, 
+    "python piso.py build/piso": {
+        "build/piso.ucf": "output-da4a368ce341fe0c58b68079dedb2fa3", 
+        "build/piso.v": "output-b1fe31313ee896ff1354e05916c40906", 
+        "piso.py": "input-d6bdddc844ea1dc3e73c74ab40ed4b4b"
+    }, 
+    "python ring.py build/ring": {
+        "build/ring.ucf": "output-de10485e54ddb321eff5c952712e63fc", 
+        "build/ring.v": "output-fa5966eadba1dd18cb84962dfc94bd94", 
+        "ring.py": "input-eadb808ccfb046b1cc5ed2a517777986"
+    }, 
+    "python sipo.py build/sipo": {
+        "build/sipo.ucf": "output-de10485e54ddb321eff5c952712e63fc", 
+        "build/sipo.v": "output-48a2f07e0362b76a1bfb2fe3c642fe36", 
+        "sipo.py": "input-ac142074e68550381aa87b4937b28198"
+    }, 
+    "python siso.py build/siso": {
+        "build/siso.ucf": "output-5dbfed6590f0e2371a81a1071d2ebd53", 
+        "build/siso.v": "output-3e5a5edb6533714dcdf81fb641a06ce4", 
+        "siso.py": "input-980b88fef609b69e9fe631b5ee1925ff"
+    }
+}

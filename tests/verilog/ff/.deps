@@ -1,0 +1,11 @@
+{
+    ".deps_version": 2, 
+    "cmp build/dff.v gold/dff.v": {
+        "build/dff.v": "input-7097f144757c3d3a68e9164f80ff0d85", 
+        "gold/dff.v": "input-7097f144757c3d3a68e9164f80ff0d85"
+    }, 
+    "python dff.py build/dff": {
+        "build/dff.v": "output-7097f144757c3d3a68e9164f80ff0d85", 
+        "dff.py": "input-8b83341939d8dbec00b71371ed51a8cb"
+    }
+}

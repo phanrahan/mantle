@@ -1,0 +1,29 @@
+{
+    ".deps_version": 2, 
+    "cmp build/srl16.ucf gold/srl16.ucf": {
+        "build/srl16.ucf": "input-6cc805f67cdad42886feb43170776b30", 
+        "gold/srl16.ucf": "input-6cc805f67cdad42886feb43170776b30"
+    }, 
+    "cmp build/srl16.v gold/srl16.v": {
+        "build/srl16.v": "input-a538f646d2f7f2998223ed9bf16829d7", 
+        "gold/srl16.v": "input-a538f646d2f7f2998223ed9bf16829d7"
+    }, 
+    "cmp build/srl32.ucf gold/srl32.ucf": {
+        "build/srl32.ucf": "input-da4a368ce341fe0c58b68079dedb2fa3", 
+        "gold/srl32.ucf": "input-da4a368ce341fe0c58b68079dedb2fa3"
+    }, 
+    "cmp build/srl32.v gold/srl32.v": {
+        "build/srl32.v": "input-4972b440aa95261ea2278851e3c82b68", 
+        "gold/srl32.v": "input-4972b440aa95261ea2278851e3c82b68"
+    }, 
+    "python srl16.py build/srl16": {
+        "build/srl16.ucf": "output-6cc805f67cdad42886feb43170776b30", 
+        "build/srl16.v": "output-a538f646d2f7f2998223ed9bf16829d7", 
+        "srl16.py": "input-a34673996dee9c92ad52edffd6ad42f0"
+    }, 
+    "python srl32.py build/srl32": {
+        "build/srl32.ucf": "output-da4a368ce341fe0c58b68079dedb2fa3", 
+        "build/srl32.v": "output-4972b440aa95261ea2278851e3c82b68", 
+        "srl32.py": "input-5317fd7fa140d52ec54350447404de8b"
+    }
+}

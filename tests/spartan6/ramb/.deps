@@ -1,0 +1,8 @@
+{
+    ".deps_version": 2, 
+    "python romb16.py build/romb16": {
+        "build/romb16.ucf": "output-98773288d142b79a8cc02b2f6ce53be0", 
+        "build/romb16.v": "output-055e1d15c94fb61747e13f7554e8d068", 
+        "romb16.py": "input-8783b9aedb204beba672620499e45505"
+    }
+}

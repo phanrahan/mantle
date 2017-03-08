@@ -1,0 +1,81 @@
+{
+    ".deps_version": 2, 
+    "cmp build/and2.v gold/and2.v": {
+        "build/and2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf", 
+        "gold/and2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf"
+    }, 
+    "cmp build/buf.v gold/buf.v": {
+        "build/buf.v": "input-3e4a323114e0211325460b931e3b5853", 
+        "gold/buf.v": "input-3e4a323114e0211325460b931e3b5853"
+    }, 
+    "cmp build/nand2.v gold/nand2.v": {
+        "build/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0", 
+        "gold/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0"
+    }, 
+    "cmp build/nor2.v gold/nor2.v": {
+        "build/nor2.v": "input-546b656d745ca3f5211d6aa794c6d22d", 
+        "gold/nor2.v": "input-546b656d745ca3f5211d6aa794c6d22d"
+    }, 
+    "cmp build/not.v gold/not.v": {
+        "and2.py": "input-70c1ee10049f6d19d5c9dd9dc3acf206", 
+        "bake": "input-ec9227a72d3bb061a7676ef429d88837", 
+        "buf.py": "input-bcef622d58adb08ec5e3f37fea7f5f25", 
+        "build/Makefile": "input-3584dbc63ed043adea78804f3a408968", 
+        "build/not.v": "input-0bd55009390948522032d1c39f7a56f2", 
+        "gold/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0", 
+        "gold/not.v": "input-0bd55009390948522032d1c39f7a56f2"
+    }, 
+    "cmp build/nxor2.v gold/nxor2.v": {
+        "bake": "input-ec9227a72d3bb061a7676ef429d88837", 
+        "buf.py": "input-bcef622d58adb08ec5e3f37fea7f5f25", 
+        "build/Makefile": "input-3584dbc63ed043adea78804f3a408968", 
+        "build/buf.v": "input-3e4a323114e0211325460b931e3b5853", 
+        "build/nxor2.v": "input-30bc2ad6d31bcdaa10275ee2ab80b832", 
+        "gold/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0", 
+        "gold/nor2.v": "input-546b656d745ca3f5211d6aa794c6d22d", 
+        "gold/not.v": "input-0bd55009390948522032d1c39f7a56f2", 
+        "gold/nxor2.v": "input-30bc2ad6d31bcdaa10275ee2ab80b832"
+    }, 
+    "cmp build/xor2.v gold/xor2.v": {
+        "build/xor2.v": "input-f09182f287f8059990e46f44d585c5a4", 
+        "gold/buf_tb.v": "input-8add653172350c3286012cbb5a13e512", 
+        "gold/nand2.v": "input-9143a0a4bdcb94032214d50f76fb4af0", 
+        "gold/nxor2.v": "input-30bc2ad6d31bcdaa10275ee2ab80b832", 
+        "gold/xor2.v": "input-f09182f287f8059990e46f44d585c5a4"
+    }, 
+    "python and2.py build/and2": {
+        "and2.py": "input-70c1ee10049f6d19d5c9dd9dc3acf206", 
+        "build/and2.v": "output-f9d31df7ac20748b85fbd9ea2d0a8ebf"
+    }, 
+    "python buf.py build/buf": {
+        "buf.py": "input-bcef622d58adb08ec5e3f37fea7f5f25", 
+        "build/buf.v": "output-3e4a323114e0211325460b931e3b5853"
+    }, 
+    "python nand2.py build/nand2": {
+        "build/nand2.v": "output-9143a0a4bdcb94032214d50f76fb4af0", 
+        "nand2.py": "input-d192c0604439db65edc0e4aea1e2e319"
+    }, 
+    "python nor2.py build/nor2": {
+        "build/nor2.v": "output-546b656d745ca3f5211d6aa794c6d22d", 
+        "nor2.py": "input-eeb7ccd1e4954f5ca8a7a67e9bd586c3"
+    }, 
+    "python not.py build/not": {
+        "build/not.v": "output-0bd55009390948522032d1c39f7a56f2", 
+        "not.py": "input-aee5d15d89b4d17dc221d74ba73afd3d"
+    }, 
+    "python nxor2.py build/nxor2": {
+        "build/buf_tb.v": "input-8add653172350c3286012cbb5a13e512", 
+        "build/nxor2.v": "output-30bc2ad6d31bcdaa10275ee2ab80b832", 
+        "gold/and2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf", 
+        "gold/buf.v": "input-3e4a323114e0211325460b931e3b5853", 
+        "nxor2.py": "input-abdeb6d26e64fd49ebde2353ca5d585e"
+    }, 
+    "python xor2.py build/xor2": {
+        "bake": "input-ec9227a72d3bb061a7676ef429d88837", 
+        "build/and2.v": "input-f9d31df7ac20748b85fbd9ea2d0a8ebf", 
+        "build/xor2.v": "output-f09182f287f8059990e46f44d585c5a4", 
+        "gold/not.v": "input-0bd55009390948522032d1c39f7a56f2", 
+        "nand2.py": "input-d192c0604439db65edc0e4aea1e2e319", 
+        "xor2.py": "input-3a43f9bb4ccbcd07d55352c9d794229c"
+    }
+}

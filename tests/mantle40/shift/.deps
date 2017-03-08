@@ -1,0 +1,94 @@
+{
+    ".deps_version": 2, 
+    "cmp build/cascadedring.pcf gold/cascadedring.pcf": {
+        "build/cascadedring.pcf": "input-686653e37ebc8b77a7e432fc1e05798c", 
+        "gold/cascadedring.pcf": "input-686653e37ebc8b77a7e432fc1e05798c"
+    }, 
+    "cmp build/cascadedring.v gold/cascadedring.v": {
+        "build/cascadedring.v": "input-52fd46664971df39b4b991cfe60b9dda", 
+        "gold/cascadedring.v": "input-52fd46664971df39b4b991cfe60b9dda"
+    }, 
+    "cmp build/johnson.pcf gold/johnson.pcf": {
+        "build/johnson.pcf": "input-4be182c5d0feaeb80629084d484560a6", 
+        "gold/johnson.pcf": "input-4be182c5d0feaeb80629084d484560a6"
+    }, 
+    "cmp build/johnson.v gold/johnson.v": {
+        "build/johnson.v": "input-bd43be8729657d9a6a048b69a2b3967f", 
+        "gold/johnson.v": "input-bd43be8729657d9a6a048b69a2b3967f"
+    }, 
+    "cmp build/pipo.pcf gold/pipo.pcf": {
+        "build/pipo.pcf": "input-2d0bd5399c93b110aad324547f95a49c", 
+        "gold/pipo.pcf": "input-2d0bd5399c93b110aad324547f95a49c"
+    }, 
+    "cmp build/pipo.v gold/pipo.v": {
+        "build/pipo.v": "input-0b91c1af22b2ff0fa4a8ace3b7ee84af", 
+        "gold/pipo.v": "input-0b91c1af22b2ff0fa4a8ace3b7ee84af"
+    }, 
+    "cmp build/piso.pcf gold/piso.pcf": {
+        "build/piso.pcf": "input-6ea4274121892082b4e3cbdb37acdadd", 
+        "gold/piso.pcf": "input-6ea4274121892082b4e3cbdb37acdadd"
+    }, 
+    "cmp build/piso.v gold/piso.v": {
+        "build/piso.v": "input-963ecced2004a0faa22b54ea9a252297", 
+        "gold/piso.v": "input-963ecced2004a0faa22b54ea9a252297"
+    }, 
+    "cmp build/ring.pcf gold/ring.pcf": {
+        "build/ring.pcf": "input-686653e37ebc8b77a7e432fc1e05798c", 
+        "gold/ring.pcf": "input-686653e37ebc8b77a7e432fc1e05798c"
+    }, 
+    "cmp build/ring.v gold/ring.v": {
+        "build/ring.v": "input-0eab23af35b71f871f4ca9941f8a6705", 
+        "gold/ring.v": "input-0eab23af35b71f871f4ca9941f8a6705"
+    }, 
+    "cmp build/sipo.pcf gold/sipo.pcf": {
+        "build/sipo.pcf": "input-29b4f9fcdc7f9417491a45f935ad2aed", 
+        "gold/sipo.pcf": "input-29b4f9fcdc7f9417491a45f935ad2aed"
+    }, 
+    "cmp build/sipo.v gold/sipo.v": {
+        "build/sipo.v": "input-4260ede252b51fd6743ab37d484b868b", 
+        "gold/sipo.v": "input-4260ede252b51fd6743ab37d484b868b"
+    }, 
+    "cmp build/siso.pcf gold/siso.pcf": {
+        "build/siso.pcf": "input-587841f9e8c18436f525272c9a649fac", 
+        "gold/siso.pcf": "input-587841f9e8c18436f525272c9a649fac"
+    }, 
+    "cmp build/siso.v gold/siso.v": {
+        "build/siso.v": "input-ba0fdee0c343be44508de602d90f411e", 
+        "gold/siso.v": "input-ba0fdee0c343be44508de602d90f411e"
+    }, 
+    "python cascadedring.py build/cascadedring": {
+        "build/cascadedring.pcf": "output-686653e37ebc8b77a7e432fc1e05798c", 
+        "build/cascadedring.v": "output-52fd46664971df39b4b991cfe60b9dda", 
+        "cascadedring.py": "input-f9d08b6b7e6c6d0fcf0f471d5ab14fbc"
+    }, 
+    "python johnson.py build/johnson": {
+        "build/johnson.pcf": "output-4be182c5d0feaeb80629084d484560a6", 
+        "build/johnson.v": "output-bd43be8729657d9a6a048b69a2b3967f", 
+        "johnson.py": "input-bd46a49e2ebe455569d5ee8d0d13cb77"
+    }, 
+    "python pipo.py build/pipo": {
+        "build/pipo.pcf": "output-2d0bd5399c93b110aad324547f95a49c", 
+        "build/pipo.v": "output-0b91c1af22b2ff0fa4a8ace3b7ee84af", 
+        "pipo.py": "input-d9c3a85d932e68d2eedb874cfd77a7ec"
+    }, 
+    "python piso.py build/piso": {
+        "build/piso.pcf": "output-6ea4274121892082b4e3cbdb37acdadd", 
+        "build/piso.v": "output-963ecced2004a0faa22b54ea9a252297", 
+        "piso.py": "input-c26f6381652f242d1649b9ad94628ef3"
+    }, 
+    "python ring.py build/ring": {
+        "build/ring.pcf": "output-686653e37ebc8b77a7e432fc1e05798c", 
+        "build/ring.v": "output-0eab23af35b71f871f4ca9941f8a6705", 
+        "ring.py": "input-8826306fa7e9f8315a52d1813a365478"
+    }, 
+    "python sipo.py build/sipo": {
+        "build/sipo.pcf": "output-29b4f9fcdc7f9417491a45f935ad2aed", 
+        "build/sipo.v": "output-4260ede252b51fd6743ab37d484b868b", 
+        "sipo.py": "input-8ce353ce753265edae35a4e42171c203"
+    }, 
+    "python siso.py build/siso": {
+        "build/siso.pcf": "output-587841f9e8c18436f525272c9a649fac", 
+        "build/siso.v": "output-ba0fdee0c343be44508de602d90f411e", 
+        "siso.py": "input-d6b90269d708a27b6caeed41453588c7"
+    }
+}

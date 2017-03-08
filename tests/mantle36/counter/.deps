@@ -1,0 +1,57 @@
+{
+    ".deps_version": 2, 
+    "cmp build/counter32.ucf gold6/counter32.ucf": {
+        "build/counter32.ucf": "input-5dbfed6590f0e2371a81a1071d2ebd53", 
+        "gold6/counter32.ucf": "input-5dbfed6590f0e2371a81a1071d2ebd53"
+    }, 
+    "cmp build/counter32.v gold6/counter32.v": {
+        "build/counter32.v": "input-b38bfb7061ef83ef490c2ef6cd642d2c", 
+        "gold6/counter32.v": "input-b38bfb7061ef83ef490c2ef6cd642d2c"
+    }, 
+    "cmp build/counter4.ucf gold6/counter4.ucf": {
+        "build/counter4.ucf": "input-de10485e54ddb321eff5c952712e63fc", 
+        "gold6/counter4.ucf": "input-de10485e54ddb321eff5c952712e63fc"
+    }, 
+    "cmp build/counter4.v gold6/counter4.v": {
+        "build/counter4.v": "input-af2ec0fcd485cb870dc268d159d41f86", 
+        "gold6/counter4.v": "input-af2ec0fcd485cb870dc268d159d41f86"
+    }, 
+    "cmp build/countermodm.ucf gold6/countermodm.ucf": {
+        "build/countermodm.ucf": "input-de10485e54ddb321eff5c952712e63fc", 
+        "gold6/countermodm.ucf": "input-de10485e54ddb321eff5c952712e63fc"
+    }, 
+    "cmp build/countermodm.v gold6/countermodm.v": {
+        "build/countermodm.v": "input-744f8e81c3ad53bb53aea7114ca85eab", 
+        "gold6/countermodm.v": "input-744f8e81c3ad53bb53aea7114ca85eab"
+    }, 
+    "cmp build/updowncounter4.ucf gold6/updowncounter4.ucf": {
+        "build/updowncounter4.ucf": "input-1cf87ff24720b994ba5f6e5e6d2ea6c7", 
+        "gold6/updowncounter4.ucf": "input-1cf87ff24720b994ba5f6e5e6d2ea6c7"
+    }, 
+    "cmp build/updowncounter4.v gold6/updowncounter4.v": {
+        "build/updowncounter4.v": "input-297a430470c1c12f38a7e9410aa1a0be", 
+        "gold6/updowncounter4.v": "input-297a430470c1c12f38a7e9410aa1a0be"
+    }, 
+    "python counter32.py build/counter32": {
+        "build/counter32.ucf": "output-5dbfed6590f0e2371a81a1071d2ebd53", 
+        "build/counter32.v": "output-b38bfb7061ef83ef490c2ef6cd642d2c", 
+        "counter32.py": "input-0e15fcac90ae396ea54b99e33c42f3c3"
+    }, 
+    "python counter4.py build/counter4": {
+        "build/counter4.ucf": "output-de10485e54ddb321eff5c952712e63fc", 
+        "build/counter4.v": "output-af2ec0fcd485cb870dc268d159d41f86", 
+        "counter4.py": "input-9902cac3c8e223a8f78d8f1b626a98d0"
+    }, 
+    "python countermodm.py build/countermodm": {
+        "build/countermodm.ucf": "output-de10485e54ddb321eff5c952712e63fc", 
+        "build/countermodm.v": "output-744f8e81c3ad53bb53aea7114ca85eab", 
+        "countermodm.py": "input-fea2e81e32c0f4849b0f3456ed6e2911"
+    }, 
+    "python updowncounter4.py build/updowncounter4": {
+        "build/updowncounter4.ucf": "output-1cf87ff24720b994ba5f6e5e6d2ea6c7", 
+        "build/updowncounter4.v": "output-297a430470c1c12f38a7e9410aa1a0be", 
+        "gold3/counter32.v": "input-29a06217c8e8c6071a6050f79db0c7bf", 
+        "gold3/countermodm.v": "input-3fcc62166d087f891203bd1379a292cf", 
+        "updowncounter4.py": "input-a4c2ddbbee2fc0ae800d84124b223c0a"
+    }
+}

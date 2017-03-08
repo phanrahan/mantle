@@ -1,0 +1,6 @@
+set_io I0 112
+set_io I1 113
+set_io I2 114
+set_io I3 115
+set_io D0 62
+set_io CLKIN 21

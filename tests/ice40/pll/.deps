@@ -1,0 +1,55 @@
+{
+    ".deps_version": 2, 
+    "cmp build/pll100.pcf gold/pll100.pcf": {
+        "build/pll100.pcf": "input-c106c7d0dc352a628c6896621e837ca3", 
+        "gold/pll100.pcf": "input-c106c7d0dc352a628c6896621e837ca3"
+    }, 
+    "cmp build/pll100.v gold/pll100.v": {
+        "build/pll100.v": "input-75690c36c75f85ab46109f596da0b335", 
+        "gold/pll100.v": "input-75690c36c75f85ab46109f596da0b335"
+    }, 
+    "cmp build/pll16.pcf gold/pll16.pcf": {
+        "build/pll16.pcf": "input-c106c7d0dc352a628c6896621e837ca3", 
+        "gold/pll16.pcf": "input-c106c7d0dc352a628c6896621e837ca3"
+    }, 
+    "cmp build/pll16.v gold/pll16.v": {
+        "build/pll16.v": "input-7efc52727395e851603fe7bbc0aa21de", 
+        "gold/pll16.v": "input-7efc52727395e851603fe7bbc0aa21de"
+    }, 
+    "cmp build/pll25.pcf gold/pll25.pcf": {
+        "build/pll25.pcf": "input-c106c7d0dc352a628c6896621e837ca3", 
+        "gold/pll25.pcf": "input-c106c7d0dc352a628c6896621e837ca3"
+    }, 
+    "cmp build/pll25.v gold/pll25.v": {
+        "build/pll25.v": "input-f0c835de793082261623b7d87760ea32", 
+        "gold/pll25.v": "input-f0c835de793082261623b7d87760ea32"
+    }, 
+    "cmp build/pll50.pcf gold/pll50.pcf": {
+        "build/pll50.pcf": "input-c106c7d0dc352a628c6896621e837ca3", 
+        "gold/pll50.pcf": "input-c106c7d0dc352a628c6896621e837ca3"
+    }, 
+    "cmp build/pll50.v gold/pll50.v": {
+        "build/pll50.v": "input-677ad54752512bfc517d9394e533cc7f", 
+        "gold/pll50.v": "input-677ad54752512bfc517d9394e533cc7f"
+    }, 
+    "python pll100.py build/pll100": {
+        "build/pll100.pcf": "output-c106c7d0dc352a628c6896621e837ca3", 
+        "build/pll100.v": "output-75690c36c75f85ab46109f596da0b335", 
+        "pll100.py": "input-c0e053bcd1ca6fb20abf29a5d5a65367"
+    }, 
+    "python pll16.py build/pll16": {
+        "build/pll16.pcf": "output-c106c7d0dc352a628c6896621e837ca3", 
+        "build/pll16.v": "output-7efc52727395e851603fe7bbc0aa21de", 
+        "pll16.py": "input-d84e21a6f162582ced154f74187a97c2"
+    }, 
+    "python pll25.py build/pll25": {
+        "build/pll25.pcf": "output-c106c7d0dc352a628c6896621e837ca3", 
+        "build/pll25.v": "output-f0c835de793082261623b7d87760ea32", 
+        "pll25.py": "input-b485f3ee96d884e46429e53e24070efc"
+    }, 
+    "python pll50.py build/pll50": {
+        "build/pll50.pcf": "output-c106c7d0dc352a628c6896621e837ca3", 
+        "build/pll50.v": "output-677ad54752512bfc517d9394e533cc7f", 
+        "pll50.py": "input-7f99ab75e5762e7702c9e928f7ad7505"
+    }
+}

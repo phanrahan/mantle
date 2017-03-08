@@ -1,0 +1,5 @@
+set_io A0 112
+set_io A1 113
+set_io B0 114
+set_io B1 115
+set_io D1 99

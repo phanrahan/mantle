@@ -1,0 +1,267 @@
+{
+    ".deps_version": 2, 
+    "cmp build/and16.ucf gold6/and16.ucf": {
+        "build/and16.ucf": "input-cf657d43159e0b6ac5b73eada6402d00", 
+        "gold6/and16.ucf": "input-cf657d43159e0b6ac5b73eada6402d00"
+    }, 
+    "cmp build/and16.v gold6/and16.v": {
+        "build/and16.v": "input-cc0d0b488b885f5a667293e26af897e0", 
+        "gold6/and16.v": "input-cc0d0b488b885f5a667293e26af897e0"
+    }, 
+    "cmp build/and18.ucf gold6/and18.ucf": {
+        "build/and18.ucf": "input-cf657d43159e0b6ac5b73eada6402d00", 
+        "gold6/and18.ucf": "input-cf657d43159e0b6ac5b73eada6402d00"
+    }, 
+    "cmp build/and18.v gold6/and18.v": {
+        "build/and18.v": "input-2b1b81ec58fed0f3cfe8212ebef2763e", 
+        "gold6/and18.v": "input-2b1b81ec58fed0f3cfe8212ebef2763e"
+    }, 
+    "cmp build/and2.ucf gold6/and2.ucf": {
+        "build/and2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea", 
+        "gold6/and2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea"
+    }, 
+    "cmp build/and2.v gold6/and2.v": {
+        "build/and2.v": "input-c87f0585d64b0905560b7823a6f573e8", 
+        "gold6/and2.v": "input-c87f0585d64b0905560b7823a6f573e8"
+    }, 
+    "cmp build/and2x2.ucf gold6/and2x2.ucf": {
+        "build/and2x2.ucf": "input-7ac57b8c3d4a3a1981f50d12422471c7", 
+        "gold6/and2x2.ucf": "input-7ac57b8c3d4a3a1981f50d12422471c7"
+    }, 
+    "cmp build/and2x2.v gold6/and2x2.v": {
+        "build/and2x2.v": "input-ad9d6723da56211e01dcdd8d283d66d7", 
+        "gold6/and2x2.v": "input-ad9d6723da56211e01dcdd8d283d66d7"
+    }, 
+    "cmp build/and4.ucf gold6/and4.ucf": {
+        "build/and4.ucf": "input-fd30fbece6d295e66dd9cac13967ad10", 
+        "gold6/and4.ucf": "input-fd30fbece6d295e66dd9cac13967ad10"
+    }, 
+    "cmp build/and4.v gold6/and4.v": {
+        "build/and4.v": "input-847fb615becdd5a84df4119584b3206d", 
+        "gold6/and4.v": "input-847fb615becdd5a84df4119584b3206d"
+    }, 
+    "cmp build/and6.ucf gold6/and6.ucf": {
+        "build/and6.ucf": "input-7daf0787b494c6a777fddf4771aa8196", 
+        "gold6/and6.ucf": "input-7daf0787b494c6a777fddf4771aa8196"
+    }, 
+    "cmp build/and6.v gold6/and6.v": {
+        "build/and6.v": "input-8c82d36f3cae7c6358a618f187d1e97a", 
+        "gold6/and6.v": "input-8c82d36f3cae7c6358a618f187d1e97a"
+    }, 
+    "cmp build/and8.ucf gold6/and8.ucf": {
+        "build/and8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00", 
+        "gold6/and8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00"
+    }, 
+    "cmp build/and8.v gold6/and8.v": {
+        "build/and8.v": "input-bea37cce01a8eaa88fc78a97d0e1e943", 
+        "gold6/and8.v": "input-bea37cce01a8eaa88fc78a97d0e1e943"
+    }, 
+    "cmp build/nand2.ucf gold6/nand2.ucf": {
+        "build/nand2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea", 
+        "gold6/nand2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea"
+    }, 
+    "cmp build/nand2.v gold6/nand2.v": {
+        "build/nand2.v": "input-86f07a278e99d15acdcc0df03e9f809e", 
+        "gold6/nand2.v": "input-86f07a278e99d15acdcc0df03e9f809e"
+    }, 
+    "cmp build/nand6.ucf gold6/nand6.ucf": {
+        "build/nand6.ucf": "input-7daf0787b494c6a777fddf4771aa8196", 
+        "gold6/nand6.ucf": "input-7daf0787b494c6a777fddf4771aa8196"
+    }, 
+    "cmp build/nand6.v gold6/nand6.v": {
+        "build/nand6.v": "input-f151c4d69fa535400d3b3939d66dd699", 
+        "gold6/nand6.v": "input-f151c4d69fa535400d3b3939d66dd699"
+    }, 
+    "cmp build/nand8.ucf gold6/nand8.ucf": {
+        "build/nand8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00", 
+        "gold6/nand8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00"
+    }, 
+    "cmp build/nand8.v gold6/nand8.v": {
+        "build/nand8.v": "input-8cc8c05987da31330ac2c3333d49fc0a", 
+        "gold6/nand8.v": "input-8cc8c05987da31330ac2c3333d49fc0a"
+    }, 
+    "cmp build/nor2.ucf gold6/nor2.ucf": {
+        "build/nor2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea", 
+        "gold6/nor2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea"
+    }, 
+    "cmp build/nor2.v gold6/nor2.v": {
+        "build/nor2.v": "input-8cee9d576458b21cfb1a7c0b0127a661", 
+        "gold6/nor2.v": "input-8cee9d576458b21cfb1a7c0b0127a661"
+    }, 
+    "cmp build/nor6.ucf gold6/nor6.ucf": {
+        "build/nor6.ucf": "input-7daf0787b494c6a777fddf4771aa8196", 
+        "gold6/nor6.ucf": "input-7daf0787b494c6a777fddf4771aa8196"
+    }, 
+    "cmp build/nor6.v gold6/nor6.v": {
+        "build/nor6.v": "input-4af1245a2eca6f8101f21bb4dbb42fa7", 
+        "gold6/nor6.v": "input-4af1245a2eca6f8101f21bb4dbb42fa7"
+    }, 
+    "cmp build/nor8.ucf gold6/nor8.ucf": {
+        "build/nor8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00", 
+        "gold6/nor8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00"
+    }, 
+    "cmp build/nor8.v gold6/nor8.v": {
+        "build/nor8.v": "input-42270acb95974af4e3335f354692ea88", 
+        "gold6/nor8.v": "input-42270acb95974af4e3335f354692ea88"
+    }, 
+    "cmp build/not.ucf gold6/not.ucf": {
+        "build/not.ucf": "input-adf99e36aca68b821d40a6c35c14c819", 
+        "gold6/not.ucf": "input-adf99e36aca68b821d40a6c35c14c819"
+    }, 
+    "cmp build/not.v gold6/not.v": {
+        "build/not.v": "input-eddc8ffd270f1513cc4ad1322c15829d", 
+        "gold6/not.v": "input-eddc8ffd270f1513cc4ad1322c15829d"
+    }, 
+    "cmp build/nxor2.ucf gold6/nxor2.ucf": {
+        "build/nxor2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea", 
+        "gold6/nxor2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea"
+    }, 
+    "cmp build/nxor2.v gold6/nxor2.v": {
+        "build/nxor2.v": "input-3fa3e6c2e1c6342796fb13e6c11889d1", 
+        "gold6/nxor2.v": "input-3fa3e6c2e1c6342796fb13e6c11889d1"
+    }, 
+    "cmp build/or2.ucf gold6/or2.ucf": {
+        "build/or2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea", 
+        "gold6/or2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea"
+    }, 
+    "cmp build/or2.v gold6/or2.v": {
+        "build/or2.v": "input-1d7e57a480a388458cb2d8012c72221e", 
+        "gold6/or2.v": "input-1d7e57a480a388458cb2d8012c72221e"
+    }, 
+    "cmp build/or6.ucf gold6/or6.ucf": {
+        "build/or6.ucf": "input-7daf0787b494c6a777fddf4771aa8196", 
+        "gold6/or6.ucf": "input-7daf0787b494c6a777fddf4771aa8196"
+    }, 
+    "cmp build/or6.v gold6/or6.v": {
+        "build/or6.v": "input-ef40fd90555a4a76cf31590bd002bd0d", 
+        "gold6/or6.v": "input-ef40fd90555a4a76cf31590bd002bd0d"
+    }, 
+    "cmp build/or8.ucf gold6/or8.ucf": {
+        "build/or8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00", 
+        "gold6/or8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00"
+    }, 
+    "cmp build/or8.v gold6/or8.v": {
+        "build/or8.v": "input-8ccd7a39d2349a68532aa4aa4c471e93", 
+        "gold6/or8.v": "input-8ccd7a39d2349a68532aa4aa4c471e93"
+    }, 
+    "cmp build/parity.ucf gold6/parity.ucf": {
+        "build/parity.ucf": "input-fd30fbece6d295e66dd9cac13967ad10", 
+        "gold6/parity.ucf": "input-fd30fbece6d295e66dd9cac13967ad10"
+    }, 
+    "cmp build/parity.v gold6/parity.v": {
+        "build/parity.v": "input-9a573b06ff8c93e668d8219cc664e867", 
+        "gold6/parity.v": "input-9a573b06ff8c93e668d8219cc664e867"
+    }, 
+    "cmp build/xor2.ucf gold6/xor2.ucf": {
+        "build/xor2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea", 
+        "gold6/xor2.ucf": "input-19941cc4d712d5862a9e5ed87947d3ea"
+    }, 
+    "cmp build/xor2.v gold6/xor2.v": {
+        "build/xor2.v": "input-0172559d17b6b8b2070d9dc576cbf130", 
+        "gold6/xor2.v": "input-0172559d17b6b8b2070d9dc576cbf130"
+    }, 
+    "python and16.py build/and16": {
+        "and16.py": "input-78b3b337d903b8ae68757f1347ef210e", 
+        "build/and16.ucf": "output-cf657d43159e0b6ac5b73eada6402d00", 
+        "build/and16.v": "output-cc0d0b488b885f5a667293e26af897e0"
+    }, 
+    "python and18.py build/and18": {
+        "and18.py": "input-2a535fb1f07a0a1425b7a4d6ee6c10b0", 
+        "build/and18.ucf": "output-cf657d43159e0b6ac5b73eada6402d00", 
+        "build/and18.v": "output-2b1b81ec58fed0f3cfe8212ebef2763e"
+    }, 
+    "python and2.py build/and2": {
+        "and2.py": "input-20e1a24868db7cad2ab89bf70d303705", 
+        "build/and2.ucf": "output-19941cc4d712d5862a9e5ed87947d3ea", 
+        "build/and2.v": "output-c87f0585d64b0905560b7823a6f573e8"
+    }, 
+    "python and2x2.py build/and2x2": {
+        "and2x2.py": "input-f85ce62c4ea2803876e6781695409622", 
+        "build/and2x2.ucf": "output-7ac57b8c3d4a3a1981f50d12422471c7", 
+        "build/and2x2.v": "output-ad9d6723da56211e01dcdd8d283d66d7"
+    }, 
+    "python and4.py build/and4": {
+        "and4.py": "input-c632fdd35b428838f8602f93149ac27d", 
+        "build/and4.ucf": "output-fd30fbece6d295e66dd9cac13967ad10", 
+        "build/and4.v": "output-847fb615becdd5a84df4119584b3206d"
+    }, 
+    "python and6.py build/and6": {
+        "and6.py": "input-f9fcdb55e8f8e4eb87c16cf7fd39c326", 
+        "build/and6.ucf": "output-7daf0787b494c6a777fddf4771aa8196", 
+        "build/and6.v": "output-8c82d36f3cae7c6358a618f187d1e97a"
+    }, 
+    "python and8.py build/and8": {
+        "and8.py": "input-0b59a0ffce3816f524805a18f53933f4", 
+        "build/and8.ucf": "output-cf657d43159e0b6ac5b73eada6402d00", 
+        "build/and8.v": "output-bea37cce01a8eaa88fc78a97d0e1e943"
+    }, 
+    "python nand2.py build/nand2": {
+        "build/nand2.ucf": "output-19941cc4d712d5862a9e5ed87947d3ea", 
+        "build/nand2.v": "output-86f07a278e99d15acdcc0df03e9f809e", 
+        "nand2.py": "input-7666fe73f6e749fb5757691b1ef2456f"
+    }, 
+    "python nand6.py build/nand6": {
+        "build/nand6.ucf": "output-7daf0787b494c6a777fddf4771aa8196", 
+        "build/nand6.v": "output-f151c4d69fa535400d3b3939d66dd699", 
+        "nand6.py": "input-016ef9a95e7fbc557dd0e80b7b8beacd"
+    }, 
+    "python nand8.py build/nand8": {
+        "and2.py": "input-20e1a24868db7cad2ab89bf70d303705", 
+        "and2x2.py": "input-f85ce62c4ea2803876e6781695409622", 
+        "build/nand8.ucf": "output-cf657d43159e0b6ac5b73eada6402d00", 
+        "build/nand8.v": "output-8cc8c05987da31330ac2c3333d49fc0a", 
+        "gold3/and16.ucf": "input-cb146a344e9adb9a78f53c389701c1e8", 
+        "gold3/and2.v": "input-c87f0585d64b0905560b7823a6f573e8", 
+        "nand8.py": "input-a9586de0c6e4481c08b985f36d9896b7"
+    }, 
+    "python nor2.py build/nor2": {
+        "build/nor2.ucf": "output-19941cc4d712d5862a9e5ed87947d3ea", 
+        "build/nor2.v": "output-8cee9d576458b21cfb1a7c0b0127a661", 
+        "nor2.py": "input-a8ac4cde9d5ee1239c5e368c78e1b440"
+    }, 
+    "python nor6.py build/nor6": {
+        "build/nor6.ucf": "output-7daf0787b494c6a777fddf4771aa8196", 
+        "build/nor6.v": "output-4af1245a2eca6f8101f21bb4dbb42fa7", 
+        "nor6.py": "input-24a6b8ee8a1c8891dba5c38d3e659400"
+    }, 
+    "python nor8.py build/nor8": {
+        "build/nor8.ucf": "output-cf657d43159e0b6ac5b73eada6402d00", 
+        "build/nor8.v": "output-42270acb95974af4e3335f354692ea88", 
+        "nor8.py": "input-29b991baa758ea3837b7450d4bebece9"
+    }, 
+    "python not.py build/not": {
+        "build/not.ucf": "output-adf99e36aca68b821d40a6c35c14c819", 
+        "build/not.v": "output-eddc8ffd270f1513cc4ad1322c15829d", 
+        "not.py": "input-78379fce2427a58594e731af615c0f6a"
+    }, 
+    "python nxor2.py build/nxor2": {
+        "build/nxor2.ucf": "output-19941cc4d712d5862a9e5ed87947d3ea", 
+        "build/nxor2.v": "output-3fa3e6c2e1c6342796fb13e6c11889d1", 
+        "nxor2.py": "input-c5ff48c8330c7a7b461b46c02012eba7"
+    }, 
+    "python or2.py build/or2": {
+        "build/or2.ucf": "output-19941cc4d712d5862a9e5ed87947d3ea", 
+        "build/or2.v": "output-1d7e57a480a388458cb2d8012c72221e", 
+        "or2.py": "input-c7fbd7e3b4c05ca8b5d4daba6f31ab04"
+    }, 
+    "python or6.py build/or6": {
+        "build/or6.ucf": "output-7daf0787b494c6a777fddf4771aa8196", 
+        "build/or6.v": "output-ef40fd90555a4a76cf31590bd002bd0d", 
+        "or6.py": "input-3d2d3de4055690f2a952e14b210c3f0d"
+    }, 
+    "python or8.py build/or8": {
+        "build/or8.ucf": "output-cf657d43159e0b6ac5b73eada6402d00", 
+        "build/or8.v": "output-8ccd7a39d2349a68532aa4aa4c471e93", 
+        "or8.py": "input-808db0058c3f16acf2a3301b35cc8682"
+    }, 
+    "python parity.py build/parity": {
+        "build/parity.ucf": "output-fd30fbece6d295e66dd9cac13967ad10", 
+        "build/parity.v": "output-9a573b06ff8c93e668d8219cc664e867", 
+        "parity.py": "input-44bfbc61a48fbc99ef2e8ebf150f2a8a"
+    }, 
+    "python xor2.py build/xor2": {
+        "build/xor2.ucf": "output-19941cc4d712d5862a9e5ed87947d3ea", 
+        "build/xor2.v": "output-0172559d17b6b8b2070d9dc576cbf130", 
+        "xor2.py": "input-5ec5fa5f66f69feabd5ee8ff971ca7b1"
+    }
+}

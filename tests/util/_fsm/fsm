@@ -1,0 +1,36 @@
+import sys
+from magma import *
+from mantle import *
+from mantle.util.fsm import FSM
+from mantle.util import debounce, falling
+from shields.megawing import MegaWing
+from greenery.fsm import fsm
+
+megawing = MegaWing()
+megawing.Clock.on()
+megawing.Switch.on(4)
+megawing.LED.on(4)
+megawing.Joystick.on()
+
+main = megawing.main()
+
+myfsm = fsm( alphabet = ['0', '1', '2', '3'], 
+                      states = ['A', 'B', 'C', 'D'], 
+                      initial = 'A', 
+                      finals = {}, 
+                      map = { 
+                         'A': {'1': 'B'},
+                         'B': {'2': 'C', '3': 'D'},
+                         'C': {'3': 'D', '0': 'A'},
+                         'D': {'0': 'A'},
+                        } )
+
+slow = Counter(16)
+select = debounce( main.SELECT, slow.COUT )
+pulse = falling( select )
+
+f = FSM( myfsm )
+
+wire( f(main.SWITCH, CE=pulse), main.LED )
+
+compile(sys.argv[1], main)

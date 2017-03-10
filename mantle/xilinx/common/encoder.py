@@ -1,5 +1,5 @@
 from magma import *
-from mantle.xilinx.port import OrN
+from ..port import OrN
 
 __all__ = ['DefineEncoder', 'Encoder']
 

@@ -1,0 +1,85 @@
+{
+    ".deps_version": 2, 
+    "python add.py build/add": {
+        "add.py": "input-87fdba04f564501225722e9eb3e7622c", 
+        "build/add.ucf": "output-d6a4f99797469543a90073948c80ee43", 
+        "build/add.v": "output-6b85b8c1335121473cc851e0d5fb6d6c"
+    }, 
+    "python baud.py build/baud": {
+        "baud.py": "input-5c4e567f05509ff9e08eb73e5115d0ab", 
+        "build/baud.ucf": "output-61e6d886ee52bb41b2cb1e022ef7ec59", 
+        "build/baud.v": "output-c2b9df8283b2373514d50f5beb4e7c05"
+    }, 
+    "python blink.py build/blink": {
+        "blink.py": "input-326c655607aac7e5af5abf11f9abb398", 
+        "build/blink.ucf": "output-706c788ba581bba832c223b80e95595a", 
+        "build/blink.v": "output-02bf52e362092e96b4e07c6658e83952"
+    }, 
+    "python call.py build/call": {
+        "build/call.ucf": "output-706c788ba581bba832c223b80e95595a", 
+        "build/call.v": "output-c2d940ba2cfbeae217237163c153f228", 
+        "call.py": "input-6413450410d485f1b58db317c172b154"
+    }, 
+    "python delay.py build/delay": {
+        "build/delay.ucf": "output-61e6d886ee52bb41b2cb1e022ef7ec59", 
+        "build/delay.v": "output-9fede097a8d303284deece5511772ff1", 
+        "delay.py": "input-335df4edf5848efe4e93a90a487dac97"
+    }, 
+    "python inout.py build/inout": {
+        "build/baud.v": "input-c2b9df8283b2373514d50f5beb4e7c05", 
+        "build/blink.v": "input-02bf52e362092e96b4e07c6658e83952", 
+        "build/call.v": "input-c2d940ba2cfbeae217237163c153f228", 
+        "build/inout.ucf": "output-0611ecb42c525049cfa46932bd215ddf", 
+        "build/inout.v": "output-4b8f4bdeb80d40cdd6f710beae9f5750", 
+        "inout.py": "input-06fb477bfa765872a934c929ba99331a"
+    }, 
+    "python or.py build/or": {
+        "build/or.ucf": "output-901c18ffae71707f5321f0691e215deb", 
+        "build/or.v": "output-35bf23e368522376f177f65eae0f4f0a", 
+        "or.py": "input-1c48599227e1693712d018e03ffeabd7"
+    }, 
+    "python sub.py build/sub": {
+        "baud.py": "input-5c4e567f05509ff9e08eb73e5115d0ab", 
+        "build/inout.ucf": "input-0611ecb42c525049cfa46932bd215ddf", 
+        "build/sub.ucf": "output-d6a4f99797469543a90073948c80ee43", 
+        "build/sub.v": "output-57a62e7702e7705eba68396fedcd1702", 
+        "sub.py": "input-866315f3530084aec7d7cbf5cb0da8bb"
+    }, 
+    "python switch.py build/switch": {
+        "build/inout.v": "input-4b8f4bdeb80d40cdd6f710beae9f5750", 
+        "build/or.ucf": "input-901c18ffae71707f5321f0691e215deb", 
+        "build/or.v": "input-35bf23e368522376f177f65eae0f4f0a", 
+        "build/switch.ucf": "output-0611ecb42c525049cfa46932bd215ddf", 
+        "build/switch.v": "output-dab5b0e5a96ff7d21be1b01d98099466", 
+        "switch.py": "input-d3633c7bbec4fa8971dcc4738adeb7f2"
+    }, 
+    "python testarith.py build/testarith": {
+        "build/delay.ucf": "input-61e6d886ee52bb41b2cb1e022ef7ec59", 
+        "build/sub.v": "input-57a62e7702e7705eba68396fedcd1702", 
+        "build/testarith.ucf": "output-01159d80c337535d6c1f03c2dd40a05e", 
+        "build/testarith.v": "output-223b9a4559c9fdff243bd14f8ea1d5e5", 
+        "or.py": "input-1c48599227e1693712d018e03ffeabd7", 
+        "testarith.py": "input-fd118fc3ecf5d3903f2a891e9162a373"
+    }, 
+    "python testlogic.py build/testlogic": {
+        "baud.py": "input-5c4e567f05509ff9e08eb73e5115d0ab", 
+        "build/inout.v": "input-4b8f4bdeb80d40cdd6f710beae9f5750", 
+        "build/testlogic.ucf": "output-007376821b837d8d79632f3c2aa038a9", 
+        "build/testlogic.v": "output-879ed7c10820a2c539e2cefbb68ddc1c", 
+        "testlogic.py": "input-dbbdffda59b2895819324e818efe9df4"
+    }, 
+    "python tst.py build/tst": {
+        "build/or.v": "input-35bf23e368522376f177f65eae0f4f0a", 
+        "build/switch.v": "input-dab5b0e5a96ff7d21be1b01d98099466", 
+        "build/tst.ucf": "output-0611ecb42c525049cfa46932bd215ddf", 
+        "build/tst.v": "output-3dc418aea2ebecb83d23f7f228b40cb8", 
+        "tst.py": "input-4514ea0f1c1c1c281bfdfa36a0802dce"
+    }, 
+    "python xor.py build/xor": {
+        "_mcp4162.py": "input-9f3ac3e3bac247a8e6ade8ba2949bdfa", 
+        "build/inout.v": "input-4b8f4bdeb80d40cdd6f710beae9f5750", 
+        "build/xor.ucf": "output-901c18ffae71707f5321f0691e215deb", 
+        "build/xor.v": "output-0303b85a3c30c869ff3799129abb3fa4", 
+        "xor.py": "input-e3a7fea9e2756efec0314a79790ea091"
+    }
+}

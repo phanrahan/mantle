@@ -1,0 +1,94 @@
+{
+    ".deps_version": 2, 
+    "cmp build/dreg4.ucf gold6/dreg4.ucf": {
+        "build/dreg4.ucf": "input-d4b8434e9235b53c1e5db4d4072f4591", 
+        "gold6/dreg4.ucf": "input-d4b8434e9235b53c1e5db4d4072f4591"
+    }, 
+    "cmp build/dreg4.v gold6/dreg4.v": {
+        "build/dreg4.v": "input-9cc63bd7d6ada46366ef62b1e803fc73", 
+        "gold6/dreg4.v": "input-9cc63bd7d6ada46366ef62b1e803fc73"
+    }, 
+    "cmp build/dreg4ce.ucf gold6/dreg4ce.ucf": {
+        "build/dreg4ce.ucf": "input-a7a2821f8cd672014a59075878437623", 
+        "gold6/dreg4ce.ucf": "input-a7a2821f8cd672014a59075878437623"
+    }, 
+    "cmp build/dreg4ce.v gold6/dreg4ce.v": {
+        "build/dreg4ce.v": "input-8a2974e51ca0b69a62448444081a730d", 
+        "gold6/dreg4ce.v": "input-8a2974e51ca0b69a62448444081a730d"
+    }, 
+    "cmp build/reg4.ucf gold6/reg4.ucf": {
+        "build/reg4.ucf": "input-d4b8434e9235b53c1e5db4d4072f4591", 
+        "gold6/reg4.ucf": "input-d4b8434e9235b53c1e5db4d4072f4591"
+    }, 
+    "cmp build/reg4.v gold6/reg4.v": {
+        "build/reg4.v": "input-9cc63bd7d6ada46366ef62b1e803fc73", 
+        "gold6/reg4.v": "input-9cc63bd7d6ada46366ef62b1e803fc73"
+    }, 
+    "cmp build/reg4ce.ucf gold6/reg4ce.ucf": {
+        "build/reg4ce.ucf": "input-a7a2821f8cd672014a59075878437623", 
+        "gold6/reg4ce.ucf": "input-a7a2821f8cd672014a59075878437623"
+    }, 
+    "cmp build/reg4ce.v gold6/reg4ce.v": {
+        "build/reg4ce.v": "input-8a2974e51ca0b69a62448444081a730d", 
+        "gold6/reg4ce.v": "input-8a2974e51ca0b69a62448444081a730d"
+    }, 
+    "cmp build/reg4r.ucf gold6/reg4r.ucf": {
+        "build/reg4r.ucf": "input-a7a2821f8cd672014a59075878437623", 
+        "gold6/reg4r.ucf": "input-a7a2821f8cd672014a59075878437623"
+    }, 
+    "cmp build/reg4r.v gold6/reg4r.v": {
+        "build/reg4r.v": "input-c672b5eac6c3a891e4f569d8d20e6bf1", 
+        "gold6/reg4r.v": "input-c672b5eac6c3a891e4f569d8d20e6bf1"
+    }, 
+    "cmp build/reg4rs.ucf gold6/reg4rs.ucf": {
+        "build/reg4rs.ucf": "input-adf2a5f1f9389dfae34f7a30c3a64955", 
+        "gold6/reg4rs.ucf": "input-adf2a5f1f9389dfae34f7a30c3a64955"
+    }, 
+    "cmp build/reg4rs.v gold6/reg4rs.v": {
+        "build/reg4rs.v": "input-a71b8b7b7eb15c2439a47366febca765", 
+        "gold6/reg4rs.v": "input-a71b8b7b7eb15c2439a47366febca765"
+    }, 
+    "cmp build/reg4s.ucf gold6/reg4s.ucf": {
+        "build/reg4s.ucf": "input-a7a2821f8cd672014a59075878437623", 
+        "gold6/reg4s.ucf": "input-a7a2821f8cd672014a59075878437623"
+    }, 
+    "cmp build/reg4s.v gold6/reg4s.v": {
+        "build/reg4s.v": "input-cf5b3c3be57516cd3783855c9b825d8d", 
+        "gold6/reg4s.v": "input-cf5b3c3be57516cd3783855c9b825d8d"
+    }, 
+    "python dreg4.py build/dreg4": {
+        "build/dreg4.ucf": "output-d4b8434e9235b53c1e5db4d4072f4591", 
+        "build/dreg4.v": "output-9cc63bd7d6ada46366ef62b1e803fc73", 
+        "dreg4.py": "input-6646275edbad84bfaae1f4fec9dee92e"
+    }, 
+    "python dreg4ce.py build/dreg4ce": {
+        "build/dreg4ce.ucf": "output-a7a2821f8cd672014a59075878437623", 
+        "build/dreg4ce.v": "output-8a2974e51ca0b69a62448444081a730d", 
+        "dreg4ce.py": "input-4813a05d0a3f136053ccdd0a444338cf"
+    }, 
+    "python reg4.py build/reg4": {
+        "build/reg4.ucf": "output-d4b8434e9235b53c1e5db4d4072f4591", 
+        "build/reg4.v": "output-9cc63bd7d6ada46366ef62b1e803fc73", 
+        "reg4.py": "input-176dae970cd64fea4ff3959daf0225f2"
+    }, 
+    "python reg4ce.py build/reg4ce": {
+        "build/reg4ce.ucf": "output-a7a2821f8cd672014a59075878437623", 
+        "build/reg4ce.v": "output-8a2974e51ca0b69a62448444081a730d", 
+        "reg4ce.py": "input-26866f2c1c9d32b3e1bfad7abbb1e872"
+    }, 
+    "python reg4r.py build/reg4r": {
+        "build/reg4r.ucf": "output-a7a2821f8cd672014a59075878437623", 
+        "build/reg4r.v": "output-c672b5eac6c3a891e4f569d8d20e6bf1", 
+        "reg4r.py": "input-ff1c46ee1ad0aa23354ec3a45d7f52f6"
+    }, 
+    "python reg4rs.py build/reg4rs": {
+        "build/reg4rs.ucf": "output-adf2a5f1f9389dfae34f7a30c3a64955", 
+        "build/reg4rs.v": "output-a71b8b7b7eb15c2439a47366febca765", 
+        "reg4rs.py": "input-cb2a28183ce2e25ec49c66c8d72b7688"
+    }, 
+    "python reg4s.py build/reg4s": {
+        "build/reg4s.ucf": "output-a7a2821f8cd672014a59075878437623", 
+        "build/reg4s.v": "output-cf5b3c3be57516cd3783855c9b825d8d", 
+        "reg4s.py": "input-e62dc93bbdd8e8ef3e2981ae60218d70"
+    }
+}

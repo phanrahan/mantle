@@ -1,5 +1,5 @@
 from magma import *
-from mantle.xilinx.port import Adders, A0, A1
+from ..port import Adders, A0, A1
 
 __all__  = ['Add', 'AddC'] 
 __all__ += ['Sub', 'SubC']

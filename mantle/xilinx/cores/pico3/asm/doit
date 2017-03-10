@@ -1,0 +1,1 @@
+python asm.py pico.arch > inst.py

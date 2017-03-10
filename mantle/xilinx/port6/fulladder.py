@@ -1,6 +1,6 @@
 from magma import *
-from parts.xilinx.spartan6.primitives.CLB import CARRY
-from parts.xilinx.spartan6.primitives.LUT import LUT5x2
+from ..spartan6.CLB import CARRY
+from ..spartan6.LUT import LUT5x2
 
 __all__  = ['FullCarry']
 __all__ += ['FullAdder']

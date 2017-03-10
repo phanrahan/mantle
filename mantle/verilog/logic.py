@@ -1,6 +1,6 @@
 import operator
 from magma import *
-import gates
+from . import gates
 
 __all__  = ['And', 'And2', 'And3', 'And4']
 __all__ += ['NAnd', 'NAnd2', 'NAnd3', 'NAnd4']

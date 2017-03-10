@@ -1,0 +1,23 @@
+{
+    ".deps_version": 2, 
+    "cmp build/pico.ucf gold/pico.ucf": {
+        "build/pico.ucf": "input-243deca5dd8ec3272151571ee9d65f9e", 
+        "gold/pico.ucf": "input-243deca5dd8ec3272151571ee9d65f9e"
+    }, 
+    "cmp build/pico.v gold/pico.v": {
+        "build/pico.v": "input-e093c0537b208d065f8ce2b3662c4389", 
+        "gold/pico.v": "input-e093c0537b208d065f8ce2b3662c4389"
+    }, 
+    "python pico.py build/pico": {
+        "a.mem": "input-62fcdbeb6a80bb9de79b18b70c3cba08", 
+        "alu.py": "input-50c01c87354910d12ba4aec2a3a314a8", 
+        "alu.pyc": "output-aaff1d40b1344a0c15cd0b029b64af45", 
+        "build/pico.ucf": "output-243deca5dd8ec3272151571ee9d65f9e", 
+        "build/pico.v": "output-e093c0537b208d065f8ce2b3662c4389", 
+        "mem.py": "input-cd13dcb63c848133e16c501451dd8af4", 
+        "mem.pyc": "output-366871d17a0b9de5e11bd08552c97c2d", 
+        "pico.py": "input-2cad102e612a9ebce34bea0e1c1bd5f8", 
+        "seq.py": "input-7b208f83223ca93c1412238c5a4f4a3a", 
+        "seq.pyc": "output-53ea9537d796cc76c34afff3e5d2452a"
+    }
+}

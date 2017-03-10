@@ -1,7 +1,7 @@
 from collections import Sequence
 from magma import *
-from parts.xilinx.spartan6.primitives.CLB import MUXCY, A0, A1, ZERO, ONE
-from parts.xilinx.spartan6.primitives.LUT import LUT5x2
+from ..spartan6.CLB import MUXCY, A0, A1, ZERO, ONE
+from ..spartan6.LUT import LUT5x2
 
 __all__ = ['Cascade', 'DefineCascade']
 

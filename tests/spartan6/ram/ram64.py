@@ -1,7 +1,7 @@
 import sys
 from magma import *
-from parts.xilinx.spartan6.primitives.RAM import RAM64
-from shields.megawing import MegaWing
+from mantle.xilinx.spartan6.RAM import RAM64
+from loam.shields.megawing import MegaWing
 
 def bit(n):
     return n * [0] + n * [1]

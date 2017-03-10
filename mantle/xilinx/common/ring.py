@@ -1,7 +1,7 @@
 from magma import *
-from parts.xilinx.spartan.primitives import SRL32
-from mantle.xilinx.port import FFs, And2, Not
-from mantle.xilinx.common.register import _RegisterName
+from ..spartan import SRL32
+from ..port import FFs, And2, Not
+from .register import _RegisterName
 
 __all__  = ['DefineRing', 'Ring']
 __all__ += ['DefineJohnson', 'Johnson']

@@ -1,6 +1,6 @@
 from magma import *
-from mantle.xilinx.port6.ROM import ROMN
-from mantle.xilinx.port6.flatcascade import FlatCascade
+from .ROM import ROMN
+from .flatcascade import FlatCascade
 
 __all__  = ['Decode']
 

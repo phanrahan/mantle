@@ -1,6 +1,6 @@
 from magma import *
-from mantle.xilinx.port import I0, I1, LUT2
-from mantle.xilinx.common.arith import Add
+from ..port import I0, I1, LUT2
+from .arith import Add
 
 __all__ = ['DefineArbiter', 'Arbiter']
 

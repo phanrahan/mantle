@@ -1,8 +1,8 @@
 import sys
 import math
 from magma import *
-from mantle import *
-from boards.papilio import Papilio
+from mantle import Counter, ROM6
+from loam.boards.papilio import Papilio
 
 N = 8
 

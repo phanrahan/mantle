@@ -1,8 +1,8 @@
 import sys
 from magma import *
-from mantle import *
+from mantle import Counter
 from mantle.util.pwm import PWM
-from boards.papilio import Papilio
+from loam.boards.papilio import Papilio
 
 N = 8
 

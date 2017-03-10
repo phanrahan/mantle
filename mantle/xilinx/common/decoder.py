@@ -1,5 +1,5 @@
 from magma import *
-from mantle.xilinx.port import Decode
+from ..port import Decode
 
 __all__  = ['Decoder']
 

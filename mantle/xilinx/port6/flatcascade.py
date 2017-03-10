@@ -1,7 +1,7 @@
 from collections import Sequence
 from magma import *
-from parts.xilinx.spartan6.primitives.CLB import *
-from mantle.xilinx.port6.ROM import ROMN
+from ..spartan6.CLB import *
+from .ROM import ROMN
 
 __all__ = ['FlatCascade', 'DefineFlatCascade']
 

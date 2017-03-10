@@ -1,6 +1,6 @@
 from magma import *
-from mantle.xilinx.port import Adders, A0, A1, And2, Decode
-from mantle.xilinx.common.register import Register
+from ..port import Adders, A0, A1, And2, Decode
+from .register import Register
 
 __all__  = ['DefineCounter', 'Counter']
 __all__ += ['DefineUpDownCounter', 'UpDownCounter']

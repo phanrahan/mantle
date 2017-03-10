@@ -1,12 +1,12 @@
-from mantle.xilinx.common.arith import *
+from .arith import *
 
-from mantle.xilinx.common.decoder import *
-from mantle.xilinx.common.encoder import *
-from mantle.xilinx.common.arbiter import *
+from .decoder import *
+from .encoder import *
+from .arbiter import *
 
-from mantle.xilinx.common.register import *
-from mantle.xilinx.common.shift import *
-from mantle.xilinx.common.ring import *
-from mantle.xilinx.common.counter import *
+from .register import *
+from .shift import *
+from .ring import *
+from .counter import *
 
 print('import xilinx mantle common')

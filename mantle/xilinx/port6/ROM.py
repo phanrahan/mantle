@@ -1,8 +1,8 @@
 from collections import Sequence
 from magma import *
 from magma.compatibility import IntegerTypes
-from parts.xilinx.spartan6.primitives.CLB import MUXF7, MUXF8
-from mantle.xilinx.port6.LUT import *
+from ..spartan6.CLB import MUXF7, MUXF8
+from .LUT import *
 
 __all__  = ['ROM1', 'ROM2', 'ROM3', 'ROM4']
 __all__ += ['ROM5', 'ROM6', 'ROM7', 'ROM8']

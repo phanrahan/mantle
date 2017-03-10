@@ -1,7 +1,7 @@
 from magma import *
-from parts.xilinx.spartan3.primitives.CLB import *
-from mantle.xilinx.port3.cascade import Cascade
-from mantle.xilinx.port3.LUT import *
+from ..spartan3.CLB import *
+from .cascade import Cascade
+from .LUT import *
 
 __all__ = ['EQ', 'NE']
 __all__ +=[ 'LT',  'LE',  'GT',  'GE']

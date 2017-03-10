@@ -1,5 +1,5 @@
 from magma import *
-from parts.xilinx.spartan3.primitives.RAMB import RAMB16, ROMB16
+from ..spartan3.RAMB import RAMB16, ROMB16
 
 __all__ = ['RAMB', 'ROMB']
 

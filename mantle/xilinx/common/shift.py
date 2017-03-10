@@ -1,6 +1,6 @@
 from magma import *
-from mantle.xilinx.port import FFs, Not, And2, Mux2
-from mantle.xilinx.common.register import _RegisterName, Register
+from ..port import FFs, Not, And2, Mux2
+from .register import _RegisterName, Register
 
 __all__  = ['DefineSIPO', 'SIPO']
 __all__ += ['DefineSISO', 'SISO']

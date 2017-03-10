@@ -1,7 +1,7 @@
 import sys
 from magma import *
-from parts.xilinx.spartan6.primitives.RAMB import ROMB
-from shields.megawing import MegaWing
+from mantle.xilinx.spartan6.RAMB import ROMB
+from loam.shields.megawing import MegaWing
 
 megawing = MegaWing()
 megawing.Clock.on()
@@ -16,6 +16,7 @@ for i in range(2048):
     rom[i] = byte
 
 romb = ROMB( rom, 8 )
+print(romb.interface)
 
 I = array(main.SWITCH[0], main.SWITCH[1], main.SWITCH[2], main.SWITCH[3],
           main.SWITCH[4], main.SWITCH[5], main.SWITCH[6], main.SWITCH[7],

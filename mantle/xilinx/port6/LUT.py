@@ -1,8 +1,7 @@
 from collections import Sequence
 from magma import *
 from magma.compatibility import IntegerTypes
-
-from parts.xilinx.spartan6.primitives.CLB import \
+from ..spartan6.CLB import \
     _LUT1, _LUT2, _LUT3, _LUT4, _LUT5, _LUT6, \
     MUXF7, MUXF8
 

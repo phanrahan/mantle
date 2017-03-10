@@ -1,7 +1,7 @@
 from magma import *
-from parts.xilinx.spartan3.primitives.CLB import *
-from mantle.xilinx.port3.flatcascade import FlatCascade
-from mantle.xilinx.port3.ROM import ROMN
+from ..spartan3.CLB import *
+from .flatcascade import FlatCascade
+from .ROM import ROMN
 
 __all__  = ['Decode']
 

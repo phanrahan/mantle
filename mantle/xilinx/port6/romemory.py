@@ -1,5 +1,5 @@
 from magma import *
-from mantle.xilinx.port6.LUT import ROM4
+from .LUT import ROM4
 
 def _ROMName(name, n):
     return name + '%d' % n

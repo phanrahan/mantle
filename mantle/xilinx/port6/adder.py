@@ -1,6 +1,6 @@
 from magma import *
-from parts.xilinx.spartan6.primitives.CLB import A0, A1
-from mantle.xilinx.port6.fulladder import FullCarry
+from ..spartan6.CLB import A0, A1
+from .fulladder import FullCarry
 
 __all__ = ['Adders', 'DefineAdders']
 

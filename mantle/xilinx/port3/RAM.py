@@ -1,5 +1,5 @@
 from magma import *
-from parts.xilinx.spartan3.primitives.RAM import RAM16DxN
+from ..spartan3.RAM import RAM16DxN
 
 __all__ = ['RAM']
 

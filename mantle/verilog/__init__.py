@@ -1,6 +1,6 @@
-from mantle.verilog.FF import *
+from .FF import *
 
-from mantle.verilog.logic import *
+from .logic import *
 
 print('import verilog')
 

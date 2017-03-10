@@ -1,5 +1,4 @@
-from magma import *
-from mantle import *
+from mantle import FF, Xor2, Xor4
 
 def QuadDecoder(A, B):
     AFF = FF()(A)

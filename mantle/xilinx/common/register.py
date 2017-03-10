@@ -1,6 +1,6 @@
 from magma import *
 from magma.compatibility import IntegerTypes
-from mantle.xilinx.port import FFs
+from ..port import FFs
 
 __all__ = ['Register', 'DefineRegister']
 

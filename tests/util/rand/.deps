@@ -19,11 +19,11 @@
     "python lfsr.py build/lfsr": {
         "build/lfsr.ucf": "output-e4ffa4e805cce8511f035f77c117d72b", 
         "build/lfsr.v": "output-5f51f1e0350ef838aca29a95e29d0d70", 
-        "lfsr.py": "input-16d139db8185ef40a6fbdae85d43d192"
+        "lfsr.py": "input-9b23c07becd8dad1dfdac9662a46609d"
     }, 
     "python lhca.py build/lhca": {
         "build/lhca.ucf": "output-e4ffa4e805cce8511f035f77c117d72b", 
         "build/lhca.v": "output-3d27a7f01acc5b0314326995ad6133ce", 
-        "lhca.py": "input-20213c132e67534ad72816f237baef57"
+        "lhca.py": "input-59a63c1c97f1615725dfeeff47b5f890"
     }
 }

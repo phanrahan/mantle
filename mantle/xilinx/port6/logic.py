@@ -1,8 +1,8 @@
 from magma import *
-from parts.xilinx.spartan6.primitives import A0, A1, A2, A3, A4, A5
-from mantle.xilinx.port6.LUT import *
-from mantle.xilinx.port6.ROM import *
-from mantle.xilinx.port6.flatcascade import FlatCascade
+from ..spartan6 import A0, A1, A2, A3, A4, A5
+from .LUT import *
+from .ROM import *
+from .flatcascade import FlatCascade
 
 __all__  = ['And',  'AndN',  'And2',  'And3',  'And4',  'And5',  'And6']
 __all__ += ['NAnd', 'NAndN', 'NAnd2', 'NAnd3', 'NAnd4', 'NAnd5', 'NAnd6']

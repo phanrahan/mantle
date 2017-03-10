@@ -1,8 +1,18 @@
 {
     ".deps_version": 2, 
-    "python romb16.py build/romb16": {
-        "build/romb16.ucf": "output-98773288d142b79a8cc02b2f6ce53be0", 
-        "build/romb16.v": "output-055e1d15c94fb61747e13f7554e8d068", 
-        "romb16.py": "input-8783b9aedb204beba672620499e45505"
+    "python romb18.py build/romb18": {
+        "build/romb18.ucf": "output-98773288d142b79a8cc02b2f6ce53be0", 
+        "build/romb18.v": "output-b39e3db09bc657f1db3821625c88433b", 
+        "romb18.py": "input-b391e1b638638cc804ce6da2c012bf64"
+    }, 
+    "python romb8.py build/romb8": {
+        "build/romb8.ucf": "output-98773288d142b79a8cc02b2f6ce53be0", 
+        "build/romb8.v": "output-354ba478289f60bbd1b7bcdef0309b34", 
+        "romb8.py": "input-7318568faa9d7325e159b36393246b48"
+    }, 
+    "python romb9.py build/romb9": {
+        "build/romb9.ucf": "output-98773288d142b79a8cc02b2f6ce53be0", 
+        "build/romb9.v": "output-06dccddf4bc3b80fb03faa4b6ecdc089", 
+        "romb9.py": "input-8c3f3580acfab3045e4d775da08383c7"
     }
 }

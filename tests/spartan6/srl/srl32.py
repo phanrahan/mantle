@@ -1,7 +1,7 @@
 import sys
 from magma import *
-from parts.xilinx.spartan6.primitives.SRL import SRL32
-from shields.megawing import MegaWing
+from mantle.xilinx.spartan6.SRL import SRL32
+from loam.shields.megawing import MegaWing
 
 megawing = MegaWing()
 megawing.Clock.on()

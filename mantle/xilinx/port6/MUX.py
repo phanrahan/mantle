@@ -1,5 +1,5 @@
 from magma import *
-from parts.xilinx.spartan6.primitives.CLB import *
+from ..spartan6.CLB import *
 
 __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
 __all__ += ['MuxN']

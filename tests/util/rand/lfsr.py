@@ -1,8 +1,8 @@
 import sys
 from magma import *
-from mantle import *
+from mantle import Counter
 from mantle.util.lfsr import LFSR
-from shields.megawing import MegaWing
+from loam.shields.megawing import MegaWing
 
 megawing = MegaWing()
 megawing.Clock.on()

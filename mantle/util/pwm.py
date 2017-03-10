@@ -1,5 +1,4 @@
-from magma import *
-from mantle import *
+from mantle import ULE
 
 def PWM(n):
     return ULE(n)

@@ -1,7 +1,7 @@
 import sys
 from magma import *
-from mantle import *
-from boards.papilio import Papilio
+from mantle import Counter
+from loam.boards.papilio import Papilio
 
 papilio = Papilio()
 papilio.Clock.on()

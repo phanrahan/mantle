@@ -1,9 +1,9 @@
 import sys
 from magma import *
 print('magma')
-from parts.xilinx.spartan6.primitives import LUT6x2
+from mantle.xilinx.spartan6 import LUT6x2
 print('lut')
-from shields.megawing import MegaWing
+from loam.shields.megawing import MegaWing
 #print(LUT4)
 
 megawing = MegaWing()

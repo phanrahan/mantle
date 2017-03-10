@@ -1,6 +1,6 @@
 from magma import *
-from parts.xilinx.spartan3.primitives.CLB import ANDCY, CARRY, A0, A1
-from mantle.xilinx.port3.LUT import LUTN
+from ..spartan3.CLB import ANDCY, CARRY, A0, A1
+from .LUT import LUTN
 
 __all__  = ['FullCarry']
 __all__ += ['FullAdder']

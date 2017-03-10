@@ -1,7 +1,7 @@
 import sys
 from magma import *
-from parts.xilinx.spartan6.primitives import LUT5x2
-from shields.megawing import MegaWing
+from mantle.xilinx.spartan6 import LUT5x2
+from loam.shields.megawing import MegaWing
 
 megawing = MegaWing()
 megawing.Switch.on(6)

@@ -1,7 +1,7 @@
 from collections import Sequence
 from magma import *
 from magma.compatibility import IntegerTypes
-from parts.xilinx.spartan3.primitives.CLB import *
+from ..spartan3.CLB import *
 
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']

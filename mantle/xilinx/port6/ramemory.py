@@ -1,5 +1,5 @@
 from magma import *
-from mantle.xilinx.port6.RAM import RAM16D, RAM64Q
+from .RAM import RAM16D, RAM64Q
 
 __all__ = ['RAM16DxN', 'RAM64Q']
 

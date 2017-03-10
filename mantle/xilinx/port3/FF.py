@@ -1,7 +1,7 @@
 from magma import *
 from magma.compatibility import IntegerTypes
-from parts.xilinx.spartan3.primitives.CLB import *
-from mantle.xilinx.port3.LUT import *
+from ..spartan3.CLB import *
+from .LUT import *
 
 __all__   = ['DFF', 'RSFF', 'SRFF', 'JKFF', 'TFF']
 __all__  += ['FF', 'FFs']

@@ -1,5 +1,5 @@
-from magma import *
-from mantle import *
+from magma import  getCurrentDefinition, wire
+from mantle import FF, And2
 
 def debounce(a, slow):
     CLK = getCurrentDefinition().CLK

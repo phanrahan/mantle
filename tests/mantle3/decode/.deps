@@ -1,0 +1,68 @@
+{
+    ".deps_version": 2, 
+    "cmp build/arbiter8.ucf gold6/arbiter8.ucf": {
+        "build/arbiter8.ucf": "input-dd06af9ebfba65d89947bfbf0454c276", 
+        "gold6/arbiter8.ucf": "input-dd06af9ebfba65d89947bfbf0454c276"
+    }, 
+    "cmp build/arbiter8.v gold6/arbiter8.v": {
+        "build/arbiter8.v": "input-0c640fb57cf52abfed4bf06d7985f278", 
+        "gold6/arbiter8.v": "input-0c640fb57cf52abfed4bf06d7985f278"
+    }, 
+    "cmp build/decode4.ucf gold6/decode4.ucf": {
+        "build/decode4.ucf": "input-fd30fbece6d295e66dd9cac13967ad10", 
+        "gold6/decode4.ucf": "input-fd30fbece6d295e66dd9cac13967ad10"
+    }, 
+    "cmp build/decode4.v gold6/decode4.v": {
+        "build/decode4.v": "input-f2bd6a43616d55d5f0b024e7679656e9", 
+        "gold6/decode4.v": "input-f2bd6a43616d55d5f0b024e7679656e9"
+    }, 
+    "cmp build/decode8.ucf gold6/decode8.ucf": {
+        "build/decode8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00", 
+        "gold6/decode8.ucf": "input-cf657d43159e0b6ac5b73eada6402d00"
+    }, 
+    "cmp build/decode8.v gold6/decode8.v": {
+        "build/decode8.v": "input-d9265c8725019f43c55a9cd4884d493e", 
+        "gold6/decode8.v": "input-d9265c8725019f43c55a9cd4884d493e"
+    }, 
+    "cmp build/decoder8.ucf gold6/decoder8.ucf": {
+        "build/decoder8.ucf": "input-18ebbc6e28255de948b1730b2070482d", 
+        "gold6/decoder8.ucf": "input-18ebbc6e28255de948b1730b2070482d"
+    }, 
+    "cmp build/decoder8.v gold6/decoder8.v": {
+        "build/decoder8.v": "input-a2a28b7c12389902ab60c824115e1c3d", 
+        "gold6/decoder8.v": "input-a2a28b7c12389902ab60c824115e1c3d"
+    }, 
+    "cmp build/encoder8.ucf gold6/encoder8.ucf": {
+        "build/encoder8.ucf": "input-0a25886d4b9b331c63997299d58f95d5", 
+        "gold6/encoder8.ucf": "input-0a25886d4b9b331c63997299d58f95d5"
+    }, 
+    "cmp build/encoder8.v gold6/encoder8.v": {
+        "build/encoder8.v": "input-f26eac0d585c693a6402e69fe48e9a92", 
+        "gold6/encoder8.v": "input-f26eac0d585c693a6402e69fe48e9a92"
+    }, 
+    "python arbiter8.py build/arbiter8": {
+        "arbiter8.py": "input-83b9689f3fa95de57c50699d04b32efa", 
+        "build/arbiter8.ucf": "output-dd06af9ebfba65d89947bfbf0454c276", 
+        "build/arbiter8.v": "output-0c640fb57cf52abfed4bf06d7985f278"
+    }, 
+    "python decode4.py build/decode4": {
+        "build/decode4.ucf": "output-fd30fbece6d295e66dd9cac13967ad10", 
+        "build/decode4.v": "output-f2bd6a43616d55d5f0b024e7679656e9", 
+        "decode4.py": "input-caa626d762e7ea8a97de6ae3577c1bd4"
+    }, 
+    "python decode8.py build/decode8": {
+        "build/decode8.ucf": "output-cf657d43159e0b6ac5b73eada6402d00", 
+        "build/decode8.v": "output-d9265c8725019f43c55a9cd4884d493e", 
+        "decode8.py": "input-d19608aa9bb72ede7095e1f9d40851cb"
+    }, 
+    "python decoder8.py build/decoder8": {
+        "build/decoder8.ucf": "output-18ebbc6e28255de948b1730b2070482d", 
+        "build/decoder8.v": "output-a2a28b7c12389902ab60c824115e1c3d", 
+        "decoder8.py": "input-4357eb62dac50166ca51686ce2751e2a"
+    }, 
+    "python encoder8.py build/encoder8": {
+        "build/encoder8.ucf": "output-0a25886d4b9b331c63997299d58f95d5", 
+        "build/encoder8.v": "output-f26eac0d585c693a6402e69fe48e9a92", 
+        "encoder8.py": "input-71576601afd07634481b7ba1d947d26f"
+    }
+}

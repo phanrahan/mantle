@@ -133,13 +133,13 @@ def init(rom,N,mode=0):
 
     # M is the number of high (>8) address values
     #  e.g. if N == 8, then there are 2 high address values 
-    M = 16/N
+    M = 16//N
     for i in range(16):
         v = 0
         for b in range(256):
-            col = (b/M)%N
+            col = (b//M)%N
             # NB. the high address values ocuppy the lowest bit positions
-            row = 256*(b%M) + 16*i + b/16
+            row = 256*(b%M) + 16*i + b//16
             bit = (rom[row] >> col)&1
             #print('i=%x'%i, 'b=%d'%b, row, col)
             v |= bit << b

@@ -1,5 +1,5 @@
 from magma import *
-from magma.verilog import bstr
+from magma.backend.verilog import bstr
 
 __all__ = ['SB_PLL', 'SB_PLL40_CORE']
 

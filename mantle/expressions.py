@@ -43,6 +43,8 @@ class ExprVisitor(ast.NodeVisitor):
                 assert len(typ.args) == 1
                 if isinstance(typ.args[0], ast.Name) and typ.args[0].id == "Bit":
                     self.width_table[arg.arg] = 1
+                elif isinstance(typ.args[0], ast.Call) and typ.args[0].func.id == "Array":
+                    self.width_table[arg.arg] = typ.args[0].args[0].n
                 else:
                     raise NotImplementedError()
             else:

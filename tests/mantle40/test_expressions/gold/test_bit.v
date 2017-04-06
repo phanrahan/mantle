@@ -7,7 +7,7 @@ assign O = {inst0_O};
 assign COUT = inst1_CO;
 endmodule
 
-module func (input  a, input  b, output  c);
+module add1 (input  a, input  b, output  c);
 wire [0:0] inst0_O;
 wire  inst0_COUT;
 Addcout1 inst0 (.I0({a}), .I1({b}), .O(inst0_O), .COUT(inst0_COUT));
@@ -176,7 +176,7 @@ wire  inst0_c;
 wire [0:0] inst1_O;
 wire [21:0] inst2_O;
 wire  inst2_COUT;
-func inst0 (.a(inst1_O[0]), .b(1'b1), .c(inst0_c));
+add1 inst0 (.a(inst1_O[0]), .b(1'b1), .c(inst0_c));
 Register1CE inst1 (.I({inst0_c}), .O(inst1_O), .CLK(CLKIN), .CE(inst2_COUT));
 Counter22 inst2 (.O(inst2_O), .COUT(inst2_COUT), .CLK(CLKIN));
 assign D1 = inst1_O[0];

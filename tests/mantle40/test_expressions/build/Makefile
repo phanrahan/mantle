@@ -1,5 +1,6 @@
-#NAME=test_bit
-NAME=test_array
+#NAME?=test_bit
+#NAME?=test_array
+NAME?=test_sub
 PNR=arachne-pnr
 
 DEVICE = 1k

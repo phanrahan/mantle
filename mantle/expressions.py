@@ -22,7 +22,7 @@ class ExprVisitor(ast.NodeVisitor):
         self.source = Source()
         self.source.add_line("from magma import *")
         self.source.add_line("from mantle import *")
-        self.__unique_id = -1
+        self.__unique_id = 0
         self.args = []
         self.width_table = {}
         self.name = None
@@ -82,9 +82,11 @@ class ExprVisitor(ast.NodeVisitor):
         if left_width != right_width: 
             raise NotImplementedError(
                 "Mismatch widths not supported yet {}".format(ast.dump(node)))
-        if isinstance(node.op, ast.Add):
+        if isinstance(node.op, (ast.Add, ast.Sub)):
+            op_str = node.op.__class__.__name__
+            assert op_str in ["Add", "Sub"]
             inst_id = self.unique_id()
-            self.source.add_line("{} = Add({})({}, {})".format(inst_id, left_width, left, right))
+            self.source.add_line("{} = {}({})({}, {})".format(inst_id, op_str, left_width, left, right))
             return inst_id
         raise NotImplementedError(ast.dump(node))
 

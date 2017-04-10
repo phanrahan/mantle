@@ -8,7 +8,7 @@ QUIET = -q
 all: $(NAME).txt
 
 %.txt: %.json
-	gp4pnr $(QUIET) -p $(DEVICE) $*.json -o $*.txt --unused-pull down --unused-drive 10k
+	gp4par $(QUIET) -p $(DEVICE) $*.json -o $*.txt --unused-pull down --unused-drive 10k
 
 %.json: %.v
 	yosys $(QUIET) -p 'synth_greenpak4 -top main -part SLG46620V -json $*.json' $<

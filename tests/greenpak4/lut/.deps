@@ -1,0 +1,7 @@
+{
+    ".deps_version": 2, 
+    "python lut2.py build/lut2": {
+        "build/lut2.v": "output-df304a2a5c09ce1c68a3b1f0fad7e244", 
+        "lut2.py": "input-5fc2433ade3f9efb55dc82c4c0c346db"
+    }
+}

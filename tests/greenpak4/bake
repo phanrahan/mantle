@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+import os, glob
+
+tests = glob.glob('*')
+
+def build():
+    for test in tests:
+        if os.path.isdir(test) and not test[0] == '_':
+            os.system('cd %s; ./bake clean; ./bake; cd ..' % test)
+
+def gold():
+    for test in tests:
+        if os.path.isdir(test) and not test[0] == '_':
+            os.system('cd %s; ./bake gold; cd ..' % test)
+
+
+build()
+#gold()

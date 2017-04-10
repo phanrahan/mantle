@@ -14,7 +14,8 @@ def AddC(n, **kwargs):
 
 def Sub(n, **kwargs):
     invert = Invert(n)
-    adder =  Adders(n, False, True, **kwargs)
+    adder =  Adders(n, True, True, **kwargs)
+    wire(1, adder.CIN)
     wire(invert.O, adder.I1)
     return AnonymousCircuit("I0", adder.I0, "I1", invert.I, 
                             "O",  adder.O, "COUT", adder.COUT)

@@ -1,3 +1,4 @@
+from __future__ import division
 from collections import Sequence
 from magma import *
 from .LUT import LUTN
@@ -23,7 +24,7 @@ def DefineFlatCascade(n, k, expr, cin):
                 e = expr[y] if isinstance(expr, Sequence) else expr
                 return LUTN( e, k+1, loc=(0,y/8, y%8) )
 
-            m = (n+k-1)/k
+            m = (n+k-1) // k
             #c = braid( col(f, m), flatargs=['I1','I2','I3'], foldargs={"I0":"O"})
             c = braid( col(f, m), foldargs={"I0":"O"})
             for i in range(m):

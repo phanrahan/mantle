@@ -60,7 +60,13 @@ class ExprVisitor(ast.NodeVisitor):
     def get_width(self, node):
         if isinstance(node, ast.Name):
             return self.width_table[node.id]
-        raise NotImplementedError()
+        elif isinstance(node, ast.BinOp):
+            left_width = self.get_width(node.left)
+            right_width = self.get_width(node.right)
+            if left_width != right_width:
+                raise NotImplementedError("Width mismatch not supported")
+            return left_width
+        raise NotImplementedError(ast.dump(node), type(node))
 
     def visit_Name(self, node):
         if node.id in self.args:
@@ -82,11 +88,34 @@ class ExprVisitor(ast.NodeVisitor):
         if left_width != right_width: 
             raise NotImplementedError(
                 "Mismatch widths not supported yet {}".format(ast.dump(node)))
-        if isinstance(node.op, (ast.Add, ast.Sub)):
-            op_str = node.op.__class__.__name__
-            assert op_str in ["Add", "Sub"]
+        binop_map = {
+            ast.Add: "Add",
+            ast.Sub: "Sub",
+            ast.BitAnd: "And",
+            ast.BitOr: "Or",
+            ast.BitXor: "Xor",
+        }
+        if node.op.__class__ in binop_map:
+            op_str = binop_map[node.op.__class__]
             inst_id = self.unique_id()
-            self.source.add_line("{} = {}({})({}, {})".format(inst_id, op_str, left_width, left, right))
+            if op_str in ["And", "Or", "Xor"]:
+                self.source.add_line("{} = {}(2, width={})({}, {})".format(inst_id, op_str, left_width, left, right))
+            else:
+                self.source.add_line("{} = {}({})({}, {})".format(inst_id, op_str, left_width, left, right))
+            return inst_id
+        raise NotImplementedError(ast.dump(node))
+
+    def visit_UnaryOp(self, node):
+        operand = self.visit(node.operand)
+        operand_width = self.get_width(node.operand)
+        unop_map = {
+            ast.Not: "Not",
+            ast.Invert: "Invert"
+        }
+        if node.op.__class__ in unop_map:
+            op_str = unop_map[node.op.__class__]
+            inst_id = self.unique_id()
+            self.source.add_line("{} = {}({})({})".format(inst_id, op_str, operand_width, operand))
             return inst_id
         raise NotImplementedError(ast.dump(node))
 
@@ -95,6 +124,8 @@ def circuit(fn):
     tree = ast.parse(textwrap.dedent(inspect.getsource(fn)))
     visitor = ExprVisitor()
     visitor.visit(tree)
-    print(visitor.source._source)
+    # print(visitor.source._source)
     exec(visitor.source._source)
-    return eval(visitor.name)
+    func = eval(visitor.name)
+    func.__magma_source = visitor.source._source
+    return func

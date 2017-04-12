@@ -110,7 +110,8 @@ class ExprVisitor(ast.NodeVisitor):
         operand_width = self.get_width(node.operand)
         unop_map = {
             ast.Not: "Not",
-            ast.Invert: "Invert"
+            ast.Invert: "Invert",
+            ast.USub: "Negate"
         }
         if node.op.__class__ in unop_map:
             op_str = unop_map[node.op.__class__]

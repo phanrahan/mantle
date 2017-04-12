@@ -36,14 +36,15 @@ EndCircuit()
 def test_sub():
     @circuit
     def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
-        c = a - b
+        c = -(a - b)
 
     expected = \
 """from magma import *
 from mantle import *
 circ = DefineCircuit("circ", "a", In(Array(5, Bit)), "b", In(Array(5, Bit)), "c", Out(Array(5, Bit)))
 inst1 = Sub(5)(circ.a, circ.b)
-wire(circ.c, inst1)
+inst2 = Negate(5)(inst1)
+wire(circ.c, inst2)
 EndCircuit()
 """
     assert circ.__magma_source == expected

@@ -137,7 +137,7 @@ def circuit(fn):
     tree = ast.parse(textwrap.dedent(inspect.getsource(fn)))
     visitor = ExprVisitor()
     visitor.visit(tree)
-    print(visitor.source._source)
+    # print(visitor.source._source)
     exec(visitor.source._source)
     func = eval(visitor.name)
     func.__magma_source = visitor.source._source

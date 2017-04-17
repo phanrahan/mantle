@@ -13,6 +13,7 @@ __all__ += ['NXor', 'NXorN', 'NXor2', 'NXor3', 'NXor4']
 
 __all__ += ['Buf', 'Buffer']
 __all__ += ['Not', 'Invert']
+__all__ += ['LeftShift', 'RightShift']
 
 
 def And2(**kwargs):
@@ -449,3 +450,32 @@ def DefineInvert(width):
 def Invert(n, **kwargs):
     return DefineInvert(n)(**kwargs)
 
+def LeftShift(width, shift_amount):
+    T = Array(width, Bit)
+    class _LeftShift(Circuit):
+        name = 'LeftShift_w{}_a{}'.format(width, shift_amount)
+
+        IO = ["I", In(T), "O", Out(T)]
+
+        @classmethod
+        def definition(io):
+            for i in range(shift_amount, width):
+                wire(io.I[i - shift_amount], io.O[i])
+            for i in range(0, shift_amount):
+                wire(0, io.O[i])
+    return _LeftShift
+
+def RightShift(width, shift_amount):
+    T = Array(width, Bit)
+    class _RightShift(Circuit):
+        name = 'RightShift_w{}_a{}'.format(width, shift_amount)
+
+        IO = ["I", In(T), "O", Out(T)]
+
+        @classmethod
+        def definition(io):
+            for i in range(0, width - shift_amount):
+                wire(io.I[i + shift_amount], io.O[i])
+            for i in range(width - shift_amount, width):
+                wire(0, io.O[i])
+    return _RightShift

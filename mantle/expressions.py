@@ -61,11 +61,15 @@ class ExprVisitor(ast.NodeVisitor):
         if isinstance(node, ast.Name):
             return self.width_table[node.id]
         elif isinstance(node, ast.BinOp):
+            if isinstance(node.op, (ast.LShift, ast.RShift)):
+                return self.get_width(node.left)
             left_width = self.get_width(node.left)
             right_width = self.get_width(node.right)
             if left_width != right_width:
                 raise NotImplementedError("Width mismatch not supported")
             return left_width
+        elif isinstance(node, ast.UnaryOp):
+            return self.get_width(node.operand)
         raise NotImplementedError(ast.dump(node), type(node))
 
     def visit_Name(self, node):
@@ -73,33 +77,41 @@ class ExprVisitor(ast.NodeVisitor):
             return "{}.{}".format(self.name, node.id)
         raise NotImplementedError()
 
+    def visit_Num(self, node):
+        return node.n
+
     def visit_Assign(self, node):
         value = self.visit(node.value)
         if len(node.targets) > 1:
             raise NotImplementedError(astor.to_source(node).rstrip())
         target = self.visit(node.targets[0])
-        self.source.add_line("wire({}, {})".format(target, value))
+        self.source.add_line("wire({}, {})".format(value, target))
 
     def visit_BinOp(self, node):
         left = self.visit(node.left)
         right = self.visit(node.right)
         left_width = self.get_width(node.left)
-        right_width = self.get_width(node.right)
-        if left_width != right_width: 
-            raise NotImplementedError(
-                "Mismatch widths not supported yet {}".format(ast.dump(node)))
+        if not isinstance(node.op, (ast.LShift, ast.RShift)):
+            right_width = self.get_width(node.right)
+            if left_width != right_width: 
+                raise NotImplementedError(
+                    "Mismatch widths not supported yet {}".format(ast.dump(node)))
         binop_map = {
             ast.Add: "Add",
             ast.Sub: "Sub",
             ast.BitAnd: "And",
             ast.BitOr: "Or",
             ast.BitXor: "Xor",
+            ast.LShift: "LeftShift",
+            ast.RShift: "RightShift",
         }
         if node.op.__class__ in binop_map:
             op_str = binop_map[node.op.__class__]
             inst_id = self.unique_id()
             if op_str in ["And", "Or", "Xor"]:
                 self.source.add_line("{} = {}(2, width={})({}, {})".format(inst_id, op_str, left_width, left, right))
+            elif op_str in ["LeftShift", "RightShift"]:
+                self.source.add_line("{} = {}({}, {})({})".format(inst_id, op_str, left_width, right, left))
             else:
                 self.source.add_line("{} = {}({})({}, {})".format(inst_id, op_str, left_width, left, right))
             return inst_id

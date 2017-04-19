@@ -7,6 +7,8 @@ python:
 
 before_install:
     - sudo apt-get -qq update
+    - git clone git@github.com:phanrahan/magmacore.git
+    - pip install -e magmacore
 
 install: 
     - pip install -r requirements.txt

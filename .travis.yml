@@ -9,6 +9,8 @@ before_install:
     - sudo apt-get -qq update
     - git clone git@github.com:phanrahan/magmacore.git
     - pip install -e magmacore
+    - git clone git@github.com:phanrahan/loam.git
+    - pip install -e loam
 
 install: 
     - pip install -r requirements.txt

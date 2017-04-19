@@ -1,8 +1,12 @@
+import sys
+import pytest
 from magma import *
 from mantle import *
 from loam.boards.icestick import IceStick
 
 
+@pytest.mark.skipif(sys.version_info < (3,),
+                    reason="requires python3")
 def test_bit():
     @circuit
     def circ(a : In(Bit), b : In(Bit), c : Out(Bit)):
@@ -18,6 +22,9 @@ EndCircuit()
 """
     assert circ.__magma_source == expected
 
+
+@pytest.mark.skipif(sys.version_info < (3,),
+                    reason="requires python3")
 def test_array():
     @circuit
     def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
@@ -33,6 +40,9 @@ EndCircuit()
 """
     assert circ.__magma_source == expected
 
+
+@pytest.mark.skipif(sys.version_info < (3,),
+                    reason="requires python3")
 def test_sub():
     @circuit
     def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
@@ -49,6 +59,9 @@ EndCircuit()
 """
     assert circ.__magma_source == expected
 
+
+@pytest.mark.skipif(sys.version_info < (3,),
+                    reason="requires python3")
 def test_logic_ops():
     @circuit
     def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):

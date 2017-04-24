@@ -14,6 +14,9 @@ class Source:
     def add_lines(self, lines, tab=""):
         for line in lines:
             self.add_line(line, tab)
+    
+    def __str__(self):
+        return self._source
 
 
 class ExprVisitor(ast.NodeVisitor):
@@ -133,12 +136,15 @@ class ExprVisitor(ast.NodeVisitor):
         raise NotImplementedError(ast.dump(node))
 
 
-def circuit(fn):
-    tree = ast.parse(textwrap.dedent(inspect.getsource(fn)))
+def process_circuit_ast(tree):
     visitor = ExprVisitor()
     visitor.visit(tree)
-    # print(visitor.source._source)
-    exec(visitor.source._source)
-    func = eval(visitor.name)
-    func.__magma_source = visitor.source._source
+    return str(visitor.source), visitor.name
+
+def circuit(fn):
+    tree = ast.parse(textwrap.dedent(inspect.getsource(fn)))
+    source, name = process_circuit_ast(tree)
+    exec(source)
+    func = eval(name)
+    func.__magma_source = source
     return func

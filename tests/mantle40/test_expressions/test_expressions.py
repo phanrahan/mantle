@@ -66,3 +66,49 @@ wire(inst5, circ.c)
 EndCircuit()
 """
     assert circ.__magma_source == expected
+
+def test_clock():
+    @circuit
+    def circ(a : In(Bit), b : Out(Bit)):
+        b = a
+
+    expected = \
+"""from magma import *
+from mantle import *
+circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))
+wire(circ.a, circ.b)
+EndCircuit()
+"""
+    assert circ.__magma_source == expected
+
+def test_wire():
+    @circuit
+    def circ(a : In(Bit), b : Out(Bit)):
+        wire(a, b)
+
+    expected = \
+"""from magma import *
+from mantle import *
+circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))
+wire(circ.a, circ.b)
+EndCircuit()
+"""
+    assert circ.__magma_source == expected
+
+def test_register():
+    @circuit
+    def circ(a : In(Bit), b : Out(Bit)):
+        c = Register(1)
+        wire(a, c.I[0])
+        wire(c.O[0], b)
+
+    expected = \
+"""from magma import *
+from mantle import *
+circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))
+c = Register(1)
+wire(circ.a, c.I[0])
+wire(c.O[0], circ.b)
+EndCircuit()
+"""
+    assert circ.__magma_source == expected

@@ -26,7 +26,7 @@ class ExprVisitor(ast.NodeVisitor):
         self.source = Source()
         self.source.add_line("from magma import *")
         self.source.add_line("from mantle import *")
-        self.__unique_id = 0
+        self.__unique_id = -1  # Starts at -1 so first instance is 0
         self.args = []
         self.width_table = {}
         self.name = None
@@ -99,11 +99,25 @@ class ExprVisitor(ast.NodeVisitor):
     def visit_Num(self, node):
         return node.n
 
+    def visit_Call(self, node):
+        if isinstance(node.func, ast.Name):
+            if len(node.args) == 1:
+                val = self.visit(node.args[0])
+                circ_width = self.get_width(node.func)
+                if isinstance(val, int) and val.bit_length() < circ_width:
+                    val = "int2seq({}, {})".format(val, circ_width)
+                circ = astor.to_source(node.func).rstrip()
+                self.source.add_line("wire({}.I, {})".format(circ, val))
+                return 
+        raise NotImplementedError(astor.to_source(node).rstrip())
+
     def visit_Assign(self, node):
         if isinstance(node.value, ast.Call):
             if node.value.func.id in {"Register", "Mux"}:
                 if node.value.func.id == "Register":
                     self.width_table[node.targets[0].id] = node.value.args[0].n
+                    self.width_table[node.targets[0].id + ".I"] = node.value.args[0].n
+                    self.width_table[node.targets[0].id + ".O"] = node.value.args[0].n
                 elif node.value.func.id == "Mux":
                     for i in range(node.value.args[0].n):
                         self.width_table[node.targets[0].id + ".I{}".format(i)] = node.value.args[1].n

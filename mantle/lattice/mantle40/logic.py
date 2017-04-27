@@ -423,7 +423,6 @@ def Buffer(n, **kwargs):
 def Not(**kwargs):
     """Not gate - 1-bit input."""
     return LUT1(~A0, **kwargs)
-
 def DefineInvert(width):
     """
     Generate Invert module

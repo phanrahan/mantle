@@ -64,7 +64,9 @@ class ExprVisitor(ast.NodeVisitor):
             if isinstance(s, ast.Expr) and \
                isinstance(s.value, ast.Call) and \
                s.value.func.id == "wire":
-                self.source.add_line(astor.to_source(s).rstrip())
+                arg1 = self.visit(s.value.args[0])
+                arg2 = self.visit(s.value.args[1])
+                self.source.add_line("wire({}, {})".format(arg1, arg2))
             else:
                 self.visit(s)
         self.source.add_line("EndCircuit()")

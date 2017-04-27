@@ -20,8 +20,9 @@ class Source:
 
 
 class ExprVisitor(ast.NodeVisitor):
-    def __init__(self):
+    def __init__(self, clock=True):
         super().__init__()
+        self.clock = clock
         self.source = Source()
         self.source.add_line("from magma import *")
         self.source.add_line("from mantle import *")
@@ -52,43 +53,73 @@ class ExprVisitor(ast.NodeVisitor):
                     raise NotImplementedError()
             else:
                 raise NotImplementedError(ast.dump(typ))
+        if self.clock:
+            args.append("\"CLK\"")
+            args.append("In(Bit)")
         self.name = node.name
         self.source.add_line(
                 "{name} = DefineCircuit(\"{name}\", {args})".format(
                     name=node.name, args=", ".join(args)))
         for s in node.body:
-            self.visit(s)
+            if isinstance(s, ast.Expr) and \
+               isinstance(s.value, ast.Call) and \
+               s.value.func.id == "wire":
+                self.source.add_line(astor.to_source(s).rstrip())
+            else:
+                self.visit(s)
         self.source.add_line("EndCircuit()")
 
     def get_width(self, node):
         if isinstance(node, ast.Name):
             return self.width_table[node.id]
+        elif isinstance(node, ast.Num):
+            return max(1, node.n.bit_length())  # max because (0).bit_length() == 1
         elif isinstance(node, ast.BinOp):
             if isinstance(node.op, (ast.LShift, ast.RShift)):
                 return self.get_width(node.left)
             left_width = self.get_width(node.left)
             right_width = self.get_width(node.right)
-            if left_width != right_width:
-                raise NotImplementedError("Width mismatch not supported")
-            return left_width
+            return max(left_width, right_width)
+            # if left_width != right_width:
+            #     raise NotImplementedError("Width mismatch not supported")
+            # return left_width
         elif isinstance(node, ast.UnaryOp):
             return self.get_width(node.operand)
+        elif isinstance(node, ast.Attribute):
+            return self.width_table[astor.to_source(node).rstrip()]
         raise NotImplementedError(ast.dump(node), type(node))
 
     def visit_Name(self, node):
         if node.id in self.args:
             return "{}.{}".format(self.name, node.id)
-        raise NotImplementedError()
+        return node.id + ".O"
 
     def visit_Num(self, node):
         return node.n
 
     def visit_Assign(self, node):
+        if isinstance(node.value, ast.Call):
+            if node.value.func.id in {"Register", "Mux"}:
+                if node.value.func.id == "Register":
+                    self.width_table[node.targets[0].id] = node.value.args[0].n
+                elif node.value.func.id == "Mux":
+                    for i in range(node.value.args[0].n):
+                        self.width_table[node.targets[0].id + ".I{}".format(i)] = node.value.args[1].n
+                else:
+                    raise NotImplementedError()
+            self.source.add_line(astor.to_source(node).rstrip())
+            return
         value = self.visit(node.value)
         if len(node.targets) > 1:
             raise NotImplementedError(astor.to_source(node).rstrip())
         target = self.visit(node.targets[0])
+        if isinstance(value, int):
+            value = "int2seq({}, {})".format(value, self.get_width(node.targets[0]))
+        assert target is not None, type(node.targets[0])
         self.source.add_line("wire({}, {})".format(value, target))
+
+    def visit_Attribute(self, node):
+        return astor.to_source(node).rstrip()
 
     def visit_BinOp(self, node):
         left = self.visit(node.left)
@@ -96,9 +127,14 @@ class ExprVisitor(ast.NodeVisitor):
         left_width = self.get_width(node.left)
         if not isinstance(node.op, (ast.LShift, ast.RShift)):
             right_width = self.get_width(node.right)
-            if left_width != right_width: 
-                raise NotImplementedError(
-                    "Mismatch widths not supported yet {}".format(ast.dump(node)))
+            if left_width < right_width and isinstance(left, int):
+                left = "int2seq({}, {})".format(left, right_width)
+                if isinstance(right, int):
+                    right = "int2seq({}, {})".format(right, right_width)
+            elif right_width < left_width and isinstance(right, int):
+                right = "int2seq({}, {})".format(right, left_width)
+                if isinstance(left, int):
+                    left = "int2seq({}, {})".format(left, left_width)
         binop_map = {
             ast.Add: "Add",
             ast.Sub: "Sub",
@@ -135,16 +171,38 @@ class ExprVisitor(ast.NodeVisitor):
             return inst_id
         raise NotImplementedError(ast.dump(node))
 
+    def visit_Subscript(self, node):
+        value = self.visit(node.value)
+        _slice = self.visit(node.slice.value)
+        if isinstance(_slice, int):
+            return "{}[{}]".format(value, _slice)
+        else:
+            inst_id = self.unique_id()
+            self.source.add_line("{} = MuxN({})({}, {})".format(inst_id, self.get_width(node.value), value, _slice))
+            return inst_id
 
-def process_circuit_ast(tree):
-    visitor = ExprVisitor()
+
+def process_circuit_ast(tree, clock=True):
+    visitor = ExprVisitor(clock)
     visitor.visit(tree)
     return str(visitor.source), visitor.name
 
-def circuit(fn):
+def process_circuit(fn, clock=True):
     tree = ast.parse(textwrap.dedent(inspect.getsource(fn)))
-    source, name = process_circuit_ast(tree)
-    exec(source)
-    func = eval(name)
+    source, name = process_circuit_ast(tree, clock=clock)
+    for i, line in enumerate(source.splitlines()):
+        print("{} {}".format(i + 1, line))
+    _globals = inspect.stack()[1][0].f_globals
+    _locals = inspect.stack()[1][0].f_locals
+    exec(source, _globals, _locals)
+    func = _locals[name]
     func.__magma_source = source
     return func
+
+def circuit(fn=None, clock=True):
+    if fn is None:
+        def wrapped(fn):
+            return process_circuit(fn, clock)
+        return wrapped
+    return process_circuit(fn, clock)
+

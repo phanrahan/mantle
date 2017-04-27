@@ -4,7 +4,7 @@ from loam.boards.icestick import IceStick
 
 
 def test_bit():
-    @circuit
+    @circuit(clock=False)
     def circ(a : In(Bit), b : In(Bit), c : Out(Bit)):
         c = a + b
 
@@ -19,7 +19,7 @@ EndCircuit()
     assert circ.__magma_source == expected
 
 def test_array():
-    @circuit
+    @circuit(clock=False)
     def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
         c = a + b
 
@@ -34,7 +34,7 @@ EndCircuit()
     assert circ.__magma_source == expected
 
 def test_sub():
-    @circuit
+    @circuit(clock=False)
     def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
         c = -(a - b)
 
@@ -50,7 +50,7 @@ EndCircuit()
     assert circ.__magma_source == expected
 
 def test_logic_ops():
-    @circuit
+    @circuit(clock=False)
     def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
         c = ~((a | b ^ a) & b) >> 2
     expected = \

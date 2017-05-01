@@ -79,12 +79,16 @@ class ExprVisitor(ast.NodeVisitor):
         elif isinstance(node, ast.BinOp):
             if isinstance(node.op, (ast.LShift, ast.RShift)):
                 return self.get_width(node.left)
+            elif isinstance(node.op, ast.And):
+                return 1  # Boolean output
             left_width = self.get_width(node.left)
             right_width = self.get_width(node.right)
             return max(left_width, right_width)
             # if left_width != right_width:
             #     raise NotImplementedError("Width mismatch not supported")
             # return left_width
+        elif isinstance(node, ast.Compare):
+            return max(self.get_width(node.left), *map(self.get_width, node.comparators))
         elif isinstance(node, ast.UnaryOp):
             return self.get_width(node.operand)
         elif isinstance(node, ast.Attribute):
@@ -101,7 +105,9 @@ class ExprVisitor(ast.NodeVisitor):
 
     def visit_Call(self, node):
         if isinstance(node.func, ast.Name):
-            if len(node.args) == 1:
+            if node.func.id == "int2seq":
+                return astor.to_source(node).rstrip()
+            elif len(node.args) == 1:
                 val = self.visit(node.args[0])
                 circ_width = self.get_width(node.func)
                 if isinstance(val, int) and val.bit_length() < circ_width:
@@ -132,10 +138,31 @@ class ExprVisitor(ast.NodeVisitor):
         if isinstance(value, int):
             value = "int2seq({}, {})".format(value, self.get_width(node.targets[0]))
         assert target is not None, type(node.targets[0])
+        assert value is not None, astor.to_source(node.value).rstrip()
         self.source.add_line("wire({}, {})".format(value, target))
 
     def visit_Attribute(self, node):
         return astor.to_source(node).rstrip()
+
+    def visit_Compare(self, node):
+        """
+        Convert to a tree of BinOps, then reuse BinOp logic
+        TODO: Is this legal?
+        """
+        curr_node = node.left
+        for op, comparator in zip(node.ops, node.comparators):
+            curr_node = ast.BinOp(curr_node, op, comparator)
+        return self.visit(curr_node)
+
+    def visit_BoolOp(self, node):
+        """
+        Convert to a tree of BinOps, then reuse BinOp logic
+        TODO: Is this legal?
+        """
+        curr_node = node.values[0]
+        for value in node.values[1:]:
+            curr_node = ast.BinOp(curr_node, node.op, value)
+        return self.visit(curr_node)
 
     def visit_BinOp(self, node):
         left = self.visit(node.left)
@@ -154,11 +181,14 @@ class ExprVisitor(ast.NodeVisitor):
         binop_map = {
             ast.Add: "Add",
             ast.Sub: "Sub",
+            ast.And: "AndN",
             ast.BitAnd: "And",
             ast.BitOr: "Or",
             ast.BitXor: "Xor",
             ast.LShift: "LeftShift",
             ast.RShift: "RightShift",
+            ast.Lt: "ULT",  # TODO: Should we default to unsigned?
+            ast.LtE: "ULE",  # TODO: Should we default to unsigned?
         }
         if node.op.__class__ in binop_map:
             op_str = binop_map[node.op.__class__]
@@ -189,7 +219,12 @@ class ExprVisitor(ast.NodeVisitor):
 
     def visit_Subscript(self, node):
         value = self.visit(node.value)
-        _slice = self.visit(node.slice.value)
+        if isinstance(node.slice, ast.Index):
+            _slice = self.visit(node.slice.value)
+        elif isinstance(node.slice, ast.Slice):
+            return "{}[{}]".format(value, astor.to_source(node.slice).rstrip())
+        else:
+            raise NotImplementedError()
         if isinstance(_slice, int):
             return "{}[{}]".format(value, _slice)
         else:

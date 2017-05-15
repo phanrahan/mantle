@@ -1,4 +1,5 @@
 from magma import *
+from .simulation import *
 
 __all__  = ['A0', 'A1', 'A2', 'A3']
 __all__ += ['I0', 'I1', 'I2', 'I3']
@@ -46,14 +47,19 @@ SB_LUT4 = DeclareCircuit('SB_LUT4',
                "I1", In(Bit),
                "I2", In(Bit),
                "I3", In(Bit),
-               "O",  Out(Bit), cells=1) 
+               "O",  Out(Bit),
+               cells=1,
+               stateful=False,
+               simulate=simulate_sb_lut4) 
 
 # Implements (I0&I1)|(I1&I2)|(I2&I0)
 SB_CARRY = DeclareCircuit('SB_CARRY',
                "I0", In(Bit), # from I1
                "I1", In(Bit), # from I2
                "CI", In(Bit),
-               "CO", Out(Bit)) 
+               "CO", Out(Bit),
+               stateful=False,
+               simulate=simulate_sb_carry) 
 
 # Positive edge versions
 
@@ -61,42 +67,55 @@ SB_CARRY = DeclareCircuit('SB_CARRY',
 SB_DFF = DeclareCircuit('SB_DFF',
                "C", In(Bit),
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=False, n=False))
 
 # DFF w/ Clock enable
 SB_DFFE = DeclareCircuit('SB_DFFE',
                "C", In(Bit),
                "E", In(Bit),
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=False, n=False)
+)
 
 # DFF w/ Synchronous Reset
 SB_DFFSR = DeclareCircuit('SB_DFFSR',
                "C", In(Bit),
                "R", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=True, r=True, s=False, n=False))
 
 # DFF w/ Asynchronous Reset
 SB_DFFR = DeclareCircuit('SB_DFFR',
                "C", In(Bit),
                "R", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=True, s=False, n=False))
     
 # DFF w/ Synchronous Set
 SB_DFFSS = DeclareCircuit('SB_DFFSS',
                "C", In(Bit),
                "S", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=True, r=False, s=True, n=False))
 
 # DFF w/ Asynchronous Set
 SB_DFFS = DeclareCircuit('SB_DFFS',
                "C", In(Bit),
                "S", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=True, n=False))
     
 # DFF w/ Synchronous Reset, Clock enable
 SB_DFFESR = DeclareCircuit('SB_DFFESR',
@@ -104,7 +123,9 @@ SB_DFFESR = DeclareCircuit('SB_DFFESR',
                "R", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=True, r=True, s=False, n=False))
 
 # DFF w/ Asynchronous Reset, Clock enable
 SB_DFFER = DeclareCircuit('SB_DFFER',
@@ -112,7 +133,9 @@ SB_DFFER = DeclareCircuit('SB_DFFER',
                "R", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=True, s=False, n=False))
     
 # DFF w/ Synchronous Set, Clock enable
 SB_DFFESS = DeclareCircuit('SB_DFFESS',
@@ -120,7 +143,9 @@ SB_DFFESS = DeclareCircuit('SB_DFFESS',
                "S", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=True, r=False, s=True, n=False))
 
 # DFF w/ Asynchronous Set, Clock enable
 SB_DFFES = DeclareCircuit('SB_DFFES',
@@ -128,48 +153,62 @@ SB_DFFES = DeclareCircuit('SB_DFFES',
                "S", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=True, n=False))
 
 # Negative edge versions
 SB_DFFN = DeclareCircuit('SB_DFFN',
                "C", In(Bit),
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=False, n=True))
 
 # DFFN w/ Clock enable
 SB_DFFNE = DeclareCircuit('SB_DFFNE',
                "C", In(Bit),
                "E", In(Bit),
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=False, n=True))
 
 # DFFN w/ Synchronous Reset
 SB_DFFNSR = DeclareCircuit('SB_DFFNSR',
                "C", In(Bit),
                "R", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=True, r=True, s=False, n=True))
 
 # DFFN w/ Asynchronous Reset
 SB_DFFNR = DeclareCircuit('SB_DFFNR',
                "C", In(Bit),
                "R", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=True, s=False, n=True))
     
 # DFFN w/ Synchronous Set
 SB_DFFNSS = DeclareCircuit('SB_DFFNSS',
                "C", In(Bit),
                "S", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=True, r=False, s=True, n=True))
 
 # DFFN w/ Asynchronous Set
 SB_DFFNS = DeclareCircuit('SB_DFFNS',
                "C", In(Bit),
                "S", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=True, n=True))
     
 # DFFN w/ Synchronous Reset, Clock enable
 SB_DFFNESR = DeclareCircuit('SB_DFFNESR',
@@ -177,7 +216,9 @@ SB_DFFNESR = DeclareCircuit('SB_DFFNESR',
                "R", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simualte=gen_sb_dff_sim(ce=True, sy=True, r=True, s=False, n=True))
 
 # DFFN w/ Asynchronous Reset, Clock enable
 SB_DFFNER = DeclareCircuit('SB_DFFNER',
@@ -185,7 +226,9 @@ SB_DFFNER = DeclareCircuit('SB_DFFNER',
                "R", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=True, s=False, n=True))
     
 # DFFN w/ Synchronous Set, Clock enable
 SB_DFFNESS = DeclareCircuit('SB_DFFNESS',
@@ -193,7 +236,9 @@ SB_DFFNESS = DeclareCircuit('SB_DFFNESS',
                "S", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=True, r=False, s=True, n=True))
 
 # DFFN w/ Asynchronous Set, Clock enable
 SB_DFFNES = DeclareCircuit('SB_DFFNES',
@@ -201,7 +246,9 @@ SB_DFFNES = DeclareCircuit('SB_DFFNES',
                "S", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
-               "Q", Out(Bit))
+               "Q", Out(Bit),
+               stateful=True,
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=True, n=True))
 
 if __name__ == '__main__':
     lut = SB_LUT4()

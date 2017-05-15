@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from magma import *
+from .simulation import gen_sb_ram40_4k_sim
 
 __all__  = ['SB_RAM40_4K']
 __all__ += ['RAMB', 'ROMB']
@@ -16,7 +17,9 @@ SB_RAM40_4K = DeclareCircuit("SB_RAM40_4K",
     "WE",    In(Bit),
     "WADDR", In(Array(11, Bit)),
     "MASK",  In(Array(16, Bit)),
-    "WDATA", In(Array(16, Bit)) )
+    "WDATA", In(Array(16, Bit)),
+    stateful=True,
+    simulate=gen_sb_ram40_4k_sim(prc=True, pwc=True))
 
 # posedge read clock, negedge write clock
 # negedge read clock, posedge write clock

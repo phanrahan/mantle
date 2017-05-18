@@ -41,7 +41,7 @@ class ExprVisitor(ast.NodeVisitor):
 
     def add_line(self, str, lineno, col_offset):
         if self.python_source:
-            str += "  # {}".format(self.python_source[lineno])
+            str += "  # {}: {}".format(lineno - 1, self.python_source[lineno - 1])
         self.source.add_line(str)
 
     def visit_FunctionDef(self, node):
@@ -67,7 +67,8 @@ class ExprVisitor(ast.NodeVisitor):
             args.append("In(Bit)")
         self.name = node.name
         self.add_line("{name} = DefineCircuit(\"{name}\", {args})".format(
-                name=node.name, args=", ".join(args)), node.lineno, node.col_offset)
+                name=node.name, args=", ".join(args)), node.lineno + 1,  # incr lineno by 1 for @circuit decorator
+                node.col_offset)
         for s in node.body:
             if isinstance(s, ast.Expr) and \
                isinstance(s.value, ast.Call) and \
@@ -151,7 +152,7 @@ class ExprVisitor(ast.NodeVisitor):
             value = "int2seq({}, {})".format(value, self.get_width(node.targets[0]))
         assert target is not None, type(node.targets[0])
         assert value is not None, to_source(node.value)
-        self.source.add_line("wire({}, {})".format(value, target))
+        self.add_line("wire({}, {})".format(value, target), node.lineno, node.col_offset)
         self.width_table[to_source(node.targets[0])] = self.get_width(node.value)
 
     def visit_Attribute(self, node):

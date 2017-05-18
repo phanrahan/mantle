@@ -79,7 +79,7 @@ class ExprVisitor(ast.NodeVisitor):
         elif isinstance(node, ast.BinOp):
             if isinstance(node.op, (ast.LShift, ast.RShift)):
                 return self.get_width(node.left)
-            elif isinstance(node.op, ast.And):
+            elif isinstance(node.op, (ast.And, ast.Eq)):
                 return 1  # Boolean output
             left_width = self.get_width(node.left)
             right_width = self.get_width(node.right)
@@ -88,11 +88,17 @@ class ExprVisitor(ast.NodeVisitor):
             #     raise NotImplementedError("Width mismatch not supported")
             # return left_width
         elif isinstance(node, ast.Compare):
-            return max(self.get_width(node.left), *map(self.get_width, node.comparators))
+            return 1
         elif isinstance(node, ast.UnaryOp):
             return self.get_width(node.operand)
         elif isinstance(node, ast.Attribute):
             return self.width_table[astor.to_source(node).rstrip()]
+        elif isinstance(node, ast.BoolOp):
+            return 1  # Logic boolean op returns 1 or 0
+        elif isinstance(node, ast.Subscript):
+            if isinstance(node.slice, ast.Index):
+                return 1  # TODO: Do we have to worry about multidimensional subscripting?
+            raise NotImplementedError(ast.dump(node), type(node))
         raise NotImplementedError(ast.dump(node), type(node))
 
     def visit_Name(self, node):
@@ -105,7 +111,7 @@ class ExprVisitor(ast.NodeVisitor):
 
     def visit_Call(self, node):
         if isinstance(node.func, ast.Name):
-            if node.func.id == "int2seq":
+            if node.func.id in ["int2seq", "array"]:
                 return astor.to_source(node).rstrip()
             elif len(node.args) == 1:
                 val = self.visit(node.args[0])
@@ -119,18 +125,19 @@ class ExprVisitor(ast.NodeVisitor):
 
     def visit_Assign(self, node):
         if isinstance(node.value, ast.Call):
-            if node.value.func.id in {"Register", "Mux"}:
-                if node.value.func.id == "Register":
-                    self.width_table[node.targets[0].id] = node.value.args[0].n
-                    self.width_table[node.targets[0].id + ".I"] = node.value.args[0].n
-                    self.width_table[node.targets[0].id + ".O"] = node.value.args[0].n
-                elif node.value.func.id == "Mux":
-                    for i in range(node.value.args[0].n):
-                        self.width_table[node.targets[0].id + ".I{}".format(i)] = node.value.args[1].n
-                else:
-                    raise NotImplementedError()
+            if node.value.func.id == "Register":
+                self.width_table[node.targets[0].id] = node.value.args[0].n
+                self.width_table[node.targets[0].id + ".I"] = node.value.args[0].n
+                self.width_table[node.targets[0].id + ".O"] = node.value.args[0].n
+            elif node.value.func.id in {"Mux", "Or", "And"}:
+                for i in range(node.value.args[0].n):
+                    self.width_table[node.targets[0].id + ".I{}".format(i)] = node.value.args[1].n
+                self.width_table[node.targets[0].id + ".O"] = node.value.args[1].n
+            else:
+                raise NotImplementedError(astor.to_source(node).rstrip())
             self.source.add_line(astor.to_source(node).rstrip())
             return
+
         value = self.visit(node.value)
         if len(node.targets) > 1:
             raise NotImplementedError(astor.to_source(node).rstrip())
@@ -140,6 +147,10 @@ class ExprVisitor(ast.NodeVisitor):
         assert target is not None, type(node.targets[0])
         assert value is not None, astor.to_source(node.value).rstrip()
         self.source.add_line("wire({}, {})".format(value, target))
+        # if isinstance(node.value, ast.BinOp):
+        #     self.width_table[node.targets[0].id + ".O"] = self.get_width(node.value)
+
+        self.width_table[astor.to_source(node.targets[0]).rstrip()] = self.get_width(node.value)
 
     def visit_Attribute(self, node):
         return astor.to_source(node).rstrip()
@@ -170,18 +181,16 @@ class ExprVisitor(ast.NodeVisitor):
         left_width = self.get_width(node.left)
         if not isinstance(node.op, (ast.LShift, ast.RShift)):
             right_width = self.get_width(node.right)
-            if left_width < right_width and isinstance(left, int):
-                left = "int2seq({}, {})".format(left, right_width)
-                if isinstance(right, int):
-                    right = "int2seq({}, {})".format(right, right_width)
-            elif right_width < left_width and isinstance(right, int):
-                right = "int2seq({}, {})".format(right, left_width)
-                if isinstance(left, int):
-                    left = "int2seq({}, {})".format(left, left_width)
+            if isinstance(left, int):
+                left = "int2seq({}, {})".format(left, max(left_width, right_width))
+            if isinstance(right, int):
+                right = "int2seq({}, {})".format(right, max(left_width, right_width))
+            width = max(left_width, right_width)
+        else:
+            width = left_width
         binop_map = {
             ast.Add: "Add",
             ast.Sub: "Sub",
-            ast.And: "AndN",
             ast.BitAnd: "And",
             ast.BitOr: "Or",
             ast.BitXor: "Xor",
@@ -189,17 +198,28 @@ class ExprVisitor(ast.NodeVisitor):
             ast.RShift: "RightShift",
             ast.Lt: "ULT",  # TODO: Should we default to unsigned?
             ast.LtE: "ULE",  # TODO: Should we default to unsigned?
+            ast.Eq: "EQ"
         }
         if node.op.__class__ in binop_map:
             op_str = binop_map[node.op.__class__]
             inst_id = self.unique_id()
             if op_str in ["And", "Or", "Xor"]:
-                self.source.add_line("{} = {}(2, width={})({}, {})".format(inst_id, op_str, left_width, left, right))
+                self.source.add_line("{} = {}(2, width={})({}, {})".format(inst_id, op_str, width, left, right))
             elif op_str in ["LeftShift", "RightShift"]:
-                self.source.add_line("{} = {}({}, {})({})".format(inst_id, op_str, left_width, right, left))
+                self.source.add_line("{} = {}({}, {})({})".format(inst_id, op_str, width, right, left))
             else:
-                self.source.add_line("{} = {}({})({}, {})".format(inst_id, op_str, left_width, left, right))
+                self.source.add_line("{} = {}({})({}, {})".format(inst_id, op_str, width, left, right))
+            # if op_str in {"AndN"}:
+            #     self.width_table["inst_id"] = 1
+            # else:
+            #     self.width_table["inst_id"] = width
             return inst_id
+        # elif node.op.__class__ in {ast.Eq}:
+        #     inst_id1 = self.unique_id()
+        #     self.source.add_line("{} = Xor(2, {})({}, {})".format(inst_id1, width, left, right))
+        #     inst_id2 = self.unique_id()
+        #     self.source.add_line("{} = NorN({})({})".format(inst_id2, width, inst_id1))
+        #     return inst_id2
         raise NotImplementedError(ast.dump(node))
 
     def visit_UnaryOp(self, node):

@@ -165,7 +165,7 @@ class ExprVisitor(ast.NodeVisitor):
         """
         curr_node = node.left
         for op, comparator in zip(node.ops, node.comparators):
-            curr_node = ast.BinOp(curr_node, op, comparator)
+            curr_node = ast.BinOp(curr_node, op, comparator, lineno=node.lineno, col_offset=node.col_offset)
         return self.visit(curr_node)
 
     def visit_BoolOp(self, node):
@@ -175,7 +175,7 @@ class ExprVisitor(ast.NodeVisitor):
         """
         curr_node = node.values[0]
         for value in node.values[1:]:
-            curr_node = ast.BinOp(curr_node, node.op, value)
+            curr_node = ast.BinOp(curr_node, node.op, value, lineno=node.lineno, col_offset=node.col_offset)
         return self.visit(curr_node)
 
     def visit_BinOp(self, node):
@@ -207,23 +207,23 @@ class ExprVisitor(ast.NodeVisitor):
             op_str = binop_map[node.op.__class__]
             inst_id = self.unique_id()
             if op_str in ["And", "Or", "Xor"]:
-                self.source.add_line("{} = {}(2, width={})({}, {})".format(inst_id, op_str, width, left, right))
+                self.add_line("{} = {}(2, width={})({}, {})".format(inst_id, op_str, width, left, right), node.lineno, node.col_offset)
             elif op_str in ["LeftShift", "RightShift"]:
-                self.source.add_line("{} = {}({}, {})({})".format(inst_id, op_str, width, right, left))
+                self.add_line("{} = {}({}, {})({})".format(inst_id, op_str, width, right, left), node.lineno, node.col_offset)
             else:
-                self.source.add_line("{} = {}({})({}, {})".format(inst_id, op_str, width, left, right))
+                self.add_line("{} = {}({})({}, {})".format(inst_id, op_str, width, left, right), node.lineno, node.col_offset)
             return inst_id
         elif isinstance(node.op, ast.And):
             inst_id0 = self.unique_id()
-            self.source.add_line("{} = And(2, width={})({}, {})".format(inst_id0, width, left, right))
+            self.add_line("{} = And(2, width={})({}, {})".format(inst_id0, width, left, right), node.lineno, node.col_offset)
             inst_id1 = self.unique_id()
-            self.source.add_line("{} = AndN({})({})".format(inst_id1, width, inst_id0))
+            self.add_line("{} = AndN({})({})".format(inst_id1, width, inst_id0), node.lineno, node.col_offset)
             return inst_id1
         elif isinstance(node.op, ast.Or):
             inst_id0 = self.unique_id()
-            self.source.add_line("{} = Or(2, width={})({}, {})".format(inst_id0, width, left, right))
+            self.add_line("{} = Or(2, width={})({}, {})".format(inst_id0, width, left, right), node.lineno, node.col_offset)
             inst_id1 = self.unique_id()
-            self.source.add_line("{} = OrN({})({})".format(inst_id1, width, inst_id0))
+            self.add_line("{} = OrN({})({})".format(inst_id1, width, inst_id0), node.lineno, node.col_offset)
             return inst_id1
         raise NotImplementedError(ast.dump(node))
 
@@ -238,7 +238,7 @@ class ExprVisitor(ast.NodeVisitor):
         if node.op.__class__ in unop_map:
             op_str = unop_map[node.op.__class__]
             inst_id = self.unique_id()
-            self.source.add_line("{} = {}({})({})".format(inst_id, op_str, operand_width, operand))
+            self.add_line("{} = {}({})({})".format(inst_id, op_str, operand_width, operand), node.lineno, node.col_offset)
             return inst_id
         raise NotImplementedError(ast.dump(node))
 
@@ -259,7 +259,7 @@ class ExprVisitor(ast.NodeVisitor):
             return "{}[{}]".format(value, _slice)
         else:
             inst_id = self.unique_id()
-            self.source.add_line("{} = MuxN({})({}, {})".format(inst_id, self.get_width(node.value), value, _slice))
+            self.add_line("{} = MuxN({})({}, {})".format(inst_id, self.get_width(node.value), value, _slice), node.lineno, node.col_offset)
             return inst_id
 
 

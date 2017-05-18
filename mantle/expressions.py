@@ -3,6 +3,9 @@ import inspect
 import ast
 import astor
 
+def to_source(tree):
+    return astor.to_source(tree).rstrip()
+
 
 class Source:
     def __init__(self):
@@ -41,7 +44,7 @@ class ExprVisitor(ast.NodeVisitor):
             self.args.append(arg.arg)
             args.append("\"" + arg.arg + "\"")
             typ = arg.annotation
-            args.append(astor.to_source(typ).rstrip())
+            args.append(to_source(typ))
             if isinstance(typ, ast.Call):
                 assert typ.func.id in ["In", "Out"]
                 assert len(typ.args) == 1
@@ -84,15 +87,12 @@ class ExprVisitor(ast.NodeVisitor):
             left_width = self.get_width(node.left)
             right_width = self.get_width(node.right)
             return max(left_width, right_width)
-            # if left_width != right_width:
-            #     raise NotImplementedError("Width mismatch not supported")
-            # return left_width
         elif isinstance(node, ast.Compare):
             return 1
         elif isinstance(node, ast.UnaryOp):
             return self.get_width(node.operand)
         elif isinstance(node, ast.Attribute):
-            return self.width_table[astor.to_source(node).rstrip()]
+            return self.width_table[to_source(node)]
         elif isinstance(node, ast.BoolOp):
             return 1  # Logic boolean op returns 1 or 0
         elif isinstance(node, ast.Subscript):
@@ -112,16 +112,16 @@ class ExprVisitor(ast.NodeVisitor):
     def visit_Call(self, node):
         if isinstance(node.func, ast.Name):
             if node.func.id in ["int2seq", "array"]:
-                return astor.to_source(node).rstrip()
+                return to_source(node)
             elif len(node.args) == 1:
                 val = self.visit(node.args[0])
                 circ_width = self.get_width(node.func)
                 if isinstance(val, int) and val.bit_length() < circ_width:
                     val = "int2seq({}, {})".format(val, circ_width)
-                circ = astor.to_source(node.func).rstrip()
+                circ = to_source(node.func)
                 self.source.add_line("wire({}.I, {})".format(circ, val))
                 return 
-        raise NotImplementedError(astor.to_source(node).rstrip())
+        raise NotImplementedError(to_source(node))
 
     def visit_Assign(self, node):
         if isinstance(node.value, ast.Call):
@@ -134,26 +134,23 @@ class ExprVisitor(ast.NodeVisitor):
                     self.width_table[node.targets[0].id + ".I{}".format(i)] = node.value.args[1].n
                 self.width_table[node.targets[0].id + ".O"] = node.value.args[1].n
             else:
-                raise NotImplementedError(astor.to_source(node).rstrip())
-            self.source.add_line(astor.to_source(node).rstrip())
+                raise NotImplementedError(to_source(node))
+            self.source.add_line(to_source(node))
             return
 
         value = self.visit(node.value)
         if len(node.targets) > 1:
-            raise NotImplementedError(astor.to_source(node).rstrip())
+            raise NotImplementedError(to_source(node))
         target = self.visit(node.targets[0])
         if isinstance(value, int):
             value = "int2seq({}, {})".format(value, self.get_width(node.targets[0]))
         assert target is not None, type(node.targets[0])
-        assert value is not None, astor.to_source(node.value).rstrip()
+        assert value is not None, to_source(node.value)
         self.source.add_line("wire({}, {})".format(value, target))
-        # if isinstance(node.value, ast.BinOp):
-        #     self.width_table[node.targets[0].id + ".O"] = self.get_width(node.value)
-
-        self.width_table[astor.to_source(node.targets[0]).rstrip()] = self.get_width(node.value)
+        self.width_table[to_source(node.targets[0])] = self.get_width(node.value)
 
     def visit_Attribute(self, node):
-        return astor.to_source(node).rstrip()
+        return to_source(node)
 
     def visit_Compare(self, node):
         """
@@ -222,13 +219,6 @@ class ExprVisitor(ast.NodeVisitor):
             inst_id1 = self.unique_id()
             self.source.add_line("{} = OrN({})({})".format(inst_id1, width, inst_id0))
             return inst_id1
-            
-        # elif node.op.__class__ in {ast.Eq}:
-        #     inst_id1 = self.unique_id()
-        #     self.source.add_line("{} = Xor(2, {})({}, {})".format(inst_id1, width, left, right))
-        #     inst_id2 = self.unique_id()
-        #     self.source.add_line("{} = NorN({})({})".format(inst_id2, width, inst_id1))
-        #     return inst_id2
         raise NotImplementedError(ast.dump(node))
 
     def visit_UnaryOp(self, node):
@@ -247,13 +237,18 @@ class ExprVisitor(ast.NodeVisitor):
         raise NotImplementedError(ast.dump(node))
 
     def visit_Subscript(self, node):
+        """
+        Subscript(value, slice, ctx)
+        """
         value = self.visit(node.value)
         if isinstance(node.slice, ast.Index):
             _slice = self.visit(node.slice.value)
         elif isinstance(node.slice, ast.Slice):
-            return "{}[{}]".format(value, astor.to_source(node.slice).rstrip())
-        else:
-            raise NotImplementedError()
+            # Constant slice, emit a select on the Bit Array
+            return "{}[{}]".format(value, to_source(node.slice))
+        elif isinstance(node.slice, ast.ExtSlice):
+            raise NotImplementedError
+
         if isinstance(_slice, int):
             return "{}[{}]".format(value, _slice)
         else:

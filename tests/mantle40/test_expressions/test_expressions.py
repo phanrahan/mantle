@@ -180,3 +180,78 @@ wire(inst0, circ.d)
 EndCircuit()
 """
     assert circ.__magma_source == expected
+
+def test_And():
+    @circuit
+    def circ(a : In(Array(4, Bit)), b : Out(Bit), c : In(Array(4, Bit)), d : Out(Bit)):
+        b = a[0] and a[1]
+        d = a and c
+
+
+    expected = \
+"""from magma import *
+from mantle import *
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "c", In(Array(4, Bit)), "d", Out(Bit), "CLK", In(Bit))
+inst0 = And(2, width=1)(circ.a[0], circ.a[1])
+inst1 = AndN(1)(inst0)
+wire(inst1, circ.b)
+inst2 = And(2, width=4)(circ.a, circ.c)
+inst3 = AndN(4)(inst2)
+wire(inst3, circ.d)
+EndCircuit()
+"""
+    assert circ.__magma_source == expected
+
+def test_Or():
+    @circuit
+    def circ(a : In(Array(4, Bit)), b : Out(Bit), c : In(Array(4, Bit)), d : Out(Bit)):
+        b = a[0] or a[1]
+        d = a or c
+
+
+    expected = \
+"""from magma import *
+from mantle import *
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "c", In(Array(4, Bit)), "d", Out(Bit), "CLK", In(Bit))
+inst0 = Or(2, width=1)(circ.a[0], circ.a[1])
+inst1 = OrN(1)(inst0)
+wire(inst1, circ.b)
+inst2 = Or(2, width=4)(circ.a, circ.c)
+inst3 = OrN(4)(inst2)
+wire(inst3, circ.d)
+EndCircuit()
+"""
+    assert circ.__magma_source == expected
+
+def test_Not():
+    @circuit
+    def circ(a : In(Array(4, Bit)), b : Out(Bit)):
+        b = not a
+
+
+    expected = \
+"""from magma import *
+from mantle import *
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "CLK", In(Bit))
+inst0 = NorN(4)(circ.a)
+wire(inst0, circ.b)
+EndCircuit()
+"""
+    assert circ.__magma_source == expected
+
+
+def test_EQ():
+    @circuit
+    def circ(a : In(Array(4, Bit)), b : In(Array(4, Bit)), c : Out(Bit)):
+        c = a == b
+
+
+    expected = \
+"""from magma import *
+from mantle import *
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", In(Array(4, Bit)), "c", Out(Bit), "CLK", In(Bit))
+inst0 = EQ(4)(circ.a, circ.b)
+wire(inst0, circ.c)
+EndCircuit()
+"""
+    assert circ.__magma_source == expected

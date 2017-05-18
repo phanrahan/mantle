@@ -248,4 +248,4 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, ce=False):
     return CounterModM
 
 def CounterModM(m, n, cin=False, cout=True, incr=1, next=False, ce=False, **kwargs):
-    return DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, ce=False)(**kwargs)
+    return DefineCounterModM(m, n, cin, cout, incr, next, ce)(**kwargs)

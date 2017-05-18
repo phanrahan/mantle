@@ -75,7 +75,7 @@ class ExprVisitor(ast.NodeVisitor):
                s.value.func.id == "wire":
                 arg1 = self.visit(s.value.args[0])
                 arg2 = self.visit(s.value.args[1])
-                self.source.add_line("wire({}, {})".format(arg1, arg2))
+                self.add_line("wire({}, {})".format(arg1, arg2), s.lineno, s.col_offset)
             else:
                 self.visit(s)
         self.source.add_line("EndCircuit()")
@@ -141,7 +141,7 @@ class ExprVisitor(ast.NodeVisitor):
                 self.width_table[node.targets[0].id + ".O"] = node.value.args[1].n
             else:
                 raise NotImplementedError(to_source(node))
-            self.source.add_line(to_source(node))
+            self.add_line(to_source(node), node.lineno, node.col_offset)
             return
 
         value = self.visit(node.value)

@@ -90,7 +90,7 @@ def test_wire():
 """from magma import *
 from mantle import *
 circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))  # 1: def circ(a : In(Bit), b : Out(Bit)):
-wire(circ.a, circ.b)
+wire(circ.a, circ.b)  # 2:     wire(a, b)
 EndCircuit()
 """
     assert circ.__magma_source == expected
@@ -106,9 +106,9 @@ def test_register():
 """from magma import *
 from mantle import *
 circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))  # 1: def circ(a : In(Bit), b : Out(Bit)):
-c = Register(1)
-wire(circ.a, c.I[0])
-wire(c.O[0], circ.b)
+c = Register(1)  # 2:     c = Register(1)
+wire(circ.a, c.I[0])  # 3:     wire(a, c.I[0])
+wire(c.O[0], circ.b)  # 4:     wire(c.O[0], b)
 EndCircuit()
 """
     assert circ.__magma_source == expected
@@ -139,9 +139,9 @@ def test_width_promotion():
 """from magma import *
 from mantle import *
 circ = DefineCircuit("circ", "b", Out(Array(3, Bit)), "CLK", In(Bit))  # 1: def circ(b : Out(Array(3, Bit))):
-a = Register(4)
+a = Register(4)  # 2:     a = Register(4)
 wire(a.I, int2seq(1, 4))
-c = Register(4)
+c = Register(4)  # 4:     c = Register(4)
 wire(int2seq(1, 4), c.I)  # 5:     c.I = 1
 EndCircuit()
 """

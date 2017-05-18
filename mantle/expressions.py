@@ -209,11 +209,20 @@ class ExprVisitor(ast.NodeVisitor):
                 self.source.add_line("{} = {}({}, {})({})".format(inst_id, op_str, width, right, left))
             else:
                 self.source.add_line("{} = {}({})({}, {})".format(inst_id, op_str, width, left, right))
-            # if op_str in {"AndN"}:
-            #     self.width_table["inst_id"] = 1
-            # else:
-            #     self.width_table["inst_id"] = width
             return inst_id
+        elif isinstance(node.op, ast.And):
+            inst_id0 = self.unique_id()
+            self.source.add_line("{} = And(2, width={})({}, {})".format(inst_id0, width, left, right))
+            inst_id1 = self.unique_id()
+            self.source.add_line("{} = AndN({})({})".format(inst_id1, width, inst_id0))
+            return inst_id1
+        elif isinstance(node.op, ast.Or):
+            inst_id0 = self.unique_id()
+            self.source.add_line("{} = Or(2, width={})({}, {})".format(inst_id0, width, left, right))
+            inst_id1 = self.unique_id()
+            self.source.add_line("{} = OrN({})({})".format(inst_id1, width, inst_id0))
+            return inst_id1
+            
         # elif node.op.__class__ in {ast.Eq}:
         #     inst_id1 = self.unique_id()
         #     self.source.add_line("{} = Xor(2, {})({}, {})".format(inst_id1, width, left, right))
@@ -226,7 +235,7 @@ class ExprVisitor(ast.NodeVisitor):
         operand = self.visit(node.operand)
         operand_width = self.get_width(node.operand)
         unop_map = {
-            ast.Not: "Not",
+            ast.Not: "NorN",
             ast.Invert: "Invert",
             ast.USub: "Negate"
         }

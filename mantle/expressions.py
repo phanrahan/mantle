@@ -23,8 +23,9 @@ class Source:
 
 
 class ExprVisitor(ast.NodeVisitor):
-    def __init__(self, clock=True):
+    def __init__(self, clock=True, python_source=None):
         super().__init__()
+        self.python_source = python_source
         self.clock = clock
         self.source = Source()
         self.source.add_line("from magma import *")
@@ -37,6 +38,11 @@ class ExprVisitor(ast.NodeVisitor):
     def unique_id(self):
         self.__unique_id += 1
         return "inst{}".format(self.__unique_id)
+
+    def add_line(self, str, lineno, col_offset):
+        if self.python_source:
+            str += "  # {}".format(self.python_source[lineno])
+        self.source.add_line(str)
 
     def visit_FunctionDef(self, node):
         args = []
@@ -60,9 +66,8 @@ class ExprVisitor(ast.NodeVisitor):
             args.append("\"CLK\"")
             args.append("In(Bit)")
         self.name = node.name
-        self.source.add_line(
-                "{name} = DefineCircuit(\"{name}\", {args})".format(
-                    name=node.name, args=", ".join(args)))
+        self.add_line("{name} = DefineCircuit(\"{name}\", {args})".format(
+                name=node.name, args=", ".join(args)), node.lineno, node.col_offset)
         for s in node.body:
             if isinstance(s, ast.Expr) and \
                isinstance(s.value, ast.Call) and \
@@ -257,14 +262,19 @@ class ExprVisitor(ast.NodeVisitor):
             return inst_id
 
 
-def process_circuit_ast(tree, clock=True):
-    visitor = ExprVisitor(clock)
+def process_circuit_ast(tree, python_source=None, clock=True):
+    """
+    Python source should be a list of strings where each string is a line in
+    the original python file
+    """
+    visitor = ExprVisitor(clock, python_source)
     visitor.visit(tree)
     return str(visitor.source), visitor.name
 
 def process_circuit(fn, clock=True):
-    tree = ast.parse(textwrap.dedent(inspect.getsource(fn)))
-    source, name = process_circuit_ast(tree, clock=clock)
+    source = textwrap.dedent(inspect.getsource(fn))
+    tree = ast.parse(source)
+    source, name = process_circuit_ast(tree, source.splitlines(), clock=clock)
     for i, line in enumerate(source.splitlines()):
         print("{} {}".format(i + 1, line))
     _globals = inspect.stack()[1][0].f_globals

@@ -11,7 +11,7 @@ def test_bit():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Bit), "b", In(Bit), "c", Out(Bit))
+circ = DefineCircuit("circ", "a", In(Bit), "b", In(Bit), "c", Out(Bit))  # def circ(a : In(Bit), b : In(Bit), c : Out(Bit)):
 inst0 = Add(1)(circ.a, circ.b)
 wire(inst0, circ.c)
 EndCircuit()
@@ -26,7 +26,7 @@ def test_array():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(5, Bit)), "b", In(Array(5, Bit)), "c", Out(Array(5, Bit)))
+circ = DefineCircuit("circ", "a", In(Array(5, Bit)), "b", In(Array(5, Bit)), "c", Out(Array(5, Bit)))  # def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
 inst0 = Add(5)(circ.a, circ.b)
 wire(inst0, circ.c)
 EndCircuit()
@@ -41,7 +41,7 @@ def test_sub():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(5, Bit)), "b", In(Array(5, Bit)), "c", Out(Array(5, Bit)))
+circ = DefineCircuit("circ", "a", In(Array(5, Bit)), "b", In(Array(5, Bit)), "c", Out(Array(5, Bit)))  # def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
 inst0 = Sub(5)(circ.a, circ.b)
 inst1 = Negate(5)(inst0)
 wire(inst1, circ.c)
@@ -56,7 +56,7 @@ def test_logic_ops():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(5, Bit)), "b", In(Array(5, Bit)), "c", Out(Array(5, Bit)))
+circ = DefineCircuit("circ", "a", In(Array(5, Bit)), "b", In(Array(5, Bit)), "c", Out(Array(5, Bit)))  # def circ(a : In(Array(5, Bit)), b : In(Array(5, Bit)), c : Out(Array(5, Bit))):
 inst0 = Xor(2, width=5)(circ.b, circ.a)
 inst1 = Or(2, width=5)(circ.a, inst0)
 inst2 = And(2, width=5)(inst1, circ.b)
@@ -75,7 +75,7 @@ def test_clock():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))  # def circ(a : In(Bit), b : Out(Bit)):
 wire(circ.a, circ.b)
 EndCircuit()
 """
@@ -89,7 +89,7 @@ def test_wire():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))  # def circ(a : In(Bit), b : Out(Bit)):
 wire(circ.a, circ.b)
 EndCircuit()
 """
@@ -105,7 +105,7 @@ def test_register():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Bit), "b", Out(Bit), "CLK", In(Bit))  # def circ(a : In(Bit), b : Out(Bit)):
 c = Register(1)
 wire(circ.a, c.I[0])
 wire(c.O[0], circ.b)
@@ -121,7 +121,7 @@ def test_assign_constant():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "b", Out(Array(3, Bit)), "CLK", In(Bit))
+circ = DefineCircuit("circ", "b", Out(Array(3, Bit)), "CLK", In(Bit))  # def circ(b : Out(Array(3, Bit))):
 wire(int2seq(6, 3), circ.b)
 EndCircuit()
 """
@@ -138,7 +138,7 @@ def test_width_promotion():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "b", Out(Array(3, Bit)), "CLK", In(Bit))
+circ = DefineCircuit("circ", "b", Out(Array(3, Bit)), "CLK", In(Bit))  # def circ(b : Out(Array(3, Bit))):
 a = Register(4)
 wire(a.I, int2seq(1, 4))
 c = Register(4)
@@ -156,7 +156,7 @@ def test_width_promotion_binop():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(3, Bit)), "b", Out(Array(3, Bit)), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Array(3, Bit)), "b", Out(Array(3, Bit)), "CLK", In(Bit))  # def circ(a : In(Array(3, Bit)), b : Out(Array(3, Bit))):
 inst0 = Add(3)(circ.a, int2seq(1, 3))
 wire(inst0, circ.b)
 EndCircuit()
@@ -173,7 +173,7 @@ def test_subscript():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "c", In(Array(2, Bit)), "d", Out(Bit), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "c", In(Array(2, Bit)), "d", Out(Bit), "CLK", In(Bit))  # def circ(a : In(Array(4, Bit)), b : Out(Bit), c : In(Array(2, Bit)), d : Out(Bit)):
 wire(circ.a[0], circ.b)
 inst0 = MuxN(4)(circ.a, circ.c)
 wire(inst0, circ.d)
@@ -191,7 +191,7 @@ def test_And():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "c", In(Array(4, Bit)), "d", Out(Bit), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "c", In(Array(4, Bit)), "d", Out(Bit), "CLK", In(Bit))  # def circ(a : In(Array(4, Bit)), b : Out(Bit), c : In(Array(4, Bit)), d : Out(Bit)):
 inst0 = And(2, width=1)(circ.a[0], circ.a[1])
 inst1 = AndN(1)(inst0)
 wire(inst1, circ.b)
@@ -212,7 +212,7 @@ def test_Or():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "c", In(Array(4, Bit)), "d", Out(Bit), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "c", In(Array(4, Bit)), "d", Out(Bit), "CLK", In(Bit))  # def circ(a : In(Array(4, Bit)), b : Out(Bit), c : In(Array(4, Bit)), d : Out(Bit)):
 inst0 = Or(2, width=1)(circ.a[0], circ.a[1])
 inst1 = OrN(1)(inst0)
 wire(inst1, circ.b)
@@ -232,7 +232,7 @@ def test_Not():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", Out(Bit), "CLK", In(Bit))  # def circ(a : In(Array(4, Bit)), b : Out(Bit)):
 inst0 = NorN(4)(circ.a)
 wire(inst0, circ.b)
 EndCircuit()
@@ -249,7 +249,7 @@ def test_EQ():
     expected = \
 """from magma import *
 from mantle import *
-circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", In(Array(4, Bit)), "c", Out(Bit), "CLK", In(Bit))
+circ = DefineCircuit("circ", "a", In(Array(4, Bit)), "b", In(Array(4, Bit)), "c", Out(Bit), "CLK", In(Bit))  # def circ(a : In(Array(4, Bit)), b : In(Array(4, Bit)), c : Out(Bit)):
 inst0 = EQ(4)(circ.a, circ.b)
 wire(inst0, circ.c)
 EndCircuit()

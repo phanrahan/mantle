@@ -104,6 +104,10 @@ class ExprVisitor(ast.NodeVisitor):
         elif isinstance(node, ast.Subscript):
             if isinstance(node.slice, ast.Index):
                 return 1  # TODO: Do we have to worry about multidimensional subscripting?
+            elif isinstance(node.slice, ast.Slice):
+                if node.slice.upper is None and node.slice.step is None:
+                    assert isinstance(node.slice.lower, ast.Num)
+                    return self.get_width(node.value) - node.slice.lower.n
             raise NotImplementedError(ast.dump(node), type(node))
         raise NotImplementedError(ast.dump(node), type(node))
 

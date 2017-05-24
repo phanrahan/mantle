@@ -180,12 +180,34 @@ def DefineOr(height, width):
             ormxn = join(col(orm, width))
             wire(def_.I0, ormxn.I0)
             wire(def_.I1, ormxn.I1)
+            if height >= 3:
+                wire(def_.I2, ormxn.I2)
+            if height == 4:
+                wire(def_.I3, ormxn.I3)
             wire(ormxn.O, def_.O)
 
     return _Or
 
 def Or(height, width=2, **kwargs):
-    return DefineOr(height, width)(**kwargs)
+    if height > 4:
+        half = height // 2
+        or1 = Or(half, width, **kwargs)
+        or2 = Or(height - half, width, **kwargs)
+        output = Or(2, width, **kwargs)
+        wire(or1.O, output.I0)
+        wire(or2.O, output.I1)
+        args = []
+        for i in range(half):
+            args.append("I{}".format(i))
+            args.append(getattr(or1, "I{}".format(i)))
+        for i in range(height - half):
+            args.append("I{}".format(i + half))
+            args.append(getattr(or2, "I{}".format(i)))
+        args.append("O")
+        args.append(output.O)
+        return AnonymousCircuit(*args)
+    else:
+        return DefineOr(height, width)(**kwargs)
 
 def OrN(n, **kwargs):
     """Or gate with n-bit input."""
@@ -423,7 +445,6 @@ def Buffer(n, **kwargs):
 def Not(**kwargs):
     """Not gate - 1-bit input."""
     return LUT1(~A0, **kwargs)
-
 def DefineInvert(width):
     """
     Generate Invert module

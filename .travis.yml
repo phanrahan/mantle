@@ -7,7 +7,7 @@ python:
 
 before_install:
     - sudo apt-get -qq update
-    - git clone -b feature/circuit-port-repr git@github.com:phanrahan/magmacore.git
+    - git clone git@github.com:phanrahan/magmacore.git
     - pip install -e magmacore
     - git clone git@github.com:phanrahan/loam.git
     - pip install -e loam

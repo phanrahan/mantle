@@ -8,13 +8,13 @@ It provides functionality similar to the classic
 
 ## Configuring Mantle
 Mantle should be configured based on the appropriate vendor of the target hardware via the `MANTLE` environment variable.
-```
+```bash
 export MANTLE=xilinx
 ```
 Currently the supported vendors are `xilinx`, `altera`, `lattice`, and `verilog` (generic backend for unsupported vendors).
 
 Next, the user should configure the specific hardware target using the `MANTLE_TARGET` environment variable.
-```
+```bash
 export MANTLE_TARGET=spartan6
 ```
 **TODO:** List set of supported hardware targets for each vendor.

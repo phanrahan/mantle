@@ -6,6 +6,19 @@ It provides functionality similar to the classic
 7400 series TTL and 
 4000 seris CMOS integrated circuits.
 
+## Configuring Mantle
+Mantle should be configured based on the appropriate vendor of the target hardware via the `MANTLE` environment variable.
+```
+export MANTLE=xilinx
+```
+Currently the supported vendors are `xilinx`, `altera`, `lattice`, and `verilog` (generic backend for unsupported vendors).
+
+Next, the user should configure the specific hardware target using the `MANTLE_TARGET` environment variable.
+```
+export MANTLE_TARGET=spartan6
+```
+**TODO:** List set of supported hardware targets for each vendor.
+
 ## Combinational Logic
 
 ### Lookup Tables (LUTs)

@@ -12,7 +12,16 @@ def simulate_sb_carry(self, value_store, state_store):
 def simulate_sb_lut4(self, value_store, state_store):
     init = self.kwargs['LUT_INIT']
     if isinstance(init, six.string_types):
-        init = lutinit(init, 16)
+        a = init.split("'")
+        l = int(a[0])
+        p = a[1][0]
+        if p == 'h':
+            base = 16
+        else:
+            base = 10
+
+        i = int(a[1][1:], base)
+        init = lutinit(i, l)
 
     lut = int2seq(init[0], init[1])
     lut = [bool(i) for i in lut]

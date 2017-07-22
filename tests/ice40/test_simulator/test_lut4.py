@@ -1,3 +1,6 @@
+import os
+os.environ["MANTLE"] = "lattice"
+
 from magma import *
 from magma.simulator_interactive_frontend import simulate
 from mantle.lattice.ice40.PLB import SB_LUT4

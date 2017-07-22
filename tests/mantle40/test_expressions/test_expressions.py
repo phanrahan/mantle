@@ -1,3 +1,5 @@
+import os
+os.environ["MANTLE"] = "lattice"
 from magma import *
 from mantle import *
 from loam.boards.icestick import IceStick

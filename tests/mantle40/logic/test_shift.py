@@ -1,3 +1,6 @@
+import os
+os.environ["MANTLE"] = "lattice"
+
 import sys
 from magma import *
 from mantle import *

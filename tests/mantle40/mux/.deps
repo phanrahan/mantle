@@ -5,28 +5,25 @@
         "gold/mux2.pcf": "input-45b1d35cb22ed823468467fa2b041f3c"
     }, 
     "cmp build/mux2.v gold/mux2.v": {
-        "build/mux2.v": "input-ca261f26ec3376b9e6484cf3d0759c05", 
-        "gold/mux2.v": "input-ca261f26ec3376b9e6484cf3d0759c05"
+        "build/mux2.v": "input-e1c4155f9ed127ff40d38ba1e336f3ea", 
+        "gold/mux2.v": "input-e1c4155f9ed127ff40d38ba1e336f3ea"
     }, 
     "cmp build/mux4.pcf gold/mux4.pcf": {
         "build/mux4.pcf": "input-453a38f6e314b020d5c516ad8e856e64", 
         "gold/mux4.pcf": "input-453a38f6e314b020d5c516ad8e856e64"
     }, 
     "cmp build/mux4.v gold/mux4.v": {
-        "build/mux4.v": "input-5e9d7b0d7d6d46457f8b3277c806f5bd", 
-        "gold/mux4.v": "input-5e9d7b0d7d6d46457f8b3277c806f5bd"
+        "build/mux4.v": "input-3ea72a34ee97fd2f8d9308ae25819e61", 
+        "gold/mux4.v": "input-3ea72a34ee97fd2f8d9308ae25819e61"
     }, 
-    "python mux2.py build/mux2": {
+    "python3 mux2.py build/mux2": {
         "build/mux2.pcf": "output-45b1d35cb22ed823468467fa2b041f3c", 
-        "build/mux2.v": "output-ca261f26ec3376b9e6484cf3d0759c05", 
-        "mux2.py": "input-4015531455f9ae9d27c7aaa7aef6f520"
+        "build/mux2.v": "output-e1c4155f9ed127ff40d38ba1e336f3ea", 
+        "mux2.py": "input-2c521a45c1a216896f00c9cc533d6dce"
     }, 
-    "python mux4.py build/mux4": {
+    "python3 mux4.py build/mux4": {
         "build/mux4.pcf": "output-453a38f6e314b020d5c516ad8e856e64", 
-        "build/mux4.v": "output-5e9d7b0d7d6d46457f8b3277c806f5bd", 
-        "mux4.py": "input-1fa3d90591f12afe2ce5158211334310"
-    }, 
-    "python muxinterface.py build/muxinterface": {
-        "muxinterface.py": "input-c345476d31b1f5e76e7a57472a4a2d96"
+        "build/mux4.v": "output-3ea72a34ee97fd2f8d9308ae25819e61", 
+        "mux4.py": "input-18541cd098be2db7b92a417070a5efd7"
     }
 }

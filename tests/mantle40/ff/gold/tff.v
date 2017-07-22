@@ -1,4 +1,4 @@
-module Adc24 (input [23:0] I0, input [23:0] I1, output [23:0] O, output  COUT);
+module Addcout24 (input [23:0] I0, input [23:0] I1, output [23:0] O, output  COUT);
 wire  inst0_O;
 wire  inst1_CO;
 wire  inst2_O;
@@ -155,7 +155,7 @@ module Counter24 (output [23:0] O, output  COUT, input  CLK);
 wire [23:0] inst0_O;
 wire  inst0_COUT;
 wire [23:0] inst1_O;
-Adc24 inst0 (.I0(inst1_O), .I1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
+Addcout24 inst0 (.I0(inst1_O), .I1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
 Register24 inst1 (.I(inst0_O), .O(inst1_O), .CLK(CLK));
 assign O = inst1_O;
 assign COUT = inst0_COUT;

@@ -29,8 +29,8 @@ O = array(main.D0, main.D1, main.D2, main.D3,
           main.D4, main.D5, main.D6, main.D7)
 
 N = 16
-M = 4096/N
-rom = range(M)
+M = 4096//N
+rom = M * [0]
 for i in range(M):
     rom[i] = i & 0xffff
 

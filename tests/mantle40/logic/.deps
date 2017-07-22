@@ -66,6 +66,7 @@
     }, 
     "cmp build/or8.pcf gold/or8.pcf": {
         "build/or8.pcf": "input-569683a2e04952b7578a8d414fab5a31", 
+        "build/test_shift_left_by_two.v": "input-b5b3e429bf55eff388d40426c90281e1", 
         "gold/or8.pcf": "input-569683a2e04952b7578a8d414fab5a31"
     }, 
     "cmp build/or8.v gold/or8.v": {
@@ -80,54 +81,55 @@
         "build/xor8.v": "input-200ae592a342496693a72182fd929e0b", 
         "gold/xor8.v": "input-200ae592a342496693a72182fd929e0b"
     }, 
-    "python abuf.py build/abuf": {
-        "abuf.py": "input-3bc1b6ba593c2bb143a8845d0a161293", 
+    "python3 abuf.py build/abuf": {
+        "abuf.py": "input-aee104f91be68174da703bc5d3453307", 
         "build/abuf.pcf": "output-6486d790115fdf155c7befd8be334023", 
         "build/abuf.v": "output-68adf9ec1bc018b1473b064a9cb67fc9"
     }, 
-    "python and2.py build/and2": {
-        "and2.py": "input-50ce0b73faa0698f6e1804540ca874b2", 
+    "python3 and2.py build/and2": {
+        "and2.py": "input-b4d1d60f580a6187b5006e248fb54e39", 
         "build/and2.pcf": "output-8ca5c534b055235d2055bf30b29eefc4", 
         "build/and2.v": "output-84f4d8ef2d90e15aaf539b49cb0db7b6"
     }, 
-    "python and8.py build/and8": {
-        "and8.py": "input-6440ef279f357bfab41a90a511554836", 
+    "python3 and8.py build/and8": {
+        "and8.py": "input-22f2518fa9852843864bc9e8c9950ced", 
         "build/and8.pcf": "output-569683a2e04952b7578a8d414fab5a31", 
         "build/and8.v": "output-38e1f96f8f1349bbcf78da07451d42fa"
     }, 
-    "python inv2.py build/inv2": {
+    "python3 inv2.py build/inv2": {
         "build/inv2.pcf": "output-9e08447d16e3466c76454337c091913a", 
         "build/inv2.v": "output-28fd4e88bdc6db6851a13e9bbf6d4ab3", 
-        "inv2.py": "input-4dfdf6d66491bc037fc888a26efdfc08"
+        "inv2.py": "input-c06be361445b9a01cf5f67e1e03a1e2a"
     }, 
-    "python logic2.py build/logic2": {
+    "python3 logic2.py build/logic2": {
         "build/logic2.pcf": "output-9e08447d16e3466c76454337c091913a", 
         "build/logic2.v": "output-fc5acc0592085cbfdea54334f69975ee", 
-        "logic2.py": "input-b9950a2ce22760e78ae000c098557405"
+        "logic2.py": "input-45190964ade1fcb11f8e0ba51a8b10bc"
     }, 
-    "python nand8.py build/nand8": {
+    "python3 nand8.py build/nand8": {
         "build/nand8.pcf": "output-569683a2e04952b7578a8d414fab5a31", 
         "build/nand8.v": "output-631db3abd5e36193c299d6db5e502c09", 
-        "nand8.py": "input-61cf4e8d248a8157a454eaf4bb253cf1"
+        "nand8.py": "input-d66621a66697faef43c4641b78ebfd08"
     }, 
-    "python nor8.py build/nor8": {
+    "python3 nor8.py build/nor8": {
         "build/nor8.pcf": "output-569683a2e04952b7578a8d414fab5a31", 
         "build/nor8.v": "output-3e3a0b59f420f63f11880167ec6de5d3", 
-        "nor8.py": "input-4cb7f7ecc478c8a7cee46003fa5d8340"
+        "nor8.py": "input-a72f3ec43ee9d26088d0f6ca77f923fe"
     }, 
-    "python not.py build/not": {
+    "python3 not.py build/not": {
         "build/not.pcf": "output-6486d790115fdf155c7befd8be334023", 
         "build/not.v": "output-f514614eeff435e278b9bae58ad61765", 
-        "not.py": "input-11c56d130e26bb96696da3c2281d9777"
+        "not.py": "input-91b72191a2b856e40d5eb243c372abcb"
     }, 
-    "python or8.py build/or8": {
+    "python3 or8.py build/or8": {
         "build/or8.pcf": "output-569683a2e04952b7578a8d414fab5a31", 
         "build/or8.v": "output-708c6f9535200dce471c2df808e95198", 
-        "or8.py": "input-d2a3b26c025b19d7c4f590ec782490ad"
+        "or8.py": "input-44074208e9fb9539171ad2c0553a5861"
     }, 
-    "python xor8.py build/xor8": {
+    "python3 xor8.py build/xor8": {
+        "build/test_shift.v": "input-4c2d5ecb60a9ceeb488d5ad0deb8b7f8", 
         "build/xor8.pcf": "output-569683a2e04952b7578a8d414fab5a31", 
         "build/xor8.v": "output-200ae592a342496693a72182fd929e0b", 
-        "xor8.py": "input-a87e41d30855665a1e788eb0da101078"
+        "xor8.py": "input-65569312f60ed9654d78c97c8e2776ba"
     }
 }

@@ -6,7 +6,7 @@ SB_LUT4 #(.LUT_INIT(16'h5555)) inst1 (.I0(I[1]), .I1(1'b0), .I2(1'b0), .I3(1'b0)
 assign O = {inst1_O,inst0_O};
 endmodule
 
-module Adc2 (input [1:0] I0, input [1:0] I1, input  CIN, output [1:0] O);
+module Addcin2 (input [1:0] I0, input [1:0] I1, input  CIN, output [1:0] O);
 wire  inst0_O;
 wire  inst1_CO;
 wire  inst2_O;
@@ -22,7 +22,7 @@ module main (input  I0, input  I1, output  D2, output  D1);
 wire [1:0] inst0_O;
 wire [1:0] inst1_O;
 Invert2 inst0 (.I({I1,I0}), .O(inst0_O));
-Adc2 inst1 (.I0({1'b0,1'b0}), .I1(inst0_O), .CIN(1'b1), .O(inst1_O));
+Addcin2 inst1 (.I0({1'b0,1'b0}), .I1(inst0_O), .CIN(1'b1), .O(inst1_O));
 assign D2 = inst1_O[1];
 assign D1 = inst1_O[0];
 endmodule

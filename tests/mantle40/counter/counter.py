@@ -1,7 +1,7 @@
 import sys
 from magma import *
 from mantle import *
-from boards.icestick import IceStick
+from loam.boards.icestick import IceStick
 
 icestick = IceStick()
 icestick.Clock.on()
@@ -19,7 +19,7 @@ main = icestick.main()
 N = 22+8
 
 counter = Counter(N)
-print counter.interface
+print( counter.interface )
 wire(counter.O[N-8:N], main.D)
 
 compile(sys.argv[1], main)

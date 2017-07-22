@@ -1,4 +1,4 @@
-module Adc2 (input [1:0] I0, input [1:0] I1, input  CIN, output [1:0] O, output  COUT);
+module Addcincout2 (input [1:0] I0, input [1:0] I1, input  CIN, output [1:0] O, output  COUT);
 wire  inst0_O;
 wire  inst1_CO;
 wire  inst2_O;
@@ -14,7 +14,7 @@ endmodule
 module main (input  A0, input  A1, input  B0, input  B1, input  CIN, output  D3, output  D2, output  D1, input  CLKIN);
 wire [1:0] inst0_O;
 wire  inst0_COUT;
-Adc2 inst0 (.I0({A1,A0}), .I1({B1,B0}), .CIN(CIN), .O(inst0_O), .COUT(inst0_COUT));
+Addcincout2 inst0 (.I0({A1,A0}), .I1({B1,B0}), .CIN(CIN), .O(inst0_O), .COUT(inst0_COUT));
 assign D3 = inst0_COUT;
 assign D2 = inst0_O[1];
 assign D1 = inst0_O[0];

@@ -1,4 +1,4 @@
-module Adc22 (input [21:0] I0, input [21:0] I1, output [21:0] O, output  COUT);
+module Addcout22 (input [21:0] I0, input [21:0] I1, output [21:0] O, output  COUT);
 wire  inst0_O;
 wire  inst1_CO;
 wire  inst2_O;
@@ -143,10 +143,16 @@ module Counter22 (output [21:0] O, output  COUT, input  CLK);
 wire [21:0] inst0_O;
 wire  inst0_COUT;
 wire [21:0] inst1_O;
-Adc22 inst0 (.I0(inst1_O), .I1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
+Addcout22 inst0 (.I0(inst1_O), .I1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
 Register22 inst1 (.I(inst0_O), .O(inst1_O), .CLK(CLK));
 assign O = inst1_O;
 assign COUT = inst0_COUT;
+endmodule
+
+module Mux2 (input [1:0] I, input  S, output  O);
+wire  inst0_O;
+SB_LUT4 #(.LUT_INIT(16'hCACA)) inst0 (.I0(I[0]), .I1(I[1]), .I2(S), .I3(1'b0), .O(inst0_O));
+assign O = inst0_O;
 endmodule
 
 module Register4CE_0001 (input [3:0] I, output [3:0] O, input  CLK, input  CE);
@@ -171,10 +177,10 @@ wire  inst1_O;
 wire  inst2_O;
 wire  inst3_O;
 wire [3:0] inst4_O;
-SB_LUT4 #(.LUT_INIT(16'hCACA)) inst0 (.I0(SI), .I1(PI[0]), .I2(LOAD), .I3(1'b0), .O(inst0_O));
-SB_LUT4 #(.LUT_INIT(16'hCACA)) inst1 (.I0(inst4_O[0]), .I1(PI[1]), .I2(LOAD), .I3(1'b0), .O(inst1_O));
-SB_LUT4 #(.LUT_INIT(16'hCACA)) inst2 (.I0(inst4_O[1]), .I1(PI[2]), .I2(LOAD), .I3(1'b0), .O(inst2_O));
-SB_LUT4 #(.LUT_INIT(16'hCACA)) inst3 (.I0(inst4_O[2]), .I1(PI[3]), .I2(LOAD), .I3(1'b0), .O(inst3_O));
+Mux2 inst0 (.I({PI[0],SI}), .S(LOAD), .O(inst0_O));
+Mux2 inst1 (.I({PI[1],inst4_O[0]}), .S(LOAD), .O(inst1_O));
+Mux2 inst2 (.I({PI[2],inst4_O[1]}), .S(LOAD), .O(inst2_O));
+Mux2 inst3 (.I({PI[3],inst4_O[2]}), .S(LOAD), .O(inst3_O));
 Register4CE_0001 inst4 (.I({inst3_O,inst2_O,inst1_O,inst0_O}), .O(inst4_O), .CLK(CLK), .CE(CE));
 assign O = inst4_O[3];
 endmodule

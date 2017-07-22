@@ -5,12 +5,12 @@
         "gold/lhca.pcf": "input-686653e37ebc8b77a7e432fc1e05798c"
     }, 
     "cmp build/lhca.v gold/lhca.v": {
-        "build/lhca.v": "input-0259e598faf22588a9310f6fe8fce87e", 
-        "gold/lhca.v": "input-0259e598faf22588a9310f6fe8fce87e"
+        "build/lhca.v": "input-9b08a51fa5c57a96f3877f6e8663bf83", 
+        "gold/lhca.v": "input-9b08a51fa5c57a96f3877f6e8663bf83"
     }, 
-    "python lhca.py build/lhca": {
+    "python3 lhca.py build/lhca": {
         "build/lhca.pcf": "output-686653e37ebc8b77a7e432fc1e05798c", 
-        "build/lhca.v": "output-0259e598faf22588a9310f6fe8fce87e", 
-        "lhca.py": "input-13b9f356bbc691a2ab94e846245d9d78"
+        "build/lhca.v": "output-9b08a51fa5c57a96f3877f6e8663bf83", 
+        "lhca.py": "input-912f8df7b567ecdaafd91ecbd935f8d1"
     }
 }

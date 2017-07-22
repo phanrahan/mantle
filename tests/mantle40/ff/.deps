@@ -45,37 +45,37 @@
         "gold/tff.pcf": "input-d0f9688b50dbf201786bebcc4e7594d2"
     }, 
     "cmp build/tff.v gold/tff.v": {
-        "build/tff.v": "input-7068deede494f4076fbb553fb90c7f48", 
-        "gold/tff.v": "input-7068deede494f4076fbb553fb90c7f48"
+        "build/tff.v": "input-3287b4be88dcab5af5172cab7dd73fb2", 
+        "gold/tff.v": "input-3287b4be88dcab5af5172cab7dd73fb2"
     }, 
-    "python dff.py build/dff": {
+    "python3 dff.py build/dff": {
         "build/dff.pcf": "output-78d904324597ab3921b219d781991be9", 
         "build/dff.v": "output-f1fe1901fd595dc61dd074d469adcdea", 
-        "dff.py": "input-d5694d8cd068bc53d8ccfb92a6e4d29b"
+        "dff.py": "input-669970cdc80897edf968921ecfb2ff17"
     }, 
-    "python dffe.py build/dffe": {
+    "python3 dffe.py build/dffe": {
         "build/dffe.pcf": "output-15e356df1201a8b534ed0375ef0bd8a3", 
         "build/dffe.v": "output-d73593d0e40ffdf78108ca3bf7bd8b82", 
-        "dffe.py": "input-9c13a8142f6ff0e2ceb793a6abdfa688"
+        "dffe.py": "input-e3a8aa262f0dc372e1f5e66746950341"
     }, 
-    "python dffinit.py build/dffinit": {
+    "python3 dffinit.py build/dffinit": {
         "build/dffinit.pcf": "output-78d904324597ab3921b219d781991be9", 
         "build/dffinit.v": "output-4985abd9cbf77b43ba7b9132f64e0d66", 
-        "dffinit.py": "input-798ea3c2b541c91d09c3a8391d47a89f"
+        "dffinit.py": "input-e685e04d943f92ae899918bfd6ae9668"
     }, 
-    "python rsff.py build/rsff": {
+    "python3 rsff.py build/rsff": {
         "build/rsff.pcf": "output-41a6d996ca530aa2c44bd0a2f7a328b1", 
         "build/rsff.v": "output-5ca38194e2f82742ef1c8531ab399508", 
-        "rsff.py": "input-abc754a8ab07d4187dd981fd9b673d4d"
+        "rsff.py": "input-f2d49edbea89ef41c0a9076683c1e0d9"
     }, 
-    "python srff.py build/srff": {
+    "python3 srff.py build/srff": {
         "build/srff.pcf": "output-41a6d996ca530aa2c44bd0a2f7a328b1", 
         "build/srff.v": "output-0f6f422896755b2327fd099694f73062", 
-        "srff.py": "input-c564bcdada3f69956019ae09f1ed705a"
+        "srff.py": "input-a894b59681b34299911cbd02d94742fc"
     }, 
-    "python tff.py build/tff": {
+    "python3 tff.py build/tff": {
         "build/tff.pcf": "output-d0f9688b50dbf201786bebcc4e7594d2", 
-        "build/tff.v": "output-7068deede494f4076fbb553fb90c7f48", 
-        "tff.py": "input-a1a65dd0b2f27c800a02333fdef1d46b"
+        "build/tff.v": "output-3287b4be88dcab5af5172cab7dd73fb2", 
+        "tff.py": "input-6d39c222bf2fe486374e1e9c5e0eb55f"
     }
 }

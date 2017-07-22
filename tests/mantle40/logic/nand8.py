@@ -1,7 +1,7 @@
 import sys
 from magma import *
 from mantle import *
-from boards.icestick import IceStick
+from loam.boards.icestick import IceStick
 
 icestick = IceStick()
 for i in range(8):

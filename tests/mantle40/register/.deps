@@ -16,14 +16,14 @@
         "build/reg8.v": "input-afd7b4d2df97562d928f757ea905a855", 
         "gold/reg8.v": "input-afd7b4d2df97562d928f757ea905a855"
     }, 
-    "python reg4.py build/reg4": {
+    "python3 reg4.py build/reg4": {
         "build/reg4.pcf": "output-ad55c990def94453b9dc4d668816df5e", 
         "build/reg4.v": "output-9a6604b386bb811faa1bf32c0402e781", 
-        "reg4.py": "input-1cc55bcf5458538767c0d595833c1240"
+        "reg4.py": "input-b39f27fc0d17fbfd32b589fcf78531a0"
     }, 
-    "python reg8.py build/reg8": {
+    "python3 reg8.py build/reg8": {
         "build/reg8.pcf": "output-267b7b2ead75ac2b971831bf6e810e5d", 
         "build/reg8.v": "output-afd7b4d2df97562d928f757ea905a855", 
-        "reg8.py": "input-da5b7f69c37660894368d8e6b53e23ff"
+        "reg8.py": "input-4b11d4bfd07b0c101f0b36d8f15480f5"
     }
 }

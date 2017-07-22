@@ -5,12 +5,12 @@
         "gold/lfsr.pcf": "input-686653e37ebc8b77a7e432fc1e05798c"
     }, 
     "cmp build/lfsr.v gold/lfsr.v": {
-        "build/lfsr.v": "input-ac268f255a07779241148ef329a665f3", 
-        "gold/lfsr.v": "input-ac268f255a07779241148ef329a665f3"
+        "build/lfsr.v": "input-4ebf8b848dac04d952e1e1add40ef100", 
+        "gold/lfsr.v": "input-4ebf8b848dac04d952e1e1add40ef100"
     }, 
-    "python lfsr.py build/lfsr": {
+    "python3 lfsr.py build/lfsr": {
         "build/lfsr.pcf": "output-686653e37ebc8b77a7e432fc1e05798c", 
-        "build/lfsr.v": "output-ac268f255a07779241148ef329a665f3", 
-        "lfsr.py": "input-f8b1d241c92d49d81e3f5fe0ffae4744"
+        "build/lfsr.v": "output-4ebf8b848dac04d952e1e1add40ef100", 
+        "lfsr.py": "input-7d5c0aac32eee645b17484f03afd2fbf"
     }
 }

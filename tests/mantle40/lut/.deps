@@ -64,44 +64,44 @@
         "build/lut8.v": "input-97042172c8c7c95772c581586c6d405c", 
         "gold/lut8.v": "input-97042172c8c7c95772c581586c6d405c"
     }, 
-    "python lut1.py build/lut1": {
+    "python3 lut1.py build/lut1": {
         "build/lut1.pcf": "output-df086731cfa7aedfa3ed1a561458b05d", 
         "build/lut1.v": "output-330d62d875fceebcf2f9361be79ec5d2", 
-        "lut1.py": "input-c1f51436958fbe1ff4ab88963e286020"
+        "lut1.py": "input-4a42f86ae63535572e90e0957e5856c8"
     }, 
-    "python lut2.py build/lut2": {
+    "python3 lut2.py build/lut2": {
         "build/lut2.pcf": "output-05aa76db131c61c4ca3b6ea2ade306e7", 
         "build/lut2.v": "output-14abb486665593378b08abff29048175", 
-        "lut2.py": "input-0585ce9d4d8754246f0059d91e41bcff"
+        "lut2.py": "input-6c5dd091912f591d9a2711a075bb1193"
     }, 
-    "python lut3.py build/lut3": {
+    "python3 lut3.py build/lut3": {
         "build/lut3.pcf": "output-8b12aaf442041d14f7de773a9f0805a1", 
         "build/lut3.v": "output-90e472c9885d44ca72c1bbeadde878de", 
-        "lut3.py": "input-36987d2d764cc7c28a1b8f4616d0be21"
+        "lut3.py": "input-99663e4f702080f2269013d6c93fc023"
     }, 
-    "python lut4.py build/lut4": {
+    "python3 lut4.py build/lut4": {
         "build/lut4.pcf": "output-5ea5482c771e780aeb5e9ffd7de72fe7", 
         "build/lut4.v": "output-8c395a219e3e58b6c877d101f27d7361", 
-        "lut4.py": "input-7f36699ac801c25f179edfbe28db85a5"
+        "lut4.py": "input-b846f8e3a5dc6e01e8aefd32367bed70"
     }, 
-    "python lut5.py build/lut5": {
+    "python3 lut5.py build/lut5": {
         "build/lut5.pcf": "output-1c64051a08c9b2c6fc10cdd06cc148e1", 
         "build/lut5.v": "output-07444b5cdd686672909c1531c9e754be", 
-        "lut5.py": "input-6c804a5a79fd034adef3703e5cacc725"
+        "lut5.py": "input-1864f390716ac2ea29a8dec0ac2d1b33"
     }, 
-    "python lut6.py build/lut6": {
+    "python3 lut6.py build/lut6": {
         "build/lut6.pcf": "output-3766b1b9f826988ccda354962f3fed30", 
         "build/lut6.v": "output-e54070ba5be96c5517cec7296412c14f", 
-        "lut6.py": "input-83a0bcfca57c8f91aa5b8142a1307e90"
+        "lut6.py": "input-80aadc247aa7d48ab0f1f68559cd1647"
     }, 
-    "python lut7.py build/lut7": {
+    "python3 lut7.py build/lut7": {
         "build/lut7.pcf": "output-a31d52a402fa7279ada33adb39ec6674", 
         "build/lut7.v": "output-a71d6cd83c3210b6da9e34591a496190", 
-        "lut7.py": "input-faf04ec2649d2d379966f80549a6d840"
+        "lut7.py": "input-6620e3da6b65884e395e78a5c244e9ce"
     }, 
-    "python lut8.py build/lut8": {
+    "python3 lut8.py build/lut8": {
         "build/lut8.pcf": "output-f8726f2913764b000ca84fc792751f38", 
         "build/lut8.v": "output-97042172c8c7c95772c581586c6d405c", 
-        "lut8.py": "input-8a9dd6a974560083e4830fbad0565173"
+        "lut8.py": "input-e42c526082f90787a0fc249a5413ebcd"
     }
 }

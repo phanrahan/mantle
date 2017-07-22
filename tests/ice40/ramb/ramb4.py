@@ -23,8 +23,8 @@ WE = main.I6
 O = array(main.D0, main.D1)
 
 N = 4
-M = 4096/N
-rom = range(M)
+M = 4096//N
+rom = M * [0]
 for i in range(M):
     rom[i] = i & 0xf
 

@@ -10,7 +10,7 @@ tests = glob.glob('*.py')
 
 def build():
     for test in tests:
-        if test[0] != '_':
+        if test[0] != '_' and not test.startswith('test_'):
             base, suffix = test.split('.')
             compile(base)
 
@@ -19,7 +19,7 @@ def compile(base):
     v = base+'.v'
     buildu, goldu = join(BUILD,u), join(GOLD,u)
     buildv, goldv = join(BUILD,v), join(GOLD,v)
-    run('python',base+'.py', join(BUILD,base))
+    run('python3',base+'.py', join(BUILD,base))
     if exists(goldu):
         run('cmp',buildu,goldu)
     if exists(goldv):

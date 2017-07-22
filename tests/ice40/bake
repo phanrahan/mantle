@@ -5,14 +5,22 @@ tests = glob.glob('*')
 
 def build():
     for test in tests:
-        if os.path.isdir(test) and not test[0] == '_':
-            os.system('cd %s; ./bake clean; ./bake; cd ..' % test)
+        if os.path.isdir(test):
+            if not test[0] == '_' and not test.startswith('test_'):
+                os.system('cd %s; ./bake; cd ..' % test)
+
+def clean():
+    for test in tests:
+        if os.path.isdir(test):
+            if not test[0] == '_' and not test.startswith('test_'):
+                os.system('cd %s; ./bake clean; cd ..' % test)
 
 def gold():
     for test in tests:
-        if os.path.isdir(test) and not test[0] == '_':
-            os.system('cd %s; ./bake gold; cd ..' % test)
+        if os.path.isdir(test):
+            if not test[0] == '_' and not test.startswith('test_'):
+                os.system('cd %s; ./bake gold; cd ..' % test)
 
-
+clean()
 build()
-#gold()
+gold()

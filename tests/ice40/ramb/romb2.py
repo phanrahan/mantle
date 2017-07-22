@@ -21,8 +21,8 @@ I = array(main.I0, main.I1, main.I2, main.I3,0,0,0,0,0,0,0)
 O = array(main.D0, main.D1)
 
 N = 2
-M = 4096/N
-rom = range(M)
+M = 4096//N
+rom = M * [0]
 for i in range(M):
     rom[i] = i & 0x3
 

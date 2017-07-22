@@ -8,7 +8,7 @@
         "build/lut4.v": "input-057da20c4a6d72f50d251127579bd3d0", 
         "gold/lut4.v": "input-057da20c4a6d72f50d251127579bd3d0"
     }, 
-    "python lut4.py build/lut4": {
+    "python3 lut4.py build/lut4": {
         "build/lut4.pcf": "output-e9bef2a3677ad4770af7d6799de1e916", 
         "build/lut4.v": "output-057da20c4a6d72f50d251127579bd3d0", 
         "lut4.py": "input-ed202626fe012e45b040330288a45d71"

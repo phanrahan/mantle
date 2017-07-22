@@ -1,13 +1,12 @@
 import sys
 from magma import *
-from mantle import *
+from mantle.verilog.gates import Not
 
-main = DefineCircuit("main", "input I", Bit, "output O", Bit)
+main = DefineCircuit("main", "I", In(Bit), "O", Out(Bit))
 
 not_ = Not()
 
-not_(main.I)
-wire(not_, main.O)
+wire( not_(main.I), main.O)
 
 compile(sys.argv[1], main)
 

@@ -1,4 +1,3 @@
-export MANTLE_TARGET='spartan3'
 export MANTLE='verilog'
-./bake clean
+unset MANTLE_TARGET
 ./bake

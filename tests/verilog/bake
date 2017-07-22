@@ -14,5 +14,5 @@ def gold():
             os.system('cd %s; ./bake gold; cd ..' % test)
 
 
-#build()
+build()
 gold()

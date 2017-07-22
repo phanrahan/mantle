@@ -2,12 +2,11 @@ import sys
 from magma import *
 from mantle import *
 
-main = DefineCircuit("main", "input I", Bit, "output O", Bit)
+main = DefineCircuit("main", "I", In(Bit), "O", Out(Bit))
 
-_not = Not()
+n = Not()
 
-_not(main.I)
-wire(_not, main.O)
+wire( n(main.I), main.O )
 
 compile(sys.argv[1], main)
 

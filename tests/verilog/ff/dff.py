@@ -1,14 +1,12 @@
 import sys
 from magma import *
-from mantle import *
+from mantle.verilog.FF import *
 
-main = DefineCircuit("main", 
-        "input I", Bit, "output O", Bit, "input CLK", Bit)
+main = DefineCircuit("main", "I", In(Bit), "O", Out(Bit), "CLK", In(Bit))
 
 dff = DFF()
 
-dff(main.I)
-wire(dff, main.O)
+wire( dff(main.I), main.O)
 
 compile(sys.argv[1], main)
 

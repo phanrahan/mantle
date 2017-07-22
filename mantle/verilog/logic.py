@@ -1,206 +1,154 @@
+import sys
+if sys.version_info > (3, 0):
+    from functools import reduce
+    from functools import lru_cache
 import operator
 from magma import *
 from . import gates
 
-__all__  = ['And', 'And2', 'And3', 'And4']
-__all__ += ['NAnd', 'NAnd2', 'NAnd3', 'NAnd4']
-__all__ += ['Or', 'Or2', 'Or3', 'Or4']
-__all__ += ['NOr', 'NOr2', 'NOr3', 'NOr4']
-__all__ += ['Xor', 'Xor2', 'Xor3', 'Xor4']
-__all__ += ['NXor', 'NXor2', 'NXor3', 'NXor4']
+# binary operators
+__all__  = ['DefineAnd', 'And', 'ReduceAnd']
+__all__ += ['DefineNAnd', 'NAnd', 'ReduceNAnd']
+__all__ += ['DefineOr', 'Or', 'ReduceOr']
+__all__ += ['DefineNOr', 'NOr', 'ReduceNOr']
+__all__ += ['DefineXOr', 'XOr', 'ReduceXOr']
+__all__ += ['DefineNXOr', 'NXOr', 'ReduceNXOr']
 
-__all__ += ['AndN']
-__all__ += ['NAndN']
-__all__ += ['OrN']
-__all__ += ['NOrN']
-__all__ += ['XorN']
-__all__ += ['NXorN']
-
+# unary operators
+__all__ += ['DefineInvert', 'Invert']
 __all__ += ['Not']
-__all__ += ['Buf']
 
-def flatten(l):
-    return reduce(operator.add, l)
+@lru_cache(maxsize=None)
+def DefineOp(name, height, op):
 
-def Op1(op):
-    op = op()
-    I = In(Bit)()
-    O = Out(Bit)()
-    op(I)
-    wire(op, O)
-    return AnonymousCircuit("I", I, "O", O)
+    if height != 1:
+        name += str(height)
+    args = [name]
+    for i in range(height):
+        args += ['I{}'.format(i), In(Bit)]
+    args += ['O', Out(Bit)]
 
-def Op(n, op):
-    op = op(n)
-    I = [In(Bit)() for i in range(n)]
-    O = Out(Bit)()
-    op(*I)
-    wire(op, O)
-    args = flatten([["I%d"%i, I[i]] for i in range(n)])
-    args += ["O", O]
-    return AnonymousCircuit(*args)
+    c = DefineCircuit(*args)
+    op = op(height)
+    EndCircuit()
+    if   height == 1:
+        wire(op(c.I0), c.O)
+    elif height == 2:
+        wire(op(c.I0, c.I1), c.O)
+    elif height == 3:
+        wire(op(c.I0, c.I1, c.I2), c.O)
+    elif height == 4:
+        wire(op(c.I0, c.I1, c.I2, c.I3), c.O)
+    return c
 
-def OpN(n, op):
-    op = op(n)
-    I = In(Array(n, Bit))()
-    O = Out(Bit)()
-    op(*[I[i] for i in range(n)])
-    wire(op, O)
-    return AnonymousCircuit("I", I, "O", O)
-
-def DefineOp(opname, op, height, width):
-    """     
-    Generate module
-        
-    I0 : Array(width, Bit), I1 : Array(n, Bit) -> O : Array(n, Bit)
-    """
-        
+@lru_cache(maxsize=None)
+def DefineOpW(name, height, width, op):
+    if height == 1:
+        name += str(width)
+    else:
+        name += str(height) + 'x' + str(width)
     T = Array(width, Bit)
-    class _Op(Circuit):
-        assert height > 1 and height <= 4
+    args = [name]
+    for i in range(height):
+        args += ['I{}'.format(i), In(T)]
+    args += ['O', Out(T)]
 
-        name = '%s%dx%d' % (opname, height, width)
-
-        if   height == 2:
-            IO  = ['I0', In(T), 'I1', In(T)]
-        elif height == 3:
-            IO  = ['I0', In(T), 'I1', In(T), 'I2', In(T)]
-        elif height == 4:
-            IO  = ['I0', In(T), 'I1', In(T), 'I2', In(T), 'I3', In(T)]
-        IO  += ['O', Out(T)]
-
-        @classmethod
-        def definition(def_):
-            def opm(y):
-                return op(height)
-            opmxn = join(col(opm, width))
-            wire(def_.I0, opmxn.I0)
-            wire(def_.I1, opmxn.I1)
-            wire(opmxn.O, def_.O)
-
-    return _Op
+    c = DefineCircuit(*args)
+    def f(y):
+        return op(height)
+    op = join(col(f, width))
+    EndCircuit()
+    if   height == 1:
+        wire(op(c.I0), c.O)
+    elif height == 2:
+        wire(op(c.I0, c.I1), c.O)
+    elif height == 3:
+        wire(op(c.I0, c.I1, c.I2), c.O)
+    elif height == 4:
+        wire(op(c.I0, c.I1, c.I2, c.I3), c.O)
+    return c
 
 
+def DefineAnd(height=2, width=None):
+    if width is None:
+        return DefineOp('And', height, gates.And)
+    return DefineOpW('And', height, width, gates.And)
+
+def And(height=2, width=None):
+    return DefineAnd(height, width)()
+
+def ReduceAnd(height=2):
+    return uncurry(And(height))
 
 
-def _And(n):
-    return Op(n, gates.And)
+def DefineNAnd(height=2, width=None):
+    if width is None:
+        return DefineOp('NAnd', height, gates.NAnd)
+    return DefineOpW('NAnd', height, width, gates.NAnd)
 
-def And2():
-    return _And(2)
+def NAnd(height=2, width=None, **kwargs):
+    return DefineNAnd(height, width)(**kwargs)
 
-def And3():
-    return _And(3)
-
-def And4():
-    return _And(4)
-
-def AndN(n):
-    return OpN(n, gates.And)
-
-def And(height, width=2, **kwargs):
-    return DefineOp('And', _And, height, width)(**kwargs)
+def ReduceNAnd(height=2):
+    return uncurry(NAnd(height))
 
 
-def _NAnd(n):
-    return Op(n, gates.NAnd)
+def DefineOr(height=2, width=None):
+    if width is None:
+        return DefineOp('Or', height, gates.Or)
+    return DefineOpW('Or', height, width, gates.Or)
 
-def NAnd2():
-    return _NAnd(2)
+def Or(height=2, width=None, **kwargs):
+    return DefineOr(height, width)(**kwargs)
 
-def NAnd3():
-    return _NAnd(3)
-
-def NAnd4():
-    return _NAnd(4)
-
-def NAndN(n):
-    return OpN(n, gates.NAnd)
-
-def NAnd(height, width=2, **kwargs):
-    return DefineOp('NAnd', _NAnd, height, width)(**kwargs)
+def ReduceOr(height=2):
+    return uncurry(Or(height))
 
 
-def _Or(n):
-    return Op(n, gates.Or)
+def DefineNOr(height=2, width=None):
+    if width is None:
+        return DefineOp('NOr', height, gates.NOr)
+    return DefineOpW('NOr', height, width, gates.NOr)
 
-def Or2():
-    return _Or(2)
+def NOr(height=2, width=None, **kwargs):
+    return DefineNOr(height, width)(**kwargs)
 
-def Or3():
-    return _Or(3)
-
-def Or4():
-    return _Or(4)
-
-def OrN(n):
-    return OpN(n, gates.Or)
-
-def Or(height, width=2, **kwargs):
-    return DefineOp('Or', _Or, height, width)(**kwargs)
+def ReduceNOr(height=2):
+    return uncurry(NOr(height))
 
 
-def _NOr(n):
-    return Op(n, gates.NOr)
+def DefineXOr(height=2, width=None):
+    if width is None:
+        return DefineOp('XOr', height, gates.XOr)
+    return DefineOpW('XOr', height, width, gates.XOr)
 
-def NOr2():
-    return _NOr(2)
+def XOr(height=2, width=None, **kwargs):
+    return DefineXOr(height, width)(**kwargs)
 
-def NOr3():
-    return _NOr(3)
-
-def NOr4():
-    return _NOr(4)
-
-def NOrN(n):
-    return OpN(n, gates.NOr)
-
-def NOr(height, width=2, **kwargs):
-    return DefineOp('NOr', _NOr, height, width)(**kwargs)
+def ReduceXOr(height=2):
+    return uncurry(XOr(height))
 
 
-def _Xor(n):
-    return Op(n, gates.Xor)
+def DefineNXOr(height=2, width=None):
+    if width is None:
+        return DefineOp('NXOr', height, gates.NXOr)
+    return DefineOpW('NXOr', height, width, gates.NXOr)
 
-def Xor2():
-    return _Xor(2)
+def NXOr(height=2, width=None, **kwargs):
+    return DefineNXOr(height, width)(**kwargs)
 
-def Xor3():
-    return _Xor(3)
-
-def Xor4():
-    return _Xor(4)
-
-def XorN(n):
-    return OpN(n, gates.Xor)
-
-def Xor(height, width=2, **kwargs):
-    return DefineOp('Xor', _Xor, height, width)(**kwargs)
+def ReduceNXOr(height=2):
+    return uncurry(NXOr(height))
 
 
-def _NXor(n):
-    return Op(n, gates.NXor)
+def DefineInvert(width=None):
+    if width is None:
+        return DefineOp('Invert', 1, gates.Not)
+    return DefineOpW('Invert', 1, width, gates.Not)
 
-def NXor2():
-    return _NXor(2)
-
-def NXor3():
-    return _NXor(3)
-
-def NXor4():
-    return _NXor(4)
-
-def NXorN(n):
-    return OpN(n, gates.NXor)
-
-def NXor(height, width=2, **kwargs):
-    return DefineOp('NXor', _NXor, height, width)(**kwargs)
+def Invert(width):
+    return DefineInvert(width)()
 
 
-def Buf():
-    return Op1(gates.Buf)
-
-def Not():
-    return Op1(gates.Not)
-
+Not = DefineOp('Not', 1, gates.Not)
 

@@ -4,73 +4,62 @@ __all__  = ['And']
 __all__ += ['NAnd']
 __all__ += ['Or']
 __all__ += ['NOr']
-__all__ += ['Xor']
-__all__ += ['NXor']
-
+__all__ += ['XOr']
+__all__ += ['NXOr']
 __all__ += ['Not']
 __all__ += ['Buf']
 
-def ins(n):
+def ins(n=2):
     l = []
     for i in range(n):
-        #l.append('input in%d' % (i+1))
         l.append('input')
         l.append(In(Bit))
     return l
 
-def DefineAnd(n):
+def DefineAnd(n=2):
     return DeclareCircuit(*(['and', 'output', Out(Bit)] + ins(n)))
 
-def And(n):
+def And(n=2):
     return DefineAnd(n)()
 
 
-def DefineNAnd(n):
+def DefineNAnd(n=2):
     return DeclareCircuit(*(['nand', 'output', Out(Bit)] + ins(n)))
 
-def NAnd(n):
+def NAnd(n=2):
     return DefineNAnd(n)()
 
 
-def DefineOr(n):
+def DefineOr(n=2):
     return DeclareCircuit(*(['or', 'output', Out(Bit)] + ins(n)))
 
-def Or(n):
+def Or(n=2):
     return DefineOr(n)()
 
 
-def DefineNOr(n):
-    return DeclareCircuit(*(['nor', 'output', Out(Bit)] + ins(n)))
+def DefineNOr(n=2):
+    return DeclareCircuit(*(['nOr', 'output', Out(Bit)] + ins(n)))
 
-def NOr(n):
+def NOr(n=2):
     return DefineNOr(n)()
 
 
-def DefineXor(n):
-    return DeclareCircuit(*(['xor', 'output', Out(Bit)] + ins(n)))
+def DefineXOr(n=2):
+    return DeclareCircuit(*(['xOr', 'output', Out(Bit)] + ins(n)))
 
-def Xor(n):
-    return DefineXor(n)()
-
-
-def DefineNXor(n):
-    return DeclareCircuit(*(['nxor', 'output', Out(Bit)] + ins(n)))
-
-def NXor(n):
-    return DefineNXor(n)()
+def XOr(n=2):
+    return DefineXOr(n)()
 
 
+def DefineNXOr(n=2):
+    return DeclareCircuit(*(['nxOr', 'output', Out(Bit)] + ins(n)))
 
-DefineNot = DeclareCircuit('not', 'output', Out(Bit), 'input', In(Bit))
-
-def Not():
-    return DefineNot()
+def NXOr(n=2):
+    return DefineNXOr(n)()
 
 
-DefineBuf = DeclareCircuit('buf', 'output', Out(Bit), 'input', In(Bit))
-
-def Buf():
-    return DefineBuf()
+Not = DeclareCircuit('not', 'output', Out(Bit), 'input', In(Bit))
+Buf = DeclareCircuit('buf', 'output', Out(Bit), 'input', In(Bit))
 
 
 

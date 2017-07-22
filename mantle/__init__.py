@@ -6,7 +6,7 @@ else:
     def circuit(fn):
         raise RuntimeError("@circuit decorator requires Python 3+")
 
-mantle = os.getenv('MANTLE', 'lattice')
+mantle = os.getenv('MANTLE', 'verilog')
 if mantle:
     mantle = mantle.strip()
     if   mantle == 'xilinx':

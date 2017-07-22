@@ -15,7 +15,9 @@ install:
     - git clone git@github.com:phanrahan/loam.git
     - pip install -e loam
     - pip install pytest-cov
+    - pip install fabricate
     - pip install -e .
 
 script: 
     - if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then py.test --cov=mantle tests;else pytest --cov=mantle tests; fi
+    - cd tests/verilog; bash doit; cd ${TRAVIS_BUILD_DIR}

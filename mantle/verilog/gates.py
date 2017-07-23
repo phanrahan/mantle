@@ -38,21 +38,21 @@ def Or(n=2):
 
 
 def DefineNOr(n=2):
-    return DeclareCircuit(*(['nOr', 'output', Out(Bit)] + ins(n)))
+    return DeclareCircuit(*(['nor', 'output', Out(Bit)] + ins(n)))
 
 def NOr(n=2):
     return DefineNOr(n)()
 
 
 def DefineXOr(n=2):
-    return DeclareCircuit(*(['xOr', 'output', Out(Bit)] + ins(n)))
+    return DeclareCircuit(*(['xor', 'output', Out(Bit)] + ins(n)))
 
 def XOr(n=2):
     return DefineXOr(n)()
 
 
 def DefineNXOr(n=2):
-    return DeclareCircuit(*(['nxOr', 'output', Out(Bit)] + ins(n)))
+    return DeclareCircuit(*(['nxor', 'output', Out(Bit)] + ins(n)))
 
 def NXOr(n=2):
     return DefineNXOr(n)()

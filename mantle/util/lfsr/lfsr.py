@@ -38,7 +38,7 @@ def LFSR(n, init=1, ce=False):
         t.append(shift.O[tap[i] - 1])
     t = array(*t)
 
-    s = XorN(nt)(t)
+    s = ReduceXOr(nt)(t)
     shift(s)
 
     args = ["output O", shift.O] + shift.interface.clockargs()

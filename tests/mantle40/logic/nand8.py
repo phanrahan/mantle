@@ -10,7 +10,7 @@ icestick.D5.on()
 
 main = icestick.main()
 
-nand8 = NAndN(8)
+nand8 = ReduceNAnd(8)
 nand8(main.J1)
 wire(nand8.O, main.D5)
 

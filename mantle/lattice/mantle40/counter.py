@@ -2,7 +2,7 @@ from magma import *
 from .register import Register
 from .decode import Decode
 from .adder import Adders
-from .logic import And2
+from .logic import And
 from .MUX import Mux
 
 __all__  = ['DefineCounter', 'Counter']
@@ -219,7 +219,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, ce=False):
 
     if ce:
         CE = In(Bit)()
-        reset = And2()(reset, CE)
+        reset = And(2)(reset, CE)
         # reset is sometimes called rollover or RO
         # note that we don't return RO in Counter
 

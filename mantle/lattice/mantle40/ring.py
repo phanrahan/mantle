@@ -1,7 +1,7 @@
 from magma import *
 from .FF import FFs
 from .register import _RegisterName
-from .logic import Not, And2
+from .logic import Not, And
 from .shift import SISO
 
 __all__  = ['DefineRing', 'Ring']
@@ -70,7 +70,7 @@ def CascadedRing(nlist, ce=False, **kwargs):
         assert(n < 32)
         ring = Ring(n, ce=True)
         ring(CE=ce)
-        and2 = And2()
+        and2 = And(2)
         and2(ce, ring.O[n-1])
         ce = and2.O
 

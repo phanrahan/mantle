@@ -10,7 +10,8 @@ icestick.D5.on()
 
 main = icestick.main()
 
-and8 = AndN(8)
+and8 = ReduceAnd(8)
+print(and8.interface)
 and8(main.J1)
 wire(and8.O, main.D5)
 

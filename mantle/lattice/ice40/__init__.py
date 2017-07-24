@@ -12,4 +12,4 @@ from .PLL import *
 
 FAMILY = 'ice40'
 
-print('import lattice ice40')
+print('import mantle lattice ice40')

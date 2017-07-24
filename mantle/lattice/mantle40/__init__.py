@@ -8,6 +8,7 @@ from .IO import *
 
 from .LUT import *
 from .ROM import *
+from .buffer import *
 
 from .MUX import *
 
@@ -36,4 +37,4 @@ from .ring import *
 from .counter import *
 
 
-print('import lattice mantle40')
+print('import mantle lattice mantle40')

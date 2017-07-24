@@ -1,7 +1,6 @@
 import sys
-from magma import *
-from mantle import *
-from loam.boards.icestick import IceStick
+from magma import array, wire, compile
+from loam.boards.icestick import IceStick, Add
 
 icestick = IceStick()
 icestick.Clock.on()

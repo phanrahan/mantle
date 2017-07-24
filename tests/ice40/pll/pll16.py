@@ -1,5 +1,5 @@
 import sys
-from magma import *
+from magma import wire, compile
 from mantle.lattice.ice40.PLL import SB_PLL
 from loam.boards.icestick import IceStick
 

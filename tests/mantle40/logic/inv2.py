@@ -1,7 +1,6 @@
 import sys
-from magma import *
-from mantle import *
-from loam.boards.icestick import IceStick
+from magma import wire, compile
+from loam.boards.icestick import IceStick, Invert
 
 icestick = IceStick()
 for i in range(2):

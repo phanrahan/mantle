@@ -1,7 +1,6 @@
 import sys
-from magma import *
-from mantle import *
-from loam.boards.icestick import IceStick
+from magma import array, wire, compile
+from loam.boards.icestick import IceStick, EQ
 
 icestick = IceStick()
 icestick.J1[0].rename('I0').input().on()
@@ -15,7 +14,6 @@ I0 = array(main.I0, main.I1, main.I2, main.I3)
 I1 = array(0, 1, 0, 1)
 
 eq4 = EQ(4)
-print(eq4.interface)
 eq4(I0,I1)
 wire(eq4.O, main.D1)
 

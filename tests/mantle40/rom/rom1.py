@@ -1,7 +1,6 @@
 import sys
-from magma import *
-from mantle import *
-from loam.boards.icestick import IceStick
+from magma import array, wire, compile
+from loam.boards.icestick import IceStick, ROM1, I0
 
 icestick = IceStick()
 icestick.J1[0].rename('I0').input().on()

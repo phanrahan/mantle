@@ -1,12 +1,9 @@
-import os
-os.environ["MANTLE"] = "lattice"
-
-from magma import *
+from magma import wire
 from magma.simulator_interactive_frontend import simulate
-from mantle.lattice.ice40.PLB import SB_LUT4
 from magma.python_simulator import PythonSimulator
 from magma.scope import Scope
 from loam.boards.icestick import IceStick
+from mantle.lattice.ice40.PLB import SB_LUT4
 
 def test_counter():
     icestick = IceStick()

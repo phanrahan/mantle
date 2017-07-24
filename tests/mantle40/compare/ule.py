@@ -1,7 +1,6 @@
 import sys
-from magma import *
-from mantle import *
-from loam.boards.icestick import IceStick
+from magma import array, wire, compile
+from loam.boards.icestick import IceStick, ULE
 
 icestick = IceStick()
 icestick.J1[0].rename('A0').input().on()
@@ -19,5 +18,4 @@ ule = ULE(8, loc=(4,1))
 ule(A, B)
 wire(ule.O, main.D1)
 
-#compile(sys.argv[1], main, output='blif', origin=(0,0))
 compile(sys.argv[1], main)

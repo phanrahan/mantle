@@ -1,5 +1,6 @@
-from magma import *
-from mantle import *
+import os
+os.environ['MANTLE'] = 'lattice'
+from mantle import Mux2, Mux4, Mux8, Mux16, MuxN, Mux
 
 def test_mux():
     mux = Mux2()

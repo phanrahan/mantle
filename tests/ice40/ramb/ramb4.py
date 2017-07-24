@@ -1,5 +1,5 @@
 import sys
-from magma import *
+from magma import array, wire, compile
 from mantle.lattice.ice40.RAMB import RAMB
 from loam.boards.icestick import IceStick
 

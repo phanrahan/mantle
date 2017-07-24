@@ -1,8 +1,7 @@
 import sys
-from magma import *
-from mantle import *
+from magma import wire, compile
+from loam.boards.icestick import IceStick, Counter
 from mantle.util.lhca import LHCA
-from loam.boards.icestick import IceStick
 
 icestick = IceStick()
 icestick.Clock.on()

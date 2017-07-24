@@ -1,10 +1,9 @@
 import os
 os.environ["MANTLE"] = "lattice"
 
-from magma import *
+from magma import wire
 from magma.simulator_interactive_frontend import simulate
-from mantle import *
-from loam.boards.icestick import IceStick
+from loam.boards.icestick import IceStick, Counter
 from magma.python_simulator import PythonSimulator
 from magma.scope import Scope
 

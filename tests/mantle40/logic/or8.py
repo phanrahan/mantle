@@ -10,7 +10,7 @@ icestick.D5.on()
 
 main = icestick.main()
 
-or8 = OrN(8)
+or8 = ReduceOr(8)
 or8(main.J1)
 wire(or8.O, main.D5)
 

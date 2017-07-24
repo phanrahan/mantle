@@ -1,31 +1,37 @@
+import sys
+if sys.version_info > (3, 0):
+    from functools import reduce
+    from functools import lru_cache
 from magma import *
 from ..ice40 import A0, A1, A2, A3
 from .flatcascade import FlatCascade
 from .LUT import *
-from .ROM import *
 
-__all__  = ['And',  'AndN',  'And2',  'And3',  'And4']
-__all__ += ['NAnd', 'NAndN', 'NAnd2', 'NAnd3', 'NAnd4']
-__all__ += ['Or',   'OrN',   'Or2',   'Or3',   'Or4']
-__all__ += ['Nor',  'NorN',  'Nor2',  'Nor3',  'Nor4']
-__all__ += ['Xor',  'XorN',  'Xor2',  'Xor3',  'Xor4']
-__all__ += ['NXor', 'NXorN', 'NXor2', 'NXor3', 'NXor4']
+# binary operators
+__all__  = ['DefineAnd', 'And', 'ReduceAnd']
+__all__ += ['DefineNAnd', 'NAnd', 'ReduceNAnd']
+__all__ += ['DefineOr', 'Or', 'ReduceOr']
+__all__ += ['DefineNOr', 'NOr', 'ReduceNOr']
+__all__ += ['DefineXOr', 'XOr', 'ReduceXOr']
+__all__ += ['DefineNXOr', 'NXOr', 'ReduceNXOr']
 
-__all__ += ['Buf', 'Buffer']
-__all__ += ['Not', 'Invert']
+# unary operators
+__all__ += ['DefineInvert', 'Invert']
+__all__ += ['Not']
+
+# logical shifts
 __all__ += ['LeftShift', 'RightShift']
 
 
-def And2(**kwargs):
-    return LUT2(A0&A1, **kwargs)
+def AndN(n, **kwargs):
+    """And gate with n-bit input."""
+    if n == 1 :return LUT2(A0, **kwargs)
+    if n == 2 :return LUT2(A0&A1, **kwargs)
+    if n == 3: return LUT3(A0&A1&A2, **kwargs)
+    if n == 4: return LUT4(A0&A1&A2&A3, **kwargs)
+    return curry(FlatCascade(n, 1, A0&A1, 1, **kwargs))
 
-def And3(**kwargs):
-    return LUT3(A0&A1&A2, **kwargs)
-
-def And4(**kwargs):
-    return LUT4(A0&A1&A2&A3, **kwargs)
-
-def DefineAnd(height, width):
+def DefineAnd(height=2, width=None):
     """
     Generate And module
 
@@ -49,9 +55,7 @@ def DefineAnd(height, width):
         @classmethod
         def definition(def_):
             def andm(y):
-                if height == 2: return And2(loc=(0,y/8, y%8))
-                if height == 3: return And3(loc=(0,y/8, y%8))
-                if height == 4: return And4(loc=(0,y/8, y%8))
+                return AndN(height, loc=(0,y/8, y%8))
             andmxn = join(col(andm, width))
             wire(def_.I0, andmxn.I0)
             wire(def_.I1, andmxn.I1)
@@ -59,35 +63,23 @@ def DefineAnd(height, width):
 
     return _And
 
-def And(height, width=2, **kwargs):
+def And(height=2, width=None, **kwargs):
+    if width is None:
+        return AndN(height, **kwargs)
     return DefineAnd(height, width)(**kwargs)
 
-def AndN(n, **kwargs):
-    """And gate with n-bit input."""
-
-    if   n == 1:
-        return ROM1(A0, **kwargs)
-    elif n == 2:
-        return ROM2(A0&A1, **kwargs)
-    elif n == 3:
-        return ROM3(A0&A1&A2, **kwargs)
-    elif n == 4:
-        return ROM4(A0&A1&A2&A3, **kwargs)
-    else:
-        return FlatCascade(n, 1, A0&A1, 1, **kwargs)
+def ReduceAnd(height=2, **kwargs):
+    return uncurry(And(height, **kwargs))
 
 
+def NAndN(n, **kwargs):
+    if n == 1 :return LUT2(~(A0), **kwargs)
+    if n == 2 :return LUT2(~(A0&A1), **kwargs)
+    if n == 3: return LUT3(~(A0&A1&A2), **kwargs)
+    if n == 4: return LUT4(~(A0&A1&A2&A3), **kwargs)
+    return curry(FlatCascade(n, 1, A0 | ~A1, 0, **kwargs))
 
-def NAnd2(**kwargs):
-    return LUT2(~(A0&A1), **kwargs)
-
-def NAnd3(**kwargs):
-    return LUT3(~(A0&A1&A2), **kwargs)
-
-def NAnd4(**kwargs):
-    return LUT4(~(A0&A1&A2&A3), **kwargs)
-
-def DefineNAnd(height, width):
+def DefineNAnd(height=2, width=None):
     """
     Generate And module
 
@@ -111,9 +103,7 @@ def DefineNAnd(height, width):
         @classmethod
         def definition(def_):
             def nandm(y):
-                if height == 2: return NAnd2(loc=(0,y/8, y%8))
-                if height == 3: return NAnd3(loc=(0,y/8, y%8))
-                if height == 4: return NAnd4(loc=(0,y/8, y%8))
+                return NAndN(height, loc=(0,y/8, y%8))
             nandmxn = join(col(nandm, width))
             wire(def_.I0, nandmxn.I0)
             wire(def_.I1, nandmxn.I1)
@@ -121,36 +111,24 @@ def DefineNAnd(height, width):
 
     return _NAnd
 
-def NAnd(height, width=2, **kwargs):
+def NAnd(height=2, width=None, **kwargs):
+    if width is None:
+        return NAndN(height, **kwargs)
     return DefineNAnd(height, width)(**kwargs)
 
-def NAndN(n, **kwargs):
-    """NAnd gate with n-bit input."""
-
-    if n <= 4:
-        if n == 1:
-            return ROM1(~(A0), **kwargs)
-        if n == 2:
-            return ROM2(~(A0&A1), **kwargs)
-        if n == 3:
-            return ROM3(~(A0&A1&A2), **kwargs)
-        if n == 4:
-            return ROM4(~(A0&A1&A2&A3), **kwargs)
-    else:
-        return FlatCascade(n, 1, A0 | ~A1, 0, **kwargs)
+def ReduceNAnd(height=2, **kwargs):
+    return uncurry(NAnd(height, **kwargs))
 
 
+def OrN(n, **kwargs):
+    """Or gate with n-bit input."""
+    if n == 1 :return LUT2(A0, **kwargs)
+    if n == 2 :return LUT2(A0|A1, **kwargs)
+    if n == 3: return LUT3(A0|A1|A2, **kwargs)
+    if n == 4: return LUT4(A0|A1|A2|A3, **kwargs)
+    return curry(FlatCascade(n, 1, A0|A1, 0, **kwargs))
 
-def Or2(**kwargs):
-    return LUT2(A0|A1, **kwargs)
-
-def Or3(**kwargs):
-    return LUT3(A0|A1|A2, **kwargs)
-
-def Or4(**kwargs):
-    return LUT4(A0|A1|A2|A3, **kwargs)
-
-def DefineOr(height, width):
+def DefineOr(height=2, width=None):
     """
     Generate Or module
 
@@ -174,9 +152,7 @@ def DefineOr(height, width):
         @classmethod
         def definition(def_):
             def orm(y):
-                if height == 2: return Or2(loc=(0,y/8, y%8))
-                if height == 3: return Or3(loc=(0,y/8, y%8))
-                if height == 4: return Or4(loc=(0,y/8, y%8))
+                return OrN(height, loc=(0,y/8, y%8))
             ormxn = join(col(orm, width))
             wire(def_.I0, ormxn.I0)
             wire(def_.I1, ormxn.I1)
@@ -188,7 +164,10 @@ def DefineOr(height, width):
 
     return _Or
 
-def Or(height, width=2, **kwargs):
+def Or(height=2, width=None, **kwargs):
+    if width is None:
+        return OrN(height, **kwargs)
+
     if height > 4:
         half = height // 2
         or1 = Or(half, width, **kwargs)
@@ -209,32 +188,19 @@ def Or(height, width=2, **kwargs):
     else:
         return DefineOr(height, width)(**kwargs)
 
-def OrN(n, **kwargs):
-    """Or gate with n-bit input."""
-
-    if n <= 4:
-        if n == 1:
-            return ROM1(A0, **kwargs)
-        if n == 2:
-            return ROM2(A0|A1, **kwargs)
-        if n == 3:
-            return ROM3(A0|A1|A2, **kwargs)
-        if n == 4:
-            return ROM4(A0|A1|A2|A3, **kwargs)
-    else:
-        return FlatCascade(n, 1, A0|A1, 0, **kwargs)
+def ReduceOr(height=2, **kwargs):
+    return uncurry(Or(height, **kwargs))
 
 
-def Nor2(**kwargs):
-    return LUT2(~(A0|A1), **kwargs)
 
-def Nor3(**kwargs):
-    return LUT3(~(A0|A1|A2), **kwargs)
+def NOrN(n, **kwargs):
+    if n == 1: return LUT2(~(A0), **kwargs)
+    if n == 2: return LUT2(~(A0|A1), **kwargs)
+    if n == 3: return LUT3(~(A0|A1|A2), **kwargs)
+    if n == 4: return LUT4(~(A0|A1|A2|A3), **kwargs)
+    return curry(FlatCascade(n, 1, A0 & ~A1, 1, **kwargs))
 
-def Nor4(**kwargs):
-    return LUT4(~(A0|A1|A2|A3), **kwargs)
-
-def DefineNor(height, width):
+def DefineNOr(height=2, width=None):
     """
     Generate Nor module
 
@@ -242,7 +208,7 @@ def DefineNor(height, width):
     """
 
     T = Array(width, Bit)
-    class _Nor(Circuit):
+    class _NOr(Circuit):
         assert height > 1 and height <= 4
 
         name = 'Nor%dx%d' % (height, width)
@@ -258,9 +224,7 @@ def DefineNor(height, width):
         @classmethod
         def definition(def_):
             def orm(y):
-                if height == 2: return Nor2(loc=(0,y/8, y%8))
-                if height == 3: return Nor3(loc=(0,y/8, y%8))
-                if height == 4: return Nor4(loc=(0,y/8, y%8))
+                return NorN(height, loc=(0,y/8, y%8))
             normxn = join(col(norm, width))
             wire(def_.I0, normxn.I0)
             wire(def_.I1, normxn.I1)
@@ -268,44 +232,31 @@ def DefineNor(height, width):
 
     return _Nor
 
-def Nor(height, width=2, **kwargs):
-    return DefineNor(height, width)(**kwargs)
+def NOr(height=2, width=None, **kwargs):
+    if width is None:
+        return NOrN(height, **kwargs)
+    return DefineNOr(height, width)(**kwargs)
 
-def NorN(n, **kwargs):
-    """Nor gate with n-bit input."""
-
-    if n <= 4:
-        if n == 1:
-            return ROM1(~(A0), **kwargs)
-        if n == 2:
-            return ROM2(~(A0|A1), **kwargs)
-        if n == 3:
-            return ROM3(~(A0|A1|A2), **kwargs)
-        if n == 4:
-            return ROM4(~(A0|A1|A2|A3), **kwargs)
-    else:
-        return FlatCascade(n, 1, A0 & ~A1, 1, **kwargs)
+def ReduceNOr(height=2, **kwargs):
+    return uncurry(NOr(height, **kwargs))
 
 
+def XOrN(n, **kwargs):
+    if n == 1: return LUT2(A0, **kwargs)
+    if n == 2: return LUT2(A0^A1, **kwargs)
+    if n == 3: return LUT3(A0^A1^A2, **kwargs)
+    if n == 4: return LUT4(A0^A1^A2^A3, **kwargs)
+    return curry(FlatCascade(n, 1, A0^A1, 0, **kwargs))
 
-def Xor2(**kwargs):
-    return LUT2(A0^A1, **kwargs)
-
-def Xor3(**kwargs):
-    return LUT3(A0^A1^A2, **kwargs)
-
-def Xor4(**kwargs):
-    return LUT4(A0^A1^A2^A3, **kwargs)
-
-def DefineXor(height, width):
+def DefineXOr(height=2, width=1):
     """
-    Generate Or module
+    Generate Exclusive Or module
 
     I0 : Array(width, Bit), I1 : Array(n, Bit) -> O : Array(n, Bit)
     """
 
     T = Array(width, Bit)
-    class _Xor(Circuit):
+    class _XOr(Circuit):
         assert height > 1 and height <= 4
 
         name = 'Xor%dx%d' % (height, width)
@@ -321,9 +272,7 @@ def DefineXor(height, width):
         @classmethod
         def definition(def_):
             def xorm(y):
-                if height == 2: return Xor2(loc=(0,y/8, y%8))
-                if height == 3: return Xor3(loc=(0,y/8, y%8))
-                if height == 4: return Xor4(loc=(0,y/8, y%8))
+                return XorN(height, loc=(0,y/8, y%8))
             xormxn = join(col(xorm, width))
             wire(def_.I0, xormxn.I0)
             wire(def_.I1, xormxn.I1)
@@ -331,35 +280,23 @@ def DefineXor(height, width):
 
     return _Xor
 
-def Xor(height, width=2, **kwargs):
-    return DefineXor(height, width)(**kwargs)
+def XOr(height=2, width=None, **kwargs):
+    if width is None:
+        return XOrN(height, **kwargs)
+    return DefineXOr(height, width)(**kwargs)
 
-def XorN(n, **kwargs):
-    """Xor gate with n-bit input."""
-
-    if n <= 4:
-        if n == 1:
-            return ROM1(A0, **kwargs)
-        if n == 2:
-            return ROM2(A0^A1, **kwargs)
-        if n == 3:
-            return ROM3(A0^A1^A2, **kwargs)
-        if n == 4:
-            return ROM4(A0^A1^A2^A3, **kwargs)
-    return FlatCascade(n, 1, A0^A1, 0, **kwargs)
+def ReduceXOr(height=2, **kwargs):
+    return uncurry(XOr(height, **kwargs))
 
 
+def NXOrN(n, **kwargs):
+    if n == 1: return LUT2(~(A0), **kwargs)
+    if n == 2: return LUT2(~(A0^A1), **kwargs)
+    if n == 3: return LUT3(~(A0^A1^A2), **kwargs)
+    if n == 4: return LUT4(~(A0^A1^A2^A3), **kwargs)
+    return None
 
-def NXor2(**kwargs):
-    return LUT2(~(A0^A1), **kwargs)
-
-def NXor3(**kwargs):
-    return LUT3(~(A0^A1^A2), **kwargs)
-
-def NXor4(**kwargs):
-    return LUT4(~(A0^A1^A2^A3), **kwargs)
-
-def DefineNXor(height, width):
+def DefineNXOr(height=2, width=None):
     """
     Generate Or module
 
@@ -367,7 +304,7 @@ def DefineNXor(height, width):
     """
 
     T = Array(width, Bit)
-    class _NXor(Circuit):
+    class _NXOr(Circuit):
         assert height > 1 and height <= 4
 
         name = 'NXor%dx%d' % (height, width)
@@ -383,9 +320,7 @@ def DefineNXor(height, width):
         @classmethod
         def definition(def_):
             def nxorm(y):
-                if height == 2: return NXor2(loc=(0,y/8, y%8))
-                if height == 3: return NXor3(loc=(0,y/8, y%8))
-                if height == 4: return NXor4(loc=(0,y/8, y%8))
+                return NXorN(height, loc=(0,y/8, y%8))
             nxormxn = join(col(nxorm, width))
             wire(def_.I0, nxormxn.I0)
             wire(def_.I1, nxormxn.I1)
@@ -393,58 +328,16 @@ def DefineNXor(height, width):
 
     return _NXor
 
-def NXor(height, width=2, **kwargs):
-    return DefineNXor(height, width)(**kwargs)
+def NXOr(height=2, width=None, **kwargs):
+    if width is None: 
+        return NOrN(height, **kwargs)
+    return DefineNXOr(height, width)(**kwargs)
 
-def NXorN(n, **kwargs):
-    """XNor gate with n-bit input."""
-
-    if n <= 4:
-        if n == 1:
-            return ROM1(~(A0), **kwargs)
-        if n == 2:
-            return ROM2(~(A0^A1), **kwargs)
-        if n == 3:
-            return ROM3(~(A0^A1^A2), **kwargs)
-        if n == 4:
-            return ROM4(~(A0^A1^A2^A3), **kwargs)
-    return None
+def ReduceNXOr(height=2, **kwargs):
+    return uncurry(NXOr(height, **kwargs))
 
 
 
-def Buf(**kwargs):
-    """Buffer - 1-bit input."""
-    return LUT1(A0, **kwargs)
-
-def DefineBuffer(width):
-    """
-    Generate Buffer module
-
-    I0 : Array(width, Bit) -> O : Array(n, Bit)
-    """
-    T = Array(width, Bit)
-    class _Buffer(Circuit):
-
-        name = 'Buffer%d' % width
-        IO  = ['I', In(T), 'O', Out(T)]
-
-        @classmethod
-        def definition(def_):
-            def buf(y):
-                return Buf(loc=(0,y/8, y%8))
-            buffer = join(col(buf, width))
-            wire(def_.I, buffer.I0)
-            wire(buffer.O, def_.O)
-
-    return _Buffer
-
-def Buffer(n, **kwargs):
-    return DefineBuffer(n)(**kwargs)
-
-
-def Not(**kwargs):
-    """Not gate - 1-bit input."""
-    return LUT1(~A0, **kwargs)
 def DefineInvert(width):
     """
     Generate Invert module
@@ -470,6 +363,12 @@ def DefineInvert(width):
 
 def Invert(n, **kwargs):
     return DefineInvert(n)(**kwargs)
+
+
+def Not(**kwargs):
+    """Not gate - 1-bit input."""
+    return LUT1(~A0, **kwargs)
+
 
 def LeftShift(width, shift_amount):
     T = Array(width, Bit)

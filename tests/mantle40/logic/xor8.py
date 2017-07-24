@@ -10,7 +10,7 @@ icestick.D5.on()
 
 main = icestick.main()
 
-xor8 = XorN(8)
+xor8 = ReduceXOr(8)
 xor8(main.J1)
 wire(xor8.O, main.D5)
 

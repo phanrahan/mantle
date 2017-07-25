@@ -1,2 +1,3 @@
 six
 git+git://github.com/berkerpeksag/astor.git#egg=astor
+backports-functools-lru-cache; python_version < '3'

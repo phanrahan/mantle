@@ -1,7 +1,7 @@
 import sys
+from mantle.compat import lru_cache
 if sys.version_info > (3, 0):
     from functools import reduce
-    from functools import lru_cache
 import operator
 from magma import *
 from . import gates

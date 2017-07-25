@@ -1,18 +1,24 @@
 #!/usr/bin/env python
 import os, glob
+import subprocess
+from fabricate import main
 
 tests = glob.glob('*')
 
 def build():
+    print("Running `bake` in test subdirectories")
+    retcode = 0
     for test in tests:
         if os.path.isdir(test) and test[0] != '_':
-            os.system('cd %s; ./bake clean; ./bake; cd ..' % test)
+            subprocess.call('./bake clean', cwd=test, shell=True)
+            retcode |= subprocess.call('./bake', cwd=test, shell=True)
+    return retcode
 
 def gold():
+    print("Running `bake gold` in test subdirectories")
     for test in tests:
         if os.path.isdir(test) and test[0] != '_':
-            os.system('cd %s; ./bake gold; cd ..' % test)
+            subprocess.call('./bake gold', cwd=test, shell=True)
 
 
-build()
-gold()
+main()

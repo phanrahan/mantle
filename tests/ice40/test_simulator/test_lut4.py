@@ -17,7 +17,6 @@ def test_lut4():
     icestick.J3[0].rename('D0').output().on()
 
     main = icestick.main()
-    print(main.interface)
 
     lut = SB_LUT4(LUT_INIT="16'h8000")
     wire(main.I0, lut.I0)

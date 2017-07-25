@@ -1,3 +1,5 @@
+import os
+os.environ['MANTLE'] = 'lattice'
 from magma import wire
 from magma.simulator_interactive_frontend import simulate
 from magma.python_simulator import PythonSimulator
@@ -5,7 +7,7 @@ from magma.scope import Scope
 from loam.boards.icestick import IceStick
 from mantle.lattice.ice40.PLB import SB_LUT4
 
-def test_counter():
+def test_lut4():
     icestick = IceStick()
     icestick.Clock.on()
     icestick.J1[0].rename('I0').input().on()
@@ -15,6 +17,7 @@ def test_counter():
     icestick.J3[0].rename('D0').output().on()
 
     main = icestick.main()
+    print(main.interface)
 
     lut = SB_LUT4(LUT_INIT="16'h8000")
     wire(main.I0, lut.I0)

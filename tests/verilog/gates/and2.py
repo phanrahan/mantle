@@ -8,6 +8,6 @@ and2 = And(2)
 
 wire( and2(main.I0, main.I1), main.O)
 
-#compile(sys.argv[1], main)
+compile(sys.argv[1], main)
 
 

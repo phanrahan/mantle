@@ -21,5 +21,5 @@ install:
 script: 
     - if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then py.test --cov=mantle tests;else pytest --cov=mantle tests; fi
     - cd tests/verilog
-    - bash doit  # Run bake verilog tests
+    - . doit  # Run bake verilog tests
     - cd ${TRAVIS_BUILD_DIR}

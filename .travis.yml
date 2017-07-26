@@ -7,6 +7,7 @@ python:
 
 before_install:
     - sudo apt-get -qq update
+    - pip install --upgrade pip setuptools
 
 install: 
     - pip install -r requirements.txt
@@ -20,6 +21,7 @@ install:
 
 script: 
     - if [[ $TRAVIS_PYTHON_VERSION == 3.5 ]]; then py.test --cov=mantle tests;else pytest --cov=mantle tests; fi
+    # Run bake verilog tests
     - cd tests/verilog
-    - . doit  # Run bake verilog tests
+    - . doit
     - cd ${TRAVIS_BUILD_DIR}

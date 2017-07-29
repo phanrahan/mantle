@@ -1,4 +1,4 @@
-NAME ?= add2
+NAME ?= lhca
 
 PCF = $(NAME).pcf
 

@@ -1,4 +1,4 @@
-NAME ?= add2
+NAME ?= reg4
 
 PCF = $(NAME).pcf
 

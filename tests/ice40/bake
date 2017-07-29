@@ -23,4 +23,4 @@ def gold():
 
 clean()
 build()
-gold()
+#gold()

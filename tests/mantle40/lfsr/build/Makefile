@@ -1,4 +1,4 @@
-NAME ?= add2
+NAME ?= lfsr
 
 PCF = $(NAME).pcf
 

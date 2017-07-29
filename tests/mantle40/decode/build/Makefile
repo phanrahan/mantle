@@ -1,4 +1,4 @@
-NAME ?= add2
+NAME ?= decode4
 
 PCF = $(NAME).pcf
 

@@ -1,4 +1,4 @@
-NAME ?= add2
+NAME ?= rom8
 
 PCF = $(NAME).pcf
 

@@ -1,7 +1,4 @@
-# NAME = test_shift
-# NAME = test_shift_right
-# NAME = test_shift_right_by_two
-NAME = test_shift_left_by_two
+NAME ?= and2
 
 PCF = $(NAME).pcf
 

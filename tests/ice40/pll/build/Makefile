@@ -1,4 +1,4 @@
-NAME ?= add2
+NAME ?= pll16
 
 PCF = $(NAME).pcf
 

@@ -1,4 +1,4 @@
-NAME ?= add2
+NAME ?= ring
 
 PCF = $(NAME).pcf
 

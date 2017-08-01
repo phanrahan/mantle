@@ -19,14 +19,21 @@ def _RegisterName(name, n, init, ce, r, s):
     return name
 
 
-def DefineRegister(n, init=0, ce=False, r=False, s=False):
+def DefineRegister(n, init=0, ce=False, r=False, s=False, _type=Bits):
     """
     Generate an n-bit register
 
-    I : Array(n, Bit) -> O : Array(n, Bit)
-    """
+    Params
+    ------
+        `_type` - Bits, UInt, or SInt
 
-    T = Array(n, Bit)
+    Interface
+    ---------
+        I : _type(n) -> O : _type(n)
+    """
+    if _type not in {Bits, UInt, SInt}:
+        raise ValueError("Argument _type must be Bits, UInt, or SInt")
+    T = _type(n)
     class _Register(Circuit):
         name = _RegisterName('Register', n, init, ce, r, s)
         IO  = ['I', In(T), 'O', Out(T)] + ClockInterface(ce,r,s)

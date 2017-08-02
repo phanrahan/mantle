@@ -164,6 +164,8 @@ def DefineMux(height, width):
             wire( mux.O, Mux.O )
     return _Mux
 
-def Mux(height, width, **kwargs):
+def Mux(height=2, width=1, **kwargs):
+    if width == 1:
+       return MuxN(height, **kwargs)
     return DefineMux(height, width)(**kwargs)
 

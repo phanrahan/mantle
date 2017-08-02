@@ -19,4 +19,5 @@ def test_mux():
     assert str(mux.interface) == 'I : Array(4,In(Bit)), S : Array(2,In(Bit)) -> O : Out(Bit)'
 
     mux = Mux(2,1)
-    assert str(mux.interface) == 'I0 : Array(1,In(Bit)), I1 : Array(1,In(Bit)), S : In(Bit) -> O : Array(1,Out(Bit))'
+    assert str(mux.interface) == 'I : Array(2,In(Bit)), S : In(Bit) -> O : Out(Bit)'
+

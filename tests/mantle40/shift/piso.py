@@ -15,7 +15,7 @@ LOAD = main.J1[5]
 
 clock = Counter(22)
 
-piso = PISO(4, init=1, ce=True)
+piso = PISO(4, init=1, has_ce=True)
 
 piso(SI, PI, LOAD, CE=clock.COUT)
 wire( piso.O, main.D0 )

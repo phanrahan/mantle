@@ -12,7 +12,7 @@ main = icestick.main()
 
 clock = Counter(22)
 
-lfsr = LFSR(8, ce=True)
+lfsr = LFSR(8, has_ce=True)
 
 wire( lfsr( CE=clock.COUT ), main.J3 )
 

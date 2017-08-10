@@ -10,9 +10,9 @@ __all__  += ['FF', 'FFs']
 #
 # TODO: add async=True, edge=True (also negedge)
 #
-def DFF(init=0, ce=False, r=False, s=False, edge=True, sync=True, **kwargs):
+def DFF(init=0, has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **kwargs):
 
-    assert not (r and s)
+    assert not (has_reset and has_set)
 
     # By default
     #  not connecting a wire to D defaults to 0
@@ -25,33 +25,33 @@ def DFF(init=0, ce=False, r=False, s=False, edge=True, sync=True, **kwargs):
         # rising edge
         if sync:
             # synchronous reset
-            if ce:
-                if   r:
+            if has_ce:
+                if   has_reset:
                     ff = SB_DFFESR(**kwargs)
-                elif s:
+                elif has_set:
                     ff = SB_DFFESS(**kwargs)
                 else:
                     ff = SB_DFFE(**kwargs)
             else:
-                if   r:
+                if   has_reset:
                     ff = SB_DFFSR(**kwargs)
-                elif s:
+                elif has_set:
                     ff = SB_DFFSS(**kwargs)
                 else:
                     ff = SB_DFF(**kwargs)
         else:
             # asynchronous reset
-            if ce:
-                if   r:
+            if has_ce:
+                if   has_reset:
                     ff = SB_DFFER(**kwargs)
-                elif s:
+                elif has_s:
                     ff = SB_DFFES(**kwargs)
                 else:
                     ff = SB_DFFE(**kwargs)
             else:
-                if   r:
+                if   has_reset:
                     ff = SB_DFFR(**kwargs)
-                elif s:
+                elif has_set:
                     ff = SB_DFFS(**kwargs)
                 else:
                     ff = SB_DFF(**kwargs)
@@ -59,33 +59,33 @@ def DFF(init=0, ce=False, r=False, s=False, edge=True, sync=True, **kwargs):
         # falling edge
         if sync:
             # synchronous reset
-            if ce:
-                if   r:
+            if has_ce:
+                if   has_reset:
                     ff = SB_DFFNESR(**kwargs)
-                elif s:
+                elif has_set:
                     ff = SB_DFFNESS(**kwargs)
                 else:
                     ff = SB_DFFNE(**kwargs)
             else:
-                if   r:
+                if   has_reset:
                     ff = SB_DFFNSR(**kwargs)
-                elif s:
+                elif has_set:
                     ff = SB_DFFNSS(**kwargs)
                 else:
                     ff = SB_DFFN(**kwargs)
         else:
             # asynchronous reset
-            if ce:
-                if   r:
+            if has_ce:
+                if   has_reset:
                     ff = SB_DFFNER(**kwargs)
-                elif s:
+                elif has_set:
                     ff = SB_DFFNES(**kwargs)
                 else:
                     ff = SB_DFFNE(**kwargs)
             else:
-                if   r:
+                if   has_reset:
                     ff = SB_DFFNR(**kwargs)
-                elif s:
+                elif has_set:
                     ff = SB_DFFNS(**kwargs)
                 else:
                     ff = SB_DFFN(**kwargs)
@@ -104,11 +104,11 @@ def DFF(init=0, ce=False, r=False, s=False, edge=True, sync=True, **kwargs):
         O = luto.O
 
     args = ['I', I, 'CLK', ff.C]
-    if ce:
+    if has_ce:
         args += ['CE', ff.E]
-    if r:
+    if has_reset:
         args += ['RESET', ff.R]
-    if s:
+    if has_set:
         args += ['SET', ff.S]
 
     args += ['O', O]
@@ -118,18 +118,18 @@ def DFF(init=0, ce=False, r=False, s=False, edge=True, sync=True, **kwargs):
 FF = DFF
 
 
-def SRFF(init=0, ce=False, edge=True, sync=True, **kwargs):
+def SRFF(init=0, has_ce=False, edge=True, sync=True, **kwargs):
 
     """A S-R flip-flop."""
 
-    dff = FF( init=init, ce=ce, edge=edge, sync=sync, **kwargs)
+    dff = FF( init=init, has_ce=has_ce, edge=edge, sync=sync, **kwargs)
     lut = LUT3( (~I1&~I2&I0)|(I1&~I2), **kwargs )
     dff(lut)
 
     wire(dff.O, lut.I0)
 
     args = []
-    if ce:
+    if has_ce:
         args += ['input CE', dff.CE]
     args += ["S", lut.I1, "R", lut.I2, 'CLK', dff.CLK, "O", dff.O]
 
@@ -137,55 +137,55 @@ def SRFF(init=0, ce=False, edge=True, sync=True, **kwargs):
 
 
 
-def RSFF(init=0, ce=False, edge=True, sync=True, **kwargs):
+def RSFF(init=0, has_ce=False, edge=True, sync=True, **kwargs):
 
     """A R-S flip-flop."""
 
-    dff = FF( init=init, ce=ce, edge=edge, sync=sync, **kwargs)
+    dff = FF( init=init, has_ce=has_ce, edge=edge, sync=sync, **kwargs)
     lut = LUT3( (~I1&~I2&I0)|(I1&~I2), **kwargs )
     dff(lut)
 
     wire(dff.O, lut.I0)
 
     args = []
-    if ce:
+    if has_ce:
         args += ['input CE', dff.CE]
     args += ["R", lut.I2, "S", lut.I1, 'CLK', dff.CLK, "O", dff.O]
 
     return AnonymousCircuit(args)
 
 
-def JKFF(ce=False, s=False, r=False, edge=True, sync=True, **kwargs):
+def JKFF(has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **kwargs):
 
     """A J-K flip-flop."""
 
-    dff = FF(ce=ce, s=s, r=r, edge=edge, sync=sync, **kwargs)
+    dff = FF(has_ce=has_ce, has_reset=has_reset, has_set=has_set, edge=edge, sync=sync, **kwargs)
     lut = LUT3( (~I0&I1)|(I0&~I2), **kwargs )
     dff(lut)
 
     wire(dff.O, lut.I0)
 
     args = ["J", lut.I1, "K", lut.I2, "O", dff.O, 'CLK', dff.CLK]
-    if ce: args += ['CE', dff.CE]
-    if r:  args += ['RESET', dff.R]
-    if s:  args += ['SET', dff.S]
+    if has_ce:     args += ['CE', dff.CE]
+    if has_reset:  args += ['RESET', dff.R]
+    if has_set:    args += ['SET', dff.S]
     return AnonymousCircuit(*args)
 
 
-def TFF(ce=False, s=False, r=False, edge=True, sync=True, **kwargs):
+def TFF(has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **kwargs):
 
     """A T flip-flop."""
 
-    tff = FF(ce=ce, s=s, r=r, edge=edge, sync=sync, **kwargs)
+    tff = FF(has_ce=has_ce, has_reset=has_reset, has_set=has_set, edge=edge, sync=sync, **kwargs)
     lut = LUT2( I0^I1, **kwargs )
     tff(lut)
 
     wire(tff.O, lut.I0)
 
     args = ["I", lut.I1, "O", tff.O, "CLK", tff.CLK]
-    if ce: args += ['CE', dff.CE]
-    if r:  args += ['RESET', dff.R]
-    if s:  args += ['SET', dff.S]
+    if has_ce:    args += ['CE', dff.CE]
+    if has_reset: args += ['RESET', dff.R]
+    if has_set:   args += ['SET', dff.S]
     return AnonymousCircuit(*args)
 
 #
@@ -193,13 +193,13 @@ def TFF(ce=False, s=False, r=False, edge=True, sync=True, **kwargs):
 #
 # Each FF may have a ce, r, and s signal.
 #   
-def FFs(n, init=0, ce=False, r=False, s=False, edge=True, sync=True):
+def FFs(n, init=0, has_ce=False, has_reset=False, has_set=False, edge=True, sync=True):
     def f(y):
         if isinstance(init, Sequence):
             data = init[y]
         else:
             data = (init >> y) & 1
-        return FF(init=data, ce=ce, r=r, s=s, edge=edge, sync=sync, loc=(0, y/8, y%8))
+        return FF(init=data, has_ce=has_ce, has_reset=has_reset, has_set=has_set, edge=edge, sync=sync, loc=(0, y/8, y%8))
     
     return col(f, n)
 

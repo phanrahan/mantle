@@ -10,7 +10,7 @@ icestick.D5.on()
 
 main = icestick.main()
 
-dff = DFF(ce=True)
+dff = DFF(has_ce=True)
 dff(main.I, CE=main.CE)
 wire(dff, main.D5)
 

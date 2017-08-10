@@ -11,7 +11,7 @@ main = icestick.main()
 
 clock = Counter(22)
 
-siso = SISO(4, init=1, ce=True)
+siso = SISO(4, init=1, has_ce=True)
 
 siso(main.I0, CE=clock.COUT)
 wire( siso.O, main.D0 )

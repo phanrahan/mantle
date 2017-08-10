@@ -12,7 +12,7 @@ main = icestick.main()
 
 clock = Counter(22)
 
-lhca = LHCA(8, ce=True)
+lhca = LHCA(8, has_ce=True)
 
 wire( lhca( CE=clock.COUT ), main.J3 )
 

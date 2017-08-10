@@ -18,7 +18,7 @@ main = icestick.main()
 
 clock = Counter(22)
 
-counter = Counter(8, ce=True, r=True)
+counter = Counter(8, has_ce=True, has_reset=True)
 counter(RESET=main.R, CE=clock.COUT)
 wire(counter, main.D)
 

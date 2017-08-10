@@ -9,11 +9,16 @@ else:
 mantle = os.getenv('MANTLE', 'verilog')
 if mantle:
     mantle = mantle.strip()
-    if   mantle == 'xilinx':
-        from mantle.xilinx import *
-    elif mantle == 'altera':
-        from mantle.altera import *
-    elif mantle == 'lattice':
-        from mantle.lattice import *
-    elif mantle == 'verilog':
+    if mantle == 'verilog':
         from mantle.verilog import *
+    else:
+        if   mantle == 'xilinx':
+            from mantle.xilinx import *
+        elif mantle == 'altera':
+            from mantle.altera import *
+        elif mantle == 'lattice':
+            from mantle.lattice import *
+
+        from mantle.common import *
+
+

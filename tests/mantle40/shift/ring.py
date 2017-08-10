@@ -11,7 +11,7 @@ main = icestick.main()
 
 clock = Counter(22)
 
-ring = Ring(8, ce=True)
+ring = Ring(8, has_ce=True)
 
 wire( ring( CE=clock.COUT ), main.J3 )
 

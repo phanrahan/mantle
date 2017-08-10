@@ -8,33 +8,27 @@ from .IO import *
 
 from .LUT import *
 from .ROM import *
-from .buffer import *
-
 from .MUX import *
-
+from .BUF import *
 from .FF import *
 
-from .adder import *
-
-from .cascade import *
+#from .cascade import *
 from .flatcascade import *
 
 from .logic import *
-from .decode import *
-from .compare import *
-from .encoder import *
-from .decoder import *
-from .arbiter import *
-
-from .adder import FullAdder, HalfAdder
+from .adder import *
 from .arith import *
+from .compare import *
 
-from .register import *
+#from .decode import *
+#from .encoder import *
+#from .decoder import *
+#from .arbiter import *
 
-from .shift import *
-from .ring import *
+#from .register import *
+#from .shift import *
+#from .ring import *
 
-from .counter import *
-
+#from .counter import *
 
 print('import mantle lattice mantle40')

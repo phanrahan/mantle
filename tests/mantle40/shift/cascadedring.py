@@ -11,7 +11,7 @@ main = icestick.main()
 
 ce = CascadedRing( [10, 10, 10, 10, 10, 10, 8] )
 
-ring = Ring(8, ce=True)
+ring = Ring(8, has_ce=True)
 
 wire( ring( CE=ce ), main.J3 )
 

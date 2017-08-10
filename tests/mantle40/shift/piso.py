@@ -17,7 +17,7 @@ clock = Counter(22)
 
 piso = PISO(4, init=1, has_ce=True)
 
-piso(SI, PI, LOAD, CE=clock.COUT)
+piso(SI, PI, LOAD, ce=clock.COUT)
 wire( piso.O, main.D0 )
 
 compile(sys.argv[1], main)

@@ -13,7 +13,7 @@ clock = Counter(22)
 
 siso = SISO(4, init=1, has_ce=True)
 
-siso(main.I0, CE=clock.COUT)
+siso(main.I0, ce=clock.COUT)
 wire( siso.O, main.D0 )
 
 compile(sys.argv[1], main)

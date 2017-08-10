@@ -11,7 +11,7 @@ icestick.D5.on()
 main = icestick.main()
 
 dff = DFF(has_ce=True)
-dff(main.I, CE=main.CE)
+dff(main.I, ce=main.CE)
 wire(dff, main.D5)
 
 compile(sys.argv[1], main)

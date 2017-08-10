@@ -13,7 +13,7 @@ clock = Counter(22)
 
 johnson = Johnson(4, has_ce=True)
 
-johnson(CE=clock.COUT)
+johnson(ce=clock.COUT)
 
 wire(johnson.O, main.J3)
 

@@ -14,7 +14,7 @@ clock = Counter(22)
 
 sipo = SIPO(4, init=1, has_ce=True)
 
-sipo(main.I0, CE=clock.COUT)
+sipo(main.I0, ce=clock.COUT)
 wire( sipo.O, main.J3 )
 
 compile(sys.argv[1], main)

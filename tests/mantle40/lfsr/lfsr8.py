@@ -14,7 +14,7 @@ clock = Counter(22)
 
 lfsr = LFSR(8, has_ce=True)
 
-wire( lfsr( CE=clock.COUT ), main.J3 )
+wire( lfsr( ce=clock.COUT ), main.J3 )
 
 compile(sys.argv[1], main)
 

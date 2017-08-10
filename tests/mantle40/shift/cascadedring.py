@@ -13,6 +13,6 @@ ce = CascadedRing( [10, 10, 10, 10, 10, 10, 8] )
 
 ring = Ring(8, has_ce=True)
 
-wire( ring( CE=ce ), main.J3 )
+wire( ring( ce=ce ), main.J3 )
 
 compile(sys.argv[1], main)

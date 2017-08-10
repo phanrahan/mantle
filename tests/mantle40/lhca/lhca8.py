@@ -14,7 +14,7 @@ clock = Counter(22)
 
 lhca = LHCA(8, has_ce=True)
 
-wire( lhca( CE=clock.COUT ), main.J3 )
+wire( lhca( ce=clock.COUT ), main.J3 )
 
 compile(sys.argv[1], main)
 

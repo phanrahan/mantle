@@ -4,7 +4,7 @@ from mantle import Mux2, Mux4, Mux8, Mux16, MuxN, Mux
 
 def test_mux():
     mux = Mux2()
-    assert str(mux.interface) == 'I : Array(2,In(Bit)), S : In(Bit) -> O : Out(Bit)'
+    assert str(mux.interface) == 'I : Bits(2), S : In(Bit) -> O : Out(Bit)'
 
     mux = Mux4()
     assert str(mux.interface) == 'I : Array(4,In(Bit)), S : Array(2,In(Bit)) -> O : Out(Bit)'

@@ -12,23 +12,14 @@ from .MUX import *
 from .BUF import *
 from .FF import *
 
-#from .cascade import *
 from .flatcascade import *
 
 from .logic import *
+
+from .halfadder import *
+from .fulladder import *
 from .adder import *
 from .arith import *
 from .compare import *
-
-#from .decode import *
-#from .encoder import *
-#from .decoder import *
-#from .arbiter import *
-
-#from .register import *
-#from .shift import *
-#from .ring import *
-
-#from .counter import *
 
 print('import mantle lattice mantle40')

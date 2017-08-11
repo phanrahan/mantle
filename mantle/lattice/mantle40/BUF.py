@@ -1,4 +1,4 @@
-from magma import Circuit, Bit, Array, In, Out, wire, join
+from magma import Circuit, Bits, In, Out, wire, join
 from ..ice40 import A0
 from .LUT import LUT1
 
@@ -8,9 +8,9 @@ def DefineBuf(width=None):
     """
     Generate Buf module
 
-    I0 : Array(width, Bit) -> O : Array(n, Bit)
+    I0 : Bits(width) -> O : Bits(n)
     """
-    T = Array(width, Bit)
+    T = Bits(width)
     class _Buf(Circuit):
 
         name = 'Buf%d' % width

@@ -38,7 +38,7 @@ def Negate(n, **kwargs):
     
 
 def ShiftRightArithmetic(width, shift_amount, **kwargs):
-    T = Array(width, Bit)
+    T = Bits(width)
     class _ShiftRightArithmetic(Circuit):
         name = 'ShiftRightArithmetic_w{}_a{}'.format(width, shift_amount)
 

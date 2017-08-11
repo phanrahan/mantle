@@ -17,7 +17,7 @@ def DefineFlatCascade(n, k, expr, cin):
 
     class _FlatCascade(Circuit):
         name = _Name(n, k+1, expr)
-        IO = ["I", In(Array(n, Bit)), "O", Out(Bit)]
+        IO = ["I", In(Bits(n)), "O", Out(Bit)]
         @classmethod
         def definition(cascade):
             def f(y):

@@ -1,41 +1,7 @@
 from magma import *
-from ..ice40.PLB import SB_CARRY, I0, I1, I2, I3
-from .LUT import LUT4
+from .fulladder import FullAdder
 
-__all__  = ["HalfAdder", "FullAdder"]
-__all__ += ['Adders', 'DefineAdders']
-
-#
-# A : Bit, B : Bit -> S : Bit, COUT : BIT
-#
-def HalfAdder(**kwargs):
-    A = In(Bit)()
-    B = In(Bit)()
-
-    sum = LUT4(I1^I2^I3, **kwargs)
-    carry = SB_CARRY() # (I0&I1)|(I1&I2)|(I2&I0)
-
-    sum(0,A,B,0)
-    carry(A,B,0)
-
-    return AnonymousCircuit("I0", A, "I1", B, "O", sum.O, "COUT", carry.CO)
-
-#
-# A : Bit, B : Bit, CIN : Bit -> S : Bit, COUT : Bit
-#
-def FullAdder(**kwargs):
-    A = In(Bit)()
-    B = In(Bit)()
-    CIN = In(Bit)()
-
-    sum = LUT4(I1^I2^I3, **kwargs)
-    carry = SB_CARRY() # (I0&I1)|(I1&I2)|(I2&I0)
-
-    sum(0,A,B,CIN)
-    carry(A,B,CIN)
-
-    return AnonymousCircuit("I0", A, "I1", B, "CIN", CIN, 
-                            "O", sum.O, "COUT", carry.CO)
+__all__ = ['Adders', 'DefineAdders']
 
 AdderCache = {}
 
@@ -49,7 +15,7 @@ def _AdderName(n, cin, cout):
 #
 # create an n-bit Adder from n FullAdders
 #
-# I0:Array(n,Bit), I1:Array(n,Bit), CIN:Bit -> O:Array(n.Bit), COUT:Bit
+# I0:Bits(n), I1:Bits(n), CIN:Bit -> O:Bits(n), COUT:Bit
 #
 # if cin, CIN is added to the circuit
 # if cout: COUT is added to the circuit
@@ -59,12 +25,12 @@ def DefineAdders(n, cin, cout, forkargs=[]):
     if name in AdderCache:
        return AdderCache[name]
 
-    ArrayN = Array(n,Bit)
-    args = ["I0", In(ArrayN), "I1", In(ArrayN)]
+    T = Bits(n)
+    args = ["I0", In(T), "I1", In(T)]
     if cin:
         args += ['CIN', In(Bit)]
 
-    args += ["O", Out(ArrayN)]
+    args += ["O", Out(T)]
     if cout:
         args += ['COUT', Out(Bit)]
 

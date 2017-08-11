@@ -16,11 +16,11 @@ def DefineCascade(n, k, expr, cin, forkargs={}):
 
     assert k <= 3
 
-    ArrayN = Array(n,Bit)
+    T = Bits(n)
     args = []
-    if k >= 1: args += ["I0", In(Bit) if 'I0' in forkargs else In(ArrayN)]
-    if k >= 2: args += ["I1", In(Bit) if 'I1' in forkargs else In(ArrayN)]
-    if k >= 3: args += ["I2", In(Bit) if 'I2' in forkargs else In(ArrayN)]
+    if k >= 1: args += ["I0", In(Bit) if 'I0' in forkargs else In(T)]
+    if k >= 2: args += ["I1", In(Bit) if 'I1' in forkargs else In(T)]
+    if k >= 3: args += ["I2", In(Bit) if 'I2' in forkargs else In(T)]
     args += ["O", Out(Bit)]
 
     class _Cascade(Circuit):

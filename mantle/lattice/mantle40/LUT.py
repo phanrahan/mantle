@@ -3,6 +3,15 @@ from magma import *
 from magma.compatibility import IntegerTypes
 from ..ice40.PLB import SB_LUT4, A0, A1, A2
 
+def Mux2(**kwargs):
+    """Construct a Mux with 2 1-bit inputs."""
+    MUX2DATA = (~A2&A0)|(A2&A1)
+    lut = LUT3(MUX2DATA, **kwargs)
+    return AnonymousCircuit("I0", lut.I0,
+                            "I1", lut.I1,
+                            "S", lut.I2,
+                            "O", lut.O)
+
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
 __all__ += ['LUTN', 'LUT']

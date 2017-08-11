@@ -35,10 +35,10 @@ def DefineAnd(height=2, width=None):
     """
     Generate And module
 
-    I0 : Array(width, Bit), I1 : Array(n, Bit) -> O : Array(n, Bit)
+    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
     """
 
-    T = Array(width, Bit)
+    T = Bits(width)
     class _And(Circuit):
         assert height > 1 and height <= 4
 
@@ -83,10 +83,10 @@ def DefineNAnd(height=2, width=None):
     """
     Generate And module
 
-    I0 : Array(width, Bit), I1 : Array(n, Bit) -> O : Array(n, Bit)
+    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
     """
 
-    T = Array(width, Bit)
+    T = Bits(width)
     class _NAnd(Circuit):
         assert height > 1 and height <= 4
 
@@ -132,10 +132,10 @@ def DefineOr(height=2, width=None):
     """
     Generate Or module
 
-    I0 : Array(width, Bit), I1 : Array(n, Bit) -> O : Array(n, Bit)
+    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
     """
 
-    T = Array(width, Bit)
+    T = Bits(width)
     class _Or(Circuit):
         assert height > 1 and height <= 4
 
@@ -204,10 +204,10 @@ def DefineNOr(height=2, width=None):
     """
     Generate Nor module
 
-    I0 : Array(width, Bit), I1 : Array(n, Bit) -> O : Array(n, Bit)
+    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
     """
 
-    T = Array(width, Bit)
+    T = Bits(width)
     class _NOr(Circuit):
         assert height > 1 and height <= 4
 
@@ -252,10 +252,10 @@ def DefineXOr(height=2, width=1):
     """
     Generate Exclusive Or module
 
-    I0 : Array(width, Bit), I1 : Array(n, Bit) -> O : Array(n, Bit)
+    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
     """
 
-    T = Array(width, Bit)
+    T = Bits(width)
     class _XOr(Circuit):
         assert height > 1 and height <= 4
 
@@ -300,10 +300,10 @@ def DefineNXOr(height=2, width=None):
     """
     Generate Or module
 
-    I0 : Array(width, Bit), I1 : Array(n, Bit) -> O : Array(n, Bit)
+    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
     """
 
-    T = Array(width, Bit)
+    T = Bits(width)
     class _NXOr(Circuit):
         assert height > 1 and height <= 4
 
@@ -342,10 +342,10 @@ def DefineInvert(width):
     """
     Generate Invert module
 
-    I0 : Array(width, Bit) -> O : Array(n, Bit)
+    I0 : Bits(width) -> O : Bits(width)
     """
 
-    T = Array(width, Bit)
+    T = Bits(width)
     class _Invert(Circuit):
         name = 'Invert%d' % width
 
@@ -371,7 +371,7 @@ def Not(**kwargs):
 
 
 def LeftShift(width, shift_amount):
-    T = Array(width, Bit)
+    T = Bits(width)
     class _LeftShift(Circuit):
         name = 'LeftShift_w{}_a{}'.format(width, shift_amount)
 
@@ -386,7 +386,7 @@ def LeftShift(width, shift_amount):
     return _LeftShift
 
 def RightShift(width, shift_amount):
-    T = Array(width, Bit)
+    T = Bits(width)
     class _RightShift(Circuit):
         name = 'RightShift_w{}_a{}'.format(width, shift_amount)
 

@@ -1,7 +1,0 @@
-export MANTLE=xilinx
-
-export MANTLE_TARGET=spartan3
-./bake3
-
-export MANTLE_TARGET=spartan6
-./bake3

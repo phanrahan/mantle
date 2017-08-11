@@ -8,7 +8,7 @@ install_reqs = parse_requirements("requirements.txt", session=False)
 reqs = [str(ir.req) for ir in install_reqs]
 
 setup(
-    name='mantle',
+    name='mantleextra',
     version='0.1-alpha',
     description='Library of hardware primitives forprogramming FPGAs',
     packages=["mantle"],

@@ -1,4 +1,0 @@
-export MANTLE=silego
-export MANTLE_TARGET=greenpak4
-./bake clean
-./bake

@@ -16,9 +16,9 @@ LOAD = main.J1[5]
 
 clock = Counter(22)
 
-pipo = PIPO(4, init=1, ce=True)
+pipo = PIPO(4, init=1, has_ce=True)
 
-pipo(SI, PI, LOAD, CE=clock.COUT)
+pipo(SI, PI, LOAD, ce=clock.COUT)
 wire( pipo.O, main.J3 )
 
 compile(sys.argv[1], main)

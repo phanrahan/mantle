@@ -148,15 +148,3 @@ Logic6 = LUT6
 Logic7 = LUT7
 Logic8 = LUT8
 
-#
-# C ? B : A
-#
-MUX2DATA = (~A2&A0)|(A2&A1)
-    
-def Mux2(**kwargs):
-    """Construct a Mux with 2 1-bit inputs."""
-    lut = LUT3(MUX2DATA, **kwargs)
-    return AnonymousCircuit("I0", lut.I0,
-                            "I1", lut.I1,
-                            "S", lut.I2,
-                            "O", lut.O)

@@ -1,5 +1,5 @@
 from magma import *
-from .logic import OrN
+from mantle import Or
 
 __all__ = ['DefineEncoder', 'Encoder']
 
@@ -14,11 +14,11 @@ def DefineEncoder(n):
     logn = log2(n)
     class _Encoder(Circuit):
         name = 'Encoder'+str(n)
-        IO = ['I', In(Array(n, Bit)), 'O', Out(Array(logn, Bit))]
+        IO = ['I', In(Bits(n)), 'O', Out(Bits(logn))]
         @classmethod
         def definition(Enc):
             def f(y):
-                or_ = OrN(n/2)
+                or_ = uncurry(Or(n/2))
                 os = []
                 for i in range(n):
                     if i & (1 << y): os.append(Enc.I[i])

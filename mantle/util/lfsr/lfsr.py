@@ -7,7 +7,7 @@ __all__ = ['LFSR']
 _lfsrtaps = {}
 
 
-def LFSR(n, init=1, ce=False):
+def LFSR(n, init=1, has_ce=False):
     def readtaps():
         global _lfsrtaps
 
@@ -31,14 +31,14 @@ def LFSR(n, init=1, ce=False):
     tap = _lfsrtaps[n]
     nt = len(tap)
 
-    shift = SIPO(n, init=init, ce=ce)
+    shift = SIPO(n, init=init, has_ce=has_ce)
 
     t = []
     for i in range(nt):
         t.append(shift.O[tap[i] - 1])
     t = array(*t)
 
-    s = ReduceXOr(nt)(t)
+    s = uncurry(XOr(nt))(t)
     shift(s)
 
     args = ["output O", shift.O] + shift.interface.clockargs()

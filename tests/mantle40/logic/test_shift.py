@@ -19,7 +19,7 @@ def test_circular_shift():
 
     counter = Counter(23, cout=True)
 
-    reg5 = Register(5, ce=True)
+    reg5 = Register(5, has_ce=True)
     wire(reg5.CE, counter.COUT)
     shift5 = LeftShift(5, 1)()
 
@@ -50,7 +50,7 @@ def test_circular_shift_right():
 
     counter = Counter(23, cout=True)
 
-    reg5 = Register(5, ce=True)
+    reg5 = Register(5, has_ce=True)
     wire(reg5.CE, counter.COUT)
     shift5 = RightShift(5, 1)()
 
@@ -82,7 +82,7 @@ def test_circular_shift_right_by_two():
 
     counter = Counter(23, cout=True)
 
-    reg5 = Register(5, ce=True)
+    reg5 = Register(5, has_ce=True)
     wire(reg5.CE, counter.COUT)
     shift5 = RightShift(5, 2)()
 
@@ -114,7 +114,7 @@ def test_circular_shift_left_by_two():
 
     counter = Counter(23, cout=True)
 
-    reg5 = Register(5, ce=True)
+    reg5 = Register(5, has_ce=True)
     wire(reg5.CE, counter.COUT)
     shift5 = LeftShift(5, 2)()
 

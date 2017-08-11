@@ -1,7 +1,7 @@
 import sys
 from magma import wire, compile
 from loam.boards.icestick import IceStick, Counter
-from mantle.util.lhca import LHCA
+from mantle.util.lfsr import LFSR
 
 icestick = IceStick()
 icestick.Clock.on()
@@ -12,9 +12,9 @@ main = icestick.main()
 
 clock = Counter(22)
 
-lhca = LHCA(8, ce=True)
+lfsr = LFSR(8, has_ce=True)
 
-wire( lhca( CE=clock.COUT ), main.J3 )
+wire( lfsr( ce=clock.COUT ), main.J3 )
 
 compile(sys.argv[1], main)
 

@@ -7,7 +7,7 @@ __all__ = ['LHCA']
 _lhcataps = {}
 
 
-def LHCA(n, init=1, ce=False):
+def LHCA(n, init=1, has_ce=False):
 
     def readtaps():
         global _lhcataps
@@ -32,7 +32,7 @@ def LHCA(n, init=1, ce=False):
 
     taps = _lhcataps[n]
 
-    reg = Register(n, init=init, ce=ce)
+    reg = Register(n, init=init, has_ce=has_ce)
 
     def lut(y):
         tap = (y + 1) in taps

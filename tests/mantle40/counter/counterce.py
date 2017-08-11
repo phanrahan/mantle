@@ -17,8 +17,8 @@ main = icestick.main()
 
 clock = Counter(22)
 
-counter = Counter(8, ce=True)
-counter(CE=clock.COUT)
+counter = Counter(8, has_ce=True)
+counter(ce=clock.COUT)
 wire(counter, main.D)
 
 compile(sys.argv[1], main)

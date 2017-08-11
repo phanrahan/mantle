@@ -1,7 +1,5 @@
 from magma import *
-from ..ice40.PLB import A0, A1
-from .LUT import LUT2
-from .arith import Add
+from mantle import LUT2, Add, A0, A1
 
 __all__ = ['DefineArbiter', 'Arbiter']
 
@@ -12,7 +10,7 @@ __all__ = ['DefineArbiter', 'Arbiter']
 #
 def DefineArbiter(n):
 
-    T = Array(n, Bit)
+    T = Bits(n)
     class _Arbiter(Circuit):
         name = 'Arbiter'+str(n)
         IO = ['I', In(T), 'O', Out(T)]

@@ -1,5 +1,4 @@
 from magma import *
-from ..ice40.PLB import A0, A1, A2, A3
 from .cascade import Cascade
 from .LUT import *
 from .arith import Sub

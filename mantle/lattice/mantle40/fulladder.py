@@ -1,22 +1,18 @@
 from magma import *
-from ..ice40.PLB import SB_CARRY, I0, I1, I2, I3
-from .LUT import LUT4
+from ..ice40.PLB import SB_CARRY, A0, A1, A2
+from .LUT import LUT3
 
-__all__  = ["FullAdder"]
+__all__  = ["FullAdder", 'fulladder']
 
-#
-# A : Bit, B : Bit, CIN : Bit -> S : Bit, COUT : Bit
-#
-def FullAdder(**kwargs):
-    A = In(Bit)()
-    B = In(Bit)()
-    CIN = In(Bit)()
+class FullAdder(Circuit):
+    name = "FullAdder"
+    IO = ["I0", In(Bit), "I1", In(Bit), "CIN", In(Bit), "O", Out(Bit), "COUT", Out(Bit)]
+    @classmethod
+    def definition(io):
+        sum = LUT3(A0^A1^A2)
+        carry = SB_CARRY() # (A0&A1)|(A1&A2)|(A2&A0)
+        wire( sum(io.I0,io.I1,io.CIN), io.O )
+        wire( carry(io.I0,io.I1,io.CIN), io.COUT )
 
-    sum = LUT4(I1^I2^I3, **kwargs)
-    carry = SB_CARRY() # (I0&I1)|(I1&I2)|(I2&I0)
-
-    sum(0,A,B,CIN)
-    carry(A,B,CIN)
-
-    return AnonymousCircuit("I0", A, "I1", B, "CIN", CIN, 
-                            "O", sum.O, "COUT", carry.CO)
+def fulladder(A, B, CIN, **kwargs):
+    return FullAdder()(A, B, CIN, **kwargs)

@@ -1,7 +1,0 @@
-set_io I0 112
-set_io I1 113
-set_io I2 114
-set_io I3 115
-set_io I4 116
-set_io I5 117
-set_io D0 62

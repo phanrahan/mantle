@@ -17,4 +17,4 @@ from .johnson import *
 
 from .counter import *
 from .countermod import *
-from .counterupdown import *
+from .counterload import *

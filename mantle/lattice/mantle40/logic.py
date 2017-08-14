@@ -3,9 +3,8 @@ if sys.version_info > (3, 0):
     from functools import reduce
     from functools import lru_cache
 from magma import *
-from ..ice40 import A0, A1, A2, A3
 from .flatcascade import FlatCascade
-from .LUT import *
+from .LUT import LUT1, LUT2, LUT3, LUT4, A0, A1, A2, A3
 
 # binary operators
 __all__  = ['DefineAnd', 'And', 'ReduceAnd']

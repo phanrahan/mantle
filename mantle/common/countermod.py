@@ -3,7 +3,9 @@ from mantle import And
 from .decode import Decode
 from .counter import Counter
 
-__all__ = ['DefineCounterModM', 'CounterModM']
+__all__ = ['DefineUpCounterModM', 'UpCounterModM']
+#__all__ += ['DefineDownCounterModM', 'DownCounterModM']
+__all__ += ['DefineCounterModM', 'CounterModM']
 
 CounterCache = {}
 
@@ -17,7 +19,8 @@ def _CounterName(name, n, ce, r, s):
 #
 # Create an n-bit mod-m counter
 #
-def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, has_ce=False):
+def DefineUpCounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
+    has_ce=False):
 
     r = False
     s = False
@@ -71,5 +74,9 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, has_ce=Fal
     CounterCache[name] = CounterModM
     return CounterModM
 
-def CounterModM(m, n, cin=False, cout=True, incr=1, next=False, has_ce=False, **kwargs):
+def UpCounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
+    has_ce=False, **kwargs):
     return DefineCounterModM(m, n, cin, cout, incr, next, has_ce)(**kwargs)
+
+DefineCounterModM = DefineUpCounterModM
+CounterModM = UpCounterModM

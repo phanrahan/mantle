@@ -3,8 +3,11 @@ from mantle import Adders, And, Mux
 from .register import Register
 from .decode import Decode
 
-__all__  = ['DefineCounter', 'Counter']
-__all__ += ['DefineCounterLoad', 'CounterLoad']
+__all__  = ['DefineUpCounter', 'UpCounter']
+#__all__ += ['DefineDownCounter', 'DownCounter']
+__all__ += ['DefineUpDownCounter', 'UpDownCounter']
+__all__ += ['DefineCounter', 'Counter']
+
 
 CounterCache = {}
 
@@ -20,7 +23,8 @@ def _CounterName(name, n, ce, r, s):
 #
 #   _ -> O[n], COUT
 #
-def DefineCounter(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has_reset=False, has_set=False):
+def DefineUpCounter(n, cin=False, cout=True, incr=1, next=False, 
+    has_ce=False, has_reset=False, has_set=False):
 
     name = _CounterName('Counter', n, has_ce, has_reset, has_set)
     if name in CounterCache:
@@ -64,28 +68,28 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has
     CounterCache[name] = Counter
     return Counter
 
-def Counter(n, cin=False, cout=True, incr=1, next=False, 
+def UpCounter(n, cin=False, cout=True, incr=1, next=False, 
              has_ce=False, has_reset=False, has_set=False, **kwargs):
-    """Construct a n-bit counter."""
-    return DefineCounter(n, cin=cin, cout=cout, incr=incr, next=next, 
+    """Construct a n-bit up counter."""
+    return DefineUpCounter(n, cin=cin, cout=cout, incr=incr, next=next, 
                has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)
 
 #
-# Create an n-bit counter with increment and load
+# Create an n-bit updown counter.
 #
-#   DATA : Bits(n), LOAD : Bit  -> O : Bits(n), COUT : Bit
+#   U : Bit, D : Bit -> O : Bits(n), COUT : Bit
 #
-def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has_reset=False, has_set=False):
+def DefineUpDownCounter(n, cout=True, next=False, 
+    has_ce=False, has_reset=False, has_set=False):
 
-    name = _CounterName('CounterLoad', n, has_ce, has_reset, has_set)
+    name = _CounterName('UpDownCounter', n, has_ce, has_reset, has_set)
     if name in CounterCache:
          return CounterCache[name]
 
     args = []
-    args += ['DATA', In(Bits(n))]
-    args += ['LOAD', In(Bit)]
-    if cin:
-        args += ['CIN', In(Bit)]
+
+    args += ["U", In(Bit)]
+    args += ["D", In(Bit)]
 
     args += ["O", Out(Bits(n))]
     if cout:
@@ -95,29 +99,22 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
 
     Counter = DefineCircuit(name, *args)
 
-    add = Adders(n, cin=cin, cout=cout)
-    mux = Mux(2, n)
+    add = Adders(n, cin=True, cout=cout)
     reg = Register(n, has_ce=has_ce, has_reset=has_reset, has_set=has_set)
 
     wire( reg.O, add.I0 )
-    wire( array(*int2seq(incr, n)), add.I1 )
+    wire( array(*(n*[Counter.D])), add.I1 )
+    wire( Counter.U, add.CIN )
 
-    wire( add.O, mux.I0 )
-    wire( Counter.DATA, mux.I1 )
-    wire( Counter.LOAD, mux.S )
-
-    reg(mux)
+    reg(add)
 
     if next:
-        wire( mux.O, Counter.O )
+        wire( add.O, Counter.O )
     else:
         wire( reg.O, Counter.O )
 
-    if cin:
-        wire( Counter.CIN, add.CIN )
-
     if cout:
-        wire( add.COUT, Counter.COUT ) # this is fishy because of the LOAD
+        wire( add.COUT, Counter.COUT )
 
     wireclock(Counter, reg)
 
@@ -126,10 +123,12 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
     CounterCache[name] = Counter
     return Counter
 
-def CounterLoad(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False, has_set=False,
-                **kwargs):
-    """Construct a n-bit counter."""
-    return DefineCounterLoad(n, cin=cin, cout=cout, incr=incr, next=next, 
-               has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)
+def UpDownCounter(n, cout=True, next=False, 
+                    has_ce=False, has_reset=False, has_set=False, **kwargs):
+    """Construct an n-bit updown counter."""
+    return DefineUpDownCounter(n, cout=cout, next=next, 
+                 has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)
 
 
+DefineCounter = DefineUpCounter
+Counter = UpCounter

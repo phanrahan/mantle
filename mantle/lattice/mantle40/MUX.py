@@ -1,9 +1,9 @@
 from magma import *
-from ..ice40.PLB import *
-from .LUT import LUT3
+#from ..ice40.PLB import *
+from .LUT import LUT3, A0, A1, A2
 
 __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
-__all__ += ['MuxN']
+#__all__ += ['MuxN']
 __all__ += ['DefineMux', 'Mux']
 
 #
@@ -26,14 +26,11 @@ class Mux2(Circuit):
 # """Construct a Mux with 4 1-bit inputs."""
 class Mux4(Circuit):
     IO = ["I", In(Bits(4)), "S", In(Bits(2)), "O", Out(Bit) ]
-            
     @classmethod
     def definition(mux4):
-
         mux0 = Mux2()
         mux1 = Mux2()
         mux = Mux2()
-
         mux0(mux4.I[0:2],mux4.S[0]) 
         mux1(mux4.I[2:4],mux4.S[0])
         mux( array( mux0.O, mux1.O ), mux4.S[1] )
@@ -42,14 +39,11 @@ class Mux4(Circuit):
 # """Construct a Mux with 8 1-bit inputs."""
 class Mux8(Circuit):
     IO = ["I", In(Bits(8)), "S", In(Bits(3)), "O", Out(Bit) ]
-            
     @classmethod
     def definition(mux8):
-
         mux0 = Mux4()
         mux1 = Mux4()
         mux = Mux2()
-
         mux0(mux8.I[0:4], mux8.S[0:2]) 
         mux1(mux8.I[4:8], mux8.S[0:2])
         mux( array( mux0.O, mux1.O ), mux8.S[2] )
@@ -58,21 +52,17 @@ class Mux8(Circuit):
 # """Construct a Mux with 16 1-bit inputs."""
 class Mux16(Circuit):
     IO = ["I", In(Bits(16)), "S", In(Bits(4)), "O", Out(Bit) ]
-            
     @classmethod
     def definition(mux16):
-
         mux0 = Mux8()
         mux1 = Mux8()
         mux = Mux2()
-
         mux0(mux16.I[0:8],  mux16.S[0:3])
         mux1(mux16.I[8:16], mux16.S[0:3])
         mux( array( mux0.O, mux1.O ), mux16.S[3])
         wire(mux.O, mux16.O)
 
 def MuxN(height, **kwargs):
-
     assert height in [2, 4, 8, 16]
 
     if height == 2:
@@ -134,7 +124,7 @@ def _MuxInterface(height, width):
     return args
 
 
-def DefineMux(height, width):
+def DefineMux(height=2, width=1):
 
     """
     Construct a Mux. Height inputs are width bits wide.
@@ -164,8 +154,8 @@ def DefineMux(height, width):
             wire( mux.O, Mux.O )
     return _Mux
 
-def Mux(height=2, width=1, **kwargs):
-    if width == 1:
+def Mux(height=2, width=None, **kwargs):
+    if width is None:
        return MuxN(height, **kwargs)
     return DefineMux(height, width)(**kwargs)
 

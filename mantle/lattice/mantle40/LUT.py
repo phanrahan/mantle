@@ -1,7 +1,13 @@
 from collections import Sequence
 from magma import *
 from magma.compatibility import IntegerTypes
-from ..ice40.PLB import SB_LUT4, A0, A1, A2
+from ..ice40.PLB import SB_LUT4, A0, A1, A2, A3
+
+__all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
+__all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
+__all__ += ['LUTN', 'LUT']
+__all__ += ['A0', 'A1', 'A2', 'A3']
+
 
 def Mux2(**kwargs):
     """Construct a Mux with 2 1-bit inputs."""
@@ -11,12 +17,6 @@ def Mux2(**kwargs):
                             "I1", lut.I1,
                             "S", lut.I2,
                             "O", lut.O)
-
-__all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
-__all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
-__all__ += ['LUTN', 'LUT']
-__all__ += ['Logic1', 'Logic2', 'Logic3', 'Logic4']
-__all__ += ['Logic5', 'Logic6', 'Logic7', 'Logic8']
 
 def LUT1(rom, **kwargs):
     lut = SB_LUT4(LUT_INIT=lutinit(rom,1<<4),**kwargs)
@@ -147,13 +147,4 @@ def LUT(rom, **kwargs):
     """
     return LUTN(rom, **kwargs)
 
-
-Logic1 = LUT1
-Logic2 = LUT2
-Logic3 = LUT3
-Logic4 = LUT4
-Logic5 = LUT5
-Logic6 = LUT6
-Logic7 = LUT7
-Logic8 = LUT8
 

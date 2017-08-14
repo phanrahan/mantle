@@ -1,6 +1,6 @@
 from collections import Sequence
 from magma import *
-from .LUT import LUT1, LUT2, LUT3, LUT4, LUT5, LUT6, LUT7, LUT8
+from .LUT import LUT1, LUT2, LUT3, LUT4, LUT5, LUT6, LUT7, LUT8, A0, A1, A2, A3
 from .MUX import Mux2
 
 __all__  = ['ROM1', 'ROM2', 'ROM3', 'ROM4']
@@ -11,52 +11,28 @@ __all__ += ['ROM16xN']
 
 # Move the lutinit function to Circuit init
 def ROM1(rom, **kwargs):
-    I = In(Bits(1))()
-    lut = LUT1(rom, **kwargs)
-    lut(I[0])
-    return AnonymousCircuit("I", I, "O", lut.O)
+    return uncurry(LUT1(rom, **kwargs))
 
 def ROM2(rom, **kwargs):
-    I = In(Bits(2))()
-    lut = LUT2(rom, **kwargs)
-    lut(I[0], I[1])
-    return AnonymousCircuit("I", I, "O", lut.O)
+    return uncurry(LUT2(rom, **kwargs))
 
 def ROM3(rom, **kwargs):
-    I = In(Bits(3))()
-    lut = LUT3(rom, **kwargs)
-    lut(I[0], I[1], I[2])
-    return AnonymousCircuit("I", I, "O", lut.O)
+    return uncurry(LUT3(rom, **kwargs))
 
 def ROM4(rom, **kwargs):
-    I = In(Bits(4))()
-    lut = LUT4(rom, **kwargs)
-    lut(I[0], I[1], I[2], I[3])
-    return AnonymousCircuit("I", I, "O", lut.O)
+    return uncurry(LUT4(rom, **kwargs))
 
 def ROM5(rom, **kwargs):
-    I = In(Bits(5))()
-    lut = LUT5(rom, **kwargs)
-    lut(I[0], I[1], I[2], I[3], I[4])
-    return AnonymousCircuit("I", I, "O", lut.O)
+    return uncurry(LUT5(rom, **kwargs))
 
 def ROM6(rom, **kwargs):
-    I = In(Bits(6))()
-    lut = LUT6(rom, **kwargs)
-    lut(I[0], I[1], I[2], I[3], I[4], I[5])
-    return AnonymousCircuit("I", I, "O", lut.O)
+    return uncurry(LUT6(rom, **kwargs))
 
 def ROM7(rom, **kwargs):
-    I = In(Bits(7))()
-    lut = LUT7(rom, **kwargs)
-    lut(I[0], I[1], I[2], I[3], I[4], I[5], I[6])
-    return AnonymousCircuit("I", I, "O", lut.O)
+    return uncurry(LUT7(rom, **kwargs))
 
 def ROM8(rom, **kwargs):
-    I = In(Bits(8))()
-    lut = LUT8(rom, **kwargs)
-    lut(I[0], I[1], I[2], I[3], I[4], I[5], I[6], I[7])
-    return AnonymousCircuit("I", I, "O", lut.O)
+    return uncurry(LUT8(rom, **kwargs))
 
 
 #

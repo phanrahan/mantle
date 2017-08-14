@@ -1,5 +1,0 @@
-set_io A 112
-set_io B 113
-set_io D2 98
-set_io D1 99
-set_io CLKIN 21

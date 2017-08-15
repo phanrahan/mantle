@@ -50,7 +50,8 @@ SB_LUT4 = DeclareCircuit('SB_LUT4',
                "O",  Out(Bit),
                cells=1,
                stateful=False,
-               simulate=simulate_sb_lut4) 
+               simulate=simulate_sb_lut4,
+               coreir_lib="ice40") 
 
 # Implements (I0&I1)|(I1&I2)|(I2&I0)
 SB_CARRY = DeclareCircuit('SB_CARRY',
@@ -59,7 +60,8 @@ SB_CARRY = DeclareCircuit('SB_CARRY',
                "CI", In(Bit),
                "CO", Out(Bit),
                stateful=False,
-               simulate=simulate_sb_carry) 
+               simulate=simulate_sb_carry,
+               coreir_lib="ice40") 
 
 # Positive edge versions
 
@@ -69,7 +71,8 @@ SB_DFF = DeclareCircuit('SB_DFF',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=False, n=False))
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=False, n=False),
+               coreir_lib="ice40")
 
 # DFF w/ Clock enable
 SB_DFFE = DeclareCircuit('SB_DFFE',
@@ -78,8 +81,8 @@ SB_DFFE = DeclareCircuit('SB_DFFE',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=False, n=False)
-)
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=False, n=False),
+               coreir_lib="ice40")
 
 # DFF w/ Synchronous Reset
 SB_DFFSR = DeclareCircuit('SB_DFFSR',
@@ -88,7 +91,8 @@ SB_DFFSR = DeclareCircuit('SB_DFFSR',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=True, r=True, s=False, n=False))
+               simulate=gen_sb_dff_sim(ce=False, sy=True, r=True, s=False, n=False),
+               coreir_lib="ice40")
 
 # DFF w/ Asynchronous Reset
 SB_DFFR = DeclareCircuit('SB_DFFR',
@@ -97,7 +101,8 @@ SB_DFFR = DeclareCircuit('SB_DFFR',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=False, r=True, s=False, n=False))
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=True, s=False, n=False),
+               coreir_lib="ice40")
     
 # DFF w/ Synchronous Set
 SB_DFFSS = DeclareCircuit('SB_DFFSS',
@@ -106,7 +111,8 @@ SB_DFFSS = DeclareCircuit('SB_DFFSS',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=True, r=False, s=True, n=False))
+               simulate=gen_sb_dff_sim(ce=False, sy=True, r=False, s=True, n=False),
+               coreir_lib="ice40")
 
 # DFF w/ Asynchronous Set
 SB_DFFS = DeclareCircuit('SB_DFFS',
@@ -115,7 +121,8 @@ SB_DFFS = DeclareCircuit('SB_DFFS',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=True, n=False))
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=True, n=False),
+               coreir_lib="ice40")
     
 # DFF w/ Synchronous Reset, Clock enable
 SB_DFFESR = DeclareCircuit('SB_DFFESR',
@@ -125,7 +132,8 @@ SB_DFFESR = DeclareCircuit('SB_DFFESR',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=True, r=True, s=False, n=False))
+               simulate=gen_sb_dff_sim(ce=True, sy=True, r=True, s=False, n=False),
+               coreir_lib="ice40")
 
 # DFF w/ Asynchronous Reset, Clock enable
 SB_DFFER = DeclareCircuit('SB_DFFER',
@@ -135,7 +143,8 @@ SB_DFFER = DeclareCircuit('SB_DFFER',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=False, r=True, s=False, n=False))
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=True, s=False, n=False),
+               coreir_lib="ice40")
     
 # DFF w/ Synchronous Set, Clock enable
 SB_DFFESS = DeclareCircuit('SB_DFFESS',
@@ -145,7 +154,8 @@ SB_DFFESS = DeclareCircuit('SB_DFFESS',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=True, r=False, s=True, n=False))
+               simulate=gen_sb_dff_sim(ce=True, sy=True, r=False, s=True, n=False),
+               coreir_lib="ice40")
 
 # DFF w/ Asynchronous Set, Clock enable
 SB_DFFES = DeclareCircuit('SB_DFFES',
@@ -155,7 +165,8 @@ SB_DFFES = DeclareCircuit('SB_DFFES',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=True, n=False))
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=True, n=False),
+               coreir_lib="ice40")
 
 # Negative edge versions
 SB_DFFN = DeclareCircuit('SB_DFFN',
@@ -163,7 +174,8 @@ SB_DFFN = DeclareCircuit('SB_DFFN',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=False, n=True))
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=False, n=True),
+               coreir_lib="ice40")
 
 # DFFN w/ Clock enable
 SB_DFFNE = DeclareCircuit('SB_DFFNE',
@@ -172,7 +184,8 @@ SB_DFFNE = DeclareCircuit('SB_DFFNE',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=False, n=True))
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=False, n=True),
+               coreir_lib="ice40")
 
 # DFFN w/ Synchronous Reset
 SB_DFFNSR = DeclareCircuit('SB_DFFNSR',
@@ -181,7 +194,8 @@ SB_DFFNSR = DeclareCircuit('SB_DFFNSR',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=True, r=True, s=False, n=True))
+               simulate=gen_sb_dff_sim(ce=False, sy=True, r=True, s=False, n=True),
+               coreir_lib="ice40")
 
 # DFFN w/ Asynchronous Reset
 SB_DFFNR = DeclareCircuit('SB_DFFNR',
@@ -190,7 +204,8 @@ SB_DFFNR = DeclareCircuit('SB_DFFNR',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=False, r=True, s=False, n=True))
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=True, s=False, n=True),
+               coreir_lib="ice40")
     
 # DFFN w/ Synchronous Set
 SB_DFFNSS = DeclareCircuit('SB_DFFNSS',
@@ -199,7 +214,8 @@ SB_DFFNSS = DeclareCircuit('SB_DFFNSS',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=True, r=False, s=True, n=True))
+               simulate=gen_sb_dff_sim(ce=False, sy=True, r=False, s=True, n=True),
+               coreir_lib="ice40")
 
 # DFFN w/ Asynchronous Set
 SB_DFFNS = DeclareCircuit('SB_DFFNS',
@@ -208,7 +224,8 @@ SB_DFFNS = DeclareCircuit('SB_DFFNS',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=True, n=True))
+               simulate=gen_sb_dff_sim(ce=False, sy=False, r=False, s=True, n=True),
+               coreir_lib="ice40")
     
 # DFFN w/ Synchronous Reset, Clock enable
 SB_DFFNESR = DeclareCircuit('SB_DFFNESR',
@@ -218,7 +235,8 @@ SB_DFFNESR = DeclareCircuit('SB_DFFNESR',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simualte=gen_sb_dff_sim(ce=True, sy=True, r=True, s=False, n=True))
+               simualte=gen_sb_dff_sim(ce=True, sy=True, r=True, s=False, n=True),
+               coreir_lib="ice40")
 
 # DFFN w/ Asynchronous Reset, Clock enable
 SB_DFFNER = DeclareCircuit('SB_DFFNER',
@@ -228,7 +246,8 @@ SB_DFFNER = DeclareCircuit('SB_DFFNER',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=False, r=True, s=False, n=True))
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=True, s=False, n=True),
+               coreir_lib="ice40")
     
 # DFFN w/ Synchronous Set, Clock enable
 SB_DFFNESS = DeclareCircuit('SB_DFFNESS',
@@ -238,7 +257,8 @@ SB_DFFNESS = DeclareCircuit('SB_DFFNESS',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=True, r=False, s=True, n=True))
+               simulate=gen_sb_dff_sim(ce=True, sy=True, r=False, s=True, n=True),
+               coreir_lib="ice40")
 
 # DFFN w/ Asynchronous Set, Clock enable
 SB_DFFNES = DeclareCircuit('SB_DFFNES',
@@ -248,7 +268,8 @@ SB_DFFNES = DeclareCircuit('SB_DFFNES',
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
-               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=True, n=True))
+               simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=True, n=True),
+               coreir_lib="ice40")
 
 if __name__ == '__main__':
     lut = SB_LUT4()

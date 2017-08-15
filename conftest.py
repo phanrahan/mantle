@@ -15,3 +15,5 @@ def mantle_test():
     """
     import magma.circuit
     magma.circuit.__magma_clear_circuit_cache()
+    import magma.config
+    magma.config.set_compile_dir('callee_file_dir')

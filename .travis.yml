@@ -33,7 +33,7 @@ install:
     - pip install -e .
 
 script: 
-    - py.test --cov=mantle --ignore=coreir/  # Ignore tests in the coreir directory
+    - py.test --cov=mantle --ignore=coreir/ --ignore=magma/ --ignore=loam/
     # Run bake verilog tests
     - cd tests/verilog
     - . doit

@@ -5,8 +5,12 @@
         "FullAdder": {
           "connections": [
             [
-              "const_inst0.out.0",
+              "const_GND.out.0",
               "inst0.I3"
+            ],
+            [
+              "self.O",
+              "inst0.O"
             ],
             [
               "self.I1",
@@ -25,6 +29,10 @@
               "inst0.I0"
             ],
             [
+              "self.COUT",
+              "inst1.CO"
+            ],
+            [
               "self.CIN",
               "inst1.CI"
             ],
@@ -34,7 +42,7 @@
             ]
           ],
           "instances": {
-            "const_inst0": {
+            "const_GND": {
               "configargs": {
                 "value": 0
               },

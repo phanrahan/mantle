@@ -1,3 +1,0 @@
-export MANTLE_TARGET=ice40
-export MANTLE=lattice
-./bake

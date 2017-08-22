@@ -8,8 +8,8 @@ main = DefineCircuit("main",
 
 and2 = And(2,2)
 
-and2(array(main.I0, main.I1), array(main.I2, main.I3))
-wire(and2, array(main.O0, main.O1))
+and2(array([main.I0, main.I1]), array([main.I2, main.I3]))
+wire(and2, array([main.O0, main.O1]))
 
 compile(sys.argv[1], main)
 

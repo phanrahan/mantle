@@ -7,7 +7,7 @@ main = DefineCircuit("main",
 
 buf2 = Buf(2)
 
-wire( buf2(array(main.I0, main.I1)), array(main.O0, main.O1))
+wire( buf2(array([main.I0, main.I1])), array([main.O0, main.O1]))
 
 compile(sys.argv[1], main)
 

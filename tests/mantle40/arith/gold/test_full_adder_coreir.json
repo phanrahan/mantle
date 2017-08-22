@@ -1,13 +1,9 @@
 {
   "namespaces": {
-    "_G": {
+    "global": {
       "modules": {
         "FullAdder": {
           "connections": [
-            [
-              "const_GND.out.0",
-              "inst0.I3"
-            ],
             [
               "self.O",
               "inst0.O"
@@ -39,6 +35,10 @@
             [
               "self.CIN",
               "inst0.I2"
+            ],
+            [
+              "inst0.I3",
+              "const_GND.out"
             ]
           ],
           "instances": {
@@ -75,5 +75,5 @@
       }
     }
   },
-  "top": "_G.FullAdder"
+  "top": "global.FullAdder"
 }

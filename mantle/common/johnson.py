@@ -10,7 +10,7 @@ def DefineJohnson(n, has_ce=False, has_reset=False, has_set=False):
 
     Walking ring counter / Moebios counter
 
-    None -> O[n]
+    O : Out(Bits(n))
     """
     class Johnson(Circuit):
         name = _RegisterName('Johnson', n, 0, has_ce, has_reset, has_set)

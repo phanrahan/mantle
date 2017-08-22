@@ -1,4 +1,5 @@
 from magma import *
+from magma.bitutils import log2
 from mantle import Or
 
 __all__ = ['DefineEncoder', 'Encoder']
@@ -22,7 +23,7 @@ def DefineEncoder(n):
                 os = []
                 for i in range(n):
                     if i & (1 << y): os.append(Enc.I[i])
-                wire(array(*os), or_)
+                wire(array(os), or_)
                 return AnonymousCircuit("O", or_.O)
             enc = join( col(f, logn) )
             wire(enc.O, Enc.O)

@@ -16,7 +16,7 @@ def _CounterName(name, n, ce, r, s):
 #
 # Create an n-bit updown counter.
 #
-#   U : Bit, D : Bit -> O : Bits(n), COUT : Bit
+#   U : In(Bit), D : In(Bit), O : Out(Bits(n)), COUT : Out(Bit)
 #
 def DefineUpDownCounter(n, cout=True, next=False, has_ce=False, has_reset=False, has_set=False):
 
@@ -41,7 +41,7 @@ def DefineUpDownCounter(n, cout=True, next=False, has_ce=False, has_reset=False,
     reg = Register(n, has_ce=has_ce, has_reset=has_reset, has_set=has_set)
 
     wire( reg.O, add.I0 )
-    wire( array(*(n*[Counter.D])), add.I1 )
+    wire( array(n*[Counter.D]), add.I1 )
     wire( Counter.U, add.CIN )
 
     reg(add)
@@ -61,8 +61,8 @@ def DefineUpDownCounter(n, cout=True, next=False, has_ce=False, has_reset=False,
     CounterCache[name] = Counter
     return Counter
 
-def UpDownCounter(n, cout=True, next=False, has_ce=False, has_reset=False, has_set=False,
-                     **kwargs):
+def UpDownCounter(n, cout=True, next=False, 
+        has_ce=False, has_reset=False, has_set=False, **kwargs):
     """Construct an n-bit updown counter."""
     return DefineUpDownCounter(n, cout=cout, next=next, 
                  has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)

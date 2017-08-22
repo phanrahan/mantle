@@ -5,7 +5,7 @@ from .LUT import LUT2, LUT3
 from .logic import Not
 
 __all__   = ['DFF', 'SRFF', 'RSFF', 'JKFF', 'TFF']
-__all__  += ['FF', 'FFs']
+__all__  += ['FF']
 
 #
 # TODO: add async=True, edge=True (also negedge)
@@ -193,13 +193,13 @@ def TFF(has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **kw
 #
 # Each FF may have a ce, r, and s signal.
 #   
-def FFs(n, init=0, has_ce=False, has_reset=False, has_set=False, edge=True, sync=True):
-    def f(y):
-        if isinstance(init, Sequence):
-            data = init[y]
-        else:
-            data = (init >> y) & 1
-        return FF(init=data, has_ce=has_ce, has_reset=has_reset, has_set=has_set, edge=edge, sync=sync, loc=(0, y/8, y%8))
-    
-    return col(f, n)
+#def FFs(n, init=0, has_ce=False, has_reset=False, has_set=False, edge=True, sync=True):
+#    def f(y):
+#        if isinstance(init, Sequence):
+#            data = init[y]
+#        else:
+#            data = (init >> y) & 1
+#        return FF(init=data, has_ce=has_ce, has_reset=has_reset, has_set=has_set, edge=edge, sync=sync, loc=(0, y/8, y%8))
+#    
+#    return col(f, n)
 

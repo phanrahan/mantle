@@ -2,7 +2,7 @@ import sys
 from magma import *
 from mantle import *
 
-main = DefineCircuit("main", "I", In(Array(2,Bit)), "O", Out(Bit))
+main = DefineCircuit("main", "I", In(Bits(2)), "O", Out(Bit))
 
 or2 = ReduceOr()
 

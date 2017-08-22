@@ -3,11 +3,6 @@ import os, glob
 from os.path import join, exists
 from fabricate import main, autoclean, run
 
-if os.environ.get("TRAVIS", False) == "true":
-    python_command = "python"
-else:
-    python_command = "python3"
-
 BUILD = 'build'
 GOLD = 'gold'
 
@@ -15,16 +10,16 @@ tests = glob.glob('*.py')
 
 def build():
     for test in tests:
-        if not test.startswith('_'):
+        if test[0] != '_' and not test.startswith('test_'):
             base, suffix = test.split('.')
             compile(base)
 
 def compile(base):
-    u = base+'.ucf'
+    u = base+'.pcf'
     v = base+'.v'
     buildu, goldu = join(BUILD,u), join(GOLD,u)
     buildv, goldv = join(BUILD,v), join(GOLD,v)
-    run(python_command,base+'.py', join(BUILD,base))
+    run('python3',base+'.py', join(BUILD,base))
     if exists(goldu):
         run('cmp',buildu,goldu)
     if exists(goldv):
@@ -34,6 +29,7 @@ def clean():
     autoclean()
 
 def gold():
-    os.system('cp %s/* %s' % (BUILD, GOLD))
+    os.system('cp %s/*.v %s' % (BUILD, GOLD))
+    os.system('cp %s/*.pcf %s' % (BUILD, GOLD))
 
 main()

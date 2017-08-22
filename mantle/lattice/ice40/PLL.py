@@ -4,11 +4,11 @@ from magma.backend.verilog import bstr
 __all__ = ['SB_PLL', 'SB_PLL40_CORE']
 
 SB_PLL40_CORE = DeclareCircuit('SB_PLL40_CORE',
-            "input REFERENCECLK", In(Bit),
-            "input RESETB", In(Bit),
-            "input BYPASS", In(Bit),
-            "output PLLOUTCORE", Out(Bit),
-            "output PLLOUTGLOBAL", Out(Bit))
+            "REFERENCECLK", In(Bit),
+            "RESETB", In(Bit),
+            "BYPASS", In(Bit),
+            "PLLOUTCORE", Out(Bit),
+            "PLLOUTGLOBAL", Out(Bit))
 
 def SB_PLL( freqout, freqin=12000000 ):
 
@@ -32,8 +32,8 @@ def SB_PLL( freqout, freqin=12000000 ):
     wire(1, pll.RESETB)
     wire(0, pll.BYPASS)
 
-    return AnonymousCircuit("input I", pll.REFERENCECLK,
-                            "output O", pll.PLLOUTGLOBAL)
+    return AnonymousCircuit("I", pll.REFERENCECLK,
+                            "O", pll.PLLOUTGLOBAL)
                             #"output O", pll.PLLOUTCORE)
 
 def filterrange(freqin, divr, divf):

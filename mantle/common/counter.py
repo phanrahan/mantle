@@ -4,7 +4,6 @@ from .register import Register
 from .decode import Decode
 
 __all__  = ['DefineUpCounter', 'UpCounter']
-#__all__ += ['DefineDownCounter', 'DownCounter']
 __all__ += ['DefineUpDownCounter', 'UpDownCounter']
 __all__ += ['DefineCounter', 'Counter']
 
@@ -46,7 +45,7 @@ def DefineUpCounter(n, cin=False, cout=True, incr=1, next=False,
     reg = Register(n, has_ce=has_ce, has_reset=has_reset, has_set=has_set)
 
     wire( reg.O, add.I0 )
-    wire( array(int2seq(incr, n)), add.I1 )
+    wire( array(incr, n), add.I1 )
 
     reg(add)
 
@@ -103,7 +102,7 @@ def DefineUpDownCounter(n, cout=True, next=False,
     reg = Register(n, has_ce=has_ce, has_reset=has_reset, has_set=has_set)
 
     wire( reg.O, add.I0 )
-    wire( array((n*[Counter.D])), add.I1 )
+    wire( array(n*[Counter.D]), add.I1 )
     wire( Counter.U, add.CIN )
 
     reg(add)

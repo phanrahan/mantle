@@ -3,8 +3,8 @@ from magma import *
 from mantle import *
 
 main = DefineCircuit("main", 
-        "input I0", Bit, "input I1", Bit, 
-        "output O0", Bit, "output O1", Bit)
+        "I0", In(Bit), "I1", In(Bit), 
+        "O0", Out(Bit), "O1", Out(Bit))
 
 invert2 = Invert(2)
 

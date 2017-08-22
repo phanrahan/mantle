@@ -7,7 +7,7 @@ def DefineRing(n, init=1, has_ce=False, has_reset=False, has_set=False):
     """
     Generate a n-bit ring counter.
 
-    None -> O[n]
+    O : Out(Bits(n))
     """
     class Ring(Circuit):
         name = _RegisterName('Ring', n, init, has_ce, has_reset, has_set)

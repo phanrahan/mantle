@@ -3,8 +3,8 @@ from magma import *
 from mantle import *
 
 main = DefineCircuit("main",
-        "input I0", Bit, "input I1", Bit, "input I2", Bit, "input I3", Bit,
-        "output O", Bit)
+        "I0", In(Bit), "I1", In(Bit), "I2", In(Bit), "I3", In(Bit),
+        "O", Out(Bit))
 
 and4 = And(4)
 

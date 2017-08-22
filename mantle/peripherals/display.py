@@ -67,7 +67,7 @@ def Refresh(digits, refresh, mode="CC"):
 class DisplayRefresh(Peripheral):
     name = 'DisplayRefresh'
 
-    IO = ["output cathodes", Array(8,Bit), "output anodes", Array(4,Bit)]
+    IO = ["cathodes", Bits(8), "anodes", Bits(4)]
 
     def __init__(self, fpga, name='display'): 
         Peripheral.__init__(self, fpga, name)
@@ -85,8 +85,8 @@ class DisplayRefresh(Peripheral):
 
     def setup(self, main):
         TIMER = main.systimer.O
-        A4 = In(Array4)
-        DIGITS = array(A4(), A4(), A4(), A4())
+        Bits4 = In(Bits(4))
+        DIGITS = concat(Bits(), Bits(), Bits(), Bits())
 
         cathodes, anodes = Refresh( DIGITS, TIMER[16:18] )
 

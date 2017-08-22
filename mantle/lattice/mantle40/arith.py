@@ -32,7 +32,7 @@ def Negate(n, **kwargs):
     invert = Invert(n)
     adder =  Adders(n, True, False, **kwargs)
     wire(1, adder.CIN)
-    wire(constarray(0,n), adder.I0)
+    wire(array(0,n), adder.I0)
     wire(invert.O, adder.I1)
     return AnonymousCircuit("I", invert.I, "O", adder.O)
     

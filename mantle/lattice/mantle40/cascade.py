@@ -1,5 +1,6 @@
 from magma import *
-from .LUT import LUTN
+from magma.bitutils import uint
+from .LUT import LUT
 
 __all__ = ['DefineCascade', 'Cascade']
 
@@ -31,7 +32,7 @@ def DefineCascade(n, k, expr, cin, forkargs={}):
         def definition(cascade):
 
             def f(y):
-                return LUTN(expr, k+1, loc=(0,y/8, y%8))
+                return LUT(expr, k+1, loc=(0,y/8, y%8))
 
             c = braid( col(f, n), foldargs={"I0":"O"}, forkargs=forkargs )
 

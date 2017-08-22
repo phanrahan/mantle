@@ -2,7 +2,7 @@ import sys
 from magma import *
 from mantle import *
 
-main = DefineCircuit("main", "input I0", Bit, "input I1", Bit, "output O", Bit)
+main = DefineCircuit("main", "I0", In(Bit), "I1", In(Bit), "O", Out(Bit))
 
 xor2 = XOr(2)
 

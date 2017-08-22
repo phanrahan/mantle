@@ -34,7 +34,7 @@ def DefineAnd(height=2, width=None):
     """
     Generate And module
 
-    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
+    I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
 
     T = Bits(width)
@@ -82,7 +82,7 @@ def DefineNAnd(height=2, width=None):
     """
     Generate And module
 
-    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
+    I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
 
     T = Bits(width)
@@ -131,7 +131,7 @@ def DefineOr(height=2, width=None):
     """
     Generate Or module
 
-    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
+    I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
 
     T = Bits(width)
@@ -203,7 +203,7 @@ def DefineNOr(height=2, width=None):
     """
     Generate Nor module
 
-    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
+    I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
 
     T = Bits(width)
@@ -251,7 +251,7 @@ def DefineXOr(height=2, width=1):
     """
     Generate Exclusive Or module
 
-    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
+    I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
 
     T = Bits(width)
@@ -299,7 +299,7 @@ def DefineNXOr(height=2, width=None):
     """
     Generate Or module
 
-    I0 : Bits(width), I1 : Bits(width) -> O : Bits(width)
+    I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
 
     T = Bits(width)

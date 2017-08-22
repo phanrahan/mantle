@@ -2,7 +2,7 @@ import sys
 from magma import *
 from mantle import *
 
-main = DefineCircuit("main", "I", In(Array(1,Bit)), "O", Out(Array(1,Bit)))
+main = DefineCircuit("main", "I", In(Bits(1)), "O", Out(Bits(1)))
 
 buf1 = Buf(1)
 

@@ -47,7 +47,7 @@ def DefineOpW(name, height, width, op):
         name += str(width)
     else:
         name += str(height) + 'x' + str(width)
-    T = Array(width, Bit)
+    T = Bits(width)
     args = [name]
     for i in range(height):
         args += ['I{}'.format(i), In(T)]

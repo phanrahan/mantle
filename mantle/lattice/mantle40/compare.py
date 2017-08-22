@@ -18,8 +18,8 @@ def EQ1(**kwargs):
 def EQ2(**kwargs):
     """Test equality of 2 2-bit inputs."""
     lut = LUT4(EQ2LUT, **kwargs)
-    return AnonymousCircuit('I0', array(lut.I0, lut.I2),
-                            'I1', array(lut.I1, lut.I3),
+    return AnonymousCircuit('I0', array([lut.I0, lut.I2]),
+                            'I1', array([lut.I1, lut.I3]),
                             'O', lut.O)
 
 def EQ(n, **kwargs):
@@ -40,8 +40,8 @@ def NE1(**kwargs):
 def NE2(**kwargs):
     """Test non-equality of 2 2-bit inputs."""
     lut = LUT4(NE2LUT, **kwargs)
-    return AnonymousCircuit('I0', array(lut.I0, lut.I2),
-                            'I1', array(lut.I1, lut.I3),
+    return AnonymousCircuit('I0', array([lut.I0, lut.I2]),
+                            'I1', array([lut.I1, lut.I3]),
                             'O', lut.O)
 
 def NE(n, **kwargs):

@@ -10,7 +10,7 @@ def DefineDecoder(n, invert=False):
 
     class _Decoder(Circuit):
         name = 'Decoder'+str(n)+("Invert" if invert else "")
-        IO = ['I', In(Array(n, Bit)), 'O', Out(Array(1<<n, Bit))]
+        IO = ['I', In(Bits(n)), 'O', Out(Bits(1<<n))]
         @classmethod
         def definition(Dec):
             def decode(y):

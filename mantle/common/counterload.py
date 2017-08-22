@@ -17,7 +17,7 @@ def _CounterName(name, n, ce, r, s):
 #
 # Create an n-bit counter with increment and load
 #
-#   DATA : Bits(n), LOAD : Bit  -> O : Bits(n), COUT : Bit
+#   DATA : In(Bits(n)), LOAD : In(Bit), O : Out(Bits(n)), COUT : Out(Bit)
 #
 def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has_reset=False, has_set=False):
 
@@ -44,7 +44,7 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
     reg = Register(n, has_ce=has_ce, has_reset=has_reset, has_set=has_set)
 
     wire( reg.O, add.I0 )
-    wire( array(*int2seq(incr, n)), add.I1 )
+    wire( array(incr, n), add.I1 )
 
     wire( add.O, mux.I0 )
     wire( Counter.DATA, mux.I1 )
@@ -70,8 +70,8 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
     CounterCache[name] = Counter
     return Counter
 
-def CounterLoad(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False, has_set=False,
-                **kwargs):
+def CounterLoad(n, cin=False, cout=True, incr=1, 
+        has_ce=False, has_reset=False, has_set=False, **kwargs):
     """Construct a n-bit counter."""
     return DefineCounterLoad(n, cin=cin, cout=cout, incr=incr, next=next, 
                has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)

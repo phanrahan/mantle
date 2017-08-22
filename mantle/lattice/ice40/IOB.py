@@ -1,16 +1,16 @@
 from magma import *
 
 SB_IO= DeclareCircuit("SB_IO", 
-                        'input PACKAGE_PIN', In(Bit), # should be inout
-                        'input CLOCK_ENABLE', In(Bit),
-                        'input INPUT_CLOCK', In(Bit),
-                        'input OUTPUT_CLOCK', In(Bit),
-                        'input OUTPUT_ENABLE', In(Bit),
-                        'input LATCH_INPUT_VALUE', In(Bit),
-                        'input D_IN_0', In(Bit), # rising
-                        'input D_IN_1', In(Bit), # falling
-                        'output D_OUT_0', Out(Bit), # rising
-                        'output D_OUT_1', Out(Bit), # falling
+                        'PACKAGE_PIN', In(Bit), # should be inout
+                        'CLOCK_ENABLE', In(Bit),
+                        'INPUT_CLOCK', In(Bit),
+                        'OUTPUT_CLOCK', In(Bit),
+                        'OUTPUT_ENABLE', In(Bit),
+                        'LATCH_INPUT_VALUE', In(Bit),
+                        'D_IN_0', In(Bit), # rising
+                        'D_IN_1', In(Bit), # falling
+                        'D_OUT_0', Out(Bit), # rising
+                        'D_OUT_1', Out(Bit), # falling
                         cells=1)
 
 #module top (input PIO1_02, output D1);

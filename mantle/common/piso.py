@@ -8,7 +8,7 @@ def DefinePISO(n, init=0, has_ce=False, has_reset=False, has_set=False):
     """
     Generate Parallel-In, Serial-Out shift register.
 
-    SI : Bit, PI : Array(n, Bit), LOAD : Bit -> O : Bit
+    SI : In(Bit), PI : Out(Bits(n)), LOAD : In(Bit), O : Out(Bit)
     """
 
     T = Bits(n)

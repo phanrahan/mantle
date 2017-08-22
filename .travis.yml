@@ -35,6 +35,6 @@ install:
 script: 
     - py.test --cov=mantle --ignore=coreir/ --ignore=magma/ --ignore=loam/
     # Run bake verilog tests
-    - cd tests/verilog
-    - . doit
-    - cd ${TRAVIS_BUILD_DIR}
+    #- cd tests/verilog
+    #- . doit
+    #- cd ${TRAVIS_BUILD_DIR}

@@ -53,7 +53,7 @@ def LHCA(n, init=1, has_ce=False):
                 return LUT2(A0^A1)(reg.O[y - 1], reg.O[y + 1])
 
     # col returns a list of outputs, convert to an array
-    luts = array(*col(lut, n))
+    luts = array(col(lut, n))
     reg(luts)
 
     args = ["output O", reg.O] + reg.interface.clockargs()

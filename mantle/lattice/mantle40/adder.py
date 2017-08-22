@@ -15,7 +15,7 @@ def _AdderName(n, cin, cout):
 #
 # create an n-bit Adder from n FullAdders
 #
-# I0:Bits(n), I1:Bits(n), CIN:Bit -> O:Bits(n), COUT:Bit
+# I0:In(Bits(n)), I1:In(Bits(n)), CIN:In(Bit), O:Out(Bits(n)), COUT:Out(Bit)
 #
 # if cin, CIN is added to the circuit
 # if cout: COUT is added to the circuit

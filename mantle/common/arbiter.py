@@ -17,7 +17,7 @@ def DefineArbiter(n):
         @classmethod
         def definition(Arb):
             ones = n * [1]
-            y = Add(n)(Arb.I, array(*ones))  # y = x - 1
+            y = Add(n)(Arb.I, array(ones))  # y = x - 1
             def a(y):
                 return LUT2(A0 & ~A1)
             arb = join(col(a, n))

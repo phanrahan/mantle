@@ -1,4 +1,3 @@
-from magma import *
 from mantle import FF
 from mantle import LUT2, I0, I1
 

@@ -36,7 +36,7 @@ def LFSR(n, init=1, has_ce=False):
     t = []
     for i in range(nt):
         t.append(shift.O[tap[i] - 1])
-    t = array(*t)
+    t = array(t)
 
     s = uncurry(XOr(nt))(t)
     shift(s)

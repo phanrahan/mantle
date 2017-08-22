@@ -1,13 +1,13 @@
-from mantle import FF, Xor2, Xor4
+from mantle import FF, XOr, XOr
 
 def QuadDecoder(A, B):
     AFF = FF()(A)
     BFF = FF()(B)
 
-    dir = Xor2()
+    dir = XOr(2)
     dir(A, BFF)
 
-    ena = Xor4()
+    ena = XOr(4)
     ena(A, B, AFF, BFF)
 
     return dir, ena

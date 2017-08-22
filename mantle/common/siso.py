@@ -7,7 +7,7 @@ def DefineSISO(n, init=0, has_ce=False, has_reset=False, has_set=False):
     """
     Generate Serial-In, Serial-Out shift register.
 
-    I : Bit -> O : Bit
+    I : In(Bit), O : Out(Bit)
     """
 
     class _SISO(Circuit):

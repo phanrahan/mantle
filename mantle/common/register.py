@@ -1,9 +1,11 @@
 from magma import *
 from magma.compatibility import IntegerTypes
+from magma.bitutils import int2seq
 from mantle import FF
 from collections import Sequence
 
 __all__  = ['FFs']
+
 __all__ += ['Register', 'DefineRegister']
 __all__ += ['_RegisterName']
 
@@ -45,7 +47,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_set=False, _typ
 
     Interface
     ---------
-        I : _type(n) -> O : _type(n)
+        I : In(_type(n)), O : Out(_type(n))
     """
     if _type not in {Bits, UInt, SInt}:
         raise ValueError("Argument _type must be Bits, UInt, or SInt")

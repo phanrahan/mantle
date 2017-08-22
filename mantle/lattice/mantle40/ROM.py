@@ -1,11 +1,12 @@
 from collections import Sequence
 from magma import *
+from magma.bitutils import lutinit
 from .LUT import LUT1, LUT2, LUT3, LUT4, LUT5, LUT6, LUT7, LUT8, A0, A1, A2, A3
 from .MUX import Mux2
 
 __all__  = ['ROM1', 'ROM2', 'ROM3', 'ROM4']
 __all__ += ['ROM5', 'ROM6', 'ROM7', 'ROM8']
-__all__ += ['ROMN', 'ROM']
+__all__ += ['ROM']
 
 __all__ += ['ROM16xN']
 
@@ -40,11 +41,11 @@ def ROM8(rom, **kwargs):
 #
 # if n is None: n = lem(rom)
 #
-def ROMN(rom, n=None, **kwargs):
+def ROM(rom, n=None, **kwargs):
     """
     n-bit LUT
 
-    I[n] -> n
+    I : In(Bits(n)), O : Bit
     """
 
     # rom must be a sequence
@@ -73,9 +74,6 @@ def ROMN(rom, n=None, **kwargs):
         return ROM8(rom, **kwargs)
 
     return None
-
-def ROM(rom, **kwargs):
-    return ROMN(rom, **kwargs)
 
 ROMCache = {}
 

@@ -1,5 +1,5 @@
 import six
-from magma.bits import *
+from magma.bitutils import *
 from collections import defaultdict
 
 def simulate_sb_carry(self, value_store, state_store):

@@ -33,7 +33,7 @@ class Mux4(Circuit):
         mux = Mux2()
         mux0(mux4.I[0:2],mux4.S[0]) 
         mux1(mux4.I[2:4],mux4.S[0])
-        mux( array( mux0.O, mux1.O ), mux4.S[1] )
+        mux( array( [mux0.O, mux1.O] ), mux4.S[1] )
         wire( mux.O, mux4.O )
 
 # """Construct a Mux with 8 1-bit inputs."""
@@ -46,7 +46,7 @@ class Mux8(Circuit):
         mux = Mux2()
         mux0(mux8.I[0:4], mux8.S[0:2]) 
         mux1(mux8.I[4:8], mux8.S[0:2])
-        mux( array( mux0.O, mux1.O ), mux8.S[2] )
+        mux( array( [mux0.O, mux1.O] ), mux8.S[2] )
         wire( mux.O, mux8.O )
 
 # """Construct a Mux with 16 1-bit inputs."""
@@ -59,7 +59,7 @@ class Mux16(Circuit):
         mux = Mux2()
         mux0(mux16.I[0:8],  mux16.S[0:3])
         mux1(mux16.I[8:16], mux16.S[0:3])
-        mux( array( mux0.O, mux1.O ), mux16.S[3])
+        mux( array( [mux0.O, mux1.O] ), mux16.S[3])
         wire(mux.O, mux16.O)
 
 def MuxN(height, **kwargs):

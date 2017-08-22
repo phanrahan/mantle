@@ -1,16 +1,16 @@
 from __future__ import division
 from collections import Sequence
 from magma import *
-from magma.bitutils import uint
+from magma.bitutils import int2uint
 from .LUT import LUT
 
 __all__ = ['DefineFlatCascade', 'FlatCascade']
 
 def _Name(n, k, expr):
     if isinstance(expr, Sequence):
-        expr = "_".join(["%X" % uint(e, 1<<k) for e in expr])
+        expr = "_".join(["%X" % int2uint(e, 1<<k) for e in expr])
     else:
-        expr = "%X" % uint(expr, 1<<k)
+        expr = "%X" % int2uint(expr, 1<<k)
     return 'FlatCascade%dx%d_%s' % (n, k, expr)
 
 def DefineFlatCascade(n, k, expr, cin):

@@ -1,11 +1,11 @@
 from magma import *
-from magma.bitutils import uint
+from magma.bitutils import int2uint
 from .LUT import LUT
 
 __all__ = ['DefineCascade', 'Cascade']
 
 def _Name(n, k, expr):
-    expr = uint(expr, 1<<k)
+    expr = int2uint(expr, 1<<k)
     return 'Cascade%dx%d_%X' % (n, k, expr)
 
 #

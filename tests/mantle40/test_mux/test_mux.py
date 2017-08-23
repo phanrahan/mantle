@@ -1,5 +1,5 @@
 import os
-os.environ['MANTLE'] = 'lattice'
+os.environ['MANTLE_TARGET'] = 'ice40'
 from mantle import Mux2, Mux4, Mux8, Mux16, Mux
 
 def test_muxn():

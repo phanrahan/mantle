@@ -29,7 +29,7 @@ endmodule
 
 def test_args():
     a = gates.And(2, name='a')
-    assert repr(a) == 'a = and(name=a)'
+    assert repr(a) == 'a = and(name="a")'
     assert repr(a[0]) == 'a[0]'
     assert repr(a[1]) == 'a[1]'
     assert repr(a[2]) == 'a[2]'

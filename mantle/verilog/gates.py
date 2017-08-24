@@ -19,43 +19,43 @@ def ins(n=2):
 def DefineAnd(n=2):
     return DeclareCircuit(*(['and', '', Out(Bit)] + ins(n)))
 
-def And(n=2):
-    return DefineAnd(n)()
+def And(n=2, **kwargs):
+    return DefineAnd(n)(**kwargs)
 
 
 def DefineNAnd(n=2):
     return DeclareCircuit(*(['nand', '', Out(Bit)] + ins(n)))
 
-def NAnd(n=2):
-    return DefineNAnd(n)()
+def NAnd(n=2, **kwargs):
+    return DefineNAnd(n)(**kwargs)
 
 
 def DefineOr(n=2):
     return DeclareCircuit(*(['or', '', Out(Bit)] + ins(n)))
 
-def Or(n=2):
-    return DefineOr(n)()
+def Or(n=2, **kwargs):
+    return DefineOr(n)(**kwargs)
 
 
 def DefineNOr(n=2):
     return DeclareCircuit(*(['nor', '', Out(Bit)] + ins(n)))
 
-def NOr(n=2):
-    return DefineNOr(n)()
+def NOr(n=2, **kwargs):
+    return DefineNOr(n)(**kwargs)
 
 
 def DefineXOr(n=2):
     return DeclareCircuit(*(['xor', '', Out(Bit)] + ins(n)))
 
-def XOr(n=2):
-    return DefineXOr(n)()
+def XOr(n=2, **kwargs):
+    return DefineXOr(n)(**kwargs)
 
 
 def DefineNXOr(n=2):
     return DeclareCircuit(*(['nxor', '', Out(Bit)] + ins(n)))
 
-def NXOr(n=2):
-    return DefineNXOr(n)()
+def NXOr(n=2, **kwargs):
+    return DefineNXOr(n)(**kwargs)
 
 
 Not = DeclareCircuit('not', '', Out(Bit), '', In(Bit))

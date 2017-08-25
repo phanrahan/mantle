@@ -6,13 +6,11 @@ from ..ice40 import FAMILY, \
 
 from .IO import *
 
+from .MUX import *
 from .LUT import *
 from .ROM import *
-from .MUX import *
 from .BUF import *
 from .FF import *
-
-from .flatcascade import *
 
 from .logic import *
 

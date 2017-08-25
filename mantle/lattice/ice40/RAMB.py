@@ -31,12 +31,38 @@ SB_RAM40_4K = DeclareCircuit("SB_RAM40_4K",
 
 # MASK=0, write-enabled, MASK=1, write-disabled
 
+#
+# N is the number of bits of output
+#
+def init(rom,N,mode=0):
+    # INIT_%x 256 bits = 32 bytes = 64 nibbles
+    params = OrderedDict({})
+    params['WRITE_MODE'] = str(mode)
+    params['READ_MODE'] = str(mode)
+
+    # M is the number of high (>8) address values
+    #  e.g. if N == 8, then there are 2 high address values 
+    M = 16//N
+    for i in range(16):
+        v = 0
+        for b in range(256):
+            col = (b//M)%N
+            # NB. the high address values ocuppy the lowest bit positions
+            row = 256*(b%M) + 16*i + b//16
+            bit = (rom[row] >> col)&1
+            #print('i=%x'%i, 'b=%d'%b, row, col)
+            v |= bit << b
+        key = 'INIT_%X' % i
+        #params[key] = "256'h%064x" % v
+        params[key] = (v, 256)
+    return params
+
 def wireaddr(addr, n):
     for i in range(n):
         wire(0, addr[10-i])
     return addr[0:11-n]
 
-def RAMB(rom, readonly=False):
+def _RAMB(rom, readonly=False):
     ram40 = None
     n = len(rom)
     if   n ==  256: # 256x16
@@ -109,6 +135,7 @@ def RAMB(rom, readonly=False):
             wire(0,WDATA[14])
             wire(0,WDATA[15])
             ram40.WDATA = array([WDATA[3], WDATA[11]])
+
     if readonly:
         wire( 0, ram40.WE    )
         wire( 0, ram40.WCLKE )
@@ -123,38 +150,8 @@ def RAMB(rom, readonly=False):
                                 "RE",    ram40.RE)
     return ram40
 
+def RAMB(ram):
+    return _RAMB(ram, readonly=False)
+
 def ROMB(rom):
-    return RAMB(rom, readonly=True)
-#
-# N is the number of bits of output
-#
-def init(rom,N,mode=0):
-    # INIT_%x 256 bits = 32 bytes = 64 nibbles
-    params = OrderedDict({})
-    params['WRITE_MODE'] = str(mode)
-    params['READ_MODE'] = str(mode)
-
-    # M is the number of high (>8) address values
-    #  e.g. if N == 8, then there are 2 high address values 
-    M = 16//N
-    for i in range(16):
-        v = 0
-        for b in range(256):
-            col = (b//M)%N
-            # NB. the high address values ocuppy the lowest bit positions
-            row = 256*(b%M) + 16*i + b//16
-            bit = (rom[row] >> col)&1
-            #print('i=%x'%i, 'b=%d'%b, row, col)
-            v |= bit << b
-        key = 'INIT_%X' % i
-        #params[key] = "256'h%064x" % v
-        params[key] = (v, 256)
-    return params
-
-if __name__ == '__main__':
-    rom = range(512)
-    for i in range(512):
-        rom[i] = i & 0xff
-
-    ramb = RAMB(rom)
-    print(ramb.interface)
+    return _RAMB(rom, readonly=True)

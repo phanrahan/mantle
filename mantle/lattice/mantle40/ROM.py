@@ -6,9 +6,8 @@ from .MUX import Mux2
 
 __all__  = ['ROM1', 'ROM2', 'ROM3', 'ROM4']
 __all__ += ['ROM5', 'ROM6', 'ROM7', 'ROM8']
-__all__ += ['ROM']
-
-__all__ += ['ROM16xN']
+__all__ += ['ROMN']
+__all__ += ['DefineROM', 'ROM']
 
 # Move the lutinit function to Circuit init
 def ROM1(rom, **kwargs):
@@ -41,12 +40,13 @@ def ROM8(rom, **kwargs):
 #
 # if n is None: n = lem(rom)
 #
-def ROM(rom, n=None, **kwargs):
+def ROMN(rom, height=None, width=None, **kwargs):
     """
     n-bit LUT
 
     I : In(Bits(n)), O : Bit
     """
+    n = height
 
     # rom must be a sequence
     if isinstance(rom, Sequence):
@@ -78,33 +78,34 @@ def ROM(rom, n=None, **kwargs):
 ROMCache = {}
 
 # Rom Module name
-def _ROMName(name, n, data):
-    return '%s%d_%d' % (name, n, abs(hash(__builtin__.tuple(data))))
+def _ROMName(name, height, width, data):
+    return '%s%dx%d_%d' % (name, height, width, abs(hash(__builtin__.tuple(data))))
 
-def DefineROM16xN(rom):
+def DefineROM(rom, height=None, width=8):
     """
     Construct a 16 entry ROM of arbitrary width.
 
-    rom[16][w]
+    rom[height][width]
     """
     assert(len(rom) == 16)
+    if height is None:
+        height = len(rom)
     # transpose - rom must be a sequence of sequences
     rom = zip(*rom)
-    n = len(rom)
 
     # could be different memory contents ...
-    name = _ROMName('ROM16x', n, rom)
+    name = _ROMName('ROM', width, rom)
     if name in ROMCache:
         return ROMCache[name]
 
-    args = ['I', In(Bits(4)), 'O', Out(Bits(n))]
+    args = ['I', In(Bits(4)), 'O', Out(Bits(width))]
 
     define = DefineCircuit(name, *args)
 
     def ROM(y):
         return ROM4(rom[y])
 
-    rom = fork(col(ROM, n))
+    rom = fork(col(ROM, width))
 
     rom(define.I)
     wire(rom.O, define.O)
@@ -117,5 +118,7 @@ def DefineROM16xN(rom):
 #
 # Create a 16xN ROM
 #
-def ROM16xN(rom):
-    return DefineROM16xN(rom)()
+def ROM(rom, height=None, width=8, **kwargs):
+    if width is None:
+        return ROMN(rom, height=height, **kwargs)
+    return DefineROM(rom, height=height, width=width)(**kwargs)

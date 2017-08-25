@@ -49,7 +49,6 @@ SB_LUT4 = DeclareCircuit('SB_LUT4',
                "I2", In(Bit),
                "I3", In(Bit),
                "O",  Out(Bit),
-               cells=1,
                stateful=False,
                simulate=simulate_sb_lut4,
                coreir_lib="ice40") 
@@ -68,7 +67,7 @@ SB_CARRY = DeclareCircuit('SB_CARRY',
 
 # DFF - D Flip-Flop
 SB_DFF = DeclareCircuit('SB_DFF',
-               "C", In(Bit),
+               "C", In(Clock),
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
@@ -77,7 +76,7 @@ SB_DFF = DeclareCircuit('SB_DFF',
 
 # DFF w/ Clock enable
 SB_DFFE = DeclareCircuit('SB_DFFE',
-               "C", In(Bit),
+               "C", In(Clock),
                "E", In(Bit),
                "D", In(Bit),
                "Q", Out(Bit),
@@ -87,7 +86,7 @@ SB_DFFE = DeclareCircuit('SB_DFFE',
 
 # DFF w/ Synchronous Reset
 SB_DFFSR = DeclareCircuit('SB_DFFSR',
-               "C", In(Bit),
+               "C", In(Clock),
                "R", In(Bit), 
                "D", In(Bit),
                "Q", Out(Bit),
@@ -97,7 +96,7 @@ SB_DFFSR = DeclareCircuit('SB_DFFSR',
 
 # DFF w/ Asynchronous Reset
 SB_DFFR = DeclareCircuit('SB_DFFR',
-               "C", In(Bit),
+               "C", In(Clock),
                "R", In(Bit), 
                "D", In(Bit),
                "Q", Out(Bit),
@@ -107,7 +106,7 @@ SB_DFFR = DeclareCircuit('SB_DFFR',
     
 # DFF w/ Synchronous Set
 SB_DFFSS = DeclareCircuit('SB_DFFSS',
-               "C", In(Bit),
+               "C", In(Clock),
                "S", In(Bit), 
                "D", In(Bit),
                "Q", Out(Bit),
@@ -117,7 +116,7 @@ SB_DFFSS = DeclareCircuit('SB_DFFSS',
 
 # DFF w/ Asynchronous Set
 SB_DFFS = DeclareCircuit('SB_DFFS',
-               "C", In(Bit),
+               "C", In(Clock),
                "S", In(Bit), 
                "D", In(Bit),
                "Q", Out(Bit),
@@ -127,7 +126,7 @@ SB_DFFS = DeclareCircuit('SB_DFFS',
     
 # DFF w/ Synchronous Reset, Clock enable
 SB_DFFESR = DeclareCircuit('SB_DFFESR',
-               "C", In(Bit),
+               "C", In(Clock),
                "R", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
@@ -138,7 +137,7 @@ SB_DFFESR = DeclareCircuit('SB_DFFESR',
 
 # DFF w/ Asynchronous Reset, Clock enable
 SB_DFFER = DeclareCircuit('SB_DFFER',
-               "C", In(Bit),
+               "C", In(Clock),
                "R", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
@@ -149,7 +148,7 @@ SB_DFFER = DeclareCircuit('SB_DFFER',
     
 # DFF w/ Synchronous Set, Clock enable
 SB_DFFESS = DeclareCircuit('SB_DFFESS',
-               "C", In(Bit),
+               "C", In(Clock),
                "S", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
@@ -160,7 +159,7 @@ SB_DFFESS = DeclareCircuit('SB_DFFESS',
 
 # DFF w/ Asynchronous Set, Clock enable
 SB_DFFES = DeclareCircuit('SB_DFFES',
-               "C", In(Bit),
+               "C", In(Clock),
                "S", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
@@ -171,7 +170,7 @@ SB_DFFES = DeclareCircuit('SB_DFFES',
 
 # Negative edge versions
 SB_DFFN = DeclareCircuit('SB_DFFN',
-               "C", In(Bit),
+               "C", In(Clock),
                "D", In(Bit),
                "Q", Out(Bit),
                stateful=True,
@@ -180,7 +179,7 @@ SB_DFFN = DeclareCircuit('SB_DFFN',
 
 # DFFN w/ Clock enable
 SB_DFFNE = DeclareCircuit('SB_DFFNE',
-               "C", In(Bit),
+               "C", In(Clock),
                "E", In(Bit),
                "D", In(Bit),
                "Q", Out(Bit),
@@ -190,7 +189,7 @@ SB_DFFNE = DeclareCircuit('SB_DFFNE',
 
 # DFFN w/ Synchronous Reset
 SB_DFFNSR = DeclareCircuit('SB_DFFNSR',
-               "C", In(Bit),
+               "C", In(Clock),
                "R", In(Bit), 
                "D", In(Bit),
                "Q", Out(Bit),
@@ -200,7 +199,7 @@ SB_DFFNSR = DeclareCircuit('SB_DFFNSR',
 
 # DFFN w/ Asynchronous Reset
 SB_DFFNR = DeclareCircuit('SB_DFFNR',
-               "C", In(Bit),
+               "C", In(Clock),
                "R", In(Bit), 
                "D", In(Bit),
                "Q", Out(Bit),
@@ -210,7 +209,7 @@ SB_DFFNR = DeclareCircuit('SB_DFFNR',
     
 # DFFN w/ Synchronous Set
 SB_DFFNSS = DeclareCircuit('SB_DFFNSS',
-               "C", In(Bit),
+               "C", In(Clock),
                "S", In(Bit), 
                "D", In(Bit),
                "Q", Out(Bit),
@@ -220,7 +219,7 @@ SB_DFFNSS = DeclareCircuit('SB_DFFNSS',
 
 # DFFN w/ Asynchronous Set
 SB_DFFNS = DeclareCircuit('SB_DFFNS',
-               "C", In(Bit),
+               "C", In(Clock),
                "S", In(Bit), 
                "D", In(Bit),
                "Q", Out(Bit),
@@ -230,7 +229,7 @@ SB_DFFNS = DeclareCircuit('SB_DFFNS',
     
 # DFFN w/ Synchronous Reset, Clock enable
 SB_DFFNESR = DeclareCircuit('SB_DFFNESR',
-               "C", In(Bit),
+               "C", In(Clock),
                "R", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
@@ -241,7 +240,7 @@ SB_DFFNESR = DeclareCircuit('SB_DFFNESR',
 
 # DFFN w/ Asynchronous Reset, Clock enable
 SB_DFFNER = DeclareCircuit('SB_DFFNER',
-               "C", In(Bit),
+               "C", In(Clock),
                "R", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
@@ -252,7 +251,7 @@ SB_DFFNER = DeclareCircuit('SB_DFFNER',
     
 # DFFN w/ Synchronous Set, Clock enable
 SB_DFFNESS = DeclareCircuit('SB_DFFNESS',
-               "C", In(Bit),
+               "C", In(Clock),
                "S", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
@@ -263,7 +262,7 @@ SB_DFFNESS = DeclareCircuit('SB_DFFNESS',
 
 # DFFN w/ Asynchronous Set, Clock enable
 SB_DFFNES = DeclareCircuit('SB_DFFNES',
-               "C", In(Bit),
+               "C", In(Clock),
                "S", In(Bit), 
                "E", In(Bit), 
                "D", In(Bit),
@@ -272,6 +271,3 @@ SB_DFFNES = DeclareCircuit('SB_DFFNES',
                simulate=gen_sb_dff_sim(ce=True, sy=False, r=False, s=True, n=True),
                coreir_lib="ice40")
 
-if __name__ == '__main__':
-    lut = SB_LUT4()
-    print(lut.interface)

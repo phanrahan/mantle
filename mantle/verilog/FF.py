@@ -1,8 +1,8 @@
-from magma import DefineCircuit, EndCircuit, In, Out, Bit
+from magma import DefineCircuit, EndCircuit, In, Out, Bit, Clock
 
 __all__ = ['DFF', 'FF']
 
-_DFF = DefineCircuit('DFF', "D", In(Bit), "CLK", In(Bit), "Q", Out(Bit) )
+_DFF = DefineCircuit('DFF', "D", In(Bit), "CLK", In(Clock), "Q", Out(Bit) )
 _DFF.verilog = '''\
     always @(posedge CLK) begin
         Q <= D;

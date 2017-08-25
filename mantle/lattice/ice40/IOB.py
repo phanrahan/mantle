@@ -10,8 +10,8 @@ SB_IO= DeclareCircuit("SB_IO",
                         'D_IN_0', In(Bit), # rising
                         'D_IN_1', In(Bit), # falling
                         'D_OUT_0', Out(Bit), # rising
-                        'D_OUT_1', Out(Bit), # falling
-                        cells=1)
+                        'D_OUT_1', Out(Bit) # falling
+                     )
 
 #module top (input PIO1_02, output D1);
 #wire y;

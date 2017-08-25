@@ -34,7 +34,6 @@ def SB_PLL( freqout, freqin=12000000 ):
 
     return AnonymousCircuit("I", pll.REFERENCECLK,
                             "O", pll.PLLOUTGLOBAL)
-                            #"output O", pll.PLLOUTCORE)
 
 def filterrange(freqin, divr, divf):
     pfd = freqin / (divr + 1)

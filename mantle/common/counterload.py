@@ -5,8 +5,6 @@ from .decode import Decode
 
 __all__ = ['DefineCounterLoad', 'CounterLoad']
 
-CounterCache = {}
-
 def _CounterName(name, n, ce, r, s):
     name += '%d' % n
     if ce: name += 'CE'
@@ -22,8 +20,6 @@ def _CounterName(name, n, ce, r, s):
 def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has_reset=False, has_set=False):
 
     name = _CounterName('CounterLoad', n, has_ce, has_reset, has_set)
-    if name in CounterCache:
-         return CounterCache[name]
 
     args = []
     args += ['DATA', In(Bits(n))]
@@ -67,7 +63,6 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
 
     EndCircuit()
 
-    CounterCache[name] = Counter
     return Counter
 
 def CounterLoad(n, cin=False, cout=True, incr=1, 

@@ -9,8 +9,6 @@ __all__ += ['DefineDownCounter', 'DownCounter']
 __all__ += ['DefineUpDownCounter', 'UpDownCounter']
 
 
-CounterCache = {}
-
 def _CounterName(name, n, ce, r, s):
     name += '%d' % n
     if ce: name += 'CE'
@@ -23,12 +21,11 @@ def _CounterName(name, n, ce, r, s):
 #
 # O : Out(UInt(n)), COUT : Out(Bit)
 #
+@cache_definition
 def DefineCounter(n, cin=False, cout=True, incr=1, next=False, 
     has_ce=False, has_reset=False, has_set=False):
 
     name = _CounterName('Counter', n, has_ce, has_reset, has_set)
-    if name in CounterCache:
-         return CounterCache[name]
 
     args = []
     if cin:
@@ -65,7 +62,6 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
 
     EndCircuit()
 
-    CounterCache[name] = Counter
     return Counter
 
 def Counter(n, cin=False, cout=True, incr=1, next=False, 
@@ -103,8 +99,6 @@ def DefineUpDownCounter(n, cout=True, next=False,
     has_ce=False, has_reset=False, has_set=False):
 
     name = _CounterName('UpDownCounter', n, has_ce, has_reset, has_set)
-    if name in CounterCache:
-         return CounterCache[name]
 
     args = []
 
@@ -140,7 +134,6 @@ def DefineUpDownCounter(n, cout=True, next=False,
 
     EndCircuit()
 
-    CounterCache[name] = Counter
     return Counter
 
 def UpDownCounter(n, cout=True, next=False, 

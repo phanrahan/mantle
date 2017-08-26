@@ -75,12 +75,11 @@ def ROMN(rom, height=None, width=None, **kwargs):
 
     return None
 
-ROMCache = {}
-
 # Rom Module name
 def _ROMName(name, height, width, data):
     return '%s%dx%d_%d' % (name, height, width, abs(hash(__builtin__.tuple(data))))
 
+@cache_definition
 def DefineROM(rom, height=None, width=8):
     """
     Construct a 16 entry ROM of arbitrary width.
@@ -95,8 +94,6 @@ def DefineROM(rom, height=None, width=8):
 
     # could be different memory contents ...
     name = _ROMName('ROM', width, rom)
-    if name in ROMCache:
-        return ROMCache[name]
 
     args = ['I', In(Bits(4)), 'O', Out(Bits(width))]
 
@@ -112,7 +109,6 @@ def DefineROM(rom, height=None, width=8):
 
     EndCircuit()
 
-    ROMCache[name] = define
     return define
 
 #

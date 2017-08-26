@@ -7,8 +7,6 @@ __all__ = ['DefineUpCounterModM', 'UpCounterModM']
 #__all__ += ['DefineDownCounterModM', 'DownCounterModM']
 __all__ += ['DefineCounterModM', 'CounterModM']
 
-CounterCache = {}
-
 def _CounterName(name, n, ce, r, s):
     name += '%d' % n
     if ce: name += 'CE'
@@ -19,14 +17,12 @@ def _CounterName(name, n, ce, r, s):
 #
 # Create an n-bit mod-m counter
 #
-def DefineUpCounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
+def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
     has_ce=False):
 
     r = False
     s = False
     name = _CounterName('CounterModM', n, has_ce, r, s)
-    if name in CounterCache:
-         return CounterCache[name]
 
     args = []
     if cin:
@@ -71,12 +67,11 @@ def DefineUpCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     EndCircuit()
 
-    CounterCache[name] = CounterModM
     return CounterModM
 
-def UpCounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
+def CounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
     has_ce=False, **kwargs):
     return DefineCounterModM(m, n, cin, cout, incr, next, has_ce)(**kwargs)
 
-DefineCounterModM = DefineUpCounterModM
-CounterModM = UpCounterModM
+DefineUpCounterModM = DefineCounterModM
+UpCounterModM = CounterModM

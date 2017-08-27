@@ -138,17 +138,25 @@ def _RAMB(rom, readonly=False):
 
     if readonly:
         wire( 0, ram40.WE    )
-        wire( 0, ram40.WCLKE )
         wire( array(11*[0]), ram40.WADDR )
         wire( array(16*[0]), ram40.WDATA )
+    wire(0 if readonly else 1, ram40.WCLKE )
+    wire(1, ram40.RCLKE)
     wire(array(16*[0]), ram40.MASK)
     if readonly:
         return AnonymousCircuit("RADDR", ram40.RADDR,
                                 "RDATA", ram40.RDATA,
                                 "RCLK",  ram40.RCLK,
-                                "RCLKE", ram40.RCLKE,
                                 "RE",    ram40.RE)
-    return ram40
+    else:
+        return AnonymousCircuit("RADDR", ram40.RADDR,
+                                "RDATA", ram40.RDATA,
+                                "RCLK",  ram40.RCLK,
+                                "RE",    ram40.RE,
+                                "WADDR", ram40.WADDR,
+                                "WDATA", ram40.WDATA,
+                                "WCLK",  ram40.WCLK,
+                                "WE",    ram40.WE)
 
 def RAMB(ram):
     return _RAMB(ram, readonly=False)

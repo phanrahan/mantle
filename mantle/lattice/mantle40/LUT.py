@@ -6,7 +6,7 @@ from ..ice40.PLB import SB_LUT4, A0, A1, A2, A3
 
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
-__all__ += ['LUT']
+__all__ += ['LUTN', 'LUT']
 __all__ += ['A0', 'A1', 'A2', 'A3']
 
 
@@ -107,7 +107,7 @@ def LUT8(rom, **kwargs):
                             "I7", I7,
                             "O", mux.O)
 
-def LUT(rom, n=None, **kwargs):
+def LUTN(rom, n=None, **kwargs):
     """
     n-bit LUT
 
@@ -140,5 +140,6 @@ def LUT(rom, n=None, **kwargs):
 
     return None
 
+LUT = LUTN
 
 

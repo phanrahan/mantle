@@ -40,14 +40,12 @@ def ROM8(rom, **kwargs):
 #
 # if n is None: n = lem(rom)
 #
-def ROMN(rom, height=None, width=None, **kwargs):
+def ROMN(rom, n=None, **kwargs):
     """
     n-bit LUT
 
     I : In(Bits(n)), O : Bit
     """
-    n = height
-
     # rom must be a sequence
     if isinstance(rom, Sequence):
         assert n is None

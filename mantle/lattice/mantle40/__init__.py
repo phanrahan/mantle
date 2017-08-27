@@ -9,6 +9,7 @@ from .IO import *
 from .MUX import *
 from .LUT import *
 from .ROM import *
+
 from .BUF import *
 from .FF import *
 
@@ -19,5 +20,7 @@ from .fulladder import *
 from .adder import *
 from .arith import *
 from .compare import *
+
+from .memory import Memory
 
 print('import mantle lattice mantle40')

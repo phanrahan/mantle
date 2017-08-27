@@ -6,9 +6,9 @@ __all__ = ['Adders', 'DefineAdders']
 AdderCache = {}
 
 def _AdderName(n, cin, cout):
-    return "Add{}{}{}".format(
-        "cin"  if cin  else "",
-        "cout" if cout else "",
+    return "Adder{}{}{}".format(
+        "Cin"  if cin  else "",
+        "Cout" if cout else "",
         n
     )
 

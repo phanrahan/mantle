@@ -1,7 +1,7 @@
 from collections import Sequence
 from magma import *
 from magma.compatibility import IntegerTypes
-from magma.bitutils import lutinit
+from magma.bitutils import lutinit, int2seq
 from ..ice40.PLB import SB_LUT4, A0, A1, A2, A3
 
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']

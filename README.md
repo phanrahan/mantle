@@ -64,7 +64,7 @@ export MANTLE_TARGET=ice40
 
 
 # Setup
-* Follow [these instructions](https://github.com/phanrahan/magma#installation) to install magma
+* Follow [these instructions](https://github.com/phanrahan/magma#setup) to install magma
 ```
 $ git clone https://github.com/phanrahan/mantle
 $ cd mantle

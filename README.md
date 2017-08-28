@@ -1,5 +1,5 @@
 # Mantle
-[![Build Status](https://travis-ci.com/phanrahan/mantle.svg?token=BftLM4kSr1QfgPspi6aF&branch=master)](https://travis-ci.com/phanrahan/mantle)
+[![Build Status](https://travis-ci.org/phanrahan/mantle.svg?branch=master)](https://travis-ci.org/phanrahan/mantle)
 
 Mantle is part of the Magma ecosystem
 of python programming tools for FPGAs.

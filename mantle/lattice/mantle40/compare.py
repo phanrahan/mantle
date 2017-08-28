@@ -6,7 +6,7 @@ from .logic import Not
 
 __all__  = ['EQ', 'NE']
 __all__ += ['ULT', 'ULE', 'UGT', 'UGE']
-#__all__ += ['LT',  'LE',  'GT',  'GE']
+#__all__ += ['SLT',  'SLE',  'SGT',  'SGE']
 
 EQ1LUT = ((A0&A1)|(~A0&~A1))
 EQ2LUT = ((A0&A1)|(~A0&~A1)) & ((A2&A3)|(~A2&~A3))
@@ -71,15 +71,15 @@ def UGE(n, **kwargs):
     return AnonymousCircuit("I0", sub.I0, "I1", sub.I1, "O", sub.COUT)
 
 
-def LT(n, **kwargs):
+def SLT(n, **kwargs):
     return None
 
-def LE(n, **kwargs):
+def SLE(n, **kwargs):
     return None
 
-def GT(n, **kwargs):
+def SGT(n, **kwargs):
     return None
 
-def GE(n, **kwargs):
+def SGE(n, **kwargs):
     return None
 

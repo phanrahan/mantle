@@ -1,3 +1,5 @@
+## Memory
+
 ### Lookup Tables (LUTs)
 
 The fundamental combinational primitive in an FPGA 
@@ -90,13 +92,13 @@ rom = ROM(init, height, width) :: I:Bits(n)  ->  O:Bit
 
 ### RAM
 
-# NYI
+RAM circuits are NYI.
+
 ```
 # DefineRAM :: I:Bits(n)  ->  O:Bit
 RAM = DefineRAM(init, height, width)
 ```
 
-# NYI
 ```
 # RAM :: I:Bits(n)  ->  O:Bit
 rom = RAM(init, height, width) :: I:Bits(n)  ->  O:Bit

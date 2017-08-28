@@ -1,20 +1,45 @@
-[Logical Operators](logic.md)
+## Mantle
 
-[Arithmetic Operators](arith.md)
+Mantle can be configured to synthesize low-level primitives
+for a particular FPGA.
 
-[Comparison Operators](compare.md)
+For example, to use mantle with the Lattice ice40,
+set the `MANTLE_TARGET`  environment variable.
+```bash
+export MANTLE_TARGET=ice40
+```
 
-[Multiplexers](mux.md)
+The default configuration is to generate generic verilog.
 
-[Decoders and Encoders](decode.md)
 
-[Register](register.md)
+### Combinational Logic
 
-[Counters](counter.md)
+- [Logical Operators](logic.md)
 
-[Shift Registers](shift.md)
+- [Arithmetic Operators](arith.md)
 
-[LUTs, ROMs, RAMs, and Memory](memory.md)
+- [Comparison Operators](compare.md)
 
-[ICE40 Primitives](ice40.md)
+- [Multiplexers](mux.md)
+
+- [Decoders, Encoders, and Arbiters](decode.md)
+
+
+### Sequential Logic
+
+- [Register and Flip-FLops](register.md)
+
+- [Counters](counter.md)
+
+- [Shift Registers](shift.md)
+
+
+### Memory
+
+- [LUTs, ROMs, RAMs, and Memory](memory.md)
+
+
+### Primitives
+
+- [ICE40 Primitives](ice40.md)
 

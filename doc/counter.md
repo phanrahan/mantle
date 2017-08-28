@@ -1,25 +1,28 @@
 ### Counters
 
-Create an n-bit up counter, 
-with optional `CE` (clock enable), `RESET`, and `SET`.
+Counter consists of an adder connected to a register.
+The adder is combinational and is computing the next value
+by incrementing the current value.
+Normally the output of the counter is the register,
+but by setting `next=True`, the output is the adder.
+
+The counters have flags to control whether the
+adder has carry in or carry out.
+The `COUT` will be true if the current value is generating a carry.
+For example, an 8-bit counter will generate a COUT 
+when the count equals 255.
+
+Since counters contain state,
+they have optional `CE` (clock enable), `RESET`, and `SET` inputs.
 `CLK` is always included.
 
+
+Create an n-bit up counter, 
 ```
 # UpCounter :: O:Out(Bits(n), COUT:Out(Bit)
 UpCounter(n, cin=False, cout=True, incr=1, next=False, 
     has_ce=False, has_r=False, has_s=False)
 ```
-
-The counter consists of an adder connected to a register.
-The adder is combinational and is computing the next value
-of the counter by incrementing the current value.
-Normally the output of the counter is the register,
-but by setting `next=True`, the output is the adder.
-
-The adder also generates a carry, `COUT`.
-`COUT` will be true if the current value is generating a carry.
-For example, an 8-bit counter will generate a COUT 
-when the count equals 255.
 
 ```
 # DownCounter :: O:Out(Bits(n), COUT:Out(Bit)

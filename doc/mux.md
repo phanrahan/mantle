@@ -1,6 +1,6 @@
 ### Multiplexers
 
-The simplest MUXes select amongts a small number of inputs.
+The basic multiplixers select an array bits.
 ```I``` is an array of n 1-bit values, or ```Bits(n)```
 ```S``` is the selector; it has ```log(n)``` bits.
 
@@ -13,10 +13,13 @@ mux = Mux16() :: I:In(Bits(16)), S:In(Bits(4)), O:Out(Bit)
 
 A more general MUX selects amongst ```height``` inputs
 each with a given ```width```.
-
 ```
-mux = Mux(height, width) :: 
-    I:Array(height, Bits(width)),
-    S:Array(log(height), Bits(width)),
+mux = Mux(height=2, width=None) :: 
+    I0:In(Bits(width)),
+    I1:In(Bits(width)),
+    ...
+    In:In(Bits(width)), # n=log2(height)
+    S:Bits(log2(height)),
     O:Out(Bits(width))
 ```
+For height=1, `S` has type `Bit`.

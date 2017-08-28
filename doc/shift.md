@@ -1,6 +1,5 @@
-# Mantle
-
 ### Shift Registers
+
 ```
 # SISO :: I:In(Bit), O:Out(Bit)
 SISO(n, init=1, has_ce=False, has_reset=False, has_set=False)
@@ -21,14 +20,14 @@ PISO(n, init=1, has_ce=False, has_reset=False, has_set=False)
 PIPO(n, init=1, has_ce=False, has_reset=False, has_set=False)
 ```
 
-## Ring
+### Ring Counter
 
 ```
 # Ring :: O:Out(Bits(n))
 Ring(n, init=1, has_ce=False, has_reset=False, has_set=False)
 ```
 
-# Johnson Counter
+### Johnson Counter
 
 ```
 # Johnson :: O:Out(Bits(n))

@@ -1,9 +1,3 @@
-# Mantle
-
-Mantle is a library of parameterized hardware primitives.
-
-## LUTs, ROMs, and RAMs 
-
 ### Lookup Tables (LUTs)
 
 The fundamental combinational primitive in an FPGA 
@@ -63,8 +57,7 @@ lut = LUT6(init) :: I0:Bit, I1:Bit, I2:Bit, ..., I5:Bit -> O:Bit
 lut = LUT7(init) :: I0:Bit, I1:Bit, I2:Bit, ..., I6:Bit -> O:Bit
 lut = LUT8(init) :: I0:Bit, I1:Bit, I2:Bit, ..., I7:Bit -> O:Bit
 
-lut = LUTN(init, n) :: I0:Bit, ..., In:Bit -> O:Bit
-lut = LUT(init) :: I0:Bit, ..., In:Bit -> O:Bit
+lut = LUTN(init, n=None) :: I0:Bit, ..., In:Bit -> O:Bit
 ```
 
 ### ROM
@@ -73,67 +66,61 @@ The ```ROM``` functions are very similar to the ```LUT``` functions.
 The only difference is the the types of the inputs.
 The ```LUT``` versions take n input arguments of type Bit.
 The ```ROM``` versions of these functions take
-a single input, an ```Array(n,Bit)```.
+a single input, an ```Bits(n)```.
 
 ```
-rom = ROM1(init) :: I:Array(1, Bit) -> O:Bit
-rom = ROM2(init) :: I:Array(2, Bit) -> O:Bit
-rom = ROM3(init) :: I:Array(3, Bit) -> O:Bit
-rom = ROM4(init) :: I:Array(4, Bit) -> O:Bit
-rom = ROM5(init) :: I:Array(5, Bit) -> O:Bit
-rom = ROM6(init) :: I:Array(6, Bit) -> O:Bit
-rom = ROM7(init) :: I:Array(7, Bit) -> O:Bit
-rom = ROM8(init) :: I:Array(8, Bit) -> O:Bit
-
-rom = ROMN(init, n) :: I:Array(n, Bit)  ->  O:Bit
-rom = ROM(init) :: I:Array(n, Bit)  -> O:Bit
+rom = ROM1(init) :: I:Bits(1) -> O:Bit
+rom = ROM2(init) :: I:Bits(2) -> O:Bit
+rom = ROM3(init) :: I:Bits(3) -> O:Bit
+rom = ROM4(init) :: I:Bits(4) -> O:Bit
+rom = ROM5(init) :: I:Bits(5) -> O:Bit
+rom = ROM6(init) :: I:Bits(6) -> O:Bit
+rom = ROM7(init) :: I:Bits(7) -> O:Bit
+rom = ROM8(init) :: I:Bits(8) -> O:Bit
+rom = ROMN(init, n=None) :: I:Bits(n)  ->  O:Bit
 ```
 
 ```
-defrom = DefineROM16XN(rom) :: I:Array(16, Bit) -> O:Array(n, Bit)
-rom = ROM16XN(rom) :: I:Array(16, Bit) -> O:Array(n, Bit)
-```
+# DefineROM :: I:Bits(n)  ->  O:Bit
+ROM = DefineROM(init, height, width)
 
+# ROM :: I:Bits(n)  ->  O:Bit
+rom = ROM(init, height, width) :: I:Bits(n)  ->  O:Bit
+```
 
 ### RAM
 
+# NYI
 ```
-# RAM16x1 :: A:Array4, I:Bit, WE:Bit -> O:Bit
-ram = RAM16X1(ram)
-
-# RAM16x2 :: A:Array4, I0:Bit:Bit, I1:Bit:Bit, WE:Bit -> O:Bit0:Bit, O:Bit1:Bit
-ram = RAM16x2(ram)
+# DefineRAM :: I:Bits(n)  ->  O:Bit
+RAM = DefineRAM(init, height, width)
+```
 
 # NYI
-# RAM16xN :: A:Array4, I:Array(n,Bit), WE:Bit -> O:Bit:Array(n,Bit)
-ram = RAM16xN(ram)
+```
+# RAM :: I:Bits(n)  ->  O:Bit
+rom = RAM(init, height, width) :: I:Bits(n)  ->  O:Bit
 ```
 
-```
-# RAM16Dx1 :: A0:Array4, A1:Array4, I:Bit, WE:Bit -> O:Bit0:Bit, O:Bit1:Bit
-ram = RAM16Dx1(ram)
-
-#
-# RAMN6Dx1 :: A0:Array4, A1:Array4, I:Bit, WE:Bit 
-#              -> O:Bit0:Array(n,Bit), O:Bit1:Array(n,Bit)
-ram = RAM16DxN(ram)
-```
+### Memory
 
 ```
-# NYI 
-# RAM32x1 :: A:Array5, I:Bit, WE:Bit -> O:Bit
-RAM32x1(ram)
-```
+# if readonly:
+#   ROM :: 
+#    "RDATA", Out(Bits(height)),
+#    "RADDR", In(Bits(width)),
+#    "RCLK",  In(Clock),
+#    "RE",    In(Bit)
+# else:
+#   RAM :: 
+#    "RDATA", Out(Bits(16)),
+#    "RADDR", In(Bits(11)),
+#    "RCLK",  In(Clock),
+#    "RE",    In(Bit),
+#    "WADDR", In(Bits(11)),
+#    "WDATA", In(Bits(16))
+#    "WCLK",  In(Clock),
+#    "WE",    In(Bit),
 
-### Blocked ROM and RAM
-
+rom = Mem( rom, height, width, readonly=False )
 ```
-# ROMB :: A:Array(height,Bit) -> O:Bit:Array(width,Bit)
-rom = ROMB( rom, width, init=None )
-```
-
-```
-# NYI
-ram = RAMB( ram, width, init=None )
-```
-

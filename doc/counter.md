@@ -1,13 +1,14 @@
-# Mantle
-
 ### Counters
 
-Counters have a ```COUT```.
+Create an n-bit up counter, 
+with optional `CE` (clock enable), `RESET`, and `SET`.
+`CLK` is always included.
+
 ```
-# Counter :: O:Out(Bits(n), COUT:Out(Bit)
-Counter(n, next=False, has_ce=False, has_r=False, has_s=False)
+# UpCounter :: O:Out(Bits(n), COUT:Out(Bit)
+UpCounter(n, cin=False, cout=True, incr=1, next=False, 
+    has_ce=False, has_r=False, has_s=False)
 ```
-Create an n-bit counter, with optional `CE` (clock enable), `RESET`, and `SET`.
 
 The counter consists of an adder connected to a register.
 The adder is combinational and is computing the next value
@@ -21,17 +22,26 @@ For example, an 8-bit counter will generate a COUT
 when the count equals 255.
 
 ```
-# UpDownCounter :: Up:Bit, Down  Bit -> O:Array[n, Bit], COUT:Bit
-UpDownCounter(n, next=False, ce=False, r=False, s=False)
+# DownCounter :: O:Out(Bits(n), COUT:Out(Bit)
+DownCounter(n, cin=False, cout=True, incr=1, next=False, 
+    has_ce=False, has_r=False, has_s=False)
+```
+
+```
+# UpDownCounter :: Up:In(Bit), Down:In(Bit), O:Out(Bits(n)), COUT:Out(Bit)
+UpDownCounter(n, cout=True, next=False, ce=False, r=False, s=False)
 ```
 Generate an up-down counter.
 The counter is incremented by (Up-Down).
 
 ```
-counter = CounterModN(m, n)
+# CounterModM :: O:Out(Bits(n), COUT:Out(Bit)
+counter = CounterModN(m, n, cin=False, cout=True, incr=1, next=False, has_ce=False)
 ```
-Counter clears when count equals m-1.
+Counter wraps around to 0 when count equals m-1.
+
 
 ```
-counter = CounterIncr(n)
-```
+# CounterLoad :: DATA:In(Bits(n), LOAD:In(Bit), O:Out(Bits(n), COUT:Out(Bit)
+counter = CounterLoad(n, cin=False, cout=True, incr=1,
+            has_ce=False, has_reset=False, has_set=False)

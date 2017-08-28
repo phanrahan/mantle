@@ -24,7 +24,7 @@ before_install:
 
 install: 
     - pip install -r requirements.txt
-    - git clone git@github.com:phanrahan/magma.git
+    - git clone https://github.com/phanrahan/magma
     - pip install -e magma
     - pip install pytest-cov
     - pip install fabricate

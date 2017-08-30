@@ -18,7 +18,7 @@ def DefineBuf(width=1):
         @classmethod
         def definition(def_):
             def buf(y):
-                return Buf(loc=(0,y/8, y%8))
+                return Buf(loc=(0,y//8, y%8))
             buffer = join(col(buf, width))
             wire(def_.I, buffer.I0)
             wire(buffer.O, def_.O)

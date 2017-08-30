@@ -8,7 +8,7 @@ of python programming tools for FPGAs.
 is a programming model for building hardware.
 The main abstraction in Magma is a Circuit.
 Circuits are created and then wired together.
-Magma circuits can be saved as structual verilog files.
+Magma circuits can be saved as structural verilog files.
 
 [Mantle](https://github.com/phanrahan/mantle)
 is a library of useful circuits.
@@ -31,7 +31,7 @@ Currently, Mantle supports generic verilog
 and the Lattice ice40
 (and its open source [icestorm](http://www.clifford.at/icestorm/) toolchain).
 A Xilinx (spartan3, spartan6, zynq) backends will be released soon.
-An Alterna backend is in the works.
+An Altera backend is in the works.
 
 ## Documentation
 

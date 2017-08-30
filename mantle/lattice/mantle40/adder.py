@@ -37,7 +37,7 @@ def DefineAdders(n, cin, cout, forkargs=[]):
     Adders = DefineCircuit( name, *args )
 
     def f(y):
-        return FullAdder(loc=(0,y/8, y%8))
+        return FullAdder(loc=(0,y//8, y%8))
 
     c = braid( col(f, n), foldargs={"CIN":"COUT"}, forkargs=forkargs)
 

@@ -9,6 +9,7 @@ from .IO import *
 from .MUX import *
 from .LUT import *
 from .ROM import *
+#from .RAM import *
 
 from .BUF import *
 from .FF import *

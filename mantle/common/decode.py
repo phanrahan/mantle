@@ -1,4 +1,3 @@
-#from magma import *
 from mantle import ROM1, ROM2, ROM3, ROM4, ROM5, ROM6, ROM7, ROM8
 
 __all__  = ['Decode']

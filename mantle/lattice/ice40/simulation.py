@@ -23,6 +23,8 @@ def simulate_sb_lut4(self, value_store, state_store):
         i = int(a[1][1:], base)
         init = lutinit(i, l)
 
+    if isinstance(init, int):
+        init = (init, 16)
     lut = int2seq(init[0], init[1])
     lut = [bool(i) for i in lut]
     inputs = self.interface.inputs()
@@ -154,7 +156,7 @@ def gen_sb_ram40_4k_sim(prc=True, pwc=True):
 
         r_e = value_store.get_value(self.RE)
         r_clke = value_store.get_value(self.RCLKE)
-        r_data = state_store['rdata']
+        r_data = state_store['r_data']
 
         if r_e and r_clock_edge and r_clke:
             idx = n_r_blocks * seq2int(r_addr)

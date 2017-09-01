@@ -139,7 +139,7 @@ def DefineMux(height=2, width=1):
         def definition(Mux):
             def amux(y):
                 if height == 2:
-                    return curry(MuxN(height, loc=(0,y/8,y%8)), prefix='I')
+                    return curry(MuxN(height, loc=(0,y//8,y%8)), prefix='I')
                 return curry(MuxN(height), prefix='I')
             mux = braid(col(amux, width), forkargs=['S'])
 

@@ -15,19 +15,19 @@ def _CounterName(name, n, ce, r, s):
 #
 # Create an n-bit counter with increment and load
 #
-#   DATA : In(Bits(n)), LOAD : In(Bit), O : Out(Bits(n)), COUT : Out(Bit)
+#   DATA : In(UInt(n)), LOAD : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
 #
 def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has_reset=False, has_set=False):
 
     name = _CounterName('CounterLoad', n, has_ce, has_reset, has_set)
 
     args = []
-    args += ['DATA', In(Bits(n))]
+    args += ['DATA', In(UInt(n))]
     args += ['LOAD', In(Bit)]
     if cin:
         args += ['CIN', In(Bit)]
 
-    args += ["O", Out(Bits(n))]
+    args += ["O", Out(UInt(n))]
     if cout:
         args += ["COUT", Out(Bit)]
 

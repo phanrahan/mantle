@@ -23,7 +23,7 @@ def DefineFlatCascade(n, k, expr, cin):
         def definition(cascade):
             def f(y):
                 e = expr[y] if isinstance(expr, Sequence) else expr
-                return LUT( e, n=k+1, loc=(0,y/8, y%8) )
+                return LUT( e, n=k+1, loc=(0,y//8, y%8) )
 
             m = (n+k-1) // k
             #c = braid( col(f, m), flatargs=['I1','I2','I3'], foldargs={"I0":"O"})

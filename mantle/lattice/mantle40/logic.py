@@ -54,7 +54,7 @@ def DefineAnd(height=2, width=None):
         @classmethod
         def definition(def_):
             def andm(y):
-                return AndN(height, loc=(0,y/8, y%8))
+                return AndN(height, loc=(0,y//8, y%8))
             andmxn = join(col(andm, width))
             wire(def_.I0, andmxn.I0)
             wire(def_.I1, andmxn.I1)

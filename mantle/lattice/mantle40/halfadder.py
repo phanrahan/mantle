@@ -5,7 +5,6 @@ from .LUT import LUT2
 __all__  = ["HalfAdder", 'halfadder']
 
 class HalfAdder(Circuit):
-    name = "HalfAdder"
     IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit), "COUT", Out(Bit)]
     @classmethod
     def definition(io):
@@ -14,6 +13,6 @@ class HalfAdder(Circuit):
         wire( sum(io.I0,io.I1), io.O )
         wire( carry(io.I0,io.I1,0), io.COUT )
 
-def halfadder(A, B, **kwargs):
-    return HalfAdder()(A, B, **kwargs)
+def halfadder(a, b, **kwargs):
+    return HalfAdder()(a, b, **kwargs)
 

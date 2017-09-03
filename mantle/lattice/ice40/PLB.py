@@ -55,9 +55,9 @@ SB_LUT4 = DeclareCircuit('SB_LUT4',
 
 # Implements (I0&I1)|(I1&I2)|(I2&I0)
 SB_CARRY = DeclareCircuit('SB_CARRY',
-               "I0", In(Bit), # from I1
-               "I1", In(Bit), # from I2
-               "CI", In(Bit),
+               "I0", In(Bit), # must be the same as SB_LUT4 I1 to pack
+               "I1", In(Bit), # must be the same as SB_LUT4 I2 to pack
+               "CI", In(Bit), # must be from previous SB_LUT4 to pack
                "CO", Out(Bit),
                stateful=False,
                simulate=simulate_sb_carry,

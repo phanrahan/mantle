@@ -5,7 +5,6 @@ from .LUT import LUT3
 __all__  = ["FullAdder", 'fulladder']
 
 class FullAdder(Circuit):
-    name = "FullAdder"
     IO = ["I0", In(Bit), "I1", In(Bit), "CIN", In(Bit), "O", Out(Bit), "COUT", Out(Bit)]
     @classmethod
     def definition(io):
@@ -14,5 +13,5 @@ class FullAdder(Circuit):
         wire( sum(io.I0,io.I1,io.CIN), io.O )
         wire( carry(io.I0,io.I1,io.CIN), io.COUT )
 
-def fulladder(A, B, CIN, **kwargs):
-    return FullAdder()(A, B, CIN, **kwargs)
+def fulladder(a, b, c, **kwargs):
+    return FullAdder()(a, b, c, **kwargs)

@@ -3,8 +3,7 @@ import pytest
 coreir = pytest.importorskip("coreir")
 from magma import *
 from magma.testing import check_files_equal
-os.environ["MANTLE"] = "coreir"
-from mantle import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, ReduceXOr
+from mantle.coreir import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, ReduceXOr
 
 
 def test_coreir_bit():

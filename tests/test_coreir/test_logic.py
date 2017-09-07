@@ -5,6 +5,7 @@ from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, ReduceXOr
 from mantle.coreir import NAnd, NOr, NXOr, ReduceNAnd, ReduceNOr, ReduceNXOr
+from mantle.coreir import LeftShift, RightShift, DynamicLeftShift, DynamicRightShift
 
 
 def test_coreir_bit():
@@ -111,6 +112,36 @@ def test_reduce_2():
     compile("build/test_coreir_reduce_2", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
             "build/test_coreir_reduce_2.json", "gold/test_coreir_reduce_2.json")
+
+
+def test_static_shift():
+    width = 4
+    class TestCircuit(Circuit):
+        name = "test_coreir_static_shift"
+        IO = ["a", In(Bits(width)), "b", In(Bits(width)), "c", Out(Bits(width))]
+        @classmethod
+        def definition(circuit):
+            c = Or(2, width)(LeftShift(width, 2)()(circuit.a),
+                             RightShift(width, 3)()(circuit.b))
+            wire(c, circuit.c)
+    compile("build/test_coreir_static_shift", TestCircuit, output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_coreir_static_shift.json", "gold/test_coreir_static_shift.json")
+
+
+def test_dynamic_shift():
+    width = 4
+    class TestCircuit(Circuit):
+        name = "test_coreir_dynamic_shift"
+        IO = ["a", In(Bits(width)), "b", In(UInt(width)), "c", Out(Bits(width))]
+        @classmethod
+        def definition(circuit):
+            c = Or(2, width)(DynamicLeftShift(width)(circuit.a, circuit.b),
+                             DynamicRightShift(width)(circuit.a, circuit.b))
+            wire(c, circuit.c)
+    compile("build/test_coreir_dynamic_shift", TestCircuit, output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_coreir_dynamic_shift.json", "gold/test_coreir_dynamic_shift.json")
 
 # def test_coreir_uint():
 #     class TestCircuit(Circuit):

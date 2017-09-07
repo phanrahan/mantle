@@ -1,10 +1,7 @@
 from magma import *
+from magma.compatibility import IntegerTypes
 import operator
 from functools import reduce
-
-
-# # logical shifts
-# __all__ += ['LeftShift', 'RightShift']
 
 
 @cache_definition
@@ -301,3 +298,95 @@ def Invert(width=None, **kwargs):
 
 def invert(arg, **kwargs):
     return Invert(get_length(arg), **kwargs)(arg)
+
+
+@cache_definition
+def DefineDynamicLeftShift(width):
+    T = Bits(width)
+    def simulate(self, value_store, state_store):
+        in0 = BitVector(value_store.get_value(self.in0))
+        in1 = BitVector(value_store.get_value(self.in1))
+        out = (in0 << in1).as_bool_list()
+        value_store.set_value(self.out, out)
+
+    return DeclareCircuit("dshl{}".format(width), 'in0', In(T), 'in1',
+            In(UInt(width)), 'out', Out(T), verilog_name="coreir_dshl",
+            coreir_name="dshl", coreir_lib="coreir", simulate=simulate,
+            default_kwargs={"width": width})
+
+
+def DynamicLeftShift(width, **kwargs):
+    return DefineDynamicLeftShift(width)(**kwargs)
+
+
+def dynamic_left_shift(I0, I1, **kwargs):
+    if not get_length(I0) == get_length(I1):
+        raise ValueError("All arguments should have the same length")
+    width = get_length(I0)
+    return DynamicLeftShift(width, **kwargs)(I0, I1)
+
+
+@cache_definition
+def LeftShift(width, amount):
+    if width < 2:
+        raise ValueError("LeftShift width should be at least 2")
+    if not isinstance(amount, IntegerTypes):
+        raise TypeError("LeftShift not implemented for argument 2 of type {}".format(
+            type(amount)))
+    if amount < 0:
+        raise ValueError("If second argument to LeftShift is an integer, it"
+                " must be positive, not {}".format(amount))
+
+    T = Bits(width)
+    circ = DefineCircuit("LeftShift{}{}".format(width, amount),
+        "in", In(T), "out", Out(T))
+    out = DynamicLeftShift(width)(getattr(circ, "in"), uint(amount, width))
+    wire(out, circ.out)
+    EndDefine()
+    return circ
+
+
+@cache_definition
+def DefineDynamicRightShift(width):
+    T = Bits(width)
+    def simulate(self, value_store, state_store):
+        in0 = BitVector(value_store.get_value(self.in0))
+        in1 = BitVector(value_store.get_value(self.in1))
+        out = (in0 << in1).as_bool_list()
+        value_store.set_value(self.out, out)
+
+    return DeclareCircuit("dshl{}".format(width), 'in0', In(T), 'in1',
+            In(UInt(width)), 'out', Out(T), verilog_name="coreir_dshl",
+            coreir_name="dshl", coreir_lib="coreir", simulate=simulate,
+            default_kwargs={"width": width})
+
+
+def DynamicRightShift(width, **kwargs):
+    return DefineDynamicRightShift(width)(**kwargs)
+
+
+def dynamic_right_shift(I0, I1, **kwargs):
+    if not get_length(I0) == get_length(I1):
+        raise ValueError("All arguments should have the same length")
+    width = get_length(I0)
+    return DynamicRightShift(width, **kwargs)(I0, I1)
+
+
+@cache_definition
+def RightShift(width, amount):
+    if width < 2:
+        raise ValueError("RightShift width should be at least 2")
+    if not isinstance(amount, IntegerTypes):
+        raise TypeError("RightShift not implemented for argument 2 of type {}".format(
+            type(amount)))
+    if amount < 0:
+        raise ValueError("If second argument to RightShift is an integer, it"
+                " must be positive, not {}".format(amount))
+
+    T = Bits(width)
+    circ = DefineCircuit("RightShift{}{}".format(width, amount),
+        "in", In(T), "out", Out(T))
+    out = DynamicRightShift(width)(getattr(circ, "in"), uint(amount, width))
+    wire(out, circ.out)
+    EndDefine()
+    return circ

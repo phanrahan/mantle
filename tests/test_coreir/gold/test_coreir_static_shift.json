@@ -1,0 +1,165 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "LeftShift42": {
+          "connections": [
+            [
+              "inst0.in1.3",
+              "bit_const_GND.out"
+            ],
+            [
+              "inst0.in1.2",
+              "bit_const_GND.out"
+            ],
+            [
+              "inst0.in1.1",
+              "bit_const_VCC.out"
+            ],
+            [
+              "inst0.in1.0",
+              "bit_const_GND.out"
+            ],
+            [
+              "self.out",
+              "inst0.out"
+            ],
+            [
+              "self.in",
+              "inst0.in0"
+            ]
+          ],
+          "instances": {
+            "bit_const_GND": {
+              "configargs": {
+                "value": 0
+              },
+              "modref": "coreir.bitconst"
+            },
+            "bit_const_VCC": {
+              "configargs": {
+                "value": 1
+              },
+              "modref": "coreir.bitconst"
+            },
+            "inst0": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.dshl"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "out": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        },
+        "RightShift43": {
+          "connections": [
+            [
+              "self.out",
+              "inst0.out"
+            ],
+            [
+              "self.in",
+              "inst0.in0"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.dshl"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "out": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        },
+        "test_coreir_static_shift": {
+          "connections": [
+            [
+              "self.c",
+              "inst0.out"
+            ],
+            [
+              "self.b",
+              "inst2.in"
+            ],
+            [
+              "self.a",
+              "inst1.in"
+            ],
+            [
+              "inst2.out",
+              "inst0.in1"
+            ],
+            [
+              "inst1.out",
+              "inst0.in0"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.or"
+            },
+            "inst1": {
+              "modref": "global.LeftShift42"
+            },
+            "inst2": {
+              "modref": "global.RightShift43"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "a": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "b": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "c": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.test_coreir_static_shift"
+}

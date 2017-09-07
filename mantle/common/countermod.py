@@ -17,6 +17,7 @@ def _CounterName(name, n, ce, r, s):
 #
 # Create an n-bit mod-m counter
 #
+@cache_definition
 def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
     has_ce=False):
 

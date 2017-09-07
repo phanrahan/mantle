@@ -5,11 +5,10 @@ from .decode import Decode
 
 __all__ = ['DefineCounterLoad', 'CounterLoad']
 
-def _CounterName(name, n, ce, r, s):
+def _CounterName(name, n, ce, r):
     name += '%d' % n
     if ce: name += 'CE'
     if r:  name += 'R'
-    if s:  name += 'S'
     return name
 
 #
@@ -17,9 +16,10 @@ def _CounterName(name, n, ce, r, s):
 #
 #   DATA : In(UInt(n)), LOAD : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
 #
-def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has_reset=False, has_set=False):
+@cache_definition
+def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has_reset=False):
 
-    name = _CounterName('CounterLoad', n, has_ce, has_reset, has_set)
+    name = _CounterName('CounterLoad', n, has_ce, has_reset)
 
     args = []
     args += ['DATA', In(UInt(n))]
@@ -31,13 +31,13 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
     if cout:
         args += ["COUT", Out(Bit)]
 
-    args += ClockInterface(has_ce, has_reset, has_set)
+    args += ClockInterface(has_ce, has_reset)
 
     Counter = DefineCircuit(name, *args)
 
     add = Adders(n, cin=cin, cout=cout)
     mux = Mux(2, n)
-    reg = Register(n, has_ce=has_ce, has_reset=has_reset, has_set=has_set)
+    reg = Register(n, has_ce=has_ce, has_reset=has_reset)
 
     wire( reg.O, add.I0 )
     wire( array(incr, n), add.I1 )
@@ -66,9 +66,9 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
     return Counter
 
 def CounterLoad(n, cin=False, cout=True, incr=1, 
-        has_ce=False, has_reset=False, has_set=False, **kwargs):
+        has_ce=False, has_reset=False, **kwargs):
     """Construct a n-bit counter."""
     return DefineCounterLoad(n, cin=cin, cout=cout, incr=incr, next=next, 
-               has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)
+               has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 

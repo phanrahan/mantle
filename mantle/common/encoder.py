@@ -10,6 +10,7 @@ __all__ = ['DefineEncoder', 'Encoder']
 #
 # NB. The current implementation only works for n<=8
 #
+@cache_definition
 def DefineEncoder(n):
     assert n <= 8
     logn = log2(n)

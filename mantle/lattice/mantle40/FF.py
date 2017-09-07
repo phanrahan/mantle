@@ -10,9 +10,10 @@ __all__  += ['FF']
 #
 # TODO: add async=True, edge=True (also negedge)
 #
-def DFF(init=0, has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **kwargs):
+def DFF(init=0, has_ce=False, has_reset=False, edge=True, sync=True, **kwargs):
 
-    assert not (has_reset and has_set)
+    # has_set not supported
+    has_set = False
 
     # By default
     #  not connecting a wire to D defaults to 0
@@ -108,8 +109,8 @@ def DFF(init=0, has_ce=False, has_reset=False, has_set=False, edge=True, sync=Tr
         args += ['CE', ff.E]
     if has_reset:
         args += ['RESET', ff.R]
-    if has_set:
-        args += ['SET', ff.S]
+    #if has_set:
+    #    args += ['SET', ff.S]
 
     args += ['O', O]
 
@@ -155,11 +156,11 @@ def RSFF(init=0, has_ce=False, edge=True, sync=True, **kwargs):
     return AnonymousCircuit(args)
 
 
-def JKFF(has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **kwargs):
+def JKFF(has_ce=False, has_reset=False, edge=True, sync=True, **kwargs):
 
     """A J-K flip-flop."""
 
-    dff = FF(has_ce=has_ce, has_reset=has_reset, has_set=has_set, edge=edge, sync=sync, **kwargs)
+    dff = FF(has_ce=has_ce, has_reset=has_reset, edge=edge, sync=sync, **kwargs)
     lut = LUT3( (~I0&I1)|(I0&~I2), **kwargs )
     dff(lut)
 
@@ -168,15 +169,15 @@ def JKFF(has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **k
     args = ["J", lut.I1, "K", lut.I2, "O", dff.O, 'CLK', dff.CLK]
     if has_ce:     args += ['CE', dff.CE]
     if has_reset:  args += ['RESET', dff.R]
-    if has_set:    args += ['SET', dff.S]
+    #if has_set:    args += ['SET', dff.S]
     return AnonymousCircuit(*args)
 
 
-def TFF(has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **kwargs):
+def TFF(has_ce=False, has_reset=False, edge=True, sync=True, **kwargs):
 
     """A T flip-flop."""
 
-    tff = FF(has_ce=has_ce, has_reset=has_reset, has_set=has_set, edge=edge, sync=sync, **kwargs)
+    tff = FF(has_ce=has_ce, has_reset=has_reset, edge=edge, sync=sync, **kwargs)
     lut = LUT2( I0^I1, **kwargs )
     tff(lut)
 
@@ -185,6 +186,6 @@ def TFF(has_ce=False, has_reset=False, has_set=False, edge=True, sync=True, **kw
     args = ["I", lut.I1, "O", tff.O, "CLK", tff.CLK]
     if has_ce:    args += ['CE', dff.CE]
     if has_reset: args += ['RESET', dff.R]
-    if has_set:   args += ['SET', dff.S]
+    #if has_set:   args += ['SET', dff.S]
     return AnonymousCircuit(*args)
 

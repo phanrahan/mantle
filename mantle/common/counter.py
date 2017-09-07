@@ -9,11 +9,10 @@ __all__ += ['DefineDownCounter', 'DownCounter']
 __all__ += ['DefineUpDownCounter', 'UpDownCounter']
 
 
-def _CounterName(name, n, ce, r, s):
+def _CounterName(name, n, ce, r):
     name += '%d' % n
     if ce: name += 'CE'
     if r:  name += 'R'
-    if s:  name += 'S'
     return name
 
 #
@@ -23,9 +22,9 @@ def _CounterName(name, n, ce, r, s):
 #
 @cache_definition
 def DefineCounter(n, cin=False, cout=True, incr=1, next=False, 
-    has_ce=False, has_reset=False, has_set=False):
+    has_ce=False, has_reset=False):
 
-    name = _CounterName('Counter', n, has_ce, has_reset, has_set)
+    name = _CounterName('Counter', n, has_ce, has_reset)
 
     args = []
     if cin:
@@ -35,12 +34,12 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
     if cout:
         args += ["COUT", Out(Bit)]
 
-    args += ClockInterface(has_ce, has_reset, has_set)
+    args += ClockInterface(has_ce, has_reset)
 
     Counter = DefineCircuit(name, *args)
 
     add = Adders(n, cin=cin, cout=cout)
-    reg = Register(n, has_ce=has_ce, has_reset=has_reset, has_set=has_set)
+    reg = Register(n, has_ce=has_ce, has_reset=has_reset)
 
     wire( reg.O, add.I0 )
     wire( array(incr, n), add.I1 )
@@ -65,10 +64,10 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
     return Counter
 
 def Counter(n, cin=False, cout=True, incr=1, next=False, 
-             has_ce=False, has_reset=False, has_set=False, **kwargs):
+             has_ce=False, has_reset=False, **kwargs):
     """Construct a n-bit up counter."""
     return DefineUpCounter(n, cin=cin, cout=cout, incr=incr, next=next, 
-               has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)
+               has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 DefineUpCounter = DefineCounter
 UpCounter = Counter
@@ -79,15 +78,15 @@ UpCounter = Counter
 # O : Out(UInt(n)), COUT : Out(Bit)
 #
 def DefineDownCounter(n, cin=False, cout=True, decr=1, next=False, 
-    has_ce=False, has_reset=False, has_set=False):
+    has_ce=False, has_reset=False):
     incr = (1 << n) - (decr)
     return DefineCounter(n, cin=cin, cout=cout, incr=incr, next=False, 
-               has_ce=has_ce, has_reset=has_reset, has_set=has_set)
+               has_ce=has_ce, has_reset=has_reset)
 
 def DownCounter(n, cin=False, cout=True, decr=1, next=False, 
-    has_ce=False, has_reset=False, has_set=False, **kwargs):
+    has_ce=False, has_reset=False, **kwargs):
     return DefineDownCounter(n, cin=cin, cout=cout, decr=decr, next=next, 
-               has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)
+               has_ce=has_ce, has_reset=has_reset)(**kwargs)
               
 
 #
@@ -96,9 +95,9 @@ def DownCounter(n, cin=False, cout=True, decr=1, next=False,
 # U : In(Bit), D : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
 #
 def DefineUpDownCounter(n, cout=True, next=False, 
-    has_ce=False, has_reset=False, has_set=False):
+    has_ce=False, has_reset=False):
 
-    name = _CounterName('UpDownCounter', n, has_ce, has_reset, has_set)
+    name = _CounterName('UpDownCounter', n, has_ce, has_reset)
 
     args = []
 
@@ -109,12 +108,12 @@ def DefineUpDownCounter(n, cout=True, next=False,
     if cout:
         args += ["COUT", Out(Bit)]
 
-    args += ClockInterface(has_ce, has_reset, has_set)
+    args += ClockInterface(has_ce, has_reset)
 
     Counter = DefineCircuit(name, *args)
 
     add = Adders(n, cin=True, cout=cout)
-    reg = Register(n, has_ce=has_ce, has_reset=has_reset, has_set=has_set)
+    reg = Register(n, has_ce=has_ce, has_reset=has_reset)
 
     wire( reg.O, add.I0 )
     wire( array(n*[Counter.D]), add.I1 )
@@ -137,9 +136,9 @@ def DefineUpDownCounter(n, cout=True, next=False,
     return Counter
 
 def UpDownCounter(n, cout=True, next=False, 
-                    has_ce=False, has_reset=False, has_set=False, **kwargs):
+                    has_ce=False, has_reset=False, **kwargs):
     """Construct an n-bit updown counter."""
     return DefineUpDownCounter(n, cout=cout, next=next, 
-                 has_ce=has_ce, has_reset=has_reset, has_set=has_set)(**kwargs)
+                 has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 

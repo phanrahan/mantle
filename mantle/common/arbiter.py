@@ -8,6 +8,7 @@ __all__ = ['DefineArbiter', 'Arbiter']
 # an Arbiter returns an array with only a single bit set,
 # in this case the lowest bit set is retained
 #
+@cache_definition
 def DefineArbiter(n):
 
     T = Bits(n)

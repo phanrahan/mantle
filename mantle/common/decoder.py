@@ -3,6 +3,7 @@ from .decode import Decode
 
 __all__  = ['Decoder']
 
+@cache_definition
 def DefineDecoder(n, invert=False):
     """
     n-bit to 2^n decoder.

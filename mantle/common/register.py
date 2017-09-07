@@ -14,21 +14,20 @@ __all__ += ['_RegisterName']
 #
 # Each FF may have a ce, r, and s signal.
 #
-def FFs(n, init=0, has_ce=False, has_reset=False, has_set=False):
+def FFs(n, init=0, has_ce=False, has_reset=False):
     if isinstance(init, IntegerTypes):
         init = int2seq(init, n)
 
     def f(y):
-        return FF(init[y], has_ce=has_ce, has_reset=has_reset, has_set=has_set)
+        return FF(init[y], has_ce=has_ce, has_reset=has_reset)
 
     return col(f, n)
 
 ## Register module name
-def _RegisterName(name, n, init, ce, r, s):
+def _RegisterName(name, n, init, ce, r):
     name += str(n)
     if ce: name += 'CE'
     if r:  name += 'R'
-    if s:  name += 'S'
 
     if isinstance(init, Sequence):
          init = seq2int(init)
@@ -37,7 +36,8 @@ def _RegisterName(name, n, init, ce, r, s):
     return name
 
 
-def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_set=False, _type=Bits):
+@cache_definition
+def DefineRegister(n, init=0, has_ce=False, has_reset=False, _type=Bits):
     """
     Generate an n-bit register
 
@@ -53,16 +53,16 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_set=False, _typ
         raise ValueError("Argument _type must be Bits, UInt, or SInt")
     T = _type(n)
     class _Register(Circuit):
-        name = _RegisterName('Register', n, init, has_ce, has_reset, has_set)
-        IO  = ['I', In(T), 'O', Out(T)] + ClockInterface(has_ce,has_reset,has_set)
+        name = _RegisterName('Register', n, init, has_ce, has_reset)
+        IO  = ['I', In(T), 'O', Out(T)] + ClockInterface(has_ce,has_reset)
         @classmethod
         def definition(reg):
-            ffs = join(FFs(n, init, has_ce, has_reset, has_set))
+            ffs = join(FFs(n, init, has_ce, has_reset))
             wire(reg.I, ffs.I)
             wire(ffs.O, reg.O)
             wireclock(reg, ffs)
     return _Register
 
-def Register(n, init=0, has_ce=False, has_reset=False, has_set=False, **kwargs):
-    return DefineRegister(n, init, has_ce, has_reset, has_set)(**kwargs)
+def Register(n, init=0, has_ce=False, has_reset=False, **kwargs):
+    return DefineRegister(n, init, has_ce, has_reset)(**kwargs)
 

@@ -3,24 +3,12 @@ import operator
 from functools import reduce
 
 
-# binary operators
-__all__  = ['DefineAnd', 'And', 'ReduceAnd']
-# __all__ += ['DefineNAnd', 'NAnd', 'ReduceNAnd']
-__all__ += ['DefineOr', 'Or', 'ReduceOr']
-# __all__ += ['DefineNOr', 'NOr', 'ReduceNOr']
-__all__ += ['DefineXOr', 'XOr', 'ReduceXOr']
-# __all__ += ['DefineNXOr', 'NXOr', 'ReduceNXOr']
-# 
-# # unary operators
-# __all__ += ['DefineInvert', 'Invert']
-__all__ += ['DefineNot', 'Not']
-# 
 # # logical shifts
 # __all__ += ['LeftShift', 'RightShift']
 
 
 @cache_definition
-def DefineFoldOp(DefineOp, op, height, width):
+def DefineFoldOp(DefineOp, name, height, width):
     if width is None:
         T = Bit
     else:
@@ -29,7 +17,7 @@ def DefineFoldOp(DefineOp, op, height, width):
     for i in range(height):
         IO += ["in{}".format(i), In(T)]
     IO += ["out", Out(T)]
-    circ = DefineCircuit("fold_{}{}{}".format(op, height, width), *IO)
+    circ = DefineCircuit("fold_{}{}{}".format(name, height, width), *IO)
     reduce_args = [getattr(circ, "in{}".format(i)) for i in range(height)]
     Op2 = DefineOp(2, width)
     wire(reduce(lambda x, y: Op2()(x, y), reduce_args), circ.out)
@@ -103,6 +91,43 @@ def and_(*args, **kwargs):
     return And(len(args), width, **kwargs)(*args)
 
 
+@cache_definition
+def DefineNAnd(height=2, width=None):
+    if width is None:
+        T = Bit
+    else:
+        T = Bits(width)
+    IO = []
+    for i in range(height):
+        IO += ["in{}".format(i), In(T)]
+    IO += ["out", Out(T)]
+    circ = DefineCircuit("NAnd{}{}".format(height, width),
+        *IO)
+    inputs = [getattr(circ, 'in{}'.format(i)) for i in range(height)]
+    if width is None:
+        inv = Not()
+    else:
+        inv = Invert(width)
+    out = inv(And(height, width)(*inputs))
+    wire(out, circ.out)
+    EndDefine()
+    return circ
+
+
+def NAnd(height, width=None, **kwargs):
+    return DefineNAnd(height, width)(**kwargs)
+
+def ReduceNAnd(height=2, **kwargs):
+    return uncurry(NAnd(height, **kwargs), prefix="in")
+
+
+def nand(*args, **kwargs):
+    width = get_length(args[0])
+    if not all(get_length(x) == width for x in args):
+        raise ValueError("All arguments should have the same length")
+    return NAnd(len(args), width, **kwargs)(*args)
+
+
 def simulate_bit_not(self, value_store, state_store):
     _in = BitVector(value_store.get_value(getattr(self, "in")))
     out = (~_in).as_bool_list()[0]
@@ -152,6 +177,43 @@ def or_(*args, **kwargs):
     return Or(len(args), width, **kwargs)(*args)
 
 
+@cache_definition
+def DefineNOr(height=2, width=None):
+    if width is None:
+        T = Bit
+    else:
+        T = Bits(width)
+    IO = []
+    for i in range(height):
+        IO += ["in{}".format(i), In(T)]
+    IO += ["out", Out(T)]
+    circ = DefineCircuit("NOr{}{}".format(height, width),
+        *IO)
+    inputs = [getattr(circ, 'in{}'.format(i)) for i in range(height)]
+    if width is None:
+        inv = Not()
+    else:
+        inv = Invert(width)
+    out = inv(Or(height, width)(*inputs))
+    wire(out, circ.out)
+    EndDefine()
+    return circ
+
+
+def NOr(height, width=None, **kwargs):
+    return DefineNOr(height, width)(**kwargs)
+
+def ReduceNOr(height=2, **kwargs):
+    return uncurry(NOr(height, **kwargs), prefix="in")
+
+
+def nor(*args, **kwargs):
+    width = get_length(args[0])
+    if not all(get_length(x) == width for x in args):
+        raise ValueError("All arguments should have the same length")
+    return NOr(len(args), width, **kwargs)(*args)
+
+
 DefineCoreirXOr = declare_bits_binop("xor", operator.xor)
 
 
@@ -180,6 +242,43 @@ def ReduceXOr(height=2, **kwargs):
     return uncurry(XOr(height, **kwargs), prefix="in")
 
 
+@cache_definition
+def DefineNXOr(height=2, width=None):
+    if width is None:
+        T = Bit
+    else:
+        T = Bits(width)
+    IO = []
+    for i in range(height):
+        IO += ["in{}".format(i), In(T)]
+    IO += ["out", Out(T)]
+    circ = DefineCircuit("NXOr{}{}".format(height, width),
+        *IO)
+    inputs = [getattr(circ, 'in{}'.format(i)) for i in range(height)]
+    if width is None:
+        inv = Not()
+    else:
+        inv = Invert(width)
+    out = inv(XOr(height, width)(*inputs))
+    wire(out, circ.out)
+    EndDefine()
+    return circ
+
+
+def NXOr(height, width=None, **kwargs):
+    return DefineXOr(height, width)(**kwargs)
+
+
+def nxor(*args, **kwargs):
+    width = get_length(args[0])
+    if not all(get_length(x) == width for x in args):
+        raise ValueError("All arguments should have the same length")
+    return NXOr(len(args), width, **kwargs)(*args)
+
+def ReduceNXOr(height=2, **kwargs):
+    return uncurry(NXOr(height, **kwargs), prefix="in")
+
+
 def simulate_bits_invert(self, value_store, state_store):
     _in = BitVector(value_store.get_value(getattr(self, "in")))
     out = (~_in).as_bool_list()
@@ -188,7 +287,7 @@ def simulate_bits_invert(self, value_store, state_store):
 @cache_definition
 def DefineInvert(width):
     T = Bits(width)
-    return DeclareCircuit("Invert{}".format(width), 
+    return DeclareCircuit("Invert{}".format(width),
             'in', In(T), 'out', Out(T),
             simulate       = simulate_bits_invert,
             verilog_name   = "coreir_not",

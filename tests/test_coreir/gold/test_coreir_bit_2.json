@@ -1,0 +1,133 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "NAnd2None": {
+          "connections": [
+            [
+              "self.out",
+              "inst0.out"
+            ],
+            [
+              "self.in1",
+              "inst1.in1"
+            ],
+            [
+              "self.in0",
+              "inst1.in0"
+            ],
+            [
+              "inst1.out",
+              "inst0.in"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "coreir.bitnot"
+            },
+            "inst1": {
+              "modref": "coreir.bitand"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in0": "BitIn",
+              "in1": "BitIn",
+              "out": "Bit"
+            }
+          ]
+        },
+        "NOr2None": {
+          "connections": [
+            [
+              "self.out",
+              "inst0.out"
+            ],
+            [
+              "self.in1",
+              "inst1.in1"
+            ],
+            [
+              "self.in0",
+              "inst1.in0"
+            ],
+            [
+              "inst1.out",
+              "inst0.in"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "coreir.bitnot"
+            },
+            "inst1": {
+              "modref": "coreir.bitor"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in0": "BitIn",
+              "in1": "BitIn",
+              "out": "Bit"
+            }
+          ]
+        },
+        "test_coreir_bit_2": {
+          "connections": [
+            [
+              "self.d",
+              "inst0.out"
+            ],
+            [
+              "self.c",
+              "inst2.in1"
+            ],
+            [
+              "self.b",
+              "inst2.in0"
+            ],
+            [
+              "self.b",
+              "inst1.in1"
+            ],
+            [
+              "self.a",
+              "inst1.in0"
+            ],
+            [
+              "inst2.out",
+              "inst0.in1"
+            ],
+            [
+              "inst1.out",
+              "inst0.in0"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "global.NOr2None"
+            },
+            "inst1": {
+              "modref": "global.NAnd2None"
+            },
+            "inst2": {
+              "modref": "coreir.bitxor"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "a": "BitIn",
+              "b": "BitIn",
+              "c": "BitIn",
+              "d": "Bit"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.test_coreir_bit_2"
+}

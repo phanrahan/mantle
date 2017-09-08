@@ -4,17 +4,14 @@ from ..ice40.PLB import *
 from .LUT import LUT2, LUT3
 from .logic import Not
 
-__all__   = ['DFF', 'SRFF', 'RSFF', 'JKFF', 'TFF']
+__all__   = ['DefineDFF', 'DFF']
+__all__  += ['SRFF', 'RSFF', 'JKFF', 'TFF']
 __all__  += ['FF']
 
-#
-# TODO: add async=True, edge=True (also negedge)
-#
-def DFF(init=0, has_ce=False, has_reset=False, edge=True, sync=True, **kwargs):
-
+def DefineDFF(has_ce=False, has_reset=False, edge=True, sync=True):
     # has_set not supported
     has_set = False
-
+    
     # By default
     #  not connecting a wire to D defaults to 0
     #  not connecting a wire to C defaults to 0
@@ -28,68 +25,75 @@ def DFF(init=0, has_ce=False, has_reset=False, edge=True, sync=True, **kwargs):
             # synchronous reset
             if has_ce:
                 if   has_reset:
-                    ff = SB_DFFESR(**kwargs)
+                    return SB_DFFESR
                 elif has_set:
-                    ff = SB_DFFESS(**kwargs)
+                    return SB_DFFESS
                 else:
-                    ff = SB_DFFE(**kwargs)
+                    return SB_DFFE
             else:
                 if   has_reset:
-                    ff = SB_DFFSR(**kwargs)
+                    return SB_DFFSR
                 elif has_set:
-                    ff = SB_DFFSS(**kwargs)
+                    return SB_DFFSS
                 else:
-                    ff = SB_DFF(**kwargs)
+                    return SB_DFF
         else:
             # asynchronous reset
             if has_ce:
                 if   has_reset:
-                    ff = SB_DFFER(**kwargs)
+                    return SB_DFFER
                 elif has_s:
-                    ff = SB_DFFES(**kwargs)
+                    return SB_DFFES
                 else:
-                    ff = SB_DFFE(**kwargs)
+                    return SB_DFFE
             else:
                 if   has_reset:
-                    ff = SB_DFFR(**kwargs)
+                    return SB_DFFR
                 elif has_set:
-                    ff = SB_DFFS(**kwargs)
+                    return SB_DFFS
                 else:
-                    ff = SB_DFF(**kwargs)
+                    return SB_DFF
     else:
         # falling edge
         if sync:
             # synchronous reset
             if has_ce:
                 if   has_reset:
-                    ff = SB_DFFNESR(**kwargs)
+                    return SB_DFFNESR
                 elif has_set:
-                    ff = SB_DFFNESS(**kwargs)
+                    return SB_DFFNESS
                 else:
-                    ff = SB_DFFNE(**kwargs)
+                    return SB_DFFNE
             else:
                 if   has_reset:
-                    ff = SB_DFFNSR(**kwargs)
+                    return SB_DFFNSR
                 elif has_set:
-                    ff = SB_DFFNSS(**kwargs)
+                    return SB_DFFNSS
                 else:
-                    ff = SB_DFFN(**kwargs)
+                    return SB_DFFN
         else:
             # asynchronous reset
             if has_ce:
                 if   has_reset:
-                    ff = SB_DFFNER(**kwargs)
+                    return SB_DFFNER
                 elif has_set:
-                    ff = SB_DFFNES(**kwargs)
+                    return SB_DFFNES
                 else:
-                    ff = SB_DFFNE(**kwargs)
+                    return SB_DFFNE
             else:
                 if   has_reset:
-                    ff = SB_DFFNR(**kwargs)
+                    return SB_DFFNR
                 elif has_set:
-                    ff = SB_DFFNS(**kwargs)
+                    return SB_DFFNS
                 else:
-                    ff = SB_DFFN(**kwargs)
+                    return SB_DFFN
+
+#
+# TODO: add async=True, edge=True (also negedge)
+#
+def DFF(init=0, has_ce=False, has_reset=False, edge=True, sync=True, **kwargs):
+
+    ff = DefineDFF(has_ce, has_reset, edge, sync)(**kwargs)
 
     I = ff.D
     O = ff.Q

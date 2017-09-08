@@ -362,6 +362,7 @@ def dynamic_right_shift(I0, I1, **kwargs):
     return DynamicRightShift(width, **kwargs)(I0, I1)
 
 
+@cache_definition
 def DefineStaticLeftShift(width, shift_amount):
     T = Bits(width)
     class _StaticLeftShift(Circuit):
@@ -382,6 +383,7 @@ def static_left_shift(arg, shift_amount, **kwargs):
     width = get_length(arg)
     return StaticLeftShift(width, shift_amount, **kwargs)(arg)
 
+@cache_definition
 def DefineStaticRightShift(width, shift_amount):
     T = Bits(width)
     class _StaticRightShift(Circuit):

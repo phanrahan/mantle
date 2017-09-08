@@ -2,31 +2,23 @@
   "namespaces": {
     "global": {
       "modules": {
-        "StaticLeftShift42": {
+        "StaticLeftShift_42": {
           "connections": [
             [
-              "inst0.in1.3",
+              "self.O.3",
               "bit_const_GND.out"
             ],
             [
-              "inst0.in1.2",
+              "self.O.2",
               "bit_const_GND.out"
             ],
             [
-              "inst0.in1.1",
-              "bit_const_VCC.out"
+              "self.O.1",
+              "self.I.3"
             ],
             [
-              "inst0.in1.0",
-              "bit_const_GND.out"
-            ],
-            [
-              "self.out",
-              "inst0.out"
-            ],
-            [
-              "self.in",
-              "inst0.in0"
+              "self.O.0",
+              "self.I.2"
             ]
           ],
           "instances": {
@@ -35,29 +27,17 @@
                 "value": 0
               },
               "modref": "coreir.bitconst"
-            },
-            "bit_const_VCC": {
-              "configargs": {
-                "value": 1
-              },
-              "modref": "coreir.bitconst"
-            },
-            "inst0": {
-              "genargs": {
-                "width": 4
-              },
-              "genref": "coreir.dshl"
             }
           },
           "type": [
             "Record",
             {
-              "in": [
+              "I": [
                 "Array",
                 4,
                 "BitIn"
               ],
-              "out": [
+              "O": [
                 "Array",
                 4,
                 "Bit"
@@ -65,34 +45,42 @@
             }
           ]
         },
-        "StaticRightShift43": {
+        "StaticRightShift_43": {
           "connections": [
             [
-              "self.out",
-              "inst0.out"
+              "self.O.3",
+              "self.I.0"
             ],
             [
-              "self.in",
-              "inst0.in0"
+              "self.O.2",
+              "bit_const_GND.out"
+            ],
+            [
+              "self.O.1",
+              "bit_const_GND.out"
+            ],
+            [
+              "self.O.0",
+              "bit_const_GND.out"
             ]
           ],
           "instances": {
-            "inst0": {
-              "genargs": {
-                "width": 4
+            "bit_const_GND": {
+              "configargs": {
+                "value": 0
               },
-              "genref": "coreir.dshl"
+              "modref": "coreir.bitconst"
             }
           },
           "type": [
             "Record",
             {
-              "in": [
+              "I": [
                 "Array",
                 4,
                 "BitIn"
               ],
-              "out": [
+              "O": [
                 "Array",
                 4,
                 "Bit"
@@ -108,18 +96,18 @@
             ],
             [
               "self.b",
-              "inst2.in"
+              "inst2.I"
             ],
             [
               "self.a",
-              "inst1.in"
+              "inst1.I"
             ],
             [
-              "inst2.out",
+              "inst2.O",
               "inst0.in1"
             ],
             [
-              "inst1.out",
+              "inst1.O",
               "inst0.in0"
             ]
           ],
@@ -131,10 +119,10 @@
               "genref": "coreir.or"
             },
             "inst1": {
-              "modref": "global.StaticLeftShift42"
+              "modref": "global.StaticLeftShift_42"
             },
             "inst2": {
-              "modref": "global.StaticRightShift43"
+              "modref": "global.StaticRightShift_43"
             }
           },
           "type": [

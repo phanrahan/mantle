@@ -337,33 +337,6 @@ def dynamic_left_shift(I0, I1, **kwargs):
 
 
 @cache_definition
-def DefineStaticLeftShift(width, amount):
-    if width < 2:
-        raise ValueError("StaticLeftShift width should be at least 2")
-    if not isinstance(amount, IntegerTypes):
-        raise TypeError("StaticLeftShift not implemented for argument 2 of type {}".format(
-            type(amount)))
-    if amount < 0:
-        raise ValueError("If second argument to StaticLeftShift is an integer, it"
-                " must be positive, not {}".format(amount))
-
-    T = Bits(width)
-    circ = DefineCircuit("StaticLeftShift{}{}".format(width, amount),
-        "in", In(T), "out", Out(T))
-    out = DynamicLeftShift(width)(getattr(circ, "in"), uint(amount, width))
-    wire(out, circ.out)
-    EndDefine()
-    return circ
-
-def StaticLeftShift(width, amount, **kwargs):
-    return DefineStaticLeftShift(width, amount)(**kwargs)
-
-def static_left_shift(arg, amount, **kwargs):
-    width = get_length(arg)
-    return StaticLeftShift(width, amount, **kwargs)(arg)
-
-
-@cache_definition
 def DefineDynamicRightShift(width):
     T = Bits(width)
     def simulate(self, value_store, state_store):
@@ -389,28 +362,42 @@ def dynamic_right_shift(I0, I1, **kwargs):
     return DynamicRightShift(width, **kwargs)(I0, I1)
 
 
-@cache_definition
-def DefineStaticRightShift(width, amount):
-    if width < 2:
-        raise ValueError("StaticRightShift width should be at least 2")
-    if not isinstance(amount, IntegerTypes):
-        raise TypeError("StaticRightShift not implemented for argument 2 of type {}".format(
-            type(amount)))
-    if amount < 0:
-        raise ValueError("If second argument to StaticRightShift is an integer, it"
-                " must be positive, not {}".format(amount))
-
+def DefineStaticLeftShift(width, shift_amount):
     T = Bits(width)
-    circ = DefineCircuit("StaticRightShift{}{}".format(width, amount),
-        "in", In(T), "out", Out(T))
-    out = DynamicRightShift(width)(getattr(circ, "in"), uint(amount, width))
-    wire(out, circ.out)
-    EndDefine()
-    return circ
+    class _StaticLeftShift(Circuit):
+        name = 'StaticLeftShift_{}{}'.format(width, shift_amount)
 
-def StaticRightShift(width, amount, **kwargs):
-    return DefineStaticRightShift(width, amount)(**kwargs)
+        IO = ["I", In(T), "O", Out(T)]
 
-def static_right_shift(arg, amount, **kwargs):
+        @classmethod
+        def definition(io):
+            output = concat(io.I[shift_amount:width], bits(0, shift_amount))
+            wire(output, io.O)
+    return _StaticLeftShift
+
+def StaticLeftShift(width, shift_amount, **kwargs):
+    return DefineStaticLeftShift(width, shift_amount)(**kwargs)
+
+def static_left_shift(arg, shift_amount, **kwargs):
     width = get_length(arg)
-    return StaticRightShift(width, amount, **kwargs)(arg)
+    return StaticLeftShift(width, shift_amount, **kwargs)(arg)
+
+def DefineStaticRightShift(width, shift_amount):
+    T = Bits(width)
+    class _StaticRightShift(Circuit):
+        name = 'StaticRightShift_{}{}'.format(width, shift_amount)
+
+        IO = ["I", In(T), "O", Out(T)]
+
+        @classmethod
+        def definition(io):
+            output = concat(bits(0, shift_amount), io.I[:width-shift_amount])
+            wire(output, io.O)
+    return _StaticRightShift
+
+def StaticRightShift(width, shift_amount, **kwargs):
+    return DefineStaticRightShift(width, shift_amount)(**kwargs)
+
+def static_right_shift(arg, shift_amount, **kwargs):
+    width = get_length(arg)
+    return StaticRightShift(width, shift_amount, **kwargs)(arg)

@@ -4,6 +4,16 @@ import operator
 from functools import reduce
 
 
+def get_length(value):
+    if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
+        return None
+    elif isinstance(value, ArrayType):
+        return len(value)
+    else:
+        raise NotImplementedError("Cannot get_length of"
+                " {}".format(type(value)))
+
+
 @cache_definition
 def DefineFoldOp(DefineOp, name, height, width):
     if width is None:
@@ -327,23 +337,30 @@ def dynamic_left_shift(I0, I1, **kwargs):
 
 
 @cache_definition
-def LeftShift(width, amount):
+def DefineStaticLeftShift(width, amount):
     if width < 2:
-        raise ValueError("LeftShift width should be at least 2")
+        raise ValueError("StaticLeftShift width should be at least 2")
     if not isinstance(amount, IntegerTypes):
-        raise TypeError("LeftShift not implemented for argument 2 of type {}".format(
+        raise TypeError("StaticLeftShift not implemented for argument 2 of type {}".format(
             type(amount)))
     if amount < 0:
-        raise ValueError("If second argument to LeftShift is an integer, it"
+        raise ValueError("If second argument to StaticLeftShift is an integer, it"
                 " must be positive, not {}".format(amount))
 
     T = Bits(width)
-    circ = DefineCircuit("LeftShift{}{}".format(width, amount),
+    circ = DefineCircuit("StaticLeftShift{}{}".format(width, amount),
         "in", In(T), "out", Out(T))
     out = DynamicLeftShift(width)(getattr(circ, "in"), uint(amount, width))
     wire(out, circ.out)
     EndDefine()
     return circ
+
+def StaticLeftShift(width, amount, **kwargs):
+    return DefineStaticLeftShift(width, amount)(**kwargs)
+
+def static_left_shift(arg, amount, **kwargs):
+    width = get_length(arg)
+    return StaticLeftShift(width, amount, **kwargs)(arg)
 
 
 @cache_definition
@@ -373,20 +390,27 @@ def dynamic_right_shift(I0, I1, **kwargs):
 
 
 @cache_definition
-def RightShift(width, amount):
+def DefineStaticRightShift(width, amount):
     if width < 2:
-        raise ValueError("RightShift width should be at least 2")
+        raise ValueError("StaticRightShift width should be at least 2")
     if not isinstance(amount, IntegerTypes):
-        raise TypeError("RightShift not implemented for argument 2 of type {}".format(
+        raise TypeError("StaticRightShift not implemented for argument 2 of type {}".format(
             type(amount)))
     if amount < 0:
-        raise ValueError("If second argument to RightShift is an integer, it"
+        raise ValueError("If second argument to StaticRightShift is an integer, it"
                 " must be positive, not {}".format(amount))
 
     T = Bits(width)
-    circ = DefineCircuit("RightShift{}{}".format(width, amount),
+    circ = DefineCircuit("StaticRightShift{}{}".format(width, amount),
         "in", In(T), "out", Out(T))
     out = DynamicRightShift(width)(getattr(circ, "in"), uint(amount, width))
     wire(out, circ.out)
     EndDefine()
     return circ
+
+def StaticRightShift(width, amount, **kwargs):
+    return DefineStaticRightShift(width, amount)(**kwargs)
+
+def static_right_shift(arg, amount, **kwargs):
+    width = get_length(arg)
+    return StaticRightShift(width, amount, **kwargs)(arg)

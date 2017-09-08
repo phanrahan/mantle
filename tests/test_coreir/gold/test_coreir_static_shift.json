@@ -2,7 +2,7 @@
   "namespaces": {
     "global": {
       "modules": {
-        "LeftShift42": {
+        "StaticLeftShift42": {
           "connections": [
             [
               "inst0.in1.3",
@@ -65,7 +65,7 @@
             }
           ]
         },
-        "RightShift43": {
+        "StaticRightShift43": {
           "connections": [
             [
               "self.out",
@@ -131,10 +131,10 @@
               "genref": "coreir.or"
             },
             "inst1": {
-              "modref": "global.LeftShift42"
+              "modref": "global.StaticLeftShift42"
             },
             "inst2": {
-              "modref": "global.RightShift43"
+              "modref": "global.StaticRightShift43"
             }
           },
           "type": [

@@ -1,5 +1,5 @@
 from magma import *
-from mantle import And, Mux, Adders
+from mantle import And, Mux, Add
 from .register import Register
 from .decode import Decode
 
@@ -38,7 +38,7 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
 
     Counter = DefineCircuit(name, *args)
 
-    add = Adders(n, cin=cin, cout=cout)
+    add = Add(n, cin=cin, cout=cout)
     reg = Register(n, has_ce=has_ce, has_reset=has_reset)
 
     wire( reg.O, add.I0 )
@@ -112,7 +112,7 @@ def DefineUpDownCounter(n, cout=True, next=False,
 
     Counter = DefineCircuit(name, *args)
 
-    add = Adders(n, cin=True, cout=cout)
+    add = Add(n, cin=True, cout=cout)
     reg = Register(n, has_ce=has_ce, has_reset=has_reset)
 
     wire( reg.O, add.I0 )

@@ -18,7 +18,6 @@ from .logic import *
 
 from .halfadder import *
 from .fulladder import *
-from .adder import *
 from .arith import *
 from .compare import *
 

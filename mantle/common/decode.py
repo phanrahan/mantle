@@ -1,6 +1,6 @@
 from mantle import ROM1, ROM2, ROM3, ROM4, ROM5, ROM6, ROM7, ROM8
 
-__all__  = ['Decode']
+__all__  = ['Decode', 'decode']
 
 def Decode(i, n, invert=False, **kwargs):
     """
@@ -27,3 +27,5 @@ def Decode(i, n, invert=False, **kwargs):
         if n == 8: return ROM8(i, **kwargs)
     return None
 
+def decode(I, i, *, invert=False, **kwargs):
+    return Decode(i, len(I), invert=invert, **kwargs)(I)

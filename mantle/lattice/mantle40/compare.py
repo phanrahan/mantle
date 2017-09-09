@@ -58,7 +58,7 @@ def ULT(n, **kwargs):
     return compose(not_, uge)
 
 def ULE(n, **kwargs):
-    sub = Sub(n, **kwargs)
+    sub = Sub(n, False, True, **kwargs)
     return AnonymousCircuit("I0", sub.I1, "I1", sub.I0, "O", sub.COUT)
 
 def UGT(n, **kwargs):
@@ -67,7 +67,7 @@ def UGT(n, **kwargs):
     return compose(not_, ule)
 
 def UGE(n, **kwargs):
-    sub = Sub(n, **kwargs)
+    sub = Sub(n, False, True, **kwargs)
     return AnonymousCircuit("I0", sub.I0, "I1", sub.I1, "O", sub.COUT)
 
 

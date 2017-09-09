@@ -1,7 +1,7 @@
 from magma import *
 from mantle import LUT2, Add, A0, A1
 
-__all__ = ['DefineArbiter', 'Arbiter']
+__all__ = ['DefineArbiter', 'Arbiter', 'arbiter']
 
 #
 # Given an input array with various bits set,
@@ -10,7 +10,6 @@ __all__ = ['DefineArbiter', 'Arbiter']
 #
 @cache_definition
 def DefineArbiter(n):
-
     T = Bits(n)
     class _Arbiter(Circuit):
         name = 'Arbiter'+str(n)
@@ -28,3 +27,6 @@ def DefineArbiter(n):
 
 def Arbiter(n, **kwargs):
     return DefineArbiter(n)(**kwargs)
+
+def arbiter(I, **kwargs):
+    return Arbiter(len(I), **kwargs)(I)

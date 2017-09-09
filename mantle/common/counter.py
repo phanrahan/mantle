@@ -44,7 +44,7 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
     wire( reg.O, add.I0 )
     wire( array(incr, n), add.I1 )
 
-    reg(add)
+    reg(add.O)
 
     if next:
         wire( add.O, Counter.O )

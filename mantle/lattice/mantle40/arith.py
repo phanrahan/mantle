@@ -7,26 +7,26 @@ __all__ += ['Sub', 'SubC']
 __all__ += ['Negate']
 __all__ += ['ShiftRightArithmetic']
 
-def Add(n, **kwargs):
-    return Adders(n, False, True, **kwargs)
+def Add(n, cin=False, cout=False, **kwargs):
+    return Adders(n, cin, cout, **kwargs)
     
 def AddC(n, **kwargs):
-    return Adders(n, True, True, **kwargs)
+    return Add(n, True, True, **kwargs)
 
-def Sub(n, **kwargs):
+def Sub(n, cin=False, cout=False, **kwargs):
     invert = Invert(n)
-    adder =  Adders(n, True, True, **kwargs)
-    wire(1, adder.CIN)
+    adder =  Adders(n, cin, cout, **kwargs)
     wire(invert.O, adder.I1)
-    return AnonymousCircuit("I0", adder.I0, "I1", invert.I, 
-                            "O",  adder.O, "COUT", adder.COUT)
+    args = ["I0", adder.I0, "I1", invert.I, "O", adder.O]
+    if cin:
+        args += ['CIN', adder.CIN]
+    if cout:
+        args += ['COUT', adder.COUT]
+    return AnonymousCircuit(args)
     
 def SubC(n, **kwargs):
-    invert = Invert(n)
-    adder =  Adders(n, True, True, **kwargs)
-    wire(invert.O, adder.I1)
-    return AnonymousCircuit("I0",   adder.I0, "I1", invert.I, "CIN",  adder.CIN,
-                            "O",    adder.O,  "COUT", adder.COUT)
+    return Sub(n, True, True, **kwargs)
+
 
 def Negate(n, **kwargs):
     invert = Invert(n)

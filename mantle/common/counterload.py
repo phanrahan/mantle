@@ -46,7 +46,7 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
     wire( Counter.DATA, mux.I1 )
     wire( Counter.LOAD, mux.S )
 
-    reg(mux)
+    reg(mux.O)
 
     if next:
         wire( mux.O, Counter.O )

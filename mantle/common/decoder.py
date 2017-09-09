@@ -1,7 +1,7 @@
 from magma import *
 from .decode import Decode
 
-__all__  = ['Decoder']
+__all__  = ['Decoder', 'decoder']
 
 @cache_definition
 def DefineDecoder(n, invert=False):
@@ -23,3 +23,6 @@ def DefineDecoder(n, invert=False):
 
 def Decoder(n, invert=False, **kwargs):
     return DefineDecoder(n, invert)(**kwargs)
+
+def decoder(I, invert=False, **kwargs):
+    return Decoder(len(I), invert=invert, **kwargs)(I)

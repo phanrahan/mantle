@@ -12,3 +12,8 @@ from .logic import (
     DefineDynamicLeftShift , DynamicLeftShift , dynamic_left_shift ,
     DefineDynamicRightShift, DynamicRightShift, dynamic_right_shift,
 )
+
+from .arith import (
+    DefineAdd, Add, add,
+    DefineSub, Sub, sub,
+)

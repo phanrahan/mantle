@@ -1,0 +1,53 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "test_sub": {
+          "connections": [
+            [
+              "self.c",
+              "inst0.out"
+            ],
+            [
+              "self.b",
+              "inst0.in1"
+            ],
+            [
+              "self.a",
+              "inst0.in0"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.sub"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "a": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "b": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "c": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.test_sub"
+}

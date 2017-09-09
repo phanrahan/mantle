@@ -65,6 +65,32 @@ def add(*args, **kwargs):
     return Add(len(args), width, T, **kwargs)(*args)
 
 
+DefineCoreirSub = declare_binop("sub", operator.sub)
+
+@cache_definition
+def DefineSub(height=2, width=1):
+    if not isinstance(width, IntegerTypes) or width < 1:
+        raise ValueError("Sub only defined for width >= 1")
+    if height is 2:
+        return DefineCoreirSub(width, SInt)
+    else:
+        return DefineFoldOp(DefineSub, "sub", height, width)
+
+def Sub(height=2, width=1, **kwargs):
+    return DefineSub(height, width)(**kwargs)
+
+def sub(*args, **kwargs):
+    width = get_length(args[0])
+    if not all(get_length(arg) == width for arg in args):
+        # TODO: Something more specific than a ValueError?
+        raise ValueError("Arguments to sub should all be the same width")
+    if not (all(isinstance(arg, SIntType) for arg in args)):
+        # TODO: Something more specific than a ValueError?
+        raise ValueError("Arguments to sub should be all SInts, not"
+                " {}".format([(arg, type(arg)) for arg in args]))
+    type_ = type(args[0])
+    return Sub(len(args), width, **kwargs)(*args)
+
 # DefineSSub = declare_binop("sub", SInt, SIntType, "__sub__", operator.sub)
 # DefineSMul = declare_binop("mul", SInt, SIntType, "__mul__", operator.mul)
 # DefineSDiv = declare_binop("sdiv", SInt, SIntType, "__div__", operator.truediv)

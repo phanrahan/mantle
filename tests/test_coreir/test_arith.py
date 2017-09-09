@@ -7,11 +7,12 @@ def test_add():
     T = UInt(4)
     class TestCircuit(Circuit):
         name = "test_add"
-        IO = ["a", In(T), "b", In(T), "c", Out(T)]
+        IO = ["a", In(T), "b", In(T), "c", Out(T), "d", Out(Bit)]
         @classmethod
         def definition(circuit):
-            c = add(circuit.a, circuit.b)
+            c, carry = add(circuit.a, circuit.b)
             wire(c, circuit.c)
+            wire(carry, circuit.d)
 
     compile("build/test_add", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
@@ -22,13 +23,14 @@ def test_addc():
     T = UInt(4)
     class TestCircuit(Circuit):
         name = "test_addc"
-        IO = ["a", In(T), "b", In(T), "c", Out(T), "d", Out(Bit)]
+        IO = ["a", In(T), "b", In(T), "c", In(Bit), "d", Out(T), "e", Out(Bit)]
         @classmethod
         def definition(circuit):
             addc = AddC(2, 4)
             addc(circuit.a, circuit.b)
-            wire(addc.out, circuit.c)
-            wire(addc.COUT, circuit.d)
+            wire(circuit.c, addc.CIN)
+            wire(addc.out, circuit.d)
+            wire(addc.COUT, circuit.e)
 
     compile("build/test_addc", TestCircuit, output="coreir")
     assert check_files_equal(__file__,

@@ -2,8 +2,111 @@
   "namespaces": {
     "global": {
       "modules": {
+        "Add24UInt": {
+          "connections": [
+            [
+              "self.out.3",
+              "inst0.out.4"
+            ],
+            [
+              "self.out.2",
+              "inst0.out.3"
+            ],
+            [
+              "self.out.1",
+              "inst0.out.2"
+            ],
+            [
+              "self.out.0",
+              "inst0.out.1"
+            ],
+            [
+              "self.in1.3",
+              "inst0.in1.4"
+            ],
+            [
+              "self.in1.2",
+              "inst0.in1.3"
+            ],
+            [
+              "self.in1.1",
+              "inst0.in1.2"
+            ],
+            [
+              "self.in1.0",
+              "inst0.in1.1"
+            ],
+            [
+              "self.in0.3",
+              "inst0.in0.4"
+            ],
+            [
+              "self.in0.2",
+              "inst0.in0.3"
+            ],
+            [
+              "self.in0.1",
+              "inst0.in0.2"
+            ],
+            [
+              "self.in0.0",
+              "inst0.in0.1"
+            ],
+            [
+              "inst0.out.0",
+              "self.COUT"
+            ],
+            [
+              "inst0.in1.0",
+              "bit_const_GND.out"
+            ],
+            [
+              "inst0.in0.0",
+              "bit_const_GND.out"
+            ]
+          ],
+          "instances": {
+            "bit_const_GND": {
+              "configargs": {
+                "value": 0
+              },
+              "modref": "coreir.bitconst"
+            },
+            "inst0": {
+              "genargs": {
+                "width": 5
+              },
+              "genref": "coreir.add"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "COUT": "Bit",
+              "in0": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "in1": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "out": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        },
         "test_add": {
           "connections": [
+            [
+              "self.d",
+              "inst0.COUT"
+            ],
             [
               "self.c",
               "inst0.out"
@@ -19,10 +122,7 @@
           ],
           "instances": {
             "inst0": {
-              "genargs": {
-                "width": 4
-              },
-              "genref": "coreir.add"
+              "modref": "global.Add24UInt"
             }
           },
           "type": [
@@ -42,7 +142,8 @@
                 "Array",
                 4,
                 "Bit"
-              ]
+              ],
+              "d": "Bit"
             }
           ]
         }

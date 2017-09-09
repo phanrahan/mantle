@@ -34,7 +34,7 @@ def declare_binop(name, python_op, out_type=None, signed=False):
 DefineCoreirAdd = declare_binop("add", operator.add)
 
 @cache_definition
-def DefineAdd(height=2, width=1, T=UInt):
+def _DefineAdd(height=2, width=1, T=UInt):
     if T not in {UInt, SInt}:
         raise TypeError("Add only defined for UInt and SInt, not {}".format(T))
     if not isinstance(width, IntegerTypes) or width < 1:
@@ -43,6 +43,32 @@ def DefineAdd(height=2, width=1, T=UInt):
         return DefineCoreirAdd(width, T)
     else:
         return DefineFoldOp(DefineAdd, "add", height, width)
+
+
+@cache_definition
+def DefineAdd(height=2, width=1, T=UInt):
+    if T not in {UInt, SInt}:
+        raise TypeError("Add only defined for UInt and SInt, not {}".format(T))
+    if not isinstance(width, IntegerTypes) or width < 1:
+        raise ValueError("Add only defined for width >= 1")
+    IO = []
+    for i in range(height):
+        IO += ["in{}".format(i), In(T(width))]
+    IO += ["out", Out(T(width)), "COUT", Out(Bit)]
+    circ = DefineCircuit("Add{}{}{}".format(height, width, T.__name__),
+        *IO)
+    if T == UInt:
+        zero = uint(0, n=1)
+    else:
+        zero = sint(0, n=1)
+    add = _DefineAdd(height, width + 1)()
+    for i in range(height):
+        wire(concat(zero, getattr(circ, "in{}".format(i))),
+             getattr(add, "in{}".format(i)))
+    wire(add.out[1:], circ.out)
+    wire(add.out[0], circ.COUT)
+    EndDefine()
+    return circ
 
 def Add(height=2, width=1, T=UInt, **kwargs):
     return DefineAdd(height, width, T)(**kwargs)
@@ -57,12 +83,13 @@ def add(*args, **kwargs):
         # TODO: Something more specific than a ValueError?
         raise ValueError("Arguments to add should be all UInt or SInts, not"
                 " {}".format([(arg, type(arg)) for arg in args]))
-    type_ = type(args[0])
-    if isinstance(type_, UIntType):
+    if isinstance(args[0], UIntType):
         T = UInt
     else:
         T = SInt
-    return Add(len(args), width, T, **kwargs)(*args)
+    add = Add(len(args), width, T, **kwargs)
+    add(*args)
+    return add.out, add.COUT
 
 
 @cache_definition
@@ -74,15 +101,19 @@ def DefineAddC(height=2, width=1, T=UInt):
     IO = []
     for i in range(height):
         IO += ["in{}".format(i), In(T(width))]
+    IO += ["CIN", In(Bit)]
     IO += ["out", Out(T(width)), "COUT", Out(Bit)]
     circ = DefineCircuit("AddC{}{}{}".format(height, width, T.__name__),
         *IO)
     if T == UInt:
         zero = uint(0, n=1)
+        cin = uint(circ.CIN)
     else:
         zero = sint(0, n=1)
+        cin = sint(circ.CIN)
     add = Add(height, width + 1)
-    for i in range(height):
+    wire(concat(cin, circ.in0), add.in0)
+    for i in range(1, height):
         wire(concat(zero, getattr(circ, "in{}".format(i))),
              getattr(add, "in{}".format(i)))
     wire(add.out[1:], circ.out)

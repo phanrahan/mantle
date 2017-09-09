@@ -65,6 +65,35 @@ def add(*args, **kwargs):
     return Add(len(args), width, T, **kwargs)(*args)
 
 
+@cache_definition
+def DefineAddC(height=2, width=1, T=UInt):
+    if T not in {UInt, SInt}:
+        raise TypeError("AddC only defined for UInt and SInt, not {}".format(T))
+    if not isinstance(width, IntegerTypes) or width < 1:
+        raise ValueError("AddC only defined for width >= 1")
+    IO = []
+    for i in range(height):
+        IO += ["in{}".format(i), In(T(width))]
+    IO += ["out", Out(T(width)), "COUT", Out(Bit)]
+    circ = DefineCircuit("AddC{}{}{}".format(height, width, T.__name__),
+        *IO)
+    if T == UInt:
+        zero = uint(0, n=1)
+    else:
+        zero = sint(0, n=1)
+    add = Add(height, width + 1)
+    for i in range(height):
+        wire(concat(zero, getattr(circ, "in{}".format(i))),
+             getattr(add, "in{}".format(i)))
+    wire(add.out[1:], circ.out)
+    wire(add.out[0], circ.COUT)
+    EndDefine()
+    return circ
+
+def AddC(height=2, width=1, T=UInt, **kwargs):
+    return DefineAddC(height, width, T)(**kwargs)
+
+
 DefineCoreirSub = declare_binop("sub", operator.sub)
 
 @cache_definition

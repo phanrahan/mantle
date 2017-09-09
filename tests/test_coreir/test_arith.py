@@ -1,6 +1,6 @@
 from magma import *
 from magma.testing import check_files_equal
-from mantle.coreir.arith import add
+from mantle.coreir.arith import add, AddC
 
 
 def test_add():
@@ -16,6 +16,23 @@ def test_add():
     compile("build/test_add", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
             "build/test_add.json", "gold/test_add.json")
+
+
+def test_addc():
+    T = UInt(4)
+    class TestCircuit(Circuit):
+        name = "test_addc"
+        IO = ["a", In(T), "b", In(T), "c", Out(T), "d", Out(Bit)]
+        @classmethod
+        def definition(circuit):
+            addc = AddC(2, 4)
+            addc(circuit.a, circuit.b)
+            wire(addc.out, circuit.c)
+            wire(addc.COUT, circuit.d)
+
+    compile("build/test_addc", TestCircuit, output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_addc.json", "gold/test_addc.json")
 
 
 def test_sub():

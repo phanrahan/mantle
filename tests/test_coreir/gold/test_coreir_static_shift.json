@@ -1,0 +1,153 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "StaticLeftShift_42": {
+          "connections": [
+            [
+              "self.O.3",
+              "bit_const_GND.out"
+            ],
+            [
+              "self.O.2",
+              "bit_const_GND.out"
+            ],
+            [
+              "self.O.1",
+              "self.I.3"
+            ],
+            [
+              "self.O.0",
+              "self.I.2"
+            ]
+          ],
+          "instances": {
+            "bit_const_GND": {
+              "configargs": {
+                "value": 0
+              },
+              "modref": "coreir.bitconst"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "I": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "O": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        },
+        "StaticRightShift_43": {
+          "connections": [
+            [
+              "self.O.3",
+              "self.I.0"
+            ],
+            [
+              "self.O.2",
+              "bit_const_GND.out"
+            ],
+            [
+              "self.O.1",
+              "bit_const_GND.out"
+            ],
+            [
+              "self.O.0",
+              "bit_const_GND.out"
+            ]
+          ],
+          "instances": {
+            "bit_const_GND": {
+              "configargs": {
+                "value": 0
+              },
+              "modref": "coreir.bitconst"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "I": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "O": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        },
+        "test_coreir_static_shift": {
+          "connections": [
+            [
+              "self.c",
+              "inst0.out"
+            ],
+            [
+              "self.b",
+              "inst2.I"
+            ],
+            [
+              "self.a",
+              "inst1.I"
+            ],
+            [
+              "inst2.O",
+              "inst0.in1"
+            ],
+            [
+              "inst1.O",
+              "inst0.in0"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.or"
+            },
+            "inst1": {
+              "modref": "global.StaticLeftShift_42"
+            },
+            "inst2": {
+              "modref": "global.StaticRightShift_43"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "a": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "b": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "c": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.test_coreir_static_shift"
+}

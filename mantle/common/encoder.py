@@ -2,7 +2,7 @@ from magma import *
 from magma.bitutils import log2
 from mantle import Or
 
-__all__ = ['DefineEncoder', 'Encoder']
+__all__ = ['DefineEncoder', 'Encoder', 'encoder']
 
 #
 # Given an n-bit input array with only a single bit set,
@@ -10,6 +10,7 @@ __all__ = ['DefineEncoder', 'Encoder']
 #
 # NB. The current implementation only works for n<=8
 #
+@cache_definition
 def DefineEncoder(n):
     assert n <= 8
     logn = log2(n)
@@ -32,3 +33,5 @@ def DefineEncoder(n):
 def Encoder(n, **kwargs):
     return DefineEncoder(n)(**kwargs)
 
+def encoder(I, **kwargs):
+    return Encoder(len(I), **kwargs)(I)

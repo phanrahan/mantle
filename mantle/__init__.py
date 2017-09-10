@@ -8,6 +8,8 @@ else:
 
 if mantle == 'verilog':
     from mantle.verilog import *
+elif mantle == 'coreir':
+    from mantle.coreir import *
 else:
     if mantle == 'lattice':
         from mantle.lattice import *

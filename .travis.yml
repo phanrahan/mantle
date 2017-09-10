@@ -17,11 +17,11 @@ before_install:
     - export COREIR=$PWD
     - export LD_LIBRARY_PATH=$PWD/lib:$LD_LIBRARY_PATH
     - make install
-    - make py
+    - pip install -e bindings/python
     - cd ..;
     # END: coreir installation
 
-install: 
+install:
     - pip install -r requirements.txt
     - git clone https://github.com/phanrahan/magma
     - pip install -e magma
@@ -29,7 +29,7 @@ install:
     - pip install fabricate
     - pip install -e .
 
-script: 
+script:
     - py.test --cov=mantle --ignore=coreir/ --ignore=magma/ --ignore=loam/
     # Run bake verilog tests
     - cd tests/verilog

@@ -17,6 +17,7 @@ def _CounterName(name, n, ce, r, s):
 #
 # Create an n-bit mod-m counter
 #
+@cache_definition
 def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
     has_ce=False):
 
@@ -38,7 +39,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     counter = Counter(n, cin=cin, cout=cout, incr=incr, next=next,
                    has_ce=has_ce, has_reset=True)
-    reset = Decode(m - 1, n)(counter)
+    reset = Decode(m - 1, n)(counter.O)
 
     if has_ce:
         CE = In(Bit)()

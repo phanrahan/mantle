@@ -1,0 +1,96 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "test_coreir_bits": {
+          "connections": [
+            [
+              "self.d",
+              "inst0.out"
+            ],
+            [
+              "self.c",
+              "inst3.in1"
+            ],
+            [
+              "self.b",
+              "inst3.in0"
+            ],
+            [
+              "self.b",
+              "inst2.in1"
+            ],
+            [
+              "self.a",
+              "inst2.in0"
+            ],
+            [
+              "inst3.out",
+              "inst0.in1"
+            ],
+            [
+              "inst2.out",
+              "inst1.in"
+            ],
+            [
+              "inst1.out",
+              "inst0.in0"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.or"
+            },
+            "inst1": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.not"
+            },
+            "inst2": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.and"
+            },
+            "inst3": {
+              "genargs": {
+                "width": 4
+              },
+              "genref": "coreir.xor"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "a": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "b": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "c": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "d": [
+                "Array",
+                4,
+                "Bit"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.test_coreir_bits"
+}

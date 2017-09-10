@@ -1,0 +1,312 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "fold_and4None": {
+          "connections": [
+            [
+              "self.out",
+              "inst2.out"
+            ],
+            [
+              "self.in3",
+              "inst2.in1"
+            ],
+            [
+              "self.in2",
+              "inst1.in1"
+            ],
+            [
+              "self.in1",
+              "inst0.in1"
+            ],
+            [
+              "self.in0",
+              "inst0.in0"
+            ],
+            [
+              "inst2.in0",
+              "inst1.out"
+            ],
+            [
+              "inst1.in0",
+              "inst0.out"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "coreir.bitand"
+            },
+            "inst1": {
+              "modref": "coreir.bitand"
+            },
+            "inst2": {
+              "modref": "coreir.bitand"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in0": "BitIn",
+              "in1": "BitIn",
+              "in2": "BitIn",
+              "in3": "BitIn",
+              "out": "Bit"
+            }
+          ]
+        },
+        "fold_or3None": {
+          "connections": [
+            [
+              "self.out",
+              "inst1.out"
+            ],
+            [
+              "self.in2",
+              "inst1.in1"
+            ],
+            [
+              "self.in1",
+              "inst0.in1"
+            ],
+            [
+              "self.in0",
+              "inst0.in0"
+            ],
+            [
+              "inst1.in0",
+              "inst0.out"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "coreir.bitor"
+            },
+            "inst1": {
+              "modref": "coreir.bitor"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in0": "BitIn",
+              "in1": "BitIn",
+              "in2": "BitIn",
+              "out": "Bit"
+            }
+          ]
+        },
+        "fold_or4None": {
+          "connections": [
+            [
+              "self.out",
+              "inst2.out"
+            ],
+            [
+              "self.in3",
+              "inst2.in1"
+            ],
+            [
+              "self.in2",
+              "inst1.in1"
+            ],
+            [
+              "self.in1",
+              "inst0.in1"
+            ],
+            [
+              "self.in0",
+              "inst0.in0"
+            ],
+            [
+              "inst2.in0",
+              "inst1.out"
+            ],
+            [
+              "inst1.in0",
+              "inst0.out"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "coreir.bitor"
+            },
+            "inst1": {
+              "modref": "coreir.bitor"
+            },
+            "inst2": {
+              "modref": "coreir.bitor"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in0": "BitIn",
+              "in1": "BitIn",
+              "in2": "BitIn",
+              "in3": "BitIn",
+              "out": "Bit"
+            }
+          ]
+        },
+        "fold_xor4None": {
+          "connections": [
+            [
+              "self.out",
+              "inst2.out"
+            ],
+            [
+              "self.in3",
+              "inst2.in1"
+            ],
+            [
+              "self.in2",
+              "inst1.in1"
+            ],
+            [
+              "self.in1",
+              "inst0.in1"
+            ],
+            [
+              "self.in0",
+              "inst0.in0"
+            ],
+            [
+              "inst2.in0",
+              "inst1.out"
+            ],
+            [
+              "inst1.in0",
+              "inst0.out"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "coreir.bitxor"
+            },
+            "inst1": {
+              "modref": "coreir.bitxor"
+            },
+            "inst2": {
+              "modref": "coreir.bitxor"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "in0": "BitIn",
+              "in1": "BitIn",
+              "in2": "BitIn",
+              "in3": "BitIn",
+              "out": "Bit"
+            }
+          ]
+        },
+        "test_coreir_reduce": {
+          "connections": [
+            [
+              "self.b.3",
+              "inst3.in3"
+            ],
+            [
+              "self.b.3",
+              "inst2.in3"
+            ],
+            [
+              "self.b.2",
+              "inst3.in2"
+            ],
+            [
+              "self.b.2",
+              "inst2.in2"
+            ],
+            [
+              "self.b.1",
+              "inst3.in1"
+            ],
+            [
+              "self.b.1",
+              "inst2.in1"
+            ],
+            [
+              "self.b.0",
+              "inst3.in0"
+            ],
+            [
+              "self.b.0",
+              "inst2.in0"
+            ],
+            [
+              "self.a.3",
+              "inst1.in3"
+            ],
+            [
+              "self.a.2",
+              "inst1.in2"
+            ],
+            [
+              "self.a.1",
+              "inst1.in1"
+            ],
+            [
+              "self.a.0",
+              "inst1.in0"
+            ],
+            [
+              "self.d",
+              "inst0.out"
+            ],
+            [
+              "inst3.out",
+              "inst0.in2"
+            ],
+            [
+              "inst2.out",
+              "inst0.in1"
+            ],
+            [
+              "inst1.out",
+              "inst0.in0"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "global.fold_or3None"
+            },
+            "inst1": {
+              "modref": "global.fold_and4None"
+            },
+            "inst2": {
+              "modref": "global.fold_or4None"
+            },
+            "inst3": {
+              "modref": "global.fold_xor4None"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "a": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "b": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "c": [
+                "Array",
+                4,
+                "BitIn"
+              ],
+              "d": "Bit"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.test_coreir_reduce"
+}

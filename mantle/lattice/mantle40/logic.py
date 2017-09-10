@@ -223,13 +223,13 @@ def DefineNOr(height=2, width=None):
         @classmethod
         def definition(def_):
             def orm(y):
-                return NorN(height, loc=(0,y/8, y%8))
+                return NOrN(height, loc=(0,y/8, y%8))
             normxn = join(col(norm, width))
             wire(def_.I0, normxn.I0)
             wire(def_.I1, normxn.I1)
             wire(normxn.O, def_.O)
 
-    return _Nor
+    return _NOr
 
 def NOr(height=2, width=None, **kwargs):
     if width is None:
@@ -271,13 +271,13 @@ def DefineXOr(height=2, width=1):
         @classmethod
         def definition(def_):
             def xorm(y):
-                return XorN(height, loc=(0,y/8, y%8))
+                return XOrN(height, loc=(0,y/8, y%8))
             xormxn = join(col(xorm, width))
             wire(def_.I0, xormxn.I0)
             wire(def_.I1, xormxn.I1)
             wire(xormxn.O, def_.O)
 
-    return _Xor
+    return _XOr
 
 def XOr(height=2, width=None, **kwargs):
     if width is None:
@@ -319,13 +319,13 @@ def DefineNXOr(height=2, width=None):
         @classmethod
         def definition(def_):
             def nxorm(y):
-                return NXorN(height, loc=(0,y/8, y%8))
+                return NXOrN(height, loc=(0,y/8, y%8))
             nxormxn = join(col(nxorm, width))
             wire(def_.I0, nxormxn.I0)
             wire(def_.I1, nxormxn.I1)
             wire(nxormxn.O, def_.O)
 
-    return _NXor
+    return _NXOr
 
 def NXOr(height=2, width=None, **kwargs):
     if width is None: 

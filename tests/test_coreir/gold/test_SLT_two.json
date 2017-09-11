@@ -2,11 +2,11 @@
   "namespaces": {
     "global": {
       "modules": {
-        "NE4": {
+        "SLT4": {
           "connections": [
             [
               "self.O",
-              "inst1.out"
+              "inst0.out"
             ],
             [
               "self.I1",
@@ -15,10 +15,6 @@
             [
               "self.I0",
               "inst0.in0"
-            ],
-            [
-              "inst1.in",
-              "inst0.out"
             ]
           ],
           "instances": {
@@ -26,10 +22,7 @@
               "genargs": {
                 "width": 4
               },
-              "genref": "coreir.eq"
-            },
-            "inst1": {
-              "modref": "coreir.bitnot"
+              "genref": "coreir.slt"
             }
           },
           "type": [
@@ -49,7 +42,7 @@
             }
           ]
         },
-        "test_NE_two": {
+        "test_SLT_two": {
           "connections": [
             [
               "self.c",
@@ -66,7 +59,7 @@
           ],
           "instances": {
             "inst0": {
-              "modref": "global.NE4"
+              "modref": "global.SLT4"
             }
           },
           "type": [
@@ -89,5 +82,5 @@
       }
     }
   },
-  "top": "global.test_NE_two"
+  "top": "global.test_SLT_two"
 }

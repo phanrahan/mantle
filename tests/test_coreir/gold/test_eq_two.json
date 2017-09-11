@@ -42,7 +42,7 @@
             }
           ]
         },
-        "test_eq_two": {
+        "test_EQ_two": {
           "connections": [
             [
               "self.c",
@@ -82,5 +82,5 @@
       }
     }
   },
-  "top": "global.test_eq_two"
+  "top": "global.test_EQ_two"
 }

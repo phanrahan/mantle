@@ -33,123 +33,85 @@ def declare_binop(name, python_op, out_type=None, signed=False):
 
 DefineCoreirAdd = declare_binop("add", operator.add)
 
-@cache_definition
-def _DefineAdd(height=2, width=1, T=UInt):
-    if T not in {UInt, SInt}:
-        raise TypeError("Add only defined for UInt and SInt, not {}".format(T))
-    if not isinstance(width, IntegerTypes) or width < 1:
-        raise ValueError("Add only defined for width >= 1")
-    if height is 2:
-        return DefineCoreirAdd(width, T)
-    else:
-        return DefineFoldOp(DefineAdd, "add", height, width)
-
 
 @cache_definition
-def DefineAdd(height=2, width=1, T=UInt):
-    if T not in {UInt, SInt}:
-        raise TypeError("Add only defined for UInt and SInt, not {}".format(T))
-    if not isinstance(width, IntegerTypes) or width < 1:
-        raise ValueError("Add only defined for width >= 1")
-    IO = []
-    for i in range(height):
-        IO += ["in{}".format(i), In(T(width))]
-    IO += ["out", Out(T(width)), "COUT", Out(Bit)]
-    circ = DefineCircuit("Add{}{}{}".format(height, width, T.__name__),
+def DefineAdd(n, cin=False, cout=False):
+    width = n
+    T = Bits(width)
+    IO = ["I0", In(T), "I1", In(T)]
+    if cin:
+        IO += ["CIN", In(Bit)]
+    IO += ["O", Out(T)]
+    if cout:
+        IO += ["COUT", Out(Bit)]
+
+    circ = DefineCircuit("Add{}{}".format(width, T.__name__),
         *IO)
-    if T == UInt:
-        zero = uint(0, n=1)
-    else:
-        zero = sint(0, n=1)
-    add = _DefineAdd(height, width + 1)()
-    for i in range(height):
-        wire(concat(zero, getattr(circ, "in{}".format(i))),
-             getattr(add, "in{}".format(i)))
-    wire(add.out[1:], circ.out)
-    wire(add.out[0], circ.COUT)
+
+    if cout:
+        width += 1
+
+    add = DefineCoreirAdd(width, Bits)()
+    for a, b in [(circ.I0, add.in0), (circ.I1, add.in1)]:
+        if cout:
+            a = concat(bits(0, n=1), a)
+        wire(a, b)
+    out = add.out
+    if cin:
+        add_cin = DefineCoreirAdd(width, Bits)()
+        wire(concat(bits(0, n=width-1), bits(circ.CIN, n=1)), add_cin.in0)
+        wire(out, add_cin.in1)
+        out = add_cin.out
+    if cout:
+        wire(out[0], circ.COUT)
+        out = out[1:]
+    wire(out, circ.O)
     EndDefine()
     return circ
 
-def Add(height=2, width=1, T=UInt, **kwargs):
-    return DefineAdd(height, width, T)(**kwargs)
+# def Add(height=2, width=1, T=UInt, **kwargs):
+#     return DefineAdd(height, width, T)(**kwargs)
+def Add(n, cin=False, cout=False, **kwargs):
+    return DefineAdd(n, cin, cout)(**kwargs)
+
 
 def add(*args, **kwargs):
     width = get_length(args[0])
     if not all(get_length(arg) == width for arg in args):
         # TODO: Something more specific than a ValueError?
         raise ValueError("Arguments to add should all be the same width")
-    if not (all(isinstance(arg, UIntType) for arg in args) or
-            all(isinstance(arg, SIntType) for arg in args)):
+    if not all(isinstance(arg, BitsType) for arg in args):
         # TODO: Something more specific than a ValueError?
-        raise ValueError("Arguments to add should be all UInt or SInts, not"
+        raise ValueError("Arguments to add should be all Bits"
                 " {}".format([(arg, type(arg)) for arg in args]))
-    if isinstance(args[0], UIntType):
-        T = UInt
-    else:
-        T = SInt
-    add = Add(len(args), width, T, **kwargs)
-    add(*args)
-    return add.out, add.COUT
+    adders = [Add(width, **kwargs) for _ in range(len(args) - 1)]
+    curr = adders[0]
+    wire(args[0], curr.I0)
+    wire(args[1], curr.I1)
+    if len(args) > 2:
+        next_ = adders[1]
+        for i in range(1, len(adders)):
+            next_ = adders[i]
+            wire(curr.O, next_.I0)
+            wire(args[i + 1], next_.I1)
+            curr = next_
+    return curr.O
 
 
-@cache_definition
-def DefineAddC(height=2, width=1, T=UInt):
-    if T not in {UInt, SInt}:
-        raise TypeError("AddC only defined for UInt and SInt, not {}".format(T))
-    if not isinstance(width, IntegerTypes) or width < 1:
-        raise ValueError("AddC only defined for width >= 1")
-    IO = []
-    for i in range(height):
-        IO += ["in{}".format(i), In(T(width))]
-    IO += ["CIN", In(Bit)]
-    IO += ["out", Out(T(width)), "COUT", Out(Bit)]
-    circ = DefineCircuit("AddC{}{}{}".format(height, width, T.__name__),
-        *IO)
-    if T == UInt:
-        zero = uint(0, n=1)
-        cin = uint(circ.CIN)
-    else:
-        zero = sint(0, n=1)
-        cin = sint(circ.CIN)
-    add = Add(height, width + 1)
-    wire(concat(cin, circ.in0), add.in0)
-    for i in range(1, height):
-        wire(concat(zero, getattr(circ, "in{}".format(i))),
-             getattr(add, "in{}".format(i)))
-    wire(add.out[1:], circ.out)
-    wire(add.out[0], circ.COUT)
-    EndDefine()
-    return circ
-
-def AddC(height=2, width=1, T=UInt, **kwargs):
-    return DefineAddC(height, width, T)(**kwargs)
-
-
-DefineCoreirSub = declare_binop("sub", operator.sub)
-
-@cache_definition
-def DefineSub(height=2, width=1):
-    if not isinstance(width, IntegerTypes) or width < 1:
-        raise ValueError("Sub only defined for width >= 1")
-    if height is 2:
-        return DefineCoreirSub(width, SInt)
-    else:
-        return DefineFoldOp(DefineSub, "sub", height, width)
-
-def Sub(height=2, width=1, **kwargs):
-    return DefineSub(height, width)(**kwargs)
-
-def sub(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(arg) == width for arg in args):
-        # TODO: Something more specific than a ValueError?
-        raise ValueError("Arguments to sub should all be the same width")
-    if not (all(isinstance(arg, SIntType) for arg in args)):
-        # TODO: Something more specific than a ValueError?
-        raise ValueError("Arguments to sub should be all SInts, not"
-                " {}".format([(arg, type(arg)) for arg in args]))
-    type_ = type(args[0])
-    return Sub(len(args), width, **kwargs)(*args)
+# def Sub(height=2, width=1, **kwargs):
+#     return DefineSub(height, width)(**kwargs)
+#
+# def sub(*args, **kwargs):
+#     width = get_length(args[0])
+#     if not all(get_length(arg) == width for arg in args):
+#         # TODO: Something more specific than a ValueError?
+#         raise ValueError("Arguments to sub should all be the same width")
+#     if not (all(isinstance(arg, SIntType) for arg in args)):
+#         # TODO: Something more specific than a ValueError?
+#         raise ValueError("Arguments to sub should be all SInts, not"
+#                 " {}".format([(arg, type(arg)) for arg in args]))
+#     type_ = type(args[0])
+#     return Sub(len(args), width, **kwargs)(*args)
 
 # DefineSSub = declare_binop("sub", SInt, SIntType, "__sub__", operator.sub)
 # DefineSMul = declare_binop("mul", SInt, SIntType, "__mul__", operator.mul)

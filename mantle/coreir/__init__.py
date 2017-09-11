@@ -15,5 +15,5 @@ from .logic import (
 
 from .arith import (
     DefineAdd, Add, add,
-    DefineSub, Sub, sub,
+    # DefineSub, Sub, sub,
 )

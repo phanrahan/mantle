@@ -1,6 +1,6 @@
 from magma import *
 from magma.testing import check_files_equal
-from mantle.coreir.arith import add, Add
+from mantle.coreir.arith import add, Add, AddC
 
 
 def test_add_two():
@@ -52,22 +52,37 @@ def test_add_cout_two():
             "build/test_add_cout_two.json", "gold/test_add_cout_two.json")
 
 
-# def test_addc():
-#     T = UInt(4)
-#     class TestCircuit(Circuit):
-#         name = "test_addc"
-#         IO = ["a", In(T), "b", In(T), "c", In(Bit), "d", Out(T), "e", Out(Bit)]
-#         @classmethod
-#         def definition(circuit):
-#             addc = AddC(2, 4)
-#             addc(circuit.a, circuit.b)
-#             wire(circuit.c, addc.CIN)
-#             wire(addc.out, circuit.d)
-#             wire(addc.COUT, circuit.e)
-#
-#     compile("build/test_addc", TestCircuit, output="coreir")
-#     assert check_files_equal(__file__,
-#             "build/test_addc.json", "gold/test_addc.json")
+def test_add_cin_two():
+    T = UInt(4)
+    class TestCircuit(Circuit):
+        name = "test_add_cin_two"
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T), "CIN", In(Bit)]
+        @classmethod
+        def definition(circuit):
+            O = Add(4, cin=True)(circuit.I0, circuit.I1, circuit.CIN)
+            wire(O, circuit.O)
+    print(repr(TestCircuit))
+
+    compile("build/test_add_cin_two", TestCircuit, output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_add_cin_two.json", "gold/test_add_cin_two.json")
+
+
+def test_addc_two():
+    T = UInt(4)
+    class TestCircuit(Circuit):
+        name = "test_addc_two"
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T), "CIN", In(Bit), "COUT", Out(Bit)]
+        @classmethod
+        def definition(circuit):
+            O, COUT = AddC(4)(circuit.I0, circuit.I1, circuit.CIN)
+            wire(O, circuit.O)
+            wire(COUT, circuit.COUT)
+    print(repr(TestCircuit))
+
+    compile("build/test_addc_two", TestCircuit, output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_addc_two.json", "gold/test_addc_two.json")
 
 
 # def test_sub():

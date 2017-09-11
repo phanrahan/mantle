@@ -69,10 +69,13 @@ def DefineAdd(n, cin=False, cout=False):
     EndDefine()
     return circ
 
-# def Add(height=2, width=1, T=UInt, **kwargs):
-#     return DefineAdd(height, width, T)(**kwargs)
+
 def Add(n, cin=False, cout=False, **kwargs):
     return DefineAdd(n, cin, cout)(**kwargs)
+
+
+def AddC(n, **kwargs):
+    return Add(n, cin=True, cout=True, **kwargs)
 
 
 def add(*args, **kwargs):

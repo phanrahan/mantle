@@ -155,6 +155,10 @@ def Not(width=None):
     return DefineNot(width)()
 
 
+def not_(arg, **kwargs):
+    return Not(get_length(arg), **kwargs)(arg)
+
+
 
 DefineCoreirOr  = declare_bits_binop("or", operator.or_)
 

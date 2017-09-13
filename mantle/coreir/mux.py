@@ -98,7 +98,8 @@ def DefineMux(height=2, width=None):
             mux = braid([curry(_DefineMux(height)()) for _ in range(width)],
                     forkargs=['S'])
             args = [getattr(interface, "I{}".format(i)) for i in range(height)]
-            mux(*args, interface.S)
+            args += [interface.S]
+            mux(*args)
             wire(mux.O, interface.O)
     return _Mux
 

@@ -1,0 +1,130 @@
+{
+  "namespaces": {
+    "global": {
+      "modules": {
+        "Mux2x3": {
+          "connections": [
+            [
+              "self.O.2",
+              "inst2.O"
+            ],
+            [
+              "self.O.1",
+              "inst1.O"
+            ],
+            [
+              "self.O.0",
+              "inst0.O"
+            ],
+            [
+              "self.I1.2",
+              "inst2.I.1"
+            ],
+            [
+              "self.I1.1",
+              "inst1.I.1"
+            ],
+            [
+              "self.I1.0",
+              "inst0.I.1"
+            ],
+            [
+              "self.I0.2",
+              "inst2.I.0"
+            ],
+            [
+              "self.I0.1",
+              "inst1.I.0"
+            ],
+            [
+              "self.I0.0",
+              "inst0.I.0"
+            ],
+            [
+              "self.S",
+              "inst2.S"
+            ],
+            [
+              "self.S",
+              "inst1.S"
+            ],
+            [
+              "self.S",
+              "inst0.S"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "global._Mux2"
+            },
+            "inst1": {
+              "modref": "global._Mux2"
+            },
+            "inst2": {
+              "modref": "global._Mux2"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "I0": [
+                "Array",
+                3,
+                "BitIn"
+              ],
+              "I1": [
+                "Array",
+                3,
+                "BitIn"
+              ],
+              "O": [
+                "Array",
+                3,
+                "Bit"
+              ],
+              "S": "BitIn"
+            }
+          ]
+        },
+        "_Mux2": {
+          "connections": [
+            [
+              "self.I.1",
+              "inst0.in1"
+            ],
+            [
+              "self.I.0",
+              "inst0.in0"
+            ],
+            [
+              "self.S",
+              "inst0.sel"
+            ],
+            [
+              "self.O",
+              "inst0.out"
+            ]
+          ],
+          "instances": {
+            "inst0": {
+              "modref": "coreir.bitmux"
+            }
+          },
+          "type": [
+            "Record",
+            {
+              "I": [
+                "Array",
+                2,
+                "BitIn"
+              ],
+              "O": "Bit",
+              "S": "BitIn"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "top": "global.Mux2x3"
+}

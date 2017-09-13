@@ -17,3 +17,5 @@ from .arith import (
     DefineAdd, Add, add,
     # DefineSub, Sub, sub,
 )
+
+from .mux import DefineMux, Mux

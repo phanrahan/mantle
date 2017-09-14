@@ -7,6 +7,8 @@ from mantle.coreir import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, Reduce
 from mantle.coreir import NAnd, NOr, NXOr, ReduceNAnd, ReduceNOr, ReduceNXOr
 from mantle.coreir import static_left_shift, static_right_shift, dynamic_left_shift, dynamic_right_shift
 
+CHECK_OUTPUT = os.environ.get("MANTLE_CHECK_COREIR_OUTPUT", False)
+
 
 def test_coreir_bit():
     class TestCircuit(Circuit):
@@ -18,8 +20,9 @@ def test_coreir_bit():
                       XOr(2)(circuit.b, circuit.c))
             wire(d, circuit.d)
     compile("build/test_coreir_bit", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_bit.json", "gold/test_coreir_bit.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_bit.json", "gold/test_coreir_bit.json")
 
 
 def test_coreir_bit_2():
@@ -32,8 +35,9 @@ def test_coreir_bit_2():
                         NXOr(2)(circuit.b, circuit.c))
             wire(d, circuit.d)
     compile("build/test_coreir_bit_2", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_bit_2.json", "gold/test_coreir_bit_2.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_bit_2.json", "gold/test_coreir_bit_2.json")
 
 
 def test_coreir_bits():
@@ -47,8 +51,9 @@ def test_coreir_bits():
                       XOr(2, width)(circuit.b, circuit.c))
             wire(d, circuit.d)
     compile("build/test_coreir_bits", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_bits.json", "gold/test_coreir_bits.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_bits.json", "gold/test_coreir_bits.json")
 
 
 def test_coreir_bits_2():
@@ -62,8 +67,9 @@ def test_coreir_bits_2():
                       NXOr(2, width)(circuit.b, circuit.c))
             wire(d, circuit.d)
     compile("build/test_coreir_bits_2", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_bits_2.json", "gold/test_coreir_bits_2.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_bits_2.json", "gold/test_coreir_bits_2.json")
 
 
 def test_three_args():
@@ -78,8 +84,9 @@ def test_three_args():
                              XOr(3, width)(circuit.b, circuit.c, circuit.a))
             wire(d, circuit.d)
     compile("build/test_coreir_three_args", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_three_args.json", "gold/test_coreir_three_args.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_three_args.json", "gold/test_coreir_three_args.json")
 
 
 def test_reduce():
@@ -94,8 +101,9 @@ def test_reduce():
                             ReduceXOr(width)(circuit.b))
             wire(d, circuit.d)
     compile("build/test_coreir_reduce", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_reduce.json", "gold/test_coreir_reduce.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_reduce.json", "gold/test_coreir_reduce.json")
 
 
 def test_reduce_2():
@@ -110,8 +118,9 @@ def test_reduce_2():
                             ReduceNXOr(width)(circuit.b))
             wire(d, circuit.d)
     compile("build/test_coreir_reduce_2", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_reduce_2.json", "gold/test_coreir_reduce_2.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_reduce_2.json", "gold/test_coreir_reduce_2.json")
 
 
 def test_static_shift():
@@ -125,8 +134,9 @@ def test_static_shift():
                              static_right_shift(circuit.b, 3))
             wire(c, circuit.c)
     compile("build/test_coreir_static_shift", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_static_shift.json", "gold/test_coreir_static_shift.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_static_shift.json", "gold/test_coreir_static_shift.json")
 
 
 def test_dynamic_shift():
@@ -140,8 +150,9 @@ def test_dynamic_shift():
                              dynamic_right_shift(circuit.a, circuit.b))
             wire(c, circuit.c)
     compile("build/test_coreir_dynamic_shift", TestCircuit, output="coreir")
-    assert check_files_equal(__file__,
-            "build/test_coreir_dynamic_shift.json", "gold/test_coreir_dynamic_shift.json")
+    if CHECK_OUTPUT:
+        assert check_files_equal(__file__,
+                "build/test_coreir_dynamic_shift.json", "gold/test_coreir_dynamic_shift.json")
 
 # def test_coreir_uint():
 #     class TestCircuit(Circuit):

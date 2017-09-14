@@ -41,7 +41,7 @@ def init(rom,N,mode=0):
     params['READ_MODE'] = str(mode)
 
     # M is the number of high (>8) address values
-    #  e.g. if N == 8, then there are 2 high address values 
+    #  e.g. if N == 8, then there are 2 high address values
     M = 16//N
     for i in range(16):
         v = 0

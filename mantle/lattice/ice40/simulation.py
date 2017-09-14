@@ -8,7 +8,7 @@ def simulate_sb_carry(self, value_store, state_store):
     CI = value_store.get_value(self.CI)
     val = (I0 and I1) or (I1 and CI) or (I0 and CI)
     value_store.set_value(self.CO, val)
-    
+
 def simulate_sb_lut4(self, value_store, state_store):
     init = self.kwargs['LUT_INIT']
     if isinstance(init, six.string_types):
@@ -104,12 +104,19 @@ def gen_sb_ram40_4k_sim(prc=True, pwc=True):
         if not state_store:
             # block
             state_store['block'] = [False] * 4096
+            # The SB_RAM primitive has a special initialization mapping for bits,
+            # see the init function in mantle/lattice/ice40/RAMB.py
+            # Here we invert the mapping and store the memory in a cartesian
+            # grid
+            N = n_r_blocks
+            M = 16 // N
             for i in range(16):
-                init_block = self.kwargs['INIT_' + str(format(i, 'X'))]
-                for x in range(256):
-                    assert ((init_block[0] >> x) & 1) == 1 or ((init_block[0] >> x) & 1) == 0
-                    state_store['block'][(i * 256) + x] = bool((init_block[0] >> x) & 1)
-            
+                v = self.kwargs['INIT_' + str(format(i, 'X'))][0]
+                for b in range(256):
+                    col = (b//M)%N
+                    row = 256*(b%M) + 16*i + b//16
+                    state_store['block'][row * N + col] = bool((v >> b) & 1)
+
             state_store['prev_r_clock'] = r_clock
             state_store['prev_w_clock'] = w_clock
             state_store['r_data'] = [False] * n_r_blocks
@@ -131,7 +138,17 @@ def gen_sb_ram40_4k_sim(prc=True, pwc=True):
 
         # write to RAM
         if w_clock_edge:
-            w_data = value_store.get_value(self.WDATA)
+            WDATA = value_store.get_value(self.WDATA)
+            w_data = [False for _ in range(n_w_blocks)]
+            for i in range(n_r_blocks):
+                if n_r_blocks == 16:
+                    w_data[i] = WDATA[i]
+                elif n_r_blocks == 8:
+                    w_data[i] = WDATA[i * 2]
+                elif n_r_blocks == 4:
+                    w_data[i] = WDATA[1 + i * 4]
+                elif n_r_blocks == 2:
+                    w_data[i] = WDATA[3 + i * 8]
             mask = value_store.get_value(self.MASK)
             w_addr = value_store.get_value(self.WADDR)
             w_e = value_store.get_value(self.WE)
@@ -159,11 +176,22 @@ def gen_sb_ram40_4k_sim(prc=True, pwc=True):
         r_data = state_store['r_data']
 
         if r_e and r_clock_edge and r_clke:
-            idx = n_r_blocks * seq2int(r_addr)
-            for i in range(n_r_blocks):
-                r_data[i] = block[idx + i];
+            row = n_r_blocks * seq2int(r_addr)
+            for col in range(n_r_blocks):
+                r_data[col] = block[row + col];
 
-        value_store.set_value(self.RDATA, r_data)
+        RDATA = [False for _ in range(16)]
+        for i in range(n_r_blocks):
+            if n_r_blocks == 16:
+                RDATA[i] = r_data[i]
+            elif n_r_blocks == 8:
+                RDATA[i * 2] = r_data[i]
+            elif n_r_blocks == 4:
+                RDATA[1 + i * 4] = r_data[i]
+            elif n_r_blocks == 2:
+                RDATA[3 + i * 8] = r_data[i]
+
+        value_store.set_value(self.RDATA, RDATA)
 
         state_store['prev_w_clock'] = w_clock
         state_store['prev_r_clock'] = r_clock

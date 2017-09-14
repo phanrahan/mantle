@@ -19,9 +19,8 @@ before_install:
     - cd coreir
     - export COREIRCONFIG="g++-4.9"
     - export COREIR=$PWD
-    - export LD_LIBRARY_PATH=$PWD/lib:$LD_LIBRARY_PATH
-    - make install
-    - pip install -e bindings/python
+    - sudo make install
+    - pip install coreir
     - cd ..
     # END: coreir installation
 

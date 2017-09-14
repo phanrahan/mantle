@@ -2,9 +2,6 @@ from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir.compare import EQ, NE, ULT, ULE, UGT, UGE, SLT, SLE, SGT, \
     SGE
-import os
-
-CHECK_OUTPUT = os.environ.get("MANTLE_CHECK_COREIR_OUTPUT", False)
 
 def check(circuit_type):
     circuit_type_name = circuit_type.__name__
@@ -21,10 +18,9 @@ def check(circuit_type):
 
     compile("build/test_{}_two".format(circuit_type_name), TestCircuit,
             output="coreir")
-    if CHECK_OUTPUT:
-        assert check_files_equal(__file__,
-                "build/test_{}_two.json".format(circuit_type_name),
-                "gold/test_{}_two.json".format(circuit_type_name))
+    assert check_files_equal(__file__,
+            "build/test_{}_two.json".format(circuit_type_name),
+            "gold/test_{}_two.json".format(circuit_type_name))
 
 def test_eq():
     check(EQ)

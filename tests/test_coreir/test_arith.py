@@ -2,10 +2,6 @@ from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir.arith import add, Add, AddC
 
-import os
-
-CHECK_OUTPUT = os.environ.get("MANTLE_CHECK_COREIR_OUTPUT", False)
-
 
 def test_add_two():
     T = UInt(4)
@@ -19,9 +15,8 @@ def test_add_two():
     print(repr(TestCircuit))
 
     compile("build/test_add_two", TestCircuit, output="coreir")
-    if CHECK_OUTPUT:
-        assert check_files_equal(__file__,
-                "build/test_add_two.json", "gold/test_add_two.json")
+    assert check_files_equal(__file__,
+            "build/test_add_two.json", "gold/test_add_two.json")
 
 
 def test_add_three():
@@ -36,9 +31,8 @@ def test_add_three():
     print(repr(TestCircuit))
 
     compile("build/test_add_three", TestCircuit, output="coreir")
-    if CHECK_OUTPUT:
-        assert check_files_equal(__file__,
-                "build/test_add_three.json", "gold/test_add_three.json")
+    assert check_files_equal(__file__,
+            "build/test_add_three.json", "gold/test_add_three.json")
 
 
 def test_add_cout_two():
@@ -54,9 +48,8 @@ def test_add_cout_two():
     print(repr(TestCircuit))
 
     compile("build/test_add_cout_two", TestCircuit, output="coreir")
-    if CHECK_OUTPUT:
-        assert check_files_equal(__file__,
-                "build/test_add_cout_two.json", "gold/test_add_cout_two.json")
+    assert check_files_equal(__file__,
+            "build/test_add_cout_two.json", "gold/test_add_cout_two.json")
 
 
 def test_add_cin_two():
@@ -71,9 +64,8 @@ def test_add_cin_two():
     print(repr(TestCircuit))
 
     compile("build/test_add_cin_two", TestCircuit, output="coreir")
-    if CHECK_OUTPUT:
-        assert check_files_equal(__file__,
-                "build/test_add_cin_two.json", "gold/test_add_cin_two.json")
+    assert check_files_equal(__file__,
+            "build/test_add_cin_two.json", "gold/test_add_cin_two.json")
 
 
 def test_addc_two():
@@ -89,9 +81,8 @@ def test_addc_two():
     print(repr(TestCircuit))
 
     compile("build/test_addc_two", TestCircuit, output="coreir")
-    if CHECK_OUTPUT:
-        assert check_files_equal(__file__,
-                "build/test_addc_two.json", "gold/test_addc_two.json")
+    assert check_files_equal(__file__,
+            "build/test_addc_two.json", "gold/test_addc_two.json")
 
 
 # def test_sub():

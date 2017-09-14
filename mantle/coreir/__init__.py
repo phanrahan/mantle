@@ -19,3 +19,4 @@ from .arith import (
 )
 
 from .mux import DefineMux, Mux
+from .memory import DefineRAM, DefineMemory

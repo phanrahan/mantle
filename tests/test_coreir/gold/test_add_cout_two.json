@@ -1,154 +1,62 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "Add4Bits(4)": {
-          "connections": [
-            [
-              "self.O.3",
-              "inst0.out.4"
-            ],
-            [
-              "self.O.2",
-              "inst0.out.3"
-            ],
-            [
-              "self.O.1",
-              "inst0.out.2"
-            ],
-            [
-              "self.O.0",
-              "inst0.out.1"
-            ],
-            [
-              "self.I1.3",
-              "inst0.in1.4"
-            ],
-            [
-              "self.I1.2",
-              "inst0.in1.3"
-            ],
-            [
-              "self.I1.1",
-              "inst0.in1.2"
-            ],
-            [
-              "self.I1.0",
-              "inst0.in1.1"
-            ],
-            [
-              "self.I0.3",
-              "inst0.in0.4"
-            ],
-            [
-              "self.I0.2",
-              "inst0.in0.3"
-            ],
-            [
-              "self.I0.1",
-              "inst0.in0.2"
-            ],
-            [
-              "self.I0.0",
-              "inst0.in0.1"
-            ],
-            [
-              "inst0.out.0",
-              "self.COUT"
-            ],
-            [
-              "inst0.in1.0",
-              "bit_const_GND.out"
-            ],
-            [
-              "inst0.in0.0",
-              "bit_const_GND.out"
-            ]
-          ],
-          "instances": {
-            "bit_const_GND": {
-              "configargs": {
-                "value": 0
-              },
-              "modref": "coreir.bitconst"
-            },
-            "inst0": {
-              "genargs": {
-                "width": 5
-              },
-              "genref": "coreir.add"
-            }
+{"top":"global.test_add_cout_two",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Add4Bits(4)":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"],
+          "COUT":"Bit"
+        }],
+        "instances":{
+          "bit_const_GND":{
+            "modref":"coreir.bitconst",
+            "configargs":{"value":0}
           },
-          "type": [
-            "Record",
-            {
-              "COUT": "Bit",
-              "I0": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "I1": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "O": [
-                "Array",
-                4,
-                "Bit"
-              ]
-            }
-          ]
+          "inst0":{
+            "genref":"coreir.add",
+            "genargs":{"width":5}
+          }
         },
-        "test_add_cout_two": {
-          "connections": [
-            [
-              "self.O",
-              "inst0.O"
-            ],
-            [
-              "self.I1",
-              "inst0.I1"
-            ],
-            [
-              "self.I0",
-              "inst0.I0"
-            ],
-            [
-              "self.COUT",
-              "inst0.COUT"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "global.Add4Bits(4)"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "COUT": "Bit",
-              "I0": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "I1": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "O": [
-                "Array",
-                4,
-                "Bit"
-              ]
-            }
-          ]
-        }
+        "connections":[
+          ["self.O.3","inst0.out.4"],
+          ["self.O.2","inst0.out.3"],
+          ["self.O.1","inst0.out.2"],
+          ["self.O.0","inst0.out.1"],
+          ["self.I1.3","inst0.in1.4"],
+          ["self.I1.2","inst0.in1.3"],
+          ["self.I1.1","inst0.in1.2"],
+          ["self.I1.0","inst0.in1.1"],
+          ["self.I0.3","inst0.in0.4"],
+          ["self.I0.2","inst0.in0.3"],
+          ["self.I0.1","inst0.in0.2"],
+          ["self.I0.0","inst0.in0.1"],
+          ["inst0.out.0","self.COUT"],
+          ["inst0.in1.0","bit_const_GND.out"],
+          ["inst0.in0.0","bit_const_GND.out"]
+        ]
+      },
+      "test_add_cout_two":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"],
+          "COUT":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"global.Add4Bits(4)"
+          }
+        },
+        "connections":[
+          ["self.O","inst0.O"],
+          ["self.I1","inst0.I1"],
+          ["self.I0","inst0.I0"],
+          ["self.COUT","inst0.COUT"]
+        ]
       }
     }
-  },
-  "top": "global.test_add_cout_two"
+  }
+}
 }

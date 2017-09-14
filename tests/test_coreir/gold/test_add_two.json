@@ -1,94 +1,43 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "Add4Bits(4)": {
-          "connections": [
-            [
-              "self.O",
-              "inst0.out"
-            ],
-            [
-              "self.I1",
-              "inst0.in1"
-            ],
-            [
-              "self.I0",
-              "inst0.in0"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "genargs": {
-                "width": 4
-              },
-              "genref": "coreir.add"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "I0": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "I1": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "O": [
-                "Array",
-                4,
-                "Bit"
-              ]
-            }
-          ]
+{"top":"global.test_add_two",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Add4Bits(4)":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.add",
+            "genargs":{"width":4}
+          }
         },
-        "test_add_two": {
-          "connections": [
-            [
-              "self.c",
-              "inst0.O"
-            ],
-            [
-              "self.b",
-              "inst0.I1"
-            ],
-            [
-              "self.a",
-              "inst0.I0"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "global.Add4Bits(4)"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "a": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "b": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "c": [
-                "Array",
-                4,
-                "Bit"
-              ]
-            }
-          ]
-        }
+        "connections":[
+          ["self.O","inst0.out"],
+          ["self.I1","inst0.in1"],
+          ["self.I0","inst0.in0"]
+        ]
+      },
+      "test_add_two":{
+        "type":["Record",{
+          "a":["Array",4,"BitIn"],
+          "b":["Array",4,"BitIn"],
+          "c":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"global.Add4Bits(4)"
+          }
+        },
+        "connections":[
+          ["self.c","inst0.O"],
+          ["self.b","inst0.I1"],
+          ["self.a","inst0.I0"]
+        ]
       }
     }
-  },
-  "top": "global.test_add_two"
+  }
+}
 }

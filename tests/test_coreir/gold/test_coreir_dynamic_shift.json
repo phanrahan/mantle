@@ -1,81 +1,38 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "test_coreir_dynamic_shift": {
-          "connections": [
-            [
-              "self.c",
-              "inst0.out"
-            ],
-            [
-              "self.b",
-              "inst2.in1"
-            ],
-            [
-              "self.b",
-              "inst1.in1"
-            ],
-            [
-              "self.a",
-              "inst2.in0"
-            ],
-            [
-              "self.a",
-              "inst1.in0"
-            ],
-            [
-              "inst2.out",
-              "inst0.in1"
-            ],
-            [
-              "inst1.out",
-              "inst0.in0"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "genargs": {
-                "width": 4
-              },
-              "genref": "coreir.or"
-            },
-            "inst1": {
-              "genargs": {
-                "width": 4
-              },
-              "genref": "coreir.dshl"
-            },
-            "inst2": {
-              "genargs": {
-                "width": 4
-              },
-              "genref": "coreir.dshl"
-            }
+{"top":"global.test_coreir_dynamic_shift",
+"namespaces":{
+  "global":{
+    "modules":{
+      "test_coreir_dynamic_shift":{
+        "type":["Record",{
+          "a":["Array",4,"BitIn"],
+          "b":["Array",4,"BitIn"],
+          "c":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.or",
+            "genargs":{"width":4}
           },
-          "type": [
-            "Record",
-            {
-              "a": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "b": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "c": [
-                "Array",
-                4,
-                "Bit"
-              ]
-            }
-          ]
-        }
+          "inst1":{
+            "genref":"coreir.dshl",
+            "genargs":{"width":4}
+          },
+          "inst2":{
+            "genref":"coreir.dshl",
+            "genargs":{"width":4}
+          }
+        },
+        "connections":[
+          ["self.c","inst0.out"],
+          ["self.b","inst2.in1"],
+          ["self.b","inst1.in1"],
+          ["self.a","inst2.in0"],
+          ["self.a","inst1.in0"],
+          ["inst2.out","inst0.in1"],
+          ["inst1.out","inst0.in0"]
+        ]
       }
     }
-  },
-  "top": "global.test_coreir_dynamic_shift"
+  }
+}
 }

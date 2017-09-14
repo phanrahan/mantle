@@ -1,86 +1,43 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "SLE4": {
-          "connections": [
-            [
-              "self.O",
-              "inst0.out"
-            ],
-            [
-              "self.I1",
-              "inst0.in1"
-            ],
-            [
-              "self.I0",
-              "inst0.in0"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "genargs": {
-                "width": 4
-              },
-              "genref": "coreir.sle"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "I0": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "I1": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "O": "Bit"
-            }
-          ]
+{"top":"global.test_SLE_two",
+"namespaces":{
+  "global":{
+    "modules":{
+      "SLE4":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.sle",
+            "genargs":{"width":4}
+          }
         },
-        "test_SLE_two": {
-          "connections": [
-            [
-              "self.c",
-              "inst0.O"
-            ],
-            [
-              "self.b",
-              "inst0.I1"
-            ],
-            [
-              "self.a",
-              "inst0.I0"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "global.SLE4"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "a": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "b": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "c": "Bit"
-            }
-          ]
-        }
+        "connections":[
+          ["self.O","inst0.out"],
+          ["self.I1","inst0.in1"],
+          ["self.I0","inst0.in0"]
+        ]
+      },
+      "test_SLE_two":{
+        "type":["Record",{
+          "a":["Array",4,"BitIn"],
+          "b":["Array",4,"BitIn"],
+          "c":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"global.SLE4"
+          }
+        },
+        "connections":[
+          ["self.c","inst0.O"],
+          ["self.b","inst0.I1"],
+          ["self.a","inst0.I0"]
+        ]
       }
     }
-  },
-  "top": "global.test_SLE_two"
+  }
+}
 }

@@ -1,0 +1,36 @@
+{"top":"global.RAM4x16",
+"namespaces":{
+  "global":{
+    "modules":{
+      "RAM4x16":{
+        "type":["Record",{
+          "RADDR":["Array",2,"BitIn"],
+          "RDATA":["Array",16,"Bit"],
+          "RCLK":["Named","coreir.clkIn"],
+          "RE":"BitIn",
+          "WADDR":["Array",2,"BitIn"],
+          "WDATA":["Array",16,"BitIn"],
+          "WCLK":["Named","coreir.clkIn"],
+          "WE":"BitIn"
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.mem",
+            "genargs":{"depth":4, "width":16}
+          }
+        },
+        "connections":[
+          ["self.WE","inst0.wen"],
+          ["self.WDATA","inst0.wdata"],
+          ["self.WCLK","inst0.wclk"],
+          ["self.WADDR","inst0.waddr"],
+          ["self.RE","inst0.ren"],
+          ["self.RDATA","inst0.rdata"],
+          ["self.RCLK","inst0.rclk"],
+          ["self.RADDR","inst0.raddr"]
+        ]
+      }
+    }
+  }
+}
+}

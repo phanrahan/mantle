@@ -1,133 +1,78 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "NAnd2None": {
-          "connections": [
-            [
-              "self.out",
-              "inst0.out"
-            ],
-            [
-              "self.in1",
-              "inst1.in1"
-            ],
-            [
-              "self.in0",
-              "inst1.in0"
-            ],
-            [
-              "inst1.out",
-              "inst0.in"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "coreir.bitnot"
-            },
-            "inst1": {
-              "modref": "coreir.bitand"
-            }
+{"top":"global.test_coreir_bit_2",
+"namespaces":{
+  "global":{
+    "modules":{
+      "NAnd2None":{
+        "type":["Record",{
+          "in0":"BitIn",
+          "in1":"BitIn",
+          "out":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitnot"
           },
-          "type": [
-            "Record",
-            {
-              "in0": "BitIn",
-              "in1": "BitIn",
-              "out": "Bit"
-            }
-          ]
+          "inst1":{
+            "modref":"coreir.bitand"
+          }
         },
-        "NOr2None": {
-          "connections": [
-            [
-              "self.out",
-              "inst0.out"
-            ],
-            [
-              "self.in1",
-              "inst1.in1"
-            ],
-            [
-              "self.in0",
-              "inst1.in0"
-            ],
-            [
-              "inst1.out",
-              "inst0.in"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "coreir.bitnot"
-            },
-            "inst1": {
-              "modref": "coreir.bitor"
-            }
+        "connections":[
+          ["self.out","inst0.out"],
+          ["self.in1","inst1.in1"],
+          ["self.in0","inst1.in0"],
+          ["inst1.out","inst0.in"]
+        ]
+      },
+      "NOr2None":{
+        "type":["Record",{
+          "in0":"BitIn",
+          "in1":"BitIn",
+          "out":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitnot"
           },
-          "type": [
-            "Record",
-            {
-              "in0": "BitIn",
-              "in1": "BitIn",
-              "out": "Bit"
-            }
-          ]
+          "inst1":{
+            "modref":"coreir.bitor"
+          }
         },
-        "test_coreir_bit_2": {
-          "connections": [
-            [
-              "self.d",
-              "inst0.out"
-            ],
-            [
-              "self.c",
-              "inst2.in1"
-            ],
-            [
-              "self.b",
-              "inst2.in0"
-            ],
-            [
-              "self.b",
-              "inst1.in1"
-            ],
-            [
-              "self.a",
-              "inst1.in0"
-            ],
-            [
-              "inst2.out",
-              "inst0.in1"
-            ],
-            [
-              "inst1.out",
-              "inst0.in0"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "global.NOr2None"
-            },
-            "inst1": {
-              "modref": "global.NAnd2None"
-            },
-            "inst2": {
-              "modref": "coreir.bitxor"
-            }
+        "connections":[
+          ["self.out","inst0.out"],
+          ["self.in1","inst1.in1"],
+          ["self.in0","inst1.in0"],
+          ["inst1.out","inst0.in"]
+        ]
+      },
+      "test_coreir_bit_2":{
+        "type":["Record",{
+          "a":"BitIn",
+          "b":"BitIn",
+          "c":"BitIn",
+          "d":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"global.NOr2None"
           },
-          "type": [
-            "Record",
-            {
-              "a": "BitIn",
-              "b": "BitIn",
-              "c": "BitIn",
-              "d": "Bit"
-            }
-          ]
-        }
+          "inst1":{
+            "modref":"global.NAnd2None"
+          },
+          "inst2":{
+            "modref":"coreir.bitxor"
+          }
+        },
+        "connections":[
+          ["self.d","inst0.out"],
+          ["self.c","inst2.in1"],
+          ["self.b","inst2.in0"],
+          ["self.b","inst1.in1"],
+          ["self.a","inst1.in0"],
+          ["inst2.out","inst0.in1"],
+          ["inst1.out","inst0.in0"]
+        ]
       }
     }
-  },
-  "top": "global.test_coreir_bit_2"
+  }
+}
 }

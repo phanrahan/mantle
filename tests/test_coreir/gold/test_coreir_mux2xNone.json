@@ -1,46 +1,26 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "_Mux2": {
-          "connections": [
-            [
-              "self.I.1",
-              "inst0.in1"
-            ],
-            [
-              "self.I.0",
-              "inst0.in0"
-            ],
-            [
-              "self.S",
-              "inst0.sel"
-            ],
-            [
-              "self.O",
-              "inst0.out"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "coreir.bitmux"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "I": [
-                "Array",
-                2,
-                "BitIn"
-              ],
-              "O": "Bit",
-              "S": "BitIn"
-            }
-          ]
-        }
+{"top":"global._Mux2",
+"namespaces":{
+  "global":{
+    "modules":{
+      "_Mux2":{
+        "type":["Record",{
+          "I":["Array",2,"BitIn"],
+          "S":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitmux"
+          }
+        },
+        "connections":[
+          ["self.I.1","inst0.in1"],
+          ["self.I.0","inst0.in0"],
+          ["self.S","inst0.sel"],
+          ["self.O","inst0.out"]
+        ]
       }
     }
-  },
-  "top": "global._Mux2"
+  }
+}
 }

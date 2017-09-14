@@ -1,68 +1,40 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "test_coreir_bit": {
-          "connections": [
-            [
-              "self.d",
-              "inst0.out"
-            ],
-            [
-              "self.c",
-              "inst3.in1"
-            ],
-            [
-              "self.b",
-              "inst3.in0"
-            ],
-            [
-              "self.b",
-              "inst2.in1"
-            ],
-            [
-              "self.a",
-              "inst2.in0"
-            ],
-            [
-              "inst3.out",
-              "inst0.in1"
-            ],
-            [
-              "inst2.out",
-              "inst1.in"
-            ],
-            [
-              "inst1.out",
-              "inst0.in0"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "coreir.bitor"
-            },
-            "inst1": {
-              "modref": "coreir.bitnot"
-            },
-            "inst2": {
-              "modref": "coreir.bitand"
-            },
-            "inst3": {
-              "modref": "coreir.bitxor"
-            }
+{"top":"global.test_coreir_bit",
+"namespaces":{
+  "global":{
+    "modules":{
+      "test_coreir_bit":{
+        "type":["Record",{
+          "a":"BitIn",
+          "b":"BitIn",
+          "c":"BitIn",
+          "d":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitor"
           },
-          "type": [
-            "Record",
-            {
-              "a": "BitIn",
-              "b": "BitIn",
-              "c": "BitIn",
-              "d": "Bit"
-            }
-          ]
-        }
+          "inst1":{
+            "modref":"coreir.bitnot"
+          },
+          "inst2":{
+            "modref":"coreir.bitand"
+          },
+          "inst3":{
+            "modref":"coreir.bitxor"
+          }
+        },
+        "connections":[
+          ["self.d","inst0.out"],
+          ["self.c","inst3.in1"],
+          ["self.b","inst3.in0"],
+          ["self.b","inst2.in1"],
+          ["self.a","inst2.in0"],
+          ["inst3.out","inst0.in1"],
+          ["inst2.out","inst1.in"],
+          ["inst1.out","inst0.in0"]
+        ]
       }
     }
-  },
-  "top": "global.test_coreir_bit"
+  }
+}
 }

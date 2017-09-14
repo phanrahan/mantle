@@ -1,190 +1,75 @@
-{
-  "namespaces": {
-    "global": {
-      "modules": {
-        "Add4Bits(4)": {
-          "connections": [
-            [
-              "self.O.3",
-              "inst1.out.4"
-            ],
-            [
-              "self.O.2",
-              "inst1.out.3"
-            ],
-            [
-              "self.O.1",
-              "inst1.out.2"
-            ],
-            [
-              "self.O.0",
-              "inst1.out.1"
-            ],
-            [
-              "self.I1.3",
-              "inst0.in1.4"
-            ],
-            [
-              "self.I1.2",
-              "inst0.in1.3"
-            ],
-            [
-              "self.I1.1",
-              "inst0.in1.2"
-            ],
-            [
-              "self.I1.0",
-              "inst0.in1.1"
-            ],
-            [
-              "self.I0.3",
-              "inst0.in0.4"
-            ],
-            [
-              "self.I0.2",
-              "inst0.in0.3"
-            ],
-            [
-              "self.I0.1",
-              "inst0.in0.2"
-            ],
-            [
-              "self.I0.0",
-              "inst0.in0.1"
-            ],
-            [
-              "inst1.out.0",
-              "self.COUT"
-            ],
-            [
-              "inst1.in0.4",
-              "self.CIN"
-            ],
-            [
-              "inst1.in0.3",
-              "bit_const_GND.out"
-            ],
-            [
-              "inst1.in0.2",
-              "bit_const_GND.out"
-            ],
-            [
-              "inst1.in0.1",
-              "bit_const_GND.out"
-            ],
-            [
-              "inst1.in0.0",
-              "bit_const_GND.out"
-            ],
-            [
-              "inst0.in1.0",
-              "bit_const_GND.out"
-            ],
-            [
-              "inst0.in0.0",
-              "bit_const_GND.out"
-            ],
-            [
-              "inst1.in1",
-              "inst0.out"
-            ]
-          ],
-          "instances": {
-            "bit_const_GND": {
-              "configargs": {
-                "value": 0
-              },
-              "modref": "coreir.bitconst"
-            },
-            "inst0": {
-              "genargs": {
-                "width": 5
-              },
-              "genref": "coreir.add"
-            },
-            "inst1": {
-              "genargs": {
-                "width": 5
-              },
-              "genref": "coreir.add"
-            }
+{"top":"global.test_addc_two",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Add4Bits(4)":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "CIN":"BitIn",
+          "O":["Array",4,"Bit"],
+          "COUT":"Bit"
+        }],
+        "instances":{
+          "bit_const_GND":{
+            "modref":"coreir.bitconst",
+            "configargs":{"value":0}
           },
-          "type": [
-            "Record",
-            {
-              "CIN": "BitIn",
-              "COUT": "Bit",
-              "I0": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "I1": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "O": [
-                "Array",
-                4,
-                "Bit"
-              ]
-            }
-          ]
+          "inst0":{
+            "genref":"coreir.add",
+            "genargs":{"width":5}
+          },
+          "inst1":{
+            "genref":"coreir.add",
+            "genargs":{"width":5}
+          }
         },
-        "test_addc_two": {
-          "connections": [
-            [
-              "self.O",
-              "inst0.O"
-            ],
-            [
-              "self.I1",
-              "inst0.I1"
-            ],
-            [
-              "self.I0",
-              "inst0.I0"
-            ],
-            [
-              "self.COUT",
-              "inst0.COUT"
-            ],
-            [
-              "self.CIN",
-              "inst0.CIN"
-            ]
-          ],
-          "instances": {
-            "inst0": {
-              "modref": "global.Add4Bits(4)"
-            }
-          },
-          "type": [
-            "Record",
-            {
-              "CIN": "BitIn",
-              "COUT": "Bit",
-              "I0": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "I1": [
-                "Array",
-                4,
-                "BitIn"
-              ],
-              "O": [
-                "Array",
-                4,
-                "Bit"
-              ]
-            }
-          ]
-        }
+        "connections":[
+          ["self.O.3","inst1.out.4"],
+          ["self.O.2","inst1.out.3"],
+          ["self.O.1","inst1.out.2"],
+          ["self.O.0","inst1.out.1"],
+          ["self.I1.3","inst0.in1.4"],
+          ["self.I1.2","inst0.in1.3"],
+          ["self.I1.1","inst0.in1.2"],
+          ["self.I1.0","inst0.in1.1"],
+          ["self.I0.3","inst0.in0.4"],
+          ["self.I0.2","inst0.in0.3"],
+          ["self.I0.1","inst0.in0.2"],
+          ["self.I0.0","inst0.in0.1"],
+          ["inst1.out.0","self.COUT"],
+          ["inst1.in0.4","self.CIN"],
+          ["inst1.in0.3","bit_const_GND.out"],
+          ["inst1.in0.2","bit_const_GND.out"],
+          ["inst1.in0.1","bit_const_GND.out"],
+          ["inst1.in0.0","bit_const_GND.out"],
+          ["inst0.in1.0","bit_const_GND.out"],
+          ["inst0.in0.0","bit_const_GND.out"],
+          ["inst1.in1","inst0.out"]
+        ]
+      },
+      "test_addc_two":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"],
+          "CIN":"BitIn",
+          "COUT":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"global.Add4Bits(4)"
+          }
+        },
+        "connections":[
+          ["self.O","inst0.O"],
+          ["self.I1","inst0.I1"],
+          ["self.I0","inst0.I0"],
+          ["self.COUT","inst0.COUT"],
+          ["self.CIN","inst0.CIN"]
+        ]
       }
     }
-  },
-  "top": "global.test_addc_two"
+  }
+}
 }

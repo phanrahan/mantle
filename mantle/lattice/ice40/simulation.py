@@ -119,7 +119,6 @@ def gen_sb_ram40_4k_sim(prc=True, pwc=True):
 
             state_store['prev_r_clock'] = r_clock
             state_store['prev_w_clock'] = w_clock
-            state_store['r_data'] = [False] * n_r_blocks
 
         block = state_store['block']
 
@@ -173,25 +172,25 @@ def gen_sb_ram40_4k_sim(prc=True, pwc=True):
 
         r_e = value_store.get_value(self.RE)
         r_clke = value_store.get_value(self.RCLKE)
-        r_data = state_store['r_data']
 
+        RDATA = [False for _ in range(16)]
         if r_e and r_clock_edge and r_clke:
+            r_data = [False] * n_r_blocks
             row = n_r_blocks * seq2int(r_addr)
             for col in range(n_r_blocks):
                 r_data[col] = block[row + col];
 
-        RDATA = [False for _ in range(16)]
-        for i in range(n_r_blocks):
-            if n_r_blocks == 16:
-                RDATA[i] = r_data[i]
-            elif n_r_blocks == 8:
-                RDATA[i * 2] = r_data[i]
-            elif n_r_blocks == 4:
-                RDATA[1 + i * 4] = r_data[i]
-            elif n_r_blocks == 2:
-                RDATA[3 + i * 8] = r_data[i]
+            for i in range(n_r_blocks):
+                if n_r_blocks == 16:
+                    RDATA[i] = r_data[i]
+                elif n_r_blocks == 8:
+                    RDATA[i * 2] = r_data[i]
+                elif n_r_blocks == 4:
+                    RDATA[1 + i * 4] = r_data[i]
+                elif n_r_blocks == 2:
+                    RDATA[3 + i * 8] = r_data[i]
 
-        value_store.set_value(self.RDATA, RDATA)
+            value_store.set_value(self.RDATA, RDATA)
 
         state_store['prev_w_clock'] = w_clock
         state_store['prev_r_clock'] = r_clock

@@ -1,0 +1,27 @@
+{"top":"global.DFF0FalseFalseFalse",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DFF0FalseFalseFalse":{
+        "type":["Record",{
+          "I":"BitIn",
+          "O":"Bit",
+          "CLK":["Named","coreir.clkIn"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.bitreg",
+            "genargs":{"clr":false, "en":false, "rst":false},
+            "configargs":{"init":0}
+          }
+        },
+        "connections":[
+          ["self.O","inst0.out"],
+          ["self.I","inst0.in"],
+          ["self.CLK","inst0.clk"]
+        ]
+      }
+    }
+  }
+}
+}

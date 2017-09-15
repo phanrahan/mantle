@@ -28,6 +28,7 @@ def DefineNE(n):
     T = Bits(n)
     circ = DefineCircuit("NE{}".format(n),
         "I0", In(T), "I1", In(T), "O", Out(Bit))
+    eq = EQ(n)
     out = not_(eq(circ.I0, circ.I1))
     wire(out, circ.O)
     EndDefine()

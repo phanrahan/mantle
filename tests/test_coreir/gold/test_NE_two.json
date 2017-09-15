@@ -2,7 +2,7 @@
 "namespaces":{
   "global":{
     "modules":{
-      "NE4":{
+      "EQ4":{
         "type":["Record",{
           "I0":["Array",4,"BitIn"],
           "I1":["Array",4,"BitIn"],
@@ -12,6 +12,23 @@
           "inst0":{
             "genref":"coreir.eq",
             "genargs":{"width":4}
+          }
+        },
+        "connections":[
+          ["self.O","inst0.out"],
+          ["self.I1","inst0.in1"],
+          ["self.I0","inst0.in0"]
+        ]
+      },
+      "NE4":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"global.EQ4"
           },
           "inst1":{
             "modref":"coreir.bitnot"
@@ -19,9 +36,9 @@
         },
         "connections":[
           ["self.O","inst1.out"],
-          ["self.I1","inst0.in1"],
-          ["self.I0","inst0.in0"],
-          ["inst1.in","inst0.out"]
+          ["self.I1","inst0.I1"],
+          ["self.I0","inst0.I0"],
+          ["inst1.in","inst0.O"]
         ]
       },
       "test_NE_two":{

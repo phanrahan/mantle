@@ -52,9 +52,12 @@ def DefineCoreirMem(height, width):
     return DeclareCircuit(name, *IO, verilog_name="coreir_mem",
             coreir_name="mem", coreir_lib="coreir",
             simulate=gen_sim_mem(height, width),
-            default_kwargs={"width": width, "depth": height})
+            coreir_genargs={"width": width, "depth": height})
 
 def DefineROM(height, width):
+    """
+    coreir doesn't have a ROM primitive yet
+    """
     raise NotImplementedError()
 
 def DefineRAM(height, width):

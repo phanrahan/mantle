@@ -26,7 +26,7 @@ def declare_binop(name, python_op, out_type=None, signed=False):
                               verilog_name="coreir_" + name,
                               coreir_name=name,
                               coreir_lib = "coreir",
-                              default_kwargs={"width": N})
+                              coreir_genargs={"width": N})
 
     return Declare
 

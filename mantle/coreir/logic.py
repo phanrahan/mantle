@@ -67,7 +67,7 @@ def declare_bits_binop(name, python_op):
                               verilog_name   = "coreir_" + name,
                               coreir_name    = name,
                               coreir_lib     = "coreir",
-                              default_kwargs = {"width": N})
+                              coreir_genargs = {"width": N})
 
     return Declare
 
@@ -304,7 +304,7 @@ def DefineInvert(width):
             verilog_name   = "coreir_not",
             coreir_name    = "not",
             coreir_lib     = "coreir",
-            default_kwargs = {"width": width})
+            coreir_genargs = {"width": width})
 
 def Invert(width=None, **kwargs):
     return DefineInvert(width)(**kwargs)
@@ -326,7 +326,7 @@ def DefineDynamicLeftShift(width):
     return DeclareCircuit("dshl{}".format(width), 'in0', In(T), 'in1',
             In(UInt(width)), 'out', Out(T), verilog_name="coreir_dshl",
             coreir_name="dshl", coreir_lib="coreir", simulate=simulate,
-            default_kwargs={"width": width})
+            coreir_genargs={"width": width})
 
 
 def DynamicLeftShift(width, **kwargs):
@@ -352,7 +352,7 @@ def DefineDynamicRightShift(width):
     return DeclareCircuit("dshl{}".format(width), 'in0', In(T), 'in1',
             In(UInt(width)), 'out', Out(T), verilog_name="coreir_dshl",
             coreir_name="dshl", coreir_lib="coreir", simulate=simulate,
-            default_kwargs={"width": width})
+            coreir_genargs={"width": width})
 
 
 def DynamicRightShift(width, **kwargs):

@@ -214,7 +214,7 @@ def DefineNOr(height=2, width=None):
     class _NOr(Circuit):
         assert height > 1 and height <= 4
 
-        name = 'Nor%dx%d' % (height, width)
+        name = 'NOr%dx%d' % (height, width)
 
         if   height == 2:
             IO  = ['I0', In(T), 'I1', In(T)]
@@ -226,7 +226,7 @@ def DefineNOr(height=2, width=None):
 
         @classmethod
         def definition(def_):
-            def orm(y):
+            def norm(y):
                 return NOrN(height, loc=(0,y/8, y%8))
             normxn = join(col(norm, width))
             wire(def_.I0, normxn.I0)
@@ -262,7 +262,7 @@ def DefineXOr(height=2, width=1):
     class _XOr(Circuit):
         assert height > 1 and height <= 4
 
-        name = 'Xor%dx%d' % (height, width)
+        name = 'XOr%dx%d' % (height, width)
 
         if   height == 2:
             IO  = ['I0', In(T), 'I1', In(T)]
@@ -310,7 +310,7 @@ def DefineNXOr(height=2, width=None):
     class _NXOr(Circuit):
         assert height > 1 and height <= 4
 
-        name = 'NXor%dx%d' % (height, width)
+        name = 'NXOr%dx%d' % (height, width)
 
         if   height == 2:
             IO  = ['I0', In(T), 'I1', In(T)]

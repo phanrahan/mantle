@@ -110,6 +110,10 @@ def DefineNAnd(height=2, width=None):
             nandmxn = join(col(nandm, width))
             wire(def_.I0, nandmxn.I0)
             wire(def_.I1, nandmxn.I1)
+            if height >= 3:
+                wire(def_.I2, nandmxn.I2)
+            if height == 4:
+                wire(def_.I3, nandmxn.I3)
             wire(nandmxn.O, def_.O)
 
     return _NAnd
@@ -231,6 +235,10 @@ def DefineNOr(height=2, width=None):
             normxn = join(col(norm, width))
             wire(def_.I0, normxn.I0)
             wire(def_.I1, normxn.I1)
+            if height >= 3:
+                wire(def_.I2, normxn.I2)
+            if height == 4:
+                wire(def_.I3, normxn.I3)
             wire(normxn.O, def_.O)
 
     return _NOr
@@ -279,6 +287,10 @@ def DefineXOr(height=2, width=1):
             xormxn = join(col(xorm, width))
             wire(def_.I0, xormxn.I0)
             wire(def_.I1, xormxn.I1)
+            if height >= 3:
+                wire(def_.I2, xormxn.I2)
+            if height == 4:
+                wire(def_.I3, xormxn.I3)
             wire(xormxn.O, def_.O)
 
     return _XOr
@@ -327,6 +339,10 @@ def DefineNXOr(height=2, width=None):
             nxormxn = join(col(nxorm, width))
             wire(def_.I0, nxormxn.I0)
             wire(def_.I1, nxormxn.I1)
+            if height >= 3:
+                wire(def_.I2, nxormxn.I2)
+            if height == 4:
+                wire(def_.I3, nxormxn.I3)
             wire(nxormxn.O, def_.O)
 
     return _NXOr

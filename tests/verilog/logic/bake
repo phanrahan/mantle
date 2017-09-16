@@ -3,6 +3,11 @@ import os, glob
 from os.path import join, exists
 from fabricate import main, autoclean, run
 
+if os.environ.get("TRAVIS", False) == "true":
+    python_command = "python"
+else:
+    python_command = "python3"
+
 BUILD = 'build'
 GOLD = 'gold'
 
@@ -19,7 +24,7 @@ def compile(base):
     v = base+'.v'
     buildu, goldu = join(BUILD,u), join(GOLD,u)
     buildv, goldv = join(BUILD,v), join(GOLD,v)
-    run('python3',base+'.py', join(BUILD,base))
+    run(python_command,base+'.py', join(BUILD,base))
     if exists(goldu):
         run('cmp',buildu,goldu)
     if exists(goldv):

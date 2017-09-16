@@ -2,7 +2,7 @@ import sys
 from magma import *
 from mantle.verilog.FF import *
 
-main = DefineCircuit("main", "I", In(Bit), "O", Out(Bit), "CLK", In(Bit))
+main = DefineCircuit("main", "I", In(Bit), "O", Out(Bit), "CLK", In(Clock))
 
 dff = DFF()
 

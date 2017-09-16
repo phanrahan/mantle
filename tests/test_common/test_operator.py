@@ -17,8 +17,6 @@ def test_and_2():
             Out(Bits(4)))
     wire(and_(circ.I0, circ.I1), circ.O)
     EndDefine()
-    compile("build/test_and_2", circ)
-    print(repr(circ))
     assert repr(circ) == """\
 main = DefineCircuit("main", "I0", In(Bits(4)), "I1", In(Bits(4)), "O", Out(Bits(4)))
 inst0 = And2x4()
@@ -28,6 +26,7 @@ wire(inst0.O, main.O)
 EndCircuit()\
 """
 
+    compile("build/test_and_2", circ)
     assert check("test_and_2.v")
 
 
@@ -36,8 +35,6 @@ def test_and_3():
             In(Bits(4)), "O", Out(Bits(4)))
     wire(and_(circ.I0, circ.I1, circ.I2), circ.O)
     EndDefine()
-    compile("build/test_and_3", circ)
-    print(repr(circ))
     assert repr(circ) == """\
 main = DefineCircuit("main", "I0", In(Bits(4)), "I1", In(Bits(4)), "I2", In(Bits(4)), "O", Out(Bits(4)))
 inst0 = And3x4()
@@ -48,4 +45,5 @@ wire(inst0.O, main.O)
 EndCircuit()\
 """
 
+    compile("build/test_and_3", circ)
     assert check("test_and_3.v")

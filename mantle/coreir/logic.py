@@ -91,13 +91,6 @@ def ReduceAnd(height=2, **kwargs):
     return uncurry(And(height, **kwargs), prefix="in")
 
 
-def and_(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(x) == width for x in args):
-        raise ValueError("All arguments should have the same length")
-    return And(len(args), width, **kwargs)(*args)
-
-
 @cache_definition
 def DefineNAnd(height=2, width=None):
     if width is None:
@@ -126,13 +119,6 @@ def NAnd(height, width=None, **kwargs):
 
 def ReduceNAnd(height=2, **kwargs):
     return uncurry(NAnd(height, **kwargs), prefix="in")
-
-
-def nand(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(x) == width for x in args):
-        raise ValueError("All arguments should have the same length")
-    return NAnd(len(args), width, **kwargs)(*args)
 
 
 def simulate_bit_not(self, value_store, state_store):
@@ -181,13 +167,6 @@ def ReduceOr(height=2, **kwargs):
     return uncurry(Or(height, **kwargs), prefix="in")
 
 
-def or_(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(x) == width for x in args):
-        raise ValueError("All arguments should have the same length")
-    return Or(len(args), width, **kwargs)(*args)
-
-
 @cache_definition
 def DefineNOr(height=2, width=None):
     if width is None:
@@ -218,13 +197,6 @@ def ReduceNOr(height=2, **kwargs):
     return uncurry(NOr(height, **kwargs), prefix="in")
 
 
-def nor(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(x) == width for x in args):
-        raise ValueError("All arguments should have the same length")
-    return NOr(len(args), width, **kwargs)(*args)
-
-
 DefineCoreirXOr = declare_bits_binop("xor", operator.xor)
 
 
@@ -241,13 +213,6 @@ def DefineXOr(height=2, width=None):
 
 def XOr(height, width=None, **kwargs):
     return DefineXOr(height, width)(**kwargs)
-
-
-def xor(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(x) == width for x in args):
-        raise ValueError("All arguments should have the same length")
-    return XOr(len(args), width, **kwargs)(*args)
 
 def ReduceXOr(height=2, **kwargs):
     return uncurry(XOr(height, **kwargs), prefix="in")
@@ -278,13 +243,6 @@ def DefineNXOr(height=2, width=None):
 
 def NXOr(height, width=None, **kwargs):
     return DefineXOr(height, width)(**kwargs)
-
-
-def nxor(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(x) == width for x in args):
-        raise ValueError("All arguments should have the same length")
-    return NXOr(len(args), width, **kwargs)(*args)
 
 def ReduceNXOr(height=2, **kwargs):
     return uncurry(NXOr(height, **kwargs), prefix="in")

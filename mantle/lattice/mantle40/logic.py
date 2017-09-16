@@ -58,6 +58,10 @@ def DefineAnd(height=2, width=None):
             andmxn = join(col(andm, width))
             wire(def_.I0, andmxn.I0)
             wire(def_.I1, andmxn.I1)
+            if height >= 3:
+                wire(def_.I2, andmxn.I2)
+            if height == 4:
+                wire(def_.I3, andmxn.I3)
             wire(andmxn.O, def_.O)
 
     return _And
@@ -106,6 +110,10 @@ def DefineNAnd(height=2, width=None):
             nandmxn = join(col(nandm, width))
             wire(def_.I0, nandmxn.I0)
             wire(def_.I1, nandmxn.I1)
+            if height >= 3:
+                wire(def_.I2, nandmxn.I2)
+            if height == 4:
+                wire(def_.I3, nandmxn.I3)
             wire(nandmxn.O, def_.O)
 
     return _NAnd
@@ -210,7 +218,7 @@ def DefineNOr(height=2, width=None):
     class _NOr(Circuit):
         assert height > 1 and height <= 4
 
-        name = 'Nor%dx%d' % (height, width)
+        name = 'NOr%dx%d' % (height, width)
 
         if   height == 2:
             IO  = ['I0', In(T), 'I1', In(T)]
@@ -222,11 +230,15 @@ def DefineNOr(height=2, width=None):
 
         @classmethod
         def definition(def_):
-            def orm(y):
+            def norm(y):
                 return NOrN(height, loc=(0,y/8, y%8))
             normxn = join(col(norm, width))
             wire(def_.I0, normxn.I0)
             wire(def_.I1, normxn.I1)
+            if height >= 3:
+                wire(def_.I2, normxn.I2)
+            if height == 4:
+                wire(def_.I3, normxn.I3)
             wire(normxn.O, def_.O)
 
     return _NOr
@@ -258,7 +270,7 @@ def DefineXOr(height=2, width=1):
     class _XOr(Circuit):
         assert height > 1 and height <= 4
 
-        name = 'Xor%dx%d' % (height, width)
+        name = 'XOr%dx%d' % (height, width)
 
         if   height == 2:
             IO  = ['I0', In(T), 'I1', In(T)]
@@ -275,6 +287,10 @@ def DefineXOr(height=2, width=1):
             xormxn = join(col(xorm, width))
             wire(def_.I0, xormxn.I0)
             wire(def_.I1, xormxn.I1)
+            if height >= 3:
+                wire(def_.I2, xormxn.I2)
+            if height == 4:
+                wire(def_.I3, xormxn.I3)
             wire(xormxn.O, def_.O)
 
     return _XOr
@@ -306,7 +322,7 @@ def DefineNXOr(height=2, width=None):
     class _NXOr(Circuit):
         assert height > 1 and height <= 4
 
-        name = 'NXor%dx%d' % (height, width)
+        name = 'NXOr%dx%d' % (height, width)
 
         if   height == 2:
             IO  = ['I0', In(T), 'I1', In(T)]
@@ -323,12 +339,16 @@ def DefineNXOr(height=2, width=None):
             nxormxn = join(col(nxorm, width))
             wire(def_.I0, nxormxn.I0)
             wire(def_.I1, nxormxn.I1)
+            if height >= 3:
+                wire(def_.I2, nxormxn.I2)
+            if height == 4:
+                wire(def_.I3, nxormxn.I3)
             wire(nxormxn.O, def_.O)
 
     return _NXOr
 
 def NXOr(height=2, width=None, **kwargs):
-    if width is None: 
+    if width is None:
         return NOrN(height, **kwargs)
     return DefineNXOr(height, width)(**kwargs)
 

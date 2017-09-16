@@ -58,6 +58,10 @@ def DefineAnd(height=2, width=None):
             andmxn = join(col(andm, width))
             wire(def_.I0, andmxn.I0)
             wire(def_.I1, andmxn.I1)
+            if height >= 3:
+                wire(def_.I2, andmxn.I2)
+            if height == 4:
+                wire(def_.I3, andmxn.I3)
             wire(andmxn.O, def_.O)
 
     return _And
@@ -328,7 +332,7 @@ def DefineNXOr(height=2, width=None):
     return _NXOr
 
 def NXOr(height=2, width=None, **kwargs):
-    if width is None: 
+    if width is None:
         return NOrN(height, **kwargs)
     return DefineNXOr(height, width)(**kwargs)
 

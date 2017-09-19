@@ -64,44 +64,42 @@ lut = LUTN(init, n=None) :: I0:Bit, ..., In:Bit -> O:Bit
 
 ### ROM
 
-The ```ROM``` functions are very similar to the ```LUT``` functions.
-The only difference is the the types of the inputs.
-The ```LUT``` versions take n input arguments of type Bit.
-The ```ROM``` versions of these functions take
-a single input, an ```Bits(n)```.
-
 ```
-rom = ROM1(init) :: I:Bits(1) -> O:Bit
-rom = ROM2(init) :: I:Bits(2) -> O:Bit
-rom = ROM3(init) :: I:Bits(3) -> O:Bit
-rom = ROM4(init) :: I:Bits(4) -> O:Bit
-rom = ROM5(init) :: I:Bits(5) -> O:Bit
-rom = ROM6(init) :: I:Bits(6) -> O:Bit
-rom = ROM7(init) :: I:Bits(7) -> O:Bit
-rom = ROM8(init) :: I:Bits(8) -> O:Bit
-rom = ROMN(init, n=None) :: I:Bits(n)  ->  O:Bit
-```
+# DefineROM :: 
+#  RADDR:In(Bits(height)), 
+#  RDATA:Out(Bits(width)),
+#  CLK:In(Clock)
+ROM = DefineROM(height, width)
 
-```
-# DefineROM :: I:Bits(n)  ->  O:Bit
-ROM = DefineROM(init, height, width)
-
-# ROM :: I:Bits(n)  ->  O:Bit
-rom = ROM(init, height, width) :: I:Bits(n)  ->  O:Bit
+# ROM :: 
+#  RADDR:In(Bits(height)), 
+#  RDATA:Out(Bits(width)),
+#  CLK:In(Clock)
+rom = ROM(height, width) 
 ```
 
 ### RAM
 
-RAM circuits are NYI.
+```
+# DefineROM :: 
+#  RADDR:In(Bits(height)), 
+#  RDATA:Out(Bits(width)),
+#  WADDR:In(Bits(height)), 
+#  WDATA:Out(Bits(width)),
+#  CLK:In(Clock),
+#  WE,In(Bit)
+RAM = DefineRAM(height, width)
+```
 
 ```
-# DefineRAM :: I:Bits(n)  ->  O:Bit
-RAM = DefineRAM(init, height, width)
-```
-
-```
-# RAM :: I:Bits(n)  ->  O:Bit
-rom = RAM(init, height, width) :: I:Bits(n)  ->  O:Bit
+# RAM :: 
+#  RADDR:In(Bits(height)), 
+#  RDATA:Out(Bits(width)),
+#  WADDR:In(Bits(height)), 
+#  WDATA:In(Bits(width)),
+#  CLK:In(Clock),
+#  WE,In(Bit)
+ram = RAM(height, width)
 ```
 
 ### Memory

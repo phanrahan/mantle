@@ -1,7 +1,9 @@
 from magma import *
-from .MUX import Mux
+from mantle import Mux
+from .register import Register
 
 __all__  = ['DefineRAM', 'RAM']
+__all__ += ['DefineROM', 'ROM']
 
 def REGs(n, width):
     return [Register(width, has_ce=True) for i in range(n)]
@@ -37,9 +39,33 @@ def writeport(logn, width, regs, WADDR, I, WE):
         regs[i](I, CE=enable.O[i])
 
 @cache_definition
-def DefineRAM(logn, width):
-    n = 1 << logn
-    TADDR = Bits(logn)
+def DefineROM(height, width):
+    n = 1 << height
+    TADDR = Bits(height)
+    TDATA = Bits(width)
+
+    class _ROM(Circuit):
+        name = 'ROM{}x{}'.format(n,width)
+        IO = ['RADDR', In(TADDR),
+              'RDATA', Out(TDATA),
+              'CLK', In(Clock)]
+
+        @classmethod
+        def definition(io):
+            regs = REGs(n, width)
+            rdata = readport(height, width, regs, io.RADDR)
+            wire(rdata, io.RDATA)
+
+    return _ROM
+
+def ROM(height, width):
+    return DefineROM(height, width)()
+
+
+@cache_definition
+def DefineRAM(height, width):
+    n = 1 << height
+    TADDR = Bits(height)
     TDATA = Bits(width)
 
     class _RAM(Circuit):
@@ -54,8 +80,8 @@ def DefineRAM(logn, width):
         @classmethod
         def definition(io):
             regs = REGs(n, width)
-            writeport(logn, width, regs, io.WADDR, io.WDATA, io.WE)
-            rdata = readport(logn, width, regs, io.RADDR)
+            writeport(height, width, regs, io.WADDR, io.WDATA, io.WE)
+            rdata = readport(height, width, regs, io.RADDR)
             wire(rdata, io.RDATA)
 
     return _RAM
@@ -96,4 +122,3 @@ def DualRAM(height, width):
     return DefineDualRAM(height, width)()
 
 
-from mantle.common.register import Register

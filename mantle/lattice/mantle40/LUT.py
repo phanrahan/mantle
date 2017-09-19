@@ -119,6 +119,7 @@ def LUTN(rom, n=None, **kwargs):
         assert n is None
         n = len(rom)
     else:
+        assert n is not None
         n = 1 << n
 
     if n == 2:

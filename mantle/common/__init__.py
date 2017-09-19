@@ -4,6 +4,7 @@ from .encoder import *
 from .arbiter import  *
 
 from .register import *
+from .RAM import *
 
 from .siso import *
 from .sipo import *

@@ -6,10 +6,9 @@ from ..ice40 import FAMILY, \
 
 from .IO import *
 
-from .MUX import *
 from .LUT import *
-from .ROM import *
-#from .RAM import *
+
+from .MUX import *
 
 from .BUF import *
 from .FF import *
@@ -21,6 +20,7 @@ from .fulladder import *
 from .arith import *
 from .compare import *
 
+#from .RAM import *
 from .memory import Memory
 
 print('import mantle lattice mantle40')

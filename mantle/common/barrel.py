@@ -2,7 +2,7 @@ from magma import Circuit, Bit, Bits, In, Out, bits, wire, map_
 from magma.bitutils import log2
 from mantle import Mux2
 
-__all__ = ['DefineBarrel', 'Barrel']
+__all__ = ['DefineBarrel', 'Barrel', 'barrel']
 
 def DefineBarrelShift(n, k):
     assert k < n

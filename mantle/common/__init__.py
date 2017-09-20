@@ -5,6 +5,7 @@ from .arbiter import  *
 
 from .register import *
 from .RAM import *
+from .ROM import *
 
 from .siso import *
 from .sipo import *

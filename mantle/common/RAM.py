@@ -1,14 +1,13 @@
-from magma import Circuit, In, Out, Clock, Bit, Bits, wire, repeat, cache_definition
+from magma import Circuit, In, Out, Clock, Bit, Bits, wire, bits, repeat, cache_definition
 from mantle import Mux, And
 from .register import Register
 from .decoder import Decoder
 
-__all__  = ['DefineROM', 'ROM']
-__all__ += ['DefineRAM', 'RAM']
+__all__  = ['DefineRAM', 'RAM']
 __all__ += ['DefineDualRAM', 'DualRAM']
 
-def REGs(n, width):
-    return [Register(width, has_ce=True) for i in range(n)]
+def REGs(n, width, has_ce):
+    return [Register(width, has_ce=has_ce) for i in range(n)]
 
 def MUXs(n, width):
     return [Mux(2,width) for i in range(n)]
@@ -44,30 +43,6 @@ def writeport(height, width, regs, WADDR, I, WE):
 
 
 @cache_definition
-def DefineROM(height, width):
-    n = 1 << height
-    TADDR = Bits(height)
-    TDATA = Bits(width)
-
-    class _ROM(Circuit):
-        name = 'ROM{}x{}'.format(n,width)
-        IO = ['RADDR', In(TADDR),
-              'RDATA', Out(TDATA),
-              'CLK', In(Clock)]
-
-        @classmethod
-        def definition(io):
-            regs = REGs(n, width)
-            rdata = readport(height, width, regs, io.RADDR)
-            wire(rdata, io.RDATA)
-
-    return _ROM
-
-def ROM(height, width):
-    return DefineROM(height, width)()
-
-
-@cache_definition
 def DefineRAM(height, width):
     n = 1 << height
     TADDR = Bits(height)
@@ -85,7 +60,7 @@ def DefineRAM(height, width):
 
         @classmethod
         def definition(io):
-            regs = REGs(n, width)
+            regs = REGs(n, width, has_ce=True)
             writeport(height, width, regs, io.WADDR, io.WDATA, io.WE)
             wire( readport(height, width, regs, io.RADDR), io.RDATA )
 
@@ -114,7 +89,7 @@ def DefineDualRAM(height, width):
 
         @classmethod
         def definition(io):
-            regs = REGs(n, width)
+            regs = REGs(n, width, has_ce=True)
             writeport(height, width, regs, io.WADDR, io.WDATA, io.WE)
             wire( readport(height, width, regs, io.RADDR0), io.RDATA0 )
             wire( readport(height, width, regs, io.RADDR1), io.RDATA1 )

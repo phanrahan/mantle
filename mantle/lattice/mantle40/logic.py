@@ -393,7 +393,7 @@ def Not(**kwargs):
 def DefineLSL(width, shift):
     T = Bits(width)
     class _LSL(Circuit):
-        name = 'LSL{}_a{}'.format(width, shift)
+        name = 'LSL{}_{}'.format(width, shift)
         IO = ["I", In(T), "O", Out(T)]
 
         @classmethod
@@ -411,7 +411,7 @@ def LSL(width, shift, **kwargs):
 def DefineLSR(width, shift):
     T = Bits(width)
     class _LSR(Circuit):
-        name = 'LSR{}_a{}'.format(width, shift)
+        name = 'LSR{}_{}'.format(width, shift)
         IO = ["I", In(T), "O", Out(T)]
 
         @classmethod

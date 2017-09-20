@@ -129,7 +129,7 @@ def Negate(width, **kwargs):
 def DefineASR(width, shift):
     T = Bits(width)
     class _ASR(Circuit):
-        name = 'ASR{}_a{}'.format(width, shift)
+        name = 'ASR{}_{}'.format(width, shift)
 
         IO = ["I", In(T), "O", Out(T)]
 

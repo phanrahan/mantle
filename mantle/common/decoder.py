@@ -13,12 +13,11 @@ def DefineDecoder(n, invert=False):
         name = 'Decoder'+str(n)+("Invert" if invert else "")
         IO = ['I', In(Bits(n)), 'O', Out(Bits(1<<n))]
         @classmethod
-        def definition(Dec):
+        def definition(io):
             def decode(y):
                 return Decode(y, n, invert, loc=(0,y/8, y%8))
             dec = fork(col(decode, 1<<n))
-            wire(Dec.I, dec.I)
-            wire(dec.O, Dec.O)
+            wire(dec(io.I), io.O)
     return _Decoder
 
 def Decoder(n, invert=False, **kwargs):

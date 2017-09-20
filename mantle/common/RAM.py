@@ -1,9 +1,11 @@
-from magma import *
-from mantle import Mux
+from magma import Circuit, In, Out, Clock, Bit, Bits, wire, repeat, cache_definition
+from mantle import Mux, And
 from .register import Register
+from .decoder import Decoder
 
-__all__  = ['DefineRAM', 'RAM']
-__all__ += ['DefineROM', 'ROM']
+__all__  = ['DefineROM', 'ROM']
+__all__ += ['DefineRAM', 'RAM']
+__all__ += ['DefineDualRAM', 'DualRAM']
 
 def REGs(n, width):
     return [Register(width, has_ce=True) for i in range(n)]
@@ -11,16 +13,17 @@ def REGs(n, width):
 def MUXs(n, width):
     return [Mux(2,width) for i in range(n)]
 
-def readport(logn, width, regs, raddr):
-    n = 1 << logn
+
+def readport(height, width, regs, raddr):
+    n = 1 << height
 
     muxs = MUXs(n-1, width)
     for i in range(n//2):
         muxs[i](regs[2*i], regs[2*i+1], raddr[0])
 
     k = 0
-    l = 1 << (logn-1)
-    for i in range(logn-1):
+    l = 1 << (height-1)
+    for i in range(height-1):
         for j in range(l//2):
             muxs[k+l+j](muxs[k+2*j], muxs[k+2*j+1], raddr[i+1])
         k += l
@@ -28,15 +31,17 @@ def readport(logn, width, regs, raddr):
 
     return muxs[n-2]
 
-def writeport(logn, width, regs, WADDR, I, WE):
-    n = 1 << logn
 
-    decoder = Decoder(logn)
-    enable = And(2,1<<logn)
+def writeport(height, width, regs, WADDR, I, WE):
+    n = 1 << height
+
+    decoder = Decoder(height)
+    enable = And(2,n)
     enable(decoder(WADDR), repeat(WE, n))
 
     for i in range(n):
         regs[i](I, CE=enable.O[i])
+
 
 @cache_definition
 def DefineROM(height, width):
@@ -74,15 +79,15 @@ def DefineRAM(height, width):
               'RDATA', Out(TDATA),
               'WADDR', In(TADDR),
               'WDATA', In(TDATA),
-              'CLK', In(Clock),
-              'WE', In(Bit)]
+              'WE', In(Bit),
+              'CLK', In(Clock)
+             ]
 
         @classmethod
         def definition(io):
             regs = REGs(n, width)
             writeport(height, width, regs, io.WADDR, io.WDATA, io.WE)
-            rdata = readport(height, width, regs, io.RADDR)
-            wire(rdata, io.RDATA)
+            wire( readport(height, width, regs, io.RADDR), io.RDATA )
 
     return _RAM
 
@@ -91,9 +96,9 @@ def RAM(height, width):
 
 
 @cache_definition
-def DefineDualRAM(logn, width):
-    n = 1 << logn
-    TADDR = Bits(logn)
+def DefineDualRAM(height, width):
+    n = 1 << height
+    TADDR = Bits(height)
     TDATA = Bits(width)
 
     class _DualRAM(Circuit):
@@ -104,17 +109,15 @@ def DefineDualRAM(logn, width):
               'RDATA1', Out(TDATA),
               'WADDR', In(TADDR),
               'WDATA', In(TDATA),
-              'CLK', In(Clock),
-              'WE', In(Bit)]
+              'WE', In(Bit),
+              'CLK', In(Clock)]
 
         @classmethod
         def definition(io):
             regs = REGs(n, width)
-            writeport(logn, width, regs, io.WADDR, io.WDATA, io.WE)
-            rdata0 = readport(logn, width, regs, io.RADDR0)
-            wire(rdata0, io.RDATA0)
-            rdata1 = readport(logn, width, regs, io.RADDR1)
-            wire(rdata1, io.RDATA1)
+            writeport(height, width, regs, io.WADDR, io.WDATA, io.WE)
+            wire( readport(height, width, regs, io.RADDR0), io.RDATA0 )
+            wire( readport(height, width, regs, io.RADDR1), io.RDATA1 )
 
     return _DualRAM
 

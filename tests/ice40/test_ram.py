@@ -9,7 +9,7 @@ def test_rom():
     main = DefineCircuit("test_romb",
                          "RDATAOUT", Out(Bits(8)),
                          "CLK", In(Clock)) # FIXME: hack
-    romb = ROMB([0b00000001, 0b11111111] + [0] * 510)
+    romb = ROMB(512, 8, [0b00000001, 0b11111111] + [0] * 510)
     wire(romb.RADDR, uint(1, 9))
     wire(romb.RCLK, main.CLK)
     wire(romb.RE, 1)
@@ -35,7 +35,7 @@ def test_ram():
                          "WDATA", In(Bits(8)),
                          "WE",   In(Bit),
                          "CLK", In(Clock))
-    ramb = RAMB([0b00000001, 0b11111111] + [0] * 510)
+    ramb = RAMB(512, 8, [0b00000001, 0b11111111] + [0] * 510)
     wire(ramb.RADDR, uint(1, 9))
     wire(ramb.RCLK, main.CLK)
     wire(ramb.RE, 1)

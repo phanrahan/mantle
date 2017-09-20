@@ -7,8 +7,9 @@ __all__ = ['DefineUpCounterModM', 'UpCounterModM']
 #__all__ += ['DefineDownCounterModM', 'DownCounterModM']
 __all__ += ['DefineCounterModM', 'CounterModM']
 
-def _CounterName(name, n, ce, r, s):
-    name += '%d' % n
+def _CounterName(name, n, m, ce, r, s):
+    name += '{}'.format(n)
+    name += 'Mod{}'.format(m)
     if ce: name += 'CE'
     if r:  name += 'R'
     if s:  name += 'S'
@@ -23,7 +24,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     r = False
     s = False
-    name = _CounterName('CounterModM', n, has_ce, r, s)
+    name = _CounterName('Counter', n, m, has_ce, r, s)
 
     args = []
     if cin:

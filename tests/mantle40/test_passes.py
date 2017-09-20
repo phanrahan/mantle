@@ -1,7 +1,6 @@
 import os
 os.environ['MANTLE_TARGET'] = 'ice40'
-from mantle.lattice.mantle40.adder  import DefineAdders
-from mantle import DefineCounter
+from mantle import DefineCounter, DefineAdd
 from mantle.lattice.ice40 import SB_LUT4, SB_CARRY, SB_DFF
 from magma.passes import InstancePass, DefinitionPass, InstanceGraphPass
 from magma.transforms import flatten, setup_clocks
@@ -23,7 +22,7 @@ class PrimitivesPass(InstancePass):
             self.ndffs += 1
 
 def test_adder():
-    add = DefineAdders(8, False, False)
+    add = DefineAdd(8, False, False)
     print(repr(add))
     c = flatten(add).circuit
     print(repr(c))

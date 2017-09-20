@@ -3,6 +3,7 @@ from magma import *
 from .simulation import gen_sb_ram40_4k_sim
 
 __all__  = ['SB_RAM40_4K']
+
 __all__ += ['RAMB', 'ROMB']
 
 # posedge read clock, posedge write clock
@@ -62,16 +63,22 @@ def wireaddr(addr, n):
         wire(0, addr[10-i])
     return addr[0:11-n]
 
-def _RAMB(rom, readonly=False):
-    ram40 = None
+def _RAMB(height, width, rom=None, readonly=False):
+    if not rom:
+        rom = height * [0]
     n = len(rom)
+    assert height == n
+
+    ram40 = None
     if   n ==  256: # 256x16
+        assert width == 16
         params = init(rom,16,mode=0)
         ram40 = SB_RAM40_4K(**params)
         ram40.RADDR = wireaddr(ram40.RADDR, 3)
         if not readonly:
             ram40.WADDR = wireaddr(ram40.WADDR, 3)
     elif n ==  512: # 512x8
+        assert width == 8
         params = init(rom,8,mode=1)
         ram40 = SB_RAM40_4K(**params)
         ram40.RADDR = wireaddr(ram40.RADDR, 2)
@@ -92,6 +99,7 @@ def _RAMB(rom, readonly=False):
                                 WDATA[8], WDATA[10], WDATA[12], WDATA[14]])
             ram40.WADDR = wireaddr(ram40.WADDR, 2)
     elif n == 1024: # 1024x4
+        assert width == 4
         params = init(rom,4,mode=2)
         ram40 =  SB_RAM40_4K(**params)
         ram40.RADDR = wireaddr(ram40.RADDR, 1)
@@ -114,6 +122,7 @@ def _RAMB(rom, readonly=False):
             ram40.WDATA = array([WDATA[1], WDATA[5], WDATA[9], WDATA[13]])
             ram40.WADDR = wireaddr(ram40.WADDR, 1)
     elif n == 2048: # 2048x2
+        assert width == 2
         params = init(rom,2,mode=3)
         ram40 = SB_RAM40_4K(**params)
         RDATA = ram40.RDATA
@@ -158,8 +167,8 @@ def _RAMB(rom, readonly=False):
                                 "WCLK",  ram40.WCLK,
                                 "WE",    ram40.WE)
 
-def RAMB(ram):
-    return _RAMB(ram, readonly=False)
+def RAMB(height, width, ram=None):
+    return _RAMB(height, width, ram, readonly=False)
 
-def ROMB(rom):
-    return _RAMB(rom, readonly=True)
+def ROMB(height, width, rom=None):
+    return _RAMB(height, width, rom, readonly=True)

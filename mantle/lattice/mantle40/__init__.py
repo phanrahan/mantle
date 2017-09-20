@@ -20,7 +20,6 @@ from .fulladder import *
 from .arith import *
 from .compare import *
 
-#from .RAM import *
 from .memory import Memory
 
 print('import mantle lattice mantle40')

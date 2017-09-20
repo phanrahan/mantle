@@ -5,10 +5,11 @@ __all__ = ['Memory']
 #
 # Contruct a memory mem[height][width]
 #
-def Memory(rom, height, width, readonly=False):
-    assert height in [4096, 20146, 1024, 512, 256]
+def Memory(height, width, rom=None, readonly=False):
 
-    assert height == len(rom)
-    assert width == 4096 / height
+    if rom:
+        assert height == len(rom)
+    else:
+        rom = height * [0]
 
-    return ROMB(rom) if readonly else RAMB(rom)
+    return ROMB(height, width, rom) if readonly else RAMB(height, width, rom)

@@ -19,7 +19,8 @@ __all__ += ['DefineInvert', 'Invert']
 __all__ += ['Not']
 
 # logical shifts
-__all__ += ['LeftShift', 'RightShift']
+__all__ += ['DefineLSL', 'LSL']
+__all__ += ['DefineLSR', 'LSR']
 
 
 def AndN(n, **kwargs):
@@ -389,32 +390,38 @@ def Not(**kwargs):
     return LUT1(~A0, **kwargs)
 
 
-def LeftShift(width, shift_amount):
+def DefineLSL(width, shift):
     T = Bits(width)
-    class _LeftShift(Circuit):
-        name = 'LeftShift_w{}_a{}'.format(width, shift_amount)
-
+    class _LSL(Circuit):
+        name = 'LSL{}_a{}'.format(width, shift)
         IO = ["I", In(T), "O", Out(T)]
 
         @classmethod
         def definition(io):
-            for i in range(shift_amount, width):
-                wire(io.I[i - shift_amount], io.O[i])
-            for i in range(0, shift_amount):
+            for i in range(shift, width):
+                wire(io.I[i - shift], io.O[i])
+            for i in range(0, shift):
                 wire(0, io.O[i])
-    return _LeftShift
+    return _LSL
 
-def RightShift(width, shift_amount):
+def LSL(width, shift, **kwargs):
+    return DefineLSL(width, shift)(**kwargs)
+
+
+def DefineLSR(width, shift):
     T = Bits(width)
-    class _RightShift(Circuit):
-        name = 'RightShift_w{}_a{}'.format(width, shift_amount)
-
+    class _LSR(Circuit):
+        name = 'LSR{}_a{}'.format(width, shift)
         IO = ["I", In(T), "O", Out(T)]
 
         @classmethod
         def definition(io):
-            for i in range(0, width - shift_amount):
-                wire(io.I[i + shift_amount], io.O[i])
-            for i in range(width - shift_amount, width):
+            for i in range(0, width - shift):
+                wire(io.I[i + shift], io.O[i])
+            for i in range(width - shift, width):
                 wire(0, io.O[i])
-    return _RightShift
+    return _LSR
+
+def LSR(width, shift, **kwargs):
+    return DefineLSR(width, shift)(**kwargs)
+

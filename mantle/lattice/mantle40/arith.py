@@ -126,10 +126,10 @@ def Negate(width, **kwargs):
     
 
 @cache_definition
-def DefineASR(width, shift):
+def DefineFixedASR(width, shift):
     T = Bits(width)
     class _ASR(Circuit):
-        name = 'ASR{}_{}'.format(width, shift)
+        name = 'FixedASR{}_{}'.format(width, shift)
 
         IO = ["I", In(T), "O", Out(T)]
 
@@ -141,6 +141,9 @@ def DefineASR(width, shift):
                 wire(io.I[width-1], io.O[i])
     return _ASR
 
-def ASR(width, shift, **kwargs):
-    return DefineASR(width, shift)(**kwargs)
+def FixedASR(width, shift, **kwargs):
+    return DefineFixedASR(width, shift)(**kwargs)
+
+DefineASR = DefineFixedASR
+ASR = FixedASR
     

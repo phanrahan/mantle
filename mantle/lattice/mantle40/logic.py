@@ -390,10 +390,10 @@ def Not(**kwargs):
     return LUT1(~A0, **kwargs)
 
 
-def DefineLSL(width, shift):
+def DefineFixedLSL(width, shift):
     T = Bits(width)
     class _LSL(Circuit):
-        name = 'LSL{}_{}'.format(width, shift)
+        name = 'FixedLSL{}_{}'.format(width, shift)
         IO = ["I", In(T), "O", Out(T)]
 
         @classmethod
@@ -404,14 +404,16 @@ def DefineLSL(width, shift):
                 wire(0, io.O[i])
     return _LSL
 
-def LSL(width, shift, **kwargs):
-    return DefineLSL(width, shift)(**kwargs)
+def FixedLSL(width, shift, **kwargs):
+    return DefineFixedLSL(width, shift)(**kwargs)
 
+DefineLSL = DefineFixedLSL
+LSL = FixedLSL
 
-def DefineLSR(width, shift):
+def DefineFixedLSR(width, shift):
     T = Bits(width)
     class _LSR(Circuit):
-        name = 'LSR{}_{}'.format(width, shift)
+        name = 'FixedLSR{}_{}'.format(width, shift)
         IO = ["I", In(T), "O", Out(T)]
 
         @classmethod
@@ -422,6 +424,9 @@ def DefineLSR(width, shift):
                 wire(0, io.O[i])
     return _LSR
 
-def LSR(width, shift, **kwargs):
-    return DefineLSR(width, shift)(**kwargs)
+def FixedLSR(width, shift, **kwargs):
+    return DefineFixedLSR(width, shift)(**kwargs)
+
+DefineLSR = DefineFixedLSR
+LSR = FixedLSR
 

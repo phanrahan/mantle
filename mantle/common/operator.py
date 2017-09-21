@@ -1,8 +1,8 @@
 from functools import wraps
 
-
 from magma import *
-from mantle import And, NAnd, Or, NOr, XOr, NXOr
+from magma.bitutils import clog2
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, ASR
 
 def get_length(value):
     if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
@@ -59,3 +59,25 @@ def xor(*args, **kwargs):
 def nxor(*args, **kwargs):
     width = get_length(args[0])
     return NXOr(len(args), width, **kwargs)(*args)
+
+
+def lsl(I0, I1, **kwargs):
+    width = get_length(I0)
+    shift = get_length(I1)
+    if shift != clog2(width):
+        raise ValueError("LSL shift should be equal to the clog2 of width")
+    return LSL(width, **kwargs)(I0, I1)
+
+def lsr(I0, I1, **kwargs):
+    width = get_length(I0)
+    shift = get_length(I1)
+    if shift != clog2(width):
+        raise ValueError("LSR shift should be equal to the clog2 of width")
+    return LSR(width, **kwargs)(I0, I1)
+
+def asr(I0, I1, **kwargs):
+    width = get_length(I0)
+    shift = get_length(I1)
+    if shift != clog2(width):
+        raise ValueError("ASR shift should be equal to the clog2 of width")
+    return ASR(width, **kwargs)(I0, I1)

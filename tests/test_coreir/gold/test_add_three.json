@@ -2,7 +2,7 @@
 "namespaces":{
   "global":{
     "modules":{
-      "Add4Bits(4)":{
+      "Add(n=4, cin=False, cout=False)":{
         "type":["Record",{
           "I0":["Array",4,"BitIn"],
           "I1":["Array",4,"BitIn"],
@@ -29,10 +29,10 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.Add4Bits(4)"
+            "modref":"global.Add(n=4, cin=False, cout=False)"
           },
           "inst1":{
-            "modref":"global.Add4Bits(4)"
+            "modref":"global.Add(n=4, cin=False, cout=False)"
           }
         },
         "connections":[

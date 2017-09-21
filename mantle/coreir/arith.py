@@ -31,43 +31,56 @@ def declare_binop(name, python_op, out_type=None, signed=False):
     return Declare
 
 
-DefineCoreirAdd = declare_binop("add", operator.add)
+def coreir_add_sub_factory(op):
+    class DefineCoreirOp(CircuitGenerator):
+        base_name = "coreir_{}".format(op)
+        def generate(self, N, has_cout=False, has_cin=False):
+            T = Bits(N)
+            IO = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
+            gen_args = {"width": N}
+            if has_cout:
+                IO += ['cout', Out(Bit)]
+                gen_args['has_cout'] = True
+            if has_cin:
+                IO += ['cin', In(Bit)]
+                gen_args['has_cin'] = True
+            return DeclareCircuit(self.cached_name, *IO,
+                              stateful=False,
+                              verilog_name="coreir_{}".format(op),
+                              coreir_name=op,
+                              coreir_lib = "coreir",
+                              coreir_genargs=gen_args)
+
+    return DefineCoreirOp
 
 
-@cache_definition
-def DefineAdd(n, cin=False, cout=False):
-    width = n
-    T = Bits(width)
-    IO = ["I0", In(T), "I1", In(T)]
-    if cin:
-        IO += ["CIN", In(Bit)]
-    IO += ["O", Out(T)]
-    if cout:
-        IO += ["COUT", Out(Bit)]
+DefineCoreirAdd = coreir_add_sub_factory("add")
 
-    circ = DefineCircuit("Add{}{}".format(width, T.__name__),
-        *IO)
 
-    if cout:
-        width += 1
-
-    add = DefineCoreirAdd(width, Bits)()
-    for a, b in [(circ.I0, add.in0), (circ.I1, add.in1)]:
+class DefineAdd(CircuitGenerator):
+    base_name = "Add"
+    def generate(self, n, cin=False, cout=False):
+        width = n
+        T = Bits(width)
+        IO = ["I0", In(T), "I1", In(T)]
+        if cin:
+            IO += ["CIN", In(Bit)]
+        IO += ["O", Out(T)]
         if cout:
-            a = concat(bits(0, n=1), a)
-        wire(a, b)
-    out = add.out
-    if cin:
-        add_cin = DefineCoreirAdd(width, Bits)()
-        wire(concat(bits(0, n=width-1), bits(circ.CIN, n=1)), add_cin.in0)
-        wire(out, add_cin.in1)
-        out = add_cin.out
-    if cout:
-        wire(out[0], circ.COUT)
-        out = out[1:]
-    wire(out, circ.O)
-    EndDefine()
-    return circ
+            IO += ["COUT", Out(Bit)]
+
+        circ = DefineCircuit(self.cached_name, *IO)
+
+        add = DefineCoreirAdd(width, has_cout=cout, has_cin=cin)()
+        wire(circ.I0, add.in0)
+        wire(circ.I1, add.in1)
+        wire(circ.O, add.out)
+        if cout:
+            wire(circ.COUT, add.cout)
+        if cin:
+            wire(circ.CIN, add.cin)
+        EndDefine()
+        return circ
 
 
 def Add(n, cin=False, cout=False, **kwargs):

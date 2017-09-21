@@ -16,7 +16,7 @@
           },
           "inst0":{
             "genref":"coreir.add",
-            "genargs":{"width":5}
+            "genargs":{"has_cin":false, "has_cout":false, "width":5}
           }
         },
         "connections":[

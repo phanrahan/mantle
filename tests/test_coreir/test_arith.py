@@ -1,6 +1,6 @@
 from magma import *
 from magma.testing import check_files_equal
-from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate
+from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate, DefineASR
 
 
 def test_add():
@@ -22,3 +22,10 @@ def test_negate():
             output="coreir")
     assert check_files_equal(__file__,
             "build/test_define_negate.json", "gold/test_define_negate.json")
+
+
+def test_asr():
+    compile("build/test_define_asr", DefineASR(4),
+            output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_define_asr.json", "gold/test_define_asr.json")

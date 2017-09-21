@@ -1,7 +1,7 @@
 import operator
 
 from magma import *
-from magma.compatibility import IntegerTypes
+from magma.bitutils import clog2
 from .logic import DefineFoldOp, get_length
 
 
@@ -125,3 +125,33 @@ class DefineNegate(CircuitGenerator):
 
 def Negate(width, **kwargs):
     return DefineNegate(width)(**kwargs)
+
+
+class DefineCoreirASR(CircuitGenerator):
+    base_name = "coreir_dashr"
+    def generate(self, N):
+        T = Bits(N)
+        IO = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
+        gen_args = {"width": N}
+        return DeclareCircuit(self.cached_name, *IO,
+                          stateful=False,
+                          verilog_name="coreir_dashr",
+                          coreir_name="dashr",
+                          coreir_lib = "coreir",
+                          coreir_genargs=gen_args)
+
+
+class DefineASR(CircuitGenerator):
+    base_name = "ASR"
+    def generate(self, width):
+        T = Bits(width)
+        IO = ["I", In(T), "S", In(Bits(clog2(width))), "O", Out(T)]
+
+        circ = DefineCircuit(self.cached_name, *IO)
+        O = DefineCoreirASR(width)()(circ.I, zext(circ.S, width - clog2(width)))
+        wire(O, circ.O)
+        EndDefine()
+        return circ
+
+def ASR(width, **kwargs):
+    return DefineASR(width)(**kwargs)

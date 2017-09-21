@@ -95,3 +95,33 @@ def add_sub_factory(name, define_coreir_op):
 
 DefineAdd, Add = add_sub_factory("Add", DefineCoreirAdd)
 DefineSub, Sub = add_sub_factory("Sub", DefineCoreirSub)
+
+
+class DefineCoreirNegate(CircuitGenerator):
+    base_name = "coreir_neg"
+    def generate(self, N):
+        T = Bits(N)
+        IO = ['in', In(T), 'out', Out(T)]
+        gen_args = {"width": N}
+        return DeclareCircuit(self.cached_name, *IO,
+                          stateful=False,
+                          verilog_name="coreir_neg",
+                          coreir_name="neg",
+                          coreir_lib = "coreir",
+                          coreir_genargs=gen_args)
+
+
+class DefineNegate(CircuitGenerator):
+    base_name = "Negate"
+    def generate(self, width):
+        T = Bits(width)
+        IO = ["I", In(T), "O", Out(T)]
+
+        circ = DefineCircuit(self.cached_name, *IO)
+        O = DefineCoreirNegate(width)()(circ.I)
+        wire(O, circ.O)
+        EndDefine()
+        return circ
+
+def Negate(width, **kwargs):
+    return DefineNegate(width)(**kwargs)

@@ -55,61 +55,43 @@ def coreir_add_sub_factory(op):
 
 
 DefineCoreirAdd = coreir_add_sub_factory("add")
+DefineCoreirSub = coreir_add_sub_factory("sub")
 
 
-class DefineAdd(CircuitGenerator):
-    base_name = "Add"
-    def generate(self, n, cin=False, cout=False):
-        width = n
-        T = Bits(width)
-        IO = ["I0", In(T), "I1", In(T)]
-        if cin:
-            IO += ["CIN", In(Bit)]
-        IO += ["O", Out(T)]
-        if cout:
-            IO += ["COUT", Out(Bit)]
+def add_sub_factory(name, define_coreir_op):
+    class DefineOp(CircuitGenerator):
+        base_name = name
+        def generate(self, n, cin=False, cout=False):
+            width = n
+            T = Bits(width)
+            IO = ["I0", In(T), "I1", In(T)]
+            if cin:
+                IO += ["CIN", In(Bit)]
+            IO += ["O", Out(T)]
+            if cout:
+                IO += ["COUT", Out(Bit)]
 
-        circ = DefineCircuit(self.cached_name, *IO)
+            circ = DefineCircuit(self.cached_name, *IO)
 
-        add = DefineCoreirAdd(width, has_cout=cout, has_cin=cin)()
-        wire(circ.I0, add.in0)
-        wire(circ.I1, add.in1)
-        wire(circ.O, add.out)
-        if cout:
-            wire(circ.COUT, add.cout)
-        if cin:
-            wire(circ.CIN, add.cin)
-        EndDefine()
-        return circ
+            add = define_coreir_op(width, has_cout=cout, has_cin=cin)()
+            wire(circ.I0, add.in0)
+            wire(circ.I1, add.in1)
+            wire(circ.O, add.out)
+            if cout:
+                wire(circ.COUT, add.cout)
+            if cin:
+                wire(circ.CIN, add.cin)
+            EndDefine()
+            return circ
 
-
-def Add(n, cin=False, cout=False, **kwargs):
-    return DefineAdd(n, cin, cout)(**kwargs)
-
-
-def AddC(n, **kwargs):
-    return Add(n, cin=True, cout=True, **kwargs)
+    DefineOp.__name__ = "Define{}".format(name)
 
 
-def add(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(arg) == width for arg in args):
-        # TODO: Something more specific than a ValueError?
-        raise ValueError("Arguments to add should all be the same width")
-    if not all(isinstance(arg, BitsType) for arg in args):
-        # TODO: Something more specific than a ValueError?
-        raise ValueError("Arguments to add should be all Bits"
-                " {}".format([(arg, type(arg)) for arg in args]))
-    adders = [Add(width, **kwargs) for _ in range(len(args) - 1)]
-    curr = adders[0]
-    wire(args[0], curr.I0)
-    wire(args[1], curr.I1)
-    if len(args) > 2:
-        next_ = adders[1]
-        for i in range(1, len(adders)):
-            next_ = adders[i]
-            wire(curr.O, next_.I0)
-            wire(args[i + 1], next_.I1)
-            curr = next_
-    return curr.O
+    def Op(n, cin=False, cout=False, **kwargs):
+        return DefineOp(n, cin, cout)(**kwargs)
+    Op.__name__ = name
 
+    return DefineOp, Op
+
+DefineAdd, Add = add_sub_factory("Add", DefineCoreirAdd)
+DefineSub, Sub = add_sub_factory("Sub", DefineCoreirSub)

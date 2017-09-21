@@ -1,0 +1,33 @@
+{"top":"global.ASR(width=4)",
+"namespaces":{
+  "global":{
+    "modules":{
+      "ASR(width=4)":{
+        "type":["Record",{
+          "I":["Array",4,"BitIn"],
+          "S":["Array",2,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "bit_const_GND":{
+            "modref":"coreir.bitconst",
+            "configargs":{"value":0}
+          },
+          "inst0":{
+            "genref":"coreir.dashr",
+            "genargs":{"width":4}
+          }
+        },
+        "connections":[
+          ["self.S.1","inst0.in1.3"],
+          ["self.S.0","inst0.in1.2"],
+          ["inst0.in1.1","bit_const_GND.out"],
+          ["inst0.in1.0","bit_const_GND.out"],
+          ["self.O","inst0.out"],
+          ["self.I","inst0.in0"]
+        ]
+      }
+    }
+  }
+}
+}

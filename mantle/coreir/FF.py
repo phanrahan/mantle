@@ -75,6 +75,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         io.extend(["rst", In(Reset)])
         name += "R"  # TODO: This assumes ordering of clock parameters
         methods.append(circuit_type_method("reset", reset))
+        gen_args["rst"] = True
 
     def when(self, condition):
         wire(condition, self.en)
@@ -84,6 +85,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         io.extend(["en", In(Enable)])
         name += "E"  # TODO: This assumes ordering of clock parameters
         methods.append(circuit_type_method("when", when))
+        gen_args["en"] = True
 
     default_kwargs = gen_args.copy()
     default_kwargs.update(config_args)
@@ -103,6 +105,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
     )
 
 
+@cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False, has_set=False):
     if has_set == True or init != 0:
         raise NotImplementedError()

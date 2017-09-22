@@ -108,7 +108,7 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_set=False):
         raise NotImplementedError()
     Reg = DefineCoreirRegister(None, init, has_ce, has_reset)
     IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce, has_reset, has_set)
-    circ = DefineCircuit("DFF(init={},has_ce={}, has_reset={},has_set={}".format(init, has_ce, has_reset, has_set),
+    circ = DefineCircuit("DFF(init={},has_ce={}, has_reset={},has_set={})".format(init, has_ce, has_reset, has_set),
         *IO)
     reg = Reg()
     wire(circ.I, getattr(reg, "in"))

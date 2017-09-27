@@ -14,11 +14,11 @@
             "genargs":{"width":4}
           },
           "inst1":{
-            "genref":"coreir.dshl",
+            "genref":"coreir.shl",
             "genargs":{"width":4}
           },
           "inst2":{
-            "genref":"coreir.dshl",
+            "genref":"coreir.lshr",
             "genargs":{"width":4}
           }
         },

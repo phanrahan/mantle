@@ -281,9 +281,9 @@ def DefineDynamicLeftShift(width):
         out = (in0 << in1).as_bool_list()
         value_store.set_value(self.out, out)
 
-    return DeclareCircuit("dshl{}".format(width), 'in0', In(T), 'in1',
-            In(UInt(width)), 'out', Out(T), verilog_name="coreir_dshl",
-            coreir_name="dshl", coreir_lib="coreir", simulate=simulate,
+    return DeclareCircuit("shl{}".format(width), 'in0', In(T), 'in1',
+            In(UInt(width)), 'out', Out(T), verilog_name="coreir_shl",
+            coreir_name="shl", coreir_lib="coreir", simulate=simulate,
             coreir_genargs={"width": width})
 
 
@@ -307,9 +307,9 @@ def DefineDynamicRightShift(width):
         out = (in0 << in1).as_bool_list()
         value_store.set_value(self.out, out)
 
-    return DeclareCircuit("dshl{}".format(width), 'in0', In(T), 'in1',
-            In(UInt(width)), 'out', Out(T), verilog_name="coreir_dshl",
-            coreir_name="dshl", coreir_lib="coreir", simulate=simulate,
+    return DeclareCircuit("lshr{}".format(width), 'in0', In(T), 'in1',
+            In(UInt(width)), 'out', Out(T), verilog_name="coreir_lshr",
+            coreir_name="lshr", coreir_lib="coreir", simulate=simulate,
             coreir_genargs={"width": width})
 
 

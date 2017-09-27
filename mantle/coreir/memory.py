@@ -43,16 +43,16 @@ def DefineCoreirMem(height, width):
     addr_width = max(height.bit_length() - 1, 1)
     IO = ["raddr", In(Bits(addr_width)),
           "rdata", Out(Bits(width)),
-          "rclk", In(Clock),
           "ren", In(Bit),
           "waddr", In(Bits(addr_width)),
           "wdata", In(Bits(width)),
-          "wclk", In(Clock),
+          "clk", In(Clock),
           "wen", In(Bit) ]
     return DeclareCircuit(name, *IO, verilog_name="coreir_mem",
             coreir_name="mem", coreir_lib="coreir",
             simulate=gen_sim_mem(height, width),
-            coreir_genargs={"width": width, "depth": height})
+            coreir_genargs={"width": width, "depth": height},
+            coreir_configargs={"init": "0"})
 
 def DefineROM(height, width):
     """
@@ -72,6 +72,7 @@ def DefineRAM(height, width):
         "WCLK",  In(Clock),
         "WE",    In(Bit),
     )
+    raise NotImplementedError("Coreir removed rclk/wclk")
     coreir_mem = DefineCoreirMem(height, width)()
     wire(circ.RADDR, coreir_mem.raddr)
     wire(circ.RDATA, coreir_mem.rdata)

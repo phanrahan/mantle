@@ -107,7 +107,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
 
 @cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False, has_set=False):
-    if has_set == True or init != 0:
+    if has_set == True:
         raise NotImplementedError()
     Reg = DefineCoreirRegister(None, init, has_ce, has_reset)
     IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce, has_reset, has_set)

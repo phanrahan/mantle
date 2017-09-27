@@ -20,7 +20,7 @@ def DefineEncoder(n):
         @classmethod
         def definition(Enc):
             def f(y):
-                or_ = uncurry(Or(n/2))
+                or_ = uncurry(Or(n//2))
                 os = []
                 for i in range(n):
                     if i & (1 << y): os.append(Enc.I[i])

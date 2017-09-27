@@ -1,35 +1,58 @@
 import pytest
 from magma import compile
 from magma.testing import check_files_equal
+from magma.testing.newfunction import testvectors as funtest
+from magma.simulator.python_simulator import testvectors as simtest
 from mantle.lattice.mantle40.halfadder import HalfAdder
 from mantle.lattice.mantle40.fulladder import FullAdder
-from mantle.lattice.mantle40.arith import DefineAdd, DefineSub
-from mantle.lattice.mantle40.arith import DefineASR
+from mantle.lattice.mantle40.arith import \
+    DefineAdd, DefineSub, \
+    DefineNegate, \
+    DefineASR
 
-def test_asr():
-    width = 4
-    shift = 2
-    TestCircuit = DefineASR(width, shift)
-    compile("build/test_asr", TestCircuit)
-    assert check_files_equal(__file__, "build/test_asr.v", "gold/test_asr.v")
+width = 2
+mask = 2**width-1
+shift = 2
 
-def test_fa():
-    compile("build/test_fa", FullAdder)
-    assert check_files_equal(__file__, "build/test_fa.v", "gold/test_fa.v")
+def sim(Test, TestFun):
+    tvsim = simtest(Test)
+    print(tvsim)
+    tvfun = funtest(Test, TestFun)
+    print(tvfun)
+    assert tvsim == tvfun
+
+def com(Test, name):
+    name = 'test_{}'.format(name)
+    build = 'build/' + name
+    gold = 'gold/' + name
+    compile(build, Test)
+    assert check_files_equal(__file__, build+'.v', gold+'.v')
+
 
 def test_ha():
-    compile("build/test_ha", HalfAdder)
-    assert check_files_equal(__file__, "build/test_ha.v", "gold/test_ha.v")
+    Test = HalfAdder
+    com( Test, 'ha' )
+
+def test_fa():
+    Test = FullAdder
+    com( Test, 'fa' )
 
 def test_add():
-    width = 4
-    Add4 = DefineAdd(width)
-    compile("build/test_add4", Add4)
-    assert check_files_equal(__file__, "build/test_add4.v", "gold/test_add4.v")
+    Test = DefineAdd(width)
+    sim( Test, lambda x, y: (x + y) & mask )
+    com( Test, 'add{}'.format(width) )
 
 def test_sub():
-    width = 4
-    Sub4 = DefineSub(width)
-    compile("build/test_sub4", Sub4)
-    assert check_files_equal(__file__, "build/test_sub4.v", "gold/test_sub4.v")
+    Test = DefineSub(width)
+    sim( Test, lambda x, y: (x - y) & mask )
+    com( Test, 'sub{}'.format(width) )
 
+def test_negate():
+    Test = DefineNegate(width)
+    sim( Test, lambda x: -x & mask )
+    com( Test, 'negate{}'.format(width) )
+
+
+def test_asr():
+    Test = DefineASR(width, shift)
+    com( Test, 'asr{}x{}'.format(width, shift) )

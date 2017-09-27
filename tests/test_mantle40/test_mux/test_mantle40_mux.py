@@ -1,20 +1,51 @@
-from mantle.lattice.mantle40 import Mux2, Mux4, Mux8, Mux16, Mux
+import os
+os.environ['MANTLE_TARGET'] = 'ice40'
+import pytest
+from magma import compile
+from magma.simulator.python_simulator import testvectors as simtest
+from magma.testing.newfunction import testvectors as funtest
+from magma.testing import check_files_equal
 
-def test_muxn():
-    mux = Mux2()
-    assert str(mux.interface) == '"I", In(Bits(2)), "S", In(Bit), "O", Out(Bit)'
+from mantle.lattice.mantle40 import Mux2, Mux4, Mux8, Mux16, DefineMux
 
-    mux = Mux4()
-    print(mux.interface)
-    assert str(mux.interface) == '"I", In(Bits(4)), "S", In(Bits(2)), "O", Out(Bit)'
+def sim(Test, TestFun):
+    tvsim = simtest(Test)
+    print(tvsim)
+    tvfun = funtest(Test, TestFun)
+    print(tvfun)
+    assert tvsim == tvfun
 
-    mux = Mux8()
-    assert str(mux.interface) == '"I", In(Bits(8)), "S", In(Bits(3)), "O", Out(Bit)'
+def com(Test, name):
+    name = 'test_{}'.format(name)
+    build = 'build/' + name
+    gold = 'gold/' + name
+    compile(build, Test)
+    assert check_files_equal(__file__, build+'.v', gold+'.v')
 
-    mux = Mux16()
-    assert str(mux.interface) == '"I", In(Bits(16)), "S", In(Bits(4)), "O", Out(Bit)'
+def test_mux2():
+    Test = Mux2
+    sim( Test, lambda i, s: (i>>s)&1 )
+    com( Test, 'mux2' )
+
+def test_mux4():
+    Test = Mux4
+    sim( Test, lambda i, s: (i>>s)&1 )
+    com( Test, 'mux4' )
+
+def test_mux8():
+    Test = Mux8
+    sim( Test, lambda i, s: (i>>s)&1 )
+    com( Test, 'mux8' )
+
+#takes too long!
+#
+#def test_mux16():
+#    Test = Mux16
+#    sim( Test, lambda i, s: (i>>s)&1 )
+#    com( Test, 'mux16' )
 
 def test_mux():
-    mux = Mux(2,1)
-    assert str(mux.interface) == '"I0", In(Bits(1)), "I1", In(Bits(1)), "S", In(Bit), "O", Out(Bits(1))'
+    Test = DefineMux(2,2)
+    sim( Test, lambda i0, i1, s: i1 if s else i0 )
+    com( Test, 'mux2x2' )
 

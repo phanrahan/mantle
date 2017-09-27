@@ -38,6 +38,7 @@ def DefineCoreirMux(width=None):
 is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
 
 
+@cache_definition
 def _DefineMux(N):
     """Construct a Mux with N 1-bit inputs"""
     assert is_power_of_two(N)
@@ -71,6 +72,7 @@ def _DefineMux(N):
     return _Mux
 
 
+@cache_definition
 def DefineMux(height=2, width=None):
     if width is None:
        return _DefineMux(height)

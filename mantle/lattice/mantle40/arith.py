@@ -30,7 +30,7 @@ def _AdderArgs(n, cin, cout):
 def DefineAdders(name, n, cin, cout, forkargs=[]):
 
     def f(y):
-        return FullAdder(loc=(0,y//8, y%8))
+        return FullAdder()
 
     c = braid( col(f, n), foldargs={"CIN":"COUT"}, forkargs=forkargs)
 
@@ -63,7 +63,7 @@ def DefineAdd(n, cin=False, cout=False):
         @classmethod
         def definition(io):
             def f(y):
-                return FullAdder(loc=(0,y//8, y%8))
+                return FullAdder()
 
             add = braid( col(f, n), foldargs={"CIN":"COUT"})
 

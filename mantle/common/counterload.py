@@ -1,5 +1,5 @@
 from magma import *
-from mantle import And, Mux, Add
+from mantle import And, Mux, DefineAdd
 from .register import Register
 from .decode import Decode
 
@@ -35,7 +35,7 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
 
     Counter = DefineCircuit(name, *args)
 
-    add = Add(n, cin=cin, cout=cout)
+    add = DefineAdd(n, cin=cin, cout=cout)()
     mux = Mux(2, n)
     reg = Register(n, has_ce=has_ce, has_reset=has_reset)
 
@@ -65,10 +65,10 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
 
     return Counter
 
-def CounterLoad(n, cin=False, cout=True, incr=1, 
+def CounterLoad(n, cin=False, cout=True, incr=1,
         has_ce=False, has_reset=False, **kwargs):
     """Construct a n-bit counter."""
-    return DefineCounterLoad(n, cin=cin, cout=cout, incr=incr, next=next, 
+    return DefineCounterLoad(n, cin=cin, cout=cout, incr=incr, next=next,
                has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 

@@ -1,5 +1,5 @@
 from magma import *
-from mantle import And, Mux, Add
+from mantle import And, Mux, DefineAdd
 from .register import Register
 from .decode import Decode
 
@@ -21,7 +21,7 @@ def _CounterName(name, n, ce, r):
 # O : Out(UInt(n)), COUT : Out(Bit)
 #
 @cache_definition
-def DefineCounter(n, cin=False, cout=True, incr=1, next=False, 
+def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
     has_ce=False, has_reset=False):
 
     name = _CounterName('Counter', n, has_ce, has_reset)
@@ -38,7 +38,7 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
 
     Counter = DefineCircuit(name, *args)
 
-    add = Add(n, cin=cin, cout=cout)
+    add = DefineAdd(n, cin=cin, cout=cout)()
     reg = Register(n, has_ce=has_ce, has_reset=has_reset)
 
     wire( reg.O, add.I0 )
@@ -63,10 +63,10 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
 
     return Counter
 
-def Counter(n, cin=False, cout=True, incr=1, next=False, 
+def Counter(n, cin=False, cout=True, incr=1, next=False,
              has_ce=False, has_reset=False, **kwargs):
     """Construct a n-bit up counter."""
-    return DefineUpCounter(n, cin=cin, cout=cout, incr=incr, next=next, 
+    return DefineUpCounter(n, cin=cin, cout=cout, incr=incr, next=next,
                has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 DefineUpCounter = DefineCounter
@@ -77,24 +77,24 @@ UpCounter = Counter
 #
 # O : Out(UInt(n)), COUT : Out(Bit)
 #
-def DefineDownCounter(n, cin=False, cout=True, decr=1, next=False, 
+def DefineDownCounter(n, cin=False, cout=True, decr=1, next=False,
     has_ce=False, has_reset=False):
     incr = (1 << n) - (decr)
-    return DefineCounter(n, cin=cin, cout=cout, incr=incr, next=False, 
+    return DefineCounter(n, cin=cin, cout=cout, incr=incr, next=False,
                has_ce=has_ce, has_reset=has_reset)
 
-def DownCounter(n, cin=False, cout=True, decr=1, next=False, 
+def DownCounter(n, cin=False, cout=True, decr=1, next=False,
     has_ce=False, has_reset=False, **kwargs):
-    return DefineDownCounter(n, cin=cin, cout=cout, decr=decr, next=next, 
+    return DefineDownCounter(n, cin=cin, cout=cout, decr=decr, next=next,
                has_ce=has_ce, has_reset=has_reset)(**kwargs)
-              
+
 
 #
 # Create an n-bit up-down counter.
 #
 # U : In(Bit), D : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
 #
-def DefineUpDownCounter(n, cout=True, next=False, 
+def DefineUpDownCounter(n, cout=True, next=False,
     has_ce=False, has_reset=False):
 
     name = _CounterName('UpDownCounter', n, has_ce, has_reset)
@@ -135,10 +135,10 @@ def DefineUpDownCounter(n, cout=True, next=False,
 
     return Counter
 
-def UpDownCounter(n, cout=True, next=False, 
+def UpDownCounter(n, cout=True, next=False,
                     has_ce=False, has_reset=False, **kwargs):
     """Construct an n-bit updown counter."""
-    return DefineUpDownCounter(n, cout=cout, next=next, 
+    return DefineUpDownCounter(n, cout=cout, next=next,
                  has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 

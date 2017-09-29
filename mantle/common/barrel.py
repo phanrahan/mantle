@@ -1,6 +1,6 @@
 from magma import Circuit, Bit, Bits, In, Out, bits, wire, map_
 from magma.bitutils import log2
-from mantle import Mux2
+from mantle import Mux
 
 __all__ = ['DefineBarrel', 'Barrel', 'barrel']
 
@@ -13,9 +13,9 @@ def DefineBarrelShift(n, k):
         @classmethod
         def definition(io):
             Is = [io.I[i] for i in range(n)]
-            muxes = map_(Mux2, n)
+            muxes = map_(Mux(2), n)
             for i in range(n):
-                shifti = i - k 
+                shifti = i - k
                 I = bits([Is[i], Is[shifti] if shifti >= 0 else io.SI])
                 muxes[i]( I, io.S )
             for i in range(n):

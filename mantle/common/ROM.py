@@ -1,12 +1,12 @@
 from magma import Circuit, In, Out, Bits, wire, bits, uncurry, fork, cache_definition
 from magma.bitutils import int2seq
-from mantle import LUT4, Mux
+from mantle import LUT, Mux
 from .RAM import readport
 
 __all__  = ['DefineROM', 'ROM']
 
 def ROM4(data, i, width):
-    return fork([uncurry(LUT4(data[i][w])) for w in range(width)])
+    return fork([uncurry(LUT(data[i][w], 4)) for w in range(width)])
 
 def ROM4s(n, width, data):
     return [ROM4(data, i, width) for i in range(n//16)]

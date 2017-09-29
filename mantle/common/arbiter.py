@@ -1,5 +1,5 @@
 from magma import *
-from mantle import LUT2, Add, A0, A1
+from mantle import LUT, DefineAdd, A0, A1
 
 __all__ = ['DefineArbiter', 'Arbiter', 'arbiter']
 
@@ -17,9 +17,9 @@ def DefineArbiter(n):
         @classmethod
         def definition(Arb):
             ones = n * [1]
-            y = Add(n)(Arb.I, array(ones))  # y = x - 1
+            y = DefineAdd(n)()(Arb.I, array(ones))  # y = x - 1
             def a(y):
-                return LUT2(A0 & ~A1)
+                return LUT(A0 & ~A1, 2)
             arb = join(col(a, n))
             arb(Arb.I, y)
             wire(arb.O, Arb.O)

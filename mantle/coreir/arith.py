@@ -58,3 +58,34 @@ def DefineAdd(N, cout=False, cin=False):
             if has_cin:
                 wire(coreir_add.cin, add.CIN)
     return Add
+
+
+
+@circuit_generator
+def DefineSub(N, cout=False, cin=False):
+    has_cout = cout
+    has_cin = cin
+    class Sub(mantle.primitives.DeclareSub(N, cin=has_cin, cout=has_cout)):
+        @classmethod
+        def definition(sub):
+            T = Bits(N)
+            coreir_io = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
+            coreir_genargs = {"width": N, "has_cout": has_cout, "has_cin": has_cin}
+            if has_cout:
+                coreir_io += ['cout', Out(Bit)]
+            if has_cin:
+                coreir_io += ['cin', In(Bit)]
+            CoreirSub = DeclareCircuit("coreir_" + sub.name, *coreir_io,
+                    coreir_name="sub", coreir_lib="coreir",
+                    coreir_genargs=coreir_genargs)
+            coreir_sub = CoreirSub()
+            wire(sub.I0, coreir_sub.in0)
+            wire(sub.I1, coreir_sub.in1)
+            wire(coreir_sub.out, sub.O)
+            if has_cout:
+                wire(coreir_sub.cout, sub.COUT)
+            if has_cin:
+                wire(coreir_sub.cin, sub.CIN)
+    return Sub
+
+

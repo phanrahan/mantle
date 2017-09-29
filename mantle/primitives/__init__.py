@@ -1,1 +1,1 @@
-from .arith import DeclareAdd
+from .arith import DeclareAdd, DeclareSub

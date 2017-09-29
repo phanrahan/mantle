@@ -47,3 +47,51 @@ def add(*args, **kwargs):
             wire(args[i + 1], next_.I1)
             curr = next_
     return curr.O
+
+
+@circuit_generator
+def DeclareSub(N, cin=False, cout=False):
+    has_cin = cin
+    has_cout = cout
+    T = Bits(N)
+    IO_ = ['I0', In(T), 'I1', In(T), 'O', Out(T)]
+    name_ = "Sub{}".format(N)
+    if has_cout:
+        IO_ += ['COUT', Out(Bit)]
+        name_ += "_cout"
+    if has_cin:
+        IO_ += ['CIN', In(Bit)]
+        name_ += "_cin"
+    class Sub(Circuit):
+        # Underscores because there's some weird scoping issue here with Python
+        # when trying to capture name and IO
+        name = name_
+        IO = IO_
+    return Sub
+
+
+def Sub(n, cin=False, cout=False, **kwargs):
+    return DeclareSub(n, cin, cout)(**kwargs)
+
+
+def sub(*args, **kwargs):
+    width = get_length(args[0])
+    if not all(get_length(arg) == width for arg in args):
+        # TODO: Something more specific than a ValueError?
+        raise ValueError("Arguments to sub should all be the same width")
+    if not all(isinstance(arg, BitsType) for arg in args):
+        # TODO: Something more specific than a ValueError?
+        raise ValueError("Arguments to sub should be all Bits"
+                " {}".format([(arg, type(arg)) for arg in args]))
+    subbers = [Sub(width, **kwargs) for _ in range(len(args) - 1)]
+    curr = subbers[0]
+    wire(args[0], curr.I0)
+    wire(args[1], curr.I1)
+    if len(args) > 2:
+        next_ = subbers[1]
+        for i in range(1, len(subbers)):
+            next_ = subbers[i]
+            wire(curr.O, next_.I0)
+            wire(args[i + 1], next_.I1)
+            curr = next_
+    return curr.O

@@ -1,4 +1,4 @@
-{"top":"global.test_add_cout_two",
+{"top":"global.Add4_cout",
 "namespaces":{
   "global":{
     "modules":{
@@ -20,25 +20,6 @@
           ["self.I1","inst0.in1"],
           ["self.I0","inst0.in0"],
           ["self.COUT","inst0.cout"]
-        ]
-      },
-      "test_add_cout_two":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"],
-          "COUT":"Bit"
-        }],
-        "instances":{
-          "inst0":{
-            "modref":"global.Add4_cout"
-          }
-        },
-        "connections":[
-          ["self.O","inst0.O"],
-          ["self.I1","inst0.I1"],
-          ["self.I0","inst0.I0"],
-          ["self.COUT","inst0.COUT"]
         ]
       }
     }

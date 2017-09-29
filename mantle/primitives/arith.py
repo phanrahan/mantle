@@ -106,3 +106,16 @@ def DeclareNegate(width):
 
 def Negate(width, **kwargs):
     return DeclareNegate(width)(**kwargs)
+
+
+@cache_definition
+def DeclareASR(width):
+    T = Bits(width)
+    class _ASR(Circuit):
+        name = 'ASR{}'.format(width)
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
+    return _ASR
+
+
+def ASR(width, shift, **kwargs):
+    return DeclareASR(width, shift)(**kwargs)

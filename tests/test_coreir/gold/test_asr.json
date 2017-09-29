@@ -1,0 +1,26 @@
+{"top":"global.ASR4",
+"namespaces":{
+  "global":{
+    "modules":{
+      "ASR4":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.ashr",
+            "genargs":{"width":4}
+          }
+        },
+        "connections":[
+          ["self.O","inst0.out"],
+          ["self.I1","inst0.in1"],
+          ["self.I0","inst0.in0"]
+        ]
+      }
+    }
+  }
+}
+}

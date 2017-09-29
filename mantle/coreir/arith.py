@@ -102,3 +102,19 @@ def DefineNegate(width):
             wire(neg.I, getattr(coreir_neg, "in"))
             wire(neg.O, coreir_neg.out)
     return _Negate
+
+
+@cache_definition
+def DefineASR(width):
+    T = Bits(width)
+    class _ASR(mantle.primitives.DeclareASR(width)):
+        @classmethod
+        def definition(asr):
+            CoreirASR = DeclareCircuit("coreir_" + asr.name, "in0", In(T),
+                    "in1", In(T), "out", Out(T), coreir_name="ashr",
+                    coreir_lib="coreir", coreir_genargs={"width": width})
+            coreir_asr = CoreirASR()
+            wire(asr.I0, coreir_asr.in0)
+            wire(asr.I1, coreir_asr.in1)
+            wire(asr.O, coreir_asr.out)
+    return _ASR

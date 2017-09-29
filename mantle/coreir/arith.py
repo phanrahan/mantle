@@ -89,3 +89,16 @@ def DefineSub(N, cout=False, cin=False):
     return Sub
 
 
+@cache_definition
+def DefineNegate(width):
+    T = Bits(width)
+    class _Negate(mantle.primitives.DeclareNegate(width)):
+        @classmethod
+        def definition(neg):
+            CoreirNeg = DeclareCircuit("coreir_" + neg.name, "in", In(T),
+                    "out", Out(T), coreir_name="neg", coreir_lib="coreir",
+                    coreir_genargs={"width": width})
+            coreir_neg = CoreirNeg()
+            wire(neg.I, getattr(coreir_neg, "in"))
+            wire(neg.O, coreir_neg.out)
+    return _Negate

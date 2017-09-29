@@ -95,3 +95,14 @@ def sub(*args, **kwargs):
             wire(args[i + 1], next_.I1)
             curr = next_
     return curr.O
+
+@cache_definition
+def DeclareNegate(width):
+    T = Bits(width)
+    class _Negate(Circuit):
+        name = 'Negate{}'.format(width)
+        IO = ['I', In(T), 'O', Out(T)]
+    return _Negate
+
+def Negate(width, **kwargs):
+    return DeclareNegate(width)(**kwargs)

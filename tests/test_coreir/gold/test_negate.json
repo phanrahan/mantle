@@ -1,0 +1,24 @@
+{"top":"global.Negate4",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Negate4":{
+        "type":["Record",{
+          "I":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.neg",
+            "genargs":{"width":4}
+          }
+        },
+        "connections":[
+          ["self.O","inst0.out"],
+          ["self.I","inst0.in"]
+        ]
+      }
+    }
+  }
+}
+}

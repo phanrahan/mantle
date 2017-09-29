@@ -20,5 +20,5 @@ from .arith import (
 
 from .FF import FF, DFF, DefineDFF
 
-from .mux import DefineMux, Mux
+from .MUX import DefineMux, Mux
 from .memory import DefineRAM, DefineMemory

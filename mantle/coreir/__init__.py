@@ -14,8 +14,7 @@ from .logic import (
 )
 
 from .arith import (
-    DefineAdd
-    # DefineSub, Sub, sub,
+    DefineAdd, DefineSub, DefineNegate, DefineASR
 )
 
 from .FF import FF, DFF, DefineDFF

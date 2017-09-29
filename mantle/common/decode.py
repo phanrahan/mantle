@@ -1,5 +1,5 @@
 from magma import uncurry
-from mantle import LUTN
+from mantle import LUT
 
 __all__  = ['Decode', 'decode']
 
@@ -17,7 +17,7 @@ def Decode(i, n, invert=False, **kwargs):
         m = 1 << n
         mask = (1 << m) - 1
         i = mask & (~i)
-    return uncurry(LUTN(i, n, **kwargs))
+    return uncurry(LUT(i, n, **kwargs))
 
 def decode(I, i, invert=False, **kwargs):
     return Decode(i, len(I), invert=invert, **kwargs)(I)

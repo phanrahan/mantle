@@ -1,5 +1,5 @@
 from magma import *
-from mantle import Mux2
+from mantle import Mux
 from .register import _RegisterName, Register, FFs
 
 __all__ = ['DefinePISO', 'PISO']
@@ -20,7 +20,7 @@ def DefinePISO(n, init=0, has_ce=False, has_reset=False):
         @classmethod
         def definition(piso):
             def mux2(y):
-                return curry(Mux2(), prefix='I')
+                return curry(Mux(2), prefix='I')
 
             mux = braid(col(mux2, n), forkargs=['S'])
             reg = Register(n, init, has_ce=has_ce, has_reset=has_reset)
@@ -36,4 +36,4 @@ def DefinePISO(n, init=0, has_ce=False, has_reset=False):
 
 def PISO(n, init=0, has_ce=False, has_reset=False, **kwargs):
     return DefinePISO(n, init, has_ce, has_reset)(**kwargs)
-    
+

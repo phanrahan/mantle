@@ -18,6 +18,7 @@ from .arith import (
 )
 
 from .FF import FF, DFF, DefineDFF
+from .LUT import LUT
 
 from .MUX import DefineMux, Mux
 from .memory import DefineRAM, DefineMemory

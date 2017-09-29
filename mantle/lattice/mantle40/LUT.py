@@ -24,18 +24,18 @@ def LUT1(rom, **kwargs):
     wire(0, lut.I1)
     wire(0, lut.I2)
     wire(0, lut.I3)
-    return AnonymousCircuit("I0", lut.I0, "O", lut.O) 
+    return AnonymousCircuit("I0", lut.I0, "O", lut.O)
 
 def LUT2(rom, **kwargs):
     lut = SB_LUT4(LUT_INIT=(lutinit(rom,1<<2)[0], 16), **kwargs)
     wire(0, lut.I2)
     wire(0, lut.I3)
-    return AnonymousCircuit("I0", lut.I0, "I1", lut.I1, "O", lut.O) 
+    return AnonymousCircuit("I0", lut.I0, "I1", lut.I1, "O", lut.O)
 
 def LUT3(rom, **kwargs):
     lut = SB_LUT4(LUT_INIT=(lutinit(rom,1<<3)[0], 16), **kwargs)
     wire(0, lut.I3)
-    return AnonymousCircuit("I0", lut.I0, "I1", lut.I1, "I2", lut.I2, "O", lut.O) 
+    return AnonymousCircuit("I0", lut.I0, "I1", lut.I1, "I2", lut.I2, "O", lut.O)
 
 def LUT4(rom, **kwargs):
     return SB_LUT4(LUT_INIT=lutinit(rom,1<<4), **kwargs)

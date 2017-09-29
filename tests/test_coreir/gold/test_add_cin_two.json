@@ -2,36 +2,24 @@
 "namespaces":{
   "global":{
     "modules":{
-      "Add4Bits(4)":{
+      "Add4_cin":{
         "type":["Record",{
           "I0":["Array",4,"BitIn"],
           "I1":["Array",4,"BitIn"],
-          "CIN":"BitIn",
-          "O":["Array",4,"Bit"]
+          "O":["Array",4,"Bit"],
+          "CIN":"BitIn"
         }],
         "instances":{
-          "bit_const_GND":{
-            "modref":"coreir.bitconst",
-            "configargs":{"value":0}
-          },
           "inst0":{
             "genref":"coreir.add",
-            "genargs":{"has_cin":false, "has_cout":false, "width":4}
-          },
-          "inst1":{
-            "genref":"coreir.add",
-            "genargs":{"has_cin":false, "has_cout":false, "width":4}
+            "genargs":{"has_cin":true, "has_cout":false, "width":4}
           }
         },
         "connections":[
-          ["inst1.in0.3","self.CIN"],
-          ["inst1.in0.2","bit_const_GND.out"],
-          ["inst1.in0.1","bit_const_GND.out"],
-          ["inst1.in0.0","bit_const_GND.out"],
-          ["self.O","inst1.out"],
+          ["self.O","inst0.out"],
           ["self.I1","inst0.in1"],
           ["self.I0","inst0.in0"],
-          ["inst1.in1","inst0.out"]
+          ["self.CIN","inst0.cin"]
         ]
       },
       "test_add_cin_two":{
@@ -43,7 +31,7 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.Add4Bits(4)"
+            "modref":"global.Add4_cin"
           }
         },
         "connections":[

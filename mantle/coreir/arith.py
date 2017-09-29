@@ -2,6 +2,7 @@ import operator
 
 from magma import *
 from magma.compatibility import IntegerTypes
+import mantle.primitives
 from .logic import DefineFoldOp, get_length
 
 
@@ -31,72 +32,29 @@ def declare_binop(name, python_op, out_type=None, signed=False):
     return Declare
 
 
-DefineCoreirAdd = declare_binop("add", operator.add)
-
-
-@cache_definition
-def DefineAdd(n, cin=False, cout=False):
-    width = n
-    T = Bits(width)
-    IO = ["I0", In(T), "I1", In(T)]
-    if cin:
-        IO += ["CIN", In(Bit)]
-    IO += ["O", Out(T)]
-    if cout:
-        IO += ["COUT", Out(Bit)]
-
-    circ = DefineCircuit("Add{}{}".format(width, T.__name__),
-        *IO)
-
-    if cout:
-        width += 1
-
-    add = DefineCoreirAdd(width, Bits)()
-    for a, b in [(circ.I0, add.in0), (circ.I1, add.in1)]:
-        if cout:
-            a = concat(bits(0, n=1), a)
-        wire(a, b)
-    out = add.out
-    if cin:
-        add_cin = DefineCoreirAdd(width, Bits)()
-        wire(concat(bits(0, n=width-1), bits(circ.CIN, n=1)), add_cin.in0)
-        wire(out, add_cin.in1)
-        out = add_cin.out
-    if cout:
-        wire(out[0], circ.COUT)
-        out = out[1:]
-    wire(out, circ.O)
-    EndDefine()
-    return circ
-
-
-def Add(n, cin=False, cout=False, **kwargs):
-    return DefineAdd(n, cin, cout)(**kwargs)
-
-
-def AddC(n, **kwargs):
-    return Add(n, cin=True, cout=True, **kwargs)
-
-
-def add(*args, **kwargs):
-    width = get_length(args[0])
-    if not all(get_length(arg) == width for arg in args):
-        # TODO: Something more specific than a ValueError?
-        raise ValueError("Arguments to add should all be the same width")
-    if not all(isinstance(arg, BitsType) for arg in args):
-        # TODO: Something more specific than a ValueError?
-        raise ValueError("Arguments to add should be all Bits"
-                " {}".format([(arg, type(arg)) for arg in args]))
-    adders = [Add(width, **kwargs) for _ in range(len(args) - 1)]
-    curr = adders[0]
-    wire(args[0], curr.I0)
-    wire(args[1], curr.I1)
-    if len(args) > 2:
-        next_ = adders[1]
-        for i in range(1, len(adders)):
-            next_ = adders[i]
-            wire(curr.O, next_.I0)
-            wire(args[i + 1], next_.I1)
-            curr = next_
-    return curr.O
-
+@circuit_generator
+def DefineAdd(N, cout=False, cin=False):
+    has_cout = cout
+    has_cin = cin
+    class Add(mantle.primitives.DeclareAdd(N, cin=has_cin, cout=has_cout)):
+        @classmethod
+        def definition(add):
+            T = Bits(N)
+            coreir_io = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
+            coreir_genargs = {"width": N, "has_cout": has_cout, "has_cin": has_cin}
+            if has_cout:
+                coreir_io += ['cout', Out(Bit)]
+            if has_cin:
+                coreir_io += ['cin', In(Bit)]
+            CoreirAdd = DeclareCircuit("coreir_" + add.name, *coreir_io,
+                    coreir_name="add", coreir_lib="coreir",
+                    coreir_genargs=coreir_genargs)
+            coreir_add = CoreirAdd()
+            wire(add.I0, coreir_add.in0)
+            wire(add.I1, coreir_add.in1)
+            wire(coreir_add.out, add.O)
+            if has_cout:
+                wire(coreir_add.cout, add.COUT)
+            if has_cin:
+                wire(coreir_add.cin, add.CIN)
+    return Add

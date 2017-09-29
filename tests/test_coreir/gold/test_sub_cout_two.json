@@ -1,0 +1,28 @@
+{"top":"global.Sub4_cout",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Sub4_cout":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"],
+          "COUT":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.sub",
+            "genargs":{"has_cin":false, "has_cout":true, "width":4}
+          }
+        },
+        "connections":[
+          ["self.O","inst0.out"],
+          ["self.I1","inst0.in1"],
+          ["self.I0","inst0.in0"],
+          ["self.COUT","inst0.cout"]
+        ]
+      }
+    }
+  }
+}
+}

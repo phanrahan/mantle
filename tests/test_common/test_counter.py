@@ -14,7 +14,7 @@ def counter4_sim():
 
 
 def test_counter():
-    Counter4 = DefineCounter(4)
+    Counter4 = DefineCounter(4, cout=False)
 
     check(Counter4, counter4_sim(), 1<<4 * 2)
 
@@ -30,6 +30,6 @@ def down_counter4_sim():
 
 
 def test_downcounter():
-    DownCounter4 = DefineDownCounter(4)
+    DownCounter4 = DefineDownCounter(4, cout=False)
 
     check(DownCounter4, down_counter4_sim(), 1<<4 * 2)

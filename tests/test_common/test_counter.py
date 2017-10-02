@@ -4,7 +4,7 @@ from magma.bit_vector import BitVector
 import os
 os.environ["MANTLE"] = "lattice"
 from mantle.common import DefineCounter, DefineDownCounter, DefineUpDownCounter
-import types
+# import types
 
 
 def coroutine(func):
@@ -20,7 +20,8 @@ def coroutine(func):
             self.reset(*args, **kwargs)
 
         def reset(self, *args, **kwargs):
-            self.co = types.coroutine(self.definition)(*args, **kwargs)
+            # self.co = types.coroutine(self.definition)(*args, **kwargs)
+            self.co = self.definition(*args, **kwargs)
             next(self.co)
 
         def __getattr__(self, key):

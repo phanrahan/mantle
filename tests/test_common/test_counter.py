@@ -32,6 +32,10 @@ def coroutine(func):
 
         def __next__(self):
             return next(self.co)
+
+        def next(self):
+            return self.__next__()
+
     return Coroutine
 
 

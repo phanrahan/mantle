@@ -44,7 +44,6 @@ def check(circuit, sim, number_of_cycles):
         # Coroutine has an implicit __next__ call on construction so it already
         # is init it's initial state
         assert sim.O == BitVector(simulator.get_value(circuit.O)).as_int()
-        print(sim.O)
         next(sim)
 
 
@@ -69,7 +68,6 @@ def down_counter4_sim():
         yield O
         for i in range((1<<4) - 1, 0, -1):
             O = i
-            print(O)
             yield O
 
 

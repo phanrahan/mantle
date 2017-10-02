@@ -2,7 +2,7 @@ from functools import wraps
 
 from magma import *
 from magma.bitutils import clog2
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, ASR
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, ASR, Not, Invert
 
 def get_length(value):
     if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
@@ -81,3 +81,10 @@ def asr(I0, I1, **kwargs):
     if shift != clog2(width):
         raise ValueError("ASR shift should be equal to the clog2 of width")
     return ASR(width, **kwargs)(I0, I1)
+
+def not_(arg, **kwargs):
+    width = get_length(arg)
+    if width is None:
+        return Not(**kwargs)(arg)
+    else:
+        return Invert(width, **kwargs)(arg)

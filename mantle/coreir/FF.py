@@ -1,4 +1,5 @@
 from magma import *
+from magma.bit_vector import BitVector
 
 
 def gen_sim_register(N, has_ce, has_reset):
@@ -10,7 +11,7 @@ def gen_sim_register(N, has_ce, has_reset):
 
         if not state_store:
             state_store['prev_clock'] = cur_clock
-            state_store['cur_val'] = BitVector(0, num_bits=N)
+            state_store['cur_val'] = BitVector(0, num_bits=N) if N is not None else False
 
         if has_reset:
             cur_reset = value_store.get_value(self.rst)
@@ -24,7 +25,7 @@ def gen_sim_register(N, has_ce, has_reset):
         #     clock_edge = not cur_clock and prev_clock
         clock_edge = cur_clock and not prev_clock
 
-        new_val = state_store['cur_val'].as_bool_list()
+        new_val = state_store['cur_val'].as_bool_list() if N is not None else state_store['cur_val']
 
         if clock_edge:
             input_val = value_store.get_value(getattr(self, "in"))
@@ -43,12 +44,15 @@ def gen_sim_register(N, has_ce, has_reset):
                 new_val = input_val
 
         if has_reset and not cur_reset:  # Reset is asserted low
-            new_val = [False for _ in range(N)]
+            if N is not None:
+                new_val = [False for _ in range(N)]
+            else:
+                new_val = None
         # if s and not sy and cur_s:
         #     new_val = True
 
         state_store['prev_clock'] = cur_clock
-        state_store['cur_val'] = BitVector(new_val, num_bits=N)
+        state_store['cur_val'] = BitVector(new_val, num_bits=N) if N is not None else new_val
         value_store.set_value(self.out, new_val)
     return sim_register
 

@@ -6,6 +6,8 @@ if mantletarget == 'ice40':
 else:
     mantle = os.getenv('MANTLE', 'verilog')
 
+from mantle.primitives import *
+
 if mantle == 'verilog':
     from mantle.verilog import *
 elif mantle == 'coreir':

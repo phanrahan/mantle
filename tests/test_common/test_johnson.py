@@ -8,13 +8,10 @@ from mantle.common import DefineJohnson
 def johnson_counter(n):
     @coroutine
     def johnson_counter_():
+        O = [False for _ in range(n)]
         while True:
-            for i in range(n):
-                O = seq2int([True] * i + [False] * (n - i))
-                yield O
-            for i in range(n):
-                O = seq2int([False] * i + [True] * (n - i))
-                yield O
+            yield O
+            O = [not O[-1]] + O[:-1]
     return johnson_counter_
 
 def test_lfsr():

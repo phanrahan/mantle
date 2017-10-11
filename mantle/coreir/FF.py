@@ -110,7 +110,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         coreir_configargs=config_args,
         coreir_name=coreir_name,
         verilog_name="coreir_" + name,
-        coreir_lib="coreir"
+        coreir_lib="mantle"
     )
 
 

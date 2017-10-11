@@ -64,6 +64,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
     if N is None:
         coreir_name = "bitreg"
         T = Bit
+        config_args["init"] = bool(init)
     else:
         coreir_name = "reg"
         T = T(N)

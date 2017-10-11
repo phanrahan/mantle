@@ -11,25 +11,25 @@
         "instances":{
           "inst0":{
             "genref":"coreir.or",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           },
           "inst1":{
             "genref":"coreir.shl",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           },
           "inst2":{
             "genref":"coreir.lshr",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.c","inst0.out"],
-          ["self.b","inst2.in1"],
-          ["self.b","inst1.in1"],
-          ["self.a","inst2.in0"],
-          ["self.a","inst1.in0"],
-          ["inst2.out","inst0.in1"],
-          ["inst1.out","inst0.in0"]
+          ["inst0.in0","inst1.out"],
+          ["inst0.in1","inst2.out"],
+          ["inst0.out","self.c"],
+          ["inst1.in0","self.a"],
+          ["inst1.in1","self.b"],
+          ["inst2.in0","self.a"],
+          ["inst2.in1","self.b"]
         ]
       }
     }

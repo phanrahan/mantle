@@ -11,14 +11,14 @@
         "instances":{
           "inst0":{
             "genref":"coreir.bitreg",
-            "genargs":{"clr":false, "en":false, "rst":false},
-            "configargs":{"init":0}
+            "genargs":{"clr":["Bool",false], "en":["Bool",false], "rst":["Bool",false]},
+            "modargs":{"init":["Bool",false]}
           }
         },
         "connections":[
-          ["self.O","inst0.out"],
-          ["self.I","inst0.in"],
-          ["self.CLK","inst0.clk"]
+          ["inst0.clk","self.CLK"],
+          ["inst0.in","self.I"],
+          ["inst0.out","self.O"]
         ]
       }
     }

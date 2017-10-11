@@ -11,13 +11,13 @@
         "instances":{
           "inst0":{
             "genref":"coreir.ashr",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.O","inst0.out"],
-          ["self.I1","inst0.in1"],
-          ["self.I0","inst0.in0"]
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
         ]
       }
     }

@@ -24,14 +24,14 @@
           }
         },
         "connections":[
-          ["self.d","inst0.out"],
-          ["self.c","inst3.in1"],
-          ["self.b","inst3.in0"],
-          ["self.b","inst2.in1"],
-          ["self.a","inst2.in0"],
-          ["inst3.out","inst0.in1"],
-          ["inst2.out","inst1.in"],
-          ["inst1.out","inst0.in0"]
+          ["inst0.in0","inst1.out"],
+          ["inst0.in1","inst3.out"],
+          ["inst0.out","self.d"],
+          ["inst1.in","inst2.out"],
+          ["inst2.in0","self.a"],
+          ["inst2.in1","self.b"],
+          ["inst3.in0","self.b"],
+          ["inst3.in1","self.c"]
         ]
       }
     }

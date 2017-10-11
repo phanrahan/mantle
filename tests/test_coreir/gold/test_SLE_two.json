@@ -11,13 +11,13 @@
         "instances":{
           "inst0":{
             "genref":"coreir.sle",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.O","inst0.out"],
-          ["self.I1","inst0.in1"],
-          ["self.I0","inst0.in0"]
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
         ]
       },
       "test_SLE_two":{
@@ -32,9 +32,9 @@
           }
         },
         "connections":[
-          ["self.c","inst0.O"],
-          ["self.b","inst0.I1"],
-          ["self.a","inst0.I0"]
+          ["inst0.I0","self.a"],
+          ["inst0.I1","self.b"],
+          ["inst0.O","self.c"]
         ]
       }
     }

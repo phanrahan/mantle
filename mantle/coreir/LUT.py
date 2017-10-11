@@ -1,4 +1,5 @@
 from magma import *
+import coreir
 from magma.bitutils import seq2int
 from collections import Sequence
 
@@ -10,7 +11,7 @@ def DeclareCoreirLUT(N, init):
             coreir_name = "lutN",
             coreir_lib  = "commonlib",
             coreir_genargs = {"N": N},
-            coreir_configargs = {"init": init})
+            coreir_configargs = {"init": coreir.BitVector(1<<N, init)})
 
 
 @circuit_generator

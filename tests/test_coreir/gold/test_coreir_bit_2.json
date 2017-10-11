@@ -17,10 +17,10 @@
           }
         },
         "connections":[
-          ["self.out","inst0.out"],
-          ["self.in1","inst1.in1"],
-          ["self.in0","inst1.in0"],
-          ["inst1.out","inst0.in"]
+          ["inst0.in","inst1.out"],
+          ["inst0.out","self.out"],
+          ["inst1.in0","self.in0"],
+          ["inst1.in1","self.in1"]
         ]
       },
       "NOr2None":{
@@ -38,10 +38,10 @@
           }
         },
         "connections":[
-          ["self.out","inst0.out"],
-          ["self.in1","inst1.in1"],
-          ["self.in0","inst1.in0"],
-          ["inst1.out","inst0.in"]
+          ["inst0.in","inst1.out"],
+          ["inst0.out","self.out"],
+          ["inst1.in0","self.in0"],
+          ["inst1.in1","self.in1"]
         ]
       },
       "test_coreir_bit_2":{
@@ -63,13 +63,13 @@
           }
         },
         "connections":[
-          ["self.d","inst0.out"],
-          ["self.c","inst2.in1"],
-          ["self.b","inst2.in0"],
-          ["self.b","inst1.in1"],
-          ["self.a","inst1.in0"],
-          ["inst2.out","inst0.in1"],
-          ["inst1.out","inst0.in0"]
+          ["inst0.in0","inst1.out"],
+          ["inst0.in1","inst2.out"],
+          ["inst0.out","self.d"],
+          ["inst1.in0","self.a"],
+          ["inst1.in1","self.b"],
+          ["inst2.in0","self.b"],
+          ["inst2.in1","self.c"]
         ]
       }
     }

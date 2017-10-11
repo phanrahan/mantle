@@ -10,14 +10,14 @@
         "instances":{
           "bit_const_GND":{
             "modref":"coreir.bitconst",
-            "configargs":{"value":0}
+            "modargs":{"value":["Int",0]}
           }
         },
         "connections":[
-          ["self.O.3","bit_const_GND.out"],
-          ["self.O.2","bit_const_GND.out"],
-          ["self.O.1","self.I.3"],
-          ["self.O.0","self.I.2"]
+          ["bit_const_GND.out","self.O.2"],
+          ["bit_const_GND.out","self.O.3"],
+          ["self.I.2","self.O.0"],
+          ["self.I.3","self.O.1"]
         ]
       },
       "StaticRightShift_43":{
@@ -28,14 +28,14 @@
         "instances":{
           "bit_const_GND":{
             "modref":"coreir.bitconst",
-            "configargs":{"value":0}
+            "modargs":{"value":["Int",0]}
           }
         },
         "connections":[
-          ["self.O.3","self.I.0"],
-          ["self.O.2","bit_const_GND.out"],
-          ["self.O.1","bit_const_GND.out"],
-          ["self.O.0","bit_const_GND.out"]
+          ["bit_const_GND.out","self.O.0"],
+          ["bit_const_GND.out","self.O.1"],
+          ["bit_const_GND.out","self.O.2"],
+          ["self.I.0","self.O.3"]
         ]
       },
       "test_coreir_static_shift":{
@@ -47,7 +47,7 @@
         "instances":{
           "inst0":{
             "genref":"coreir.or",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           },
           "inst1":{
             "modref":"global.StaticLeftShift_42"
@@ -57,11 +57,11 @@
           }
         },
         "connections":[
-          ["self.c","inst0.out"],
-          ["self.b","inst2.I"],
-          ["self.a","inst1.I"],
-          ["inst2.O","inst0.in1"],
-          ["inst1.O","inst0.in0"]
+          ["inst0.in0","inst1.O"],
+          ["inst0.in1","inst2.O"],
+          ["inst0.out","self.c"],
+          ["inst1.I","self.a"],
+          ["inst2.I","self.b"]
         ]
       }
     }

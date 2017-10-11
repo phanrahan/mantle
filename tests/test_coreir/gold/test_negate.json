@@ -10,12 +10,12 @@
         "instances":{
           "inst0":{
             "genref":"coreir.neg",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.O","inst0.out"],
-          ["self.I","inst0.in"]
+          ["inst0.in","self.I"],
+          ["inst0.out","self.O"]
         ]
       }
     }

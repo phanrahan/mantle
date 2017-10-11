@@ -12,19 +12,19 @@
         "instances":{
           "inst0":{
             "genref":"coreir.and",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           },
           "inst1":{
             "genref":"coreir.and",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.out","inst1.out"],
-          ["self.in2","inst1.in1"],
-          ["self.in1","inst0.in1"],
-          ["self.in0","inst0.in0"],
-          ["inst1.in0","inst0.out"]
+          ["inst0.in0","self.in0"],
+          ["inst0.in1","self.in1"],
+          ["inst0.out","inst1.in0"],
+          ["inst1.in1","self.in2"],
+          ["inst1.out","self.out"]
         ]
       },
       "fold_or34":{
@@ -37,19 +37,19 @@
         "instances":{
           "inst0":{
             "genref":"coreir.or",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           },
           "inst1":{
             "genref":"coreir.or",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.out","inst1.out"],
-          ["self.in2","inst1.in1"],
-          ["self.in1","inst0.in1"],
-          ["self.in0","inst0.in0"],
-          ["inst1.in0","inst0.out"]
+          ["inst0.in0","self.in0"],
+          ["inst0.in1","self.in1"],
+          ["inst0.out","inst1.in0"],
+          ["inst1.in1","self.in2"],
+          ["inst1.out","self.out"]
         ]
       },
       "fold_xor34":{
@@ -62,19 +62,19 @@
         "instances":{
           "inst0":{
             "genref":"coreir.xor",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           },
           "inst1":{
             "genref":"coreir.xor",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.out","inst1.out"],
-          ["self.in2","inst1.in1"],
-          ["self.in1","inst0.in1"],
-          ["self.in0","inst0.in0"],
-          ["inst1.in0","inst0.out"]
+          ["inst0.in0","self.in0"],
+          ["inst0.in1","self.in1"],
+          ["inst0.out","inst1.in0"],
+          ["inst1.in1","self.in2"],
+          ["inst1.out","self.out"]
         ]
       },
       "test_coreir_three_args":{
@@ -90,7 +90,7 @@
           },
           "inst1":{
             "genref":"coreir.not",
-            "genargs":{"width":4}
+            "genargs":{"width":["Int",4]}
           },
           "inst2":{
             "modref":"global.fold_and34"
@@ -100,17 +100,17 @@
           }
         },
         "connections":[
-          ["self.d","inst0.out"],
-          ["self.c","inst3.in1"],
-          ["self.c","inst2.in2"],
-          ["self.b","inst3.in0"],
-          ["self.b","inst2.in1"],
-          ["self.a","inst3.in2"],
-          ["self.a","inst2.in0"],
-          ["self.a","inst0.in0"],
-          ["inst3.out","inst0.in2"],
-          ["inst2.out","inst1.in"],
-          ["inst1.out","inst0.in1"]
+          ["inst0.in0","self.a"],
+          ["inst0.in1","inst1.out"],
+          ["inst0.in2","inst3.out"],
+          ["inst0.out","self.d"],
+          ["inst1.in","inst2.out"],
+          ["inst2.in0","self.a"],
+          ["inst2.in1","self.b"],
+          ["inst2.in2","self.c"],
+          ["inst3.in0","self.b"],
+          ["inst3.in1","self.c"],
+          ["inst3.in2","self.a"]
         ]
       }
     }

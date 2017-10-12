@@ -13,7 +13,7 @@
           "inst0":{
             "genref":"commonlib.lutN",
             "genargs":{"N":["Int",3]},
-            "modargs":{"init":[["BitVector",8],"11011110"]}
+            "modargs":{"init":[["BitVector",8],222]}
           }
         },
         "connections":[

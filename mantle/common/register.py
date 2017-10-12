@@ -62,6 +62,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, _type=Bits):
             wire(reg.I, ffs.I)
             wire(ffs.O, reg.O)
             wireclock(reg, ffs)
+            wiredefaultclock(reg, ffs)
     return _Register
 
 def Register(n, init=0, has_ce=False, has_reset=False, **kwargs):

@@ -58,6 +58,7 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
         wire( add.COUT, Counter.COUT )
 
     wireclock(Counter, reg)
+    wiredefaultclock(Counter, reg)
 
     EndCircuit()
 

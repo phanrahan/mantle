@@ -2,6 +2,57 @@
 "namespaces":{
   "global":{
     "modules":{
+      "bitand_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitand"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
+      "bitor_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitor"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
+      "bitxor_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitxor"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
       "test_coreir_bit":{
         "type":["Record",{
           "a":"BitIn",
@@ -11,27 +62,27 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"coreir.bitor"
+            "modref":"global.bitor_wrapped"
           },
           "inst1":{
             "modref":"coreir.bitnot"
           },
           "inst2":{
-            "modref":"coreir.bitand"
+            "modref":"global.bitand_wrapped"
           },
           "inst3":{
-            "modref":"coreir.bitxor"
+            "modref":"global.bitxor_wrapped"
           }
         },
         "connections":[
-          ["inst0.in0","inst1.out"],
-          ["inst0.in1","inst3.out"],
-          ["inst0.out","self.d"],
-          ["inst1.in","inst2.out"],
-          ["inst2.in0","self.a"],
-          ["inst2.in1","self.b"],
-          ["inst3.in0","self.b"],
-          ["inst3.in1","self.c"]
+          ["inst0.I0","inst1.out"],
+          ["inst0.I1","inst3.O"],
+          ["inst0.O","self.d"],
+          ["inst1.in","inst2.O"],
+          ["inst2.I0","self.a"],
+          ["inst2.I1","self.b"],
+          ["inst3.I0","self.b"],
+          ["inst3.I1","self.c"]
         ]
       }
     }

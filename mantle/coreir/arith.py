@@ -51,8 +51,8 @@ def DefineAdd(N, cout=False, cin=False):
             I0 = add.I0
             I1 = add.I1
             if has_cout:
-                I0 = concat(bits(0, n=1), add.I0)
-                I1 = concat(bits(0, n=1), add.I1)
+                I0 = concat(add.I0, bits(0, n=1))
+                I1 = concat(add.I1, bits(0, n=1))
             if has_cin:
                 coreir_add_cin = CoreirAdd()
                 wire(coreir_add_cin.in0, concat(bits(0, n=coreir_genargs["width"]-1), add.CIN))

@@ -4,44 +4,95 @@
     "modules":{
       "NAnd2None":{
         "type":["Record",{
-          "in0":"BitIn",
-          "in1":"BitIn",
-          "out":"Bit"
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
         }],
         "instances":{
           "inst0":{
             "modref":"coreir.bitnot"
           },
           "inst1":{
-            "modref":"coreir.bitand"
+            "modref":"global.bitand_wrapped"
           }
         },
         "connections":[
-          ["inst0.in","inst1.out"],
-          ["inst0.out","self.out"],
-          ["inst1.in0","self.in0"],
-          ["inst1.in1","self.in1"]
+          ["inst0.in","inst1.O"],
+          ["inst0.out","self.O"],
+          ["inst1.I0","self.I0"],
+          ["inst1.I1","self.I1"]
         ]
       },
       "NOr2None":{
         "type":["Record",{
-          "in0":"BitIn",
-          "in1":"BitIn",
-          "out":"Bit"
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
         }],
         "instances":{
           "inst0":{
             "modref":"coreir.bitnot"
           },
           "inst1":{
+            "modref":"global.bitor_wrapped"
+          }
+        },
+        "connections":[
+          ["inst0.in","inst1.O"],
+          ["inst0.out","self.O"],
+          ["inst1.I0","self.I0"],
+          ["inst1.I1","self.I1"]
+        ]
+      },
+      "bitand_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitand"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
+      "bitor_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
             "modref":"coreir.bitor"
           }
         },
         "connections":[
-          ["inst0.in","inst1.out"],
-          ["inst0.out","self.out"],
-          ["inst1.in0","self.in0"],
-          ["inst1.in1","self.in1"]
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
+      "bitxor_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"coreir.bitxor"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
         ]
       },
       "test_coreir_bit_2":{
@@ -59,17 +110,17 @@
             "modref":"global.NAnd2None"
           },
           "inst2":{
-            "modref":"coreir.bitxor"
+            "modref":"global.bitxor_wrapped"
           }
         },
         "connections":[
-          ["inst0.in0","inst1.out"],
-          ["inst0.in1","inst2.out"],
-          ["inst0.out","self.d"],
-          ["inst1.in0","self.a"],
-          ["inst1.in1","self.b"],
-          ["inst2.in0","self.b"],
-          ["inst2.in1","self.c"]
+          ["inst0.I0","inst1.O"],
+          ["inst0.I1","inst2.O"],
+          ["inst0.O","self.d"],
+          ["inst1.I0","self.a"],
+          ["inst1.I1","self.b"],
+          ["inst2.I0","self.b"],
+          ["inst2.I1","self.c"]
         ]
       }
     }

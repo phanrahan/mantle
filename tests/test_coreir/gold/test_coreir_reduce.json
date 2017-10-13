@@ -2,7 +2,7 @@
 "namespaces":{
   "global":{
     "modules":{
-      "bitand_wrapped":{
+      "and_wrapped":{
         "type":["Record",{
           "I0":"BitIn",
           "I1":"BitIn",
@@ -10,41 +10,7 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"coreir.bitand"
-          }
-        },
-        "connections":[
-          ["inst0.in0","self.I0"],
-          ["inst0.in1","self.I1"],
-          ["inst0.out","self.O"]
-        ]
-      },
-      "bitor_wrapped":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
-        "instances":{
-          "inst0":{
-            "modref":"coreir.bitor"
-          }
-        },
-        "connections":[
-          ["inst0.in0","self.I0"],
-          ["inst0.in1","self.I1"],
-          ["inst0.out","self.O"]
-        ]
-      },
-      "bitxor_wrapped":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
-        "instances":{
-          "inst0":{
-            "modref":"coreir.bitxor"
+            "modref":"corebit.and"
           }
         },
         "connections":[
@@ -63,13 +29,13 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.bitand_wrapped"
+            "modref":"global.and_wrapped"
           },
           "inst1":{
-            "modref":"global.bitand_wrapped"
+            "modref":"global.and_wrapped"
           },
           "inst2":{
-            "modref":"global.bitand_wrapped"
+            "modref":"global.and_wrapped"
           }
         },
         "connections":[
@@ -91,10 +57,10 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.bitor_wrapped"
+            "modref":"global.or_wrapped"
           },
           "inst1":{
-            "modref":"global.bitor_wrapped"
+            "modref":"global.or_wrapped"
           }
         },
         "connections":[
@@ -115,13 +81,13 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.bitor_wrapped"
+            "modref":"global.or_wrapped"
           },
           "inst1":{
-            "modref":"global.bitor_wrapped"
+            "modref":"global.or_wrapped"
           },
           "inst2":{
-            "modref":"global.bitor_wrapped"
+            "modref":"global.or_wrapped"
           }
         },
         "connections":[
@@ -144,13 +110,13 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.bitxor_wrapped"
+            "modref":"global.xor_wrapped"
           },
           "inst1":{
-            "modref":"global.bitxor_wrapped"
+            "modref":"global.xor_wrapped"
           },
           "inst2":{
-            "modref":"global.bitxor_wrapped"
+            "modref":"global.xor_wrapped"
           }
         },
         "connections":[
@@ -161,6 +127,23 @@
           ["inst1.O","inst2.I0"],
           ["inst2.I1","self.I3"],
           ["inst2.O","self.O"]
+        ]
+      },
+      "or_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"corebit.or"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
         ]
       },
       "test_coreir_reduce":{
@@ -201,6 +184,23 @@
           ["inst3.I1","self.b.1"],
           ["inst3.I2","self.b.2"],
           ["inst3.I3","self.b.3"]
+        ]
+      },
+      "xor_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"corebit.xor"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
         ]
       }
     }

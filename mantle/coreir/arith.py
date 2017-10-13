@@ -3,7 +3,7 @@ import operator
 from magma import *
 from magma.compatibility import IntegerTypes
 import mantle.primitives
-from .logic import DefineFoldOp, get_length
+from .logic import DefineFoldOp, get_length, Invert, Not
 
 
 def declare_binop(name, python_op, out_type=None, signed=False):
@@ -55,9 +55,10 @@ def DefineAdd(N, cout=False, cin=False):
                 I1 = concat(add.I1, bits(0, n=1))
             if has_cin:
                 coreir_add_cin = CoreirAdd()
-                wire(coreir_add_cin.in0, concat(bits(0, n=coreir_genargs["width"]-1), add.CIN))
+                wire(coreir_add_cin.in0, concat(bits(0,
+                    n=coreir_genargs["width"]-1), bits(add.CIN)))
                 wire(coreir_add_cin.in1, I0)
-                I0 = coreir_add_cin.O
+                I0 = coreir_add_cin.out
             wire(I0, coreir_add.in0)
             wire(I1, coreir_add.in1)
             O = coreir_add.out
@@ -77,25 +78,19 @@ def DefineSub(N, cout=False, cin=False):
     has_cin = cin
     class Sub(mantle.primitives.DeclareSub(N, cin=has_cin, cout=has_cout)):
         @classmethod
-        def definition(sub):
-            T = Bits(N)
-            coreir_io = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
-            coreir_genargs = {"width": N, "has_cout": has_cout, "has_cin": has_cin}
-            if has_cout:
-                coreir_io += ['cout', Out(Bit)]
-            if has_cin:
-                coreir_io += ['cin', In(Bit)]
-            CoreirSub = DeclareCircuit("coreir_" + sub.name, *coreir_io,
-                    coreir_name="sub", coreir_lib="coreir",
-                    coreir_genargs=coreir_genargs)
-            coreir_sub = CoreirSub()
-            wire(sub.I0, coreir_sub.in0)
-            wire(sub.I1, coreir_sub.in1)
-            wire(coreir_sub.out, sub.O)
-            if has_cout:
-                wire(coreir_sub.cout, sub.COUT)
-            if has_cin:
-                wire(coreir_sub.cin, sub.CIN)
+        def definition(io):
+            invert = Invert(N)
+            add = DefineAdd(N, cin=True, cout=cout)()
+            wire(io.I0, add.I0)
+            wire(io.I1, invert.I)
+            wire(invert.O, add.I1)
+            wire(add.O, io.O)
+            if cin:
+                wire( Not()(io.CIN), add.CIN )
+            else:
+                wire( 1, add.CIN )
+            if cout:
+                wire(add.COUT, io.COUT)
     return Sub
 
 

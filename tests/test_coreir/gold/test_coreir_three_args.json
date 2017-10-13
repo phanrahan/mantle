@@ -2,6 +2,22 @@
 "namespaces":{
   "global":{
     "modules":{
+      "Invert4_wrapped":{
+        "type":["Record",{
+          "I":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["inst0.in","self.I"],
+          ["inst0.out","self.O"]
+        ]
+      },
       "and4_wrapped":{
         "type":["Record",{
           "I0":["Array",4,"BitIn"],
@@ -119,8 +135,7 @@
             "modref":"global.fold_or34"
           },
           "inst1":{
-            "genref":"coreir.not",
-            "genargs":{"width":["Int",4]}
+            "modref":"global.Invert4_wrapped"
           },
           "inst2":{
             "modref":"global.fold_and34"
@@ -131,10 +146,10 @@
         },
         "connections":[
           ["inst0.I0","self.a"],
-          ["inst0.I1","inst1.out"],
+          ["inst0.I1","inst1.O"],
           ["inst0.I2","inst3.O"],
           ["inst0.O","self.d"],
-          ["inst1.in","inst2.O"],
+          ["inst1.I","inst2.O"],
           ["inst2.I0","self.a"],
           ["inst2.I1","self.b"],
           ["inst2.I2","self.c"],

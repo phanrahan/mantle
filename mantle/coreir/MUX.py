@@ -15,12 +15,12 @@ def DefineCoreirMux(width=None):
         out = in1 if sel.as_int() else in0
         value_store.set_value(self.out, out)
     if width is None:
-        return DeclareCircuit("coreir_bitmux".format(N),
+        return DeclareCircuit("coreir_mux".format(N),
             *["in0", In(Bit), "in1", In(Bit), "sel", In(Bit),
              "out", Out(Bit)],
             verilog_name="coreir_bitmux",
-            coreir_name="bitmux",
-            coreir_lib="coreir",
+            coreir_name="mux",
+            coreir_lib="corebit",
             simulate=simulate
         )
     else:

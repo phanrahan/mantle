@@ -31,7 +31,7 @@
             "modref":"global.EQ4"
           },
           "inst1":{
-            "modref":"coreir.bitnot"
+            "modref":"corebit.not"
           }
         },
         "connections":[

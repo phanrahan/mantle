@@ -144,8 +144,8 @@ def simulate_bit_not(self, value_store, state_store):
     value_store.set_value(self.out, out)
 
 
-DefineCoreirNot = DeclareCircuit("bitnot", 'in', In(Bit), 'out', Out(Bit),
-    simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="coreir")
+DefineCoreirNot = DeclareCircuit("not", 'in', In(Bit), 'out', Out(Bit),
+    simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="corebit")
 
 @cache_definition
 def DefineNot(width=None):
@@ -273,13 +273,20 @@ def simulate_bits_invert(self, value_store, state_store):
 @cache_definition
 def DefineInvert(width):
     T = Bits(width)
-    return DeclareCircuit("Invert{}".format(width),
+    decl = DeclareCircuit("Invert{}".format(width),
             'in', In(T), 'out', Out(T),
             simulate       = simulate_bits_invert,
             verilog_name   = "coreir_not",
             coreir_name    = "not",
             coreir_lib     = "coreir",
             coreir_genargs = {"width": width})
+    circ = DefineCircuit("Invert{}_wrapped".format(width),
+        "I", In(T), "O", Out(T))
+    prim = decl()
+    wire(circ.I, getattr(prim, "in"))
+    wire(circ.O, prim.out)
+    EndDefine()
+    return circ
 
 def Invert(width=None, **kwargs):
     return DefineInvert(width)(**kwargs)

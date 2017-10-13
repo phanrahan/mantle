@@ -2,6 +2,22 @@
 "namespaces":{
   "global":{
     "modules":{
+      "Invert4_wrapped":{
+        "type":["Record",{
+          "I":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["inst0.in","self.I"],
+          ["inst0.out","self.O"]
+        ]
+      },
       "NAnd24":{
         "type":["Record",{
           "I0":["Array",4,"BitIn"],
@@ -10,16 +26,15 @@
         }],
         "instances":{
           "inst0":{
-            "genref":"coreir.not",
-            "genargs":{"width":["Int",4]}
+            "modref":"global.Invert4_wrapped"
           },
           "inst1":{
             "modref":"global.and4_wrapped"
           }
         },
         "connections":[
-          ["inst0.in","inst1.O"],
-          ["inst0.out","self.O"],
+          ["inst0.I","inst1.O"],
+          ["inst0.O","self.O"],
           ["inst1.I0","self.I0"],
           ["inst1.I1","self.I1"]
         ]
@@ -32,16 +47,15 @@
         }],
         "instances":{
           "inst0":{
-            "genref":"coreir.not",
-            "genargs":{"width":["Int",4]}
+            "modref":"global.Invert4_wrapped"
           },
           "inst1":{
             "modref":"global.or4_wrapped"
           }
         },
         "connections":[
-          ["inst0.in","inst1.O"],
-          ["inst0.out","self.O"],
+          ["inst0.I","inst1.O"],
+          ["inst0.O","self.O"],
           ["inst1.I0","self.I0"],
           ["inst1.I1","self.I1"]
         ]

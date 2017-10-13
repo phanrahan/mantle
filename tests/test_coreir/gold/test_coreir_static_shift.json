@@ -9,8 +9,8 @@
         }],
         "instances":{
           "bit_const_GND":{
-            "modref":"coreir.bitconst",
-            "modargs":{"value":["Int",0]}
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
           }
         },
         "connections":[
@@ -27,8 +27,8 @@
         }],
         "instances":{
           "bit_const_GND":{
-            "modref":"coreir.bitconst",
-            "modargs":{"value":["Int",0]}
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
           }
         },
         "connections":[

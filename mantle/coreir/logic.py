@@ -43,7 +43,7 @@ def declare_bit_binop(name, python_op):
                           'in0', In(Bit), 'in1', In(Bit), 'out', Out(Bit),
                           simulate=simulate,
                           verilog_name = "coreir_" + name,
-                          coreir_lib = "coreir")
+                          coreir_lib = "corebit")
 
     circ = DefineCircuit("{}_wrapped".format(name),
         'I0', In(Bit), 'I1', In(Bit), 'O', Out(Bit))
@@ -55,9 +55,9 @@ def declare_bit_binop(name, python_op):
     return circ
 
 
-BitAnd = declare_bit_binop("bitand", operator.and_)
-BitOr  = declare_bit_binop("bitor", operator.or_)
-BitXOr = declare_bit_binop("bitxor", operator.xor)
+BitAnd = declare_bit_binop("and", operator.and_)
+BitOr  = declare_bit_binop("or", operator.or_)
+BitXOr = declare_bit_binop("xor", operator.xor)
 
 
 def declare_bits_binop(name, python_op):

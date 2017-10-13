@@ -1,5 +1,6 @@
 from magma import *
 from magma.bit_vector import BitVector
+import coreir
 
 
 def gen_sim_register(N, has_ce, has_reset):
@@ -59,15 +60,11 @@ def gen_sim_register(N, has_ce, has_reset):
 
 def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
     name = "reg_P"  # TODO: Add support for clock interface
-    if init is not 0:
-        raise NotImplementedError()
-    # config_args = {"init": init}
-    config_args = {}
+    config_args = {"init": coreir.type.BitVector(N if N is not None else 1, init)}
     gen_args = {}
     if N is None:
         coreir_name = "reg"
         T = T(1)
-        # config_args["init"] = bool(init)
         gen_args["width"] = 1
     else:
         coreir_name = "reg"

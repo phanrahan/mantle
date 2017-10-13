@@ -1,13 +1,15 @@
 import os
 from magma import *
 from mantle import *
+from mantle.common.sipo import SIPO
 
-__all__ = ['LFSR']
+__all__ = ['DefineLFSR', '_lfsrtaps']
 
 _lfsrtaps = {}
 
 
-def LFSR(n, init=1, has_ce=False):
+@cache_definition
+def DefineLFSR(n, init=1, has_ce=False):
     def readtaps():
         global _lfsrtaps
 
@@ -31,6 +33,8 @@ def LFSR(n, init=1, has_ce=False):
     tap = _lfsrtaps[n]
     nt = len(tap)
 
+    lfsr = DefineCircuit('lfsr{}{}{}'.format(n, init, has_ce),
+        "O", Out(Bits(n)), *ClockInterface(has_ce))
     shift = SIPO(n, init=init, has_ce=has_ce)
 
     t = []
@@ -41,5 +45,8 @@ def LFSR(n, init=1, has_ce=False):
     s = uncurry(XOr(nt))(t)
     shift(s)
 
-    args = ["output O", shift.O] + shift.interface.clockargs()
-    return AnonymousCircuit(args)
+    wire(shift.O, lfsr.O)
+    wireclock(shift, lfsr)
+    wiredefaultclock(shift, lfsr)
+    EndDefine()
+    return lfsr

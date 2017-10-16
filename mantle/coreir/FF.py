@@ -60,16 +60,17 @@ def gen_sim_register(N, has_ce, has_reset):
 
 def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
     name = "reg_P"  # TODO: Add support for clock interface
-    config_args = {"init": coreir.type.BitVector(N if N is not None else 1, init)}
+    config_args = {"init": coreir.type.BitVector(N, init) if N is not None else bool(init)}
     gen_args = {}
     if N is None:
-        coreir_name = "reg"
-        T = T(1)
-        gen_args["width"] = 1
+        coreir_name = "dff"
+        coreir_lib = "corebit"
+        T = Bit
     else:
         coreir_name = "reg"
         T = T(N)
         gen_args["width"] = N
+        coreir_lib = "coreir"
     io = ["in", In(T), "clk", In(Clock), "out", Out(T)]
     methods = []
 
@@ -93,8 +94,9 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         methods.append(circuit_type_method("when", when))
         gen_args["has_en"] = True
 
-    default_kwargs = gen_args.copy()
-    default_kwargs.update(config_args)
+    # default_kwargs = gen_args.copy()
+    default_kwargs = {}
+    # default_kwargs.update(config_args)
 
     return DeclareCircuit(
         name,
@@ -107,7 +109,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         coreir_configargs=config_args,
         coreir_name=coreir_name,
         verilog_name="coreir_" + name,
-        coreir_lib="mantle"
+        coreir_lib=coreir_lib
     )
 
 
@@ -120,10 +122,10 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_set=False):
     circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}_has_set{}".format(init, has_ce, has_reset, has_set),
         *IO)
     reg = Reg()
-    wire(circ.I, getattr(reg, "in")[0])
+    wire(circ.I, getattr(reg, "in"))
     wiredefaultclock(circ, reg)
     wireclock(circ, reg)
-    wire(reg.out[0], circ.O)
+    wire(reg.out, circ.O)
     EndDefine()
     return circ
 

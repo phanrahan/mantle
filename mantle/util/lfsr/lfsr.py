@@ -9,7 +9,7 @@ _lfsrtaps = {}
 
 
 @cache_definition
-def DefineLFSR(n, init=1, has_ce=False):
+def DefineLFSR(n, init=1, has_ce=False, has_reset=True):
     def readtaps():
         global _lfsrtaps
 
@@ -33,9 +33,9 @@ def DefineLFSR(n, init=1, has_ce=False):
     tap = _lfsrtaps[n]
     nt = len(tap)
 
-    lfsr = DefineCircuit('lfsr{}{}{}'.format(n, init, has_ce),
-        "O", Out(Bits(n)), *ClockInterface(has_ce))
-    shift = SIPO(n, init=init, has_ce=has_ce)
+    lfsr = DefineCircuit('lfsr{}{}{}'.format(n, init, has_ce, has_reset),
+        "O", Out(Bits(n)), *ClockInterface(has_ce, has_reset))
+    shift = SIPO(n, init=init, has_ce=has_ce, has_reset=has_reset)
 
     t = []
     for i in range(nt):
@@ -46,7 +46,10 @@ def DefineLFSR(n, init=1, has_ce=False):
     shift(s)
 
     wire(shift.O, lfsr.O)
-    wireclock(shift, lfsr)
-    wiredefaultclock(shift, lfsr)
+    wire(shift.CLK, lfsr.CLK)
+    if has_reset:
+        wire(shift.RESET, lfsr.RESET)
+    if has_ce:
+        wire(shift.CE, lfsr.CE)
     EndDefine()
     return lfsr

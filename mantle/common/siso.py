@@ -22,6 +22,7 @@ def DefineSISO(n, init=0, has_ce=False, has_reset=False):
             reg(siso.I)
             wire(reg.O, siso.O)
             wireclock(siso, reg)
+            wiredefaultclock(siso, reg)
     return _SISO
 
 def SISO(n, init=0, has_ce=False, has_reset=False, **kwargs):

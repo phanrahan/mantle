@@ -95,7 +95,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         gen_args["has_en"] = True
 
     # default_kwargs = gen_args.copy()
-    default_kwargs = {}
+    default_kwargs = {"init": init if N is not None else bool(init)}
     # default_kwargs.update(config_args)
 
     return DeclareCircuit(

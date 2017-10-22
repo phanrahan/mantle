@@ -124,6 +124,7 @@ def _MuxInterface(height, width):
     return args
 
 
+@cache_definition
 def DefineMux(height=2, width=1):
 
     """

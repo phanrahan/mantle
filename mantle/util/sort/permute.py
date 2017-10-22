@@ -1,4 +1,4 @@
-from magma import In, Out, Bits, Circuit, wire
+from magma import In, Out, Bits, Circuit, wire, cache_definition
 
 __all__  = ['DefinePermute', 'Permute']
 __all__ += ['Reverse']
@@ -52,6 +52,7 @@ def _reverseriffle(n):
 def _unreverseriffle(n):
     return inverse(_reverseriffle(n))
 
+@cache_definition
 def DefinePermute(na,permutation):
     n = len(permutation)
     class Permute(Circuit):
@@ -63,7 +64,7 @@ def DefinePermute(na,permutation):
     return Permute
 
 def Permute(name,permutation):
-    return DefinePermute(name,permutation)()
+    return DefinePermute(name,tuple(permutation))()
 
 
 def Reverse(n):

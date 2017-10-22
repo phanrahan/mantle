@@ -1,4 +1,4 @@
-from magma import Circuit, Bits, In, Out, wire, fork, join, flat, uncurry, map_
+from magma import Circuit, Bits, In, Out, wire, fork, join, flat, uncurry, map_, cache_definition
 from mantle import And, Or
 
 __all__  = ['Swap',  'swap']
@@ -20,6 +20,7 @@ def swap(I):
     return Swap()(I)
 
 
+@cache_definition
 def DefineSwaps(n):
     class Swaps(Circuit):
         name = 'Swap{}'.format(n)
@@ -37,6 +38,7 @@ def swaps(I):
     return Swaps(len(I))(I)
 
 
+@cache_definition
 def DefineEvenOddSwaps(n):
     class EvenOddSwaps(Circuit):
         name = 'EvenOddSwap{}'.format(n)

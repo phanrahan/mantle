@@ -4,9 +4,11 @@ from mantle import *
 from .swap import swaps, evenoddswaps
 
 __all__  = ['DefineBrickSorter', 'BrickSorter', 'bricksorter']
+
 #
 # Brick Sorter
 #
+@cache_definition
 def DefineBrickSorter(n):
     assert n % 2 == 0
     T = Bits(n)

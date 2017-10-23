@@ -23,7 +23,8 @@ before_install:
     - pip install git+git://github.com/leonardt/pycoreir.git@dev
     - cd ..
     # END: coreir installation
-    - pip install git+git://github.com/phanrahan/magma.git@coreir-dev
+    - git clone -b coreir-dev https://github.com/phanrahan/magma.git
+    - pip install -e magma
 
 install:
     - pip install -r requirements.txt

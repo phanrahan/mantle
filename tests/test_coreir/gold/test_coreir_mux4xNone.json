@@ -10,7 +10,7 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"coreir.bitmux"
+            "modref":"corebit.mux"
           }
         },
         "connections":[

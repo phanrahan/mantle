@@ -1,9 +1,10 @@
 from magma import *
 from magma.bit_vector import BitVector
+from mantle.coreir.MUX import Mux
 import coreir
 
 
-def gen_sim_register(N, has_ce, has_reset):
+def gen_sim_register(N, has_ce):
     def sim_register(self, value_store, state_store):
         """
         Adapted from Brennan's SB_DFF simulation in mantle
@@ -14,8 +15,8 @@ def gen_sim_register(N, has_ce, has_reset):
             state_store['prev_clock'] = cur_clock
             state_store['cur_val'] = BitVector(0, num_bits=N) if N is not None else False
 
-        if has_reset:
-            cur_reset = value_store.get_value(self.rst)
+        # if has_reset:
+        #     cur_reset = value_store.get_value(self.rst)
         # if s:
         #     cur_s = value_store.get_value(self.S)
 
@@ -44,11 +45,11 @@ def gen_sim_register(N, has_ce, has_reset):
                 #     new_val = input_val
                 new_val = input_val
 
-        if has_reset and not cur_reset:  # Reset is asserted low
-            if N is not None:
-                new_val = [False for _ in range(N)]
-            else:
-                new_val = None
+        # if has_reset and not cur_reset:  # Reset is asserted low
+        #     if N is not None:
+        #         new_val = [False for _ in range(N)]
+        #     else:
+        #         new_val = None
         # if s and not sy and cur_s:
         #     new_val = True
 
@@ -58,7 +59,7 @@ def gen_sim_register(N, has_ce, has_reset):
     return sim_register
 
 
-def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
+def DefineCoreirRegister(N, init=0, has_ce=False, T=Bits):
     name = "reg_P"  # TODO: Add support for clock interface
     config_args = {"init": coreir.type.BitVector(N, init) if N is not None else bool(init)}
     gen_args = {}
@@ -78,11 +79,11 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         wire(condition, self.rst)
         return self
 
-    if has_reset:
-        io.extend(["rst", In(Reset)])
-        name += "R"  # TODO: This assumes ordering of clock parameters
-        methods.append(circuit_type_method("reset", reset))
-        gen_args["has_rst"] = True
+    # if has_reset:
+    #     io.extend(["rst", In(Reset)])
+    #     name += "R"  # TODO: This assumes ordering of clock parameters
+    #     methods.append(circuit_type_method("reset", reset))
+    #     gen_args["has_rst"] = True
 
     def when(self, condition):
         wire(condition, self.en)
@@ -102,7 +103,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         name,
         *io,
         stateful=True,
-        simulate=gen_sim_register(N, has_ce, has_reset),
+        simulate=gen_sim_register(N, has_ce),
         circuit_type_methods=methods,
         default_kwargs=default_kwargs,
         coreir_genargs=gen_args,
@@ -115,14 +116,26 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
 
 @cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False, has_set=False):
-    if has_set == True:
-        raise NotImplementedError()
-    Reg = DefineCoreirRegister(None, init, has_ce, has_reset)
-    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce, has_reset, has_set)
+    Reg = DefineCoreirRegister(None, init, has_ce)
+    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce, has_reset)
+    if has_set:
+        IO += ["SET", In(Bit)]
     circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}_has_set{}".format(init, has_ce, has_reset, has_set),
         *IO)
     reg = Reg()
-    wire(circ.I, getattr(reg, "in"))
+    if has_set:
+        if not init in [0, 1]:
+            raise ValueError("init for DFF should be 0 or 1 or True or False")
+        mux = Mux(2)
+        wire(mux.I[0], circ.I)
+        wire(mux.I[1], init)
+        wire(mux.S, circ.SET)
+        I = mux.O
+    elif has_reset:
+        raise NotImplementedError("Coreir needs an async/sync reset primitive")
+    else:
+        I = circ.I
+    wire(I, getattr(reg, "in"))
     wiredefaultclock(circ, reg)
     wireclock(circ, reg)
     wire(reg.out, circ.O)

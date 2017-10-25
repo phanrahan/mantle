@@ -2,7 +2,7 @@ from functools import wraps
 
 from magma import *
 from magma.bitutils import clog2
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, ASR, Not, Invert
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, ASR, Not, Invert, EQ, Add, Sub, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
 
 def get_length(value):
     if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
@@ -88,3 +88,94 @@ def not_(arg, **kwargs):
         return Not(**kwargs)(arg)
     else:
         return Invert(width, **kwargs)(arg)
+
+@check_operator_args
+def eq(I0, I1, **kwargs):
+    width = get_length(I0)
+    return EQ(width, **kwargs)(I0, I1)
+
+@check_operator_args
+def add(I0, I1, **kwargs):
+    width = get_length(I0)
+    return Add(width)(I0, I1)
+
+@check_operator_args
+def sub(I0, I1, **kwargs):
+    width = get_length(I0)
+    return Sub(width)(I0, I1)
+
+@check_operator_args
+def mul(I0, I1, **kwargs):
+    raise NotImplementedError("Coreir does not have Mul")
+    width = get_length(I0)
+    return Mul(width)(I0, I1)
+
+@check_operator_args
+def div(I0, I1, **kwargs):
+    raise NotImplementedError("Coreir does not have Div")
+    width = get_length(I0)
+    return Div(width)(I0, I1)
+
+bitwise_ops = [
+    ("__and__", and_),
+    ("__or__", or_),
+    ("__xor__", xor),
+    ("__not__", not_),
+    ("__lshift__", lsl),
+    ("__rshift__", lsr),
+    ("__eq__", eq)
+]
+
+for method, op in bitwise_ops:
+    setattr(BitsType, method, op)
+
+arithmetic_ops = [
+    ("__add__", add),
+    ("__sub__", sub),
+    ("__mul__", mul),
+    ("__div__", div)
+]
+
+@check_operator_args
+def lt(I0, I1, **kwargs):
+    width = get_length(I0)
+    if isinstance(I0, SIntType):
+        return SLT(width)(I0, I1)
+    else:
+        return ULT(width)(I0, I1)
+
+@check_operator_args
+def le(I0, I1, **kwargs):
+    width = get_length(I0)
+    if isinstance(I0, SIntType):
+        return SLE(width)(I0, I1)
+    else:
+        return ULE(width)(I0, I1)
+
+@check_operator_args
+def gt(I0, I1, **kwargs):
+    width = get_length(I0)
+    if isinstance(I0, SIntType):
+        return SGT(width)(I0, I1)
+    else:
+        return UGT(width)(I0, I1)
+
+@check_operator_args
+def ge(I0, I1, **kwargs):
+    width = get_length(I0)
+    if isinstance(I0, SIntType):
+        return SGE(width)(I0, I1)
+    else:
+        return UGE(width)(I0, I1)
+
+
+relational_ops = [
+    ("__lt__", lt),
+    ("__le__", le),
+    ("__gt__", gt),
+    ("__ge__", ge)
+]
+
+for method, op in arithmetic_ops + relational_ops:
+    setattr(SIntType, method, op)
+    setattr(UIntType, method, op)

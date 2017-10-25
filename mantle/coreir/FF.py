@@ -59,19 +59,13 @@ def gen_sim_register(N, has_ce):
     return sim_register
 
 
-def DefineCoreirRegister(N, init=0, has_ce=False, T=Bits):
-    name = "reg_P"  # TODO: Add support for clock interface
-    config_args = {"init": coreir.type.BitVector(N, init) if N is not None else bool(init)}
-    gen_args = {}
+def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
     if N is None:
-        coreir_name = "dff"
-        coreir_lib = "corebit"
-        T = Bit
-    else:
-        coreir_name = "reg"
-        T = T(N)
-        gen_args["width"] = N
-        coreir_lib = "coreir"
+        N = 1
+    name = "reg_P"  # TODO: Add support for clock interface
+    config_args = {"init": coreir.type.BitVector(N, init)}
+    gen_args = {"width": N}
+    T = T(N)
     io = ["in", In(T), "clk", In(Clock), "out", Out(T)]
     methods = []
 
@@ -79,11 +73,11 @@ def DefineCoreirRegister(N, init=0, has_ce=False, T=Bits):
         wire(condition, self.rst)
         return self
 
-    # if has_reset:
-    #     io.extend(["rst", In(Reset)])
-    #     name += "R"  # TODO: This assumes ordering of clock parameters
-    #     methods.append(circuit_type_method("reset", reset))
-    #     gen_args["has_rst"] = True
+    if has_reset:
+        io.extend(["rst", In(Reset)])
+        name += "R"  # TODO: This assumes ordering of clock parameters
+        methods.append(circuit_type_method("reset", reset))
+        gen_args["has_rst"] = True
 
     def when(self, condition):
         wire(condition, self.en)
@@ -96,7 +90,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, T=Bits):
         gen_args["has_en"] = True
 
     # default_kwargs = gen_args.copy()
-    default_kwargs = {"init": init if N is not None else bool(init)}
+    default_kwargs = {"init": coreir.type.BitVector(N, init)}
     # default_kwargs.update(config_args)
 
     return DeclareCircuit(
@@ -108,44 +102,30 @@ def DefineCoreirRegister(N, init=0, has_ce=False, T=Bits):
         default_kwargs=default_kwargs,
         coreir_genargs=gen_args,
         coreir_configargs=config_args,
-        coreir_name=coreir_name,
+        coreir_name="reg",
         verilog_name="coreir_" + name,
-        coreir_lib=coreir_lib
+        coreir_lib="mantle"
     )
 
 
 @cache_definition
-def DefineDFF(init=0, has_ce=False, has_reset=False, has_set=False):
+def DefineDFF(init=0, has_ce=False, has_reset=False):
     Reg = DefineCoreirRegister(None, init, has_ce)
     IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce, has_reset)
-    if has_set:
-        IO += ["SET", In(Bit)]
-    circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}_has_set{}".format(init, has_ce, has_reset, has_set),
+    circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}".format(init, has_ce, has_reset),
         *IO)
     reg = Reg()
-    if has_set:
-        if not init in [0, 1]:
-            raise ValueError("init for DFF should be 0 or 1 or True or False")
-        mux = Mux(2)
-        wire(mux.I[0], circ.I)
-        wire(mux.I[1], init)
-        wire(mux.S, circ.SET)
-        I = mux.O
-    elif has_reset:
-        raise NotImplementedError("Coreir needs an async/sync reset primitive")
-    else:
-        I = circ.I
-    wire(I, getattr(reg, "in"))
     wiredefaultclock(circ, reg)
     wireclock(circ, reg)
-    wire(reg.out, circ.O)
+    wire(circ.I, getattr(reg, "in")[0])
+    wire(reg.out[0], circ.O)
     EndDefine()
     return circ
 
 
 
 
-def DFF(init=0, has_ce=False, has_reset=False, has_set=False, **kwargs):
-    return DefineDFF(init, has_ce, has_reset, has_set)(**kwargs)
+def DFF(init=0, has_ce=False, has_reset=False, **kwargs):
+    return DefineDFF(init, has_ce, has_reset)(**kwargs)
 
 FF = DFF

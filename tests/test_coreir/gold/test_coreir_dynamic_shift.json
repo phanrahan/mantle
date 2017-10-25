@@ -2,6 +2,24 @@
 "namespaces":{
   "global":{
     "modules":{
+      "or4_wrapped":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.or",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
       "test_coreir_dynamic_shift":{
         "type":["Record",{
           "a":["Array",4,"BitIn"],
@@ -10,8 +28,7 @@
         }],
         "instances":{
           "inst0":{
-            "genref":"coreir.or",
-            "genargs":{"width":["Int",4]}
+            "modref":"global.or4_wrapped"
           },
           "inst1":{
             "genref":"coreir.shl",
@@ -23,9 +40,9 @@
           }
         },
         "connections":[
-          ["inst0.in0","inst1.out"],
-          ["inst0.in1","inst2.out"],
-          ["inst0.out","self.c"],
+          ["inst0.I0","inst1.out"],
+          ["inst0.I1","inst2.out"],
+          ["inst0.O","self.c"],
           ["inst1.in0","self.a"],
           ["inst1.in1","self.b"],
           ["inst2.in0","self.a"],

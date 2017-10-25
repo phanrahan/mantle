@@ -1,8 +1,10 @@
 from magma import *
 from magma.bit_vector import BitVector
+from mantle.coreir.MUX import Mux
+import coreir
 
 
-def gen_sim_register(N, has_ce, has_reset):
+def gen_sim_register(N, has_ce):
     def sim_register(self, value_store, state_store):
         """
         Adapted from Brennan's SB_DFF simulation in mantle
@@ -13,8 +15,8 @@ def gen_sim_register(N, has_ce, has_reset):
             state_store['prev_clock'] = cur_clock
             state_store['cur_val'] = BitVector(0, num_bits=N) if N is not None else False
 
-        if has_reset:
-            cur_reset = value_store.get_value(self.rst)
+        # if has_reset:
+        #     cur_reset = value_store.get_value(self.rst)
         # if s:
         #     cur_s = value_store.get_value(self.S)
 
@@ -43,11 +45,11 @@ def gen_sim_register(N, has_ce, has_reset):
                 #     new_val = input_val
                 new_val = input_val
 
-        if has_reset and not cur_reset:  # Reset is asserted low
-            if N is not None:
-                new_val = [False for _ in range(N)]
-            else:
-                new_val = None
+        # if has_reset and not cur_reset:  # Reset is asserted low
+        #     if N is not None:
+        #         new_val = [False for _ in range(N)]
+        #     else:
+        #         new_val = None
         # if s and not sy and cur_s:
         #     new_val = True
 
@@ -58,21 +60,12 @@ def gen_sim_register(N, has_ce, has_reset):
 
 
 def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
-    name = "reg_P"  # TODO: Add support for clock interface
-    if init is not 0:
-        raise NotImplementedError()
-    # config_args = {"init": init}
-    config_args = {}
-    gen_args = {}
     if N is None:
-        coreir_name = "reg"
-        T = T(1)
-        # config_args["init"] = bool(init)
-        gen_args["width"] = 1
-    else:
-        coreir_name = "reg"
-        T = T(N)
-        gen_args["width"] = N
+        N = 1
+    name = "reg_P"  # TODO: Add support for clock interface
+    config_args = {"init": coreir.type.BitVector(N, init)}
+    gen_args = {"width": N}
+    T = T(N)
     io = ["in", In(T), "clk", In(Clock), "out", Out(T)]
     methods = []
 
@@ -96,36 +89,35 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         methods.append(circuit_type_method("when", when))
         gen_args["has_en"] = True
 
-    default_kwargs = gen_args.copy()
-    default_kwargs.update(config_args)
+    # default_kwargs = gen_args.copy()
+    default_kwargs = {"init": coreir.type.BitVector(N, init)}
+    # default_kwargs.update(config_args)
 
     return DeclareCircuit(
         name,
         *io,
         stateful=True,
-        simulate=gen_sim_register(N, has_ce, has_reset),
+        simulate=gen_sim_register(N, has_ce),
         circuit_type_methods=methods,
         default_kwargs=default_kwargs,
         coreir_genargs=gen_args,
         coreir_configargs=config_args,
-        coreir_name=coreir_name,
+        coreir_name="reg",
         verilog_name="coreir_" + name,
-        coreir_lib="coreir"
+        coreir_lib="mantle"
     )
 
 
 @cache_definition
-def DefineDFF(init=0, has_ce=False, has_reset=False, has_set=False):
-    if has_set == True:
-        raise NotImplementedError()
-    Reg = DefineCoreirRegister(None, init, has_ce, has_reset)
-    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce, has_reset, has_set)
-    circ = DefineCircuit("DFF(init={}, has_ce={}, has_reset={}, has_set={})".format(init, has_ce, has_reset, has_set),
+def DefineDFF(init=0, has_ce=False, has_reset=False):
+    Reg = DefineCoreirRegister(None, init, has_ce)
+    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce, has_reset)
+    circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}".format(init, has_ce, has_reset),
         *IO)
     reg = Reg()
-    wire(circ.I, getattr(reg, "in")[0])
     wiredefaultclock(circ, reg)
     wireclock(circ, reg)
+    wire(circ.I, getattr(reg, "in")[0])
     wire(reg.out[0], circ.O)
     EndDefine()
     return circ
@@ -133,7 +125,7 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_set=False):
 
 
 
-def DFF(init=0, has_ce=False, has_reset=False, has_set=False, **kwargs):
-    return DefineDFF(init, has_ce, has_reset, has_set)(**kwargs)
+def DFF(init=0, has_ce=False, has_reset=False, **kwargs):
+    return DefineDFF(init, has_ce, has_reset)(**kwargs)
 
 FF = DFF

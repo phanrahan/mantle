@@ -2,79 +2,125 @@
 "namespaces":{
   "global":{
     "modules":{
-      "fold_and34":{
+      "Invert4_wrapped":{
         "type":["Record",{
-          "in0":["Array",4,"BitIn"],
-          "in1":["Array",4,"BitIn"],
-          "in2":["Array",4,"BitIn"],
-          "out":["Array",4,"Bit"]
+          "I":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["inst0.in","self.I"],
+          ["inst0.out","self.O"]
+        ]
+      },
+      "and4_wrapped":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
         }],
         "instances":{
           "inst0":{
             "genref":"coreir.and",
             "genargs":{"width":["Int",4]}
-          },
-          "inst1":{
-            "genref":"coreir.and",
-            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst0.in0","self.in0"],
-          ["inst0.in1","self.in1"],
-          ["inst0.out","inst1.in0"],
-          ["inst1.in1","self.in2"],
-          ["inst1.out","self.out"]
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
+      "fold_and34":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "I2":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"global.and4_wrapped"
+          },
+          "inst1":{
+            "modref":"global.and4_wrapped"
+          }
+        },
+        "connections":[
+          ["inst0.I0","self.I0"],
+          ["inst0.I1","self.I1"],
+          ["inst0.O","inst1.I0"],
+          ["inst1.I1","self.I2"],
+          ["inst1.O","self.O"]
         ]
       },
       "fold_or34":{
         "type":["Record",{
-          "in0":["Array",4,"BitIn"],
-          "in1":["Array",4,"BitIn"],
-          "in2":["Array",4,"BitIn"],
-          "out":["Array",4,"Bit"]
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "I2":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
         }],
         "instances":{
           "inst0":{
-            "genref":"coreir.or",
-            "genargs":{"width":["Int",4]}
+            "modref":"global.or4_wrapped"
           },
           "inst1":{
-            "genref":"coreir.or",
-            "genargs":{"width":["Int",4]}
+            "modref":"global.or4_wrapped"
           }
         },
         "connections":[
-          ["inst0.in0","self.in0"],
-          ["inst0.in1","self.in1"],
-          ["inst0.out","inst1.in0"],
-          ["inst1.in1","self.in2"],
-          ["inst1.out","self.out"]
+          ["inst0.I0","self.I0"],
+          ["inst0.I1","self.I1"],
+          ["inst0.O","inst1.I0"],
+          ["inst1.I1","self.I2"],
+          ["inst1.O","self.O"]
         ]
       },
       "fold_xor34":{
         "type":["Record",{
-          "in0":["Array",4,"BitIn"],
-          "in1":["Array",4,"BitIn"],
-          "in2":["Array",4,"BitIn"],
-          "out":["Array",4,"Bit"]
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "I2":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
         }],
         "instances":{
           "inst0":{
-            "genref":"coreir.xor",
-            "genargs":{"width":["Int",4]}
+            "modref":"global.xor4_wrapped"
           },
           "inst1":{
-            "genref":"coreir.xor",
+            "modref":"global.xor4_wrapped"
+          }
+        },
+        "connections":[
+          ["inst0.I0","self.I0"],
+          ["inst0.I1","self.I1"],
+          ["inst0.O","inst1.I0"],
+          ["inst1.I1","self.I2"],
+          ["inst1.O","self.O"]
+        ]
+      },
+      "or4_wrapped":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.or",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst0.in0","self.in0"],
-          ["inst0.in1","self.in1"],
-          ["inst0.out","inst1.in0"],
-          ["inst1.in1","self.in2"],
-          ["inst1.out","self.out"]
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
         ]
       },
       "test_coreir_three_args":{
@@ -89,8 +135,7 @@
             "modref":"global.fold_or34"
           },
           "inst1":{
-            "genref":"coreir.not",
-            "genargs":{"width":["Int",4]}
+            "modref":"global.Invert4_wrapped"
           },
           "inst2":{
             "modref":"global.fold_and34"
@@ -100,17 +145,35 @@
           }
         },
         "connections":[
-          ["inst0.in0","self.a"],
-          ["inst0.in1","inst1.out"],
-          ["inst0.in2","inst3.out"],
-          ["inst0.out","self.d"],
-          ["inst1.in","inst2.out"],
-          ["inst2.in0","self.a"],
-          ["inst2.in1","self.b"],
-          ["inst2.in2","self.c"],
-          ["inst3.in0","self.b"],
-          ["inst3.in1","self.c"],
-          ["inst3.in2","self.a"]
+          ["inst0.I0","self.a"],
+          ["inst0.I1","inst1.O"],
+          ["inst0.I2","inst3.O"],
+          ["inst0.O","self.d"],
+          ["inst1.I","inst2.O"],
+          ["inst2.I0","self.a"],
+          ["inst2.I1","self.b"],
+          ["inst2.I2","self.c"],
+          ["inst3.I0","self.b"],
+          ["inst3.I1","self.c"],
+          ["inst3.I2","self.a"]
+        ]
+      },
+      "xor4_wrapped":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.xor",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
         ]
       }
     }

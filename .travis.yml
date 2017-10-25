@@ -1,6 +1,5 @@
 language: python
 python:
-    - "2.7"
     - "3.4"
     - "3.5"
 
@@ -15,19 +14,19 @@ before_install:
     - pip install --upgrade pip setuptools
 
     # BEGIN: coreir installation
-    - git clone -b master https://github.com/rdaly525/coreir.git
+    - git clone -b dev https://github.com/rdaly525/coreir.git
     - cd coreir
     - export COREIRCONFIG="g++-4.9"
     - export COREIR=$PWD
     - sudo make install
-    - pip install coreir
+    - pip install git+git://github.com/leonardt/pycoreir.git@dev
     - cd ..
     # END: coreir installation
+    - git clone -b coreir-dev https://github.com/phanrahan/magma.git
+    - pip install -e magma
 
 install:
     - pip install -r requirements.txt
-    - git clone https://github.com/phanrahan/magma
-    - pip install -e magma
     - pip install pytest-cov
     - pip install fabricate
     - pip install -e .

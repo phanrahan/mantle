@@ -83,6 +83,9 @@ def asr(I0, I1, **kwargs):
     return ASR(width, **kwargs)(I0, I1)
 
 def not_(arg, **kwargs):
+    return Not(**kwargs)(arg)
+
+def invert(arg, **kwargs):
     width = get_length(arg)
     if width is None:
         return Not(**kwargs)(arg)
@@ -120,7 +123,7 @@ bitwise_ops = [
     ("__and__", and_),
     ("__or__", or_),
     ("__xor__", xor),
-    ("__not__", not_),
+    ("__invert__", invert),
     ("__lshift__", lsl),
     ("__rshift__", lsr),
     ("__eq__", eq)

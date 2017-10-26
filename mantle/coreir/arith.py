@@ -62,8 +62,8 @@ def DefineAdd(N, cout=False, cin=False):
                 I1 = concat(add.I1, bits(0, n=1))
             if has_cin:
                 coreir_add_cin = CoreirAdd()
-                wire(coreir_add_cin.in0, concat(bits(0,
-                    n=coreir_genargs["width"]-1), bits(add.CIN)))
+                wire(coreir_add_cin.in0, concat(bits(add.CIN), bits(0,
+                    n=coreir_genargs["width"]-1)))
                 wire(coreir_add_cin.in1, I0)
                 I0 = coreir_add_cin.out
             wire(I0, coreir_add.in0)
@@ -76,7 +76,6 @@ def DefineAdd(N, cout=False, cin=False):
             if has_cout:
                 wire(COUT, add.COUT)
     return Add
-
 
 
 @circuit_generator

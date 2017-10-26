@@ -22,10 +22,6 @@ def DeclareAdd(N, cin=False, cout=False):
     return Add
 
 
-def Add(n, cin=False, cout=False, **kwargs):
-    return DeclareAdd(n, cin, cout)(**kwargs)
-
-
 def add(*args, **kwargs):
     width = get_length(args[0])
     if not all(get_length(arg) == width for arg in args):
@@ -70,10 +66,6 @@ def DeclareSub(N, cin=False, cout=False):
     return Sub
 
 
-def Sub(n, cin=False, cout=False, **kwargs):
-    return DeclareSub(n, cin, cout)(**kwargs)
-
-
 def sub(*args, **kwargs):
     width = get_length(args[0])
     if not all(get_length(arg) == width for arg in args):
@@ -104,9 +96,6 @@ def DeclareNegate(width):
         IO = ['I', In(T), 'O', Out(T)]
     return _Negate
 
-def Negate(width, **kwargs):
-    return DeclareNegate(width)(**kwargs)
-
 
 @cache_definition
 def DeclareASR(width):
@@ -115,7 +104,3 @@ def DeclareASR(width):
         name = 'ASR{}'.format(width)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
     return _ASR
-
-
-def ASR(width, shift, **kwargs):
-    return DeclareASR(width, shift)(**kwargs)

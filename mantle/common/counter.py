@@ -1,5 +1,6 @@
 from magma import *
-from mantle import And, Mux, DefineAdd, Add
+from mantle.common.arith import Add
+from mantle import And, Mux, DefineAdd
 from .register import Register
 from .decode import Decode
 

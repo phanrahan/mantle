@@ -77,9 +77,6 @@ def DefineAdd(n, cin=False, cout=False):
                 wire(add.COUT, io.COUT)
             wire(add.O, io.O)
     return _Add
-
-def Add(n, cin=False, cout=False, **kwargs):
-    return DefineAdd(n, cin, cout)(**kwargs)
     
 
 @cache_definition
@@ -102,9 +99,6 @@ def DefineSub(n, cin=False, cout=False):
             if cout:
                 wire(add.COUT, io.COUT)
     return _Sub
-
-def Sub(n, cin=False, cout=False, **kwargs):
-    return DefineSub(n, cin, cout)(**kwargs)
     
     
 
@@ -120,9 +114,6 @@ def DefineNegate(width):
             add =  Add(width, False, False)
             wire( add( invert(io.I), (array(1,width))), io.O )
     return _Negate
-
-def Negate(width, **kwargs):
-    return DefineNegate(width)(**kwargs)
     
 
 @cache_definition
@@ -141,9 +132,4 @@ def DefineFixedASR(width, shift):
                 wire(io.I[width-1], io.O[i])
     return _ASR
 
-def FixedASR(width, shift, **kwargs):
-    return DefineFixedASR(width, shift)(**kwargs)
-
 DefineASR = DefineFixedASR
-ASR = FixedASR
-    

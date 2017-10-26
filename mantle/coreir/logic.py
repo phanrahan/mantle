@@ -298,7 +298,7 @@ def invert(arg, **kwargs):
 
 
 @cache_definition
-def DefineDynamicLeftShift(width):
+def DefineLSL(width):
     T = Bits(width)
     def simulate(self, value_store, state_store):
         in0 = BitVector(value_store.get_value(self.in0))
@@ -312,19 +312,19 @@ def DefineDynamicLeftShift(width):
             coreir_genargs={"width": width})
 
 
-def DynamicLeftShift(width, **kwargs):
-    return DefineDynamicLeftShift(width)(**kwargs)
+def LSL(width, **kwargs):
+    return DefineLSL(width)(**kwargs)
 
 
-def dynamic_left_shift(I0, I1, **kwargs):
+def lsl(I0, I1, **kwargs):
     if not get_length(I0) == get_length(I1):
         raise ValueError("All arguments should have the same length")
     width = get_length(I0)
-    return DynamicLeftShift(width, **kwargs)(I0, I1)
+    return LSL(width, **kwargs)(I0, I1)
 
 
 @cache_definition
-def DefineDynamicRightShift(width):
+def DefineLSR(width):
     T = Bits(width)
     def simulate(self, value_store, state_store):
         in0 = BitVector(value_store.get_value(self.in0))
@@ -338,15 +338,15 @@ def DefineDynamicRightShift(width):
             coreir_genargs={"width": width})
 
 
-def DynamicRightShift(width, **kwargs):
-    return DefineDynamicRightShift(width)(**kwargs)
+def LSR(width, **kwargs):
+    return DefineLSR(width)(**kwargs)
 
 
-def dynamic_right_shift(I0, I1, **kwargs):
+def lsr(I0, I1, **kwargs):
     if not get_length(I0) == get_length(I1):
         raise ValueError("All arguments should have the same length")
     width = get_length(I0)
-    return DynamicRightShift(width, **kwargs)(I0, I1)
+    return LSR(width, **kwargs)(I0, I1)
 
 
 @cache_definition

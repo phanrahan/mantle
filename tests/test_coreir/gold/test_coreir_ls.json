@@ -1,4 +1,4 @@
-{"top":"global.test_coreir_dynamic_shift",
+{"top":"global.test_coreir_ls",
 "namespaces":{
   "global":{
     "modules":{
@@ -20,7 +20,7 @@
           ["inst0.out","self.O"]
         ]
       },
-      "test_coreir_dynamic_shift":{
+      "test_coreir_ls":{
         "type":["Record",{
           "a":["Array",4,"BitIn"],
           "b":["Array",4,"BitIn"],

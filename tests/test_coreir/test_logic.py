@@ -5,7 +5,7 @@ from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, ReduceXOr
 from mantle.coreir import NAnd, NOr, NXOr, ReduceNAnd, ReduceNOr, ReduceNXOr
-from mantle.coreir import static_left_shift, static_right_shift, dynamic_left_shift, dynamic_right_shift
+from mantle.coreir import static_left_shift, static_right_shift, lsl, lsr
 
 
 def test_coreir_bit():
@@ -129,19 +129,19 @@ def test_static_shift():
             "build/test_coreir_static_shift.json", "gold/test_coreir_static_shift.json")
 
 
-def test_dynamic_shift():
+def test_ls():
     width = 4
     class TestCircuit(Circuit):
-        name = "test_coreir_dynamic_shift"
+        name = "test_coreir_ls"
         IO = ["a", In(Bits(width)), "b", In(UInt(width)), "c", Out(Bits(width))]
         @classmethod
         def definition(circuit):
-            c = Or(2, width)(dynamic_left_shift(circuit.a, circuit.b),
-                             dynamic_right_shift(circuit.a, circuit.b))
+            c = Or(2, width)(lsl(circuit.a, circuit.b),
+                             lsr(circuit.a, circuit.b))
             wire(c, circuit.c)
-    compile("build/test_coreir_dynamic_shift", TestCircuit, output="coreir")
+    compile("build/test_coreir_ls", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_dynamic_shift.json", "gold/test_coreir_dynamic_shift.json")
+            "build/test_coreir_ls.json", "gold/test_coreir_ls.json")
 
 # def test_coreir_uint():
 #     class TestCircuit(Circuit):

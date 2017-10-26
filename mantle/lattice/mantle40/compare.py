@@ -1,6 +1,6 @@
 from magma import *
 from .LUT import *
-from .arith import Sub
+from .arith import DefineSub
 from .logic import Not
 
 __all__  = ['DefineEQ', 'EQ']
@@ -117,7 +117,7 @@ def DefineUCMP(opname, reverse, negate, n):
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
         @classmethod
         def definition(io):
-            sub = Sub(n, False, True)
+            sub = DefineSub(n, False, True)()
             if not reverse:
                 sub(io.I0, io.I1)
             else:
@@ -172,7 +172,7 @@ def DefineSCMP(opname, op, reverse, n):
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
         @classmethod
         def definition(io):
-            sub = Sub(n)
+            sub = DefineSub(n)()
             cmp = LUT3(op)
             if not reverse:
                 wire(cmp( sub(io.I0, io.I1)[-1], io.I0[-1], io.I1[-1] ), io.O)

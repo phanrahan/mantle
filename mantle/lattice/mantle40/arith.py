@@ -2,10 +2,10 @@ from magma import *
 from .logic import Invert, Not
 from .fulladder import FullAdder
 
-__all__  = ['DefineAdd', 'Add'] 
-__all__ += ['DefineSub', 'Sub']
-__all__ += ['DefineNegate', 'Negate']
-__all__ += ['DefineASR', 'ASR']
+__all__  = ['DefineAdd'] 
+__all__ += ['DefineSub']
+__all__ += ['DefineNegate']
+__all__ += ['DefineASR']
 
 def _AdderName(basename, n, cin, cout):
     return "{}{}{}{}".format(
@@ -87,7 +87,7 @@ def DefineSub(n, cin=False, cout=False):
         @classmethod
         def definition(io):
             invert = Invert(n)
-            add =  Add(n, True, cout)
+            add =  DefineAdd(n, True, cout)()
             wire(io.I0, add.I0)
             wire(io.I1, invert.I)
             wire(invert.O, add.I1)
@@ -111,7 +111,7 @@ def DefineNegate(width):
         @classmethod
         def definition(io):
             invert = Invert(width)
-            add =  Add(width, False, False)
+            add =  DefineAdd(width, False, False)()
             wire( add( invert(io.I), (array(1,width))), io.O )
     return _Negate
     

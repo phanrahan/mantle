@@ -1,6 +1,15 @@
 from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate, DefineASR
+from magma.testing.newfunction import testvectors as function_test
+from magma.simulator.python_simulator import testvectors as simulator_test
+
+
+def test_add():
+    width = 4
+    mask = 2**width-1
+    Add = DefineAdd(width)
+    assert function_test(Add, lambda x, y: (x + y) & mask) == simulator_test(Add)
 
 
 def test_add_cout_two():

@@ -2,6 +2,7 @@ import operator
 
 from magma import *
 from magma.compatibility import IntegerTypes
+from magma.bit_vector import BitVector
 import mantle.primitives
 from .logic import DefineFoldOp, get_length, Invert, Not
 
@@ -36,6 +37,11 @@ def declare_binop(name, python_op, out_type=None, signed=False):
 def DefineAdd(N, cout=False, cin=False):
     has_cout = cout
     has_cin = cin
+
+    def simulate_coreir_add(self, value_store, state_store):
+        in0 = BitVector(value_store.get_value(self.in0), N)
+        in1 = BitVector(value_store.get_value(self.in1), N)
+        value_store.set_value(self.out, in0 + in1)
     class Add(mantle.primitives.DeclareAdd(N, cin=has_cin, cout=has_cout)):
         @classmethod
         def definition(add):
@@ -46,7 +52,8 @@ def DefineAdd(N, cout=False, cin=False):
             coreir_io = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
             CoreirAdd = DeclareCircuit("coreir_" + add.name, *coreir_io,
                     coreir_name="add", coreir_lib="coreir",
-                    coreir_genargs=coreir_genargs)
+                    coreir_genargs=coreir_genargs,
+                    simulate=simulate_coreir_add)
             coreir_add = CoreirAdd()
             I0 = add.I0
             I1 = add.I1

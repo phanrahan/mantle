@@ -2,7 +2,8 @@ from functools import wraps
 
 from magma import *
 from magma.bitutils import clog2
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, ASR, Not, Invert, EQ, Add, Sub, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
+from mantle.common.arith import ASR, Add, Sub, Negate
 
 def get_length(value):
     if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
@@ -126,10 +127,11 @@ bitwise_ops = [
     ("__invert__", invert),
     ("__lshift__", lsl),
     ("__rshift__", lsr),
-    ("__eq__", eq)
+    # ("__eq__", eq)
 ]
 
 for method, op in bitwise_ops:
+    setattr(BitType, method, op)
     setattr(BitsType, method, op)
 
 arithmetic_ops = [

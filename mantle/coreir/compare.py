@@ -9,7 +9,10 @@ DefineCoreirEQ = declare_binop("eq", operator.eq, out_type=Bit)
 
 @cache_definition
 def DefineEQ(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("EQ{}".format(n), *IO)
     coreir_eq = DefineCoreirEQ(n, Bits)()
@@ -25,7 +28,10 @@ def EQ(n, **kwargs):
 
 @cache_definition
 def DefineNE(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     circ = DefineCircuit("NE{}".format(n),
         "I0", In(T), "I1", In(T), "O", Out(Bit))
     eq = EQ(n)
@@ -43,7 +49,10 @@ DefineCoreirULT = declare_binop("ult", operator.lt, out_type=Bit)
 
 @cache_definition
 def DefineULT(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("ULT{}".format(n), *IO)
     coreir_ult = DefineCoreirULT(n, Bits)()
@@ -62,7 +71,10 @@ DefineCoreirULE = declare_binop("ule", operator.le, out_type=Bit)
 
 @cache_definition
 def DefineULE(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("ULE{}".format(n), *IO)
     coreir_ule = DefineCoreirULE(n, Bits)()
@@ -81,7 +93,10 @@ DefineCoreirUGT = declare_binop("ugt", operator.lt, out_type=Bit)
 
 @cache_definition
 def DefineUGT(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("UGT{}".format(n), *IO)
     coreir_ugt = DefineCoreirUGT(n, Bits)()
@@ -100,7 +115,10 @@ DefineCoreirUGE = declare_binop("uge", operator.le, out_type=Bit)
 
 @cache_definition
 def DefineUGE(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("UGE{}".format(n), *IO)
     coreir_uge = DefineCoreirUGE(n, Bits)()
@@ -119,7 +137,10 @@ DefineCoreirSLT = declare_binop("slt", operator.lt, out_type=Bit)
 
 @cache_definition
 def DefineSLT(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("SLT{}".format(n), *IO)
     coreir_slt = DefineCoreirSLT(n, Bits)()
@@ -138,7 +159,10 @@ DefineCoreirSLE = declare_binop("sle", operator.le, out_type=Bit)
 
 @cache_definition
 def DefineSLE(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("SLE{}".format(n), *IO)
     coreir_sle = DefineCoreirSLE(n, Bits)()
@@ -157,7 +181,10 @@ DefineCoreirSGT = declare_binop("sgt", operator.lt, out_type=Bit)
 
 @cache_definition
 def DefineSGT(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("SGT{}".format(n), *IO)
     coreir_sgt = DefineCoreirSGT(n, Bits)()
@@ -176,7 +203,10 @@ DefineCoreirSGE = declare_binop("sge", operator.le, out_type=Bit)
 
 @cache_definition
 def DefineSGE(n):
-    T = Bits(n)
+    if n is None:
+        T = Bit
+    else:
+        T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("SGE{}".format(n), *IO)
     coreir_sge = DefineCoreirSGE(n, Bits)()

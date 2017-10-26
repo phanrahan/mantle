@@ -19,7 +19,10 @@ def declare_binop(name, python_op, out_type=None, signed=False):
 
     @cache_definition
     def Declare(N, type_):
-        T = type_(N)
+        if N is None:
+            T = Bit
+        else:
+            T = type_(N)
         return DeclareCircuit("coreir_{}{}".format(name, N),
                               'in0', In(T), 'in1', In(T),
                               'out', Out(out_type if out_type else T),

@@ -23,3 +23,4 @@ A2 = 0xF0F0
 A3 = 0xFF00
 
 from mantle.common import *
+import mantle.common.operator

@@ -1,23 +1,46 @@
 #
 # Implementation of compressor trees
 #
-from magma import fork
-from mantle import LUT2, LUT3, I0, I1, I2
+from magma import fork, cache_definition, DefineCircuit, EndDefine, In, Out, Bit, wire
+from mantle import mantletarget
+if mantletarget == "ice40":
+    from mantle import LUT2, LUT3, I0, I1, I2
+else:
+    from mantle import XOr, Or, And
+
 
 __all__ = ['compressor']
 
 n3to2s = 0
 n2to2s = 0
 
-def compress2to2():
-    global n2to2s
-    n2to2s = n2to2s + 1
-    return fork([LUT2(I0^I1), LUT2((I0&I1)|(I1&I2))])
+if mantletarget == "ice40":
+    def compress2to2():
+        global n2to2s
+        n2to2s = n2to2s + 1
+        return fork([LUT2(I0^I1), LUT2((I0&I1)|(I1&I2))])
 
-def compress3to2():
-    global n3to2s
-    n3to2s = n3to2s + 1
-    return fork([LUT3(I0^I1^I2), LUT3((I0&I1)|(I1&I2)|(I2&I0))])
+    def compress3to2():
+        global n3to2s
+        n3to2s = n3to2s + 1
+        return fork([LUT3(I0^I1^I2), LUT3((I0&I1)|(I1&I2)|(I2&I0))])
+else:
+    @cache_definition
+    def Define3to2Op():
+        Op = DefineCircuit("Op", "I0", In(Bit), "I1", In(Bit), "I2", In(Bit), "O", Out(Bit))
+        a = And(2)(Op.I0, Op.I1)
+        b = And(2)(Op.I1, Op.I2)
+        c = And(2)(Op.I2, Op.I0)
+        d = Or(3)(a, b, c)
+        wire(d, Op.O)
+        EndDefine()
+        return Op
+
+    def compress3to2():
+        global n3to2s
+        n3to2s = n3to2s + 1
+        Op = Define3to2Op()
+        return fork([XOr(3), Op()])
 
 # compress 2 and 3 bit groups in a column
 def compresscolumn2(bits):

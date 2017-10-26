@@ -2,6 +2,40 @@
 "namespaces":{
   "global":{
     "modules":{
+      "and_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"corebit.and"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
+      "or_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"corebit.or"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
+        ]
+      },
       "test_coreir_bit":{
         "type":["Record",{
           "a":"BitIn",
@@ -11,27 +45,44 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"coreir.bitor"
+            "modref":"global.or_wrapped"
           },
           "inst1":{
-            "modref":"coreir.bitnot"
+            "modref":"corebit.not"
           },
           "inst2":{
-            "modref":"coreir.bitand"
+            "modref":"global.and_wrapped"
           },
           "inst3":{
-            "modref":"coreir.bitxor"
+            "modref":"global.xor_wrapped"
           }
         },
         "connections":[
-          ["inst0.in0","inst1.out"],
-          ["inst0.in1","inst3.out"],
-          ["inst0.out","self.d"],
-          ["inst1.in","inst2.out"],
-          ["inst2.in0","self.a"],
-          ["inst2.in1","self.b"],
-          ["inst3.in0","self.b"],
-          ["inst3.in1","self.c"]
+          ["inst0.I0","inst1.out"],
+          ["inst0.I1","inst3.O"],
+          ["inst0.O","self.d"],
+          ["inst1.in","inst2.O"],
+          ["inst2.I0","self.a"],
+          ["inst2.I1","self.b"],
+          ["inst3.I0","self.b"],
+          ["inst3.I1","self.c"]
+        ]
+      },
+      "xor_wrapped":{
+        "type":["Record",{
+          "I0":"BitIn",
+          "I1":"BitIn",
+          "O":"Bit"
+        }],
+        "instances":{
+          "inst0":{
+            "modref":"corebit.xor"
+          }
+        },
+        "connections":[
+          ["inst0.in0","self.I0"],
+          ["inst0.in1","self.I1"],
+          ["inst0.out","self.O"]
         ]
       }
     }

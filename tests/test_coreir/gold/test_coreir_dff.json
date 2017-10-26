@@ -1,8 +1,8 @@
-{"top":"global.DFF(init=0, has_ce=False, has_reset=False, has_set=False)",
+{"top":"global.DFF_init0_has_ceFalse_has_resetFalse",
 "namespaces":{
   "global":{
     "modules":{
-      "DFF(init=0, has_ce=False, has_reset=False, has_set=False)":{
+      "DFF_init0_has_ceFalse_has_resetFalse":{
         "type":["Record",{
           "I":"BitIn",
           "O":"Bit",
@@ -10,8 +10,9 @@
         }],
         "instances":{
           "inst0":{
-            "genref":"coreir.reg",
-            "genargs":{"clr":["Bool",false], "en":["Bool",false], "rst":["Bool",false], "width":["Int",1]}
+            "genref":"mantle.reg",
+            "genargs":{"has_clr":["Bool",false], "has_en":["Bool",false], "has_rst":["Bool",false], "width":["Int",1]},
+            "modargs":{"init":[["BitVector",1],0]}
           }
         },
         "connections":[

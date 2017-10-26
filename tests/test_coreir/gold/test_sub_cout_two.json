@@ -2,6 +2,68 @@
 "namespaces":{
   "global":{
     "modules":{
+      "Add4_cout_cin":{
+        "type":["Record",{
+          "I0":["Array",4,"BitIn"],
+          "I1":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"],
+          "COUT":"Bit",
+          "CIN":"BitIn"
+        }],
+        "instances":{
+          "bit_const_GND":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "inst0":{
+            "genref":"coreir.add",
+            "genargs":{"width":["Int",5]}
+          },
+          "inst1":{
+            "genref":"coreir.add",
+            "genargs":{"width":["Int",5]}
+          }
+        },
+        "connections":[
+          ["bit_const_GND.out","inst0.in1.4"],
+          ["bit_const_GND.out","inst1.in0.0"],
+          ["bit_const_GND.out","inst1.in0.1"],
+          ["bit_const_GND.out","inst1.in0.2"],
+          ["bit_const_GND.out","inst1.in0.3"],
+          ["bit_const_GND.out","inst1.in1.4"],
+          ["inst0.in0","inst1.out"],
+          ["self.CIN","inst1.in0.4"],
+          ["self.COUT","inst0.out.4"],
+          ["inst0.in1.0","self.I1.0"],
+          ["inst0.in1.1","self.I1.1"],
+          ["inst0.in1.2","self.I1.2"],
+          ["inst0.in1.3","self.I1.3"],
+          ["inst0.out.0","self.O.0"],
+          ["inst0.out.1","self.O.1"],
+          ["inst0.out.2","self.O.2"],
+          ["inst0.out.3","self.O.3"],
+          ["inst1.in1.0","self.I0.0"],
+          ["inst1.in1.1","self.I0.1"],
+          ["inst1.in1.2","self.I0.2"],
+          ["inst1.in1.3","self.I0.3"]
+        ]
+      },
+      "Invert4_wrapped":{
+        "type":["Record",{
+          "I":["Array",4,"BitIn"],
+          "O":["Array",4,"Bit"]
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["inst0.in","self.I"],
+          ["inst0.out","self.O"]
+        ]
+      },
       "Sub4_cout":{
         "type":["Record",{
           "I0":["Array",4,"BitIn"],
@@ -10,16 +72,24 @@
           "COUT":"Bit"
         }],
         "instances":{
+          "bit_const_VCC":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",true]}
+          },
           "inst0":{
-            "genref":"coreir.sub",
-            "genargs":{"has_cin":["Bool",false], "has_cout":["Bool",true], "width":["Int",4]}
+            "modref":"global.Invert4_wrapped"
+          },
+          "inst1":{
+            "modref":"global.Add4_cout_cin"
           }
         },
         "connections":[
-          ["inst0.cout","self.COUT"],
-          ["inst0.in0","self.I0"],
-          ["inst0.in1","self.I1"],
-          ["inst0.out","self.O"]
+          ["bit_const_VCC.out","inst1.CIN"],
+          ["inst0.I","self.I1"],
+          ["inst0.O","inst1.I1"],
+          ["inst1.COUT","self.COUT"],
+          ["inst1.I0","self.I0"],
+          ["inst1.O","self.O"]
         ]
       }
     }

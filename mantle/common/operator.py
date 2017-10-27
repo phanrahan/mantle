@@ -127,7 +127,7 @@ bitwise_ops = [
     ("__invert__", invert),
     ("__lshift__", lsl),
     ("__rshift__", lsr),
-    # ("__eq__", eq)
+    ("__eq__", eq)
 ]
 
 for method, op in bitwise_ops:

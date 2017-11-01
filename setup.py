@@ -17,7 +17,7 @@ setup(
         "mantle.coreir",
         "mantle.lattice",
         "mantle.verilog",
-        "mantle.primitives"
+        "mantle.primitives",
         "mantle.util",
         "mantle.util.lfsr",
         "mantle.util.sort",

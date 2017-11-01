@@ -101,7 +101,7 @@ def eq(I0, I1, **kwargs):
 @check_operator_args
 def add(I0, I1, **kwargs):
     width = get_length(I0)
-    return Add(width)(I0, I1)
+    return Add(width, **kwargs)(I0, I1)
 
 @check_operator_args
 def sub(I0, I1, **kwargs):
@@ -127,7 +127,7 @@ bitwise_ops = [
     ("__invert__", invert),
     ("__lshift__", lsl),
     ("__rshift__", lsr),
-    ("__eq__", eq)
+    # ("__eq__", eq)
 ]
 
 for method, op in bitwise_ops:

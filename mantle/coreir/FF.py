@@ -4,7 +4,7 @@ from mantle.coreir.MUX import Mux
 import coreir
 
 
-def gen_sim_register(N, has_ce):
+def gen_sim_register(N, init, has_ce):
     def sim_register(self, value_store, state_store):
         """
         Adapted from Brennan's SB_DFF simulation in mantle
@@ -13,7 +13,7 @@ def gen_sim_register(N, has_ce):
 
         if not state_store:
             state_store['prev_clock'] = cur_clock
-            state_store['cur_val'] = BitVector(0, num_bits=N) if N is not None else False
+            state_store['cur_val'] = BitVector(init, num_bits=N) if N is not None else bool(init)
 
         # if has_reset:
         #     cur_reset = value_store.get_value(self.rst)
@@ -97,7 +97,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
         name,
         *io,
         stateful=True,
-        simulate=gen_sim_register(N, has_ce),
+        simulate=gen_sim_register(N, init, has_ce),
         circuit_type_methods=methods,
         default_kwargs=default_kwargs,
         coreir_genargs=gen_args,

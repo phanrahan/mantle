@@ -42,8 +42,11 @@ def DefineAdd(N, cout=False, cin=False):
     has_cin = cin
 
     def simulate_coreir_add(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0), N)
-        in1 = BitVector(value_store.get_value(self.in1), N)
+        width = N
+        if has_cout:
+            width = N + 1
+        in0 = BitVector(value_store.get_value(self.in0), width)
+        in1 = BitVector(value_store.get_value(self.in1), width)
         value_store.set_value(self.out, in0 + in1)
     class Add(mantle.primitives.DeclareAdd(N, cin=has_cin, cout=has_cout)):
         @classmethod

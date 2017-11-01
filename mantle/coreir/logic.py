@@ -66,6 +66,7 @@ def declare_bits_binop(name, python_op):
         in0 = BitVector(value_store.get_value(self.in0))
         in1 = BitVector(value_store.get_value(self.in1))
         out = python_op(in0, in1).as_bool_list()
+        # print(f"{python_op}({in0}, {in1}), {out}")
         value_store.set_value(self.out, out)
 
     @cache_definition

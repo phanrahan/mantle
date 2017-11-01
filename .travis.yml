@@ -1,7 +1,8 @@
 language: python
 python:
-    - "3.4"
-    - "3.5"
+    - "3.6"
+
+sudo: false
 
 addons:
   apt:
@@ -14,13 +15,21 @@ before_install:
     - pip install --upgrade pip setuptools
 
     # BEGIN: coreir installation
-    - git clone https://github.com/rdaly525/coreir.git
+    - mkdir deps
+    - mkdir deps/bin
+    - mkdir deps/lib
+    - mkdir deps/include
+    - cd deps
+    - git clone -b dev https://github.com/rdaly525/coreir.git
     - cd coreir
     - export COREIRCONFIG="g++-4.9"
     - export COREIR=$PWD
-    - sudo make install
-    - pip install git+git://github.com/leonardt/pycoreir.git
+    - make install prefix=$TRAVIS_BUILD_DIR/deps
     - cd ..
+    - cd ..
+    - export PATH=$TRAVIS_BUILD_DIR/deps/bin:$PATH
+    - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/deps/lib:$LD_LIBRARY_PATH
+    - pip install coreir
     # END: coreir installation
     - git clone https://github.com/phanrahan/magma.git
     - pip install -e magma

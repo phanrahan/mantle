@@ -16,6 +16,8 @@ setup(
         "mantle.common",
         "mantle.coreir",
         "mantle.lattice",
+        "mantle.lattice.mantle40",
+        "mantle.lattice.ice40",
         "mantle.verilog",
         "mantle.primitives",
         "mantle.util",

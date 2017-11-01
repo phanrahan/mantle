@@ -106,7 +106,7 @@ def test_bitwise():
         check_binary_overloaded_operator(args[1], args[2], T=SInt)
 
     compare_ops = [
-        (eq, operator.eq, EQ(4) ),
+        # (eq, operator.eq, EQ(4) ),
         (lt, operator.lt, ULT(4), SLT(4)),
         (le, operator.le, ULE(4), SLE(4)),
         (gt, operator.gt, UGT(4), SGT(4)),

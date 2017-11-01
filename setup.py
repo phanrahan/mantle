@@ -11,7 +11,19 @@ setup(
     name='mantleextra',
     version='0.1-alpha',
     description='Library of hardware primitives forprogramming FPGAs',
-    packages=["mantle"],
+    packages=[
+        "mantle",
+        "mantle.common",
+        "mantle.coreir",
+        "mantle.lattice",
+        "mantle.verilog",
+        "mantle.primitives"
+        "mantle.util",
+        "mantle.util.lfsr",
+        "mantle.util.sort",
+        "mantle.util.compressor",
+        "mantle.util.lhca",
+    ],
     
     install_requires=reqs
     )

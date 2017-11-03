@@ -21,7 +21,7 @@ def check_operator_args(fn):
             raise RuntimeError("{} requires at least 2 arguments".format(fn.__name__))
         width = get_length(args[0])
         if not all(get_length(x) == width for x in args):
-            raise ValueError("All arguments should have the same length")
+            raise ValueError(f"All arguments should have the same length: {args}")
         return fn(*args, **kwargs)
     return wrapped
 

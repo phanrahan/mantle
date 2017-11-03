@@ -1,7 +1,7 @@
 from functools import wraps
 
 from magma import *
-from magma.bitutils import clog2
+from magma.bitutils import clog2, seq2int
 from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Mux
 from mantle.common.arith import ASR, Add, Sub, Negate
 
@@ -186,4 +186,6 @@ for method, op in arithmetic_ops + relational_ops:
     setattr(UIntType, method, op)
 
 def mux(I, S):
+    if S.const():
+        return I[seq2int(S.bits())]
     return Mux(len(I), get_length(I[0]))(*I, S)

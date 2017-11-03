@@ -2,7 +2,7 @@ from functools import wraps
 
 from magma import *
 from magma.bitutils import clog2
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Mux
 from mantle.common.arith import ASR, Add, Sub, Negate
 
 def get_length(value):
@@ -184,3 +184,6 @@ relational_ops = [
 for method, op in arithmetic_ops + relational_ops:
     setattr(SIntType, method, op)
     setattr(UIntType, method, op)
+
+def mux(I, S):
+    return Mux(len(I), get_length(I[0]))(*I, S)

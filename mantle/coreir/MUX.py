@@ -2,6 +2,7 @@ from __future__ import division
 
 
 from magma import *
+from magma.bit_vector import BitVector
 import math
 
 

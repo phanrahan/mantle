@@ -2,6 +2,8 @@ language: python
 python:
     - "3.6"
 
+sudo: true  # Needed for coreir-dev branch building coreir from source (installing g++-4.9 through apt)
+
 before_install:
     - git clone https://github.com/phanrahan/magma.git
     - pip install -e magma

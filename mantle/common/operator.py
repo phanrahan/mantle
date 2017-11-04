@@ -1,8 +1,8 @@
 from functools import wraps
 
 from magma import *
-from magma.bitutils import clog2
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
+from magma.bitutils import clog2, seq2int
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Mux
 from mantle.common.arith import ASR, Add, Sub, Negate
 
 def get_length(value):
@@ -21,7 +21,7 @@ def check_operator_args(fn):
             raise RuntimeError("{} requires at least 2 arguments".format(fn.__name__))
         width = get_length(args[0])
         if not all(get_length(x) == width for x in args):
-            raise ValueError("All arguments should have the same length")
+            raise ValueError(f"All arguments should have the same length: {args}")
         return fn(*args, **kwargs)
     return wrapped
 
@@ -184,3 +184,8 @@ relational_ops = [
 for method, op in arithmetic_ops + relational_ops:
     setattr(SIntType, method, op)
     setattr(UIntType, method, op)
+
+def mux(I, S):
+    if S.const():
+        return I[seq2int(S.bits())]
+    return Mux(len(I), get_length(I[0]))(*I, S)

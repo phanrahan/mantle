@@ -1,13 +1,17 @@
 from magma import *
 import coreir
-from magma.bitutils import seq2int
+from magma.bitutils import seq2int, int2seq
 from collections import Sequence
 
 
 @circuit_generator
 def DeclareCoreirLUT(N, init):
+    def simulate(self, value_store, state_store):
+        in_ = value_store.get_value(getattr(self, "in"))
+        value_store.set_value(self.out, [bool(i) for i in int2seq(init, N)][seq2int(in_)])
     return DeclareCircuit("coreir_lut{}".format(N),
             'in', In(Bits(N)), 'out', Out(Bit),
+            simulate=simulate,
             coreir_name = "lutN",
             coreir_lib  = "commonlib",
             coreir_genargs = {"N": N},

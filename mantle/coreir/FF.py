@@ -59,13 +59,13 @@ def gen_sim_register(N, init, has_ce):
     return sim_register
 
 
-def DefineCoreirReg(N, init=0, has_ce=False, has_reset=False, T=Bits):
-    if N is None:
-        N = 1
+def DefineCoreirReg(width, init=0, has_ce=False, has_reset=False, T=Bits):
+    if width is None:
+        width = 1
     name = "reg_P"  # TODO: Add support for clock interface
-    config_args = {"init": coreir.type.BitVector(N, init)}
-    gen_args = {"width": N}
-    T = T(N)
+    config_args = {"init": coreir.type.BitVector(width, init)}
+    gen_args = {"width": width}
+    T = T(width)
     io = ["in", In(T), "clk", In(Clock), "out", Out(T)]
     methods = []
 
@@ -90,14 +90,14 @@ def DefineCoreirReg(N, init=0, has_ce=False, has_reset=False, T=Bits):
         gen_args["has_en"] = True
 
     # default_kwargs = gen_args.copy()
-    default_kwargs = {"init": coreir.type.BitVector(N, init)}
+    default_kwargs = {"init": coreir.type.BitVector(width, init)}
     # default_kwargs.update(config_args)
 
     return DeclareCircuit(
         name,
         *io,
         stateful=True,
-        simulate=gen_sim_register(N, init, has_ce),
+        simulate=gen_sim_register(width, init, has_ce),
         circuit_type_methods=methods,
         default_kwargs=default_kwargs,
         coreir_genargs=gen_args,

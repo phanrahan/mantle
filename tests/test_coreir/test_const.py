@@ -2,7 +2,7 @@ import os
 os.environ["MANTLE"] = "coreir"
 from magma import compile
 from magma.testing import check_files_equal
-from mantle.coreir import DefineCoreirConst, DefineCoreBitConst
+from mantle.coreir import DefineCoreirConst, DefineCorebitConst
 
 
 def test_const():
@@ -20,7 +20,7 @@ EndCircuit()"""
 
 
 def test_bit_const():
-    BitConst = DefineCoreBitConst(value=1)
+    BitConst = DefineCorebitConst(value=1)
     assert repr(BitConst) == """\
 corebit_const1 = DefineCircuit("corebit_const1", "out", Out(Bit))
 wire(1, corebit_const1.out)

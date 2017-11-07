@@ -1,5 +1,3 @@
-from magma import bits
-
 from .logic import (
     And      , DefineAnd   , ReduceAnd ,
     NAnd     , DefineNAnd  , ReduceNAnd,
@@ -33,5 +31,14 @@ from .compare import DefineEQ, EQ, \
                      DefineSGT, SGT, \
                      DefineSGE, SGE
 
+from magma import bits, cache_definition, Circuit, Bits, wire, Out
+
+@cache_definition
 def DefineCoreirConst(width, value):
-    return bits(width, value)
+    class CoreirConst(Circuit):
+        name = f"coreir_const{width}{value}"
+        IO = ["out", Out(Bits(width))]
+        @classmethod
+        def definition(io):
+            wire(io.out, bits(value, width))
+    return CoreirConst

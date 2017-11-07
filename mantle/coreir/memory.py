@@ -43,7 +43,6 @@ def DefineCoreirMem(height, width):
     addr_width = max(height.bit_length() - 1, 1)
     IO = ["raddr", In(Bits(addr_width)),
           "rdata", Out(Bits(width)),
-          "ren", In(Bit),
           "waddr", In(Bits(addr_width)),
           "wdata", In(Bits(width)),
           "clk", In(Clock),
@@ -51,8 +50,8 @@ def DefineCoreirMem(height, width):
     return DeclareCircuit(name, *IO, verilog_name="coreir_mem",
             coreir_name="mem", coreir_lib="coreir",
             simulate=gen_sim_mem(height, width),
-            coreir_genargs={"width": width, "depth": height},
-            coreir_configargs={"init": "0"})
+            coreir_genargs={"width": width, "depth": height})
+            # coreir_configargs={"init": "0"})
 
 def DefineROM(height, width):
     """

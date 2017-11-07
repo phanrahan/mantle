@@ -19,7 +19,7 @@ from .FF import FF, DFF, DefineDFF, DefineCoreirReg
 from .LUT import LUT
 
 from .MUX import DefineMux, Mux, DefineCoreirMux
-from .memory import DefineRAM, DefineMemory
+from .memory import DefineRAM, DefineMemory, DefineCoreirMem
 from .compare import DefineEQ, EQ, \
                      DefineNE, NE, \
                      DefineULT, ULT, \

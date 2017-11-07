@@ -1,0 +1,32 @@
+{"top":"global.test_coreir_mem",
+"namespaces":{
+  "global":{
+    "modules":{
+      "test_coreir_mem":{
+        "type":["Record",{
+          "raddr":["Array",2,"BitIn"],
+          "rdata":["Array",16,"Bit"],
+          "waddr":["Array",2,"BitIn"],
+          "wdata":["Array",16,"BitIn"],
+          "clk":["Named","coreir.clkIn"],
+          "wen":"BitIn"
+        }],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.mem",
+            "genargs":{"depth":["Int",4], "width":["Int",16]}
+          }
+        },
+        "connections":[
+          ["inst0.clk","self.clk"],
+          ["inst0.raddr","self.raddr"],
+          ["inst0.rdata","self.rdata"],
+          ["inst0.waddr","self.waddr"],
+          ["inst0.wdata","self.wdata"],
+          ["inst0.wen","self.wen"]
+        ]
+      }
+    }
+  }
+}
+}

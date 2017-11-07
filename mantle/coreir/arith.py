@@ -35,31 +35,32 @@ def declare_binop(name, python_op, out_type=None, signed=False):
 
     return Declare
 
+@cache_definition
+def DefineCoreirAdd(N):
+    coreir_genargs = {"width": N} # , "has_cout": has_cout, "has_cin": has_cin}
+    def simulate_coreir_add(self, value_store, state_store):
+        width = N
+        in0 = BitVector(value_store.get_value(self.in0), width)
+        in1 = BitVector(value_store.get_value(self.in1), width)
+        value_store.set_value(self.out, in0 + in1)
+    T = Bits(N)
+    coreir_io = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
+    return DeclareCircuit(f"coreir_add{N}", *coreir_io,
+            coreir_name="add", coreir_lib="coreir",
+            coreir_genargs=coreir_genargs,
+            simulate=simulate_coreir_add)
 
 @circuit_generator
 def DefineAdd(N, cout=False, cin=False):
     has_cout = cout
     has_cin = cin
-
-    def simulate_coreir_add(self, value_store, state_store):
-        width = N
-        if has_cout:
-            width = N + 1
-        in0 = BitVector(value_store.get_value(self.in0), width)
-        in1 = BitVector(value_store.get_value(self.in1), width)
-        value_store.set_value(self.out, in0 + in1)
     class Add(mantle.primitives.DeclareAdd(N, cin=has_cin, cout=has_cout)):
         @classmethod
         def definition(add):
-            coreir_genargs = {"width": N} # , "has_cout": has_cout, "has_cin": has_cin}
+            width = N
             if has_cout:
-                coreir_genargs["width"] += 1
-            T = Bits(coreir_genargs["width"])
-            coreir_io = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
-            CoreirAdd = DeclareCircuit("coreir_" + add.name, *coreir_io,
-                    coreir_name="add", coreir_lib="coreir",
-                    coreir_genargs=coreir_genargs,
-                    simulate=simulate_coreir_add)
+                width += 1
+            CoreirAdd = DefineCoreirAdd(width)
             coreir_add = CoreirAdd()
             I0 = add.I0
             I1 = add.I1
@@ -69,7 +70,7 @@ def DefineAdd(N, cout=False, cin=False):
             if has_cin:
                 coreir_add_cin = CoreirAdd()
                 wire(coreir_add_cin.in0, concat(bits(add.CIN), bits(0,
-                    n=coreir_genargs["width"]-1)))
+                    n=width-1)))
                 wire(coreir_add_cin.in1, I0)
                 I0 = coreir_add_cin.out
             wire(I0, coreir_add.in0)

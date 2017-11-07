@@ -13,12 +13,12 @@ from .logic import (
     DefineLSR, LSR, lsr,
 )
 
-from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR
+from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAdd
 
-from .FF import FF, DFF, DefineDFF
+from .FF import FF, DFF, DefineDFF, DefineCoreirRegister
 from .LUT import LUT
 
-from .MUX import DefineMux, Mux
+from .MUX import DefineMux, Mux, DefineCoreirMux
 from .memory import DefineRAM, DefineMemory
 from .compare import DefineEQ, EQ, \
                      DefineNE, NE, \

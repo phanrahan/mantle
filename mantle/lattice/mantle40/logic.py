@@ -38,7 +38,7 @@ def FlatCascade(n, k, expr, cin, **kwargs):
             return LUT( e, n=k+1 )
 
         # number of luts
-        m = (n+k-1) // k 
+        m = (n+k-1) // k
         c = braid( col(f, m), foldargs={"I0":"O"})
 
         wire(cin, c.I0)
@@ -50,7 +50,7 @@ def FlatCascade(n, k, expr, cin, **kwargs):
 
         return AnonymousCircuit( ['I', c.I[0:n], 'O', c.O] )
 
-def DefineReduceOp(opname, n, expr, cascadeexpr, cin):
+def DefineReduceOp(opname, n, luts, cascadeexpr, cin):
     T = Bits(n)
     class _ReduceOp(Circuit):
         name = '{}{}'.format(opname, n)
@@ -58,10 +58,10 @@ def DefineReduceOp(opname, n, expr, cascadeexpr, cin):
 
         @classmethod
         def definition(io):
-            if   n == 1: a = uncurry(LUT1(expr))
-            elif n == 2: a = uncurry(LUT2(expr))
-            elif n == 3: a = uncurry(LUT3(expr))
-            elif n == 4: a = uncurry(LUT4(expr))
+            if   n == 1: a = uncurry(LUT1(luts[n - 1]))
+            elif n == 2: a = uncurry(LUT2(luts[n - 1]))
+            elif n == 3: a = uncurry(LUT3(luts[n - 1]))
+            elif n == 4: a = uncurry(LUT4(luts[n - 1]))
             else: a = FlatCascade(n, 1, cascadeexpr, cin)
             wire(a(io.I), io.O)
     return _ReduceOp
@@ -69,7 +69,7 @@ def DefineReduceOp(opname, n, expr, cascadeexpr, cin):
 @cache_definition
 def DefineReduceAnd(n):
     luts = [A0, A0&A1, A0&A1&A2, A0&A1&A2&A3]
-    return DefineReduceOp('And', n, luts[n-1], A0 & A1, 1)
+    return DefineReduceOp('And', n, luts, A0 & A1, 1)
 
 def ReduceAnd(height=2, **kwargs):
     return DefineReduceAnd(height)(**kwargs)
@@ -77,7 +77,7 @@ def ReduceAnd(height=2, **kwargs):
 @cache_definition
 def DefineReduceNAnd(n):
     luts = [~A0, ~(A0&A1), ~(A0&A1&A2), ~(A0&A1&A2&A3)]
-    return DefineReduceOp('NAnd', n, luts[n-1], A0 & ~A1, 0)
+    return DefineReduceOp('NAnd', n, luts, A0 & ~A1, 0)
 
 def ReduceNAnd(height=2, **kwargs):
     return DefineReduceNAnd(height)(**kwargs)
@@ -85,7 +85,7 @@ def ReduceNAnd(height=2, **kwargs):
 @cache_definition
 def DefineReduceOr(n):
     luts = [A0, A0|A1, A0|A1|A2, A0|A1|A2|A3]
-    return DefineReduceOp('Or', n, luts[n-1], A0 | A1, 0)
+    return DefineReduceOp('Or', n, luts, A0 | A1, 0)
 
 def ReduceOr(height=2, **kwargs):
     return DefineReduceOr(height)(**kwargs)
@@ -93,7 +93,7 @@ def ReduceOr(height=2, **kwargs):
 @cache_definition
 def DefineReduceNOr(n):
     luts = [~A0, ~(A0|A1), ~(A0|A1|A2), ~(A0|A1|A2|A3)]
-    return DefineReduceOp('NOr', n, luts[n-1], A0 | ~A1, 1)
+    return DefineReduceOp('NOr', n, luts, A0 | ~A1, 1)
 
 def ReduceNOr(height=2, **kwargs):
     return DefineReduceNOr(height)(**kwargs)
@@ -101,7 +101,7 @@ def ReduceNOr(height=2, **kwargs):
 @cache_definition
 def DefineReduceXOr(n):
     luts = [A0, A0^A1, A0^A1^A2, A0^A1^A2^A3]
-    return DefineReduceOp('XOr', n, luts[n-1], A0 ^ A1, 0)
+    return DefineReduceOp('XOr', n, luts, A0 ^ A1, 0)
 
 def ReduceXOr(height=2, **kwargs):
     return DefineReduceXOr(height)(**kwargs)
@@ -109,7 +109,7 @@ def ReduceXOr(height=2, **kwargs):
 @cache_definition
 def DefineReduceNXOr(n):
     luts = [~A0, ~(A0^A1), ~(A0^A1^A2), ~(A0^A1^A2^A3)]
-    return DefineReduceOp('NXOr', n, luts[n-1], A0 ^ ~A1, 1)
+    return DefineReduceOp('NXOr', n, luts, A0 ^ ~A1, 1)
 
 def ReduceNXOr(height=2, **kwargs):
     return DefineReduceNXOr(height)(**kwargs)

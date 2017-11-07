@@ -32,7 +32,7 @@ def DefineCoreirMux(width=None):
             coreir_name="mux",
             coreir_lib="coreir",
             simulate=simulate,
-            default_kwargs={"width": N}
+            coreir_genargs={"width": N}
         )
 
 

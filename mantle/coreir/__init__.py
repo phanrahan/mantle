@@ -31,7 +31,7 @@ from .compare import DefineEQ, EQ, \
                      DefineSGT, SGT, \
                      DefineSGE, SGE
 
-from magma import bits, cache_definition, Circuit, Bits, wire, Out
+from magma import bits, cache_definition, Circuit, Bits, wire, Out, In, Bit
 
 @cache_definition
 def DefineCoreirConst(width, value):
@@ -42,3 +42,27 @@ def DefineCoreirConst(width, value):
         def definition(io):
             wire(io.out, bits(value, width))
     return CoreirConst
+
+@cache_definition
+def DefineCoreBitConst(value):
+    if not isinstance(value, bool) and not (isinstance(value, int) and value in {0, 1}):
+        raise ValueError("DefineCoreBitConst expects a boolean value or 0 or 1")
+    class CoreBitConst(Circuit):
+        name = f"corebit_const{value}"
+        IO = ["out", Out(Bit)]
+        @classmethod
+        def definition(io):
+            wire(io.out, value)
+    return CoreBitConst
+
+@cache_definition
+def DefineCoreBitTerm():
+    class CoreBitTerm(Circuit):
+        name = f"corebit_term"
+        IO = ["in", In(Bit)]
+        @classmethod
+        def definition(io):
+            pass
+    return CoreBitTerm
+
+CoreBitTerm = DefineCoreBitTerm()

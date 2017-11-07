@@ -1,0 +1,13 @@
+{"top":"global.corebit_term",
+"namespaces":{
+  "global":{
+    "modules":{
+      "corebit_term":{
+        "type":["Record",{
+          "in":"BitIn"
+        }]
+      }
+    }
+  }
+}
+}

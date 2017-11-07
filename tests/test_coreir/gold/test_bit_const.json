@@ -1,0 +1,22 @@
+{"top":"global.corebit_const1",
+"namespaces":{
+  "global":{
+    "modules":{
+      "corebit_const1":{
+        "type":["Record",{
+          "out":"Bit"
+        }],
+        "instances":{
+          "bit_const_VCC":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",true]}
+          }
+        },
+        "connections":[
+          ["bit_const_VCC.out","self.out"]
+        ]
+      }
+    }
+  }
+}
+}

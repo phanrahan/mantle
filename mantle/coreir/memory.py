@@ -1,14 +1,14 @@
 from magma import *
 
 
-def gen_sim_mem(height, width):
+def gen_sim_mem(depth, width):
     def sim_mem(self, value_store, state_store):
         cur_rclk = value_store.get_value(self.rclk)
         cur_wclk = value_store.get_value(self.wclk)
 
         if not state_store:
             state_store['mem'] = [
-                BitVector(0, width) for _ in range(height)
+                BitVector(0, width) for _ in range(depth)
             ]
             state_store['prev_rclk'] = cur_rclk
             state_store['prev_wclk'] = cur_wclk
@@ -36,11 +36,11 @@ def gen_sim_mem(height, width):
 
 
 @cache_definition
-def DefineCoreirMem(height, width):
-    name = "coreir_mem{}x{}".format(height,width)
+def DefineCoreirMem(depth, width):
+    name = "coreir_mem{}x{}".format(depth,width)
     is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
-    assert is_power_of_two(width) and is_power_of_two(height)
-    addr_width = max(height.bit_length() - 1, 1)
+    assert is_power_of_two(width) and is_power_of_two(depth)
+    addr_width = max(depth.bit_length() - 1, 1)
     IO = ["raddr", In(Bits(addr_width)),
           "rdata", Out(Bits(width)),
           "waddr", In(Bits(addr_width)),
@@ -49,8 +49,8 @@ def DefineCoreirMem(height, width):
           "wen", In(Bit) ]
     return DeclareCircuit(name, *IO, verilog_name="coreir_mem",
             coreir_name="mem", coreir_lib="coreir",
-            simulate=gen_sim_mem(height, width),
-            coreir_genargs={"width": width, "depth": height})
+            simulate=gen_sim_mem(depth, width),
+            coreir_genargs={"width": width, "depth": depth})
             # coreir_configargs={"init": "0"})
 
 def DefineROM(height, width):

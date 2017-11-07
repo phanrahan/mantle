@@ -44,25 +44,25 @@ def DefineCoreirConst(width, value):
     return CoreirConst
 
 @cache_definition
-def DefineCoreBitConst(value):
+def DefineCorebitConst(value):
     if not isinstance(value, bool) and not (isinstance(value, int) and value in {0, 1}):
-        raise ValueError("DefineCoreBitConst expects a boolean value or 0 or 1")
-    class CoreBitConst(Circuit):
+        raise ValueError("DefineCorebitConst expects a boolean value or 0 or 1")
+    class CorebitConst(Circuit):
         name = f"corebit_const{value}"
         IO = ["out", Out(Bit)]
         @classmethod
         def definition(io):
             wire(io.out, value)
-    return CoreBitConst
+    return CorebitConst
 
 @cache_definition
-def DefineCoreBitTerm():
-    class CoreBitTerm(Circuit):
+def DefineCorebitTerm():
+    class CorebitTerm(Circuit):
         name = f"corebit_term"
         IO = ["in", In(Bit)]
         @classmethod
         def definition(io):
             pass
-    return CoreBitTerm
+    return CorebitTerm
 
-CoreBitTerm = DefineCoreBitTerm()
+CorebitTerm = DefineCorebitTerm()

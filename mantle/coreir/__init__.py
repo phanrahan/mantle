@@ -15,7 +15,7 @@ from .logic import (
 
 from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAdd
 
-from .FF import FF, DFF, DefineDFF, DefineCoreirRegister
+from .FF import FF, DFF, DefineDFF, DefineCoreirReg
 from .LUT import LUT
 
 from .MUX import DefineMux, Mux, DefineCoreirMux

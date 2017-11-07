@@ -59,7 +59,7 @@ def gen_sim_register(N, init, has_ce):
     return sim_register
 
 
-def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
+def DefineCoreirReg(N, init=0, has_ce=False, has_reset=False, T=Bits):
     if N is None:
         N = 1
     name = "reg_P"  # TODO: Add support for clock interface
@@ -110,7 +110,7 @@ def DefineCoreirRegister(N, init=0, has_ce=False, has_reset=False, T=Bits):
 
 @cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False):
-    Reg = DefineCoreirRegister(None, init, has_ce)
+    Reg = DefineCoreirReg(None, init, has_ce)
     IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce, has_reset)
     circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}".format(init, has_ce, has_reset),
         *IO)

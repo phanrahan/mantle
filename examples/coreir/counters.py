@@ -13,7 +13,7 @@ def DefineMantleReg(init):
         def definition(io):
             c0 = bits(0, 16)
             clrMux = mantle.coreir.DefineCoreirMux(width=16)()
-            reg0 = mantle.coreir.DefineCoreirRegister(16, init=init)()
+            reg0 = mantle.coreir.DefineCoreirReg(16, init=init)()
             wire(c0, clrMux.in1)
             wire(getattr(io, "in"), clrMux.in0)
             wire(clrMux.out, getattr(reg0, "in"))

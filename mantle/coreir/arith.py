@@ -36,16 +36,15 @@ def declare_binop(name, python_op, out_type=None, signed=False):
     return Declare
 
 @cache_definition
-def DefineCoreirAdd(N):
-    coreir_genargs = {"width": N} # , "has_cout": has_cout, "has_cin": has_cin}
+def DefineCoreirAdd(width):
+    coreir_genargs = {"width": width} # , "has_cout": has_cout, "has_cin": has_cin}
     def simulate_coreir_add(self, value_store, state_store):
-        width = N
         in0 = BitVector(value_store.get_value(self.in0), width)
         in1 = BitVector(value_store.get_value(self.in1), width)
         value_store.set_value(self.out, in0 + in1)
-    T = Bits(N)
+    T = Bits(width)
     coreir_io = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
-    return DeclareCircuit(f"coreir_add{N}", *coreir_io,
+    return DeclareCircuit(f"coreir_add{width}", *coreir_io,
             coreir_name="add", coreir_lib="coreir",
             coreir_genargs=coreir_genargs,
             simulate=simulate_coreir_add)

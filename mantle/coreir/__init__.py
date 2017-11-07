@@ -1,3 +1,5 @@
+from magma import bits
+
 from .logic import (
     And      , DefineAnd   , ReduceAnd ,
     NAnd     , DefineNAnd  , ReduceNAnd,
@@ -30,3 +32,6 @@ from .compare import DefineEQ, EQ, \
                      DefineSLE, SLE, \
                      DefineSGT, SGT, \
                      DefineSGE, SGE
+
+def DefineCoreirConst(width, value):
+    return bits(width, value)

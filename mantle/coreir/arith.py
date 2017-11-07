@@ -18,12 +18,12 @@ def declare_binop(name, python_op, out_type=None, signed=False):
         value_store.set_value(self.out, out)
 
     @cache_definition
-    def Declare(N, type_):
-        if N is None:
+    def Declare(width, type_=Bits):
+        if width is None:
             T = Bit
         else:
-            T = type_(N)
-        return DeclareCircuit("coreir_{}{}".format(name, N),
+            T = type_(width)
+        return DeclareCircuit("coreir_{}{}".format(name, width),
                               'in0', In(T), 'in1', In(T),
                               'out', Out(out_type if out_type else T),
                               stateful=False,
@@ -31,9 +31,11 @@ def declare_binop(name, python_op, out_type=None, signed=False):
                               verilog_name="coreir_" + name,
                               coreir_name=name,
                               coreir_lib = "coreir",
-                              coreir_genargs={"width": N})
+                              coreir_genargs={"width": width})
 
     return Declare
+
+DefineCoreirMul = declare_binop("mul", operator.mul)
 
 @cache_definition
 def DefineCoreirAdd(width):

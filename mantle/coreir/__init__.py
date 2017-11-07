@@ -13,23 +13,24 @@ from .logic import (
     DefineLSR, LSR, lsr,
 )
 
-from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAdd
+from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAdd, DefineCoreirMul
 
 from .FF import FF, DFF, DefineDFF, DefineCoreirReg
 from .LUT import LUT
 
 from .MUX import DefineMux, Mux, DefineCoreirMux
 from .memory import DefineRAM, DefineMemory, DefineCoreirMem
-from .compare import DefineEQ, EQ, \
-                     DefineNE, NE, \
-                     DefineULT, ULT, \
-                     DefineULE, ULE, \
-                     DefineUGT, UGT, \
-                     DefineUGE, UGE, \
-                     DefineSLT, SLT, \
-                     DefineSLE, SLE, \
-                     DefineSGT, SGT, \
-                     DefineSGE, SGE
+from .compare import \
+    DefineEQ, DefineCoreirEq, EQ, \
+    DefineNE, DefineCoreirNeq, NE, \
+    DefineULT, DefineCoreirUlt, ULT, \
+    DefineULE, DefineCoreirUle, ULE, \
+    DefineUGT, DefineCoreirUgt, UGT, \
+    DefineUGE, DefineCoreirUge, UGE, \
+    DefineSLT, DefineCoreirSlt, SLT, \
+    DefineSLE, DefineCoreirSle, SLE, \
+    DefineSGT, DefineCoreirSgt, SGT, \
+    DefineSGE, DefineCoreirSge, SGE
 
 from magma import bits, cache_definition, Circuit, Bits, wire, Out, In, Bit
 

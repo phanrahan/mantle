@@ -38,9 +38,7 @@ def gen_sim_mem(depth, width):
 @cache_definition
 def DefineCoreirMem(depth, width):
     name = "coreir_mem{}x{}".format(depth,width)
-    is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
-    assert is_power_of_two(width) and is_power_of_two(depth)
-    addr_width = max(depth.bit_length() - 1, 1)
+    addr_width = max((depth-1).bit_length(), 1)
     IO = ["raddr", In(Bits(addr_width)),
           "rdata", Out(Bits(width)),
           "waddr", In(Bits(addr_width)),

@@ -7,6 +7,7 @@ from mantle.common import DefineCounter, DefineDownCounter, DefineUpDownCounter
 
 @coroutine
 def counter4_sim():
+    yield
     while True:
         for i in range(0, 1<<4):
             O = i
@@ -20,6 +21,7 @@ def test_counter():
 
 @coroutine
 def down_counter4_sim():
+    yield
     # Counter starts at 0, then counts down
     while True:
         O = 0

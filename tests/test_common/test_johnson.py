@@ -9,6 +9,7 @@ def johnson_counter(n):
     @coroutine
     def johnson_counter_():
         O = [False for _ in range(n)]
+        yield
         while True:
             yield O
             O = [not O[-1]] + O[:-1]

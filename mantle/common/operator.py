@@ -93,6 +93,11 @@ def invert(arg, **kwargs):
     else:
         return Invert(width, **kwargs)(arg)
 
+def negate(arg, **kwargs):
+    if isinstance(arg, int):
+        return -arg
+    return Negate(get_length(arg), **kwargs)(arg)
+
 @check_operator_args
 def eq(I0, I1, **kwargs):
     width = get_length(I0)

@@ -1,8 +1,10 @@
-from magma import uncurry
+from magma import uncurry, cache_definition
 from mantle import LUT
+import os
 
 __all__  = ['Decode', 'decode']
 
+@cache_definition
 def Decode(i, n, invert=False, **kwargs):
     """
     Decode the n-bit number i.
@@ -12,6 +14,13 @@ def Decode(i, n, invert=False, **kwargs):
 
     assert n <= 8
 
+    if os.environ["MANTLE"] == "coreir":
+        from mantle import eq
+        from magma import Bits, In, Bit, DefineCircuit, EndDefine, wire, bits, Out
+        circ = DefineCircuit(f"Decode{i}{n}", "I", In(Bits(n)), "O", Out(Bit))
+        wire(circ.O, eq(circ.I, bits(i, n)))
+        EndDefine()
+        return circ()
     i = 1 << i
     if invert:
         m = 1 << n

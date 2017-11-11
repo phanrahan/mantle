@@ -115,54 +115,30 @@ def ReduceNXOr(height=2, **kwargs):
     return DefineReduceNXOr(height)(**kwargs)
 
 
-__cache = {}
+@cache_definition
 def DefineOp(opname, op, height=2, width=1):
     """
     Generate Op module
 
     I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
-    if (opname, op, height, width) in __cache:
-        return __cache[(opname, op, height, width)]
     T = Bits(width)
-    if height <= 4:
-        class _Op(Circuit):
+    class _Op(Circuit):
 
-            name = '{}{}x{}'.format(opname, height, width)
+        name = '{}{}x{}'.format(opname, height, width)
 
-            IO = sum([['I{}'.format(i), In(T)] for i in range(height)], [])
-            IO  += ['O', Out(T)]
+        IO = sum([['I{}'.format(i), In(T)] for i in range(height)], [])
+        IO  += ['O', Out(T)]
 
-            @classmethod
-            def definition(io):
-                def opm(y):
-                    return curry(op(height))
-                opmxn = join(col(opm, width))
-                wire(io.I0, opmxn.I0)
-                wire(io.I1, opmxn.I1)
-                if height >= 3:
-                    wire(io.I2, opmxn.I2)
-                if height == 4:
-                    wire(io.I3, opmxn.I3)
-                wire(opmxn.O, io.O)
-        __cache[(opname, op, height, width)] = _Op
-        return _Op
-    else:
-        IO = []
-        for i in range(height):
-            IO += ["I{}".format(i), In(T)]
-        IO += ["O", Out(T)]
-        circ = DefineCircuit("reduce_tree_{}{}{}".format(opname, height, width), *IO)
-        half_height = height // 2
-        args0 = [getattr(circ, "I{}".format(i)) for i in range(half_height)]
-        args1 = [getattr(circ, "I{}".format(i)) for i in range(half_height, height)]
-        op0 = DefineOp(opname, op, half_height, width)()(*args0)
-        op1 = DefineOp(opname, op, height - half_height, width)()(*args1)
-        out = DefineOp(opname, op, height=2, width=width)()(op0, op1)
-        wire(out, circ.O)
-        EndDefine()
-        __cache[(opname, op, height, width)] = circ
-        return circ
+        @classmethod
+        def definition(io):
+            def opm(y):
+                return curry(op(height))
+            opmxn = join(col(opm, width))
+            for port in ('I{}'.format(i) for i in range(height)):
+                wire(getattr(io, port), getattr(opmxn, port))
+            wire(opmxn.O, io.O)
+    return _Op
 
 @cache_definition
 def DefineAnd(height=2, width=1):

@@ -115,13 +115,15 @@ def ReduceNXOr(height=2, **kwargs):
     return DefineReduceNXOr(height)(**kwargs)
 
 
-@cache_definition
+__cache = {}
 def DefineOp(opname, op, height=2, width=1):
     """
     Generate Op module
 
     I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
+    if (opname, op, height, width) in __cache:
+        return __cache[(opname, op, height, width)]
     T = Bits(width)
     if height <= 4:
         class _Op(Circuit):
@@ -143,6 +145,7 @@ def DefineOp(opname, op, height=2, width=1):
                 if height == 4:
                     wire(io.I3, opmxn.I3)
                 wire(opmxn.O, io.O)
+        __cache[(opname, op, height, width)] = _Op
         return _Op
     else:
         IO = []
@@ -158,6 +161,7 @@ def DefineOp(opname, op, height=2, width=1):
         out = DefineOp(opname, op, height=2, width=width)()(op0, op1)
         wire(out, circ.O)
         EndDefine()
+        __cache[(opname, op, height, width)] = circ
         return circ
 
 @cache_definition

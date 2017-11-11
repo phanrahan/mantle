@@ -191,6 +191,8 @@ for method, op in arithmetic_ops + relational_ops:
     setattr(UIntType, method, op)
 
 def mux(I, S):
-    if S.const():
+    if isinstance(S, int):
+        return I[S]
+    elif S.const():
         return I[seq2int(S.bits())]
     return Mux(len(I), get_length(I[0]))(*I, S)

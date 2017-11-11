@@ -8,7 +8,7 @@ from collections import Sequence
 def DeclareCoreirLUT(N, init):
     def simulate(self, value_store, state_store):
         in_ = value_store.get_value(getattr(self, "in"))
-        value_store.set_value(self.out, [bool(i) for i in int2seq(init, N)][seq2int(in_)])
+        value_store.set_value(self.out, [bool(i) for i in int2seq(init, 2 ** N)][seq2int(in_)])
     return DeclareCircuit("coreir_lut{}".format(N),
             'in', In(Bits(N)), 'out', Out(Bit),
             simulate=simulate,

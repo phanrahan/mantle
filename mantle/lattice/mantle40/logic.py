@@ -149,7 +149,7 @@ def DefineOp(opname, op, height=2, width=1):
         for i in range(height):
             IO += ["I{}".format(i), In(T)]
         IO += ["O", Out(T)]
-        circ = DefineCircuit("reduce_tree_{}{}{}{}".format(opname, op, height, width), *IO)
+        circ = DefineCircuit("reduce_tree_{}{}{}{}".format(opname, height, width), *IO)
         half_height = height // 2
         args0 = [getattr(circ, "I{}".format(i)) for i in range(half_height)]
         args1 = [getattr(circ, "I{}".format(i)) for i in range(half_height, height)]

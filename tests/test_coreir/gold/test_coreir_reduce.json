@@ -2,24 +2,7 @@
 "namespaces":{
   "global":{
     "modules":{
-      "and_wrapped":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
-        "instances":{
-          "inst0":{
-            "modref":"corebit.and"
-          }
-        },
-        "connections":[
-          ["inst0.in0","self.I0"],
-          ["inst0.in1","self.I1"],
-          ["inst0.out","self.O"]
-        ]
-      },
-      "fold_and4None":{
+      "And4xNone":{
         "type":["Record",{
           "I0":"BitIn",
           "I1":"BitIn",
@@ -29,26 +12,19 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.and_wrapped"
-          },
-          "inst1":{
-            "modref":"global.and_wrapped"
-          },
-          "inst2":{
-            "modref":"global.and_wrapped"
+            "genref":"coreir.andr",
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst0.I0","self.I0"],
-          ["inst0.I1","self.I1"],
-          ["inst0.O","inst1.I0"],
-          ["inst1.I1","self.I2"],
-          ["inst1.O","inst2.I0"],
-          ["inst2.I1","self.I3"],
-          ["inst2.O","self.O"]
+          ["inst0.out","self.O"],
+          ["self.I0","inst0.in.0"],
+          ["self.I1","inst0.in.1"],
+          ["self.I2","inst0.in.2"],
+          ["self.I3","inst0.in.3"]
         ]
       },
-      "fold_or3None":{
+      "Or3xNone":{
         "type":["Record",{
           "I0":"BitIn",
           "I1":"BitIn",
@@ -57,21 +33,18 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.or_wrapped"
-          },
-          "inst1":{
-            "modref":"global.or_wrapped"
+            "genref":"coreir.orr",
+            "genargs":{"width":["Int",3]}
           }
         },
         "connections":[
-          ["inst0.I0","self.I0"],
-          ["inst0.I1","self.I1"],
-          ["inst0.O","inst1.I0"],
-          ["inst1.I1","self.I2"],
-          ["inst1.O","self.O"]
+          ["inst0.out","self.O"],
+          ["self.I0","inst0.in.0"],
+          ["self.I1","inst0.in.1"],
+          ["self.I2","inst0.in.2"]
         ]
       },
-      "fold_or4None":{
+      "Or4xNone":{
         "type":["Record",{
           "I0":"BitIn",
           "I1":"BitIn",
@@ -81,23 +54,16 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.or_wrapped"
-          },
-          "inst1":{
-            "modref":"global.or_wrapped"
-          },
-          "inst2":{
-            "modref":"global.or_wrapped"
+            "genref":"coreir.orr",
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst0.I0","self.I0"],
-          ["inst0.I1","self.I1"],
-          ["inst0.O","inst1.I0"],
-          ["inst1.I1","self.I2"],
-          ["inst1.O","inst2.I0"],
-          ["inst2.I1","self.I3"],
-          ["inst2.O","self.O"]
+          ["inst0.out","self.O"],
+          ["self.I0","inst0.in.0"],
+          ["self.I1","inst0.in.1"],
+          ["self.I2","inst0.in.2"],
+          ["self.I3","inst0.in.3"]
         ]
       },
       "fold_xor4None":{
@@ -129,23 +95,6 @@
           ["inst2.O","self.O"]
         ]
       },
-      "or_wrapped":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
-        "instances":{
-          "inst0":{
-            "modref":"corebit.or"
-          }
-        },
-        "connections":[
-          ["inst0.in0","self.I0"],
-          ["inst0.in1","self.I1"],
-          ["inst0.out","self.O"]
-        ]
-      },
       "test_coreir_reduce":{
         "type":["Record",{
           "a":["Array",4,"BitIn"],
@@ -155,13 +104,13 @@
         }],
         "instances":{
           "inst0":{
-            "modref":"global.fold_or3None"
+            "modref":"global.Or3xNone"
           },
           "inst1":{
-            "modref":"global.fold_and4None"
+            "modref":"global.And4xNone"
           },
           "inst2":{
-            "modref":"global.fold_or4None"
+            "modref":"global.Or4xNone"
           },
           "inst3":{
             "modref":"global.fold_xor4None"

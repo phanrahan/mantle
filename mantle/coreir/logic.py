@@ -55,6 +55,33 @@ def declare_bit_binop(name, python_op):
     EndDefine()
     return circ
 
+def DefineCoreirReduce(op_name, python_op, width):
+    def simulate(self, value_store, state_store):
+        in_ = BitVector(value_store.get_value(getattr(self, "in")))
+        out = reduce(python_op, in_)
+        value_store.set_value(self.out, out)
+    decl = DeclareCircuit(op_name, "in", In(Bits(width)), "out", Out(Bit),
+            coreir_name = op_name,
+            coreir_lib = "coreir",
+            coreir_genargs = {"width": width},
+            simulate = simulate)
+    return decl
+
+def DefineCoreirReduceAnd(width):
+    return DefineCoreirReduce("andr", operator.and_, width)
+
+def DefineCoreirReduceOr(width):
+    return DefineCoreirReduce("orr", operator.or_, width)
+    # class ReduceAnd(Circuit):
+    #     name = f"reduce_and_{width}"
+    #     IO = ["I", In(Bits(width)), "O", Out(Bit)]
+    #     @classmethod
+    #     def definition(io):
+    #         circ = decl()
+    #         wire(getattr(circ, "in"), io.I)
+    #         wire(circ.out, io.O)
+    # return ReduceAnd
+
 
 BitAnd = declare_bit_binop("and", operator.and_)
 BitOr  = declare_bit_binop("or", operator.or_)
@@ -92,6 +119,30 @@ def declare_bits_binop(name, python_op):
 
 DefineCoreirAnd = declare_bits_binop("and", operator.and_)
 
+def DefineOp(op_name, DefineCoreirReduce, height, width):
+    if width is None:
+        T = Bit
+    else:
+        T = Bits(width)
+    IO = []
+    for i in range(height):
+        IO += ["I{}".format(i), In(T)]
+    IO += ["O", Out(T)]
+    circ = DefineCircuit(f"{op_name}{height}x{width}", *IO)
+    if width is None:
+        reduce = DefineCoreirReduce(height)()
+        for j in range(height):
+            wire(getattr(reduce, "in")[j], getattr(circ, f"I{j}"))
+        wire(reduce.out, circ.O)
+    else:
+        for i in range(width):
+            reduce = DefineCoreirReduce(height)()
+            for j in range(height):
+                wire(getattr(reduce, "in")[j], getattr(circ, f"I{j}")[i])
+            wire(reduce.out, circ.O[i])
+    EndDefine()
+    return circ
+
 @cache_definition
 def DefineAnd(height=2, width=None):
     if height is 2:
@@ -99,8 +150,7 @@ def DefineAnd(height=2, width=None):
             return BitAnd
         else:
             return DefineCoreirAnd(width)
-    else:
-        return DefineFoldOp(DefineAnd, "and", height, width)
+    return DefineOp("And", DefineCoreirReduceAnd, height, width)
 
 
 def And(height, width=None, **kwargs):
@@ -175,8 +225,7 @@ def DefineOr(height=2, width=None):
             return BitOr
         else:
             return DefineCoreirOr(width)
-    else:
-        return DefineFoldOp(DefineOr, "or", height, width)
+    return DefineOp("Or", DefineCoreirReduceOr, height, width)
 
 
 def Or(height, width=None, **kwargs):

@@ -21,17 +21,25 @@ def declare_binop(name, python_op, out_type=None, signed=False):
     def Declare(width, type_=Bits):
         if width is None:
             T = Bit
+            return DeclareCircuit("coreir_bit_{}{}".format(name, width),
+                                  'in0', In(T), 'in1', In(T),
+                                  'out', Out(out_type if out_type else T),
+                                  stateful=False,
+                                  simulate=simulate,
+                                  verilog_name="coreir_" + name,
+                                  coreir_name=name if name != "eq" else "xnor",
+                                  coreir_lib = "corebit")
         else:
             T = type_(width)
-        return DeclareCircuit("coreir_{}{}".format(name, width),
-                              'in0', In(T), 'in1', In(T),
-                              'out', Out(out_type if out_type else T),
-                              stateful=False,
-                              simulate=simulate,
-                              verilog_name="coreir_" + name,
-                              coreir_name=name,
-                              coreir_lib = "coreir",
-                              coreir_genargs={"width": width})
+            return DeclareCircuit("coreir_{}{}".format(name, width),
+                                  'in0', In(T), 'in1', In(T),
+                                  'out', Out(out_type if out_type else T),
+                                  stateful=False,
+                                  simulate=simulate,
+                                  verilog_name="coreir_" + name,
+                                  coreir_name=name,
+                                  coreir_lib = "coreir",
+                                  coreir_genargs={"width": width})
 
     return Declare
 

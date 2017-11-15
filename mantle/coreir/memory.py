@@ -1,36 +1,31 @@
 from magma import *
+from magma.bit_vector import BitVector
 
 
 def gen_sim_mem(depth, width):
     def sim_mem(self, value_store, state_store):
-        cur_rclk = value_store.get_value(self.rclk)
-        cur_wclk = value_store.get_value(self.wclk)
+        cur_clk = value_store.get_value(self.clk)
 
         if not state_store:
             state_store['mem'] = [
                 BitVector(0, width) for _ in range(depth)
             ]
-            state_store['prev_rclk'] = cur_rclk
-            state_store['prev_wclk'] = cur_wclk
+            state_store['prev_clk'] = cur_clk
 
 
-        prev_rclk = state_store['prev_rclk']
-        prev_wclk = state_store['prev_wclk']
-        rclk_edge = cur_rclk and not prev_rclk
-        wclk_edge = cur_wclk and not prev_wclk
+        prev_clk = state_store['prev_clk']
+        clk_edge = cur_clk and not prev_clk
         rdata = value_store.get_value(self.rdata)
 
-        if rclk_edge:
-            if value_store.get_value(self.ren):
-                index = BitVector(value_store.get_value(self.raddr)).as_int()
-                rdata = state_store['mem'][index].as_bool_list()
-        if wclk_edge:
+        if clk_edge:
+            index = BitVector(value_store.get_value(self.raddr)).as_int()
+            rdata = state_store['mem'][index].as_bool_list()
+        if clk_edge:
             if value_store.get_value(self.wen):
                 index = BitVector(value_store.get_value(self.waddr)).as_int()
                 state_store['mem'][index] = BitVector(value_store.get_value(self.wdata))
 
-        state_store['prev_rclk'] = cur_rclk
-        state_store['prev_wclk'] = cur_wclk
+        state_store['prev_clk'] = cur_clk
         value_store.set_value(self.rdata, rdata)
     return sim_mem
 

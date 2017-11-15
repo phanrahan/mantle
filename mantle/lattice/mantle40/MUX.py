@@ -76,7 +76,7 @@ def MuxN(height, **kwargs):
 
 # Mux Module name
 def _MuxName(height, width):
-    return 'Mux%dx%d' % (height, width)
+    return f'Mux{height}x{width}'
 
 def _MuxInterface(height, width):
     AW = In(Bits(width))
@@ -132,6 +132,15 @@ def DefineMux(height=2, width=1):
     """
 
     assert height in [2, 4, 8, 16]
+    if width is None:
+        if height == 2:
+            return Mux2
+        elif height == 4:
+            return Mux4
+        elif height == 8:
+            return Mux8
+        elif height == 16:
+            return Mux16
 
     class _Mux(Circuit):
         name = _MuxName(height, width)

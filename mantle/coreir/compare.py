@@ -1,10 +1,32 @@
 from magma import *
+from magma.bit_vector import BitVector 
 from .arith import declare_binop, get_length
 from .logic import not_, XOr
 import operator
 
 
-DefineCoreirEq = declare_binop("eq", operator.eq, out_type=Bit)
+def DefineCoreirEq(width):
+    def simulate(self, value_store, state_store):
+        in0 = BitVector(value_store.get_value(self.in0))
+        in1 = BitVector(value_store.get_value(self.in1))
+        out = operator.eq(in0, in1).as_bool_list()[0]
+        value_store.set_value(self.out, out)
+    if width is None:
+        circ = DefineCircuit('corebit_eq', 'in0', In(Bit), 'in1', In(Bit), 'out', Out(Bit))
+        wire(circ.out, not_(XOr(2, None)(circ.in0, circ.in1)))
+        EndDefine()
+        return circ
+    else:
+        T = Bits(width)
+        return DeclareCircuit("coreir_eq_{}".format(width),
+                              'in0', In(T), 'in1', In(T),
+                              'out', Out(Bit),
+                              stateful=False,
+                              simulate=simulate,
+                              verilog_name="coreir_eq",
+                              coreir_name="eq",
+                              coreir_lib = "coreir",
+                              coreir_genargs={"width": width})
 
 
 @cache_definition
@@ -15,7 +37,7 @@ def DefineEQ(n):
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     circ = DefineCircuit("EQ{}".format(n), *IO)
-    coreir_eq = DefineCoreirEq(n, Bits)()
+    coreir_eq = DefineCoreirEq(n)()
     wire(circ.I0, coreir_eq.in0)
     wire(circ.I1, coreir_eq.in1)
     wire(coreir_eq.out, circ.O)

@@ -27,7 +27,7 @@ def declare_binop(name, python_op, out_type=None, signed=False):
                                   stateful=False,
                                   simulate=simulate,
                                   verilog_name="coreir_" + name,
-                                  coreir_name=name if name != "eq" else "xnor",
+                                  coreir_name=name,
                                   coreir_lib = "corebit")
         else:
             T = type_(width)

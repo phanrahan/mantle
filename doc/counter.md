@@ -31,7 +31,7 @@ DownCounter(n, cin=False, cout=True, incr=1, next=False,
 ```
 
 ```
-# UpDownCounter :: Up:In(Bit), Down:In(Bit), O:Out(Bits(n)), COUT:Out(Bit)
+# UpDownCounter :: U:In(Bit), D:In(Bit), O:Out(Bits(n)), COUT:Out(Bit)
 UpDownCounter(n, cout=True, next=False, ce=False, r=False, s=False)
 ```
 Generate an up-down counter.

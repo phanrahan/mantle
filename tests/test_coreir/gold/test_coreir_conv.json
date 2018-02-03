@@ -33,7 +33,7 @@
           },
           "mem":{
             "genref":"coreir.mem",
-            "genargs":{"depth":["Int",10], "width":["Int",16]}
+            "genargs":{"depth":["Int",10], "has_init":["Bool",false], "width":["Int",16]}
           },
           "raddr_eq":{
             "genref":"coreir.eq",

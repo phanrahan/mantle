@@ -30,9 +30,7 @@ def test_shift_register():
     actual = []
     for i in range(0, 1 << N, 3):
         simulator.set_value(ShiftRegister.I, uint(i, N))
-        for j in range(2):
-            simulator.step()
-            simulator.evaluate()
+        simulator.advance(2)
         actual.append(seq2int(simulator.get_value(ShiftRegister.O)))
 
     assert actual == expected

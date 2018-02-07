@@ -25,7 +25,7 @@ Mantle includes many of the standard types of flip-flops.
 
 ```
 # DFF :: I:In(Bit), O:Out(Bit)
-DFF(init=0, has_ce=False, has_reset=False, has_set=False)
+DFF(init=0, has_ce=False, has_reset=False)
 ```
 
 Set-Reset Flip-Flop
@@ -43,13 +43,13 @@ RSFF(init=0, has_ce=False)
 JK Flip-Flop
 ```
 # JKFF :: J:In(Bit), K:In(Bit), O:Out(Bit)
-JKFF(init=0, has_ce=False, has_reset=False, has_set=False)
+JKFF(has_ce=False, has_reset=False)
 ```
 
 Toggle Flip-Flop
 ```
 # TFF :: I:In(Bit), O:Out(Bit)
-TFF(init=0, has_ce=False, has_reset=False, has_set=False)
+TFF(has_ce=False, has_reset=False)
 ```
 If `I` is true, toggle the flip-flop.
 

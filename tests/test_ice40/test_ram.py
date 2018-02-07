@@ -19,11 +19,7 @@ def test_rom():
     sim = PythonSimulator(main, clock=main.CLK)
     sim.evaluate()
 
-    sim.step()
-    sim.evaluate()
-
-    sim.step()
-    sim.evaluate()
+    sim.advance(2)
 
     assert sim.get_value(main.RDATAOUT) == BitVector(0b11111111, num_bits=8)
 
@@ -50,11 +46,7 @@ def test_ram():
     sim.set_value(main.WE, False)
     sim.evaluate()
 
-    sim.step()
-    sim.evaluate()
-
-    sim.step()
-    sim.evaluate()
+    sim.advance(2)
 
     assert sim.get_value(main.RDATA) == BitVector(0b11111111, num_bits=8)
 
@@ -62,20 +54,12 @@ def test_ram():
     sim.set_value(main.WE, True)
     sim.set_value(main.WDATA, BitVector(0xBE, num_bits=8))
 
-    sim.step()
-    sim.evaluate()
-
-    sim.step()
-    sim.evaluate()
+    sim.advance(2)
 
     # Read RADDR = 1 again
     sim.set_value(main.WE, False)
     sim.evaluate()
 
-    sim.step()
-    sim.evaluate()
-
-    sim.step()
-    sim.evaluate()
+    sim.advance(2)
 
     assert sim.get_value(main.RDATA) == BitVector(0xBE, num_bits=8)

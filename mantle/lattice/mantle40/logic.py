@@ -195,8 +195,7 @@ def NXOr(height=2, width=None, **kwargs):
     return DefineNXOr(height, width)(**kwargs)
 
 
-
-
+@cache_definition
 def DefineInvert(width):
     """
     Generate Invert module

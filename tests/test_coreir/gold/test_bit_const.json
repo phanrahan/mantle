@@ -7,13 +7,13 @@
           "out":"Bit"
         }],
         "instances":{
-          "bit_const_VCC_0":{
+          "bit_const_VCC":{
             "modref":"corebit.const",
             "modargs":{"value":["Bool",true]}
           }
         },
         "connections":[
-          ["bit_const_VCC_0.out","self.out"]
+          ["bit_const_VCC.out","self.out"]
         ]
       }
     }

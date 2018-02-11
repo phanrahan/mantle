@@ -14,7 +14,7 @@
         "instances":{
           "inst0":{
             "genref":"coreir.mem",
-            "genargs":{"depth":["Int",4], "width":["Int",16]}
+            "genargs":{"depth":["Int",4], "has_init":["Bool",false], "width":["Int",16]}
           }
         },
         "connections":[

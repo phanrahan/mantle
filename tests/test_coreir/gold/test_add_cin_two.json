@@ -3,12 +3,12 @@
   "global":{
     "modules":{
       "Add4_cin":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"],
-          "CIN":"BitIn"
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]],
+          ["CIN","BitIn"]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",

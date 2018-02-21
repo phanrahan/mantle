@@ -3,11 +3,11 @@
   "global":{
     "modules":{
       "NAnd2None":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.not"
@@ -24,11 +24,11 @@
         ]
       },
       "NOr2None":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.not"
@@ -45,11 +45,11 @@
         ]
       },
       "and_wrapped":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.and"
@@ -62,11 +62,11 @@
         ]
       },
       "or_wrapped":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.or"
@@ -79,12 +79,12 @@
         ]
       },
       "test_coreir_bit_2":{
-        "type":["Record",{
-          "a":"BitIn",
-          "b":"BitIn",
-          "c":"BitIn",
-          "d":"Bit"
-        }],
+        "type":["Record",[
+          ["a","BitIn"],
+          ["b","BitIn"],
+          ["c","BitIn"],
+          ["d","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.NOr2None"
@@ -107,11 +107,11 @@
         ]
       },
       "xor_wrapped":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.xor"

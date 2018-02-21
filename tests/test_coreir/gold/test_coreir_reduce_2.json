@@ -3,13 +3,13 @@
   "global":{
     "modules":{
       "And4xNone":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "I2":"BitIn",
-          "I3":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["I2","BitIn"],
+          ["I3","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.andr",
@@ -25,13 +25,13 @@
         ]
       },
       "NAnd4None":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "I2":"BitIn",
-          "I3":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["I2","BitIn"],
+          ["I3","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.not"
@@ -50,13 +50,13 @@
         ]
       },
       "NOr4None":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "I2":"BitIn",
-          "I3":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["I2","BitIn"],
+          ["I3","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.not"
@@ -75,12 +75,12 @@
         ]
       },
       "Or3xNone":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "I2":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["I2","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.orr",
@@ -95,13 +95,13 @@
         ]
       },
       "Or4xNone":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "I2":"BitIn",
-          "I3":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["I2","BitIn"],
+          ["I3","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.orr",
@@ -117,13 +117,13 @@
         ]
       },
       "fold_xor4None":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "I2":"BitIn",
-          "I3":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["I2","BitIn"],
+          ["I3","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.xor_wrapped"
@@ -146,12 +146,12 @@
         ]
       },
       "test_coreir_reduce_2":{
-        "type":["Record",{
-          "a":["Array",4,"BitIn"],
-          "b":["Array",4,"BitIn"],
-          "c":["Array",4,"BitIn"],
-          "d":"Bit"
-        }],
+        "type":["Record",[
+          ["a",["Array",4,"BitIn"]],
+          ["b",["Array",4,"BitIn"]],
+          ["c",["Array",4,"BitIn"]],
+          ["d","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.Or3xNone"
@@ -186,11 +186,11 @@
         ]
       },
       "xor_wrapped":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.xor"

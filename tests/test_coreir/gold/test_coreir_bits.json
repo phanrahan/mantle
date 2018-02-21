@@ -3,10 +3,10 @@
   "global":{
     "modules":{
       "Invert4_wrapped":{
-        "type":["Record",{
-          "I":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.not",
@@ -19,11 +19,11 @@
         ]
       },
       "and4_wrapped":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.and",
@@ -37,11 +37,11 @@
         ]
       },
       "or4_wrapped":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.or",
@@ -55,12 +55,12 @@
         ]
       },
       "test_coreir_bits":{
-        "type":["Record",{
-          "a":["Array",4,"BitIn"],
-          "b":["Array",4,"BitIn"],
-          "c":["Array",4,"BitIn"],
-          "d":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["a",["Array",4,"BitIn"]],
+          ["b",["Array",4,"BitIn"]],
+          ["c",["Array",4,"BitIn"]],
+          ["d",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.or4_wrapped"
@@ -87,11 +87,11 @@
         ]
       },
       "xor4_wrapped":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.xor",

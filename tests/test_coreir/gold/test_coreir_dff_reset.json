@@ -3,17 +3,17 @@
   "global":{
     "modules":{
       "DFF_init0_has_ceFalse_has_resetTrue":{
-        "type":["Record",{
-          "I":"BitIn",
-          "O":"Bit",
-          "CLK":["Named","coreir.clkIn"],
-          "RESET":["Named","coreir.rstIn"]
-        }],
+        "type":["Record",[
+          ["I","BitIn"],
+          ["O","Bit"],
+          ["CLK",["Named","coreir.clkIn"]],
+          ["RESET",["Named","coreir.rstIn"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"mantle.reg",
             "genargs":{"has_clr":["Bool",false], "has_en":["Bool",false], "has_rst":["Bool",false], "width":["Int",1]},
-            "modargs":{"init":[["BitVector",1],0]}
+            "modargs":{"init":[["BitVector",1],"1'h00"]}
           }
         },
         "connections":[

@@ -3,13 +3,13 @@
   "global":{
     "modules":{
       "Add4_cout_cin":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"],
-          "COUT":"Bit",
-          "CIN":"BitIn"
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]],
+          ["COUT","Bit"],
+          ["CIN","BitIn"]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",
@@ -49,10 +49,10 @@
         ]
       },
       "Invert4_wrapped":{
-        "type":["Record",{
-          "I":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.not",
@@ -65,12 +65,12 @@
         ]
       },
       "Sub4_cout":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"],
-          "COUT":"Bit"
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]],
+          ["COUT","Bit"]
+        ]],
         "instances":{
           "bit_const_VCC":{
             "modref":"corebit.const",

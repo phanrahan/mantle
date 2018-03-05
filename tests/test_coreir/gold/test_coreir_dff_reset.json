@@ -13,7 +13,7 @@
           "inst0":{
             "genref":"mantle.reg",
             "genargs":{"has_clr":["Bool",false], "has_en":["Bool",false], "has_rst":["Bool",true], "width":["Int",1]},
-            "modargs":{"init":[["BitVector",1],"1'h00"]}
+            "modargs":{"init":[["BitVector",1],"1'h0"]}
           }
         },
         "connections":[

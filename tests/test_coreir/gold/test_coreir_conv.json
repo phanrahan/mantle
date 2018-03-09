@@ -3,13 +3,13 @@
   "global":{
     "modules":{
       "commonlib_LinebufferMem_U5":{
-        "type":["Record",{
-          "clk":["Named","coreir.clkIn"],
-          "rdata":["Array",16,"Bit"],
-          "valid":"Bit",
-          "wdata":["Array",16,"BitIn"],
-          "wen":"BitIn"
-        }],
+        "type":["Record",[
+          ["clk",["Named","coreir.clkIn"]],
+          ["rdata",["Array",16,"Bit"]],
+          ["valid","Bit"],
+          ["wdata",["Array",16,"BitIn"]],
+          ["wen","BitIn"]
+        ]],
         "instances":{
           "add_r":{
             "genref":"coreir.add",
@@ -92,12 +92,12 @@
         ]
       },
       "commonlib_Linebuffer_U3":{
-        "type":["Record",{
-          "clk":["Named","coreir.clkIn"],
-          "in":["Array",16,"BitIn"],
-          "wen":"BitIn",
-          "out":["Array",2,["Array",1,["Array",16,"Bit"]]]
-        }],
+        "type":["Record",[
+          ["clk",["Named","coreir.clkIn"]],
+          ["in",["Array",16,"BitIn"]],
+          ["wen","BitIn"],
+          ["out",["Array",2,["Array",1,["Array",16,"Bit"]]]]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.commonlib_LinebufferMem_U5"
@@ -116,9 +116,9 @@
         ]
       },
       "corebit_const1":{
-        "type":["Record",{
-          "out":"Bit"
-        }],
+        "type":["Record",[
+          ["out","Bit"]
+        ]],
         "instances":{
           "bit_const_VCC":{
             "modref":"corebit.const",
@@ -130,14 +130,14 @@
         ]
       },
       "corebit_term":{
-        "type":["Record",{
-          "in":"BitIn"
-        }]
+        "type":["Record",[
+          ["in","BitIn"]
+        ]]
       },
       "coreir_const160":{
-        "type":["Record",{
-          "out":["Array",16,"Bit"]
-        }],
+        "type":["Record",[
+          ["out",["Array",16,"Bit"]]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",
@@ -164,9 +164,9 @@
         ]
       },
       "coreir_const167":{
-        "type":["Record",{
-          "out":["Array",16,"Bit"]
-        }],
+        "type":["Record",[
+          ["out",["Array",16,"Bit"]]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",
@@ -197,9 +197,9 @@
         ]
       },
       "coreir_const40":{
-        "type":["Record",{
-          "out":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["out",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",
@@ -214,9 +214,9 @@
         ]
       },
       "coreir_const41":{
-        "type":["Record",{
-          "out":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["out",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",
@@ -235,9 +235,9 @@
         ]
       },
       "coreir_const410":{
-        "type":["Record",{
-          "out":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["out",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",
@@ -256,11 +256,11 @@
         ]
       },
       "global_DesignTop":{
-        "type":["Record",{
-          "clk":["Named","coreir.clkIn"],
-          "in":["Array",1,["Array",16,"BitIn"]],
-          "out":["Array",16,"Bit"]
-        }],
+        "type":["Record",[
+          ["clk",["Named","coreir.clkIn"]],
+          ["in",["Array",1,["Array",16,"BitIn"]]],
+          ["out",["Array",16,"Bit"]]
+        ]],
         "instances":{
           "add_335_339_340":{
             "genref":"coreir.add",
@@ -318,12 +318,12 @@
         ]
       },
       "mantle_reg_U6_0":{
-        "type":["Record",{
-          "in":["Array",4,"BitIn"],
-          "clk":["Named","coreir.clkIn"],
-          "out":["Array",4,"Bit"],
-          "en":"BitIn"
-        }],
+        "type":["Record",[
+          ["in",["Array",4,"BitIn"]],
+          ["clk",["Named","coreir.clkIn"]],
+          ["out",["Array",4,"Bit"]],
+          ["en","BitIn"]
+        ]],
         "instances":{
           "enMux":{
             "genref":"coreir.mux",
@@ -332,7 +332,7 @@
           "reg0":{
             "genref":"mantle.reg",
             "genargs":{"has_clr":["Bool",false], "has_en":["Bool",false], "has_rst":["Bool",false], "width":["Int",4]},
-            "modargs":{"init":[["BitVector",4],0]}
+            "modargs":{"init":[["BitVector",4],"4'h0"]}
           }
         },
         "connections":[
@@ -345,10 +345,10 @@
         ]
       },
       "mantle_wire_U0":{
-        "type":["Record",{
-          "in":["Array",16,"BitIn"],
-          "out":["Array",16,"Bit"]
-        }],
+        "type":["Record",[
+          ["in",["Array",16,"BitIn"]],
+          ["out",["Array",16,"Bit"]]
+        ]],
         "connections":[
           ["self.in","self.out"]
         ]

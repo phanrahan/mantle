@@ -3,14 +3,14 @@
   "global":{
     "modules":{
       "Mux4x3":{
-        "type":["Record",{
-          "I0":["Array",3,"BitIn"],
-          "I1":["Array",3,"BitIn"],
-          "I2":["Array",3,"BitIn"],
-          "I3":["Array",3,"BitIn"],
-          "S":["Array",2,"BitIn"],
-          "O":["Array",3,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",3,"BitIn"]],
+          ["I1",["Array",3,"BitIn"]],
+          ["I2",["Array",3,"BitIn"]],
+          ["I3",["Array",3,"BitIn"]],
+          ["S",["Array",2,"BitIn"]],
+          ["O",["Array",3,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global._Mux4"
@@ -44,11 +44,11 @@
         ]
       },
       "_Mux2":{
-        "type":["Record",{
-          "I":["Array",2,"BitIn"],
-          "S":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I",["Array",2,"BitIn"]],
+          ["S","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.mux"
@@ -62,11 +62,11 @@
         ]
       },
       "_Mux4":{
-        "type":["Record",{
-          "I":["Array",4,"BitIn"],
-          "S":["Array",2,"BitIn"],
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["S",["Array",2,"BitIn"]],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global._Mux2"

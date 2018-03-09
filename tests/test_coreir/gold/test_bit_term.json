@@ -3,9 +3,9 @@
   "global":{
     "modules":{
       "corebit_term":{
-        "type":["Record",{
-          "in":"BitIn"
-        }]
+        "type":["Record",[
+          ["in","BitIn"]
+        ]]
       }
     }
   }

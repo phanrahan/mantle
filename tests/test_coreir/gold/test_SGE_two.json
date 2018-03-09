@@ -3,11 +3,11 @@
   "global":{
     "modules":{
       "SGE4":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.sge",
@@ -21,11 +21,11 @@
         ]
       },
       "test_SGE_two":{
-        "type":["Record",{
-          "a":["Array",4,"BitIn"],
-          "b":["Array",4,"BitIn"],
-          "c":"Bit"
-        }],
+        "type":["Record",[
+          ["a",["Array",4,"BitIn"]],
+          ["b",["Array",4,"BitIn"]],
+          ["c","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.SGE4"

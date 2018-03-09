@@ -3,12 +3,12 @@
   "global":{
     "modules":{
       "Add4_cout":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"],
-          "COUT":"Bit"
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]],
+          ["COUT","Bit"]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",

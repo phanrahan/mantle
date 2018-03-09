@@ -3,9 +3,9 @@
   "global":{
     "modules":{
       "corebit_const1":{
-        "type":["Record",{
-          "out":"Bit"
-        }],
+        "type":["Record",[
+          ["out","Bit"]
+        ]],
         "instances":{
           "bit_const_VCC":{
             "modref":"corebit.const",

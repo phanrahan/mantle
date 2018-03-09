@@ -3,17 +3,17 @@
   "global":{
     "modules":{
       "LUT3_222":{
-        "type":["Record",{
-          "I0":"BitIn",
-          "I1":"BitIn",
-          "I2":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["I2","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "genref":"commonlib.lutN",
             "genargs":{"N":["Int",3]},
-            "modargs":{"init":[["BitVector",8],222]}
+            "modargs":{"init":[["BitVector",8],"8'hde"]}
           }
         },
         "connections":[
@@ -24,10 +24,10 @@
         ]
       },
       "test_coreir_lut3":{
-        "type":["Record",{
-          "I":["Array",3,"BitIn"],
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I",["Array",3,"BitIn"]],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.LUT3_222"

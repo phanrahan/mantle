@@ -3,10 +3,10 @@
   "global":{
     "modules":{
       "Invert4_wrapped":{
-        "type":["Record",{
-          "I":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.not",
@@ -19,11 +19,11 @@
         ]
       },
       "NAnd24":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.Invert4_wrapped"
@@ -40,11 +40,11 @@
         ]
       },
       "NOr24":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.Invert4_wrapped"
@@ -61,11 +61,11 @@
         ]
       },
       "and4_wrapped":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.and",
@@ -79,11 +79,11 @@
         ]
       },
       "or4_wrapped":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.or",
@@ -97,12 +97,12 @@
         ]
       },
       "test_coreir_bits_2":{
-        "type":["Record",{
-          "a":["Array",4,"BitIn"],
-          "b":["Array",4,"BitIn"],
-          "c":["Array",4,"BitIn"],
-          "d":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["a",["Array",4,"BitIn"]],
+          ["b",["Array",4,"BitIn"]],
+          ["c",["Array",4,"BitIn"]],
+          ["d",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.NOr24"
@@ -125,11 +125,11 @@
         ]
       },
       "xor4_wrapped":{
-        "type":["Record",{
-          "I0":["Array",4,"BitIn"],
-          "I1":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.xor",

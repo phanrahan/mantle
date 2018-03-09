@@ -3,12 +3,12 @@
   "global":{
     "modules":{
       "Mux2x3":{
-        "type":["Record",{
-          "I0":["Array",3,"BitIn"],
-          "I1":["Array",3,"BitIn"],
-          "S":"BitIn",
-          "O":["Array",3,"Bit"]
-        }],
+        "type":["Record",[
+          ["I0",["Array",3,"BitIn"]],
+          ["I1",["Array",3,"BitIn"]],
+          ["S","BitIn"],
+          ["O",["Array",3,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global._Mux2"
@@ -36,11 +36,11 @@
         ]
       },
       "_Mux2":{
-        "type":["Record",{
-          "I":["Array",2,"BitIn"],
-          "S":"BitIn",
-          "O":"Bit"
-        }],
+        "type":["Record",[
+          ["I",["Array",2,"BitIn"]],
+          ["S","BitIn"],
+          ["O","Bit"]
+        ]],
         "instances":{
           "inst0":{
             "modref":"corebit.mux"

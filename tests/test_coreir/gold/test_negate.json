@@ -3,10 +3,10 @@
   "global":{
     "modules":{
       "Negate4":{
-        "type":["Record",{
-          "I":["Array",4,"BitIn"],
-          "O":["Array",4,"Bit"]
-        }],
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.neg",

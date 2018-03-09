@@ -3,14 +3,14 @@
   "global":{
     "modules":{
       "test_coreir_mem":{
-        "type":["Record",{
-          "raddr":["Array",2,"BitIn"],
-          "rdata":["Array",16,"Bit"],
-          "waddr":["Array",2,"BitIn"],
-          "wdata":["Array",16,"BitIn"],
-          "clk":["Named","coreir.clkIn"],
-          "wen":"BitIn"
-        }],
+        "type":["Record",[
+          ["raddr",["Array",2,"BitIn"]],
+          ["rdata",["Array",16,"Bit"]],
+          ["waddr",["Array",2,"BitIn"]],
+          ["wdata",["Array",16,"BitIn"]],
+          ["clk",["Named","coreir.clkIn"]],
+          ["wen","BitIn"]
+        ]],
         "instances":{
           "inst0":{
             "genref":"coreir.mem",

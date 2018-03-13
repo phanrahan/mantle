@@ -5,6 +5,14 @@ import os
 __all__  = ['Decode', 'decode']
 
 @cache_definition
+def DefineCoreIRDecode(i, n):
+    from mantle import eq
+    from magma import Bits, In, Bit, DefineCircuit, EndDefine, wire, bits, Out
+    circ = DefineCircuit(f"Decode{i}{n}", "I", In(Bits(n)), "O", Out(Bit))
+    wire(circ.O, eq(circ.I, bits(i, n)))
+    EndDefine()
+    return circ
+
 def Decode(i, n, invert=False, **kwargs):
     """
     Decode the n-bit number i.
@@ -15,12 +23,7 @@ def Decode(i, n, invert=False, **kwargs):
     assert n <= 8
 
     if os.environ["MANTLE"] == "coreir":
-        from mantle import eq
-        from magma import Bits, In, Bit, DefineCircuit, EndDefine, wire, bits, Out
-        circ = DefineCircuit(f"Decode{i}{n}", "I", In(Bits(n)), "O", Out(Bit))
-        wire(circ.O, eq(circ.I, bits(i, n)))
-        EndDefine()
-        return circ()
+        return DefineCoreIRDecode(i, n)()
     i = 1 << i
     if invert:
         m = 1 << n

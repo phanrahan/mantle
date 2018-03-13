@@ -1,6 +1,7 @@
 from magma import *
 import coreir
-from magma.bitutils import seq2int, int2seq
+from magma.bitutils import seq2int, int2seq, fun2seq
+from types import FunctionType
 from collections import Sequence
 
 
@@ -17,25 +18,8 @@ def DeclareCoreirLUT(N, init):
             coreir_genargs = {"N": N},
             coreir_configargs = {"init": coreir.BitVector(1<<N, init)})
 
-
-@circuit_generator
-def LUT(init, N=None, **kwargs):
-    """
-    n-bit LUT
-
-    I : In(Bits(n)), O : Out(Bit)
-    """
-    if isinstance(init, Sequence):
-        if N is None:
-            if 2 ** N < len(init):
-                raise ValueError("init is too large for N={}".format(N))
-        else:
-            N = math.clog2(len(init))
-        init = seq2int(init)
-    else:
-        if N is None:
-            raise ValueError("N requires for not sequence init")
-
+@cache_definition
+def DefineLUT(init, N):
     io = []
     for i in range(N):
         io += ["I{}".format(i), In(Bit)]
@@ -49,5 +33,29 @@ def LUT(init, N=None, **kwargs):
             lutN = DeclareCoreirLUT(N, init)()
             for i in range(N):
                 wire(getattr(lutN, "in")[i], getattr(cls, "I{}".format(i)))
-                wire(lutN.out, cls.O)
-    return LUT()
+            wire(lutN.out, cls.O)
+
+    return LUT
+
+def LUT(init, N=None, **kwargs):
+    """
+    n-bit LUT
+
+    I : In(Bits(n)), O : Out(Bit)
+    """
+
+    if isinstance(init, FunctionType):
+        init = fun2seq(init, 1<<N)
+
+    if isinstance(init, Sequence):
+        if N is not None:
+            if 2 ** N < len(init):
+                raise ValueError("init is too large for N={}".format(N))
+        else:
+            N = math.clog2(len(init))
+        init = seq2int(init)
+    else:
+        if N is None:
+            raise ValueError("N requires for not sequence init")
+
+    return DefineLUT(init, N)()

@@ -53,7 +53,14 @@ There also exist libraries for low-level FPGA-specific primitives.
 
 ## Configuring Mantle
 
-Mantle can be configured to synthesize low-level primitives
+By default Mantle is configured to use the CoreIR implementation, equivalent to:
+```
+export MANTLE=coreir
+```
+
+Other options include: `verilog` and `lattice`.
+
+Mantle can also be configured to synthesize low-level primitives
 for a particular FPGA.
 
 For example, to use mantle with the Lattice ice40,

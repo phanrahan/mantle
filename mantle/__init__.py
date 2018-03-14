@@ -4,7 +4,7 @@ mantletarget = os.getenv('MANTLE_TARGET', None)
 if mantletarget == 'ice40':
     mantle = 'lattice'
 else:
-    mantle = os.getenv('MANTLE', 'verilog')
+    mantle = os.getenv('MANTLE', 'coreir')
 
 from mantle.primitives import *
 

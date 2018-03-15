@@ -77,7 +77,7 @@ def DefineCoreirReg(width, init=0, has_ce=False, has_reset=False, T=Bits):
         io.extend(["rst", In(Reset)])
         name += "R"  # TODO: This assumes ordering of clock parameters
         methods.append(circuit_type_method("reset", reset))
-        gen_args["has_rst"] = True
+        # gen_args["has_rst"] = True
 
     def when(self, condition):
         wire(condition, self.en)
@@ -110,14 +110,17 @@ def DefineCoreirReg(width, init=0, has_ce=False, has_reset=False, T=Bits):
 
 @cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False):
-    Reg = DefineCoreirReg(None, init, has_ce, has_reset)
+    Reg = DefineCoreirReg(None, init, has_ce)
     IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce=has_ce, has_reset=has_reset)
     circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}".format(init, has_ce, has_reset),
         *IO)
     reg = Reg()
     wiredefaultclock(circ, reg)
     wireclock(circ, reg)
-    wire(circ.I, getattr(reg, "in")[0])
+    I = circ.I
+    if has_reset:
+        I = Mux()(bits([circ.I, bit(init)]), circ.RESET)
+    wire(I, getattr(reg, "in")[0])
     wire(reg.out[0], circ.O)
     EndDefine()
     return circ

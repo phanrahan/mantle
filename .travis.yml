@@ -12,7 +12,7 @@ before_install:
 install:
     - pip install -r requirements.txt
     - pip install pytest-cov
-    - pip install fabricate
+    - pip install fabricate delegator.py
     - pip install -e .
 
 script:

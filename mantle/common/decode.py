@@ -22,7 +22,7 @@ def Decode(i, n, invert=False, **kwargs):
 
     assert n <= 8
 
-    if os.environ["MANTLE"] == "coreir":
+    if os.getenv("MANTLE", "coreir") == "coreir":
         return DefineCoreIRDecode(i, n)()
     i = 1 << i
     if invert:

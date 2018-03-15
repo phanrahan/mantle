@@ -19,7 +19,7 @@ def _CounterName(name, n, m, ce, r, s):
 # Create an n-bit mod-m counter
 #
 @cache_definition
-def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
+def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     has_ce=False):
 
     r = False
@@ -52,7 +52,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     wire(reset, counter.RESET) # synchronous reset
 
-    if has_ce: 
+    if has_ce:
         wire(CE, counter.CE)
 
     if cin:
@@ -71,7 +71,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     return CounterModM
 
-def CounterModM(m, n, cin=False, cout=True, incr=1, next=False, 
+def CounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     has_ce=False, **kwargs):
     return DefineCounterModM(m, n, cin, cout, incr, next, has_ce)(**kwargs)
 

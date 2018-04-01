@@ -6,7 +6,7 @@ import math
 
 __all__ = ['DefineUpCounterModM', 'UpCounterModM']
 #__all__ += ['DefineDownCounterModM', 'DownCounterModM']
-__all__ += ['DefineCounterModM', 'CounterModM']
+__all__ += ['DefineCounterModM', 'CounterModM', 'SizedCounterModM']
 
 def _CounterName(name, n, m, ce, r, s):
     name += '{}'.format(n)
@@ -76,7 +76,7 @@ def CounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     has_ce=False, **kwargs):
     return DefineCounterModM(m, n, cin, cout, incr, next, has_ce)(**kwargs)
 
-def SizedCounterModM(m, cin=False, cout=True, incr=1, next=False,
+def SizedCounterModM(m, cin=False, cout=False, incr=1, next=False,
     has_ce=False, **kwargs):
     """
     This is that counts from 0 to m - 1 that uses the minimum number of bits

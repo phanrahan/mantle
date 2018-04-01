@@ -2,6 +2,7 @@ from magma import *
 from mantle import And
 from .decode import Decode
 from .counter import Counter
+import math
 
 __all__ = ['DefineUpCounterModM', 'UpCounterModM']
 #__all__ += ['DefineDownCounterModM', 'DownCounterModM']
@@ -74,6 +75,21 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 def CounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     has_ce=False, **kwargs):
     return DefineCounterModM(m, n, cin, cout, incr, next, has_ce)(**kwargs)
+
+def SizedCounterModM(m, cin=False, cout=True, incr=1, next=False,
+    has_ce=False, **kwargs):
+    """
+    This is that counts from 0 to m - 1 that uses the minimum number of bits
+    :param m: The value the counter counts up to
+    :param cin: Whether this counter should have a carry input
+    :param cout: Whether this counter should a carry output
+    :param incr: How much this counter should increment by per clock. Default is 1.
+    :param next:
+    :param has_ce: Whether this counter should a clock-enable input
+    :param kwargs: Args passed to the counter circuit when it is being initialized
+    :return: A counter circuit
+    """
+    return DefineCounterModM(m, math.ceil(math.log(m, 2)), cin, cout, incr, next, has_ce)(**kwargs)
 
 DefineUpCounterModM = DefineCounterModM
 UpCounterModM = CounterModM

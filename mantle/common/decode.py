@@ -20,10 +20,10 @@ def Decode(i, n, invert=False, **kwargs):
     @return: 1 if the n-bit input equals i
     """
 
-    assert n <= 8
-
     if os.getenv("MANTLE", "coreir") == "coreir":
         return DefineCoreIRDecode(i, n)()
+
+    assert n <= 8
     i = 1 << i
     if invert:
         m = 1 << n

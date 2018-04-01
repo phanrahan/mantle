@@ -51,7 +51,6 @@ def CoreirMem(cirb, depth, width):
     return ModuleFromGeneratorWrapper(cirb, "coreir", "mem", ["global"],
                                       {"width": width, "depth": depth})
 
-
 def DefineROM(height, width):
     """
     coreir doesn't have a ROM primitive yet

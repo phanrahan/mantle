@@ -89,7 +89,7 @@ def SizedCounterModM(m, cin=False, cout=True, incr=1, next=False,
     :param kwargs: Args passed to the counter circuit when it is being initialized
     :return: A counter circuit
     """
-    return DefineCounterModM(m, math.ceil(math.log(m, 2)) + 1, cin, cout, incr, next, has_ce)(**kwargs)
+    return DefineCounterModM(m, math.ceil(math.log(m, 2)), cin, cout, incr, next, has_ce)(**kwargs)
 
 DefineUpCounterModM = DefineCounterModM
 UpCounterModM = CounterModM

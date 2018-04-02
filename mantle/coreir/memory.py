@@ -58,7 +58,7 @@ def DefineROM(height, width):
     raise NotImplementedError()
 
 def getRAMAddrWidth(height):
-    return max(height.bit_length(), 1)
+    return max((height - 1).bit_length(), 1)
 
 def DefineRAM(height, width):
     addr_width = getRAMAddrWidth(height)

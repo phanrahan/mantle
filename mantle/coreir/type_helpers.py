@@ -1,5 +1,5 @@
 from magma.backend.coreir_ import CoreIRBackend
-from magma.frontend.coreir_ import ModuleFromGeneratorWrapper
+from magma.frontend.coreir_ import CircuitFromGeneratorWrapper
 
 def Term(cirb: CoreIRBackend, width: int):
     """
@@ -9,6 +9,6 @@ def Term(cirb: CoreIRBackend, width: int):
     :param width: The width of the element to absorb
     :return:
     """
-    return ModuleFromGeneratorWrapper(cirb, "coreir", "term",
-                               ["global"],
-                               {"width": width})
+    return CircuitFromGeneratorWrapper(cirb, "coreir", "term",
+                                       ["global"],
+                                       {"width": width})

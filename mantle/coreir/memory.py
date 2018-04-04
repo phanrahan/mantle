@@ -1,6 +1,6 @@
 from magma import *
 from magma.bit_vector import BitVector
-from magma.frontend.coreir_ import ModuleFromGeneratorWrapper
+from magma.frontend.coreir_ import CircuitFromGeneratorWrapper
 
 
 def gen_sim_mem(depth, width):
@@ -48,8 +48,8 @@ def DefineCoreirMem(depth, width):
             # coreir_configargs={"init": "0"})
 
 def CoreirMem(cirb, depth, width):
-    return ModuleFromGeneratorWrapper(cirb, "coreir", "mem", ["global"],
-                                      {"width": width, "depth": depth})
+    return CircuitFromGeneratorWrapper(cirb, "coreir", "mem", ["global"],
+                                       {"width": width, "depth": depth})
 
 def DefineROM(height, width):
     """

@@ -126,7 +126,7 @@ def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
         data: In(Array(N, Array(width, Bit)))
         sel: In(Array(getRAMAddrWidth(N), Bit))
     }
-    O : Out(Array(width, Bit))
+    out : Out(Array(width, Bit))
     Note: even though this isn't a RAM, the AddrWidth computation is the same.
     """
     return CircuitInstanceFromGeneratorWrapper(cirb, "commonlib", "muxN",

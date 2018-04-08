@@ -4,7 +4,7 @@ from __future__ import division
 from magma import *
 from magma.bit_vector import BitVector
 from magma.backend.coreir_ import CoreIRBackend
-from magma.frontend.coreir_ import CircuitInstanceFromGeneratorWrapper
+from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper
 
 import math
 
@@ -129,7 +129,7 @@ def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
     out : Out(Array(width, Bit))
     Note: even though this isn't a RAM, the AddrWidth computation is the same.
     """
-    return CircuitInstanceFromGeneratorWrapper(cirb, "commonlib", "muxn",
+    return DefineCircuitFromGeneratorWrapper(cirb, "commonlib", "muxn",
                                                          ["mantle", "coreir", "global"],
                                                          {"N": N, "width": width})
 

@@ -81,7 +81,6 @@ def DefineMux(height=2, width=None):
     if width is None:
        return _DefineMux(height)
 
-
     T = Bits(width)
 
     io = []

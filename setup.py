@@ -23,4 +23,9 @@ setup(
     install_requires=[
         "six",
         "coreir"
-    ])
+    ],
+    url='https://github.com/phanrahan/mantle',
+    author='Leonard Truong',
+    author_email='lenny@cs.stanford.edu',
+    python_requires='>=3.6'
+)

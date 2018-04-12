@@ -10,7 +10,6 @@ before_install:
     - source magma/.travis/install_coreir.sh
 
 install:
-    - pip install -r requirements.txt
     - pip install pytest-cov
     - pip install fabricate delegator.py
     - pip install -e .

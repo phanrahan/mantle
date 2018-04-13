@@ -25,7 +25,7 @@ setup(
         "coreir"
     ],
     url='https://github.com/phanrahan/mantle',
-    author='Leonard Truong',
-    author_email='lenny@cs.stanford.edu',
+    maintainer='Leonard Truong',
+    maintainer_email='lenny@cs.stanford.edu',
     python_requires='>=3.6'
 )

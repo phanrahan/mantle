@@ -11,4 +11,5 @@ def Term(cirb: CoreIRBackend, width: int):
     """
     return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "term",
                                                ["global"],
+                                               "term_w" + str(width),
                                                {"width": width})

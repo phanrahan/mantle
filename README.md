@@ -75,7 +75,6 @@ export MANTLE_TARGET=ice40
 ```
 $ git clone https://github.com/phanrahan/mantle
 $ cd mantle
-$ pip install -r requirements.txt
 $ pip install pytest
 $ pip install -e .
 $ pytest

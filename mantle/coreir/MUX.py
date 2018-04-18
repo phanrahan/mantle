@@ -113,7 +113,6 @@ def DefineMux(height=2, width=None):
 def Mux(height=2, width=None, **kwargs):
     return DefineMux(height, width)(**kwargs)
 
-@cache_definition
 def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
     """
     Get a Mux that handles any number of inputs
@@ -128,9 +127,10 @@ def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
     out : Out(Array(width, Bit))
     Note: even though this isn't a RAM, the AddrWidth computation is the same.
     """
+    name = "CommonlibMuxN_n{}_w{}".format(str(N), str(width))
     return DefineCircuitFromGeneratorWrapper(cirb, "commonlib", "muxn",
-                                                         ["mantle", "coreir", "global"],
-                                                         {"N": N, "width": width})
+                                             ["mantle", "coreir", "global"], name,
+                                             {"N": N, "width": width})
 
 def CommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
     return DefineCommonlibMuxN(cirb, N, width)()

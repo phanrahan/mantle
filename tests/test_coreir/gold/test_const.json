@@ -17,10 +17,10 @@
           }
         },
         "connections":[
-          ["bit_const_GND.out","self.out.0"],
-          ["bit_const_GND.out","self.out.1"],
-          ["bit_const_GND.out","self.out.2"],
-          ["bit_const_VCC.out","self.out.3"]
+          ["self.out.0","bit_const_GND.out"],
+          ["self.out.1","bit_const_GND.out"],
+          ["self.out.2","bit_const_GND.out"],
+          ["self.out.3","bit_const_VCC.out"]
         ]
       }
     }

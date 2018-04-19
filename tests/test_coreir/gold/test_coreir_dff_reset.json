@@ -24,12 +24,12 @@
           }
         },
         "connections":[
-          ["bit_const_GND.out","inst1.I.1"],
-          ["inst0.clk","self.CLK"],
+          ["inst1.I.1","bit_const_GND.out"],
+          ["self.CLK","inst0.clk"],
           ["inst1.O","inst0.in.0"],
-          ["inst1.S","self.RESET"],
+          ["self.O","inst0.out.0"],
           ["self.I","inst1.I.0"],
-          ["self.O","inst0.out.0"]
+          ["self.RESET","inst1.S"]
         ]
       },
       "_Mux2":{
@@ -44,10 +44,10 @@
           }
         },
         "connections":[
-          ["inst0.in0","self.I.0"],
-          ["inst0.in1","self.I.1"],
-          ["inst0.out","self.O"],
-          ["inst0.sel","self.S"]
+          ["self.I.0","inst0.in0"],
+          ["self.I.1","inst0.in1"],
+          ["self.O","inst0.out"],
+          ["self.S","inst0.sel"]
         ]
       }
     }

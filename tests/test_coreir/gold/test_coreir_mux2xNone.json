@@ -14,10 +14,10 @@
           }
         },
         "connections":[
-          ["inst0.in0","self.I.0"],
-          ["inst0.in1","self.I.1"],
-          ["inst0.out","self.O"],
-          ["inst0.sel","self.S"]
+          ["self.I.0","inst0.in0"],
+          ["self.I.1","inst0.in1"],
+          ["self.O","inst0.out"],
+          ["self.S","inst0.sel"]
         ]
       }
     }

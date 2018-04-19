@@ -18,12 +18,12 @@
           }
         },
         "connections":[
-          ["inst0.clk","self.clk"],
-          ["inst0.raddr","self.raddr"],
-          ["inst0.rdata","self.rdata"],
-          ["inst0.waddr","self.waddr"],
-          ["inst0.wdata","self.wdata"],
-          ["inst0.wen","self.wen"]
+          ["self.clk","inst0.clk"],
+          ["self.raddr","inst0.raddr"],
+          ["self.rdata","inst0.rdata"],
+          ["self.waddr","inst0.waddr"],
+          ["self.wdata","inst0.wdata"],
+          ["self.wen","inst0.wen"]
         ]
       }
     }

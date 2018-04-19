@@ -40,7 +40,7 @@ EndCircuit()\
 """.format(name=name, out_type=str(out_type), T=str(T(4)), expected_instance=repr(expected_instance))
 
 def check_binary_operator(op, expected_instance, T=Bits, out_type=Bits(4)):
-    name = 'check_binary_{}'.format(op.__name__)
+    name = 'check_binary_{}_{}_{}'.format(op.__name__, T, out_type)
     circ = DefineCircuit(name, "I0", In(T(4)), "I1", In(T(4)), "O", Out(out_type))
     wire(op(circ.I0, circ.I1), circ.O)
     EndDefine()
@@ -54,7 +54,7 @@ EndCircuit()\
 """.format(name=name, out_type=str(out_type), T=str(T(4)), expected_instance=repr(expected_instance))
 
 def check_binary_overloaded_operator(op, expected_instance, T=Bits, out_type=Bits(4)):
-    name = 'check_binary_{}_overloaded'.format(op.__name__)
+    name = 'check_binary_{}_{}_{}_overloaded'.format(op.__name__, T, out_type)
     circ = DefineCircuit(name, "I0", In(T(4)), "I1", In(T(4)), "O", Out(out_type))
     wire(op(circ.I0, circ.I1), circ.O)
     EndDefine()

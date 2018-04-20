@@ -39,7 +39,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     CounterModM = DefineCircuit(name, *args)
 
-    counter = Counter(n, cin=cin, cout=cout, incr=incr, next=next,
+    counter = Counter(n, cin=cin, cout=False, incr=incr, next=next,
                    has_ce=has_ce, has_reset=True)
     reset = Decode(m - 1, n)(counter.O)
 

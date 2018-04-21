@@ -90,3 +90,5 @@ ENV/
 .ropeproject
 
 .deps
+.idea/
+.pytest_cache/

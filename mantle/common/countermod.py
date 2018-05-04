@@ -8,9 +8,11 @@ __all__ = ['DefineUpCounterModM', 'UpCounterModM']
 #__all__ += ['DefineDownCounterModM', 'DownCounterModM']
 __all__ += ['DefineCounterModM', 'CounterModM', 'SizedCounterModM']
 
-def _CounterName(name, n, m, ce, r, s):
+def _CounterName(name, n, m, cin, cout, ce, r, s):
     name += '{}'.format(n)
     name += 'Mod{}'.format(m)
+    if cin: name += 'CIN'
+    if cout: name += 'COUT'
     if ce: name += 'CE'
     if r:  name += 'R'
     if s:  name += 'S'
@@ -25,7 +27,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     r = False
     s = False
-    name = _CounterName('Counter', n, m, has_ce, r, s)
+    name = _CounterName('Counter', n, m, cin, cout, has_ce, r, s)
 
     args = []
     if cin:
@@ -39,7 +41,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     CounterModM = DefineCircuit(name, *args)
 
-    counter = Counter(n, cin=cin, cout=cout, incr=incr, next=next,
+    counter = Counter(n, cin=cin, cout=False, incr=incr, next=next,
                    has_ce=has_ce, has_reset=True)
     reset = Decode(m - 1, n)(counter.O)
 

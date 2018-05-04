@@ -3,13 +3,25 @@ from magma.testing import check_files_equal
 from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate, DefineASR
 from magma.testing.newfunction import testvectors as function_test
 from magma.simulator.python_simulator import testvectors as simulator_test
-
+from magma.simulator.coreir_simulator import CoreIRSimulator
 
 def test_add():
     width = 4
     mask = 2**width-1
     Add = DefineAdd(width)
     assert function_test(Add, lambda x, y: (x + y) & mask) == simulator_test(Add)
+
+def test_add_cout_one():
+    args = ['I0', In(Bits(1)), 'I1', In(Bits(1)), 'O', Out(Bits(1)), 'COUT',  Out(Bit)] + \
+        ClockInterface(False, False)
+    testcircuit = DefineCircuit('test_add_cout_one', *args)
+    add = DefineAdd(1, cout=True)()
+    wire(testcircuit.I0, add.I0)
+    wire(testcircuit.I1, add.I1)
+    wire(testcircuit.O, add.O)
+    wire(testcircuit.COUT, add.COUT)
+    EndCircuit()
+    sim = CoreIRSimulator(testcircuit, testcircuit.CLK)
 
 
 def test_add_cout_two():

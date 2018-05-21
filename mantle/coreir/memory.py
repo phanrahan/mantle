@@ -48,9 +48,8 @@ def DefineCoreirMem(depth, width):
             # coreir_configargs={"init": "0"})
 
 def CoreirMem(cirb, depth, width):
-    return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "mem", ["global"],
-                                               "CoreIRmem_w{}_d{}".format(width, depth),
-                                               {"width": width, "depth": depth})
+    return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "mem", "CoreIRmem_w{}_d{}".format(width, depth),
+                                               ["global"], {"width": width, "depth": depth})
 
 def DefineROM(height, width):
     """

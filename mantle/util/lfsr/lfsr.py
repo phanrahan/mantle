@@ -33,8 +33,15 @@ def DefineLFSR(n, init=1, has_ce=False, has_reset=False):
     tap = _lfsrtaps[n]
     nt = len(tap)
 
-    lfsr = DefineCircuit('lfsr{}{}{}'.format(n, init, has_ce, has_reset),
-        "O", Out(Bits(n)), *ClockInterface(has_ce, has_reset))
+    name = 'LFSR{}'.format(n)
+    if init:
+        name += '_' + str(init)
+    if has_ce:
+        name += 'CE'
+    if has_reset:
+        name += 'R'
+    lfsr = DefineCircuit(name, "O", Out(Bits(n)), 
+             *ClockInterface(has_ce=has_ce, has_reset=has_reset))
     shift = SIPO(n, init=init, has_ce=has_ce, has_reset=has_reset)
 
     t = []

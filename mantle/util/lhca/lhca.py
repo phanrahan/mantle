@@ -56,6 +56,6 @@ def LHCA(n, init=1, has_ce=False):
     luts = array(col(lut, n))
     reg(luts)
 
-    args = ["output O", reg.O] + reg.interface.clockargs()
+    args = ["O", reg.O] + reg.interface.clockargs()
 
     return AnonymousCircuit(args)

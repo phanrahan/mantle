@@ -20,7 +20,7 @@ def check_unary_operator(op, instance_op):
     EndDefine()
     assert repr(circ) == """\
 {name} = DefineCircuit("{name}", "I", In(Bits(4)), "O", Out(Bits(4)))
-inst0 = {instance_op}4()
+inst0 = {instance_op}4_wrapped()
 wire({name}.I, inst0.I)
 wire(inst0.O, {name}.O)
 EndCircuit()\

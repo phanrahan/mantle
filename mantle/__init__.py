@@ -8,6 +8,10 @@ if mantle_target == 'verilog':
     from mantle.verilog import *
 elif mantle_target == 'coreir':
     from mantle.coreir import *
+elif mantle_target in ['altera', 'cyclone4']:
+    from mantle.altera import *
+elif mantle_target in ['xilinx', 'spartan3', 'spartan6', 'kintex7']:
+    from mantle.xilinx import *
 elif mantle_target in ['lattice', 'ice40']:
     from mantle.lattice import *
 else:

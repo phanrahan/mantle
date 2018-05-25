@@ -8,7 +8,7 @@ if mantle_target == 'verilog':
     from mantle.verilog import *
 elif mantle_target == 'coreir':
     from mantle.coreir import *
-elif mantle_target == 'lattice':
+elif mantle_target in ['lattice', 'ice40']:
     from mantle.lattice import *
 else:
     raise RuntimeError(f"MANTLE_TARGET={mantle_target} not supported")

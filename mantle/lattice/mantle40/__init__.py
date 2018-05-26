@@ -22,4 +22,4 @@ from .compare import *
 
 from .memory import Memory
 
-print('import mantle lattice mantle40')
+print('import lattice mantle40')

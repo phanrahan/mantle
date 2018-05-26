@@ -1,13 +1,13 @@
 from magma import *
 
-IOBUF = DeclareCircuit("IOBUF", "input T", Bit,
-                                "input I", Bit,
-                                "inout IO", Bit,
-                                "output O", Bit)
+IOBUF = DeclareCircuit("IOBUF", "T", In(Bit),
+                                "I", In(Bit),
+                                "IO", InOut(Bit),
+                                "O", Out(Bit))
 
 def IOB(**params):
     iob = IOBUF(**params)
-    args = ["input T", iob.T, "input I", iob.I, "inout IO", iob.IO, "output O", iob.O]
+    args = ["T", iob.T, "I", iob.I, "IO", iob.IO, "O", iob.O]
     return AnonymousCircuit(args)
 
 

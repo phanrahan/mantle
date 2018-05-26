@@ -1,4 +1,5 @@
 from magma import *
+from magma.bitutils import lutinit
 
 __all__  = ['RAM16x1S', 'RAM16',
             'RAM16x2S', 'RAM16x2',
@@ -7,58 +8,58 @@ __all__ += ['RAM16DxN', 'DefineRAM16DxN']
 
 
 RAM16x1S = DeclareCircuit('RAM16X1S',
-            "input A0", Bit,
-            "input A1", Bit,
-            "input A2", Bit,
-            "input A3", Bit,
-            "output O", Bit,
-            "input D", Bit,
-            "input WE", Bit,
-            "input WCLK", Bit )
+            "A0", In(Bit),
+            "A1", In(Bit),
+            "A2", In(Bit),
+            "A3", In(Bit),
+            "O", Out(Bit),
+            "D", In(Bit),
+            "WE", In(Bit),
+            "WCLK", In(Clock) )
 
 RAM16x2S = DeclareCircuit('RAM16X2S',
-            "input A0", Bit,
-            "input A1", Bit,
-            "input A2", Bit,
-            "input A3", Bit,
-            "output O0", Bit,
-            "output O1", Bit,
-            "input D0", Bit,
-            "input D1", Bit,
-            "input WE", Bit,
-            "input WCLK", Bit )
+            "A0", In(Bit),
+            "A1", In(Bit),
+            "A2", In(Bit),
+            "A3", In(Bit),
+            "O0", Out(Bit),
+            "O1", Out(Bit),
+            "D0", In(Bit),
+            "D1", In(Bit),
+            "WE", In(Bit),
+            "input WCLK", In(Clock) )
 
 
 RAM16x1D = DeclareCircuit('RAM16X1D',
-            "input A0", Bit,
-            "input A1", Bit,
-            "input A2", Bit,
-            "input A3", Bit,
-            "input DPRA0", Bit,
-            "input DPRA1", Bit,
-            "input DPRA2", Bit,
-            "input DPRA3", Bit,
-            "output SPO", Bit,
-            "output DPO", Bit,
-            "input D", Bit,
-            "input WE", Bit,
-            "input WCLK", Bit )
+            "A0", In(Bit),
+            "A1", In(Bit),
+            "A2", In(Bit),
+            "A3", In(Bit),
+            "DPRA0", In(Bit),
+            "DPRA1", In(Bit),
+            "DPRA2", In(Bit),
+            "DPRA3", In(Bit),
+            "SPO", Out(Bit),
+            "DPO", Out(Bit),
+            "D", In(Bit),
+            "WE", In(Bit),
+            "WCLK", In(Clock) )
 
 
 def RAM16(ram):
     ram16 = RAM16x1S(INIT=lutinit(ram,16))
             
-    return AnonymousCircuit("input A", array(ram16.A0, ram16.A1, ram16.A2, ram16.A3),
-                   "output O",  ram16.O,
-                   "input I",   ram16.D,
-                   "input WE",  ram16.WE,
-                   "input CLK", ram16.WCLK)
+    return AnonymousCircuit("A", array([ram16.A0, ram16.A1, ram16.A2, ram16.A3]),
+                   "O",  ram16.O,
+                   "I",   ram16.D,
+                   "WE",  ram16.WE,
+                   "CLK", ram16.WCLK)
 
 def RAM16D(ram):
     ram16 = RAM16x1D(INIT=lutinit(ram,16))
             
-    A0 = array(ram16.A0, ram16.A1, ram16.A2, ram16.A3)
-    A1 = array(ram16.DPRA0, ram16.DPRA1, ram16.DPRA2, ram16.DPRA3)
+    A0 = array([ram16.A0, ram16.A1, ram16.A2, ram16.A3])
+    A1 = array([ram16.DPRA0, ram16.DPRA1, ram16.DPRA2, ram16.DPRA3])
     return AnonymousCircuit("input A0",  A0,
                    "input A1",  A1,
                    "output O0", ram16.SPO,
@@ -70,7 +71,7 @@ def RAM16D(ram):
 def RAM16x2(ram0, ram1):
     ram16 = RAM16x2S(INIT_00=lutinit(ram0, 16), INIT_01=lutinit(ram1,16) )
             
-    return AnonymousCircuit("input A",   array(ram16.A0, ram16.A1, ram16.A2, ram16.A3),
+    return AnonymousCircuit("input A",   array([ram16.A0, ram16.A1, ram16.A2, ram16.A3]),
                    "output O0",  ram16.O0,
                    "output O1",  ram16.O1,
                    "input  I0",  ram16.D0,
@@ -89,14 +90,14 @@ def DefineRAM16DxN(n, init=0):
     if name in RAMCache:
          return RAMCache[name]
 
-    ArrayN = Array(n, Bit)
-    args =  ["input A0",  Array4,
-             "input A1",  Array4,
-             "output O0", ArrayN,
-             "output O1", ArrayN,
-             "input I",   ArrayN,
-             "input WE",  Bit,
-             "input CLK", Bit]
+    T = Bits(n)
+    args =  ["A0",  In(Bits(4)),
+             "A1",  In(Bits(4)),
+             "O0", Out(T),
+             "O1", Out(T),
+             "I",   In(T),
+             "WE",  In(Bit),
+             "CLK", In(Bit)]
 
     define = DefineCircuit(name, *args)
 

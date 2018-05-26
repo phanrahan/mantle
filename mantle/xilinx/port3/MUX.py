@@ -15,12 +15,12 @@ def Mux2():
     lut = _LUT3(INIT=lutinit(MUX2DATA,1<<3))
     return AnonymousCircuit("I",  array(lut.I0, lut.I1), 
                             "S",  lut.I2,
-                            "O", lut.O)
+                            "O",  lut.O)
 
 
 # """Construct a Mux with 4 1-bit inputs."""
 class Mux4(Circuit):
-    IO = ["I", In(Array4), "S", In(Array2), "O", Out(Bit) ]
+    IO = ["I", In(Bits(4)), "S", In(Bits(2)), "O", Out(Bit) ]
             
     @classmethod
     def definition(mux4):
@@ -36,7 +36,7 @@ class Mux4(Circuit):
 
 # """Construct a Mux with 8 1-bit inputs."""
 class Mux8(Circuit):
-    IO = ["I", In(Array8), "S", In(Array3), "O", Out(Bit) ]
+    IO = ["I", In(Array8), "S", In(Bits(3)), "O", Out(Bit) ]
             
     @classmethod
     def definition(mux8):
@@ -52,7 +52,7 @@ class Mux8(Circuit):
 
 # """Construct a Mux with 16 1-bit inputs."""
 class Mux16(Circuit):
-    IO = ["I", In(Array16), "S", In(Array4), "O", Out(Bit) ]
+    IO = ["I", In(Array16), "S", In(Bits(4)), "O", Out(Bit) ]
             
     @classmethod
     def definition(mux16):
@@ -94,7 +94,7 @@ def _MuxInterface(height, width):
                 'I1', AW,
                 'I2', AW,
                 'I3', AW]
-        args += ['S', In(Array2)]
+        args += ['S', In(Bits(2))]
     elif height == 8:
         args = ['I0', AW, 
                 'I1', AW,
@@ -104,7 +104,7 @@ def _MuxInterface(height, width):
                 'I5', AW,
                 'I6', AW,
                 'I7', AW]
-        args += ['S', In(Array3)]
+        args += ['S', In(Bits(3))]
     elif height == 16:
         args = ['I0',  AW, 
                 'I1',  AW,
@@ -122,7 +122,7 @@ def _MuxInterface(height, width):
                 'I13', AW,
                 'I14', AW,
                 'I15', AW]
-        args += ['S', In(Array4)]
+        args += ['S', In(Bits(4))]
 
     args += ['O', Out(AW)]
 

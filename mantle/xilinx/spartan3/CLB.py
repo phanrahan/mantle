@@ -33,101 +33,101 @@ ANY = A0 | A1 | A2 | A3
 PARITY = A0 ^ A1 ^ A2 ^ A3 
 
 _LUT1 = DeclareCircuit('LUT1',
-               "input I0", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "O",  Out(Bit))
 
 _LUT2 = DeclareCircuit('LUT2',
-               "input I0", Bit,
-               "input I1", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "O",  Out(Bit))
 
 _LUT3 = DeclareCircuit('LUT3',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input I2", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "I2", In(Bit),
+               "O",  Out(Bit))
 
 _LUT4 = DeclareCircuit('LUT4',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input I2", Bit,
-               "input I3", Bit,
-               "output O", Bit) 
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "I2", In(Bit),
+               "I3", In(Bit),
+               "O",  Out(Bit)) 
 
 # D-FF with Clock Enable and Aynchronous Clear
 FDCE = DeclareCircuit('FDCE',
-               "input  C",   Bit,
-               "input  CE",  Bit,
-               "input  CLR", Bit,
-               "input  D",   Bit,
-               "output Q",   Bit)
+               "C",   In(Clock),
+               "CE",  In(Enable),
+               "CLR", In(Bit),
+               "D",   In(Bit),
+               "Q",   Out(Bit))
     
 # D-FF with Clock Enable and Aynchronous Preset and Clear
 FDCPE = DeclareCircuit('FDCPE',
-               "input  C",   Bit,
-               "input  CE",  Bit,
-               "input  CLR", Bit,
-               "input  PRE", Bit,
-               "input  D",   Bit,
-               "output Q",   Bit) 
+               "C",   In(Clock),
+               "CE",  In(Enable),
+               "CLR", In(Bit),
+               "PRE", In(Bit),
+               "D",   In(Bit),
+               "Q",   Out(Bit)) 
 
 # D-FF with Synchronous Reset and Set and Clock Enable
 FDRSE = DeclareCircuit('FDRSE',
-               "input  C",   Bit,
-               "input  CE",  Bit,
-               "input  R",   Bit,
-               "input  S",   Bit,
-               "input  D",   Bit,
-               "output Q",   Bit) 
+               "C",   In(Clock),
+               "CE",  In(Enable),
+               "R",   In(Bit),
+               "S",   In(Bit),
+               "D",   In(Bit),
+               "Q",   Out(Bit)) 
 
 MUXF5 = DeclareCircuit('MUXF5',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input  S", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "S",  In(Bit),
+               "O",  Out(Bit))
 
 MUXF6 = DeclareCircuit('MUXF6',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input  S", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "S",  In(Bit),
+               "O",  Out(Bit))
 
 MUXF7 = DeclareCircuit('MUXF7',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input  S", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "S",  In(Bit),
+               "O",  Out(Bit))
 
 MUXF8 = DeclareCircuit('MUXF8',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input  S", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "S", In(Bit),
+               "O", Out(Bit))
 
 
 MUXCY = DeclareCircuit('MUXCY',
-               "input DI", Bit,
-               "input CI", Bit,
-               "input  S", Bit,
-               "output O", Bit)
+               "DI", In(Bit),
+               "CI", In(Bit),
+               "S", In(Bit),
+               "O", Out(Bit))
 
 MUXCY_L = DeclareCircuit('MUXCY_L',
-               "input DI", Bit,
-               "input CI", Bit,
-               "input  S", Bit,
-               "output LO", Bit)
+               "DI", In(Bit),
+               "CI", In(Bit),
+               "S", In(Bit),
+               "LO", Out(Bit))
 
 MUXCY_D = DeclareCircuit('MUXCY_D',
-               "input DI", Bit,
-               "input CI", Bit,
-               "input  S", Bit,
-               "output O", Bit,
-               "output LO", Bit)
+               "DI", In(Bit),
+               "CI", In(Bit),
+               "S", In(Bit),
+               "O", Out(Bit),
+               "LO", Out(Bit))
 
 XORCY = DeclareCircuit('XORCY',
-               "input LI", Bit,
-               "input CI", Bit,
-               "output O", Bit)
+               "LI", In(Bit),
+               "CI", In(Bit),
+               "O", Out(Bit))
 
 def CARRY(I0, I1, CIN):
     mux = MUXCY()
@@ -142,7 +142,7 @@ def CARRY(I0, I1, CIN):
     return xor.O, mux.O
 
 ANDCY = DeclareCircuit('MULT_AND',
-               "input I0", Bit,
-               "input I1", Bit,
-               "output LO", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "LO", Out(Bit))
 

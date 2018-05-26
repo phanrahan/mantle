@@ -1,15 +1,15 @@
 import os
-
-print ('import xilinx')
-
 target = os.getenv('MANTLE_TARGET', None)
 
-assert target == 'spartan3' or target == 'spartan6' or target == 'kintex7'
+assert target in [None, 'spartan3', 'spartan6', 'kintex7']
 
 if   target == 'spartan3':
+    print ('import xilinx mantle3')
     from .port3 import *
-else:
+    from .common import *
+elif target == 'spartan6':
+    print ('import xilinx mantle6')
     from .port6 import *
+    from .common import *
 
-from .common import *
 

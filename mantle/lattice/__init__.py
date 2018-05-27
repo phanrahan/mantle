@@ -1,6 +1,6 @@
 import os
 
-target = os.getenv('MANTLE_TARGET', 'ice40')
+target = os.environ.get('MANTLE_TARGET', 'ice40')
 
 assert target == 'ice40'
 

@@ -1,4 +1,4 @@
-from PS7Wrap import PS7Wrap
+from .PS7Wrap import PS7Wrap
 
 FAMILY = 'kintex7'
 

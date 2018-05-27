@@ -5,22 +5,23 @@ from ..spartan3 import FAMILY, \
     LUTS_PER_LOGICBLOCK, BITS_PER_LUT, LOG_BITS_PER_LUT
 
 from .LUT import *
-from .ROM import *
-from .RAM import *
+#from .ROM import *
+#from .RAM import *
 
 from .MUX import *
 
 from .FF import *
 
-from .RAMB import *
+#from .RAMB import *
 
-from .adder import *
+from .fulladder import *
+from .halfadder import *
+from .arith import *
 
-from .cascade import *
-from .flatcascade import *
+#from .cascade import *
+#from .flatcascade import *
 
 from .logic import *
-from .decode import *
 from .compare import *
 
 print('import mantle xilinx port3')

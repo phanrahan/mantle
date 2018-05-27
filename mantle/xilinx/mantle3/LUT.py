@@ -1,5 +1,6 @@
 from collections import Sequence
 from magma import *
+from magma.bitutils import lutinit
 from magma.compatibility import IntegerTypes
 from ..spartan3.CLB import *
 

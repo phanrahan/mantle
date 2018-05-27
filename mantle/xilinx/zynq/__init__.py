@@ -1,1 +1,1 @@
-from ps7 import PS7
+from .ps7 import PS7

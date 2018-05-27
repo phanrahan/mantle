@@ -1,12 +1,10 @@
 import os
-
-target = os.getenv('MANTLE_TARGET', None)
-target = target.strip()
+target = os.environ.get('MANTLE_TARGET', 'spartan3')
 
 assert target == 'spartan3' or target == 'spartan6' or target == 'kintex7'
 
 if   target == 'spartan3':
-    from ..port3 import *
+    from ..mantle3 import *
 else:
-    from ..port6 import *
+    from ..mantle6 import *
 

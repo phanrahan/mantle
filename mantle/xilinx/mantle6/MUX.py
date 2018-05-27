@@ -1,4 +1,5 @@
 from magma import *
+from magma.bitutils import lutinit
 from ..spartan6.CLB import *
 
 __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
@@ -13,21 +14,21 @@ MUX2DATA = (~A2&A0)|(A2&A1)
 def Mux2():
     """Construct a Mux with 2 1-bit inputs."""
     lut = _LUT3(INIT=lutinit(MUX2DATA,1<<3))
-    return AnonymousCircuit("I",  array(lut.I0, lut.I1), 
-                   "S",  lut.I2,
-                   "output O", lut.O)
+    return AnonymousCircuit("I", array([lut.I0, lut.I1]), 
+                            "S", lut.I2,
+                            "O", lut.O)
 
 MUX4DATA = (~A4&~A5&A0)|(A4&~A5&A1)|(~A4&A5&A2)|(A4&A5&A3)
 
 def Mux4():
     """Construct a Mux with 4 1-bit inputs."""
     lut = _LUT6(INIT=lutinit(MUX4DATA, 1<<6))
-    return AnonymousCircuit( "I",  array(lut.I0, lut.I1, lut.I2, lut.I3), 
-                             "S",  array(lut.I4, lut.I5),
+    return AnonymousCircuit( "I", array([lut.I0, lut.I1, lut.I2, lut.I3]), 
+                             "S", array([lut.I4, lut.I5]),
                              "O", lut.O)
 
 # """Construct a Mux with 8 1-bit inputs."""
-Mux8 = DefineCircuit("Mux8", "I", In(Array8), "S", In(Array3), "O", Out(Bit) )
+Mux8 = DefineCircuit("Mux8", "I", In(Bits(8)), "S", In(Bits(3)), "O", Out(Bit) )
 I = Mux8.I
 S = Mux8.S
 mux0 = Mux4()
@@ -40,7 +41,7 @@ wire(mux, Mux8.O)
 EndCircuit()
 
 # """Construct a Mux with 16 1-bit inputs."""
-Mux16 = DefineCircuit("Mux16", "I", In(Array16), "S", In(Array4), "O", Out(Bit))
+Mux16 = DefineCircuit("Mux16", "I", In(Bits(16)), "S", In(Bits(4)), "O", Out(Bit))
 I = Mux16.I
 S = Mux16.S
 mux0 = Mux8()
@@ -80,7 +81,7 @@ def DefineMux(height, width):
 
     assert height in [2, 4, 8, 16]
 
-    AW = In(Array(width,Bit))
+    AW = In(Bits(width))
     if   height == 2:
         args = ['I0', AW, 
                 'I1', AW,
@@ -90,7 +91,7 @@ def DefineMux(height, width):
                 'I1', AW,
                 'I2', AW,
                 'I3', AW,
-                'S', In(Array2)]
+                'S', In(Bits(2))]
     elif height == 8:
         args = ['I0', AW, 
                 'I1', AW,
@@ -100,7 +101,7 @@ def DefineMux(height, width):
                 'I5', AW,
                 'I6', AW,
                 'I7', AW,
-                'S', In(Array3)]
+                'S', In(Bits(3))]
     elif height == 16:
         args = ['I0',  AW, 
                 'I1',  AW,
@@ -118,7 +119,7 @@ def DefineMux(height, width):
                 'I13', AW,
                 'I14', AW,
                 'I15', AW,
-                'S', In(Array4)]
+                'S', In(Bits(4))]
 
     args += ['O', Out(AW)]
     D = DefineCircuit(name, *args)

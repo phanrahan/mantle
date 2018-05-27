@@ -1,5 +1,6 @@
 from collections import Sequence
 from magma import *
+from magma.bitutils import lutinit
 from magma.compatibility import IntegerTypes
 from ..spartan6.CLB import \
     _LUT1, _LUT2, _LUT3, _LUT4, _LUT5, _LUT6, \
@@ -32,7 +33,7 @@ def LUT6(rom, **kwargs):
 def LUT7(rom, **kwargs):
     if isinstance(rom, IntegerTypes):
         rom = int2seq(rom, 128)
-    I = In(Array7)()
+    I = In(Bits(7))()
     # need to convert rom to a sequence
     lut0 = LUT6(rom[ 0: 64])
     lut1 = LUT6(rom[64:128])
@@ -52,7 +53,7 @@ def LUT7(rom, **kwargs):
 def LUT8(rom, **kwargs):
     if isinstance(rom, IntegerTypes):
         rom = int2seq(rom, 256)
-    I = In(Array8)()
+    I = In(Bits(8))()
     # need to convert rom to a sequence
     lut0 = LUT7(rom[  0:128])
     lut1 = LUT7(rom[128:256])

@@ -2,9 +2,7 @@ from magma import *
 from ..spartan6.CLB import CARRY
 from ..spartan6.LUT import LUT5x2
 
-__all__  = ['FullCarry']
-__all__ += ['FullAdder']
-__all__ += ['HalfAdder']
+__all__ = ['FullAdder']
 
 #
 # return I0, ..., In, CIN -> O, COUT
@@ -51,5 +49,3 @@ def FullCarry(k, expr6, expr5):
 def FullAdder():
     pass
 
-def HalfAdder():
-    pass

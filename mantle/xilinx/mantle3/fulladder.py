@@ -4,7 +4,6 @@ from .LUT import LUTN
 
 __all__  = ['FullCarry']
 __all__ += ['FullAdder']
-__all__ += ['HalfAdder']
 
 # return I0, ..., In, CIN -> O, COUT
 #
@@ -59,5 +58,3 @@ def FullCarry(k, expr1, expr2):
 def FullAdder():
     pass
 
-def HalfAdder():
-    pass

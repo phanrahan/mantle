@@ -1,4 +1,5 @@
 from magma import *
+from magma.bitutils import lutinit
 from ..spartan3.CLB import *
 
 __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
@@ -13,7 +14,7 @@ MUX2DATA = (~A2&A0)|(A2&A1)
 def Mux2():
     """Construct a Mux with 2 1-bit inputs."""
     lut = _LUT3(INIT=lutinit(MUX2DATA,1<<3))
-    return AnonymousCircuit("I",  array(lut.I0, lut.I1), 
+    return AnonymousCircuit("I",  array([lut.I0, lut.I1]), 
                             "S",  lut.I2,
                             "O",  lut.O)
 
@@ -36,7 +37,7 @@ class Mux4(Circuit):
 
 # """Construct a Mux with 8 1-bit inputs."""
 class Mux8(Circuit):
-    IO = ["I", In(Array8), "S", In(Bits(3)), "O", Out(Bit) ]
+    IO = ["I", In(Bits(8)), "S", In(Bits(3)), "O", Out(Bit) ]
             
     @classmethod
     def definition(mux8):
@@ -52,7 +53,7 @@ class Mux8(Circuit):
 
 # """Construct a Mux with 16 1-bit inputs."""
 class Mux16(Circuit):
-    IO = ["I", In(Array16), "S", In(Bits(4)), "O", Out(Bit) ]
+    IO = ["I", In(Bits(16)), "S", In(Bits(4)), "O", Out(Bit) ]
             
     @classmethod
     def definition(mux16):
@@ -84,7 +85,7 @@ def _MuxName(height, width):
     return 'Mux%dx%d' % (height, width)
 
 def _MuxInterface(height, width):
-    AW = In(Array(width,Bit))
+    AW = In(Bits(width))
     if   height == 2:
         args = ['I0', AW, 
                 'I1', AW]

@@ -38,103 +38,103 @@ ANY = A0 | A1 | A2 | A3 | A4 | A5
 PARITY = A0 ^ A1 ^ A2 ^ A3 ^ A4 ^ A5
 
 _LUT1 = DeclareCircuit('LUT1',
-               "input I0", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "O", Out(Bit))
 
 _LUT2 = DeclareCircuit('LUT2',
-               "input I0", Bit,
-               "input I1", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "O", Out(Bit))
 
 _LUT3 = DeclareCircuit('LUT3',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input I2", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "I2", In(Bit),
+               "O", Out(Bit))
 
 _LUT4 = DeclareCircuit('LUT4',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input I2", Bit,
-               "input I3", Bit,
-               "output O", Bit) 
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "I2", In(Bit),
+               "I3", In(Bit),
+               "O", Out(Bit)) 
 
 _LUT5 = DeclareCircuit('LUT5',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input I2", Bit,
-               "input I3", Bit,
-               "input I4", Bit,
-               "output O", Bit) 
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "I2", In(Bit),
+               "I3", In(Bit),
+               "I4", In(Bit),
+               "O", Out(Bit)) 
 
 _LUT6 = DeclareCircuit('LUT6',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input I2", Bit,
-               "input I3", Bit,
-               "input I4", Bit,
-               "input I5", Bit,
-               "output O", Bit) 
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "I2", In(Bit),
+               "I3", In(Bit),
+               "I4", In(Bit),
+               "I5", In(Bit),
+               "O", Out(Bit)) 
 
 _LUT6x2 = DeclareCircuit('LUT6_2',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input I2", Bit,
-               "input I3", Bit,
-               "input I4", Bit,
-               "input I5", Bit,
-               "output O5", Bit,
-               "output O6", Bit) 
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "I2", In(Bit),
+               "I3", In(Bit),
+               "I4", In(Bit),
+               "I5", In(Bit),
+               "O5", Out(Bit),
+               "O6", Out(Bit)) 
 
 # D-FF with Clock Enable and Aynchronous Clear
 FDCE = DeclareCircuit('FDCE',
-               "input  C",   Bit,
-               "input  CE",  Bit,
-               "input  CLR", Bit,
-               "input  D",   Bit,
-               "output Q",   Bit)
+               "C",   In(Bit),
+               "CE",  In(Bit),
+               "CLR", In(Bit),
+               "D",   In(Bit),
+               "Q",   Out(Bit))
     
 # D-FF with Clock Enable and Aynchronous Preset and Clear
 FDCPE = DeclareCircuit('FDCPE',
-               "input  C",   Bit,
-               "input  CE",  Bit,
-               "input  CLR", Bit,
-               "input  PRE", Bit,
-               "input  D",   Bit,
-               "output Q",   Bit) 
+               "C",   In(Bit),
+               "CE",  In(Bit),
+               "CLR", In(Bit),
+               "PRE", In(Bit),
+               "D",   In(Bit),
+               "Q",   Out(Bit)) 
 
 # D-FF with Synchronous Reset and Set and Clock Enable
 FDRSE = DeclareCircuit('FDRSE',
-               "input  C",   Bit,
-               "input  CE",  Bit,
-               "input  R",   Bit,
-               "input  S",   Bit,
-               "input  D",   Bit,
-               "output Q",   Bit) 
+               "C",   In(Bit),
+               "CE",  In(Bit),
+               "R",   In(Bit),
+               "S",   In(Bit),
+               "D",   In(Bit),
+               "Q",   Out(Bit)) 
 
 MUXF7 = DeclareCircuit('MUXF7',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input  S", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "S", In(Bit),
+               "O", Out(Bit))
 
 MUXF8 = DeclareCircuit('MUXF8',
-               "input I0", Bit,
-               "input I1", Bit,
-               "input  S", Bit,
-               "output O", Bit)
+               "I0", In(Bit),
+               "I1", In(Bit),
+               "S", In(Bit),
+               "O", Out(Bit))
 
 
 MUXCY = DeclareCircuit('MUXCY',
-               "input DI", Bit,
-               "input CI", Bit,
-               "input  S", Bit,
-               "output O", Bit)
+               "DI", In(Bit),
+               "CI", In(Bit),
+               "S", In(Bit),
+               "O", Out(Bit))
 
 XORCY = DeclareCircuit('XORCY',
-               "input LI", Bit,
-               "input CI", Bit,
-               "output O", Bit)
+               "LI", In(Bit),
+               "CI", In(Bit),
+               "O", Out(Bit))
 
 def CARRY(I0, I1, CIN):
     mux = MUXCY()
@@ -184,12 +184,12 @@ def CARRY(I0, I1, CIN):
 #endmodule
 
 CARRY4 = DeclareCircuit('CARRY4',
-               "input  CYINIT", Bit,# 0
-               "input  CI", Bit,    # CIN
-               "input   S", Array4, # I0
-               "input  DI", Array4, # I1
-               "output  O", Array4,
-               "outout CO", Array4)
+               "CYINIT", In(Bit),# 0
+               "CI", In(Bit),    # CIN
+               "S", In(Bits(4)), # I0
+               "DI", In(Bits(4)), # I1
+               "O", Out(Bits(4)),
+               "outout CO", Out(Bits(4)))
 
 if __name__ == '__main__':
      print("%016X" % (A0&~A0))

@@ -1,6 +1,5 @@
 import os
-
-mantle_target = os.getenv('MANTLE_TARGET', "coreir")
+mantle_target = os.environ['MANTLE_TARGET']
 
 from mantle.primitives import *
 

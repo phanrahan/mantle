@@ -3,13 +3,13 @@ from magma import *
 __all__ = ['_DCM', 'DCM']
 
 _DCM = DeclareCircuit('DCM',
-            "input CLKIN", Bit,
-            "input CLKFB", Bit,
-            "input PSCLK", Bit,
-            "input PSEN", Bit,
-            "input PSINCDEC", Bit,
-            "input RST", Bit,
-            "output CLKFX", Bit)
+            "CLKIN", In(Bit),
+            "CLKFB", In(Bit),
+            "PSCLK", In(Bit),
+            "PSEN", In(Bit),
+            "PSINCDEC", In(Bit),
+            "RST", In(Bit),
+            "CLKFX", In(Bit))
 
 def DCM( freq, basefreq=32):
 

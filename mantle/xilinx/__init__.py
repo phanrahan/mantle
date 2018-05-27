@@ -1,5 +1,5 @@
 import os
-target = os.getenv('MANTLE_TARGET', None)
+target = os.environ['MANTLE_TARGET']
 
 assert target in [None, 'spartan3', 'spartan6', 'kintex7']
 

@@ -1,6 +1,6 @@
 import os
 
-target = os.getenv('MANTLE_TARGET', 'spartan3')
+target = os.environ['MANTLE_TARGET']
 target = target.strip()
 
 assert target == 'spartan3' or target == 'spartan6' or target == 'kintex7'

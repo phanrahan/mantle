@@ -3,31 +3,31 @@ from magma import *
 __all__ = ["IOB", "ODDR2"]
 
 _IOB = DeclareCircuit("IOBUF", 
-                     "input T", Bit,
-                     "input I", Bit,
-                     "inout IO", Bit,
-                     "output O", Bit)
+                     "T", In(Bit),
+                     "I", In(Bit),
+                     "IO", InOut(Bit),
+                     "O", Out(Bit))
 
-_ODDR2 = DeclareCircuit("ODDR2", "input S", Bit, 
-                                "input R", Bit,
-                                "input CE", Bit,
-                                "input D0", Bit,
-                                "input D1", Bit,
-                                "input C0", Bit,
-                                "input C1", Bit,
-                                "output Q", Bit)
+_ODDR2 = DeclareCircuit("ODDR2", "S", In(Bit), 
+                                 "R", In(Bit),
+                                 "CE", In(Bit),
+                                 "D0", In(Bit),
+                                 "D1", In(Bit),
+                                 "C0", In(Bit),
+                                 "C1", In(Bit),
+                                 "Q", Out(Bit))
 def IOB(**params):
     iobuf = _IOBUF(**params)
-    return AnonymousCircuit("input T", iobuf.T, "input I", iobuf.I, "inout IO", iobuf.IO, "output O", iobuf.O)
+    return AnonymousCircuit("T", iobuf.T, "I", iobuf.I, "IO", iobuf.IO, "O", iobuf.O)
 
 
 def ODDR2(**params):
     oddr2 = _ODDR2(**params)
-    return AnonymousCircuit("input S", oddr2.S,
-                   "input R", oddr2.R,
-                   "input CE", oddr2.CE,
-                   "input D0", oddr2.D0,
-                   "input D1", oddr2.D1,
-                   "input C0", oddr2.C0,
-                   "input C1", oddr2.C1,
-                   "output Q", oddr2.Q)
+    return AnonymousCircuit("S", oddr2.S,
+                            "R", oddr2.R,
+                            "CE", oddr2.CE,
+                            "D0", oddr2.D0,
+                            "D1", oddr2.D1,
+                            "C0", oddr2.C0,
+                            "C1", oddr2.C1,
+                            "Q", oddr2.Q)

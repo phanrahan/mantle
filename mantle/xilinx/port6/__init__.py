@@ -23,4 +23,3 @@ from .logic import *
 from .decode import *
 from .compare import *
 
-print('import xilinx mantle port6')

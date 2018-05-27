@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from magma import *
+from magma.bitutils import log2
 
 __all__  = ['RAMB16BWER']
 __all__ += ['RAMB16', 'RAMB16D']
@@ -8,27 +9,27 @@ __all__ += ['ROMB']
 
 
 RAMB16BWER = DeclareCircuit("RAMB16BWER",
-            "input DIA", Array(32, Bit),
-            "input DIPA", Array(4, Bit),
-            "output DOA", Array(32, Bit),
-            "output DOPA", Array(4, Bit),
-            "input ADDRA", Array(14, Bit),
-            "input CLKA", Bit,
-            "input ENA", Bit,
-            "input WEA", Array(4, Bit),
-            "input RSTA", Bit,
-            "input REGCEA", Bit,
+            "DIA", In(Bits(32)),
+            "DIPA", In(Bits(4)),
+            "DOA", Out(Bits(32)),
+            "DOPA", Out(Bits(4)),
+            "ADDRA", In(Bits(14)),
+            "CLKA", In(Clock),
+            "ENA", In(Bit),
+            "WEA", In(Bits(4)),
+            "RSTA", In(Bit),
+            "REGCEA", In(Bit),
 
-            "input DIB", Array(32, Bit),
-            "input DIPB", Array(4, Bit),
-            "output DOB", Array(32, Bit),
-            "output DOPB", Array(4, Bit),
-            "input ADDRB", Array(14, Bit),
-            "input CLKB", Bit,
-            "input ENB", Bit,
-            "input WEB", Array(4, Bit),
-            "input RSTB", Bit,
-            "input REGCEB", Bit)
+            "DIB", In(Bits(32)),
+            "DIPB", In(Bits(4)),
+            "DOB", Out(Bits(32)),
+            "DOPB", Out(Bits(4)),
+            "ADDRB", In(Bits(14)),
+            "CLKB", In(Clock),
+            "ENB", In(Bit),
+            "WEB", In(Bits(4)),
+            "RSTB", In(Bit),
+            "REGCEB", In(Bit))
 
 
 
@@ -46,7 +47,7 @@ def RAMB16D(rom, width, init = None):
     params['WRITE_MODE_A'] = '"WRITE_FIRST"'
     params['WRITE_MODE_B'] = '"WRITE_FIRST"'
 
-    # initialize RAM output register
+    # initialize RAM register
     init = (0, width) if init is None else (init, width)
     params["INIT_A"] = init
     params["INIT_B"] = init
@@ -65,21 +66,21 @@ def RAMB16D(rom, width, init = None):
     ramb16_init_bits(rom, width, params)
     ram = RAMB16BWER(**params)
 
-    args  = ["input CLKA", ram.CLKA, "input CLKB", ram.CLKB]
-    args += ["input ENA", ram.ENA, "input ENB", ram.ENB]
-    args += ["input WEA", ram.WEA, "input WEB", ram.WEB]
-    args += ["input REGCEA", ram.REGCEA, "input REGCEB", ram.REGCEB]
+    args  = ["CLKA", ram.CLKA, "CLKB", ram.CLKB]
+    args += ["ENA", ram.ENA, "ENB", ram.ENB]
+    args += ["WEA", ram.WEA, "WEB", ram.WEB]
+    args += ["REGCEA", ram.REGCEA, "REGCEB", ram.REGCEB]
 
     wire(0, ram.RSTA)
     wire(0, ram.RSTB)
 
     AA = config_ramb16_addr_pins(logn, ram, p = "A")
     IA, OA = config_ramb16_io_pins(width, ram, p = "A")
-    args += ['input IA', IA, "input AA", AA, "output OA", OA]
+    args += ['IA', IA, "AA", AA, "OA", OA]
 
     AB = config_ramb16_addr_pins(logn, ram, p = "B")
     IB, OB = config_ramb16_io_pins(width, ram, p = "B")
-    args += ['input IB', IB, "input AB", AB, "output OB", OB]
+    args += ['IB', IB, "AB", AB, "OB", OB]
 
     return AnonymousCircuit(*args)
 
@@ -95,7 +96,7 @@ def RAMB16(rom, width, init=None):
     params['WRITE_MODE_A'] = '"WRITE_FIRST"'
     params['WRITE_MODE_B'] = '"WRITE_FIRST"'
 
-    # initialize RAM output register
+    # initialize RAM register
     init = (0, width) if init is None else (init, width)
     params["INIT_A"] = init
     params["INIT_B"] = init
@@ -114,27 +115,27 @@ def RAMB16(rom, width, init=None):
     ramb16_init_bits(rom, width, params)
     ram = RAMB16BWER(**params)
 
-    A = array(*[ram.ADDRB[i] for i in range(14)])
+    A = array([ram.ADDRB[i] for i in range(14)])
 
-    I = array(*[ram.DIB[i] for i in range(ram.DIB.N)])
+    I = array([ram.DIB[i] for i in range(ram.DIB.N)])
 
-    IP = array(*[ram.DIPB[i] for i in range(ram.DIPB.N)])
+    IP = array([ram.DIPB[i] for i in range(ram.DIPB.N)])
 
-    wire(array(0,0,0,0), ram.WEB)
+    wire(array([0,0,0,0]), ram.WEB)
     wire(0, ram.CLKB)
     wire(0, ram.RSTB)
     wire(0, ram.REGCEB)
     wire(0, ram.ENB)
 
-    wire(array(0,0,0,0), ram.WEA)   # WE  defaults to active high - inverted
+    wire(array([0,0,0,0]), ram.WEA)   # WE  defaults to active high - inverted
     wire(0, ram.RSTA)  # RST defaults to active high - inverted
     wire(0, ram.REGCEA)
 
     A = config_ramb16_addr_pins(logn, ram, p = "A")
     I, O = config_ramb16_io_pins(width, ram, p = "A")
-    args  = ['input I', I, "input A", A, "output O", O]
+    args  = ['I', I, "A", A, "O", O]
 
-    args += ['input CLK', ram.CLKA, 'input CE', ram.ENA]
+    args += ['CLK', ram.CLKA, 'CE', ram.ENA]
 
     return AnonymousCircuit(*args)
 
@@ -142,10 +143,10 @@ def RAMB16(rom, width, init=None):
 def ROMB16(rom, width, init=None):
     rom = RAMB16(rom, width, init=init)
 
-    wire(array(*(width*[0])), rom.I)
+    wire(array((width*[0])), rom.I)
     wire(1, rom.CE)
 
-    return AnonymousCircuit("input A", rom.A, "output O", rom.O, 'input CLK', rom.CLK)
+    return AnonymousCircuit("A", rom.A, "O", rom.O, 'CLK', rom.CLK)
 
 ROMB = ROMB16
 
@@ -156,7 +157,7 @@ def config_ramb16_addr_pins(addrwidth, ram, p = "A"):
     R = [rA[i] for i in range(14 - addrwidth, 14)]
     for n in range(0, 14 - addrwidth):
         wire(0, rA[n])
-    return array(*R)
+    return array(R)
 
 def config_ramb16_io_pins(width, ram, p = "A"):
     rDIA = ram.DIA if p == "A" else ram.DIB
@@ -191,7 +192,7 @@ def config_ramb16_io_pins(width, ram, p = "A"):
             O += [rDOPA[0], rDOPA[1]]
             for i in range(2,4):
                 wire(0, rDIPA[i])
-    return array(*I), array(*O)
+    return array(I), array(O)
 
 # functions to format INIT strings
 
@@ -237,7 +238,7 @@ def romX16(ram, n, params={}):
                 nonzero = True
             val |= word << (16*j)
         if nonzero:
-            key = "INIT_" + ("%02X" % (i / N))
+            key = "INIT_" + ("%02X" % (i // N))
             params[key] = (val, 256)
     return params
 
@@ -253,7 +254,7 @@ def romX8(ram, n, params={}):
                 nonzero = True
             val |= word << (8*j)
         if nonzero:
-            key = "INIT_" + ("%02X" % (i / N))
+            key = "INIT_" + ("%02X" % (i // N))
             params[key] = (val, 256)
     return params
 
@@ -292,7 +293,7 @@ def romX1P(ram, n, params={}):
                 nonzero = True
             val |= nibble << (4*j)
         if nonzero:
-            key = "INITP_" + ("%02X" % (i / N))
+            key = "INITP_" + ("%02X" % (i // N))
             params[key] = (val, 256)
     return params
 
@@ -312,7 +313,7 @@ def romX2P(ram, n, params={}):
                 nonzero = True
             val |= nibble << (4*j)
         if nonzero:
-            key = "INITP_" + ("%02X" % (i / N))
+            key = "INITP_" + ("%02X" % (i // N))
             params[key] = (val, 256)
     return params
 

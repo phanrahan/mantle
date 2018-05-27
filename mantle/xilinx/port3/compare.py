@@ -3,9 +3,16 @@ from ..spartan3.CLB import *
 from .cascade import Cascade
 from .LUT import *
 
-__all__ = ['EQ', 'NE']
-__all__ +=[ 'LT',  'LE',  'GT',  'GE']
-__all__ +=['ULT', 'ULE', 'UGT', 'UGE']
+__all__  = ['DefineEQ', 'EQ']
+__all__ += ['DefineNE', 'NE']
+__all__ += ['DefineUGE', 'UGE']
+__all__ += ['DefineULE', 'ULE']
+__all__ += ['DefineUGT', 'UGT']
+__all__ += ['DefineULT', 'ULT']
+__all__ += ['DefineSGE', 'SGE']
+__all__ += ['DefineSLE', 'SLE']
+__all__ += ['DefineSGT', 'SGT']
+__all__ += ['DefineSLT', 'SLT']
 
 EQ1LUT = ((A0&A1)|(~A0&~A1))
 EQ2LUT = ((A0&A1)|(~A0&~A1)) & ((A2&A3)|(~A2&~A3))
@@ -63,7 +70,16 @@ def UGT(n):
 def UGE(n):
     return Cascade(n, 2, EQ1LUT, I0, 1)
 
-LE = ULE
-LT = ULT
-GE = UGE
-GT = UGT
+
+def SLT(n):
+    pass
+
+def SLE(n):
+    pass
+
+def SGT(n):
+    pass
+
+def SGE(n):
+    pass
+

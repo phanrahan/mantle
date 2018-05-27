@@ -13,7 +13,7 @@ from .IOB import *
 from .DCM import *
 
 # Block RAM functions
-#from .RAMB import *
+from .RAMB import *
 
 # Digital signal processing functions
 #from .DSP import *

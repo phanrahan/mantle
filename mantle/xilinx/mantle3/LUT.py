@@ -8,8 +8,6 @@ __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
 __all__ += ['LUTN', 'LUT']
 __all__ += ['A0', 'A1', 'A2', 'A3']
-__all__ += ['Logic1', 'Logic2', 'Logic3', 'Logic4']
-__all__ += ['Logic5', 'Logic6', 'Logic7', 'Logic8']
 
 def LUT1(rom, **kwargs):
     return _LUT1(INIT=lutinit(rom,1<<1), **kwargs)

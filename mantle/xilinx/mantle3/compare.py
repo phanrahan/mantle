@@ -1,5 +1,5 @@
 from magma import *
-from .LUT import *
+from .LUT import LUTN, LUT1, LUT2, LUT3, LUT4, A0, A1, A2, A3
 from .arith import DefineSub
 from .logic import Not
 
@@ -14,8 +14,57 @@ __all__ += ['DefineSLE', 'SLE']
 __all__ += ['DefineSGT', 'SGT']
 __all__ += ['DefineSLT', 'SLT']
 
+#
+# n is the number of luts 
+# k is the number of bits per lut
+# expr goes into each LUT
+# fold the luts by wiring O to I0
+# extra args can be forked or joined
+#
+def _Cascade(n, k, expr, cin, forkargs={}):
+
+    assert k <= 3
+
+    def f(y):
+        return LUTN(expr, k+1)
+
+    cascade = braid( col(f, n), foldargs={"I0":"O"}, forkargs=forkargs )
+
+    wire( cin, cascade.I0 )
+
+    args = []
+    if k > 0: args += ["I0", cascade.I1]
+    if k > 1: args += ["I1", cascade.I2]
+    if k > 2: args += ["I2", cascade.I3]
+    args += ["O", cascade.O]
+
+    return AnonymousCircuit(*args)
+
+class EQ1(Circuit):
+    IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        EQ1LUT = ((A0&A1)|(~A0&~A1))
+        wire( LUT2(EQ1LUT)(io.I0, io.I1), io.O )
+
+class EQ2(Circuit):
+    T = Bits(2)
+    IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        EQ2LUT = ((A0&A1)|(~A0&~A1)) & ((A2&A3)|(~A2&~A3))
+        wire( LUT4(EQ2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
+
 def DefineEQ(n):
-    pass
+    T = Bits(n)
+    class _EQ(Circuit):
+        name = "EQ{}".format(n)
+        IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
+        @classmethod
+        def definition(io):
+             eq = _Cascade(n, 2, A0&((A1&A2)|(~A1&~A2)), 1)
+             wire(eq(io.I0, io.I1), io.O)
+    return _EQ
 
 def EQ(n, **kwargs):
     if   n == 1:
@@ -25,8 +74,31 @@ def EQ(n, **kwargs):
     return DefineEQ(n)(**kwargs)
 
 
+class NE1(Circuit):
+    IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        NE1LUT = (A0^A1)
+        wire( LUT2(NE1LUT)(io.I0, io.I1), io.O )
+
+class NE2(Circuit):
+    T = Bits(2)
+    IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        NE2LUT = (A0^A1)|(A2^A3)
+        wire( LUT4(NE2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
+
 def DefineNE(n):
-    pass
+    T = Bits(n)
+    class _NE(Circuit):
+        name = "NE{}".format(n)
+        IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
+        @classmethod
+        def definition(io):
+             ne =  _Cascade(n, 2, A0|(A1^A2), 0)
+             wire(ne(io.I0, io.I1), io.O)
+    return _NE
 
 def NE(n, **kwargs):
     if   n == 1:

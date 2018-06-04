@@ -1,4 +1,14 @@
+from __future__ import division
+import sys
+if sys.version_info > (3, 0):
+    from functools import reduce
+    from functools import lru_cache
+from collections import Sequence
+
 from magma import *
+from .LUT import LUT1, A0, A1, A2, A3
+from .ROM import ROM1, ROM2, ROM3, ROM4
+from .flatcascade import FlatCascade
 
 # unary operators
 __all__  = ['DefineReduceAnd', 'ReduceAnd']
@@ -24,53 +34,139 @@ __all__ += ['Not']
 __all__ += ['DefineLSL', 'LSL']
 __all__ += ['DefineLSR', 'LSR']
 
-def FlatCascade(n, k, expr, cin, **kwargs):
-    pass
+
+# unary operators
+__all__  = ['DefineReduceAnd', 'ReduceAnd']
+__all__ += ['DefineReduceNAnd', 'ReduceNAnd']
+__all__ += ['DefineReduceOr', 'ReduceOr']
+__all__ += ['DefineReduceNOr', 'ReduceNOr']
+__all__ += ['DefineReduceXOr', 'ReduceXOr']
+__all__ += ['DefineReduceNXOr', 'ReduceNXOr']
+
+# binary operators
+__all__ += ['DefineAnd', 'And']
+__all__ += ['DefineNAnd', 'NAnd']
+__all__ += ['DefineOr', 'Or']
+__all__ += ['DefineNOr', 'NOr']
+__all__ += ['DefineXOr', 'XOr']
+__all__ += ['DefineNXOr', 'NXOr']
+
+# unary operators
+__all__ += ['DefineInvert', 'Invert']
+__all__ += ['Not']
+
+# logical shifts
+__all__ += ['DefineLSL', 'LSL']
+__all__ += ['DefineLSR', 'LSR']
+
+#def FlatCascade(n, k, expr, cin, **kwargs):
+#
+#        def f(y):
+#            e = expr[y] if isinstance(expr, Sequence) else expr
+#            return LUT( e, n=k+1 )
+#
+#        # number of luts
+#        m = (n+k-1) // k
+#        c = braid( col(f, m), foldargs={"I0":"O"})
+#
+#        wire(cin, c.I0)
+#
+#        c = flat(uncurry(c))
+#
+#        for i in range(n, len(c.I)):
+#            wire(cin, c.I[i])
+#
+#        return AnonymousCircuit( ['I', c.I[0:n], 'O', c.O] )
+
+def DefineReduceOp(opname, n, luts, cascadeexpr, cin):
+    T = Bits(n)
+    class _ReduceOp(Circuit):
+        name = '{}{}'.format(opname, n)
+        IO = ['I', In(T), 'O', Out(Bit)]
+
+        @classmethod
+        def definition(io):
+            if   n == 1: a = ROM1(luts[n - 1])
+            elif n == 2: a = ROM2(luts[n - 1])
+            elif n == 3: a = ROM3(luts[n - 1])
+            elif n == 4: a = ROM4(luts[n - 1])
+            else: a = FlatCascade(n, 1, cascadeexpr, cin)
+            wire(a(io.I), io.O)
+    return _ReduceOp
 
 @cache_definition
 def DefineReduceAnd(n):
-    pass
+    luts = [A0, A0&A1, A0&A1&A2, A0&A1&A2&A3]
+    return DefineReduceOp('And', n, luts, A0 & A1, 1)
 
 def ReduceAnd(height=2, **kwargs):
     return DefineReduceAnd(height)(**kwargs)
 
 @cache_definition
 def DefineReduceNAnd(n):
-    pass
+    luts = [~A0, ~(A0&A1), ~(A0&A1&A2), ~(A0&A1&A2&A3)]
+    return DefineReduceOp('NAnd', n, luts, A0 & ~A1, 0)
 
 def ReduceNAnd(height=2, **kwargs):
     return DefineReduceNAnd(height)(**kwargs)
 
 @cache_definition
 def DefineReduceOr(n):
-    pass
+    luts = [A0, A0|A1, A0|A1|A2, A0|A1|A2|A3]
+    return DefineReduceOp('Or', n, luts, A0 | A1, 0)
 
 def ReduceOr(height=2, **kwargs):
     return DefineReduceOr(height)(**kwargs)
 
 @cache_definition
 def DefineReduceNOr(n):
-    pass
+    luts = [~A0, ~(A0|A1), ~(A0|A1|A2), ~(A0|A1|A2|A3)]
+    return DefineReduceOp('NOr', n, luts, A0 | ~A1, 1)
 
 def ReduceNOr(height=2, **kwargs):
     return DefineReduceNOr(height)(**kwargs)
 
 @cache_definition
 def DefineReduceXOr(n):
-    pass
+    luts = [A0, A0^A1, A0^A1^A2, A0^A1^A2^A3]
+    return DefineReduceOp('XOr', n, luts, A0 ^ A1, 0)
 
 def ReduceXOr(height=2, **kwargs):
     return DefineReduceXOr(height)(**kwargs)
 
 @cache_definition
 def DefineReduceNXOr(n):
-    pass
+    luts = [~A0, ~(A0^A1), ~(A0^A1^A2), ~(A0^A1^A2^A3)]
+    return DefineReduceOp('NXOr', n, luts, A0 ^ ~A1, 1)
 
 def ReduceNXOr(height=2, **kwargs):
     return DefineReduceNXOr(height)(**kwargs)
 
-def DefineOp():
-    pass
+
+@cache_definition
+def DefineOp(opname, op, height=2, width=1):
+    """
+    Generate Op module
+
+    I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
+    """
+    T = Bits(width)
+    class _Op(Circuit):
+
+        name = '{}{}x{}'.format(opname, height, width)
+
+        IO = sum([['I{}'.format(i), In(T)] for i in range(height)], [])
+        IO  += ['O', Out(T)]
+
+        @classmethod
+        def definition(io):
+            def opm(y):
+                return curry(op(height))
+            opmxn = join(col(opm, width))
+            for port in ('I{}'.format(i) for i in range(height)):
+                wire(getattr(io, port), getattr(opmxn, port))
+            wire(opmxn.O, io.O)
+    return _Op
 
 @cache_definition
 def DefineAnd(height=2, width=1):

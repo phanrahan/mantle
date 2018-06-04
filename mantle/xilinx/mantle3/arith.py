@@ -7,6 +7,46 @@ __all__ += ['DefineSub']
 __all__ += ['DefineNegate']
 __all__ += ['DefineASR']
 
+def _AdderName(basename, n, cin, cout):
+    return "{}{}{}{}".format(
+        basename, n,
+        "Cin"  if cin  else "",
+        "Cout" if cout else ""
+    )
+
+def _AdderArgs(n, cin, cout):
+    T = Bits(n)
+
+    args = ["I0", In(T), "I1", In(T)]
+    if cin:
+        args += ['CIN', In(Bit)]
+
+    args += ["O", Out(T)]
+    if cout:
+        args += ['COUT', Out(Bit)]
+
+    return args
+
+def DefineAdders(name, n, cin, cout, forkargs=[]):
+
+    def f(y):
+        return FullAdder()
+
+    c = braid( col(f, n), foldargs={"CIN":"COUT"}, forkargs=forkargs)
+
+    wire(Adders.I0, c.I0)
+    wire(Adders.I1, c.I1)
+
+    wire(c.O, Adders.O)
+
+    if cin:
+        wire(Adders.CIN, c.CIN)
+    else:
+        wire(0, c.CIN)
+
+    if cout:
+        wire(c.COUT, Adders.COUT)
+
 #
 # create an n-bit Adder from n FullAdders
 #
@@ -17,16 +57,79 @@ __all__ += ['DefineASR']
 #
 @cache_definition
 def DefineAdd(n, cin=False, cout=False):
-    pass
+    class _Add(Circuit):
+        name = _AdderName('Add', n, cin, cout)
+        IO = _AdderArgs(n, cin, cout)
+        @classmethod
+        def definition(io):
+            def f(y):
+                return FullAdder()
+
+            add = braid( col(f, n), foldargs={"CIN":"COUT"})
+
+            wire(io.I0, add.I0)
+            wire(io.I1, add.I1)
+            if cin:
+                wire(io.CIN, add.CIN)
+            else:
+                wire(0, add.CIN)
+            if cout:
+                wire(add.COUT, io.COUT)
+            wire(add.O, io.O)
+    return _Add
+    
 
 @cache_definition
 def DefineSub(n, cin=False, cout=False):
-    pass
+    class _Sub(Circuit):
+        name = _AdderName('Sub', n, cin, cout)
+        IO = _AdderArgs(n, cin, cout)
+        @classmethod
+        def definition(io):
+            invert = Invert(n)
+            add =  DefineAdd(n, True, cout)()
+            wire(io.I0, add.I0)
+            wire(io.I1, invert.I)
+            wire(invert.O, add.I1)
+            wire(add.O, io.O)
+            if cin:
+                wire( Not()(io.CIN), add.CIN )
+            else:
+                wire( 1, add.CIN )
+            if cout:
+                wire(add.COUT, io.COUT)
+    return _Sub
+    
+    
 
 @cache_definition
 def DefineNegate(width):
-    pass
+    T = Bits(width)
+    class _Negate(Circuit):
+        name = 'Negate{}'.format(width)
+        IO = ['I', In(T), 'O', Out(T)]
+        @classmethod
+        def definition(io):
+            invert = Invert(width)
+            add =  DefineAdd(width, False, False)()
+            wire( add( invert(io.I), (array(1,width))), io.O )
+    return _Negate
+    
 
 @cache_definition
-def DefineASR(width, shift):
-    pass
+def DefineFixedASR(width, shift):
+    T = Bits(width)
+    class _ASR(Circuit):
+        name = 'FixedASR{}_{}'.format(width, shift)
+
+        IO = ["I", In(T), "O", Out(T)]
+
+        @classmethod
+        def definition(io):
+            for i in range(0, width - shift):
+                wire(io.I[i + shift], io.O[i])
+            for i in range(width - shift, width):
+                wire(io.I[width-1], io.O[i])
+    return _ASR
+
+DefineASR = DefineFixedASR

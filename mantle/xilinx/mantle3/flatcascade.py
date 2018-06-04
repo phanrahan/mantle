@@ -28,7 +28,7 @@ def FullCascade(k, expr, din):
     wire(din,   mux.DI)
     wire(CIN,   mux.CI)
 
-    return AnonymousCircuit( 'input I', rom.I, "output O", mux.O, "input CIN", CIN )
+    return AnonymousCircuit( 'I', rom.I, "O", mux.O, "CIN", CIN )
         
 
 #
@@ -49,7 +49,7 @@ def FullCascade(k, expr, din):
 def DefineFlatCascade(n, k, expr, input, din, cin):
     class _FlatCascade(Circuit):
         name = _Name(n, k, expr, input, din, cin)
-        IO = ["input I", Array(n, Bit), "output O", Bit]
+        IO = ["I", Bits(n), "O", Bit]
         @classmethod
         def definition(carry):
             def f(y):

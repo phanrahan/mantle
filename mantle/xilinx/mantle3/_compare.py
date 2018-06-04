@@ -24,9 +24,9 @@ def EQ1():
 def EQ2():
     """Test equality of 2 2-bit inputs."""
     lut = LUT4(EQ2LUT)
-    return AnonymousCircuit('I0', array(lut.I0, lut.I2),
-                   'I1', array(lut.I1, lut.I3),
-                   'O', lut.O)
+    return AnonymousCircuit('I0', bits([lut.I0, lut.I2]),
+                            'I1', bits([lut.I1, lut.I3]),
+                            'O', lut.O)
 
 def EQ(n):
     if n == 1:
@@ -46,9 +46,9 @@ def NE1():
 def NE2():
     """Test non-equality of 2 2-bit inputs."""
     lut = LUT4(NE2LUT)
-    return AnonymousCircuit('I0', array(lut.I0, lut.I2),
-                   'I1', array(lut.I1, lut.I3),
-                   'O', lut.O)
+    return AnonymousCircuit('I0', bits([lut.I0, lut.I2]),
+                            'I1', bits([lut.I1, lut.I3]),
+                            'O', lut.O)
 
 def NE(n):
     if n == 1:

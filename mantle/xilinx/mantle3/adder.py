@@ -1,6 +1,6 @@
 from magma import *
-from ..spartan3.CLB import ANDCY, CARRY, A0, A1
-from .fulladder import FullCarry
+from .LUT import A0, A1
+from .fullcarry import FullCarry
 
 __all__ = ['Adders', 'DefineAdders']
 
@@ -45,17 +45,17 @@ def DefineAdders(n, k, expr1, expr2, cin, cout, forkargs=[]):
     if name in AdderCache:
        return AdderCache[name]
 
-    ArrayN = Array(n,Bit)
+    ArrayN = Bits(n)
     args = []
-    if k >= 1: args += ["input I0", Bit if 'I0' in forkargs else ArrayN]
-    if k >= 2: args += ["input I1", Bit if 'I1' in forkargs else ArrayN]
-    if k >= 3: args += ["input I2", Bit if 'I2' in forkargs else ArrayN]
-    if k >= 4: args += ["input I3", Bit if 'I3' in forkargs else ArrayN]
-    args += ["output O", ArrayN]
+    if k >= 1: args += ["I0", In(Bit) if 'I0' in forkargs else In(ArrayN)]
+    if k >= 2: args += ["I1", In(Bit) if 'I1' in forkargs else In(ArrayN)]
+    if k >= 3: args += ["I2", In(Bit) if 'I2' in forkargs else In(ArrayN)]
+    if k >= 4: args += ["I3", In(Bit) if 'I3' in forkargs else In(ArrayN)]
+    args += ["O", Out(ArrayN)]
     if cin is None:
-        args += ['input CIN', Bit]
+        args += ['CIN', In(Bit)]
     if cout:
-        args += ['output COUT', Bit]
+        args += ['COUT', Out(Bit)]
 
     Adders = DefineCircuit( name, *args )
 

@@ -40,13 +40,13 @@ def FullCascade(k, expr1, expr2):
     if k >= 1:
          I0 = Bit()
          wire(I0, lut.I0)
-         args += ['input I0', I0]
+         args += ['I0', I0]
     if k >= 2:
          I1 = Bit()
          wire(I1, lut.I1)
-         args += ['input I1', I1]
-    if k >= 3: args += ['input I2', lut.I2]
-    if k >= 4: args += ['input I3', lut.I3]
+         args += ['I1', I1]
+    if k >= 3: args += ['I2', lut.I2]
+    if k >= 4: args += ['I3', lut.I3]
 
 
     if expr2 == A0&A1:
@@ -70,7 +70,7 @@ def FullCascade(k, expr1, expr2):
     wire(DI,    mux.DI)
     wire(CIN,   mux.CI)
 
-    args += ["output COUT", mux.O, "input CIN", CIN]
+    args += ["COUT", mux.O, "CIN", CIN]
     return AnonymousCircuit( args )
 
 
@@ -87,13 +87,13 @@ def FullCascade(k, expr1, expr2):
 #
 def DefineCascade(n, k, expr1, expr2, cin, forkargs={}):
 
-    ArrayN = Array(n,Bit)
+    ArrayN = In(Bits(n))
     args = []
-    if k >= 1: args += ["input I0", Bit if 'I0' in forkargs else ArrayN]
-    if k >= 2: args += ["input I1", Bit if 'I1' in forkargs else ArrayN]
-    if k >= 3: args += ["input I2", Bit if 'I2' in forkargs else ArrayN]
-    if k >= 4: args += ["input I3", Bit if 'I3' in forkargs else ArrayN]
-    args += ["output O", Bit]
+    if k >= 1: args += ["I0", In(Bit) if 'I0' in forkargs else ArrayN]
+    if k >= 2: args += ["I1", In(Bit) if 'I1' in forkargs else ArrayN]
+    if k >= 3: args += ["I2", In(Bit) if 'I2' in forkargs else ArrayN]
+    if k >= 4: args += ["I3", In(Bit) if 'I3' in forkargs else ArrayN]
+    args += ["O", Out(Bit)]
 
     class _Cascade(Circuit):
         name = _Name(n, k, expr1, expr2, cin)

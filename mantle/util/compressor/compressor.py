@@ -2,8 +2,8 @@
 # Implementation of compressor trees
 #
 from magma import fork, cache_definition, DefineCircuit, EndDefine, In, Out, Bit, wire
-from mantle import mantletarget
-if mantletarget == "ice40":
+from mantle import mantle_target
+if mantle_target == "ice40":
     from mantle import LUT2, LUT3, I0, I1, I2
 else:
     from mantle import XOr, Or, And
@@ -14,7 +14,7 @@ __all__ = ['compressor']
 n3to2s = 0
 n2to2s = 0
 
-if mantletarget == "ice40":
+if mantle_target == "ice40":
     def compress2to2():
         global n2to2s
         n2to2s = n2to2s + 1
@@ -97,7 +97,7 @@ def ripple(bits):
     twos = []
     for b in bits:
         # ripple: combine last column of twos with this column
-        b = b + twos 
+        b = b + twos
         # should only require fulladders (compress 3 to 2)
         assert len(b) <= 3
         twos, ones = compresscolumn2(b)

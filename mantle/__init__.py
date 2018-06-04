@@ -1,22 +1,29 @@
-import os
+import magma as m
 
-mantle_target = os.getenv('MANTLE_TARGET', "coreir")
+if m.mantle_target is None:
+    m.mantle_target = 'coreir'
 
-from mantle.primitives import *
+if m.mantle_target in ['coreir', 'verilog', 
+                     'cyclone4', 
+                     'spartan3', 'spartan6', 'kyntex7',
+                     'ice40']:
 
-if mantle_target == 'verilog':
-    from mantle.verilog import *
-elif mantle_target == 'coreir':
-    from mantle.coreir import *
-elif mantle_target in ['lattice', 'ice40']:
-    from mantle.lattice import *
+    from mantle.primitives import *
+
+    if m.mantle_target == 'verilog':
+        from mantle.verilog import *
+    elif m.mantle_target == 'coreir':
+        from mantle.coreir import *
+    elif m.mantle_target in ['cyclone4']:
+        from mantle.altera import *
+    elif m.mantle_target in ['spartan3', 'spartan6', 'kintex7']:
+        from mantle.xilinx import *
+    elif m.mantle_target in ['ice40']:
+        from mantle.lattice import *
+
+    from mantle.common import *
+
 else:
-    raise RuntimeError(f"MANTLE_TARGET={mantle_target} not supported")
+    raise RuntimeError(f"MANTLE_TARGET={m.mantle_target} not supported")
 
 
-A0 = 0xAAAA
-A1 = 0xCCCC
-A2 = 0xF0F0
-A3 = 0xFF00
-
-from mantle.common import *

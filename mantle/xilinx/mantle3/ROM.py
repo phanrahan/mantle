@@ -1,82 +1,39 @@
 from collections import Sequence
 from magma import *
+from magma.bitutils import int2seq
 from magma.compatibility import IntegerTypes
 from ..spartan3.CLB import MUXF5, MUXF6, MUXF7, MUXF8
 from .LUT import *
 
 __all__  = ['ROM1', 'ROM2', 'ROM3', 'ROM4']
 __all__ += ['ROM5', 'ROM6', 'ROM7', 'ROM8']
-__all__ += ['ROMN', 'ROM']
+__all__ += ['ROMN']
 #__all__ += ['ROM16xN']
 
 # Move the lutinit function to Circuit init
 def ROM1(rom, **kwargs):
     return uncurry(LUT1(rom, **kwargs))
-    #I = In(Array1)()
-    #lut = LUT1(rom, **kwargs)
-    #lut(I[0])
-    #return AnonymousCircuit("I", I, "O", lut.O)
 
 def ROM2(rom, **kwargs):
     return uncurry(LUT2(rom, **kwargs))
-    #I = In(Array2)()
-    #lut = LUT2(rom, **kwargs)
-    #lut(I[0], I[1])
-    #return AnonymousCircuit("I", I, "O", lut.O)
 
 def ROM3(rom, **kwargs):
     return uncurry(LUT3(rom, **kwargs))
-    #I = In(Array3)()
-    #lut = LUT3(rom, **kwargs)
-    #lut(I[0], I[1], I[2])
-    #return AnonymousCircuit("I", I, "O", lut.O)
 
 def ROM4(rom, **kwargs):
     return uncurry(LUT4(rom, **kwargs))
-    #I = In(Array4)()
-    #lut = LUT4(rom, **kwargs)
-    #lut(I[0], I[1], I[2], I[3])
-    #return AnonymousCircuit("I", I, "O", lut.O)
 
 def ROM5(rom, **kwargs):
-    if isinstance(rom, IntegerTypes):
-        rom = int2seq(rom, 32)
-    I = In(Bits(5)) 
-    lut = fork( ROM4(rom[ 0:16]), ROM4(rom[16:32]) )
-    lut(I[0:4])
-    mux = MUXF5()
-    mux(lut.O[0], lut.O[1], I[4])
-    return AnonymousCircuit("I", I, "O", mux.O)
+    return uncurry(LUT5(rom, **kwargs))
 
 def ROM6(rom, **kwargs):
-    if isinstance(rom, IntegerTypes):
-        rom = int2seq(rom, 64)
-    I = In(Bits(6))
-    lut = fork( ROM5(rom[ 0:32]), ROM5(rom[32:64]))
-    mux = MUXF6()
-    lut(I[0:5])
-    mux(lut.O[0], lut.O[1], I[5])
-    return AnonymousCircuit("I", I, "O", mux.O)
+    return uncurry(LUT6(rom, **kwargs))
 
 def ROM7(rom, **kwargs):
-    if isinstance(rom, IntegerTypes):
-        rom = int2seq(rom, 128)
-    I = In(Bits(7))
-    lut = fork( ROM6(rom[ 0:64]), ROM6(rom[64:128]))
-    mux = MUXF7()
-    lut(I[0:6])
-    mux(lut.O[0], lut.O[1], I[6])
-    return AnonymousCircuit("I", I, "O", mux.O)
+    return uncurry(LUT7(rom, **kwargs))
 
 def ROM8(rom, **kwargs):
-    if isinstance(rom, IntegerTypes):
-        rom = int2seq(rom, 256)
-    I = In(Bits(8))
-    lut = fork( ROM7(rom[ 0:128]), ROM7(rom[128:256]))
-    mux = MUXF8()
-    lut(I[0:7])
-    mux(lut.O[0], lut.O[1], I[7])
-    return AnonymousCircuit("I", I, "O", mux.O)
+    return uncurry(LUT8(rom, **kwargs))
 
 def ROMN(rom, n=None, **kwargs):
     """
@@ -112,13 +69,13 @@ def ROMN(rom, n=None, **kwargs):
 
     return None
 
-def ROM(rom, **kwargs):
-    """
-    n-bit ROM
-
-    I[n] -> n
-    """
-    return ROMN(rom, **kwargs)
+#def ROM(rom, **kwargs):
+#    """
+#    n-bit ROM
+#
+#    I[n] -> n
+#    """
+#    return ROMN(rom, **kwargs)
 #
 #
 #def _ROMName(name, n):

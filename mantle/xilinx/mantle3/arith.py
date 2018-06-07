@@ -1,54 +1,40 @@
 from magma import *
-from .logic import Invert, Not
-from .fulladder import FullAdder
+from .LUT import A0, A1
+from .cascade import FullCascade
 
 __all__  = ['DefineAdd'] 
 __all__ += ['DefineSub']
 __all__ += ['DefineNegate']
 __all__ += ['DefineASR']
 
-def _AdderName(basename, n, cin, cout):
-    return "{}{}{}{}".format(
-        basename, n,
-        "Cin"  if cin  else "",
-        "Cout" if cout else ""
-    )
+def _Name(basename, n, cin, cout):
+    name = basename + str(n)
+    if cin is 0 or cin is 1:
+        name += '_cin{}'.format(cin)
+    elif cin:
+        name += '_cin'.format(cin)
+    if cout:
+        name += '_cout'.format(cout)
+    return name
 
-def _AdderArgs(n, cin, cout):
+def _Args(n, cin, cout):
     T = Bits(n)
 
     args = ["I0", In(T), "I1", In(T)]
-    if cin:
-        args += ['CIN', In(Bit)]
+
+    if cin is not 0 and cin is not 1:
+        if cin:
+            args += ['CIN', In(Bit)]
 
     args += ["O", Out(T)]
+
     if cout:
         args += ['COUT', Out(Bit)]
 
     return args
 
-def DefineAdders(name, n, cin, cout, forkargs=[]):
-
-    def f(y):
-        return FullAdder()
-
-    c = braid( col(f, n), foldargs={"CIN":"COUT"}, forkargs=forkargs)
-
-    wire(Adders.I0, c.I0)
-    wire(Adders.I1, c.I1)
-
-    wire(c.O, Adders.O)
-
-    if cin:
-        wire(Adders.CIN, c.CIN)
-    else:
-        wire(0, c.CIN)
-
-    if cout:
-        wire(c.COUT, Adders.COUT)
-
 #
-# create an n-bit Adder from n FullAdders
+# Create an n-bit Add 
 #
 # I0:In(Bits(n)), I1:In(Bits(n)), CIN:In(Bit), O:Out(Bits(n)), COUT:Out(Bit)
 #
@@ -58,61 +44,40 @@ def DefineAdders(name, n, cin, cout, forkargs=[]):
 @cache_definition
 def DefineAdd(n, cin=False, cout=False):
     class _Add(Circuit):
-        name = _AdderName('Add', n, cin, cout)
-        IO = _AdderArgs(n, cin, cout)
+        name = _Name('Add', n, cin, cout)
+        IO = _Args(n, cin, cout)
         @classmethod
         def definition(io):
-            def f(y):
-                return FullAdder()
-
-            add = braid( col(f, n), foldargs={"CIN":"COUT"})
-
+            add = FullCascade(n, 2, A0^A1, A0, cin, cout)
             wire(io.I0, add.I0)
             wire(io.I1, add.I1)
-            if cin:
-                wire(io.CIN, add.CIN)
-            else:
-                wire(0, add.CIN)
-            if cout:
-                wire(add.COUT, io.COUT)
             wire(add.O, io.O)
     return _Add
     
 
 @cache_definition
-def DefineSub(n, cin=False, cout=False):
+def DefineSub(n, cin=1, cout=False):
     class _Sub(Circuit):
-        name = _AdderName('Sub', n, cin, cout)
-        IO = _AdderArgs(n, cin, cout)
+        name = _Name('Sub', n, cin, cout)
+        IO = _Args(n, cin, cout)
         @classmethod
         def definition(io):
-            invert = Invert(n)
-            add =  DefineAdd(n, True, cout)()
-            wire(io.I0, add.I0)
-            wire(io.I1, invert.I)
-            wire(invert.O, add.I1)
-            wire(add.O, io.O)
-            if cin:
-                wire( Not()(io.CIN), add.CIN )
-            else:
-                wire( 1, add.CIN )
-            if cout:
-                wire(add.COUT, io.COUT)
+            sub = FullCascade(n, 2, A0^~A1, A0, cin, cout)
+            wire(io.I0, sub.I0)
+            wire(io.I1, sub.I1)
+            wire(sub.O, io.O)
     return _Sub
-    
-    
 
 @cache_definition
-def DefineNegate(width):
-    T = Bits(width)
+def DefineNegate(n):
+    T = Bits(n)
     class _Negate(Circuit):
-        name = 'Negate{}'.format(width)
+        name = 'Negate{}'.format(n)
         IO = ['I', In(T), 'O', Out(T)]
         @classmethod
         def definition(io):
-            invert = Invert(width)
-            add =  DefineAdd(width, False, False)()
-            wire( add( invert(io.I), (array(1,width))), io.O )
+            sub =  DefineSub(n)()
+            wire( sub( uint(0,n), io.I ), io.O )
     return _Negate
     
 
@@ -121,9 +86,7 @@ def DefineFixedASR(width, shift):
     T = Bits(width)
     class _ASR(Circuit):
         name = 'FixedASR{}_{}'.format(width, shift)
-
         IO = ["I", In(T), "O", Out(T)]
-
         @classmethod
         def definition(io):
             for i in range(0, width - shift):

@@ -1,7 +1,8 @@
 from magma import *
-from .LUT import *
+from .LUT import LUT2, LUT3, LUT4, A0, A1, A2, A3, ZERO
 from .arith import DefineSub
 from .logic import Not
+from .cascade import HalfCascade
 
 __all__  = ['DefineEQ', 'EQ']
 __all__ += ['DefineNE', 'NE']
@@ -14,8 +15,39 @@ __all__ += ['DefineSLE', 'SLE']
 __all__ += ['DefineSGT', 'SGT']
 __all__ += ['DefineSLT', 'SLT']
 
+EQ1LUT = ((A0&A1)|(~A0&~A1))
+EQ2LUT = ((A0&A1)|(~A0&~A1)) & ((A2&A3)|(~A2&~A3))
+
+class EQ1(Circuit):
+    IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        wire( LUT2(EQ1LUT)(io.I0, io.I1), io.O )
+
+class EQ2(Circuit):
+    T = Bits(2)
+    IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        wire( LUT4(EQ2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
+
+@cache_definition
 def DefineEQ(n):
-    pass
+    assert n % 2 == 0
+    T = Bits(n)
+    class _EQ(Circuit):
+        name = "EQ{}".format(n)
+        IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
+        @classmethod
+        def definition(io):
+             eq = HalfCascade(n//2, 4, EQ2LUT, ZERO, 1)
+             for i in range(n//2):
+                 wire(io.I0[2*i], eq.I0[i])
+                 wire(io.I1[2*i], eq.I1[i])
+                 wire(io.I0[2*i+1], eq.I2[i])
+                 wire(io.I1[2*i+1], eq.I3[i])
+             wire(eq.O, io.O)
+    return _EQ
 
 def EQ(n, **kwargs):
     if   n == 1:
@@ -24,9 +56,39 @@ def EQ(n, **kwargs):
         return EQ2(**kwargs)
     return DefineEQ(n)(**kwargs)
 
+NE1LUT = (A0^A1)
+NE2LUT = (A0^A1)|(A2^A3)
 
+class NE1(Circuit):
+    IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        wire( LUT2(NE1LUT)(io.I0, io.I1), io.O )
+
+class NE2(Circuit):
+    T = Bits(2)
+    IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        wire( LUT4(NE2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
+
+@cache_definition
 def DefineNE(n):
-    pass
+    assert n % 2 == 0
+    T = Bits(n)
+    class _NE(Circuit):
+        name = "NE{}".format(n)
+        IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
+        @classmethod
+        def definition(io):
+             ne =  HalfCascade(n//2, 4, NE2LUT, ZERO, 1)
+             for i in range(n//2):
+                 wire(io.I0[2*i], ne.I0[i])
+                 wire(io.I1[2*i], ne.I1[i])
+                 wire(io.I0[2*i+1], ne.I2[i])
+                 wire(io.I1[2*i+1], ne.I3[i])
+             wire(ne.O, io.O)
+    return _NE
 
 def NE(n, **kwargs):
     if   n == 1:
@@ -45,7 +107,7 @@ def DefineUCMP(opname, reverse, negate, n):
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
         @classmethod
         def definition(io):
-            sub = DefineSub(n, False, True)()
+            sub = DefineSub(n,1,True)()
             if not reverse:
                 sub(io.I0, io.I1)
             else:

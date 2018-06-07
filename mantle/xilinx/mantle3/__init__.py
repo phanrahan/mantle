@@ -13,9 +13,8 @@ from .MUX import *
 from .FF import *
 
 from .logic import *
+from .decode import *
 
-from .fulladder import *
-from .halfadder import *
 from .arith import *
 from .compare import *
 

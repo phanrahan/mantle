@@ -8,7 +8,7 @@ __all__ += ['LUTS_PER_LOGICBLOCK', 'BITS_PER_LUT', 'LOG_BITS_PER_LUT']
 
 __all__ += ['_LUT1', '_LUT2', '_LUT3', '_LUT4']
 __all__ += ['MUXF5', 'MUXF6', 'MUXF7', 'MUXF8']
-__all__ += ['MUXCY', 'MUXCY_L', 'MUXCY_D', 'ANDCY', 'XORCY', 'CARRY']
+__all__ += ['MUXCY', 'MUXCY_L', 'MUXCY_D', 'ANDCY', 'XORCY']
 __all__ += ['FDRSE', 'FDCPE', 'FDCE']
 
 LUTS_PER_LOGICBLOCK = 2
@@ -128,18 +128,6 @@ XORCY = DeclareCircuit('XORCY',
                "LI", In(Bit),
                "CI", In(Bit),
                "O", Out(Bit))
-
-def CARRY(I0, I1, CIN):
-    mux = MUXCY()
-    wire(I0,  mux.S)
-    wire(I1,  mux.DI)
-    wire(CIN, mux.CI)
-
-    xor = XORCY()
-    wire(I0,  xor.LI)
-    wire(CIN, xor.CI)
-
-    return xor.O, mux.O
 
 ANDCY = DeclareCircuit('MULT_AND',
                "I0", In(Bit),

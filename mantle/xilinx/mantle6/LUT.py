@@ -1,16 +1,15 @@
 from collections import Sequence
 from magma import *
-from magma.bitutils import lutinit
+from magma.bitutils import lutinit, int2seq
 from magma.compatibility import IntegerTypes
-from ..spartan6.CLB import \
-    _LUT1, _LUT2, _LUT3, _LUT4, _LUT5, _LUT6, \
-    MUXF7, MUXF8
+from ..spartan6.CLB import *
+
 
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
-__all__ += ['LUTN', 'LUT']
-__all__ += ['Logic1', 'Logic2', 'Logic3', 'Logic4']
-__all__ += ['Logic5', 'Logic6', 'Logic7', 'Logic8']
+__all__ += ['LUTN']
+__all__ += ['LUT6x2', 'LUT5x2']
+__all__ += ['A0', 'A1', 'A2', 'A3', 'ZERO', 'ONE']
 
 def LUT1(rom, **kwargs):
     return _LUT1(INIT=lutinit(rom,1<<1), **kwargs)
@@ -105,21 +104,30 @@ def LUTN(rom, n=None, **kwargs):
 
     return None
 
-def LUT(rom, **kwargs):
-    """
-    n-bit LUT
 
-    I[n] -> n
-    """
-    return LUTN(rom, **kwargs)
+# rom5 is for O5
+# rom6 is for O6
+def LUT6x2(rom5, rom6):
+    lut = _LUT6x2(INIT=lutinit(rom5+rom6,1<<6))
+    return AnonymousCircuit("I0", lut.I0,
+                            "I1", lut.I1,
+                            "I2", lut.I2,
+                            "I3", lut.I3,
+                            "I4", lut.I4,
+                            "I5", lut.I5,
+                            "O5", lut.O5,
+                            "O6", lut.O6)
+
+def LUT5x2(rom1, rom2):
+    lut = LUT6x2(rom1, rom2)
+    wire(1, lut.I5)
+    return AnonymousCircuit("I0", lut.I0,
+                            "I1", lut.I1,
+                            "I2", lut.I2,
+                            "I3", lut.I3,
+                            "I4", lut.I4,
+                            "O5", lut.O5,
+                            "O6", lut.O6)
 
 
-Logic1 = LUT1
-Logic2 = LUT2
-Logic3 = LUT3
-Logic4 = LUT4
-Logic5 = LUT5
-Logic6 = LUT6
-Logic7 = LUT7
-Logic8 = LUT8
 

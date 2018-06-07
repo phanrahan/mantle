@@ -1,13 +1,13 @@
 from collections import Sequence
 from magma import *
-from magma.bitutils import lutinit
+from magma.bitutils import lutinit, int2seq
 from magma.compatibility import IntegerTypes
 from ..spartan3.CLB import *
 
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
-__all__ += ['LUTN', 'LUT']
-__all__ += ['A0', 'A1', 'A2', 'A3']
+__all__ += ['LUTN']
+__all__ += ['A0', 'A1', 'A2', 'A3', 'ZERO', 'ONE']
 
 def LUT1(rom, **kwargs):
     return _LUT1(INIT=lutinit(rom,1<<1), **kwargs)
@@ -120,21 +120,4 @@ def LUTN(rom, n=None, **kwargs):
         return LUT8(rom, **kwargs)
 
     return None
-
-def LUT(rom, **kwargs):
-    """
-    n-bit LUT
-
-    I[n] -> n
-    """
-    return LUTN(rom, **kwargs)
-
-Logic1 = LUT1
-Logic2 = LUT2
-Logic3 = LUT3
-Logic4 = LUT4
-Logic5 = LUT5
-Logic6 = LUT6
-Logic7 = LUT7
-Logic8 = LUT8
 

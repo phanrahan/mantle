@@ -11,8 +11,8 @@ SRL16E = DeclareCircuit('SRL16E',
             "A1", In(Bit),
             "A2", In(Bit),
             "A3", In(Bit),
-            "D", In(Bit),
-            "Q", Out(Bit),
+            "D",  In(Bit),
+            "Q",  Out(Bit),
             "CE", In(Enable),
             "CLK", In(Clock) )
 
@@ -21,13 +21,13 @@ SRLC16E = DeclareCircuit('SRLC16E',
             "A1", In(Bit),
             "A2", In(Bit),
             "A3", In(Bit),
-            "D", In(Bit),
-            "Q", Out(Bit),
+            "D",  In(Bit),
+            "Q",  Out(Bit),
             "Q15", Out(Bit),
             "CE", In(Enable),
             "CLK", In(Clock))
 
-def SRL16(init=0, shiftout=False, has_ce=False):
+def SRL16(init=0, has_shiftout=False, has_ce=False):
 
     """
     Create a 16-bit shift register using a LUT
@@ -38,7 +38,7 @@ def SRL16(init=0, shiftout=False, has_ce=False):
     if isinstance(init, IntegerTypes):
         init = int2seq(init, 16)
 
-    if shiftout:
+    if has_shiftout:
         srl16 = SRLC16E(INIT=lutinit(init,16))
     else:
         srl16 = SRL16E(INIT=lutinit(init,16))
@@ -51,7 +51,7 @@ def SRL16(init=0, shiftout=False, has_ce=False):
     else:
         wire(1,srl16.CE)
 
-    if shiftout:
+    if has_shiftout:
         args += ["SHIFTOUT", srl16.Q15]
 
     args += ["CLK", srl16.CLK]
@@ -59,7 +59,7 @@ def SRL16(init=0, shiftout=False, has_ce=False):
     return AnonymousCircuit(args)
 
 
-def SRL32(init=0, shiftout=False, has_ce=False):
+def SRL32(init=0, has_shiftout=False, has_ce=False):
     """
     Configure a Slice as a 32-bit shift register
 
@@ -73,8 +73,8 @@ def SRL32(init=0, shiftout=False, has_ce=False):
         init = int2seq(init, 32)
 
     A = In(Bits(5))()
-    srl0 = SRL16(init[ 0:16], shiftout=True, has_ce=has_ce)
-    srl1 = SRL16(init[16:32], shiftout=True, has_ce=has_ce)
+    srl0 = SRL16(init[ 0:16], has_shiftout=True, has_ce=has_ce)
+    srl1 = SRL16(init[16:32], has_shiftout=True, has_ce=has_ce)
     srls = [srl0, srl1]
     srl = braid( srls, forkargs=['A', 'CE', 'CLK'], foldargs={"I":"SHIFTOUT"} ) 
     wire( A[0:4], srl.A )

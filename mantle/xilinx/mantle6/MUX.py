@@ -28,30 +28,36 @@ def Mux4():
                              "O", lut.O)
 
 # """Construct a Mux with 8 1-bit inputs."""
-Mux8 = DefineCircuit("Mux8", "I", In(Bits(8)), "S", In(Bits(3)), "O", Out(Bit) )
-I = Mux8.I
-S = Mux8.S
-mux0 = Mux4()
-mux1 = Mux4()
-mux0(I[0:4], S[0:2])
-mux1(I[4:8], S[0:2])
-mux = MUXF7()
-mux(mux0, mux1, S[2])
-wire(mux, Mux8.O)
-EndCircuit()
+class Mux8(Circuit):
+    IO = ["I", In(Bits(8)), "S", In(Bits(3)), "O", Out(Bit) ]
+
+    @classmethod
+    def definition(mux8):
+
+        mux0 = Mux4()
+        mux1 = Mux4()
+        mux = MUXF7()
+
+        mux0(mux8.I[0:4], mux8.S[0:2])
+        mux1(mux8.I[4:8], mux8.S[0:2])
+        mux( mux0.O, mux1.O, mux8.S[2] )
+        wire( mux.O, mux8.O )
 
 # """Construct a Mux with 16 1-bit inputs."""
-Mux16 = DefineCircuit("Mux16", "I", In(Bits(16)), "S", In(Bits(4)), "O", Out(Bit))
-I = Mux16.I
-S = Mux16.S
-mux0 = Mux8()
-mux1 = Mux8()
-mux0(I[0: 8], S[0:3])
-mux1(I[8:16], S[0:3])
-mux = MUXF7()
-mux(mux0, mux1, S[3])
-wire(mux, Mux16.O)
-EndCircuit()
+class Mux16(Circuit):
+    IO = ["I", In(Bits(16)), "S", In(Bits(4)), "O", Out(Bit) ]
+
+    @classmethod
+    def definition(mux16):
+
+        mux0 = Mux8()
+        mux1 = Mux8()
+        mux = MUXF8()
+
+        mux0(mux16.I[0:8],  mux16.S[0:3])
+        mux1(mux16.I[8:16], mux16.S[0:3])
+        mux(mux0.O, mux1.O, mux16.S[3])
+        wire(mux.O, mux16.O)
 
 def MuxN(height):
 

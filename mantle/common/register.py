@@ -68,14 +68,16 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, _type=Bits):
 def Register(n, init=0, has_ce=False, has_reset=False, **kwargs):
     return DefineRegister(n, init, has_ce, has_reset)(**kwargs)
 
-def register(I, enable=None, reset=None, **kwargs):
+def register(I, ce=None, reset=None, **kwargs):
+    has_ce = ce is not None
+    has_reset = reset is not None
     reg = Register(len(I), 
-                   has_ce=enable is not None,
-                   has_reset=reset is not None,
+                   has_ce=has_ce,
+                   has_reset=has_reset,
                    **kwargs)
     reg(I)
     if has_ce:
-        wire(enable, reg.CE)
+        wire(ce, reg.CE)
     if has_reset:
         wire(reset, reg.CE)
 

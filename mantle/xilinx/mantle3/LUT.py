@@ -97,8 +97,7 @@ def LUTN(rom, n=None, **kwargs):
 
     # rom must be a sequence
     if isinstance(rom, Sequence):
-        assert n is None
-        n = len(rom)
+        assert n == len(rom)
     else:
         n = 1 << n
 

@@ -36,11 +36,11 @@ def SRFF( init=0, has_ce=False):
 
     """A S-R flip-flop."""
 
-    dff = FF( init=init, has_ce=ce, has_set=True, has_reset=True)
+    dff = FF( init=init, has_ce=has_ce, has_set=True, has_reset=True)
     dff(dff)
 
     args = []
-    if ce:
+    if has_ce:
         args += ['CE', dff.CE]
     args += ["S", dff.SET, "R", dff.RESET, 'CLK', dff.CLK, "O", dff.O]
 
@@ -55,7 +55,7 @@ def RSFF( init=0, has_ce=False):
     dff(dff)
 
     args = []
-    if ce:
+    if has_ce:
         args += ['CE', dff.CE]
     args += ["S", dff.SET, "R", dff.RESET, 'CLK', dff.CLK, "O", dff.O]
 

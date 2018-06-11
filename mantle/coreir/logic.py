@@ -44,6 +44,7 @@ def declare_bit_binop(name, python_op):
                           'in0', In(Bit), 'in1', In(Bit), 'out', Out(Bit),
                           simulate=simulate,
                           verilog_name = "coreir_" + name,
+                          firrtl_op  = name,
                           coreir_lib = "corebit")
 
     circ = DefineCircuit("{}_wrapped".format(name),

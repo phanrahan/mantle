@@ -2,9 +2,9 @@ from magma import *
 import os
 os.environ["MANTLE"] = "lattice"
 from magma.testing import check_files_equal
-from mantle.common.operator import and_, nand, or_, nor, xor, nxor, invert, lsl, lsr, eq, add, sub, lt, le, gt, ge
+from mantle.common.operator import and_, nand, or_, nor, xor, nxor, invert, lsl, lsr, eq, add, sub, lt, le, gt, ge, neg
 import operator
-from mantle import And, Or, XOr, Add, Sub, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Invert
+from mantle import And, Or, XOr, Add, Sub, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Invert, Negate
 
 def check(file_name):
     return check_files_equal(
@@ -13,18 +13,21 @@ def check(file_name):
         "gold/{}".format(file_name)
     )
 
-def check_unary_operator(op, instance_op):
+def check_unary_operator(op, instance_op, wrapped=True):
+    wrapped_suffix = ""
+    if wrapped:
+        wrapped_suffix = "_wrapped"
     name = 'check_unary_{}'.format(op.__name__)
     circ = DefineCircuit(name, "I", In(Bits(4)), "O", Out(Bits(4)))
     wire(op(circ.I), circ.O)
     EndDefine()
     assert repr(circ) == """\
 {name} = DefineCircuit("{name}", "I", In(Bits(4)), "O", Out(Bits(4)))
-inst0 = {instance_op}4_wrapped()
+inst0 = {instance_op}4{wrapped_suffix}()
 wire({name}.I, inst0.I)
 wire(inst0.O, {name}.O)
 EndCircuit()\
-""".format(name=name, instance_op=instance_op)
+""".format(name=name, instance_op=instance_op, wrapped_suffix=wrapped_suffix)
 
 def check_unary_overloaded_operator(op, expected_instance, T=Bits, out_type=Bits(4)):
     name = 'check_unary_{}_overloaded'.format(op.__name__)
@@ -94,6 +97,9 @@ def test_bitwise():
         print("Testing {}".format(args))
         check_binary_operator(args[0], args[2])
         check_binary_overloaded_operator(args[1], args[2])
+
+    check_unary_operator(neg, "Negate", wrapped=False)
+    check_unary_overloaded_operator(operator.neg, Negate(4), T=SInt)
 
     binary_arith_ops = [
         (add , operator.add, Add(4, cin=False)),

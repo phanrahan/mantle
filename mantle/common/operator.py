@@ -93,7 +93,7 @@ def invert(arg, **kwargs):
     else:
         return Invert(width, **kwargs)(arg)
 
-def negate(arg, **kwargs):
+def neg(arg, **kwargs):
     if isinstance(arg, int):
         return -arg
     return Negate(get_length(arg), **kwargs)(arg)
@@ -140,6 +140,7 @@ for method, op in bitwise_ops:
     setattr(BitsType, method, op)
 
 arithmetic_ops = [
+    ("__neg__", neg),
     ("__add__", add),
     ("__sub__", sub),
     ("__mul__", mul),

@@ -105,12 +105,11 @@ and instanced using the following function.
 SB_RAM40_4K() ::
 ```
 
-There is a utility function `RAMB`
-which configures the memory as a RAM,
-and another `ROMB` that configures it as a ROM.
-This memory is initialized with the contents of `rom`.
-The aspect ratio (height x width) of the memory 
-depends on the length of the array `rom`.
+There is a utility function `RAMB` which configures the memory as a RAM, and
+another `ROMB` that configures it as a ROM.  This memory is initialized with
+the contents of `rom` (for `ROMB`) or `ram` (for `RAMB`).  The aspect ratio
+(height x width) of the memory depends on the length of the array `rom` or
+`ram`.
 The following aspect ratios are allowed:
 2048x2,
 1024x4,
@@ -128,7 +127,7 @@ The following aspect ratios are allowed:
 # WCLK,  In(Bit),
 # WCLKE, In(Bit),
 # WE,    In(Bit)
-RAMB(rom)
+ROMB(height, width, ram=None):
 ```
 
 ```
@@ -137,7 +136,7 @@ RAMB(rom)
 # RCLK,  In(Bit),
 # RCLKE, In(Bit),
 # RE,    In(Bit)
-ROMB(rom):
+ROMB(height, width, rom=None):
 ```
 
 

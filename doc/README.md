@@ -9,7 +9,7 @@ set the `MANTLE_TARGET`  environment variable.
 export MANTLE_TARGET=ice40
 ```
 
-The default configuration is to generate generic verilog.
+The default configuration is to generate generic `coreir`.
 
 
 ### Combinational Logic

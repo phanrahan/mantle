@@ -57,22 +57,17 @@ def DefineRAM(height, width):
     circ = DefineCircuit("RAM{}x{}".format(height, width),
         "RADDR", In(Bits(addr_width)),
         "RDATA", Out(Bits(width)),
-        "RCLK",  In(Clock),
-        "RE",    In(Bit),
         "WADDR", In(Bits(addr_width)),
         "WDATA", In(Bits(width)),
-        "WCLK",  In(Clock),
+        "CLK",   In(Clock),
         "WE",    In(Bit),
     )
-    raise NotImplementedError("Coreir removed rclk/wclk")
     coreir_mem = DefineCoreirMem(height, width)()
     wire(circ.RADDR, coreir_mem.raddr)
     wire(circ.RDATA, coreir_mem.rdata)
-    wire(circ.RCLK, coreir_mem.rclk)
-    wire(circ.RE, coreir_mem.ren)
+    wire(circ.CLK, coreir_mem.clk)
     wire(circ.WADDR, coreir_mem.waddr)
     wire(circ.WDATA, coreir_mem.wdata)
-    wire(circ.WCLK, coreir_mem.wclk)
     wire(circ.WE, coreir_mem.wen)
     EndDefine()
     return circ

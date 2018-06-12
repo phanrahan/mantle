@@ -15,7 +15,7 @@ The programmable logic block consists of a vertical column of 8 logic cells.
 Each logic cell containts three components,
 a 4-bit lookup table (LUT4), a Carry unit, and a D-flip-flop (DFF)..
 
-![ice40 PLB][images/ice40plb.jpg]
+![ice40 PLB](images/ice40plb.jpg)
 
 ### LUTS
 
@@ -84,7 +84,7 @@ SB_DFFES() :: C:In(Bit), E:In(Bit), S:In(Bit), D:In(Bit), Q:Out(Bit)
 
 ## Memory 
 
-![Lattice RAM4K Block][images/ice40mem.jpg]
+![Lattice RAM4K Block](images/ice40mem.jpg)
 
 The memory blocks on the ice40 are 4 kilo-bits,
 and instanced using the following function.
@@ -143,7 +143,7 @@ ROMB(rom):
 
 ## IO
 
-![ice40 Programmable IO][images/ice40io.jpg]
+![ice40 Programmable IO](images/ice40io.jpg)
 
 ```
 # SB_IO() ::

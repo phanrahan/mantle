@@ -114,12 +114,17 @@ def LUTN(rom, n=None, **kwargs):
     I : In(Bits(n)), O : Out(Bit)
     """
 
-    # rom must be a sequence
-    if isinstance(rom, Sequence):
-        assert n == len(rom)
-    else:
-        assert n is not None
+    if n is not None:
         n = 1 << n
+
+    if isinstance(rom, Sequence):
+        if n is None:
+            n = len(rom)
+        else:
+            assert n == len(rom)
+
+    assert n is not None
+
 
     if n == 2:
         return LUT1(rom, **kwargs)

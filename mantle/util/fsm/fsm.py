@@ -1,13 +1,14 @@
 from magma import *
-from mantle import *
+from mantle import LUT4, I0, I1, I2, I3, FF, Mux2
 import greenery
 
-__all__ = ['FSM']
+__all__ = ['DefineFSM']
 
 
-def State(state, ins, outs, states, events):
+def State(state, ins, outs, ffs, events):
 
-        # entering state
+        # logic entering state
+        #  if in a state with an event edge to this state
         ilut = LUT4((I0&I1)|(I2&I3))
 
         num_entrance_events = len(ins)
@@ -17,7 +18,7 @@ def State(state, ins, outs, states, events):
         else:
             previous_state_index = ins[0][0]
             trigger_event_index = ins[0][1]
-            wire(states.O[previous_state_index], ilut.I0)
+            wire(ffs.O[previous_state_index], ilut.I0)
             wire(events[trigger_event_index], ilut.I1)
 
         if num_entrance_events < 2:
@@ -26,13 +27,15 @@ def State(state, ins, outs, states, events):
         else:
             previous_state_index = ins[1][0]
             trigger_event_index = ins[1][1]
-            wire(states.O[previous_state_index], ilut.I2)
+            wire(ffs.O[previous_state_index], ilut.I2)
             wire(events[trigger_event_index], ilut.I3)
 
         if num_entrance_events > 2:
             print('#Warning:', num_entrance_events, 'inputs (only 2 allowed)')
 
 
+        # logic for exiting state
+        #  if an outgoing event edge from this state
         olut = LUT4(~(I0|I1|I2|I3))
 
         num_exit_states = len(outs)
@@ -64,28 +67,29 @@ def State(state, ins, outs, states, events):
             print('#Warning:', n, 'outputs (only 4 allowed)')
 
         mux = Mux2()
-        mux( bits([ilut.O, olut.O]), states.O[state] )
-        wire(mux.O, states.I[state])
+        mux( bits([ilut.O, olut.O]), ffs.O[state] )
+        wire(mux.O, ffs.I[state])
 
 
-def FSM(fsm):
+def DefineFSM(name, fsm):
     assert isinstance(fsm, greenery.fsm.fsm)
 
-    states = fsm.states
-    events = fsm.alphabet
+    states = list(fsm.states)
+    events = list(fsm.alphabet)
     initial = fsm.initial
     transitions = fsm.map
-
     nstates = len(states)
+    nevents = len(events)
 
-    # outs is an array with index=state 
-    # and values=[events that exit this state]
+    FSM =  DefineCircuit(name, 
+              'events', In(Bits(nevents)),
+              'states', Out(Bits(nstates)),
+              *ClockInterface(has_ce=True))
+
+    # create a [event] of outgoing transitions for each state
     outs = nstates * [0]
 
-    # ins is an array with index=state and values=[(prev_state, event)]
-    # that represent previous states and associated events
-    # that cause a transititon to this state
-    ins = list(range(nstates))
+    # create a [(prev_state, event)] of incoming transitions for each state
     ins = nstates * [0]
 
     for state, state_transitions in transitions.items():
@@ -106,16 +110,21 @@ def FSM(fsm):
             else:
                 ins[next_state_index] = [(state_index, event_index)]
 
-    CE = Enable()
-    EV = Bits(len(events))()
 
     def ff(y):
         init = 1 if states.index(initial) == y else 0
         return FF(init=init, has_ce=True)
     ffs = join(col(ff, nstates))
-    wire(CE, ffs.CE)
+
+    wire(FSM.CE, ffs.CE)
+    wire(ffs.O, FSM.states)
 
     for i in range(nstates):
-        State(i, ins[i], outs[i], ffs, EV)
+        #print('ins',ins[i])
+        #print('outs',outs[i])
+        State(i, ins[i], outs[i], ffs, FSM.events)
 
-    return AnonymousCircuit('events', EV, 'states', ffs.O, 'CE', CE)
+    EndCircuit()
+
+    return FSM
+

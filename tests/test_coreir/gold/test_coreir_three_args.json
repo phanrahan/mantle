@@ -28,22 +28,22 @@
           }
         },
         "connections":[
-          ["inst0.out","self.O.0"],
-          ["inst1.out","self.O.1"],
-          ["inst2.out","self.O.2"],
-          ["inst3.out","self.O.3"],
-          ["inst0.in.0","self.I0.0"],
-          ["inst0.in.1","self.I1.0"],
-          ["inst0.in.2","self.I2.0"],
-          ["inst1.in.0","self.I0.1"],
-          ["inst1.in.1","self.I1.1"],
-          ["inst1.in.2","self.I2.1"],
-          ["inst2.in.0","self.I0.2"],
-          ["inst2.in.1","self.I1.2"],
-          ["inst2.in.2","self.I2.2"],
-          ["inst3.in.0","self.I0.3"],
-          ["inst3.in.1","self.I1.3"],
-          ["inst3.in.2","self.I2.3"]
+          ["self.I0.0","inst0.in.0"],
+          ["self.I1.0","inst0.in.1"],
+          ["self.I2.0","inst0.in.2"],
+          ["self.O.0","inst0.out"],
+          ["self.I0.1","inst1.in.0"],
+          ["self.I1.1","inst1.in.1"],
+          ["self.I2.1","inst1.in.2"],
+          ["self.O.1","inst1.out"],
+          ["self.I0.2","inst2.in.0"],
+          ["self.I1.2","inst2.in.1"],
+          ["self.I2.2","inst2.in.2"],
+          ["self.O.2","inst2.out"],
+          ["self.I0.3","inst3.in.0"],
+          ["self.I1.3","inst3.in.1"],
+          ["self.I2.3","inst3.in.2"],
+          ["self.O.3","inst3.out"]
         ]
       },
       "Invert4_wrapped":{
@@ -58,8 +58,8 @@
           }
         },
         "connections":[
-          ["inst0.in","self.I"],
-          ["inst0.out","self.O"]
+          ["self.I","inst0.in"],
+          ["self.O","inst0.out"]
         ]
       },
       "Or3x4":{
@@ -88,22 +88,22 @@
           }
         },
         "connections":[
-          ["inst0.out","self.O.0"],
-          ["inst1.out","self.O.1"],
-          ["inst2.out","self.O.2"],
-          ["inst3.out","self.O.3"],
-          ["inst0.in.0","self.I0.0"],
-          ["inst0.in.1","self.I1.0"],
-          ["inst0.in.2","self.I2.0"],
-          ["inst1.in.0","self.I0.1"],
-          ["inst1.in.1","self.I1.1"],
-          ["inst1.in.2","self.I2.1"],
-          ["inst2.in.0","self.I0.2"],
-          ["inst2.in.1","self.I1.2"],
-          ["inst2.in.2","self.I2.2"],
-          ["inst3.in.0","self.I0.3"],
-          ["inst3.in.1","self.I1.3"],
-          ["inst3.in.2","self.I2.3"]
+          ["self.I0.0","inst0.in.0"],
+          ["self.I1.0","inst0.in.1"],
+          ["self.I2.0","inst0.in.2"],
+          ["self.O.0","inst0.out"],
+          ["self.I0.1","inst1.in.0"],
+          ["self.I1.1","inst1.in.1"],
+          ["self.I2.1","inst1.in.2"],
+          ["self.O.1","inst1.out"],
+          ["self.I0.2","inst2.in.0"],
+          ["self.I1.2","inst2.in.1"],
+          ["self.I2.2","inst2.in.2"],
+          ["self.O.2","inst2.out"],
+          ["self.I0.3","inst3.in.0"],
+          ["self.I1.3","inst3.in.1"],
+          ["self.I2.3","inst3.in.2"],
+          ["self.O.3","inst3.out"]
         ]
       },
       "fold_xor34":{
@@ -122,11 +122,11 @@
           }
         },
         "connections":[
-          ["inst0.I0","self.I0"],
-          ["inst0.I1","self.I1"],
-          ["inst0.O","inst1.I0"],
-          ["inst1.I1","self.I2"],
-          ["inst1.O","self.O"]
+          ["self.I0","inst0.I0"],
+          ["self.I1","inst0.I1"],
+          ["inst1.I0","inst0.O"],
+          ["self.I2","inst1.I1"],
+          ["self.O","inst1.O"]
         ]
       },
       "test_coreir_three_args":{
@@ -151,17 +151,17 @@
           }
         },
         "connections":[
-          ["inst0.I0","self.a"],
-          ["inst0.I1","inst1.O"],
-          ["inst0.I2","inst3.O"],
-          ["inst0.O","self.d"],
-          ["inst1.I","inst2.O"],
-          ["inst2.I0","self.a"],
-          ["inst2.I1","self.b"],
-          ["inst2.I2","self.c"],
-          ["inst3.I0","self.b"],
-          ["inst3.I1","self.c"],
-          ["inst3.I2","self.a"]
+          ["self.a","inst0.I0"],
+          ["inst1.O","inst0.I1"],
+          ["inst3.O","inst0.I2"],
+          ["self.d","inst0.O"],
+          ["inst2.O","inst1.I"],
+          ["self.a","inst2.I0"],
+          ["self.b","inst2.I1"],
+          ["self.c","inst2.I2"],
+          ["self.b","inst3.I0"],
+          ["self.c","inst3.I1"],
+          ["self.a","inst3.I2"]
         ]
       },
       "xor4_wrapped":{
@@ -177,9 +177,9 @@
           }
         },
         "connections":[
-          ["inst0.in0","self.I0"],
-          ["inst0.in1","self.I1"],
-          ["inst0.out","self.O"]
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["self.O","inst0.out"]
         ]
       }
     }

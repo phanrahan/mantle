@@ -30,7 +30,7 @@ EndCircuit()\
 """.format(name=name, instance_op=instance_op, wrapped_suffix=wrapped_suffix)
 
 def check_unary_overloaded_operator(op, expected_instance, T=Bits, out_type=Bits(4)):
-    name = 'check_unary_{}_overloaded'.format(op.__name__)
+    name = 'check_unary_{}_overloaded_{}'.format(op.__name__, str(T(4)))
     circ = DefineCircuit(name, "I", In(T(4)), "O", Out(out_type))
     wire(op(circ.I), circ.O)
     EndDefine()
@@ -43,7 +43,7 @@ EndCircuit()\
 """.format(name=name, out_type=str(out_type), T=str(T(4)), expected_instance=repr(expected_instance))
 
 def check_binary_operator(op, expected_instance, T=Bits, out_type=Bits(4)):
-    name = 'check_binary_{}'.format(op.__name__)
+    name = 'check_binary_{}_{}'.format(op.__name__, str(T(4)))
     circ = DefineCircuit(name, "I0", In(T(4)), "I1", In(T(4)), "O", Out(out_type))
     wire(op(circ.I0, circ.I1), circ.O)
     EndDefine()
@@ -57,7 +57,7 @@ EndCircuit()\
 """.format(name=name, out_type=str(out_type), T=str(T(4)), expected_instance=repr(expected_instance))
 
 def check_binary_overloaded_operator(op, expected_instance, T=Bits, out_type=Bits(4)):
-    name = 'check_binary_{}_overloaded'.format(op.__name__)
+    name = 'check_binary_{}_overloaded_{}'.format(op.__name__, str(T(4)))
     circ = DefineCircuit(name, "I0", In(T(4)), "I1", In(T(4)), "O", Out(out_type))
     wire(op(circ.I0, circ.I1), circ.O)
     EndDefine()
@@ -71,7 +71,7 @@ EndCircuit()\
 """.format(name=name, out_type=str(out_type), T=str(T(4)), expected_instance=repr(expected_instance))
 
 def check_operator_three_args(op, instance_op):
-    name = 'check_{}_three_args'.format(op.__name__)
+    name = 'check_{}_three_args_{}'.format(op.__name__, str(T(4)))
     circ = DefineCircuit(name, "I0", In(Bits(4)), "I1", In(Bits(4)),  "I2", In(Bits(4)), "O", Out(Bits(4)))
     wire(op(circ.I0, circ.I1, circ.I2), circ.O)
     EndDefine()

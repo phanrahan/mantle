@@ -13,6 +13,7 @@ def gen_sim_register(N, init, has_ce):
 
         if not state_store:
             state_store['prev_clock'] = cur_clock
+            print(init)
             state_store['cur_val'] = BitVector(init, num_bits=N) if N is not None else bool(init)
 
         # if has_reset:

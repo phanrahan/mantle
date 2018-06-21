@@ -17,10 +17,10 @@
           }
         },
         "connections":[
-          ["inst0.out","self.O"],
           ["self.I0","inst0.in.0"],
           ["self.I1","inst0.in.1"],
-          ["self.I2","inst0.in.2"]
+          ["self.I2","inst0.in.2"],
+          ["self.O","inst0.out"]
         ]
       },
       "test_coreir_lut3":{
@@ -34,10 +34,10 @@
           }
         },
         "connections":[
-          ["inst0.I0","self.I.0"],
-          ["inst0.I1","self.I.1"],
-          ["inst0.I2","self.I.2"],
-          ["inst0.O","self.O"]
+          ["self.I.0","inst0.I0"],
+          ["self.I.1","inst0.I1"],
+          ["self.I.2","inst0.I2"],
+          ["self.O","inst0.O"]
         ]
       }
     }

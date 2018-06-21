@@ -17,11 +17,11 @@
           }
         },
         "connections":[
-          ["inst0.out","self.O"],
           ["self.I0","inst0.in.0"],
           ["self.I1","inst0.in.1"],
           ["self.I2","inst0.in.2"],
-          ["self.I3","inst0.in.3"]
+          ["self.I3","inst0.in.3"],
+          ["self.O","inst0.out"]
         ]
       },
       "NAnd4None":{
@@ -41,12 +41,12 @@
           }
         },
         "connections":[
-          ["inst0.in","inst1.O"],
-          ["inst0.out","self.O"],
-          ["inst1.I0","self.I0"],
-          ["inst1.I1","self.I1"],
-          ["inst1.I2","self.I2"],
-          ["inst1.I3","self.I3"]
+          ["inst1.O","inst0.in"],
+          ["self.O","inst0.out"],
+          ["self.I0","inst1.I0"],
+          ["self.I1","inst1.I1"],
+          ["self.I2","inst1.I2"],
+          ["self.I3","inst1.I3"]
         ]
       },
       "NOr4None":{
@@ -66,12 +66,37 @@
           }
         },
         "connections":[
-          ["inst0.in","inst1.O"],
-          ["inst0.out","self.O"],
-          ["inst1.I0","self.I0"],
-          ["inst1.I1","self.I1"],
-          ["inst1.I2","self.I2"],
-          ["inst1.I3","self.I3"]
+          ["inst1.O","inst0.in"],
+          ["self.O","inst0.out"],
+          ["self.I0","inst1.I0"],
+          ["self.I1","inst1.I1"],
+          ["self.I2","inst1.I2"],
+          ["self.I3","inst1.I3"]
+        ]
+      },
+      "NXOr4None":{
+        "type":["Record",[
+          ["in0","BitIn"],
+          ["in1","BitIn"],
+          ["in2","BitIn"],
+          ["in3","BitIn"],
+          ["out","Bit"]
+        ]],
+        "instances":{
+          "inst0":{
+            "modref":"corebit.not"
+          },
+          "inst1":{
+            "modref":"global.fold_xor4None"
+          }
+        },
+        "connections":[
+          ["inst1.O","inst0.in"],
+          ["self.out","inst0.out"],
+          ["self.in0","inst1.I0"],
+          ["self.in1","inst1.I1"],
+          ["self.in2","inst1.I2"],
+          ["self.in3","inst1.I3"]
         ]
       },
       "Or3xNone":{
@@ -88,10 +113,10 @@
           }
         },
         "connections":[
-          ["inst0.out","self.O"],
           ["self.I0","inst0.in.0"],
           ["self.I1","inst0.in.1"],
-          ["self.I2","inst0.in.2"]
+          ["self.I2","inst0.in.2"],
+          ["self.O","inst0.out"]
         ]
       },
       "Or4xNone":{
@@ -109,11 +134,11 @@
           }
         },
         "connections":[
-          ["inst0.out","self.O"],
           ["self.I0","inst0.in.0"],
           ["self.I1","inst0.in.1"],
           ["self.I2","inst0.in.2"],
-          ["self.I3","inst0.in.3"]
+          ["self.I3","inst0.in.3"],
+          ["self.O","inst0.out"]
         ]
       },
       "fold_xor4None":{
@@ -136,13 +161,13 @@
           }
         },
         "connections":[
-          ["inst0.I0","self.I0"],
-          ["inst0.I1","self.I1"],
-          ["inst0.O","inst1.I0"],
-          ["inst1.I1","self.I2"],
-          ["inst1.O","inst2.I0"],
-          ["inst2.I1","self.I3"],
-          ["inst2.O","self.O"]
+          ["self.I0","inst0.I0"],
+          ["self.I1","inst0.I1"],
+          ["inst1.I0","inst0.O"],
+          ["self.I2","inst1.I1"],
+          ["inst2.I0","inst1.O"],
+          ["self.I3","inst2.I1"],
+          ["self.O","inst2.O"]
         ]
       },
       "test_coreir_reduce_2":{
@@ -163,26 +188,26 @@
             "modref":"global.NOr4None"
           },
           "inst3":{
-            "modref":"global.fold_xor4None"
+            "modref":"global.NXOr4None"
           }
         },
         "connections":[
-          ["inst0.I0","inst1.O"],
-          ["inst0.I1","inst2.O"],
-          ["inst0.I2","inst3.O"],
-          ["inst0.O","self.d"],
-          ["inst1.I0","self.a.0"],
-          ["inst1.I1","self.a.1"],
-          ["inst1.I2","self.a.2"],
-          ["inst1.I3","self.a.3"],
-          ["inst2.I0","self.b.0"],
-          ["inst2.I1","self.b.1"],
-          ["inst2.I2","self.b.2"],
-          ["inst2.I3","self.b.3"],
-          ["inst3.I0","self.b.0"],
-          ["inst3.I1","self.b.1"],
-          ["inst3.I2","self.b.2"],
-          ["inst3.I3","self.b.3"]
+          ["inst1.O","inst0.I0"],
+          ["inst2.O","inst0.I1"],
+          ["inst3.out","inst0.I2"],
+          ["self.d","inst0.O"],
+          ["self.a.0","inst1.I0"],
+          ["self.a.1","inst1.I1"],
+          ["self.a.2","inst1.I2"],
+          ["self.a.3","inst1.I3"],
+          ["self.b.0","inst2.I0"],
+          ["self.b.1","inst2.I1"],
+          ["self.b.2","inst2.I2"],
+          ["self.b.3","inst2.I3"],
+          ["self.b.0","inst3.in0"],
+          ["self.b.1","inst3.in1"],
+          ["self.b.2","inst3.in2"],
+          ["self.b.3","inst3.in3"]
         ]
       },
       "xor_wrapped":{
@@ -197,9 +222,9 @@
           }
         },
         "connections":[
-          ["inst0.in0","self.I0"],
-          ["inst0.in1","self.I1"],
-          ["inst0.out","self.O"]
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["self.O","inst0.out"]
         ]
       }
     }

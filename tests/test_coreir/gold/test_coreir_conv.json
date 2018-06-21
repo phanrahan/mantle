@@ -60,35 +60,35 @@
           }
         },
         "connections":[
-          ["add_r.in0","inst5.out"],
-          ["add_r.in1","c1.out"],
-          ["add_r.out","raddr_eq.in0"],
-          ["add_r.out","raddr_mux.in0"],
-          ["add_w.in0","inst9.out"],
-          ["add_w.in1","c1.out"],
-          ["add_w.out","waddr_eq.in0"],
-          ["add_w.out","waddr_mux.in0"],
-          ["inst5.clk","self.clk"],
-          ["inst5.en","self.wen"],
-          ["inst5.in","raddr_mux.out"],
-          ["inst5.out","mem.raddr"],
-          ["inst5.out","veq.in0"],
-          ["inst9.clk","self.clk"],
-          ["inst9.en","self.wen"],
-          ["inst9.in","waddr_mux.out"],
-          ["inst9.out","mem.waddr"],
-          ["inst9.out","veq.in1"],
-          ["max_const.out","raddr_eq.in1"],
-          ["max_const.out","waddr_eq.in1"],
-          ["mem.clk","self.clk"],
-          ["mem.rdata","self.rdata"],
-          ["mem.wdata","self.wdata"],
-          ["mem.wen","self.wen"],
-          ["raddr_eq.out","raddr_mux.sel"],
-          ["raddr_mux.in1","zero_const.out"],
-          ["self.valid","veq.out"],
-          ["waddr_eq.out","waddr_mux.sel"],
-          ["waddr_mux.in1","zero_const.out"]
+          ["inst5.out","add_r.in0"],
+          ["c1.out","add_r.in1"],
+          ["raddr_eq.in0","add_r.out"],
+          ["raddr_mux.in0","add_r.out"],
+          ["inst9.out","add_w.in0"],
+          ["c1.out","add_w.in1"],
+          ["waddr_eq.in0","add_w.out"],
+          ["waddr_mux.in0","add_w.out"],
+          ["self.clk","inst5.clk"],
+          ["self.wen","inst5.en"],
+          ["raddr_mux.out","inst5.in"],
+          ["mem.raddr","inst5.out"],
+          ["veq.in0","inst5.out"],
+          ["self.clk","inst9.clk"],
+          ["self.wen","inst9.en"],
+          ["waddr_mux.out","inst9.in"],
+          ["mem.waddr","inst9.out"],
+          ["veq.in1","inst9.out"],
+          ["raddr_eq.in1","max_const.out"],
+          ["waddr_eq.in1","max_const.out"],
+          ["self.clk","mem.clk"],
+          ["self.rdata","mem.rdata"],
+          ["self.wdata","mem.wdata"],
+          ["self.wen","mem.wen"],
+          ["raddr_mux.sel","raddr_eq.out"],
+          ["zero_const.out","raddr_mux.in1"],
+          ["veq.out","self.valid"],
+          ["waddr_mux.sel","waddr_eq.out"],
+          ["zero_const.out","waddr_mux.in1"]
         ]
       },
       "commonlib_Linebuffer_U3":{
@@ -107,12 +107,12 @@
           }
         },
         "connections":[
-          ["inst0.clk","self.clk"],
-          ["inst0.rdata","self.out.0.0"],
-          ["inst0.valid","mem_1_valid_term.in"],
-          ["inst0.wdata","self.in"],
-          ["inst0.wen","self.wen"],
-          ["self.in","self.out.1.0"]
+          ["self.clk","inst0.clk"],
+          ["self.out.0.0","inst0.rdata"],
+          ["mem_1_valid_term.in","inst0.valid"],
+          ["self.in","inst0.wdata"],
+          ["self.wen","inst0.wen"],
+          ["self.out.1.0","self.in"]
         ]
       },
       "corebit_const1":{
@@ -126,7 +126,7 @@
           }
         },
         "connections":[
-          ["bit_const_VCC.out","self.out"]
+          ["self.out","bit_const_VCC.out"]
         ]
       },
       "corebit_term":{
@@ -145,22 +145,22 @@
           }
         },
         "connections":[
-          ["bit_const_GND.out","self.out.0"],
-          ["bit_const_GND.out","self.out.1"],
-          ["bit_const_GND.out","self.out.10"],
-          ["bit_const_GND.out","self.out.11"],
-          ["bit_const_GND.out","self.out.12"],
-          ["bit_const_GND.out","self.out.13"],
-          ["bit_const_GND.out","self.out.14"],
-          ["bit_const_GND.out","self.out.15"],
-          ["bit_const_GND.out","self.out.2"],
-          ["bit_const_GND.out","self.out.3"],
-          ["bit_const_GND.out","self.out.4"],
-          ["bit_const_GND.out","self.out.5"],
-          ["bit_const_GND.out","self.out.6"],
-          ["bit_const_GND.out","self.out.7"],
-          ["bit_const_GND.out","self.out.8"],
-          ["bit_const_GND.out","self.out.9"]
+          ["self.out.0","bit_const_GND.out"],
+          ["self.out.10","bit_const_GND.out"],
+          ["self.out.11","bit_const_GND.out"],
+          ["self.out.12","bit_const_GND.out"],
+          ["self.out.13","bit_const_GND.out"],
+          ["self.out.14","bit_const_GND.out"],
+          ["self.out.15","bit_const_GND.out"],
+          ["self.out.1","bit_const_GND.out"],
+          ["self.out.2","bit_const_GND.out"],
+          ["self.out.3","bit_const_GND.out"],
+          ["self.out.4","bit_const_GND.out"],
+          ["self.out.5","bit_const_GND.out"],
+          ["self.out.6","bit_const_GND.out"],
+          ["self.out.7","bit_const_GND.out"],
+          ["self.out.8","bit_const_GND.out"],
+          ["self.out.9","bit_const_GND.out"]
         ]
       },
       "coreir_const167":{
@@ -178,22 +178,22 @@
           }
         },
         "connections":[
-          ["bit_const_GND.out","self.out.10"],
-          ["bit_const_GND.out","self.out.11"],
-          ["bit_const_GND.out","self.out.12"],
-          ["bit_const_GND.out","self.out.13"],
-          ["bit_const_GND.out","self.out.14"],
-          ["bit_const_GND.out","self.out.15"],
-          ["bit_const_GND.out","self.out.3"],
-          ["bit_const_GND.out","self.out.4"],
-          ["bit_const_GND.out","self.out.5"],
-          ["bit_const_GND.out","self.out.6"],
-          ["bit_const_GND.out","self.out.7"],
-          ["bit_const_GND.out","self.out.8"],
-          ["bit_const_GND.out","self.out.9"],
-          ["bit_const_VCC.out","self.out.0"],
-          ["bit_const_VCC.out","self.out.1"],
-          ["bit_const_VCC.out","self.out.2"]
+          ["self.out.10","bit_const_GND.out"],
+          ["self.out.11","bit_const_GND.out"],
+          ["self.out.12","bit_const_GND.out"],
+          ["self.out.13","bit_const_GND.out"],
+          ["self.out.14","bit_const_GND.out"],
+          ["self.out.15","bit_const_GND.out"],
+          ["self.out.3","bit_const_GND.out"],
+          ["self.out.4","bit_const_GND.out"],
+          ["self.out.5","bit_const_GND.out"],
+          ["self.out.6","bit_const_GND.out"],
+          ["self.out.7","bit_const_GND.out"],
+          ["self.out.8","bit_const_GND.out"],
+          ["self.out.9","bit_const_GND.out"],
+          ["self.out.0","bit_const_VCC.out"],
+          ["self.out.1","bit_const_VCC.out"],
+          ["self.out.2","bit_const_VCC.out"]
         ]
       },
       "coreir_const40":{
@@ -207,10 +207,10 @@
           }
         },
         "connections":[
-          ["bit_const_GND.out","self.out.0"],
-          ["bit_const_GND.out","self.out.1"],
-          ["bit_const_GND.out","self.out.2"],
-          ["bit_const_GND.out","self.out.3"]
+          ["self.out.0","bit_const_GND.out"],
+          ["self.out.1","bit_const_GND.out"],
+          ["self.out.2","bit_const_GND.out"],
+          ["self.out.3","bit_const_GND.out"]
         ]
       },
       "coreir_const41":{
@@ -228,10 +228,10 @@
           }
         },
         "connections":[
-          ["bit_const_GND.out","self.out.1"],
-          ["bit_const_GND.out","self.out.2"],
-          ["bit_const_GND.out","self.out.3"],
-          ["bit_const_VCC.out","self.out.0"]
+          ["self.out.1","bit_const_GND.out"],
+          ["self.out.2","bit_const_GND.out"],
+          ["self.out.3","bit_const_GND.out"],
+          ["self.out.0","bit_const_VCC.out"]
         ]
       },
       "coreir_const410":{
@@ -249,10 +249,10 @@
           }
         },
         "connections":[
-          ["bit_const_GND.out","self.out.0"],
-          ["bit_const_GND.out","self.out.2"],
-          ["bit_const_VCC.out","self.out.1"],
-          ["bit_const_VCC.out","self.out.3"]
+          ["self.out.0","bit_const_GND.out"],
+          ["self.out.2","bit_const_GND.out"],
+          ["self.out.1","bit_const_VCC.out"],
+          ["self.out.3","bit_const_VCC.out"]
         ]
       },
       "global_DesignTop":{
@@ -301,20 +301,20 @@
           }
         },
         "connections":[
-          ["add_335_339_340.in0","const0__334.out"],
-          ["add_335_339_340.in1","mul_337_338_339.out"],
-          ["add_335_339_340.out","add_335_343_344.in0"],
-          ["add_335_343_344.in1","mul_342_338_343.out"],
-          ["add_335_343_344.out","self.out"],
-          ["const7__338.out","mul_337_338_339.in1"],
-          ["const7__338__ds__1.out","mul_342_338_343.in1"],
-          ["inst0.in","inst7.out.0.0"],
-          ["inst0.out","mul_337_338_339.in0"],
-          ["inst1.in","inst7.out.1.0"],
-          ["inst1.out","mul_342_338_343.in0"],
-          ["inst7.clk","self.clk"],
-          ["inst7.in","self.in.0"],
-          ["inst7.wen","lb_p4_clamped_stencil_update_stream_wen.out"]
+          ["const0__334.out","add_335_339_340.in0"],
+          ["mul_337_338_339.out","add_335_339_340.in1"],
+          ["add_335_343_344.in0","add_335_339_340.out"],
+          ["mul_342_338_343.out","add_335_343_344.in1"],
+          ["self.out","add_335_343_344.out"],
+          ["mul_337_338_339.in1","const7__338.out"],
+          ["mul_342_338_343.in1","const7__338__ds__1.out"],
+          ["inst7.out.0.0","inst0.in"],
+          ["mul_337_338_339.in0","inst0.out"],
+          ["inst7.out.1.0","inst1.in"],
+          ["mul_342_338_343.in0","inst1.out"],
+          ["self.clk","inst7.clk"],
+          ["self.in.0","inst7.in"],
+          ["lb_p4_clamped_stencil_update_stream_wen.out","inst7.wen"]
         ]
       },
       "mantle_reg_U6_0":{
@@ -336,12 +336,12 @@
           }
         },
         "connections":[
-          ["enMux.in0","reg0.out"],
-          ["enMux.in1","self.in"],
-          ["enMux.out","reg0.in"],
-          ["enMux.sel","self.en"],
-          ["reg0.clk","self.clk"],
-          ["reg0.out","self.out"]
+          ["reg0.out","enMux.in0"],
+          ["self.in","enMux.in1"],
+          ["reg0.in","enMux.out"],
+          ["self.en","enMux.sel"],
+          ["self.clk","reg0.clk"],
+          ["self.out","reg0.out"]
         ]
       },
       "mantle_wire_U0":{
@@ -350,7 +350,7 @@
           ["out",["Array",16,"Bit"]]
         ]],
         "connections":[
-          ["self.in","self.out"]
+          ["self.out","self.in"]
         ]
       }
     }

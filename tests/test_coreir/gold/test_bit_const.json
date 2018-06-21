@@ -13,7 +13,7 @@
           }
         },
         "connections":[
-          ["bit_const_VCC.out","self.out"]
+          ["self.out","bit_const_VCC.out"]
         ]
       }
     }

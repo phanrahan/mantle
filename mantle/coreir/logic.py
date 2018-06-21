@@ -311,10 +311,10 @@ def DefineNXOr(height=2, width=None):
 
 
 def NXOr(height, width=None, **kwargs):
-    return DefineXOr(height, width)(**kwargs)
+    return DefineNXOr(height, width)(**kwargs)
 
 def ReduceNXOr(height=2, **kwargs):
-    return uncurry(NXOr(height, **kwargs))
+    return uncurry(NXOr(height, **kwargs), "in")
 
 
 def simulate_bits_invert(self, value_store, state_store):

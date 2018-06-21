@@ -21,18 +21,18 @@
           }
         },
         "connections":[
-          ["inst0.O","self.O.0"],
-          ["inst0.S","self.S"],
-          ["inst1.O","self.O.1"],
-          ["inst1.S","self.S"],
-          ["inst2.O","self.O.2"],
-          ["inst2.S","self.S"],
-          ["inst0.I.0","self.I0.0"],
-          ["inst0.I.1","self.I1.0"],
-          ["inst1.I.0","self.I0.1"],
-          ["inst1.I.1","self.I1.1"],
-          ["inst2.I.0","self.I0.2"],
-          ["inst2.I.1","self.I1.2"]
+          ["self.I0.0","inst0.I.0"],
+          ["self.I1.0","inst0.I.1"],
+          ["self.O.0","inst0.O"],
+          ["self.S","inst0.S"],
+          ["self.I0.1","inst1.I.0"],
+          ["self.I1.1","inst1.I.1"],
+          ["self.O.1","inst1.O"],
+          ["self.S","inst1.S"],
+          ["self.I0.2","inst2.I.0"],
+          ["self.I1.2","inst2.I.1"],
+          ["self.O.2","inst2.O"],
+          ["self.S","inst2.S"]
         ]
       },
       "_Mux2":{
@@ -47,10 +47,10 @@
           }
         },
         "connections":[
-          ["inst0.in0","self.I.0"],
-          ["inst0.in1","self.I.1"],
-          ["inst0.out","self.O"],
-          ["inst0.sel","self.S"]
+          ["self.I.0","inst0.in0"],
+          ["self.I.1","inst0.in1"],
+          ["self.O","inst0.out"],
+          ["self.S","inst0.sel"]
         ]
       }
     }

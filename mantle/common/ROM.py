@@ -40,7 +40,6 @@ def interleave16(data, width):
     #print(len(data), data)
     return data
 
-@cache_definition
 def DefineROM(height, width, data):
     assert height >= 4
     n = 1 << height

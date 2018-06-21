@@ -16,7 +16,7 @@
           }
         },
         "connections":[
-          ["inst0.clk","self.CLK"],
+          ["self.CLK","inst0.clk"],
           ["self.I","inst0.in.0"],
           ["self.O","inst0.out.0"]
         ]

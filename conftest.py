@@ -15,3 +15,17 @@ def mantle_test():
     magma.config.set_compile_dir('callee_file_dir')
     magma_clear_circuit_cache()
     clear_cachedFunctions()
+
+
+def pytest_collection_modifyitems(items):
+    for item in items:
+        if   "mantle3" in item.nodeid or "spartan3" in item.nodeid:
+            item.add_marker(pytest.mark.spartan3)
+        elif "mantle6" in item.nodeid or "spartan6" in item.nodeid:
+            item.add_marker(pytest.mark.spartan6)
+        elif "mantle40" in item.nodeid or "ice40" in item.nodeid:
+            item.add_marker(pytest.mark.ice40)
+        elif "verilog" in item.nodeid:
+            item.add_marker(pytest.mark.verilog)
+        else:
+            item.add_marker(pytest.mark.coreir)

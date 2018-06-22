@@ -1,9 +1,5 @@
-import os
-
-target = os.environ['MANTLE_TARGET']
-target = target.strip()
-
-assert target == 'spartan3' or target == 'spartan6' or target == 'kintex7'
+import magma
+target = magma.mantle_target
 
 if   target == 'spartan3':
     from ..spartan3 import *

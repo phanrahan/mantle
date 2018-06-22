@@ -15,4 +15,8 @@ install:
     - pip install -e .
 
 script:
-    - py.test -m coreir --cov=mantle tests/
+    - py.test tests/test_verilog
+    - py.test tests/test_coreir
+    - py.test tests/test_ice40 tests/test_mantle40
+    - py.test tests/test_spartan3 tests/test_mantle3 
+    - py.test tests/test_spartan6 tests/test_mantle6 

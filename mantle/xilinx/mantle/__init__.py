@@ -1,10 +1,8 @@
-import os
-target = os.environ.get('MANTLE_TARGET', 'spartan3')
-
-assert target == 'spartan3' or target == 'spartan6' or target == 'kintex7'
+import magma
+target = magma.mantle_target
 
 if   target == 'spartan3':
     from ..mantle3 import *
-else:
+elif target == 'spartan6':
     from ..mantle6 import *
 

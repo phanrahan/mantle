@@ -11,13 +11,14 @@ __all__ += ['DefineMux', 'Mux']
 #
 MUX2DATA = (~A2&A0)|(A2&A1)
 
-def Mux2():
-    """Construct a Mux with 2 1-bit inputs."""
-    lut = _LUT3(INIT=lutinit(MUX2DATA,1<<3))
-    return AnonymousCircuit("I",  array([lut.I0, lut.I1]), 
-                            "S",  lut.I2,
-                            "O",  lut.O)
-
+# """Construct a Mux with 2 1-bit inputs."""
+class Mux2(Circuit):
+    IO = ["I", In(Bits(2)), "S", In(Bit), "O", Out(Bit) ]
+            
+    @classmethod
+    def definition(io):
+        lut = _LUT3(INIT=lutinit(MUX2DATA,1<<3))
+        wire( lut(io.I[0], io.I[1], io.S), io.O)
 
 # """Construct a Mux with 4 1-bit inputs."""
 class Mux4(Circuit):

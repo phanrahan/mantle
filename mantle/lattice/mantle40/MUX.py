@@ -3,7 +3,6 @@ from magma import *
 from .LUT import LUT3, A0, A1, A2
 
 __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
-#__all__ += ['MuxN']
 __all__ += ['DefineMux', 'Mux']
 
 #

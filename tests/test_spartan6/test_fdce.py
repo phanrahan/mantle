@@ -2,7 +2,7 @@ from magma import DefineCircuit, EndCircuit, In, Out, Bit, Clock, wire
 from magma.backend.verilog import compile
 from mantle.xilinx.spartan6 import FDCE
 
-def test_fdce6():
+def test_fdce():
     main = DefineCircuit('main', 'I', In(Bit), "O", Out(Bit), "CLK", In(Clock))
     dff = FDCE()
     wire(1, dff.CE)

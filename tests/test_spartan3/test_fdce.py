@@ -11,6 +11,6 @@ def test_fdce():
     wire(dff.Q, main.O)
     EndCircuit()
 
-    print(compile(main)) # compile will wire up the CLK
+    print(compile(main))
     print(repr(main))
 

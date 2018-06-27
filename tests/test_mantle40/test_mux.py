@@ -1,14 +1,11 @@
-import pytest
 import magma
 magma.set_mantle_target('ice40')
-from magma import compile
-from magma.simulator.python_simulator import testvectors as simtest
-from magma.testing.newfunction import testvectors as funtest
-from magma.testing import check_files_equal
 
 from mantle.lattice.mantle40 import Mux2, Mux4, Mux8, Mux16, DefineMux
 
 def sim(Test, TestFun):
+    from magma.simulator.python_simulator import testvectors as simtest
+    from magma.testing.newfunction import testvectors as funtest
     tvsim = simtest(Test)
     print(tvsim)
     tvfun = funtest(Test, TestFun)
@@ -16,6 +13,8 @@ def sim(Test, TestFun):
     assert tvsim == tvfun
 
 def com(Test, name):
+    from magma import compile
+    from magma.testing import check_files_equal
     name = 'test_{}'.format(name)
     build = 'build/' + name
     gold = 'gold/' + name

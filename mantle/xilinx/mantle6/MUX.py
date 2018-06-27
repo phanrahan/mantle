@@ -6,26 +6,26 @@ __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
 __all__ += ['MuxN']
 __all__ += ['DefineMux', 'Mux']
 
-#
-# C ? B : A
-#
-MUX2DATA = (~A2&A0)|(A2&A1)
 
-def Mux2():
-    """Construct a Mux with 2 1-bit inputs."""
-    lut = _LUT3(INIT=lutinit(MUX2DATA,1<<3))
-    return AnonymousCircuit("I", array([lut.I0, lut.I1]), 
-                            "S", lut.I2,
-                            "O", lut.O)
+# """Construct a Mux with 2 1-bit inputs."""
+class Mux2(Circuit):
+    IO = ["I", In(Bits(2)), "S", In(Bit), "O", Out(Bit) ]
 
-MUX4DATA = (~A4&~A5&A0)|(A4&~A5&A1)|(~A4&A5&A2)|(A4&A5&A3)
+    @classmethod
+    def definition(io):
+        MUX2DATA = (~A2&A0)|(A2&A1)
+        lut = _LUT3(INIT=lutinit(MUX2DATA,1<<3))
+        wire( lut(io.I[0], io.I[1], io.S), io.O)
 
-def Mux4():
-    """Construct a Mux with 4 1-bit inputs."""
-    lut = _LUT6(INIT=lutinit(MUX4DATA, 1<<6))
-    return AnonymousCircuit( "I", array([lut.I0, lut.I1, lut.I2, lut.I3]), 
-                             "S", array([lut.I4, lut.I5]),
-                             "O", lut.O)
+# """Construct a Mux with 4 1-bit inputs."""
+class Mux4(Circuit):
+    IO = ["I", In(Bits(4)), "S", In(Bits(2)), "O", Out(Bit) ]
+
+    @classmethod
+    def definition(io):
+        MUX4DATA = (~A4&~A5&A0)|(A4&~A5&A1)|(~A4&A5&A2)|(A4&A5&A3)
+        lut = _LUT6(INIT=lutinit(MUX4DATA,1<<6))
+        wire( lut(io.I[0], io.I[1], io.I[2], io.I[3], io.S[0], io.S[1]), io.O)
 
 # """Construct a Mux with 8 1-bit inputs."""
 class Mux8(Circuit):

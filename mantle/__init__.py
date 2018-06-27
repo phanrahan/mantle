@@ -1,14 +1,14 @@
 import magma as m
 
 if m.mantle_target is None:
-    m.mantle_target = 'coreir'
+    m.set_mantle_target('coreir')
 
 if m.mantle_target in ['coreir', 'verilog', 
                      'cyclone4', 
                      'spartan3', 'spartan6', 'kyntex7',
                      'ice40']:
 
-    from mantle.primitives import *
+    #from mantle.primitives import *
 
     if m.mantle_target == 'verilog':
         from mantle.verilog import *

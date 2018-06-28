@@ -11,13 +11,17 @@ from magma.testing import check_files_equal
     "or_",
     "nor",
     "xor",
-    "nxor"
+    "nxor",
+    "lsl",
+    "lsr",
+    "asr",
+    "add",
+    "sub"
 ])
 @pytest.mark.parametrize("N", [4])
 @pytest.mark.parametrize("T,TType", [(m.UInt, m.UIntType), (m.SInt, m.SIntType), (m.Bits, m.BitsType)])
-def test_binary_logic_op(op_name, N, T, TType):
+def test_binary_op(op_name, N, T, TType):
     op = getattr(mantle, op_name)
-    # T = m.Bits
     def to_str(x):
         if callable(x):
             return x.__name__
@@ -38,27 +42,32 @@ def test_binary_logic_op(op_name, N, T, TType):
             f"build/{_name}.v", f"gold/{_name}.v")
 
 
-@pytest.mark.parametrize("op_name", ["lsl", "lsr", "asr"])
+@pytest.mark.parametrize("op_name", [
+    "eq",
+    "lt",
+    "le",
+    "gt",
+    "ge",
+])
 @pytest.mark.parametrize("N", [4])
-@pytest.mark.parametrize("T,TType", [(m.UInt, m.UIntType), (m.SInt, m.SIntType), (m.Bits, m.BitsType)])
-def test_binary_logic_op(op_name, N, T, TType):
+@pytest.mark.parametrize("T", [m.UInt, m.SInt, m.Bits])
+def test_comparison_op(op_name, N, T):
     op = getattr(mantle, op_name)
-    # T = m.Bits
     def to_str(x):
         if callable(x):
             return x.__name__
         return str(x)
-    _name = "TestsCircuit_" + "_".join(to_str(x) for x in (op_name, N, T, TType))
+    _name = "TestsCircuit_" + "_".join(to_str(x) for x in (op_name, N, T))
     class TestCircuit(m.Circuit):
         name = _name
         IO = ["I0", m.In(T(N)), "I1", m.In(T(N)),
-              "O", m.Out(T(N))]
+              "O", m.Out(m.Bit)]
         @classmethod
         def definition(io):
             res = op(io.I0, io.I1)
-            assert isinstance(res, TType), type(res)
+            assert isinstance(res, m.BitType), type(res)
             m.wire(res, io.O)
 
-    m.compile(f'build/{_name}', TestCircuit, output="coreir")
+    m.compile(f'build/{_name}', TestCircuit)
     assert check_files_equal(__file__,
-            f"build/{_name}.json", f"gold/{_name}.json")
+            f"build/{_name}.v", f"gold/{_name}.v")

@@ -25,42 +25,17 @@ def check_operator_args(fn):
         T = type(args[0])
         if not all(type(x) == T for x in args):
             raise TypeError("Currently Arguments to operators must be of the same type")
-        return fn(width, T, *args, **kwargs)
+        return fn(width, *args, **kwargs)
     return wrapped
 
 operators = {}
 
-def _pass_circuit(_circuit):
+def _pass_circuit(_circuit, name):
     def _wrapped(fn):
         def _wrapped_inner(*args, **kwargs):
-            return fn(_circuit, *args, **kwargs)
+            return fn(_circuit, name, *args, **kwargs)
         return _wrapped_inner
     return _wrapped
-
-for _operator_name, _Circuit in (
-    ("and_", And),
-    ("nand", NAnd),
-    ("or_", Or),
-    ("nor", NOr),
-    ("xor", XOr),
-    ("nxor", NXOr)
-):
-    # Because Python uses dynamic scoping, the closures will use the
-    # last value of _Circuit rather than capturing the lexical value.
-    # Hacky workaround is to pass _Circuit as an argument to a
-    # decorator so the "lexical" value is captured.
-    @check_operator_args
-    @_pass_circuit(_Circuit)
-    def operator(circuit, width, T, *args, **kwargs):
-        # TODO: Set name and qualname for better debug messages
-        ret = circuit(len(args), width, **kwargs)(*args)
-        if isinstance(T, UIntKind):
-            return uint(ret)
-        elif isinstance(T, SIntKind):
-            return sint(ret)
-        return ret
-    operators[_operator_name] = operator
-    exec(f"{_operator_name} = operator")
 
 def preserve_type(fn):
     def wrapper(*args, **kwargs):
@@ -72,6 +47,38 @@ def preserve_type(fn):
             return sint(retval)
         return retval
     return wrapper
+
+for _operator_name, _Circuit in (
+    ("and_", And),
+    ("nand", NAnd),
+    ("or_", Or),
+    ("nor", NOr),
+    ("xor", XOr),
+    ("nxor", NXOr),
+    ("add", Add),
+    ("sub", Sub),
+    # TODO: These lack implementations
+    # ("mul", Mul),
+    # ("div", Div)
+):
+    # Because Python uses dynamic scoping, the closures will use the
+    # last value of _Circuit rather than capturing the lexical value.
+    # Hacky workaround is to pass _Circuit as an argument to a
+    # decorator so the "lexical" value is captured.
+    @preserve_type
+    @check_operator_args
+    @_pass_circuit(_Circuit, _operator_name)
+    def operator(circuit, name, width, *args, **kwargs):
+        # TODO: Set name and qualname for better debug messages
+        if name in ["add", "sub"]:
+            # These don't have a height
+            if len(args) > 2:
+                raise Exception(f"{name} operator expects 2 arguments")
+            return circuit(width, **kwargs)(*args)
+        else:
+            return circuit(len(args), width, **kwargs)(*args)
+    operators[_operator_name] = operator
+    exec(f"{_operator_name} = operator")
 
 @preserve_type
 def lsl(I0, I1, **kwargs):
@@ -92,9 +99,11 @@ def asr(I0, I1, **kwargs):
     shift = get_length(I1)
     return ASR(width, **kwargs)(I0, I1)
 
+@preserve_type
 def not_(arg, **kwargs):
     return Not(**kwargs)(arg)
 
+@preserve_type
 def invert(arg, **kwargs):
     width = get_length(arg)
     if width is None:
@@ -102,30 +111,11 @@ def invert(arg, **kwargs):
     else:
         return Invert(width, **kwargs)(arg)
 
+@preserve_type
 def neg(arg, **kwargs):
     if isinstance(arg, int):
         return -arg
     return Negate(get_length(arg), **kwargs)(arg)
-
-@check_operator_args
-def eq(width, T, I0, I1, **kwargs):
-    return EQ(width, T=T, **kwargs)(I0, I1)
-
-@check_operator_args
-def add(width, T, I0, I1, **kwargs):
-    return Add(width, T=T, **kwargs)(I0, I1)
-
-@check_operator_args
-def sub(width, T, I0, I1, **kwargs):
-    return Sub(width, T=T, **kwargs)(I0, I1)
-
-@check_operator_args
-def mul(width, T, I0, I1, **kwargs):
-    return Mul(width, T=T, **kwargs)(I0, I1)
-
-@check_operator_args
-def div(width, T, I0, I1, **kwargs):
-    return Div(width, T=T, **kwargs)(I0, I1)
 
 bitwise_ops = [
     ("__and__", and_),
@@ -145,37 +135,41 @@ arithmetic_ops = [
     ("__neg__", neg),
     ("__add__", add),
     ("__sub__", sub),
-    ("__mul__", mul),
-    ("__div__", div)
+    # ("__mul__", mul),
+    # ("__div__", div)
 ]
 
 @check_operator_args
-def lt(width, T, I0, I1, **kwargs):
+def lt(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
-        return SLT(width, T=T)(I0, I1)
+        return SLT(width, **kwargs)(I0, I1)
     else:
-        return ULT(width, T=T)(I0, I1)
+        return ULT(width, **kwargs)(I0, I1)
 
 @check_operator_args
-def le(width, T, I0, I1, **kwargs):
+def le(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
-        return SLE(width, T=T)(I0, I1)
+        return SLE(width, **kwargs)(I0, I1)
     else:
-        return ULE(width, T=T)(I0, I1)
+        return ULE(width, **kwargs)(I0, I1)
 
 @check_operator_args
-def gt(width, T, I0, I1, **kwargs):
+def gt(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
-        return SGT(width, T=T)(I0, I1)
+        return SGT(width, **kwargs)(I0, I1)
     else:
-        return UGT(width, T=T)(I0, I1)
+        return UGT(width, **kwargs)(I0, I1)
 
 @check_operator_args
-def ge(width, T, I0, I1, **kwargs):
+def ge(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
-        return SGE(width, T=T)(I0, I1)
+        return SGE(width, **kwargs)(I0, I1)
     else:
-        return UGE(width, T=T)(I0, I1)
+        return UGE(width, **kwargs)(I0, I1)
+
+@check_operator_args
+def eq(width, I0, I1, **kwargs):
+    return EQ(width, **kwargs)(I0, I1)
 
 
 relational_ops = [
@@ -189,6 +183,7 @@ for method, op in arithmetic_ops + relational_ops:
     setattr(SIntType, method, op)
     setattr(UIntType, method, op)
 
+@preserve_type
 def mux(I, S):
     if isinstance(S, int):
         return I[S]

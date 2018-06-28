@@ -62,41 +62,50 @@ for _operator_name, _Circuit in (
     operators[_operator_name] = operator
     exec(f"{_operator_name} = operator")
 
+def preserve_type(fn):
+    def wrapper(*args, **kwargs):
+        retval = fn(*args, **kwargs)
+        T = type(args[0])
+        if isinstance(T, UIntKind):
+            return uint(retval)
+        elif isinstance(T, SIntKind):
+            return sint(retval)
+        return retval
+    return wrapper
+
+@preserve_type
 def lsl(I0, I1, **kwargs):
     width = get_length(I0)
     shift = get_length(I1)
-    if shift != clog2(width):
-        raise ValueError("LSL shift should be equal to the clog2 of width")
-    return LSL(width, T=type(I0), **kwargs)(I0, I1)
+    T = type(I0)
+    return LSL(width, **kwargs)(I0, I1)
 
+@preserve_type
 def lsr(I0, I1, **kwargs):
     width = get_length(I0)
     shift = get_length(I1)
-    if shift != clog2(width):
-        raise ValueError("LSR shift should be equal to the clog2 of width")
-    return LSR(width, T=type(I0), **kwargs)(I0, I1)
+    return LSR(width, **kwargs)(I0, I1)
 
+@preserve_type
 def asr(I0, I1, **kwargs):
     width = get_length(I0)
     shift = get_length(I1)
-    if shift != clog2(width):
-        raise ValueError("ASR shift should be equal to the clog2 of width")
-    return ASR(width, T=type(I0), **kwargs)(I0, I1)
+    return ASR(width, **kwargs)(I0, I1)
 
 def not_(arg, **kwargs):
-    return Not(T=type(arg), **kwargs)(arg)
+    return Not(**kwargs)(arg)
 
 def invert(arg, **kwargs):
     width = get_length(arg)
     if width is None:
-        return Not(T=type(arg), **kwargs)(arg)
+        return Not(**kwargs)(arg)
     else:
-        return Invert(width, T=type(arg), **kwargs)(arg)
+        return Invert(width, **kwargs)(arg)
 
 def neg(arg, **kwargs):
     if isinstance(arg, int):
         return -arg
-    return Negate(get_length(arg), T=type(arg), **kwargs)(arg)
+    return Negate(get_length(arg), **kwargs)(arg)
 
 @check_operator_args
 def eq(width, T, I0, I1, **kwargs):
@@ -185,4 +194,4 @@ def mux(I, S):
         return I[S]
     elif S.const():
         return I[seq2int(S.bits())]
-    return Mux(len(I), get_length(I[0]), T=type(I[0]))(*I, S)
+    return Mux(len(I), get_length(I[0]))(*I, S)

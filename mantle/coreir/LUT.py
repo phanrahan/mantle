@@ -42,7 +42,7 @@ def LUT(init, N=None, **kwargs):
     """
     n-bit LUT
 
-    I : In(Bits(n)), O : Out(Bit)
+    I0 : In(Bit), I1 : In(Bit), ..., In : In(Bit),  O : Out(Bit)
     """
 
     if isinstance(init, FunctionType):

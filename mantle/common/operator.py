@@ -30,14 +30,16 @@ def check_operator_args(fn):
 
 operators = {}
 
-def _pass_circuit(_circuit, name):
+def _pass_closure_vars_as_args(*closure_args):
     def _wrapped(fn):
+        @wraps(fn)
         def _wrapped_inner(*args, **kwargs):
-            return fn(_circuit, name, *args, **kwargs)
+            return fn(*closure_args, *args, **kwargs)
         return _wrapped_inner
     return _wrapped
 
 def preserve_type(fn):
+    @wraps(fn)
     def wrapper(*args, **kwargs):
         retval = fn(*args, **kwargs)
         T = type(args[0])
@@ -67,9 +69,8 @@ for _operator_name, _Circuit in (
     # decorator so the "lexical" value is captured.
     @preserve_type
     @check_operator_args
-    @_pass_circuit(_Circuit, _operator_name)
+    @_pass_closure_vars_as_args(_Circuit, _operator_name)
     def operator(circuit, name, width, *args, **kwargs):
-        # TODO: Set name and qualname for better debug messages
         if name in ["add", "sub"]:
             # These don't have a height
             if len(args) > 2:
@@ -77,6 +78,8 @@ for _operator_name, _Circuit in (
             return circuit(width, **kwargs)(*args)
         else:
             return circuit(len(args), width, **kwargs)(*args)
+    operator.__name__ = _operator_name
+    operator.__qualname__ = _operator_name
     operators[_operator_name] = operator
     exec(f"{_operator_name} = operator")
 

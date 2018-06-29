@@ -9,7 +9,5 @@ def Term(cirb: CoreIRBackend, width: int):
     :param width: The width of the element to absorb
     :return:
     """
-    return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "term",
-                                               ["global"],
-                                               "term_w" + str(width),
+    return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "term", "term_w" + str(width), ["global"],
                                                {"width": width})

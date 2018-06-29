@@ -1,5 +1,6 @@
 from collections import namedtuple
 import pytest
+import magma
 import mantle
 
 HEIGHTS = [2]
@@ -26,33 +27,48 @@ def sim(Test, TestFun):
     assert tvsim == tvfun
 
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_lut1():
     test = mantle.LUT1([0,1])
     assert 'AnonymousCircuitType("I0", .I0, "O", .O)' == repr(test)
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_lut2():
     test = mantle.LUT2([0,0,0,1])
     assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "O", .O)' == repr(test)
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_lut3():
     test = mantle.LUT3([0, 0, 0, 0, 0,0,0,1])
     assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "I2", .I2, "O", .O)' == repr(test)
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_lut4():
     test = mantle.LUT4(15*[0] + [1])
     # this is only correct for ice40
     assert ' = SB_LUT4(LUT_INIT=0x8000)' == repr(test)
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_mux2():
     Test = mantle.Mux2
     sim( Test, lambda i, s: (i>>s)&1 )
     com( Test, 'mux2' )
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_mux4():
     Test = mantle.Mux4
     sim( Test, lambda i, s: (i>>s)&1 )
     com( Test, 'mux4' )
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_mux8():
     Test = mantle.Mux8
     sim( Test, lambda i, s: (i>>s)&1 )
@@ -78,6 +94,8 @@ def test_not():
     sim( Test, lambda x: not x )
     com( Test, 'not' )
 
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 @pytest.mark.parametrize("op", [
     op('DefineReduceAnd', lambda x: x),
     op('DefineReduceNAnd', lambda x: x),
@@ -94,6 +112,8 @@ def test_logic(op, height):
     sim( Test, op.func )
     com( Test, f'{op.name}{height}' )
 
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 @pytest.mark.parametrize("op", [
     op('DefineAnd', lambda x, y: x&y),
     op('DefineNAnd', lambda x, y: ~(x&y)),
@@ -138,6 +158,7 @@ def test_arith(op, width):
     sim( Test, op.func )
     com( Test, f'{op.name}{width}' )
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 @pytest.mark.parametrize("op", [
     op('DefineASR', lambda x, y: x>>y),
     op('DefineLSR', lambda x, y: x>>y),

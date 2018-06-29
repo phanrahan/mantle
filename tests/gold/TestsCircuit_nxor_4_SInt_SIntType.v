@@ -18,9 +18,10 @@ xor4_wrapped inst1 (.I0(in0), .I1(in1), .O(inst1_O));
 assign out = inst0_O;
 endmodule
 
-module TestsCircuit_nxor_4_SInt_SIntType (input signed [3:0] I0, input signed [3:0] I1, output signed [3:0] O);
+module TestsCircuit_nxor_4_SInt_SIntType (input signed [3:0] I0, input signed [3:0] I1, output signed [3:0] O0, output signed [3:0] O1);
 wire [3:0] inst0_out;
 NXOr24 inst0 (.in0(I0), .in1(I1), .out(inst0_out));
-assign O = inst0_out;
+assign O0 = inst0_out;
+assign O1 = {1'b0,1'b0,1'b0,1'b0};
 endmodule
 

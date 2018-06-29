@@ -9,5 +9,5 @@ def Sub(n, cin=False, cout=False, **kwargs):
 def Negate(width, **kwargs):
     return DefineNegate(width)(**kwargs)
 
-def ASR(width, shift, **kwargs):
-    return DefineASR(width, shift)(**kwargs)
+def ASR(width, **kwargs):
+    return DefineASR(width)(**kwargs)

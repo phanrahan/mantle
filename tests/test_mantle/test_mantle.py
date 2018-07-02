@@ -28,33 +28,40 @@ def sim(Test, TestFun):
 
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_lut1():
     test = mantle.LUT1([0,1])
-    assert 'AnonymousCircuitType("I0", .I0, "O", .O)' == repr(test)
+    target = magma.mantle_target
+    if target == 'spartan3' or target == 'spartan6':
+        assert ' = LUT1(INIT=0x2)' == repr(test)
+    else:
+        assert 'AnonymousCircuitType("I0", .I0, "O", .O)' == repr(test)
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_lut2():
     test = mantle.LUT2([0,0,0,1])
-    assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "O", .O)' == repr(test)
+    target = magma.mantle_target
+    if target == 'spartan3' or target == 'spartan6':
+        assert ' = LUT2(INIT=0x8)' == repr(test)
+    else:
+        assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "O", .O)' == repr(test)
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_lut3():
     test = mantle.LUT3([0, 0, 0, 0, 0,0,0,1])
-    assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "I2", .I2, "O", .O)' == repr(test)
+    target = magma.mantle_target
+    if target == 'spartan3' or target == 'spartan6':
+        assert ' = LUT3(INIT=0x80)' == repr(test)
+    else:
+        assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "I2", .I2, "O", .O)' == repr(test)
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_lut4():
     test = mantle.LUT4(15*[0] + [1])
-    # this is only correct for ice40
-    assert ' = SB_LUT4(LUT_INIT=0x8000)' == repr(test)
+    target = magma.mantle_target
+    if target == 'spartan3' or target == 'spartan6':
+        assert ' = LUT4(INIT=0x8000)' == repr(test)
+    else:
+        assert ' = SB_LUT4(LUT_INIT=0x8000)' == repr(test)
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_mux2():
@@ -130,11 +137,21 @@ def test_logic(op, height, width):
     sim( Test, op.func )
     com( Test, f'{op.name}{height}x{width}' )
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_ha():
-    pass
+    Test = mantle.HalfAdder
+    #sim( Test, None)
+    com( Test, 'ha' )
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_fa():
-    pass
+    Test = mantle.FullAdder
+    #sim( Test, None)
+    com( Test, 'fa' )
 
 @pytest.mark.parametrize("op", [
     op('DefineAdd', lambda x, y: x+y),

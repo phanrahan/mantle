@@ -1,5 +1,3 @@
-import os
-os.environ["MANTLE"] = "coreir"
 from magma import *
 
 from magma.simulator import PythonSimulator

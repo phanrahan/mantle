@@ -1,5 +1,4 @@
 import magma
-magma.set_mantle_target('ice40')
 
 from mantle.lattice.mantle40 import Mux2, Mux4, Mux8, Mux16, DefineMux
 

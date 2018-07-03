@@ -1,6 +1,5 @@
 import pytest
 import magma
-magma.set_mantle_target('ice40')
 from magma import compile
 from magma.simulator.python_simulator import testvectors as simtest
 from magma.testing.newfunction import testvectors as funtest

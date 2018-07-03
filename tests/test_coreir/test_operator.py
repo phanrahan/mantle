@@ -1,6 +1,5 @@
 import pytest
 import magma as m
-m.set_mantle_target("coreir")
 import mantle
 from magma.testing import check_files_equal
 from collections import namedtuple

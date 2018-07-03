@@ -3,8 +3,8 @@ import pytest
 import magma
 import mantle
 
-HEIGHTS = [2]
-WIDTHS = [2,4]
+HEIGHTS = [2, 4]
+WIDTHS = [2, 4]
 
 op = namedtuple("op", ["name", "func"])
 
@@ -168,6 +168,9 @@ def test_arith(op, width):
     com( Test, f'{op.name}{width}' )
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'ice40',    reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
+@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 @pytest.mark.parametrize("op", [
     op('DefineASR', lambda x, y: x>>y),
     op('DefineLSR', lambda x, y: x>>y),
@@ -177,8 +180,8 @@ def test_arith(op, width):
 def test_shift(op, width):
     Define = getattr(mantle, op.name)
     for shift in range(width):
-        Test = Define(width, shift)
-        sim( Test, lambda x: op.func(x,shift) )
-        com( Test, f'{op.name}{width}x{shift}' )
+        Test = Define(width)
+        sim( Test, lambda x, y: op.func(x,y) )
+        com( Test, f'{op.name}{width}' )
 
 

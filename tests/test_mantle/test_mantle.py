@@ -101,8 +101,6 @@ def test_not():
     sim( Test, lambda x: not x )
     com( Test, 'not' )
 
-@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 @pytest.mark.parametrize("op", [
     op('DefineReduceAnd', lambda x: x),
     op('DefineReduceNAnd', lambda x: x),
@@ -119,8 +117,6 @@ def test_logic(op, height):
     sim( Test, op.func )
     com( Test, f'{op.name}{height}' )
 
-@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 @pytest.mark.parametrize("op", [
     op('DefineAnd', lambda x, y: x&y),
     op('DefineNAnd', lambda x, y: ~(x&y)),
@@ -138,16 +134,12 @@ def test_logic(op, height, width):
     com( Test, f'{op.name}{height}x{width}' )
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_ha():
     Test = mantle.HalfAdder
     #sim( Test, None)
     com( Test, 'ha' )
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan3', reason='NYI')
-@pytest.mark.skipif(magma.mantle_target == 'spartan6', reason='NYI')
 def test_fa():
     Test = mantle.FullAdder
     #sim( Test, None)

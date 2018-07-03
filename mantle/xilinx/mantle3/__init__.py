@@ -5,16 +5,18 @@ from ..spartan3 import FAMILY, \
     LUTS_PER_LOGICBLOCK, BITS_PER_LUT, LOG_BITS_PER_LUT
 
 from .LUT import *
-from .ROM import *
-from .RAM import *
+#from .ROM import *
+#from .RAM import *
 
 from .MUX import *
 
 from .FF import *
 
 from .logic import *
-from .decode import *
+#from .decode import *
 
+from .halfadder import *
+from .fulladder import *
 from .arith import *
 from .compare import *
 

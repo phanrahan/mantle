@@ -38,7 +38,7 @@ __all__ += ['DefineLSR', 'LSR']
 # Efficient Reduction using carry chain and FlatHalfCascade
 #
 def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
-    assert n % 4 == 0
+    #assert n % 4 == 0
     T = Bits(n)
     class _ReduceOp(Circuit):
         name = '{}{}'.format(opname, n)
@@ -46,9 +46,15 @@ def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
 
         @classmethod
         def definition(io):
-            if n <= 4: a = ROMN(lutexprs[n - 1], n)
-            else: a = FlatHalfCascade(n, 4, lutexprs[3], andexpr, cin)
-            wire(a(io.I), io.O)
+            I = io.I
+            if n <= 4: #8?
+                a = ROMN(lutexprs[n - 1], n)
+            else:
+                nluts = (n + 3) // 4
+                a = FlatHalfCascade(nluts, 4, lutexprs[3], andexpr, cin)
+                if nluts != n:
+                    I = concat(I, bits(0, nluts-n))
+            wire(a(I), io.O)
     return _ReduceOp
 
 @cache_definition

@@ -5,7 +5,7 @@ from mantle.common.operator import and_, nand, or_, nor, xor, nxor, invert, lsl,
 import operator
 from mantle import And, Or, XOr, Add, Sub, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Invert, Negate
 
-magma.set_mantle_target('ice40')
+#magma.set_mantle_target('ice40')
 
 def check(file_name):
     return check_files_equal(
@@ -87,7 +87,7 @@ EndCircuit()\
 """.format(name=name, instance_op=instance_op)
 
 def test_bitwise():
-    check_unary_operator(invert, "Invert")
+    check_unary_operator(invert, "Invert", wrapped=False)
     check_unary_overloaded_operator(operator.invert, Invert(4))
     binary_bits_ops = [
         (and_, operator.and_, And(2, 4)),

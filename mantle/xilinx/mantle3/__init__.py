@@ -13,7 +13,7 @@ from .MUX import *
 from .FF import *
 
 from .logic import *
-#from .decode import *
+from .decode import *
 
 from .halfadder import *
 from .fulladder import *

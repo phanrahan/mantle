@@ -4,16 +4,14 @@ from ..ice40 import FAMILY, \
     ALL, ANY, PARITY, ZERO, ONE, \
     LUTS_PER_LOGICBLOCK, BITS_PER_LUT, LOG_BITS_PER_LUT
 
-#from .IO import *
-
 from .LUT import *
 
 from .MUX import *
 
-#from .BUF import *
 from .FF import *
 
 from .logic import *
+from .decode import *
 
 from .halfadder import *
 from .fulladder import *

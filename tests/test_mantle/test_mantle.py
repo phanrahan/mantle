@@ -27,41 +27,58 @@ def sim(Test, TestFun):
     assert tvsim == tvfun
 
 
-@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_lut1():
-    test = mantle.LUT1([0,1])
     target = magma.mantle_target
+    if target == 'coreir':
+        test = mantle.LUT([0,1], 1)
+    else:
+        test = mantle.LUT1([0,1])
     if target == 'spartan3' or target == 'spartan6':
         assert ' = LUT1(INIT=0x2)' == repr(test)
-    else:
+    elif target == 'ice40':
         assert 'AnonymousCircuitType("I0", .I0, "O", .O)' == repr(test)
+    elif target == 'coreir':
+        assert ' = LUT1_2()' == repr(test)
 
-@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+
 def test_lut2():
-    test = mantle.LUT2([0,0,0,1])
     target = magma.mantle_target
+    if target == 'coreir':
+        test = mantle.LUT([0,0,0,1], 2)
+    else:
+        test = mantle.LUT2([0,0,0,1])
     if target == 'spartan3' or target == 'spartan6':
         assert ' = LUT2(INIT=0x8)' == repr(test)
-    else:
+    elif target == 'ice40':
         assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "O", .O)' == repr(test)
+    elif target == 'coreir':
+        assert ' = LUT2_8()' == repr(test)
 
-@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_lut3():
-    test = mantle.LUT3([0, 0, 0, 0, 0,0,0,1])
     target = magma.mantle_target
+    if target == 'coreir':
+        test = mantle.LUT([0, 0, 0, 0, 0,0,0,1], 3)
+    else:
+        test = mantle.LUT3([0, 0, 0, 0, 0,0,0,1])
     if target == 'spartan3' or target == 'spartan6':
         assert ' = LUT3(INIT=0x80)' == repr(test)
-    else:
+    elif target == 'ice40':
         assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "I2", .I2, "O", .O)' == repr(test)
+    elif target == 'coreir':
+        assert ' = LUT3_128()' == repr(test)
 
-@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_lut4():
-    test = mantle.LUT4(15*[0] + [1])
     target = magma.mantle_target
+    if target == 'coreir':
+        test = mantle.LUT(15*[0] + [1], 4)
+    else:
+        test = mantle.LUT4(15*[0] + [1])
     if target == 'spartan3' or target == 'spartan6':
         assert ' = LUT4(INIT=0x8000)' == repr(test)
-    else:
+    elif target == 'ice40':
         assert ' = SB_LUT4(LUT_INIT=0x8000)' == repr(test)
+    elif target == 'coreir':
+        assert ' = LUT4_32768()' == repr(test)
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_mux2():
@@ -83,6 +100,7 @@ def test_mux8():
 
 # this test if very expensive becuase it tests all possible inputs
 @pytest.mark.skip
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_mux16():
     Test = mantle.Mux16
     sim( Test, lambda i, s: (i>>s)&1 )
@@ -185,3 +203,8 @@ def test_shift(op, width):
         com( Test, f'{op.name}{width}' )
 
 
+@pytest.mark.parametrize("width", WIDTHS)
+def test_decode(width):
+    Test = mantle.DefineDecode(0, width)
+    sim( Test, lambda x: x == 0)
+    com( Test, f'Decode{width}' )

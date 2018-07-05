@@ -113,9 +113,8 @@ def test_mux(height, width):
     sim( Test, lambda i0, i1, s: i1 if s else i0 )
     com( Test, f'mux{height}x{width}' )
 
-@pytest.mark.skip
 def test_not():
-    Test = mantle.Not
+    Test = mantle.DefineNot()
     sim( Test, lambda x: not x )
     com( Test, 'not' )
 

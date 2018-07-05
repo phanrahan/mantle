@@ -197,18 +197,11 @@ def simulate_bit_not(self, value_store, state_store):
     value_store.set_value(self.out, out)
 
 
-DefineCoreirNot = DeclareCircuit("not", 'in', In(Bit), 'out', Out(Bit),
+coreirNot = DeclareCircuit("not", 'in', In(Bit), 'out', Out(Bit),
     simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="corebit")
 
-@cache_definition
-def DefineNot(width=None):
-    if width != None:
-        raise ValueError("Not is only defined as a 1-bit operation, width must"
-                " be None")
-    return DefineCoreirNot
-
 def Not(width=None):
-    return DefineNot(width)()
+    return coreirNot()
 
 
 def not_(arg, **kwargs):

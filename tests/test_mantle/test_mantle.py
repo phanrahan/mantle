@@ -114,7 +114,7 @@ def test_mux(height, width):
     com( Test, f'mux{height}x{width}' )
 
 def test_not():
-    Test = mantle.DefineNot()
+    Test = mantle.Not
     sim( Test, lambda x: not x )
     com( Test, 'not' )
 

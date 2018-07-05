@@ -13,6 +13,8 @@ from .logic import (
     DefineLSR, LSR, lsr,
 )
 
+from .decode import decode, Decode, DefineDecode
+
 from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAdd, DefineCoreirMul
 
 from .FF import FF, DFF, DefineDFF, DefineCoreirReg
@@ -31,6 +33,7 @@ from .compare import \
     DefineSLE, DefineCoreirSle, SLE, \
     DefineSGT, DefineCoreirSgt, SGT, \
     DefineSGE, DefineCoreirSge, SGE
+
 
 from magma import bits, cache_definition, Circuit, Bits, wire, Out, In, Bit
 

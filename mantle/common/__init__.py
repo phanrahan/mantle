@@ -1,6 +1,5 @@
 from .arith import *
 
-from .decode import *
 from .decoder import *
 from .encoder import *
 from .arbiter import  *

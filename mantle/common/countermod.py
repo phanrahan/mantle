@@ -1,6 +1,5 @@
 from magma import *
-from mantle import And
-from .decode import Decode
+from mantle import And, Decode
 from .counter import Counter
 
 __all__ = ['DefineUpCounterModM', 'UpCounterModM']

@@ -1,5 +1,5 @@
 from magma import *
-from .decode import Decode
+from mantle import Decode
 
 __all__  = ['Decoder', 'decoder']
 

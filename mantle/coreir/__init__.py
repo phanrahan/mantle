@@ -6,7 +6,7 @@ from .logic import (
     XOr      , DefineXOr   , ReduceXOr ,
     NXOr     , DefineNXOr  , ReduceNXOr,
     Invert   , DefineInvert,
-    Not      , DefineNot   ,
+    Not      ,
     DefineStaticLeftShift  , StaticLeftShift  , static_left_shift  ,
     DefineStaticRightShift , StaticRightShift , static_right_shift ,
     DefineLSL , LSL , lsl ,

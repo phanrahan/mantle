@@ -150,13 +150,11 @@ def test_logic(op, height, width):
     sim( Test, op.func )
     com( Test, f'{op.name}{height}x{width}' )
 
-@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_ha():
     Test = mantle.HalfAdder
     #sim( Test, None)
     com( Test, 'ha' )
 
-@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_fa():
     Test = mantle.FullAdder
     #sim( Test, None)

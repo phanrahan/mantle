@@ -15,6 +15,8 @@ from .logic import (
 
 from .decode import decode, Decode, DefineDecode
 
+from .fulladder import FullAdder
+from .halfadder import HalfAdder
 from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAdd, DefineCoreirMul
 
 from .FF import FF, DFF, DefineDFF, DefineCoreirReg

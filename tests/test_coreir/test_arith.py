@@ -6,6 +6,7 @@ from magma.simulator.python_simulator import testvectors as simulator_test
 
 
 def test_add():
+    exit(1)
     width = 4
     mask = 2**width-1
     Add = DefineAdd(width)

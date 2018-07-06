@@ -6,7 +6,7 @@ if sys.version_info > (3, 0):
 from collections import Sequence
 
 from magma import *
-from .LUT import LUTN, LUT1, LUT2, LUT3, LUT4, A0, A1, A2, A3, ZERO, ONE
+from .LUT import LUT, LUT1, LUT2, LUT3, LUT4, A0, A1, A2, A3, ZERO, ONE
 from .ROM import ROMN
 from .cascade import FlatHalfCascade
 
@@ -93,7 +93,7 @@ def LUTCascade(n, k, expr, cin):
 
         def f(y):
             e = expr[y] if isinstance(expr, Sequence) else expr
-            return LUTN( e, n=k+1 )
+            return LUT( e, n=k+1 )
 
         # number of luts
         m = (n+k-1) // k

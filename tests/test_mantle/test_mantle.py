@@ -202,8 +202,24 @@ def test_shift(op, width):
         com( Test, f'{op.name}{width}' )
 
 
+@pytest.mark.parametrize("op", [
+    op('DefineRegister', lambda x: x),
+    op('DefineSISO',     lambda x: x),
+    op('DefinePISO',     lambda x: x),
+    op('DefineSISO',     lambda x: x),
+    op('DefinePISO',     lambda x: x),
+    op('DefineRing',     lambda x: x),
+    op('DefineJohnson',  lambda x: x),
+    op('DefineDecoder',  lambda x: x),
+    op('DefineEncoder',  lambda x: x),
+    op('DefineArbiter',  lambda x: x),
+    op('DefineCounter',  lambda x: x),
+    op('DefineCounterLoad',  lambda x: x)
+])
 @pytest.mark.parametrize("width", WIDTHS)
-def test_decode(width):
-    Test = mantle.DefineDecode(0, width)
-    sim( Test, lambda x: x == 0)
-    com( Test, f'Decode{width}' )
+def test_decode(op, width):
+    Define = getattr(mantle, op.name)
+    Test = Define(width)
+    #sim( Test, op.func)
+    com( Test, f'{op.name}{width}' )
+

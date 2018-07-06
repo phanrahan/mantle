@@ -1,3 +1,5 @@
+#from .MUX import *
+
 from .arith import *
 
 from .decoder import *

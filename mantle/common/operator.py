@@ -2,8 +2,9 @@ from functools import wraps
 
 from magma import *
 from magma.bitutils import clog2, seq2int
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Mux
-from mantle.common.arith import ASR, Add, Sub, Negate
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
+from mantle import Mux
+from .arith import ASR, Add, Sub, Negate
 
 def get_length(value):
     if isinstance(value, (BitType, ClockType, EnableType, ResetType)):

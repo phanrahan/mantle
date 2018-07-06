@@ -3,7 +3,6 @@ from magma.bitutils import lutinit
 from ..spartan6.CLB import *
 
 __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
-__all__ += ['MuxN']
 __all__ += ['DefineMux', 'Mux']
 
 
@@ -59,45 +58,23 @@ class Mux16(Circuit):
         mux(mux0.O, mux1.O, mux16.S[3])
         wire(mux.O, mux16.O)
 
-def MuxN(height):
-
-    assert height in [2, 4, 8, 16]
-
-    if height == 2:
-        return Mux2()
-    elif height == 4:
-        return Mux4()
-    elif height == 8:
-        return Mux8()
-    elif height == 16:
-        return Mux16()
-
-MuxCache = {}
 
 # Mux Module name
 def _MuxName(height, width):
-    return 'Mux%dx%d' % (height, width)
+    return f'Mux{height}x{width}'
 
-def DefineMux(height, width):
-
-    """Construct a Mux. Height inputs are width bits wide."""
-    name = _MuxName(height, width)
-    if name in MuxCache:
-        return MuxCache[name]
-
-    assert height in [2, 4, 8, 16]
-
+def _MuxInterface(height, width):
     AW = In(Bits(width))
     if   height == 2:
         args = ['I0', AW, 
-                'I1', AW,
-                'S', In(Bit)]
+                'I1', AW]
+        args += ['S', In(Bit)]
     elif height == 4:
         args = ['I0', AW, 
                 'I1', AW,
                 'I2', AW,
-                'I3', AW,
-                'S', In(Bits(2))]
+                'I3', AW]
+        args += ['S', In(Bits(2))]
     elif height == 8:
         args = ['I0', AW, 
                 'I1', AW,
@@ -106,8 +83,8 @@ def DefineMux(height, width):
                 'I4', AW,
                 'I5', AW,
                 'I6', AW,
-                'I7', AW,
-                'S', In(Bits(3))]
+                'I7', AW]
+        args += ['S', In(Bits(3))]
     elif height == 16:
         args = ['I0',  AW, 
                 'I1',  AW,
@@ -124,31 +101,67 @@ def DefineMux(height, width):
                 'I12', AW,
                 'I13', AW,
                 'I14', AW,
-                'I15', AW,
-                'S', In(Bits(4))]
+                'I15', AW]
+        args += ['S', In(Bits(4))]
 
     args += ['O', Out(AW)]
-    D = DefineCircuit(name, *args)
 
-    def amux(y):
-        return curry(MuxN(height), prefix='I')
-    muxes = col(amux, width)
+    return args
 
-    # Array of arrays ...
-    mux = braid(muxes, forkargs=['S'])
+def MuxN(height, **kwargs):
+    assert height in [2, 4, 8, 16]
 
-    if   height == 2:  mux( D.I0, D.I1, D.S )
-    elif height == 4:  mux( D.I0, D.I1, D.I2, D.I3, D.S )
-    elif height == 8:  mux( D.I0, D.I1, D.I2, D.I3, D.I4, D.I5, D.I6, D.I7, D.S )
-    elif height == 16: mux( D.I0, D.I1, D.I2, D.I3, D.I4, D.I5, D.I6, D.I7, 
-                            D.I8, D.I9, D.I10, D.I11, D.I12, D.I13, D.I14, D.I15, D.S )
-    wire( mux.O, D.O )
+    if height == 2:
+        return Mux2(**kwargs)
+    elif height == 4:
+        return Mux4(**kwargs)
+    elif height == 8:
+        return Mux8(**kwargs)
+    elif height == 16:
+        return Mux16(**kwargs)
 
-    EndCircuit()
+@cache_definition
+def DefineMux(height=2, width=1):
 
-    MuxCache[name] = D
-    return D
+    """
+    Construct a Mux. Height inputs are width bits wide.
+    """
 
-def Mux(height, width):
-    return DefineMux(height, width)()
+    assert height in [2, 4, 8, 16]
+    if width is None:
+        if height == 2:
+            return Mux2
+        elif height == 4:
+            return Mux4
+        elif height == 8:
+            return Mux8
+        elif height == 16:
+            return Mux16
+
+    class _Mux(Circuit):
+        name = _MuxName(height, width)
+        IO = _MuxInterface(height, width)
+        @classmethod
+        def definition(Mux):
+            def amux(y):
+                if height == 2:
+                    return curry(MuxN(height), prefix='I')
+                return curry(MuxN(height), prefix='I')
+            mux = braid(col(amux, width), forkargs=['S'])
+
+            if   height == 2:  mux( Mux.I0, Mux.I1, Mux.S )
+            elif height == 4:  mux( Mux.I0, Mux.I1, Mux.I2, Mux.I3, Mux.S )
+            elif height == 8:  mux( Mux.I0, Mux.I1, Mux.I2, Mux.I3, 
+                                    Mux.I4, Mux.I5, Mux.I6, Mux.I7, Mux.S )
+            elif height == 16: mux( Mux.I0, Mux.I1, Mux.I2, Mux.I3, 
+                                    Mux.I4, Mux.I5, Mux.I6, Mux.I7, 
+                                    Mux.I8, Mux.I9, Mux.I10, Mux.I11, 
+                                    Mux.I12, Mux.I13, Mux.I14, Mux.I15, Mux.S )
+            wire( mux.O, Mux.O )
+    return _Mux
+
+def Mux(height=2, width=None, **kwargs):
+    if width is None:
+       return MuxN(height, **kwargs)
+    return DefineMux(height, width)(**kwargs)
 

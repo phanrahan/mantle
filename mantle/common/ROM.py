@@ -1,6 +1,7 @@
 from magma import Circuit, In, Out, Bits, wire, bits, uncurry, fork, cache_definition
 from magma.bitutils import int2seq
-from mantle import LUT, Mux
+from mantle import LUT
+from mantle import Mux
 from .RAM import readport
 
 __all__  = ['DefineROM', 'ROM']

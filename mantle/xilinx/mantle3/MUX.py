@@ -3,7 +3,6 @@ from magma.bitutils import lutinit
 from ..spartan3.CLB import *
 
 __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
-__all__ += ['MuxN']
 __all__ += ['DefineMux', 'Mux']
 
 #
@@ -68,22 +67,10 @@ class Mux16(Circuit):
         mux(mux0.O, mux1.O, mux16.S[3])
         wire(mux.O, mux16.O)
 
-def MuxN(height):
-
-    assert height in [2, 4, 8, 16]
-
-    if height == 2:
-        return Mux2()
-    elif height == 4:
-        return Mux4()
-    elif height == 8:
-        return Mux8()
-    elif height == 16:
-        return Mux16()
 
 # Mux Module name
 def _MuxName(height, width):
-    return 'Mux%dx%d' % (height, width)
+    return f'Mux{height}x{width}'
 
 def _MuxInterface(height, width):
     AW = In(Bits(width))
@@ -130,14 +117,35 @@ def _MuxInterface(height, width):
 
     return args
 
+def MuxN(height, **kwargs):
+    assert height in [2, 4, 8, 16]
 
-def DefineMux(height, width):
+    if height == 2:
+        return Mux2(**kwargs)
+    elif height == 4:
+        return Mux4(**kwargs)
+    elif height == 8:
+        return Mux8(**kwargs)
+    elif height == 16:
+        return Mux16(**kwargs)
+
+@cache_definition
+def DefineMux(height=2, width=1):
 
     """
     Construct a Mux. Height inputs are width bits wide.
     """
 
     assert height in [2, 4, 8, 16]
+    if width is None:
+        if height == 2:
+            return Mux2
+        elif height == 4:
+            return Mux4
+        elif height == 8:
+            return Mux8
+        elif height == 16:
+            return Mux16
 
     class _Mux(Circuit):
         name = _MuxName(height, width)
@@ -145,6 +153,8 @@ def DefineMux(height, width):
         @classmethod
         def definition(Mux):
             def amux(y):
+                if height == 2:
+                    return curry(MuxN(height), prefix='I')
                 return curry(MuxN(height), prefix='I')
             mux = braid(col(amux, width), forkargs=['S'])
 
@@ -159,6 +169,8 @@ def DefineMux(height, width):
             wire( mux.O, Mux.O )
     return _Mux
 
-def Mux(height, width):
-    return DefineMux(height, width)()
+def Mux(height=2, width=None, **kwargs):
+    if width is None:
+       return MuxN(height, **kwargs)
+    return DefineMux(height, width)(**kwargs)
 

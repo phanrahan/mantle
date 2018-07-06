@@ -1,7 +1,7 @@
 from collections import Sequence
 from magma import *
 from ..spartan3.CLB import ANDCY, XORCY, MUXCY
-from .LUT import LUTN, LOG_BITS_PER_LUT, A0, A1, A2, A3, ZERO, ONE
+from .LUT import LUT, LOG_BITS_PER_LUT, A0, A1, A2, A3, ZERO, ONE
 from .ROM import ROMN
 
 __all__  = ['HalfCarry', 'FullCarry']
@@ -26,7 +26,7 @@ def halfcarry(k, lutexpr, andexpr, use_rom):
             I1 = Bit()
             wire(I1, lut.I[1])
     else:
-        lut = LUTN(lutexpr, k)
+        lut = LUT(lutexpr, k)
         if k >= 1:
             I0 = Bit()
             wire(I0, lut.I0)

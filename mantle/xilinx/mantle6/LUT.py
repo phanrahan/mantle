@@ -7,7 +7,7 @@ from ..spartan6.CLB import *
 
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
-__all__ += ['LUTN']
+__all__ += ['LUT']
 __all__ += ['LUT6x2', 'LUT5x2']
 __all__ += ['A0', 'A1', 'A2', 'A3', 'ZERO', 'ONE']
 
@@ -71,18 +71,23 @@ def LUT8(rom, **kwargs):
                    "O", mux.O)
 
 
-def LUTN(rom, n=None, **kwargs):
+def LUT(rom, n=None, **kwargs):
     """
     n-bit LUT
 
     I[n] -> n
     """
 
-    # rom must be a sequence
-    if isinstance(rom, Sequence):
-        assert n == len(rom)
-    else:
+    if n is not None:
         n = 1 << n
+
+    if isinstance(rom, Sequence):
+        if n is None:
+            n = len(rom)
+        else:
+            assert n == len(rom)
+
+    assert n is not None
 
     if n == 2:
         return LUT1(rom, **kwargs)

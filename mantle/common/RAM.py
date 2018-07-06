@@ -1,5 +1,6 @@
 from magma import Circuit, In, Out, Clock, Bit, Bits, wire, bits, repeat, cache_definition
-from mantle import Mux, And
+from mantle import And
+from mantle import Mux
 from .register import Register
 from .decoder import Decoder
 

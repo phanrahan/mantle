@@ -74,8 +74,8 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     return CounterModM
 
 def CounterModM(m, n, cin=False, cout=True, incr=1, next=False,
-    has_ce=False, **kwargs):
-    return DefineCounterModM(m, n, cin, cout, incr, next, has_ce)(**kwargs)
+    has_ce=False, has_reset=False, **kwargs):
+    return DefineCounterModM(m, n, cin, cout, incr, next, has_ce, has_reset=has_reset)(**kwargs)
 
 DefineUpCounterModM = DefineCounterModM
 UpCounterModM = CounterModM

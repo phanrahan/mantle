@@ -200,12 +200,18 @@ def test_shift(op, width):
         com( Test, f'{op.name}{width}' )
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+def test_dff():
+    DFF = mantle.DFF
+    Test = DFF()
+    #sim( Test, op.func)
+    com( Test, 'DFF' )
+
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 @pytest.mark.parametrize("op", [
-    op('DFF',  lambda x: x),
     op('SRFF', lambda x: x),
     op('RSFF', lambda x: x),
     op('JKFF', lambda x: x),
-    op('TFF',  lambda x: x)
+    op('TFF',  lambda x: x),
 ])
 def test_ff(op):
     FF = getattr(mantle, op.name)

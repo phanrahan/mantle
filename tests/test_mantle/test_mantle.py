@@ -199,6 +199,19 @@ def test_shift(op, width):
         sim( Test, lambda x, y: op.func(x,y) )
         com( Test, f'{op.name}{width}' )
 
+@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
+@pytest.mark.parametrize("op", [
+    op('DFF',  lambda x: x),
+    op('SRFF', lambda x: x),
+    op('RSFF', lambda x: x),
+    op('JKFF', lambda x: x),
+    op('TFF',  lambda x: x)
+])
+def test_ff(op):
+    FF = getattr(mantle, op.name)
+    Test = FF()
+    #sim( Test, op.func)
+    com( Test, f'{op.name}' )
 
 @pytest.mark.parametrize("op", [
     op('DefineRegister', lambda x: x),

@@ -23,8 +23,7 @@ def Decode(i, n, invert=False, **kwargs):
     if n <= 4:
         i = 1 << i
         if invert:
-            m = 1 << n
-            mask = (1 << m) - 1
+            mask = (1 << (1 << n)) - 1
             i = mask & (~i)
         return m.uncurry(LUT(i, n, **kwargs))
 

@@ -49,7 +49,7 @@ def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
             if n <= 4: #8?
                 a = ROMN(lutexprs[n - 1], n)
             else:
-                nluts = (n + 3) // 4
+                nluts = 4 * ((n + 3) // 4)
                 a = FlatHalfCascade(nluts, 4, lutexprs[3], andexpr, cin)
                 if nluts != n:
                     I = concat(I, bits(0, nluts-n))

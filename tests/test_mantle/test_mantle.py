@@ -3,8 +3,8 @@ import pytest
 import magma
 import mantle
 
-HEIGHTS = [2, 4]
-WIDTHS = [2, 4]
+HEIGHTS = [2, 4, 8]
+WIDTHS = [2, 4, 8]
 
 op = namedtuple("op", ["name", "func"])
 

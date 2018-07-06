@@ -1,6 +1,7 @@
+import math
 from magma import *
 import coreir
-from magma.bitutils import seq2int, int2seq, fun2seq
+from magma.bitutils import clog2, seq2int, int2seq, fun2seq
 from types import FunctionType
 from collections import Sequence
 from bit_vector import BitVector
@@ -53,7 +54,7 @@ def LUT(init, N=None, **kwargs):
             if 2 ** N < len(init):
                 raise ValueError("init is too large for N={}".format(N))
         else:
-            N = math.clog2(len(init))
+            N = clog2(len(init))
         init = seq2int(init)
     else:
         if N is None:

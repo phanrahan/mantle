@@ -20,7 +20,7 @@ from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAd
 from .FF import FF, DFF, DefineDFF, DefineCoreirReg
 from .LUT import LUT
 
-from .MUX import DefineMux, Mux, DefineCoreirMux
+from .MUX import Mux2, Mux4, Mux8, Mux16, DefineMux, Mux, DefineCoreirMux
 from .memory import DefineRAM, DefineMemory, DefineCoreirMem
 from .compare import \
     DefineEQ, DefineCoreirEq, EQ, \

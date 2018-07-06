@@ -109,3 +109,8 @@ def DefineMux(height=2, width=None):
 
 def Mux(height=2, width=None, **kwargs):
     return DefineMux(height, width)(**kwargs)
+
+Mux2 = Mux(2)
+Mux4 = Mux(4)
+Mux8 = Mux(8)
+Mux16 = Mux(16)

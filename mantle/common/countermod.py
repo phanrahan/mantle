@@ -19,9 +19,9 @@ def _CounterName(name, n, m, ce, r, s):
 #
 @cache_definition
 def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
-    has_ce=False):
+    has_ce=False, has_reset=False):
 
-    r = False
+    r = has_reset
     s = False
     name = _CounterName('Counter', n, m, has_ce, r, s)
 
@@ -40,6 +40,9 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     counter = Counter(n, cin=cin, cout=cout, incr=incr, next=next,
                    has_ce=has_ce, has_reset=True)
     reset = Decode(m - 1, n)(counter.O)
+
+    if has_reset:
+        reset = Or(2)(reset, counter.RESET)
 
     if has_ce:
         CE = In(Bit)()

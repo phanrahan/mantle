@@ -7,7 +7,6 @@ if m.mantle_target in [ 'coreir',
                         'ice40',
                         'spartan3', 'spartan6', 'kyntex7',
                         'cyclone4', 
-                        'greenpak4', 
                         'verilog' ]:
 
     #from mantle.primitives import *
@@ -20,8 +19,6 @@ if m.mantle_target in [ 'coreir',
         from mantle.xilinx import *
     elif m.mantle_target in ['cyclone4']:
         from mantle.altera import *
-    elif m.mantle_target in ['greenpak4']:
-        from mantle.silego import *
     elif m.mantle_target == 'verilog':
         from mantle.verilog import *
 

@@ -1,3 +1,5 @@
+import pytest
+
 import magma as m
 from magma import compile
 from magma.simulator.python_simulator import testvectors as simtest
@@ -19,6 +21,16 @@ def com(Test, name):
     gold = f'gold/{name}'
     compile(build, Test)
     assert check_files_equal(__file__, build+'.v', gold+'.v')
+
+def test_inv():
+    Test = m.DefineCircuit("INV",
+              "I", m.In(m.Bit),
+              "O", m.Out(m.Bit))
+    inv = greenpak4.GP_INV()
+    m.wire(Test.I, inv.IN)
+    m.wire(inv.OUT, Test.O)
+
+    com( Test, 'inv' )
 
 def test_lut2():
     Test = m.DefineCircuit("LUT2",
@@ -44,7 +56,6 @@ def test_lut3():
     m.wire(lut.OUT, Test.O)
 
     com( Test, 'lut3' )
-
   
 def test_lut4():
     Test = m.DefineCircuit("LUT4",
@@ -61,3 +72,18 @@ def test_lut4():
     m.wire(lut.OUT, Test.O)
 
     com( Test, 'lut4' )
+
+@pytest.mark.parametrize('ff',['DFF', 'DFFI'])
+def test_ff(ff):
+    Test = m.DefineCircuit(ff,
+              "I",   m.In(m.Bit),
+              "CLK", m.In(m.Clock),
+              "O",   m.Out(m.Bit))
+    DFF = getattr(greenpak4,'GP_'+ff)
+    dff = DFF()
+    m.wire(Test.I, dff.D)
+    m.wire(Test.CLK, dff.CLK)
+    m.wire(dff.Q if ff == 'DFF' else dff.nQ, Test.O)
+
+    com( Test, ff )
+

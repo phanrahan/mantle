@@ -3,9 +3,7 @@ from magma import *
 
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
-__all__ += ['LUTN', 'LUT']
-__all__ += ['Logic1', 'Logic2', 'Logic3', 'Logic4']
-__all__ += ['Logic5', 'Logic6', 'Logic7', 'Logic8']
+__all__ += ['LUT']
 
 def LUT1(rom, **kwargs):
     lut = SB_LUT4(LUT_INIT=lutinit(rom,4),**kwargs)
@@ -46,19 +44,23 @@ def LUT7(rom, **kwargs):
 def LUT8(rom, **kwargs):
     return None
 
-def LUTN(rom, n=None, **kwargs):
+def LUT(rom, n=None, **kwargs):
     """
     n-bit LUT
 
     I[n] -> n
     """
 
-    # rom must be a sequence
-    if isinstance(rom, Sequence):
-        assert n is None
-        n = len(rom)
-    else:
+    if n is not None:
         n = 1 << n
+
+    if isinstance(rom, Sequence):
+        if n is None:
+            n = len(rom)
+        else:
+            assert n == len(rom)
+
+    assert n is not None
 
     if n == 2:
         return LUT1(rom, **kwargs)
@@ -79,20 +81,3 @@ def LUTN(rom, n=None, **kwargs):
 
     return None
 
-def LUT(rom, **kwargs):
-    """
-    n-bit LUT
-
-    I[n] -> n
-    """
-    return LUTN(rom, **kwargs)
-
-
-Logic1 = LUT1
-Logic2 = LUT2
-Logic3 = LUT3
-Logic4 = LUT4
-Logic5 = LUT5
-Logic6 = LUT6
-Logic7 = LUT7
-Logic8 = LUT8

@@ -15,6 +15,7 @@ py.test --target coreir tests/test_mantle
 py.test --target ice40 tests/test_mantle
 py.test --target spartan3 tests/test_mantle
 py.test --target spartan6 tests/test_mantle
+#py.test --target greenpak4 tests/test_greenpak4
 
 # Return code is nonzero if an error occured
 test $err = 0

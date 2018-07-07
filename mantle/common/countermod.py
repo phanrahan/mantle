@@ -1,5 +1,5 @@
 from magma import *
-from mantle import And, Decode
+from mantle import And, Decode, Or
 from .counter import Counter
 
 __all__ = ['DefineUpCounterModM', 'UpCounterModM']
@@ -19,9 +19,9 @@ def _CounterName(name, n, m, ce, r, s):
 #
 @cache_definition
 def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
-    has_ce=False):
+    has_ce=False, has_reset=False):
 
-    r = False
+    r = has_reset
     s = False
     name = _CounterName('Counter', n, m, has_ce, r, s)
 
@@ -40,6 +40,9 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     counter = Counter(n, cin=cin, cout=cout, incr=incr, next=next,
                    has_ce=has_ce, has_reset=True)
     reset = Decode(m - 1, n)(counter.O)
+
+    if has_reset:
+        reset = Or(2)(reset, CounterModM.RESET)
 
     if has_ce:
         CE = In(Bit)()
@@ -71,8 +74,8 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     return CounterModM
 
 def CounterModM(m, n, cin=False, cout=True, incr=1, next=False,
-    has_ce=False, **kwargs):
-    return DefineCounterModM(m, n, cin, cout, incr, next, has_ce)(**kwargs)
+    has_ce=False, has_reset=False, **kwargs):
+    return DefineCounterModM(m, n, cin, cout, incr, next, has_ce, has_reset=has_reset)(**kwargs)
 
 DefineUpCounterModM = DefineCounterModM
 UpCounterModM = CounterModM

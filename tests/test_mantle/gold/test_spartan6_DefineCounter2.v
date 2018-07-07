@@ -10,6 +10,7 @@ MUXCY inst1 (.DI(inst0_O5), .S(inst0_O6), .O(inst1_O));
 LUT6_2 #(.INIT(64'h1111111111111110)) inst2 (.I0(I0[1]), .I1(I1[1]), .I5(1'b1), .O5(inst2_O5), .O6(inst2_O6));
 MUXCY inst3 (.DI(inst2_O5), .CI(inst1_O), .S(inst2_O6), .O(inst3_O));
 assign O = {inst2_O6,inst0_O6};
+assign COUT = inst3_O;
 endmodule
 
 module Register2 (input [1:0] I, output [1:0] O, input  CLK);

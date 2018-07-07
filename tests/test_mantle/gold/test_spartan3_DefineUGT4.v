@@ -16,6 +16,7 @@ MUXCY inst5 (.DI(I0[2]), .CI(inst3_O), .S(inst4_O), .O(inst5_O));
 LUT2 #(.INIT(4'h9)) inst6 (.I0(I0[3]), .I1(I1[3]), .O(inst6_O));
 MUXCY inst7 (.DI(I0[3]), .CI(inst5_O), .S(inst6_O), .O(inst7_O));
 assign O = {inst6_O,inst4_O,inst2_O,inst0_O};
+assign COUT = inst7_O;
 endmodule
 
 module UGT4 (input [3:0] I0, input [3:0] I1, output  O);

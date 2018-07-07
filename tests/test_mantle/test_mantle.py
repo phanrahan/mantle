@@ -163,7 +163,24 @@ def test_fa():
 @pytest.mark.parametrize("op", [
     op('DefineAdd', lambda x, y: x+y),
     op('DefineSub', lambda x, y: x-y),
-    op('DefineNegate', lambda x: -x),
+])
+@pytest.mark.parametrize("cin", [False, True])
+@pytest.mark.parametrize("cout", [False, True])
+@pytest.mark.parametrize("width", WIDTHS)
+def test_arith(op, cin, cout, width):
+    Define = getattr(mantle, op.name)
+    Test = Define(width, cin=cin, cout=cout)
+    sim( Test, op.func )
+    com( Test, f'{op.name}{width}{"_cin" if cin else ""}{"_cout" if cout else ""}' )
+
+@pytest.mark.parametrize("width", WIDTHS)
+def test_negate(width):
+    Define = mantle.Negate
+    Test = Define(width)
+    sim( Test, op.func )
+    com( Test, f'Negate{width}' )
+
+@pytest.mark.parametrize("op", [
     op('DefineEQ', lambda x, y: x==y),
     op('DefineNE', lambda x, y: x!=y),
     op('DefineUGT', lambda x, y: x>y),
@@ -176,7 +193,7 @@ def test_fa():
     op('DefineSLE', lambda x, y: x<=y)
 ])
 @pytest.mark.parametrize("width", WIDTHS)
-def test_arith(op, width):
+def test_compare(op, width):
     Define = getattr(mantle, op.name)
     Test = Define(width)
     sim( Test, op.func )

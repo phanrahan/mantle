@@ -1,5 +1,6 @@
 from magma import *
 from .LUT import A0, A1
+from .logic import Not
 from .cascade import FullCascade
 
 __all__  = ['DefineAdd'] 
@@ -22,13 +23,12 @@ def _Args(n, cin, cout):
 
     args = ["I0", In(T), "I1", In(T)]
 
-    if cin is not 0 and cin is not 1:
-        if cin:
-            args += ['CIN', In(Bit)]
+    if cin is True:
+        args += ['CIN', In(Bit)]
 
     args += ["O", Out(T)]
 
-    if cout:
+    if cout is True:
         args += ['COUT', Out(Bit)]
 
     return args
@@ -52,6 +52,10 @@ def DefineAdd(n, cin=False, cout=False):
             wire(io.I0, add.I0)
             wire(io.I1, add.I1)
             wire(add.O, io.O)
+            if cin is True:
+                wire(io.CIN, add.CIN)
+            if cout is True:
+                wire(add.COUT, io.COUT)
     return _Add
     
 
@@ -66,6 +70,10 @@ def DefineSub(n, cin=1, cout=False):
             wire(io.I0, sub.I0)
             wire(io.I1, sub.I1)
             wire(sub.O, io.O)
+            if cin is True:
+                wire( Not()(io.CIN), sub.CIN )
+            if cout is True:
+                wire(sub.COUT, io.COUT)
     return _Sub
 
 @cache_definition

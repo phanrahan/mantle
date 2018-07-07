@@ -20,6 +20,7 @@ MUXCY inst5 (.DI(inst4_O5), .CI(inst3_O), .S(inst4_O6), .O(inst5_O));
 LUT6_2 #(.INIT(64'h4444444444444443)) inst6 (.I0(I0[3]), .I1(I1[3]), .I5(1'b1), .O5(inst6_O5), .O6(inst6_O6));
 MUXCY inst7 (.DI(inst6_O5), .CI(inst5_O), .S(inst6_O6), .O(inst7_O));
 assign O = {inst6_O6,inst4_O6,inst2_O6,inst0_O6};
+assign COUT = inst7_O;
 endmodule
 
 module ULE4 (input [3:0] I0, input [3:0] I1, output  O);

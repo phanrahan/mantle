@@ -155,6 +155,8 @@ def HalfCascade(n, k, lutexpr, andexpr, cin, forkargs={}):
         wire(cin, c.CIN)
     elif cin:
         args += ['CIN', c.CIN]
+    else:
+        wire(0, c.CIN)
 
     return AnonymousCircuit(args)
 
@@ -306,6 +308,8 @@ def FullCascade(n, k, lutexpr, andexpr, cin, cout, forkargs=[]):
         wire(cin, c.CIN)
     elif cin:
         args += ['CIN', c.CIN]
+    else:
+        wire(0, c.CIN)
 
     args += ['O', c.O]
 

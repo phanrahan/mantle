@@ -1,7 +1,8 @@
 from collections import Sequence
 from magma import *
 from ..spartan6.CLB import XORCY, MUXCY
-from .LUT import LUT5x2, LOG_BITS_PER_LUT, A0, A1, A2, A3, ZERO, ONE
+from ..spartan6.LUT import LUT5x2
+from .LUT import LOG_BITS_PER_LUT, A0, A1, A2, A3, ZERO, ONE
 
 __all__  = ['HalfCarry', 'FullCarry']
 __all__ += ['FullCascade']
@@ -18,18 +19,30 @@ def halfcarry(k, lutexpr, andexpr, use_rom):
     lut = LUT5x2(andexpr, lutexpr)
     if use_rom:
         lut = uncurry(lut)
-        args += ['I', lut.I]
+        args += ['I', lut.I[:k]]
+        for i in range(k,5):
+            wire(0, lut.I[i])
     else:
         if k >= 1:
             args += ['I0', lut.I0]
+        else:
+            wire(0, lut.I0)
         if k >= 2:
             args += ['I1', lut.I1]
+        else:
+            wire(0, lut.I1)
         if k >= 3:
             args += ['I2', lut.I2]
+        else:
+            wire(0, lut.I2)
         if k >= 4:
             args += ['I3', lut.I3]
+        else:
+            wire(0, lut.I3)
         if k >= 5:
             args += ['I4', lut.I4]
+        else:
+            wire(0, lut.I4)
 
     CIN = Bit()
 
@@ -47,7 +60,7 @@ def halfcarry(k, lutexpr, andexpr, use_rom):
 
 def fullcarry(k, lutexpr, andexpr, use_rom):
 
-    CIN, COUT, O, args = _halfcarry(k, lutexpr, andexpr, use_rom)
+    CIN, COUT, O, args = halfcarry(k, lutexpr, andexpr, use_rom)
 
     xor = XORCY()
     wire(O,   xor.LI)
@@ -104,6 +117,7 @@ def FlatHalfCascade(n, k, lutexpr, andexpr, cin):
 
     c = braid( col(f, nluts), foldargs={"CIN":"COUT"})
     c = flat(c)
+    print(c)
 
     wire(cin, c.CIN)
 
@@ -266,7 +280,7 @@ def FullCascade(n, k, lutexpr, andexpr, cin, cout, forkargs=[]):
 
     def f(x):
         e = lutexpr[y] if isinstance(lutexpr, Sequence) else lutexpr
-        return HalfCarry(k, e, andexpr)
+        return FullCarry(k, e, andexpr)
 
     c = braid( col(f, n), foldargs={"CIN":"COUT"}, forkargs=forkargs)
 
@@ -280,6 +294,8 @@ def FullCascade(n, k, lutexpr, andexpr, cin, cout, forkargs=[]):
         wire(cin, c.CIN)
     elif cin:
         args += ['CIN', c.CIN]
+    else:
+        wire(0, c.CIN)
 
     args += ['O', c.O]
 

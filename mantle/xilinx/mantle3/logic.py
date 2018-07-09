@@ -52,7 +52,6 @@ def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
             else:
                 nluts = 4 * ((n + 3) // 4)
                 a = FlatHalfCascade(nluts, 4, lutexprs[3], andexpr, cin)
-                print(n,nluts)
                 if nluts != n:
                     I = concat(I, bits(0, nluts-n))
             wire(a(I), io.O)

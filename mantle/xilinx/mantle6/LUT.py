@@ -8,7 +8,6 @@ from ..spartan6.CLB import *
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']
 __all__ += ['LUT5', 'LUT6', 'LUT7', 'LUT8']
 __all__ += ['LUT']
-__all__ += ['LUT6x2', 'LUT5x2']
 __all__ += ['A0', 'A1', 'A2', 'A3', 'ZERO', 'ONE']
 
 def LUT1(rom, **kwargs):
@@ -107,31 +106,3 @@ def LUT(rom, n=None, **kwargs):
         return LUT8(rom, **kwargs)
 
     return None
-
-
-# rom5 is for O5
-# rom6 is for O6
-def LUT6x2(rom5, rom6):
-    lut = _LUT6x2(INIT=lutinit(rom5+rom6,1<<6))
-    return AnonymousCircuit("I0", lut.I0,
-                            "I1", lut.I1,
-                            "I2", lut.I2,
-                            "I3", lut.I3,
-                            "I4", lut.I4,
-                            "I5", lut.I5,
-                            "O5", lut.O5,
-                            "O6", lut.O6)
-
-def LUT5x2(rom1, rom2):
-    lut = LUT6x2(rom1, rom2)
-    wire(1, lut.I5)
-    return AnonymousCircuit("I0", lut.I0,
-                            "I1", lut.I1,
-                            "I2", lut.I2,
-                            "I3", lut.I3,
-                            "I4", lut.I4,
-                            "O5", lut.O5,
-                            "O6", lut.O6)
-
-
-

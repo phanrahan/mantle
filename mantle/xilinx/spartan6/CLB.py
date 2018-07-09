@@ -1,4 +1,5 @@
 from magma import *
+from magma.bitutils import lutinit
 
 __all__  = ['A0', 'A1', 'A2', 'A3', 'A4', 'A5']
 __all__ += ['I0', 'I1', 'I2', 'I3', 'I4', 'I5']
@@ -6,10 +7,12 @@ __all__ += ['ALL', 'ANY', 'PARITY']
 __all__ += ['ZERO', 'ONE']
 __all__ += ['LUTS_PER_LOGICBLOCK', 'BITS_PER_LUT', 'LOG_BITS_PER_LUT']
 
-
 __all__ += ['_LUT1', '_LUT2', '_LUT3', '_LUT4' , '_LUT5', '_LUT6', '_LUT6x2']
+
 __all__ += ['MUXF7', 'MUXF8']
+
 __all__ += ['MUXCY', 'XORCY', 'CARRY4', 'CARRY']
+
 __all__ += ['FDRSE', 'FDCPE', 'FDCE']
 
 LUTS_PER_LOGICBLOCK = 4
@@ -88,16 +91,16 @@ _LUT6x2 = DeclareCircuit('LUT6_2',
 
 # D-FF with Clock Enable and Aynchronous Clear
 FDCE = DeclareCircuit('FDCE',
-               "C",   In(Bit),
-               "CE",  In(Bit),
+               "C",   In(Clock),
+               "CE",  In(Enable),
                "CLR", In(Bit),
                "D",   In(Bit),
                "Q",   Out(Bit))
     
 # D-FF with Clock Enable and Aynchronous Preset and Clear
 FDCPE = DeclareCircuit('FDCPE',
-               "C",   In(Bit),
-               "CE",  In(Bit),
+               "C",   In(Clock),
+               "CE",  In(Enable),
                "CLR", In(Bit),
                "PRE", In(Bit),
                "D",   In(Bit),
@@ -105,8 +108,8 @@ FDCPE = DeclareCircuit('FDCPE',
 
 # D-FF with Synchronous Reset and Set and Clock Enable
 FDRSE = DeclareCircuit('FDRSE',
-               "C",   In(Bit),
-               "CE",  In(Bit),
+               "C",   In(Clock),
+               "CE",  In(Enable),
                "R",   In(Bit),
                "S",   In(Bit),
                "D",   In(Bit),

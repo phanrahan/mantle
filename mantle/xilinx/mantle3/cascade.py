@@ -73,7 +73,7 @@ def halfcarry(k, lutexpr, andexpr, use_rom):
 
 def fullcarry(k, lutexpr, andexpr, use_rom):
 
-    CIN, COUT, O, args = _halfcarry(k, lutexpr, andexpr, use_rom)
+    CIN, COUT, O, args = halfcarry(k, lutexpr, andexpr, use_rom)
 
     xor = XORCY()
     wire(O,   xor.LI)
@@ -278,6 +278,7 @@ def HalfCascade(n, k, lutexpr, andexpr, cin, forkargs={}):
 ##
 ##    return _HalfCascade
 ##
+
 #
 #
 #
@@ -294,7 +295,7 @@ def FullCascade(n, k, lutexpr, andexpr, cin, cout, forkargs=[]):
 
     def f(x):
         e = lutexpr[y] if isinstance(lutexpr, Sequence) else lutexpr
-        return HalfCarry(k, e, andexpr)
+        return FullCarry(k, e, andexpr)
 
     c = braid( col(f, n), foldargs={"CIN":"COUT"}, forkargs=forkargs)
 

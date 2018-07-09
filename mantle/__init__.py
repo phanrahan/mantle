@@ -5,9 +5,11 @@ if m.mantle_target is None:
 
 if m.mantle_target in [ 'coreir',
                         'ice40',
-                        'spartan3', 'spartan6', 'kyntex7',
+                        'spartan3',
+                        'spartan6',
+                        'kyntex7',
                         'cyclone4', 
-                        'verilog' ]:
+]:
 
     #from mantle.primitives import *
 

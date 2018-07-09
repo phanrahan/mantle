@@ -1,2 +1,2 @@
-from mantle.util.lhca.lhca import LHCA
+from .lhca import LHCA
 

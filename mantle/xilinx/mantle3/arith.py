@@ -42,7 +42,7 @@ def _Args(n, cin, cout):
 # if cout: COUT is added to the circuit
 #
 @cache_definition
-def DefineAdd(n, cin=False, cout=False):
+def DefineAdd(n, cin=0, cout=False):
     class _Add(Circuit):
         name = _Name('Add', n, cin, cout)
         IO = _Args(n, cin, cout)

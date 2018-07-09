@@ -40,7 +40,7 @@ __all__ += ['DefineLSR', 'LSR']
 def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
     T = Bits(n)
     class _ReduceOp(Circuit):
-        name = '{}{}'.format(opname, n)
+        name = f'{opname}{n}'
         IO = ['I', In(T), 'O', Out(Bit)]
 
         @classmethod
@@ -50,6 +50,7 @@ def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
                 a = ROMN(lutexprs[n - 1], n)
             else:
                 nluts = 4 * ((n + 3) // 4)
+                print(n, nluts)
                 a = FlatHalfCascade(nluts, 4, lutexprs[3], andexpr, cin)
                 if nluts != n:
                     I = concat(I, bits(0, nluts-n))

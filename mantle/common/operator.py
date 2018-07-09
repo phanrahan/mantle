@@ -2,8 +2,9 @@ from functools import wraps
 
 from magma import *
 from magma.bitutils import clog2, seq2int
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Mux
-from mantle.common.arith import ASR, Add, Sub, Negate
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
+from mantle import Mux
+from .arith import ASR, Add, Sub, Negate
 
 def get_length(value):
     if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
@@ -22,70 +23,91 @@ def check_operator_args(fn):
         width = get_length(args[0])
         if not all(get_length(x) == width for x in args):
             raise ValueError(f"All arguments should have the same length: {args}")
-        return fn(*args, **kwargs)
+        T = type(args[0])
+        if not all(type(x) == T for x in args):
+            raise TypeError("Currently Arguments to operators must be of the same type")
+        return fn(width, *args, **kwargs)
     return wrapped
 
+operators = {}
 
-@check_operator_args
-def and_(*args, **kwargs):
-    width = get_length(args[0])
-    return And(len(args), width, **kwargs)(*args)
+def _pass_closure_vars_as_args(*closure_args):
+    def _wrapped(fn):
+        @wraps(fn)
+        def _wrapped_inner(*args, **kwargs):
+            return fn(*closure_args, *args, **kwargs)
+        return _wrapped_inner
+    return _wrapped
 
+def preserve_type(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        retval = fn(*args, **kwargs)
+        T = type(args[0])
+        if isinstance(T, UIntKind):
+            return uint(retval)
+        elif isinstance(T, SIntKind):
+            return sint(retval)
+        return retval
+    return wrapper
 
-@check_operator_args
-def nand(*args, **kwargs):
-    width = get_length(args[0])
-    return NAnd(len(args), width, **kwargs)(*args)
+for _operator_name, _Circuit in (
+    ("and_", And),
+    ("nand", NAnd),
+    ("or_", Or),
+    ("nor", NOr),
+    ("xor", XOr),
+    ("nxor", NXOr),
+    ("add", Add),
+    ("sub", Sub),
+    # TODO: These lack implementations
+    # ("mul", Mul),
+    # ("div", Div)
+):
+    # Because Python uses dynamic scoping, the closures will use the
+    # last value of _Circuit rather than capturing the lexical value.
+    # Hacky workaround is to pass _Circuit as an argument to a
+    # decorator so the "lexical" value is captured.
+    @preserve_type
+    @check_operator_args
+    @_pass_closure_vars_as_args(_Circuit, _operator_name)
+    def operator(circuit, name, width, *args, **kwargs):
+        if name in ["add", "sub"]:
+            # These don't have a height
+            if len(args) > 2:
+                raise Exception(f"{name} operator expects 2 arguments")
+            return circuit(width, **kwargs)(*args)
+        else:
+            return circuit(len(args), width, **kwargs)(*args)
+    operator.__name__ = _operator_name
+    operator.__qualname__ = _operator_name
+    operators[_operator_name] = operator
+    exec(f"{_operator_name} = operator")
 
-
-@check_operator_args
-def or_(*args, **kwargs):
-    width = get_length(args[0])
-    return Or(len(args), width, **kwargs)(*args)
-
-
-@check_operator_args
-def nor(*args, **kwargs):
-    width = get_length(args[0])
-    return NOr(len(args), width, **kwargs)(*args)
-
-
-@check_operator_args
-def xor(*args, **kwargs):
-    width = get_length(args[0])
-    return XOr(len(args), width, **kwargs)(*args)
-
-
-@check_operator_args
-def nxor(*args, **kwargs):
-    width = get_length(args[0])
-    return NXOr(len(args), width, **kwargs)(*args)
-
-
+@preserve_type
 def lsl(I0, I1, **kwargs):
     width = get_length(I0)
     shift = get_length(I1)
-    if shift != clog2(width):
-        raise ValueError("LSL shift should be equal to the clog2 of width")
+    T = type(I0)
     return LSL(width, **kwargs)(I0, I1)
 
+@preserve_type
 def lsr(I0, I1, **kwargs):
     width = get_length(I0)
     shift = get_length(I1)
-    if shift != clog2(width):
-        raise ValueError("LSR shift should be equal to the clog2 of width")
     return LSR(width, **kwargs)(I0, I1)
 
+@preserve_type
 def asr(I0, I1, **kwargs):
     width = get_length(I0)
     shift = get_length(I1)
-    if shift != clog2(width):
-        raise ValueError("ASR shift should be equal to the clog2 of width")
     return ASR(width, **kwargs)(I0, I1)
 
+@preserve_type
 def not_(arg, **kwargs):
     return Not(**kwargs)(arg)
 
+@preserve_type
 def invert(arg, **kwargs):
     width = get_length(arg)
     if width is None:
@@ -93,37 +115,11 @@ def invert(arg, **kwargs):
     else:
         return Invert(width, **kwargs)(arg)
 
-def negate(arg, **kwargs):
+@preserve_type
+def neg(arg, **kwargs):
     if isinstance(arg, int):
         return -arg
     return Negate(get_length(arg), **kwargs)(arg)
-
-@check_operator_args
-def eq(I0, I1, **kwargs):
-    width = get_length(I0)
-    return EQ(width, **kwargs)(I0, I1)
-
-@check_operator_args
-def add(I0, I1, **kwargs):
-    width = get_length(I0)
-    return Add(width, **kwargs)(I0, I1)
-
-@check_operator_args
-def sub(I0, I1, **kwargs):
-    width = get_length(I0)
-    return Sub(width)(I0, I1)
-
-@check_operator_args
-def mul(I0, I1, **kwargs):
-    raise NotImplementedError("Coreir does not have Mul")
-    width = get_length(I0)
-    return Mul(width)(I0, I1)
-
-@check_operator_args
-def div(I0, I1, **kwargs):
-    raise NotImplementedError("Coreir does not have Div")
-    width = get_length(I0)
-    return Div(width)(I0, I1)
 
 bitwise_ops = [
     ("__and__", and_),
@@ -140,43 +136,44 @@ for method, op in bitwise_ops:
     setattr(BitsType, method, op)
 
 arithmetic_ops = [
+    ("__neg__", neg),
     ("__add__", add),
     ("__sub__", sub),
-    ("__mul__", mul),
-    ("__div__", div)
+    # ("__mul__", mul),
+    # ("__div__", div)
 ]
 
 @check_operator_args
-def lt(I0, I1, **kwargs):
-    width = get_length(I0)
+def lt(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
-        return SLT(width)(I0, I1)
+        return SLT(width, **kwargs)(I0, I1)
     else:
-        return ULT(width)(I0, I1)
+        return ULT(width, **kwargs)(I0, I1)
 
 @check_operator_args
-def le(I0, I1, **kwargs):
-    width = get_length(I0)
+def le(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
-        return SLE(width)(I0, I1)
+        return SLE(width, **kwargs)(I0, I1)
     else:
-        return ULE(width)(I0, I1)
+        return ULE(width, **kwargs)(I0, I1)
 
 @check_operator_args
-def gt(I0, I1, **kwargs):
-    width = get_length(I0)
+def gt(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
-        return SGT(width)(I0, I1)
+        return SGT(width, **kwargs)(I0, I1)
     else:
-        return UGT(width)(I0, I1)
+        return UGT(width, **kwargs)(I0, I1)
 
 @check_operator_args
-def ge(I0, I1, **kwargs):
-    width = get_length(I0)
+def ge(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
-        return SGE(width)(I0, I1)
+        return SGE(width, **kwargs)(I0, I1)
     else:
-        return UGE(width)(I0, I1)
+        return UGE(width, **kwargs)(I0, I1)
+
+@check_operator_args
+def eq(width, I0, I1, **kwargs):
+    return EQ(width, **kwargs)(I0, I1)
 
 
 relational_ops = [
@@ -190,6 +187,7 @@ for method, op in arithmetic_ops + relational_ops:
     setattr(SIntType, method, op)
     setattr(UIntType, method, op)
 
+@preserve_type
 def mux(I, S):
     if isinstance(S, int):
         return I[S]

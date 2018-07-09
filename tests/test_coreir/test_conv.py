@@ -1,5 +1,3 @@
-import os
-os.environ['MANTLE'] = 'coreir'
 from magma import *
 from magma.testing import check_files_equal
 from mantle import *

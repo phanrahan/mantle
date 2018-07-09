@@ -1,7 +1,7 @@
 from magma import *
-from .decode import Decode
+from mantle import Decode
 
-__all__  = ['Decoder', 'decoder']
+__all__  = ['DefineDecoder', 'Decoder', 'decoder']
 
 @cache_definition
 def DefineDecoder(n, invert=False):
@@ -15,7 +15,7 @@ def DefineDecoder(n, invert=False):
         @classmethod
         def definition(io):
             def decode(y):
-                return Decode(y, n, invert, loc=(0,y/8, y%8))
+                return Decode(y, n, invert)
             dec = fork(col(decode, 1<<n))
             wire(dec(io.I), io.O)
     return _Decoder

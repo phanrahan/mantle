@@ -1,8 +1,8 @@
 from magma import *
-from mantle.common.arith import Add
-from mantle import And, Mux, DefineAdd
+from mantle import And, DefineAdd
+from mantle import Mux
+from .arith import Add
 from .register import Register
-from .decode import Decode
 
 __all__  = ['DefineCounter', 'Counter']
 __all__ += ['DefineUpCounter', 'UpCounter']

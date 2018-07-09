@@ -1,1 +1,1 @@
-from mantle.util.lfsr.lfsr import DefineLFSR
+from .lfsr import DefineLFSR

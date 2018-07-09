@@ -1,6 +1,5 @@
 from magma import *
-from mantle import And
-from .decode import Decode
+from mantle import And, Decode, Or
 from .counter import Counter
 import math
 
@@ -23,9 +22,9 @@ def _CounterName(name, n, m, cin, cout, ce, r, s):
 #
 @cache_definition
 def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
-    has_ce=False):
+    has_ce=False, has_reset=False):
 
-    r = False
+    r = has_reset
     s = False
     name = _CounterName('Counter', n, m, cin, cout, has_ce, r, s)
 
@@ -45,8 +44,11 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
                    has_ce=has_ce, has_reset=True)
     reset = Decode(m - 1, n)(counter.O)
 
+    if has_reset:
+        reset = Or(2)(reset, CounterModM.RESET)
+
     if has_ce:
-        CE = In(Bit)()
+        CE = CounterModM.CE
         reset = And(2)(reset, CE)
         # reset is sometimes called rollover or RO
         # note that we don't return RO in Counter
@@ -66,17 +68,13 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     if cout:
         wire( reset, CounterModM.COUT )
 
-    wire(CounterModM.CLK, counter.CLK)
-    if hasattr(counter,"CE"):
-        wire(CounterModM.CE, counter.CE)
-
     EndCircuit()
 
     return CounterModM
 
 def CounterModM(m, n, cin=False, cout=True, incr=1, next=False,
-    has_ce=False, **kwargs):
-    return DefineCounterModM(m, n, cin, cout, incr, next, has_ce)(**kwargs)
+    has_ce=False, has_reset=False, **kwargs):
+    return DefineCounterModM(m, n, cin, cout, incr, next, has_ce, has_reset=has_reset)(**kwargs)
 
 def SizedCounterModM(m, cin=False, cout=False, incr=1, next=False,
     has_ce=False, **kwargs):

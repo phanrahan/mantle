@@ -44,6 +44,7 @@ def declare_bit_binop(name, python_op):
                           'in0', In(Bit), 'in1', In(Bit), 'out', Out(Bit),
                           simulate=simulate,
                           verilog_name = "coreir_" + name,
+                          firrtl_op  = name,
                           coreir_lib = "corebit")
 
     circ = DefineCircuit("{}_wrapped".format(name),
@@ -189,18 +190,11 @@ def simulate_bit_not(self, value_store, state_store):
     value_store.set_value(self.out, out)
 
 
-DefineCoreirNot = DeclareCircuit("not", 'in', In(Bit), 'out', Out(Bit),
+coreirNot = DeclareCircuit("not", 'in', In(Bit), 'out', Out(Bit),
     simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="corebit")
 
-@cache_definition
-def DefineNot(width=None):
-    if width != None:
-        raise ValueError("Not is only defined as a 1-bit operation, width must"
-                " be None")
-    return DefineCoreirNot
-
 def Not(width=None):
-    return DefineNot(width)()
+    return coreirNot()
 
 
 def not_(arg, **kwargs):
@@ -296,10 +290,10 @@ def DefineNXOr(height=2, width=None):
 
 
 def NXOr(height, width=None, **kwargs):
-    return DefineXOr(height, width)(**kwargs)
+    return DefineNXOr(height, width)(**kwargs)
 
 def ReduceNXOr(height=2, **kwargs):
-    return uncurry(NXOr(height, **kwargs))
+    return uncurry(NXOr(height, **kwargs), "in")
 
 
 def simulate_bits_invert(self, value_store, state_store):

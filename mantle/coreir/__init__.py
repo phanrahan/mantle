@@ -6,19 +6,23 @@ from .logic import (
     XOr      , DefineXOr   , ReduceXOr ,
     NXOr     , DefineNXOr  , ReduceNXOr,
     Invert   , DefineInvert,
-    Not      , DefineNot   ,
+    Not      ,
     DefineStaticLeftShift  , StaticLeftShift  , static_left_shift  ,
     DefineStaticRightShift , StaticRightShift , static_right_shift ,
     DefineLSL , LSL , lsl ,
     DefineLSR, LSR, lsr,
 )
 
+from .decode import decode, Decode, DefineDecode
+
+from .fulladder import FullAdder
+from .halfadder import HalfAdder
 from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAdd, DefineCoreirMul
 
 from .FF import FF, DFF, DefineDFF, DefineCoreirReg
 from .LUT import LUT
 
-from .MUX import DefineMux, Mux, DefineCoreirMux
+from .MUX import Mux2, Mux4, Mux8, Mux16, DefineMux, Mux, DefineCoreirMux
 from .memory import DefineRAM, DefineMemory, DefineCoreirMem
 from .compare import \
     DefineEQ, DefineCoreirEq, EQ, \
@@ -31,6 +35,7 @@ from .compare import \
     DefineSLE, DefineCoreirSle, SLE, \
     DefineSGT, DefineCoreirSgt, SGT, \
     DefineSGE, DefineCoreirSge, SGE
+
 
 from magma import bits, cache_definition, Circuit, Bits, wire, Out, In, Bit
 

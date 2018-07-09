@@ -11,13 +11,13 @@ __all__  += ['FF']
 def DefineDFF(has_ce=False, has_reset=False, edge=True, sync=True):
     # has_set not supported
     has_set = False
-    
+
     # By default
     #  not connecting a wire to D defaults to 0
     #  not connecting a wire to C defaults to 0
     #  not connecting a wire to R defaults to 0
     #  not connecting a wire to E defaults to 1
-    #   this is better than connecting a 1 to E, 
+    #   this is better than connecting a 1 to E,
     #   which causes that signal to be generated
     if edge:
         # rising edge
@@ -135,7 +135,7 @@ def SRFF(init=0, has_ce=False, edge=True, sync=True, **kwargs):
 
     args = []
     if has_ce:
-        args += ['input CE', dff.CE]
+        args += ['CE', dff.CE]
     args += ["S", lut.I1, "R", lut.I2, 'CLK', dff.CLK, "O", dff.O]
 
     return AnonymousCircuit(args)
@@ -154,7 +154,7 @@ def RSFF(init=0, has_ce=False, edge=True, sync=True, **kwargs):
 
     args = []
     if has_ce:
-        args += ['input CE', dff.CE]
+        args += ['CE', dff.CE]
     args += ["R", lut.I2, "S", lut.I1, 'CLK', dff.CLK, "O", dff.O]
 
     return AnonymousCircuit(args)

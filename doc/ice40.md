@@ -3,12 +3,11 @@
 These circuits are the low-level primitives for the Lattice ICE40 FPGAs,
 originally designed by Silicon Blue (hence, the prefix `SB_`).
 
-Detailed documentation on these primitives is available in
-the [Lattice iCE Technology Library]
-(http://www.latticesemi.com/~/media/LatticeSemi/Documents/TechnicalBriefs/SBTICETechnologyLibrary201504.pdf)
-and
-the [Lattice iCE40 LP/HX Family Datasheet]
-(http://www.latticesemi.com/~/media/LatticeSemi/Documents/DataSheets/iCE/iCE40LPHXFamilyDataSheet.pdf).
+Detailed documentation on these primitives is available in the [Lattice iCE
+Technology
+Library](http://www.latticesemi.com/~/media/LatticeSemi/Documents/TechnicalBriefs/SBTICETechnologyLibrary201504.pdf)
+and the [Lattice iCE40 LP/HX Family
+Datasheet](http://www.latticesemi.com/~/media/LatticeSemi/Documents/DataSheets/iCE/iCE40LPHXFamilyDataSheet.pdf).
 
 ## Programmable Logic Block 
 
@@ -16,7 +15,7 @@ The programmable logic block consists of a vertical column of 8 logic cells.
 Each logic cell containts three components,
 a 4-bit lookup table (LUT4), a Carry unit, and a D-flip-flop (DFF)..
 
-[ice40 PLB][images/ice40plb.jpg]
+![ice40 PLB](images/ice40plb.jpg)
 
 ### LUTS
 
@@ -56,7 +55,7 @@ SB_DFF(init=0, has_ce=False, has_reset=False, has_set=False, edge=True, sync=Tru
 The input can be stored in the flip-flop 
 on the rising (edge=True) or falling (edge=False) edge.
 The flip-flop can optionally contain a clock enable.
-The flip-flip be configured to have a reset or set input,
+The flip-flop can be configured to have a reset or set input,
 but not both.
 The reset and set can be configured to be either
 synchronous (sync=True) or asynchroous (sync=False).
@@ -85,7 +84,7 @@ SB_DFFES() :: C:In(Bit), E:In(Bit), S:In(Bit), D:In(Bit), Q:Out(Bit)
 
 ## Memory 
 
-[Lattice RAM4K Block][images/ice40mem.jpg]
+![Lattice RAM4K Block](images/ice40mem.jpg)
 
 The memory blocks on the ice40 are 4 kilo-bits,
 and instanced using the following function.
@@ -106,12 +105,11 @@ and instanced using the following function.
 SB_RAM40_4K() ::
 ```
 
-There is a utility function `RAMB`
-which configures the memory as a RAM,
-and another `ROMB` that configures it as a ROM.
-This memory is initialized with the contents of `rom`.
-The aspect ratio (height x width) of the memory 
-depends on the length of the array `rom`.
+There is a utility function `RAMB` which configures the memory as a RAM, and
+another `ROMB` that configures it as a ROM.  This memory is initialized with
+the contents of `rom` (for `ROMB`) or `ram` (for `RAMB`).  The aspect ratio
+(height x width) of the memory depends on the length of the array `rom` or
+`ram`.
 The following aspect ratios are allowed:
 2048x2,
 1024x4,
@@ -129,7 +127,7 @@ The following aspect ratios are allowed:
 # WCLK,  In(Bit),
 # WCLKE, In(Bit),
 # WE,    In(Bit)
-RAMB(rom)
+ROMB(height, width, ram=None):
 ```
 
 ```
@@ -138,13 +136,13 @@ RAMB(rom)
 # RCLK,  In(Bit),
 # RCLKE, In(Bit),
 # RE,    In(Bit)
-ROMB(rom):
+ROMB(height, width, rom=None):
 ```
 
 
 ## IO
 
-[ice40 Programmable IO][images/ice40io.jpg]
+![ice40 Programmable IO](images/ice40io.jpg)
 
 ```
 # SB_IO() ::

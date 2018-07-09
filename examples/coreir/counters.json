@@ -3,11 +3,11 @@
   "global":{
     "modules":{
       "Counter16":{
-        "type":["Record",{
-          "clk":["Named","coreir.clkIn"],
-          "clr":"BitIn",
-          "out":["Array",16,"Bit"]
-        }],
+        "type":["Record",[
+          ["clk",["Named","coreir.clkIn"]],
+          ["clr","BitIn"],
+          ["out",["Array",16,"Bit"]]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",
@@ -50,9 +50,9 @@
         ]
       },
       "Counters":{
-        "type":["Record",{
-          "clk":["Named","coreir.clkIn"]
-        }],
+        "type":["Record",[
+          ["clk",["Named","coreir.clkIn"]]
+        ]],
         "instances":{
           "inst0":{
             "modref":"global.Counter16"
@@ -69,12 +69,12 @@
         ]
       },
       "MantleReg55":{
-        "type":["Record",{
-          "in":["Array",16,"BitIn"],
-          "clk":["Named","coreir.clkIn"],
-          "out":["Array",16,"Bit"],
-          "clr":"BitIn"
-        }],
+        "type":["Record",[
+          ["in",["Array",16,"BitIn"]],
+          ["clk",["Named","coreir.clkIn"]],
+          ["out",["Array",16,"Bit"]],
+          ["clr","BitIn"]
+        ]],
         "instances":{
           "bit_const_GND":{
             "modref":"corebit.const",
@@ -87,7 +87,7 @@
           "inst1":{
             "genref":"mantle.reg",
             "genargs":{"has_clr":["Bool",false], "has_en":["Bool",false], "has_rst":["Bool",false], "width":["Int",16]},
-            "modargs":{"init":[["BitVector",16],55]}
+            "modargs":{"init":[["BitVector",16],"16'h0037"]}
           }
         },
         "connections":[

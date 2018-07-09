@@ -21,13 +21,13 @@ Create an n-bit up counter,
 ```
 # UpCounter :: O:Out(Bits(n), COUT:Out(Bit)
 UpCounter(n, cin=False, cout=True, incr=1, next=False, 
-    has_ce=False, has_r=False, has_s=False)
+    has_ce=False, has_reset=False, has_s=False)
 ```
 
 ```
 # DownCounter :: O:Out(Bits(n), COUT:Out(Bit)
 DownCounter(n, cin=False, cout=True, incr=1, next=False, 
-    has_ce=False, has_r=False, has_s=False)
+    has_ce=False, has_reset=False, has_s=False)
 ```
 
 ```

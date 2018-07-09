@@ -1,6 +1,6 @@
 from mantle import FF, XOr, XOr
 
-def QuadDecoder(A, B):
+def quaddecoder(A, B):
     AFF = FF()(A)
     BFF = FF()(B)
 

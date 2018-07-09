@@ -1,16 +1,9 @@
 from setuptools import setup
 
-from pip.req import parse_requirements
-
-# parse_requirements() returns generator of pip.req.InstallRequirement objects
-install_reqs = parse_requirements("requirements.txt", session=False)
-
-reqs = [str(ir.req) for ir in install_reqs]
-
 setup(
-    name='mantleextra',
-    version='0.1-alpha',
-    description='Library of hardware primitives forprogramming FPGAs',
+    name='mantle',
+    version='0.1',
+    description='Library of hardware primitives for programming FPGAs',
     packages=[
         "mantle",
         "mantle.common",
@@ -26,6 +19,13 @@ setup(
         "mantle.util.compressor",
         "mantle.util.lhca",
     ],
-    
-    install_requires=reqs
-    )
+
+    install_requires=[
+        "six",
+        "coreir"
+    ],
+    url='https://github.com/phanrahan/mantle',
+    maintainer='Leonard Truong',
+    maintainer_email='lenny@cs.stanford.edu',
+    python_requires='>=3.6'
+)

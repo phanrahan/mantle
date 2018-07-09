@@ -1,5 +1,4 @@
 from magma import *
-from magma.bitutils import lutinit
 from .simulation import *
 
 __all__  = ['A0', 'A1', 'A2', 'A3']

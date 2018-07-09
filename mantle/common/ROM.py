@@ -1,6 +1,7 @@
 from magma import Circuit, In, Out, Bits, wire, bits, uncurry, fork, cache_definition
 from magma.bitutils import int2seq
-from mantle import LUT, Mux
+from mantle import LUT
+from mantle import Mux
 from .RAM import readport
 
 __all__  = ['DefineROM', 'ROM']
@@ -40,7 +41,6 @@ def interleave16(data, width):
     #print(len(data), data)
     return data
 
-@cache_definition
 def DefineROM(height, width, data):
     assert height >= 4
     n = 1 << height

@@ -1,12 +1,12 @@
+#from .MUX import *
+
 from .arith import *
-from .decode import *
+
 from .decoder import *
 from .encoder import *
 from .arbiter import  *
 
 from .register import *
-from .RAM import *
-from .ROM import *
 
 from .siso import *
 from .sipo import *
@@ -23,4 +23,8 @@ from .johnson import *
 from .counter import *
 from .countermod import *
 from .counterload import *
+
+from .RAM import *
+from .ROM import *
+
 from .operator import *

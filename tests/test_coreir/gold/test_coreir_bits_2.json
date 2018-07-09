@@ -60,6 +60,27 @@
           ["self.I1","inst1.I1"]
         ]
       },
+      "NXOr24":{
+        "type":["Record",[
+          ["in0",["Array",4,"BitIn"]],
+          ["in1",["Array",4,"BitIn"]],
+          ["out",["Array",4,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "modref":"global.Invert4_wrapped"
+          },
+          "inst1":{
+            "modref":"global.xor4_wrapped"
+          }
+        },
+        "connections":[
+          ["inst1.O","inst0.I"],
+          ["self.out","inst0.O"],
+          ["self.in0","inst1.I0"],
+          ["self.in1","inst1.I1"]
+        ]
+      },
       "and4_wrapped":{
         "type":["Record",[
           ["I0",["Array",4,"BitIn"]],
@@ -111,17 +132,17 @@
             "modref":"global.NAnd24"
           },
           "inst2":{
-            "modref":"global.xor4_wrapped"
+            "modref":"global.NXOr24"
           }
         },
         "connections":[
           ["inst1.O","inst0.I0"],
-          ["inst2.O","inst0.I1"],
+          ["inst2.out","inst0.I1"],
           ["self.d","inst0.O"],
           ["self.a","inst1.I0"],
           ["self.b","inst1.I1"],
-          ["self.b","inst2.I0"],
-          ["self.c","inst2.I1"]
+          ["self.b","inst2.in0"],
+          ["self.c","inst2.in1"]
         ]
       },
       "xor4_wrapped":{

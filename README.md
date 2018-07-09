@@ -55,7 +55,8 @@ There also exist libraries for low-level FPGA-specific primitives.
 
 By default Mantle is configured to use the CoreIR implementation, equivalent to:
 ```
-export MANTLE=coreir
+import magma as m
+m.set_mantle_target("coreir")
 ```
 
 Other options include: `verilog` and `lattice`.
@@ -66,7 +67,7 @@ for a particular FPGA.
 For example, to use mantle with the Lattice ice40,
 set the `MANTLE_TARGET`  environment variable.
 ```bash
-export MANTLE_TARGET=ice40
+m.set_mantle_target("ice40")
 ```
 
 
@@ -75,7 +76,6 @@ export MANTLE_TARGET=ice40
 ```
 $ git clone https://github.com/phanrahan/mantle
 $ cd mantle
-$ pip install -r requirements.txt
 $ pip install pytest
 $ pip install -e .
 $ pytest

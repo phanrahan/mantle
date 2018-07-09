@@ -1,5 +1,3 @@
-import os
-os.environ["MANTLE"] = "coreir"
 from magma import compile
 from magma.testing import check_files_equal
 from mantle.coreir import DefineCoreirConst, DefineCorebitConst

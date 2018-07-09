@@ -13,6 +13,7 @@ def gen_sim_register(N, init, has_ce):
 
         if not state_store:
             state_store['prev_clock'] = cur_clock
+            print(init)
             state_store['cur_val'] = BitVector(init, num_bits=N) if N is not None else bool(init)
 
         # if has_reset:
@@ -63,7 +64,7 @@ def DefineCoreirReg(width, init=0, has_ce=False, has_reset=False, T=Bits):
     if width is None:
         width = 1
     name = "reg_P"  # TODO: Add support for clock interface
-    config_args = {"init": BitVector(init, num_bits=width)}
+    config_args = {"init": coreir.type.BitVector(init, num_bits=width)}
     gen_args = {"width": width}
     T = T(width)
     io = ["in", In(T), "clk", In(Clock), "out", Out(T)]
@@ -90,7 +91,7 @@ def DefineCoreirReg(width, init=0, has_ce=False, has_reset=False, T=Bits):
         gen_args["has_en"] = True
 
     # default_kwargs = gen_args.copy()
-    default_kwargs = {"init": BitVector(init, num_bits=width)}
+    default_kwargs = {"init": coreir.type.BitVector(init, num_bits=width)}
     # default_kwargs.update(config_args)
 
     return DeclareCircuit(

@@ -45,7 +45,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
         reset = Or(2)(reset, CounterModM.RESET)
 
     if has_ce:
-        CE = In(Bit)()
+        CE = CounterModM.CE
         reset = And(2)(reset, CE)
         # reset is sometimes called rollover or RO
         # note that we don't return RO in Counter
@@ -64,10 +64,6 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     if cout:
         wire( reset, CounterModM.COUT )
-
-    wire(CounterModM.CLK, counter.CLK)
-    if hasattr(counter,"CE"):
-        wire(CounterModM.CE, counter.CE)
 
     EndCircuit()
 

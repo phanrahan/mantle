@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='mantle',
     version='0.1',
-    description='Library of hardware primitives forprogramming FPGAs',
+    description='Library of hardware primitives for programming FPGAs',
     packages=[
         "mantle",
         "mantle.common",
@@ -19,7 +19,7 @@ setup(
         "mantle.util.compressor",
         "mantle.util.lhca",
     ],
-    
+
     install_requires=[
         "six",
         "coreir"

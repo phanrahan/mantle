@@ -76,7 +76,7 @@ def ReduceNAnd(height=2, **kwargs):
 @cache_definition
 def DefineReduceOr(n):
     luts = [~A0, ~(A0|A1), ~(A0|A1|A2), ~(A0|A1|A2|A3)]
-    return DefineReduceOp('Or', n, luts, ZERO, 1)
+    return DefineReduceOp('Or', n, luts, ONE, 0)
 
 def ReduceOr(height=2, **kwargs):
     return DefineReduceOr(height)(**kwargs)
@@ -84,7 +84,7 @@ def ReduceOr(height=2, **kwargs):
 @cache_definition
 def DefineReduceNOr(n):
     luts = [~A0, ~(A0|A1), ~(A0|A1|A2), ~(A0|A1|A2|A3)]
-    return DefineReduceOp('NOr', n, luts, ONE, 0)
+    return DefineReduceOp('NOr', n, luts, ZERO, 1)
 
 def ReduceNOr(height=2, **kwargs):
     return DefineReduceNOr(height)(**kwargs)

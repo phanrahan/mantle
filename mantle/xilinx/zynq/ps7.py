@@ -1,6 +1,7 @@
 import re
 from magma import *
 from ..kintex7 import PS7Wrap 
+from loam import Peripheral
 
 __all__ = ['PS7']
 

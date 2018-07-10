@@ -7,7 +7,7 @@ if m.mantle_target in [ 'coreir',
                         'ice40',
                         'spartan3',
                         'spartan6',
-                        'kyntex7',
+                        'kintex7',
                         'cyclone4', 
 ]:
 

@@ -51,12 +51,7 @@ def halfcarry(k, lutexpr, andexpr, use_rom):
     wire(lut.O5, mux.DI)
     wire(CIN,    mux.CI)
 
-    COUT = mux.O
-    O = lut.O6
-
-    args += ["CIN", CIN, "O", O, "COUT", COUT]
-
-    return CIN, COUT, O, args 
+    return CIN, mux.O, lut.O6, args 
 
 def fullcarry(k, lutexpr, andexpr, use_rom):
 
@@ -66,14 +61,14 @@ def fullcarry(k, lutexpr, andexpr, use_rom):
     wire(O,   xor.LI)
     wire(CIN, xor.CI)
 
-    O = xor.O
-
-    return CIN, COUT, O, args
+    return CIN, COUT, xor.O, args
 
 
 def HalfCarry(k, lutexpr, andexpr, use_rom=False):
 
     CIN, COUT, O, args = halfcarry(k, lutexpr, andexpr, use_rom)
+
+    args += ["CIN", CIN, "O", O, "COUT", COUT]
 
     return AnonymousCircuit(args)
 
@@ -81,6 +76,8 @@ def HalfCarry(k, lutexpr, andexpr, use_rom=False):
 def FullCarry(k, lutexpr, andexpr, use_rom=False):
 
     CIN, COUT, O, args = fullcarry(k, lutexpr, andexpr, use_rom)
+
+    args += ["CIN", CIN, "O", O, "COUT", COUT]
 
     return AnonymousCircuit(args)
 

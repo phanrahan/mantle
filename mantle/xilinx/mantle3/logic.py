@@ -60,7 +60,7 @@ def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
 @cache_definition
 def DefineReduceAnd(n):
     luts = [A0, A0&A1, A0&A1&A2, A0&A1&A2&A3]
-    return DefineReduceOp('And', n, luts, ONE, 0)
+    return DefineReduceOp('And', n, luts, ZERO, 1)
 
 def ReduceAnd(height=2, **kwargs):
     return DefineReduceAnd(height)(**kwargs)
@@ -68,7 +68,7 @@ def ReduceAnd(height=2, **kwargs):
 @cache_definition
 def DefineReduceNAnd(n):
     luts = [A0, A0&A1, A0&A1&A2, A0&A1&A2&A3]
-    return DefineReduceOp('NAnd', n, luts, ZERO, 1)
+    return DefineReduceOp('NAnd', n, luts, ONE, 0)
 
 def ReduceNAnd(height=2, **kwargs):
     return DefineReduceNAnd(height)(**kwargs)

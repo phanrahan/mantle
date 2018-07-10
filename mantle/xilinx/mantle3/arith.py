@@ -11,11 +11,11 @@ __all__ += ['DefineASR']
 def _Name(basename, n, cin, cout):
     name = basename + str(n)
     if cin is 0 or cin is 1:
-        name += '_cin{}'.format(cin)
+        name += f'_cin{cin}'
     elif cin:
-        name += '_cin'.format(cin)
+        name += '_cin'
     if cout:
-        name += '_cout'.format(cout)
+        name += '_cout'
     return name
 
 def _Args(n, cin, cout):

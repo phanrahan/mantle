@@ -6,7 +6,7 @@ class HalfAdder(m.Circuit):
     @classmethod
     def definition(io):
         # Generate the sum
-        sum_ = XOr(2)(io.IO, io.I1)
+        sum_ = XOr(2)(io.I0, io.I1)
         # Generate the carry
         cout = And(2)(io.I0, io.I1)
         m.wire(sum_, io.O)

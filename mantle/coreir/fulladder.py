@@ -7,7 +7,7 @@ class FullAdder(m.Circuit):
     @classmethod
     def definition(io):
         # Generate the sum
-        sum_ = XOr(3)(io.IO, io.I1, io.CIN)
+        sum_ = XOr(3)(io.I0, io.I1, io.CIN)
         # Generate the carry
         cout = Or(3)(And(2)(io.I0, io.I1), And(2)(io.I1, io.CIN), And(2)(io.I0, io.CIN))
         m.wire(sum_, io.O)

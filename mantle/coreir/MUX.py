@@ -134,7 +134,7 @@ def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
     """
     name = "CommonlibMuxN_n{}_w{}".format(str(N), str(width))
     return DefineCircuitFromGeneratorWrapper(cirb, "commonlib", "muxn",
-                                             ["mantle", "coreir", "global"], name,
+                                             name, ["mantle", "coreir", "global"],
                                              {"N": N, "width": width})
 
 def CommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):

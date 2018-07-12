@@ -6,6 +6,7 @@ sudo: true  # Needed for coreir-dev branch building coreir from source (installi
 
 before_install:
     - git clone https://github.com/phanrahan/magma.git
+    - if [[ $TRAVIS_BRANCH == 'coreir-dev' ]]; then git -C magma checkout coreir-dev; fi
     - pip install -e magma
     - source magma/.travis/install_coreir.sh
 

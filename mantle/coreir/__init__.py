@@ -71,4 +71,5 @@ def DefineCorebitTerm():
             pass
     return CorebitTerm
 
-CorebitTerm = DefineCorebitTerm()
+def CorebitTerm():
+    return DefineCorebitTerm()()

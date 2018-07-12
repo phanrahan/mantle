@@ -84,11 +84,6 @@ def DefineCoreirReduceOr(width):
     # return ReduceAnd
 
 
-BitAnd = declare_bit_binop("and", operator.and_)
-BitOr  = declare_bit_binop("or", operator.or_)
-BitXOr = declare_bit_binop("xor", operator.xor)
-
-
 def declare_bits_binop(name, python_op):
     def simulate(self, value_store, state_store):
         in0 = BitVector(value_store.get_value(self.in0))
@@ -118,8 +113,6 @@ def declare_bits_binop(name, python_op):
 
     return Declare
 
-DefineCoreirAnd = declare_bits_binop("and", operator.and_)
-
 def DefineOp(op_name, DefineCoreirReduce, height, width):
     if width is None:
         T = Bit
@@ -148,9 +141,9 @@ def DefineOp(op_name, DefineCoreirReduce, height, width):
 def DefineAnd(height=2, width=None):
     if height is 2:
         if width is None:
-            return BitAnd
+            return declare_bit_binop("and", operator.and_)
         else:
-            return DefineCoreirAnd(width)
+            return declare_bits_binop("and", operator.and_)(width)
     return DefineOp("And", DefineCoreirReduceAnd, height, width)
 
 
@@ -197,28 +190,21 @@ def simulate_bit_not(self, value_store, state_store):
     value_store.set_value(self.out, out)
 
 
-coreirNot = DeclareCircuit("not", 'in', In(Bit), 'out', Out(Bit),
+Not = DeclareCircuit("not", 'in', In(Bit), 'out', Out(Bit),
     simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="corebit")
-
-def Not(width=None):
-    return coreirNot()
 
 
 def not_(arg, **kwargs):
     return Not(get_length(arg), **kwargs)(arg)
 
 
-
-DefineCoreirOr  = declare_bits_binop("or", operator.or_)
-
-
 @cache_definition
 def DefineOr(height=2, width=None):
     if height is 2:
         if width is None:
-            return BitOr
+            return declare_bit_binop("or", operator.or_)
         else:
-            return DefineCoreirOr(width)
+            return declare_bits_binop("or", operator.or_)(width)
     return DefineOp("Or", DefineCoreirReduceOr, height, width)
 
 
@@ -259,16 +245,13 @@ def ReduceNOr(height=2, **kwargs):
     return uncurry(NOr(height, **kwargs))
 
 
-DefineCoreirXOr = declare_bits_binop("xor", operator.xor)
-
-
 @cache_definition
 def DefineXOr(height=2, width=None):
     if height is 2:
         if width is None:
-            return BitXOr
+            return declare_bit_binop("xor", operator.xor)
         else:
-            return DefineCoreirXOr(width)
+            return declare_bits_binop("xor", operator.xor)(width)
     else:
         return DefineFoldOp(DefineXOr, "xor", height, width)
 

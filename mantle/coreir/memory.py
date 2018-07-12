@@ -1,5 +1,6 @@
 from magma import *
 from magma.bit_vector import BitVector
+from magma.frontend.coreir_ import CircuitInstanceFromGeneratorWrapper
 
 
 def gen_sim_mem(depth, width):
@@ -33,7 +34,7 @@ def gen_sim_mem(depth, width):
 @cache_definition
 def DefineCoreirMem(depth, width):
     name = "coreir_mem{}x{}".format(depth,width)
-    addr_width = max((depth-1).bit_length(), 1)
+    addr_width = getRAMAddrWidth(depth)
     IO = ["raddr", In(Bits(addr_width)),
           "rdata", Out(Bits(width)),
           "waddr", In(Bits(addr_width)),
@@ -46,14 +47,21 @@ def DefineCoreirMem(depth, width):
             coreir_genargs={"width": width, "depth": depth})
             # coreir_configargs={"init": "0"})
 
+def CoreirMem(cirb, depth, width):
+    return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "mem", "CoreIRmem_w{}_d{}".format(width, depth),
+                                               ["global"], {"width": width, "depth": depth})
+
 def DefineROM(height, width):
     """
     coreir doesn't have a ROM primitive yet
     """
     raise NotImplementedError()
 
+def getRAMAddrWidth(height):
+    return max((height - 1).bit_length(), 1)
+
 def DefineRAM(height, width):
-    addr_width = max(height.bit_length() - 1, 1)
+    addr_width = getRAMAddrWidth(height)
     circ = DefineCircuit("RAM{}x{}".format(height, width),
         "RADDR", In(Bits(addr_width)),
         "RDATA", Out(Bits(width)),

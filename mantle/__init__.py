@@ -1,15 +1,34 @@
+import mantle
 import magma as m
+import importlib
+
+
+def weak_import(module, scope):
+    # Iterate over names defined in module, only define them here if
+    # they haven't already been defined. This allows implementations to
+    # specialize a common module. For example, mantle40 defines a FullAdder, so
+    # it will not use the generic FullAdder in common.
+    module = importlib.import_module(f"mantle.{module}")
+    if hasattr(module, "__all__"):
+        names = module.__all__
+    else:
+        names = dir(module)
+    for name in names:
+        try:
+            getattr(mantle, name)
+        except AttributeError:
+            scope.update({name: getattr(module, name)})
 
 if m.mantle_target is None:
     m.set_mantle_target('coreir')
 
-if m.mantle_target in [ 'coreir',
-                        'ice40',
-                        'spartan3',
-                        'spartan6',
-                        'kintex7',
-                        'cyclone4', 
-]:
+if m.mantle_target in ['coreir',
+                       'ice40',
+                       'spartan3',
+                       'spartan6',
+                       'kintex7',
+                       'cyclone4',
+    ]:
 
     #from mantle.primitives import *
 
@@ -24,9 +43,9 @@ if m.mantle_target in [ 'coreir',
     elif m.mantle_target == 'verilog':
         from mantle.verilog import *
 
-    from mantle.common import *
+    import mantle.common
+    for module in mantle.common.modules:
+        weak_import(f"common.{module}", globals())
 
 else:
     raise RuntimeError(f"MANTLE_TARGET={m.mantle_target} not supported")
-
-

@@ -9,11 +9,9 @@ from .logic import (
     Not      ,
     DefineStaticLeftShift  , StaticLeftShift  , static_left_shift  ,
     DefineStaticRightShift , StaticRightShift , static_right_shift ,
-    DefineLSL , LSL , lsl ,
-    DefineLSR, LSR, lsr,
+    DefineLSL , LSL ,
+    DefineLSR, LSR,
 )
-
-from .decode import decode, Decode, DefineDecode
 
 from .fulladder import FullAdder
 from .halfadder import HalfAdder

@@ -6,6 +6,8 @@ from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT
 from mantle import Mux
 from .arith import ASR, Add, Sub, Negate
 
+__all__ = []
+
 def get_length(value):
     if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
         return None
@@ -39,11 +41,17 @@ def _pass_closure_vars_as_args(*closure_args):
         return _wrapped_inner
     return _wrapped
 
+def export(fn):
+    global __all__
+    __all__ += [fn.__name__]
+    return fn
+
 def preserve_type(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         retval = fn(*args, **kwargs)
         T = type(args[0])
+        print(T)
         if isinstance(T, UIntKind):
             return uint(retval)
         elif isinstance(T, SIntKind):
@@ -64,6 +72,7 @@ for _operator_name, _Circuit in (
     # ("mul", Mul),
     # ("div", Div)
 ):
+    __all__ += [_operator_name]
     # Because Python uses dynamic scoping, the closures will use the
     # last value of _Circuit rather than capturing the lexical value.
     # Hacky workaround is to pass _Circuit as an argument to a
@@ -84,6 +93,7 @@ for _operator_name, _Circuit in (
     operators[_operator_name] = operator
     exec(f"{_operator_name} = operator")
 
+@export
 @preserve_type
 def lsl(I0, I1, **kwargs):
     width = get_length(I0)
@@ -91,22 +101,26 @@ def lsl(I0, I1, **kwargs):
     T = type(I0)
     return LSL(width, **kwargs)(I0, I1)
 
+@export
 @preserve_type
 def lsr(I0, I1, **kwargs):
     width = get_length(I0)
     shift = get_length(I1)
     return LSR(width, **kwargs)(I0, I1)
 
+@export
 @preserve_type
 def asr(I0, I1, **kwargs):
     width = get_length(I0)
     shift = get_length(I1)
     return ASR(width, **kwargs)(I0, I1)
 
+@export
 @preserve_type
 def not_(arg, **kwargs):
     return Not(**kwargs)(arg)
 
+@export
 @preserve_type
 def invert(arg, **kwargs):
     width = get_length(arg)
@@ -115,6 +129,7 @@ def invert(arg, **kwargs):
     else:
         return Invert(width, **kwargs)(arg)
 
+@export
 @preserve_type
 def neg(arg, **kwargs):
     if isinstance(arg, int):
@@ -143,6 +158,7 @@ arithmetic_ops = [
     # ("__div__", div)
 ]
 
+@export
 @check_operator_args
 def lt(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
@@ -150,6 +166,7 @@ def lt(width, I0, I1, **kwargs):
     else:
         return ULT(width, **kwargs)(I0, I1)
 
+@export
 @check_operator_args
 def le(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
@@ -157,6 +174,7 @@ def le(width, I0, I1, **kwargs):
     else:
         return ULE(width, **kwargs)(I0, I1)
 
+@export
 @check_operator_args
 def gt(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
@@ -164,6 +182,7 @@ def gt(width, I0, I1, **kwargs):
     else:
         return UGT(width, **kwargs)(I0, I1)
 
+@export
 @check_operator_args
 def ge(width, I0, I1, **kwargs):
     if isinstance(I0, SIntType):
@@ -171,6 +190,7 @@ def ge(width, I0, I1, **kwargs):
     else:
         return UGE(width, **kwargs)(I0, I1)
 
+@export
 @check_operator_args
 def eq(width, I0, I1, **kwargs):
     return EQ(width, **kwargs)(I0, I1)
@@ -187,6 +207,7 @@ for method, op in arithmetic_ops + relational_ops:
     setattr(SIntType, method, op)
     setattr(UIntType, method, op)
 
+@export
 @preserve_type
 def mux(I, S):
     if isinstance(S, int):

@@ -1,7 +1,7 @@
 import magma
 from magma import *
 from magma.testing.coroutine import check, coroutine
-from mantle.common import DefineCounter, DefineDownCounter, DefineUpDownCounter
+from mantle import DefineCounter, DefineDownCounter, DefineUpDownCounter
 
 magma.set_mantle_target('ice40')
 

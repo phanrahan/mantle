@@ -2,7 +2,7 @@
 # Implementation of compressor trees
 #
 from magma import fork, cache_definition, DefineCircuit, EndDefine, In, Out, Bit, wire
-from mantle import mantle_target
+from magma import mantle_target
 if mantle_target == "ice40":
     from mantle import LUT2, LUT3, I0, I1, I2
 else:

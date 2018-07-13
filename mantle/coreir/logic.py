@@ -343,13 +343,6 @@ def LSL(width, **kwargs):
     return DefineLSL(width)(**kwargs)
 
 
-def lsl(I0, I1, **kwargs):
-    if not get_length(I0) == get_length(I1):
-        raise ValueError("All arguments should have the same length")
-    width = get_length(I0)
-    return LSL(width, **kwargs)(I0, I1)
-
-
 @cache_definition
 def DefineLSR(width):
     T = Bits(width)
@@ -367,13 +360,6 @@ def DefineLSR(width):
 
 def LSR(width, **kwargs):
     return DefineLSR(width)(**kwargs)
-
-
-def lsr(I0, I1, **kwargs):
-    if not get_length(I0) == get_length(I1):
-        raise ValueError("All arguments should have the same length")
-    width = get_length(I0)
-    return LSR(width, **kwargs)(I0, I1)
 
 
 @cache_definition

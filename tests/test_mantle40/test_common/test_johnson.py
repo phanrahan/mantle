@@ -2,7 +2,7 @@ import magma
 from magma.bitutils import seq2int
 from magma.testing.coroutine import check, coroutine
 from magma.simulator import PythonSimulator
-from mantle.common import DefineJohnson
+from mantle import DefineJohnson
 
 magma.set_mantle_target('ice40')
 

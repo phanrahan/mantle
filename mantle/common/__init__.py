@@ -1,30 +1,31 @@
-#from .MUX import *
+modules = [
+    # "MUX",
+    "arith",
+    "decode",
+    "decoder",
+    "encoder",
+    "arbiter",
 
-from .arith import *
+    "register",
 
-from .decoder import *
-from .encoder import *
-from .arbiter import  *
+    "siso",
+    "sipo",
+    "piso",
+    "pipo",
 
-from .register import *
+    "barrel",
 
-from .siso import *
-from .sipo import *
-from .piso import *
-from .pipo import *
+    "ring",
+    "cascadedring",
 
-from .barrel import *
+    "johnson",
 
-from .ring import *
-from .cascadedring import *
+    "counter",
+    "countermod",
+    "counterload",
 
-from .johnson import *
+    "RAM",
+    "ROM",
 
-from .counter import *
-from .countermod import *
-from .counterload import *
-
-from .RAM import *
-from .ROM import *
-
-from .operator import *
+    "operator"
+]

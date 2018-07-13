@@ -4,7 +4,8 @@ from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, ReduceXOr
 from mantle.coreir import NAnd, NOr, NXOr, ReduceNAnd, ReduceNOr, ReduceNXOr
-from mantle.coreir import static_left_shift, static_right_shift, lsl, lsr
+from mantle.coreir import static_left_shift, static_right_shift
+from mantle import lsl, lsr
 
 
 def test_coreir_bit():

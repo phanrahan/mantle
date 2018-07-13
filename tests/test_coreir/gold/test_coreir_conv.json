@@ -330,9 +330,9 @@
             "genargs":{"width":["Int",4]}
           },
           "reg0":{
-            "genref":"mantle.reg",
-            "genargs":{"has_clr":["Bool",false], "has_en":["Bool",false], "has_rst":["Bool",false], "width":["Int",4]},
-            "modargs":{"init":[["BitVector",4],"4'h0"]}
+            "genref":"coreir.reg",
+            "genargs":{"width":["Int",4]},
+            "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
           }
         },
         "connections":[

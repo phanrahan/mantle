@@ -71,7 +71,7 @@ def Register(n, init=0, has_ce=False, has_reset=False, **kwargs):
 def register(I, ce=None, reset=None, **kwargs):
     has_ce = ce is not None
     has_reset = reset is not None
-    reg = Register(len(I), 
+    reg = Register(len(I),
                    has_ce=has_ce,
                    has_reset=has_reset,
                    **kwargs)
@@ -79,5 +79,5 @@ def register(I, ce=None, reset=None, **kwargs):
     if has_ce:
         wire(ce, reg.CE)
     if has_reset:
-        wire(reset, reg.CE)
+        wire(reset, reg.RESET)
 

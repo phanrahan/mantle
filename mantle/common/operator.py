@@ -218,7 +218,7 @@ relational_ops = [
     ("__le__", le),
     ("__gt__", gt),
     ("__ge__", ge),
-    # ("__eq__", eq)
+    ("__eq__", eq)
 ]
 
 for method, op in arithmetic_ops + relational_ops:

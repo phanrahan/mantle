@@ -12,7 +12,7 @@ __all__ = []
 
 
 def get_length(value):
-    if isinstance(value, m.ClockTypes):
+    if isinstance(value, m._BitType):
         return None
     elif isinstance(value, m.ArrayType):
         return len(value)

@@ -48,17 +48,18 @@ def DefineShift(n, op):
     T = Bits(n)
     class _Shift(Circuit):
         name = f'{op.upper()}{n}'
-        IO = ['I', In(T), 'S', In(Bits(logn)), 'SI', In(Bit), "O", Out(T)]
+        IO = ['I', In(T), 'S', In(Bits(logn)), "O", Out(T)]
         @classmethod
         def definition(io):
             I = io.I
             for k in range(logn):
-                 I = ShiftK(n, 1<<k, op)(I, io.S[k], io.SI)
+                 I = ShiftK(n, 1<<k, op)(I, io.S[k])
             wire(I, io.O)
     return _Shift
 
 def Shift(n, op):
     return DefineShift(n, op)()
+
 
 def DefineLSL(n):
     return DefineShift(n, 'lsl')
@@ -73,7 +74,7 @@ def LSR(n):
     return Shift(n, 'lsr')
 
 def DefineASR(n):
-    shift = DefineShift(n, 'asr')
+    return DefineShift(n, 'asr')
 
 def ASR(n):
     return Shift(n, 'asr')

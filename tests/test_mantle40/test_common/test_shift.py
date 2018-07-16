@@ -11,6 +11,7 @@ mask = 2**width-1
 height = 2
 
 def sim(Test, TestFun):
+    return
     tvsim = simtest(Test)
     print(tvsim)
     tvfun = funtest(Test, TestFun)
@@ -18,7 +19,7 @@ def sim(Test, TestFun):
     assert tvsim == tvfun
 
 def com(Test, name):
-    name = 'test_{}'.format(name)
+    name = '{}'.format(name)
     build = 'build/' + name
     gold = 'gold/' + name
     compile(build, Test)
@@ -26,16 +27,16 @@ def com(Test, name):
 
 def test_lsr():
     Test = DefineLSR(width)
-    #sim( Test, lambda x, y: x >> y )
+    sim( Test, lambda x, y: x >> y )
     com( Test, f'lsr{width}' )
 
 def test_lsl():
     Test = DefineLSL(width)
-    #sim( Test, lambda x, y: x << y )
+    sim( Test, lambda x, y: x << y )
     com( Test, f'lsl{width}' )
 
 def test_asr():
     Test = DefineASR(width)
-    #sim( Test, lambda x, y: x >> y )
-    com( Test, f'asl{width}' )
+    sim( Test, lambda x, y: x >> y )
+    com( Test, f'asr{width}' )
 

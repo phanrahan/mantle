@@ -13,11 +13,11 @@ def com(Test, name):
     import magma
     from magma import compile
     from magma.testing import check_files_equal
-    name = f'test_{magma.mantle_target}_{name}'
+    name = f'{name}_{magma.mantle_target}'
     build = 'build/' + name
     gold = 'gold/' + name
     compile(build, Test)
-    #assert check_files_equal(__file__, build+'.v', gold+'.v')
+    assert check_files_equal(__file__, build+'.v', gold+'.v')
 
 def sim(Test, TestFun):
     if TestFun is None:
@@ -198,7 +198,6 @@ def test_compare(op, width):
     sim( Test, op.func )
     com( Test, f'{op.name}{width}' )
 
-@pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 @pytest.mark.parametrize("op", [
     op('DefineASR', operator.rshift),
     op('DefineLSR', operator.rshift),

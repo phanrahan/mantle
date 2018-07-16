@@ -1,11 +1,10 @@
 from magma import *
-from .logic import Invert, Not
+from .logic import DefineInvert, Not
 from .fulladder import FullAdder
 
 __all__  = ['DefineAdd'] 
 __all__ += ['DefineSub']
 __all__ += ['DefineNegate']
-__all__ += ['DefineASR']
 
 def _AdderName(basename, n, cin, cout):
     return "{}{}{}{}".format(
@@ -86,7 +85,7 @@ def DefineSub(n, cin=False, cout=False):
         IO = _AdderArgs(n, cin, cout)
         @classmethod
         def definition(io):
-            invert = Invert(n)
+            invert = DefineInvert(n)()
             add =  DefineAdd(n, True, cout)()
             wire(io.I0, add.I0)
             wire(io.I1, invert.I)
@@ -110,26 +109,8 @@ def DefineNegate(width):
         IO = ['I', In(T), 'O', Out(T)]
         @classmethod
         def definition(io):
-            invert = Invert(width)
+            invert = DefineInvert(width)()
             add =  DefineAdd(width, False, False)()
             wire( add( invert(io.I), (array(1,width))), io.O )
     return _Negate
     
-
-@cache_definition
-def DefineFixedASR(width, shift):
-    T = Bits(width)
-    class _ASR(Circuit):
-        name = 'FixedASR{}_{}'.format(width, shift)
-
-        IO = ["I", In(T), "O", Out(T)]
-
-        @classmethod
-        def definition(io):
-            for i in range(0, width - shift):
-                wire(io.I[i + shift], io.O[i])
-            for i in range(width - shift, width):
-                wire(io.I[width-1], io.O[i])
-    return _ASR
-
-DefineASR = DefineFixedASR

@@ -6,7 +6,6 @@ from .cascade import FullCascade
 __all__  = ['DefineAdd'] 
 __all__ += ['DefineSub']
 __all__ += ['DefineNegate']
-__all__ += ['DefineASR']
 
 def _Name(basename, n, cin, cout):
     name = basename + str(n)
@@ -89,18 +88,3 @@ def DefineNegate(n):
     return _Negate
     
 
-@cache_definition
-def DefineFixedASR(width, shift):
-    T = Bits(width)
-    class _ASR(Circuit):
-        name = 'FixedASR{}_{}'.format(width, shift)
-        IO = ["I", In(T), "O", Out(T)]
-        @classmethod
-        def definition(io):
-            for i in range(0, width - shift):
-                wire(io.I[i + shift], io.O[i])
-            for i in range(width - shift, width):
-                wire(io.I[width-1], io.O[i])
-    return _ASR
-
-DefineASR = DefineFixedASR

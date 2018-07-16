@@ -30,10 +30,6 @@ __all__ += ['DefineNXOr', 'NXOr']
 __all__ += ['DefineInvert', 'Invert']
 __all__ += ['Not']
 
-# logical shifts
-__all__ += ['DefineLSL', 'LSL']
-__all__ += ['DefineLSR', 'LSR']
-
 #
 # Efficient Reduction using carry chain and FlatHalfCascade
 #
@@ -251,47 +247,4 @@ def Invert(n, **kwargs):
 def Not(**kwargs):
     """Not gate - 1-bit input."""
     return LUT1(~A0, **kwargs)
-
-
-@cache_definition
-def DefineFixedLSL(width, shift):
-    T = Bits(width)
-    class _LSL(Circuit):
-        name = 'FixedLSL{}_{}'.format(width, shift)
-        IO = ["I", In(T), "O", Out(T)]
-
-        @classmethod
-        def definition(io):
-            for i in range(shift, width):
-                wire(io.I[i - shift], io.O[i])
-            for i in range(0, shift):
-                wire(0, io.O[i])
-    return _LSL
-
-def FixedLSL(width, shift, **kwargs):
-    return DefineFixedLSL(width, shift)(**kwargs)
-
-DefineLSL = DefineFixedLSL
-LSL = FixedLSL
-
-@cache_definition
-def DefineFixedLSR(width, shift):
-    T = Bits(width)
-    class _LSR(Circuit):
-        name = 'FixedLSR{}_{}'.format(width, shift)
-        IO = ["I", In(T), "O", Out(T)]
-
-        @classmethod
-        def definition(io):
-            for i in range(0, width - shift):
-                wire(io.I[i + shift], io.O[i])
-            for i in range(width - shift, width):
-                wire(0, io.O[i])
-    return _LSR
-
-def FixedLSR(width, shift, **kwargs):
-    return DefineFixedLSR(width, shift)(**kwargs)
-
-DefineLSR = DefineFixedLSR
-LSR = FixedLSR
 

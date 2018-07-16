@@ -6,9 +6,7 @@ from magma.simulator.python_simulator import testvectors as simtest
 from mantle.lattice.mantle40.halfadder import HalfAdder
 import mantle
 from mantle.lattice.mantle40.arith import \
-    DefineAdd, DefineSub, \
-    DefineNegate, \
-    DefineASR
+    DefineAdd, DefineSub, DefineNegate
 
 width = 2
 mask = 2**width-1
@@ -56,7 +54,3 @@ def test_negate():
     sim( Test, lambda x: -x & mask )
     com( Test, 'negate{}'.format(width) )
 
-
-def test_asr():
-    Test = DefineASR(width, shift)
-    com( Test, 'asr{}x{}'.format(width, shift) )

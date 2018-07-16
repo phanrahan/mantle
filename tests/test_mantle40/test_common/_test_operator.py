@@ -1,8 +1,11 @@
+import operator
+
 import magma
 from magma import *
 from magma.testing import check_files_equal
-from mantle.common.operator import and_, nand, or_, nor, xor, nxor, invert, lsl, lsr, eq, add, sub, lt, le, gt, ge, neg
-import operator
+
+from mantle import and_, nand, or_, nor, xor, nxor, invert, lsl, lsr, eq, add, sub, lt, le, gt, ge, neg
+
 from mantle import And, Or, XOr, Add, Sub, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE, Invert, Negate
 
 #magma.set_mantle_target('ice40')

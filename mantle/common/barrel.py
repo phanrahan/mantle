@@ -2,15 +2,21 @@ from magma import Circuit, Bit, Bits, In, Out, bits, wire, map_
 from magma.bitutils import log2
 from mantle import Mux2
 
-__all__  = ['DefineShift', 'Shift', 'shift']
-__all__ += ['DefineRotate', 'Rotate', 'rotate']
+__all__  = ['DefineShift', 'Shift']
+__all__  = ['DefineLSL', 'LSL']
+__all__ += ['DefineLSR', 'LSR']
+__all__ += ['DefineASR', 'ASR']
+
+__all__ += ['DefineRotate', 'Rotate']
+__all__ += ['DefineROL', 'ROL']
+__all__ += ['DefineROR', 'ROR']
 
 def DefineShiftK(n, k, op):
     assert k < n
     T = Bits(n)
     class _ShiftK(Circuit):
-        name = f'Shift{n}_{k}'
-        IO = ['I', In(T), 'S', In(Bit), 'SI', In(Bit), "O", Out(T)]
+        name = f'{op.upper()}{n}_{k}'
+        IO = ['I', In(T), 'S', In(Bit), "O", Out(T)]
         @classmethod
         def definition(io):
             Is = [io.I[i] for i in range(n)]
@@ -18,10 +24,13 @@ def DefineShiftK(n, k, op):
             for i in range(n):
                 if   op == 'lsl':
                     shifti = i - k
-                    I = bits([Is[i], Is[shifti] if shifti >= 0 else io.SI])
-                elif op == 'lsr' or op == 'asr':
+                    I = bits([Is[i], Is[shifti] if shifti >= 0 else 0])
+                elif op == 'lsr':
                     shifti = i + k
-                    I = bits([Is[i], Is[shifti] if shifti <  n else io.SI])
+                    I = bits([Is[i], Is[shifti] if shifti <  n else 0])
+                elif op == 'asr':
+                    shifti = i + k
+                    I = bits([Is[i], Is[shifti] if shifti <  n else Is[n-1]])
                 else:
                     assert False
                 muxes[i]( I, io.S )
@@ -38,7 +47,7 @@ def DefineShift(n, op):
     logn = log2(n)
     T = Bits(n)
     class _Shift(Circuit):
-        name = f'Shift{n}'
+        name = f'{op.upper()}{n}'
         IO = ['I', In(T), 'S', In(Bits(logn)), 'SI', In(Bit), "O", Out(T)]
         @classmethod
         def definition(io):
@@ -51,17 +60,31 @@ def DefineShift(n, op):
 def Shift(n, op):
     return DefineShift(n, op)()
 
-def shift(i, s, si, op):
-    n = len(i)
-    assert log2(n) == len(s)
-    return Shift(n, op)(i, s, si)
+def DefineLSL(n):
+    return DefineShift(n, 'lsl')
+
+def LSL(n):
+    return Shift(n, 'lsl')
+
+def DefineLSR(n):
+    return DefineShift(n, 'lsr')
+
+def LSR(n):
+    return Shift(n, 'lsr')
+
+def DefineASR(n):
+    shift = DefineShift(n, 'asr')
+
+def ASR(n):
+    return Shift(n, 'asr')
+
 
 
 def DefineRotateK(n, k, op):
     assert k < n
     T = Bits(n)
     class _RotateK(Circuit):
-        name = f'Rotate{n}_{k}'
+        name = f'{op.upper()}{n}_{k}'
         IO = ['I', In(T), 'S', In(Bit), "O", Out(T)]
         @classmethod
         def definition(io):
@@ -69,11 +92,11 @@ def DefineRotateK(n, k, op):
             muxes = map_(Mux2, n)
             for i in range(n):
                 if  op == 'rol':
-                    shifti = (i - k + n) % n
-                    I = bits([Is[i], Is[shifti]])
+                    rotatei = (i - k + n) % n
+                    I = bits([Is[i], Is[rotatei]])
                 elif op == 'ror':
-                    shifti = (i + k) % n
-                    I = bits([Is[i], Is[shifti]])
+                    rotatei = (i + k) % n
+                    I = bits([Is[i], Is[rotatei]])
                 else:
                     assert False
                 muxes[i]( I, io.S )
@@ -90,7 +113,7 @@ def DefineRotate(n, op):
     logn = log2(n)
     T = Bits(n)
     class _Rotate(Circuit):
-        name = f'Rotate{n}'
+        name = f'{op.upper()}{n}'
         IO = ['I', In(T), 'S', In(Bits(logn)), "O", Out(T)]
         @classmethod
         def definition(io):
@@ -103,7 +126,14 @@ def DefineRotate(n, op):
 def Rotate(n, op):
     return DefineRotate(n, op)()
 
-def rotate(i, s, op):
-    n = len(i)
-    assert log2(n) == len(s)
-    return Rotate(n, op)(i, s)
+def DefineROL(n):
+    return DefineRotate(n, 'rol')
+
+def ROL(n):
+    return Rotate(n, 'rol')
+
+def DefineROR(n):
+    return DefineRotate(n, 'ror')
+
+def ROR(n):
+    return Rotate(n, 'ror')

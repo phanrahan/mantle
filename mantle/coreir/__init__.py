@@ -9,13 +9,13 @@ from .logic import (
     Not      ,
     DefineStaticLeftShift  , StaticLeftShift  , static_left_shift  ,
     DefineStaticRightShift , StaticRightShift , static_right_shift ,
-    DefineLSL , LSL ,
+    DefineLSL, LSL ,
     DefineLSR, LSR,
 )
 
-from .fulladder import FullAdder
-from .halfadder import HalfAdder
-from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineCoreirAdd, DefineCoreirMul
+#from .fulladder import FullAdder
+#from .halfadder import HalfAdder
+from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, ASR, DefineCoreirAdd, DefineCoreirMul
 
 from .FF import FF, DFF, DefineDFF, DefineCoreirReg
 from .LUT import LUT

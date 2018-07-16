@@ -12,12 +12,10 @@ from mantle.lattice.mantle40.logic import \
     DefineOr,  DefineNOr, \
     DefineXOr, DefineNXOr, \
     DefineInvert
-from mantle.lattice.mantle40 import DefineLSR, DefineLSL, DefineASR
 
 width = 2
 mask = 2**width-1
 height = 2
-shift = 2
 
 def sim(Test, TestFun):
     tvsim = simtest(Test)
@@ -130,19 +128,4 @@ def test_invert():
     sim( Test, lambda x: ~x & mask )
     com( Test, 'invert{}'.format(width) )
 
-
-def test_lsr():
-    Test = DefineLSR(width, shift)
-    #sim( Test, lambda x, y: x >> y )
-    com( Test, 'lsr{}x{}'.format(width,shift) )
-
-def test_lsl():
-    Test = DefineLSL(width, shift)
-    #sim( Test, lambda x, y: x << y )
-    com( Test, 'lsl{}x{}'.format(width,shift) )
-
-def test_asr():
-    Test = DefineASR(width, shift)
-    #sim( Test, lambda x, y: x >> y )
-    com( Test, 'asl{}x{}'.format(width,shift) )
 

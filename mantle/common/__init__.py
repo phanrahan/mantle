@@ -1,10 +1,19 @@
 modules = [
-    # "MUX",
-    "arith",
+
+    #"logic",
+
     "decode",
     "decoder",
     "encoder",
     "arbiter",
+
+    'halfadder',
+    'fulladder',
+    "arith",
+
+    "compare",
+
+    "barrel",
 
     "register",
 
@@ -12,8 +21,6 @@ modules = [
     "sipo",
     "piso",
     "pipo",
-
-    "barrel",
 
     "ring",
     "cascadedring",

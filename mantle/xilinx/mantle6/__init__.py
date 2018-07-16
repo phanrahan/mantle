@@ -1,6 +1,6 @@
 from ..spartan6 import FAMILY, \
-    A0, A1, A2, A3, \
-    I0, I1, I2, I3, \
+    A0, A1, A2, A3, A4, A5, \
+    I0, I1, I2, I3, I4, I5, \
     ALL, ANY, PARITY, ZERO, ONE, \
     LUTS_PER_LOGICBLOCK, BITS_PER_LUT, LOG_BITS_PER_LUT
 

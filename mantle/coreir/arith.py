@@ -145,3 +145,7 @@ def DefineASR(width):
             wire(asr.I1, coreir_asr.in1)
             wire(asr.O, coreir_asr.out)
     return _ASR
+
+def ASR(width, **kwargs):
+    return DefineASR(width)(**kwargs)
+

@@ -5,14 +5,14 @@ from .logic import Not
 
 __all__  = ['DefineEQ', 'EQ']
 __all__ += ['DefineNE', 'NE']
-__all__ += ['DefineUGE', 'UGE']
-__all__ += ['DefineULE', 'ULE']
-__all__ += ['DefineUGT', 'UGT']
-__all__ += ['DefineULT', 'ULT']
-__all__ += ['DefineSGE', 'SGE']
-__all__ += ['DefineSLE', 'SLE']
-__all__ += ['DefineSGT', 'SGT']
-__all__ += ['DefineSLT', 'SLT']
+__all__ += ['DefineUGE']
+__all__ += ['DefineULE']
+__all__ += ['DefineUGT']
+__all__ += ['DefineULT']
+__all__ += ['DefineSGE']
+__all__ += ['DefineSLE']
+__all__ += ['DefineSGT']
+__all__ += ['DefineSLT']
 
 #
 # n is the number of luts 
@@ -132,29 +132,17 @@ def DefineUCMP(opname, reverse, negate, n):
 def DefineUGE(n):
     return DefineUCMP('UGE', False, False, n)
 
-def UGE(n, **kwargs):
-    return DefineUGE(n)(**kwargs)
-
 @cache_definition
 def DefineULE(n):
     return DefineUCMP('ULE', True, False, n)
-
-def ULE(n, **kwargs):
-    return DefineULE(n)(**kwargs)
 
 @cache_definition
 def DefineULT(n):
     return DefineUCMP('ULT', False, True, n)
 
-def ULT(n, **kwargs):
-    return DefineULT(n)(**kwargs)
-
 @cache_definition
 def DefineUGT(n):
     return DefineUCMP('UGT', True, True, n)
-
-def UGT(n, **kwargs):
-    return DefineUGT(n)(**kwargs)
 
 
 # signed comparison
@@ -184,27 +172,15 @@ def DefineSCMP(opname, op, reverse, n):
 def DefineSGE(n):
     return DefineSCMP('SGE', _sge, False, n)
 
-def SGE(n, **kwargs):
-    return DefineSGE(n)(**kwargs)
-
 @cache_definition
 def DefineSLE(n):
     return DefineSCMP('SLE', _sge, True, n)
-
-def SLE(n, **kwargs):
-    return DefineSLE(n)(**kwargs)
 
 @cache_definition
 def DefineSLT(n):
     return DefineSCMP('SLT', _slt, False, n)
 
-def SLT(n, **kwargs):
-    return DefineSLT(n)(**kwargs)
-
 @cache_definition
 def DefineSGT(n):
     return DefineSCMP('SGT', _slt, True, n)
-
-def SGT(n, **kwargs):
-    return DefineSGT(n)(**kwargs)
 

@@ -2,9 +2,11 @@ from functools import wraps
 
 from magma import *
 from magma.bitutils import clog2, seq2int
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert
+from mantle import LSL, LSR, ASR
+from mantle import EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
 from mantle import Mux
-from .arith import ASR, Add, Sub, Negate
+from .arith import Add, Sub, Negate
 
 __all__ = []
 

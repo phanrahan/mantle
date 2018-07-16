@@ -113,10 +113,10 @@ def DefineMux(height=2, width=None):
 def Mux(height=2, width=None, **kwargs):
     return DefineMux(height, width)(**kwargs)
 
-Mux2 = Mux(2)
-Mux4 = Mux(4)
-Mux8 = Mux(8)
-Mux16 = Mux(16)
+Mux2 = DefineMux(2)
+Mux4 = DefineMux(4)
+Mux8 = DefineMux(8)
+Mux16 = DefineMux(16)
 
 def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
     """

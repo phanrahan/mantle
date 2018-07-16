@@ -1,6 +1,6 @@
 from functools import wraps
 
-from magma import *
+import magma as m
 from magma.bitutils import clog2, seq2int
 from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert
 from mantle import LSL, LSR, ASR

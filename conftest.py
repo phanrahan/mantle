@@ -1,5 +1,6 @@
 import pytest
 import magma
+import magma.backend.coreir_
 
 def pytest_addoption(parser):
     parser.addoption("--target", action="store", default="coreir")

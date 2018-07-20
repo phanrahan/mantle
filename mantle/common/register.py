@@ -15,12 +15,12 @@ __all__ += ['_RegisterName']
 #
 # Each FF may have a ce, r, and s signal.
 #
-def FFs(n, init=0, has_ce=False, has_reset=False):
+def FFs(n, init=0, has_ce=False, has_reset=False, has_async_reset=False):
     if isinstance(init, IntegerTypes):
         init = int2seq(init, n)
 
     def f(y):
-        return FF(init[y], has_ce=has_ce, has_reset=has_reset)
+        return FF(init[y], has_ce=has_ce, has_reset=has_reset, has_async_reset=has_async_reset)
 
     return col(f, n)
 
@@ -58,7 +58,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_async_reset=Fal
         IO  = ['I', In(T), 'O', Out(T)] + ClockInterface(has_ce=has_ce,has_reset=has_reset,has_async_reset=has_async_reset)
         @classmethod
         def definition(reg):
-            ffs = join(FFs(n, init, has_ce, has_reset))
+            ffs = join(FFs(n, init, has_ce, has_reset, has_async_reset))
             wire(reg.I, ffs.I)
             wire(ffs.O, reg.O)
             wireclock(reg, ffs)

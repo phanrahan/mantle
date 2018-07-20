@@ -108,7 +108,7 @@ def define_wrap(type_, type_name, in_type):
 @cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False):
     Reg = DefineCoreirReg(None, init, has_reset)
-    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce=has_ce, has_reset=True)
+    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce=has_ce, has_reset=has_reset)
     circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}".format(init, has_ce, has_reset),
         *IO)
     reg = Reg()

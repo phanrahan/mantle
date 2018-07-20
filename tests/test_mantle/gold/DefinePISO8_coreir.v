@@ -4,7 +4,7 @@ coreir_bitmux inst0 (.in0(I[0]), .in1(I[1]), .sel(S), .out(inst0_out));
 assign O = inst0_out;
 endmodule
 
-module DFF_init0_has_ceFalse_has_resetFalse (input  I, output  O, input  CLK, input  RESET);
+module DFF_init0_has_ceFalse_has_resetFalse (input  I, output  O, input  CLK);
 wire [0:0] inst0_out;
 coreir_reg_P #(.init(0)) inst0 (.in({I}), .clk(CLK), .out(inst0_out));
 assign O = inst0_out[0];

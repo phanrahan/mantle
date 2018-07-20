@@ -31,7 +31,7 @@ _Mux2 inst7 (.I({I1[7],I0[7]}), .S(S), .O(inst7_O));
 assign O = {inst7_O,inst6_O,inst5_O,inst4_O,inst3_O,inst2_O,inst1_O,inst0_O};
 endmodule
 
-module DFF_init0_has_ceFalse_has_resetFalse (input  I, output  O, input  CLK, input  RESET);
+module DFF_init0_has_ceFalse_has_resetFalse (input  I, output  O, input  CLK);
 wire [0:0] inst0_out;
 coreir_reg_P #(.init(0)) inst0 (.in({I}), .clk(CLK), .out(inst0_out));
 assign O = inst0_out[0];

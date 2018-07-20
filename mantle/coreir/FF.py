@@ -133,7 +133,7 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False):
 
 
 
-def DFF(init=0, has_ce=False, has_reset=False, **kwargs):
-    return DefineDFF(init, has_ce, has_reset)(**kwargs)
+def DFF(init=0, has_ce=False, has_reset=False, has_async_reset=False, **kwargs):
+    return DefineDFF(init, has_ce, has_reset, has_async_reset)(**kwargs)
 
 FF = DFF

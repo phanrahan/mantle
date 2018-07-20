@@ -106,19 +106,23 @@ def define_wrap(type_, type_name, in_type):
     )
 
 @cache_definition
-def DefineDFF(init=0, has_ce=False, has_reset=False):
-    Reg = DefineCoreirReg(None, init, has_reset)
-    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce=has_ce, has_reset=has_reset)
-    circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}".format(init, has_ce, has_reset),
+def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False):
+    Reg = DefineCoreirReg(None, init, has_async_reset)
+    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce=has_ce, has_reset=has_reset, has_async_reset=has_async_reset)
+    circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}_has_async_reset{}".format(init, has_ce, has_reset, has_async_reset),
         *IO)
     reg = Reg()
     wiredefaultclock(circ, reg)
     wireclock(circ, reg)
     I = circ.I
-    if has_reset:
+    if has_reset and has_async_reset:
+        raise ValueError("Cannot have synchronous and asynchronous reset")
+    if has_async_reset:
         _wrap = define_wrap(AsyncReset, "coreir.arst", Reset)()
         wire(circ.RESET, getattr(_wrap, "in"))
         wire(getattr(_wrap, "out"), reg.arst)
+    elif has_reset:
+        I = Mux()(bits([circ.I, bit(init)]), circ.RESET)
     if has_ce:
         I = Mux()(bits([getattr(reg, "out")[0], circ.I]), circ.CE)
     wire(I, getattr(reg, "in")[0])

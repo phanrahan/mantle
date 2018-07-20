@@ -117,11 +117,7 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False):
     I = circ.I
     if has_reset and has_async_reset:
         raise ValueError("Cannot have synchronous and asynchronous reset")
-    if has_async_reset:
-        _wrap = define_wrap(AsyncReset, "coreir.arst", Reset)()
-        wire(circ.RESET, getattr(_wrap, "in"))
-        wire(getattr(_wrap, "out"), reg.arst)
-    elif has_reset:
+    if has_reset:
         I = Mux()(bits([circ.I, bit(init)]), circ.RESET)
     if has_ce:
         I = Mux()(bits([getattr(reg, "out")[0], I]), circ.CE)

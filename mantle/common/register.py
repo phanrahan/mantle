@@ -20,7 +20,12 @@ def FFs(n, init=0, has_ce=False, has_reset=False, has_async_reset=False):
         init = int2seq(init, n)
 
     def f(y):
-        return FF(init[y], has_ce=has_ce, has_reset=has_reset, has_async_reset=has_async_reset)
+        if mantle_target == "coreir":
+            return FF(init[y], has_ce=has_ce, has_reset=has_reset, has_async_reset=has_async_reset)
+        else:
+            if has_async_reset:
+                raise NotImplementedError()
+            return FF(init[y], has_ce=has_ce, has_reset=has_reset)
 
     return col(f, n)
 

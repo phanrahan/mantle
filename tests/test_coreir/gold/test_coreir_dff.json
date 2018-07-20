@@ -1,8 +1,8 @@
-{"top":"global.DFF_init0_has_ceFalse_has_resetFalse",
+{"top":"global.DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse",
 "namespaces":{
   "global":{
     "modules":{
-      "DFF_init0_has_ceFalse_has_resetFalse":{
+      "DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse":{
         "type":["Record",[
           ["I","BitIn"],
           ["O","Bit"],

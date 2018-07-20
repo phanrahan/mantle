@@ -38,7 +38,7 @@ def _RegisterName(name, n, init, ce, r):
 
 
 @cache_definition
-def DefineRegister(n, init=0, has_ce=False, has_reset=False, _type=Bits):
+def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_async_reset=False, _type=Bits):
     """
     Generate an n-bit register
 
@@ -55,7 +55,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, _type=Bits):
     T = _type(n)
     class _Register(Circuit):
         name = _RegisterName('Register', n, init, has_ce, has_reset)
-        IO  = ['I', In(T), 'O', Out(T)] + ClockInterface(has_ce=has_ce,has_reset=has_reset)
+        IO  = ['I', In(T), 'O', Out(T)] + ClockInterface(has_ce=has_ce,has_reset=has_reset,has_async_reset=has_async_reset)
         @classmethod
         def definition(reg):
             ffs = join(FFs(n, init, has_ce, has_reset))
@@ -65,19 +65,23 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, _type=Bits):
             wiredefaultclock(reg, ffs)
     return _Register
 
-def Register(n, init=0, has_ce=False, has_reset=False, **kwargs):
+def Register(n, init=0, has_ce=False, has_reset=False, has_async_reset=False, **kwargs):
     return DefineRegister(n, init, has_ce, has_reset)(**kwargs)
 
-def register(I, ce=None, reset=None, **kwargs):
+def register(I, ce=None, reset=None, async_reset=None, **kwargs):
     has_ce = ce is not None
     has_reset = reset is not None
+    has_async_reset = async_reset is not None
     reg = Register(len(I),
                    has_ce=has_ce,
                    has_reset=has_reset,
+                   has_async_reset=has_async_reset,
                    **kwargs)
     reg(I)
     if has_ce:
         wire(ce, reg.CE)
     if has_reset:
         wire(reset, reg.RESET)
+    if has_async_reset:
+        wire(reset, reg.ASYNCRESET)
 

@@ -122,7 +122,7 @@ def DefineNegate(width):
     class _Negate(mantle.primitives.DeclareNegate(width)):
         @classmethod
         def definition(neg):
-            CoreirNeg = DeclareCircuit("coreir_" + neg.name, "in", In(T),
+            CoreirNeg = DeclareCircuit("coreir_neg", "in", In(T),
                     "out", Out(T), coreir_name="neg", coreir_lib="coreir",
                     coreir_genargs={"width": width})
             coreir_neg = CoreirNeg()

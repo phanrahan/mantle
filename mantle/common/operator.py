@@ -31,7 +31,8 @@ def check_operator_args(fn):
             raise ValueError(
                 f"All arguments should have the same length: {args}")
         T = type(args[0])
-        if not all(type(x).__class__ == T.__class__ for x in args):
+        if not (all(issubclass(type(x).__class__, T.__class__) for x in args) or (
+                all(issubclass(T.__class__, type(x).__class__) for x in args))):
             raise TypeError(
                 "Currently Arguments to operators must be of the same type")
         return fn(width, *args, **kwargs)

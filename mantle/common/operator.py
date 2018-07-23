@@ -4,7 +4,7 @@ import magma as m
 from magma.bitutils import seq2int
 from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert
 from mantle import ASR
-from mantle import EQ, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
+from mantle import EQ, NE, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
 from mantle import Mux
 from .arith import Add, Sub, Negate
 
@@ -213,6 +213,12 @@ def eq(width, I0, I1, **kwargs):
     return EQ(width, **kwargs)(I0, I1)
 
 
+@export
+@check_operator_args
+def ne(width, I0, I1, **kwargs):
+    return NE(width, **kwargs)(I0, I1)
+
+
 relational_ops = [
     ("__lt__", lt),
     ("__le__", le),
@@ -226,6 +232,7 @@ for method, op in arithmetic_ops + relational_ops:
 
 for type_ in (m._BitType, m.ArrayType):
     setattr(type_, "__eq__", eq)
+    setattr(type_, "__neq__", ne)
 
 
 @export

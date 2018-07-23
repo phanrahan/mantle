@@ -20,6 +20,7 @@ op = namedtuple("op", ["name", "operator"])
     op(name="add", operator="+"),
     op(name="sub", operator="-"),
     op(name="eq", operator="=="),
+    op(name="ne", operator="!="),
     op(name="lt", operator="<"),
     op(name="le", operator="<="),
     op(name="gt", operator=">"),
@@ -43,7 +44,7 @@ def test_binary_op(op, N, T, TType):
     # List of comparison ops so we can special case them (output type and
     # wiring 0)
     comparisons = ["lt", "le", "gt", "ge"]
-    if op.name in comparisons + ["eq"]:
+    if op.name in comparisons + ["eq", "ne"]:
         out_T = m.Out(m.Bit)
         expected_res_type = m.BitType
     else:

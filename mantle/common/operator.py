@@ -141,6 +141,7 @@ def invert(arg, **kwargs):
     else:
         return Invert(width, **kwargs)(arg)
 
+
 @export
 @preserve_type
 def neg(arg, **kwargs):
@@ -159,7 +160,8 @@ bitwise_ops = [
 ]
 
 for method, op in bitwise_ops:
-    setattr(m.BitType, method, op)
+    if op not in (lsl, lsr):
+        setattr(m.BitType, method, op)
     setattr(m.BitsType, method, op)
 
 arithmetic_ops = [

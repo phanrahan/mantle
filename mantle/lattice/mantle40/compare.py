@@ -15,7 +15,7 @@ __all__ += ['DefineSGT']
 __all__ += ['DefineSLT']
 
 #
-# n is the number of luts 
+# n is the number of luts
 # k is the number of bits per lut
 # expr goes into each LUT
 # fold the luts by wiring O to I0
@@ -40,12 +40,18 @@ def _Cascade(n, k, expr, cin, forkargs={}):
 
     return AnonymousCircuit(*args)
 
-class EQ1(Circuit):
+class EQNone(Circuit):
     IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit)]
     @classmethod
     def definition(io):
         EQ1LUT = ((A0&A1)|(~A0&~A1))
         wire( LUT2(EQ1LUT)(io.I0, io.I1), io.O )
+
+class EQ1(Circuit):
+    IO = ["I0", In(Bits(1)), "I1", In(Bits(1)), "O", Out(Bit)]
+    @classmethod
+    def definition(io):
+        wire(EQNone()(io.I0[0], io.I1[0]), io.O)
 
 class EQ2(Circuit):
     T = Bits(2)
@@ -67,7 +73,9 @@ def DefineEQ(n):
     return _EQ
 
 def EQ(n, **kwargs):
-    if   n == 1:
+    if   n == None:
+        return EQNone(**kwargs)
+    elif n == 1:
         return EQ1(**kwargs)
     elif n == 2:
         return EQ2(**kwargs)

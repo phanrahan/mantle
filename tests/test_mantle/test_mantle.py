@@ -23,10 +23,9 @@ def sim(Test, TestFun):
     if TestFun is None:
          return
     return
-    from magma.testing.newfunction import testvectors as funtest
-    from magma.simulator.python_simulator import testvectors as simtest
-    tvsim = simtest(Test)
-    tvfun = funtest(Test, TestFun)
+    from fault.test_vectors import generate_function_test_vectors, generate_simulator_test_vectors
+    tvsim = generate_simulator_test_vectors(Test)
+    tvfun = generate_function_test_vectors(Test, TestFun)
     assert tvsim == tvfun
 
 
@@ -202,7 +201,7 @@ def test_compare(op, width):
     op('DefineASR', operator.rshift),
     op('DefineLSR', operator.rshift),
     op('DefineLSL', operator.lshift),
-    #op('DefineROL', None), 
+    #op('DefineROL', None),
     #op('DefineROR', None)
 ])
 @pytest.mark.parametrize("width", WIDTHS)

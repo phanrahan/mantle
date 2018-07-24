@@ -18,7 +18,7 @@ def Decode(i, n, invert=False, **kwargs):
     @return: 1 if the n-bit input equals i
     """
 
-    assert n <= 8
+    #assert n <= 8
 
     if n <= 4:
         i = 1 << i

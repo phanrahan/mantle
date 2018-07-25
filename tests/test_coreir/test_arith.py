@@ -1,15 +1,15 @@
 from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate, DefineASR
-from magma.testing.newfunction import testvectors as function_test
-from magma.simulator.python_simulator import testvectors as simulator_test
+from fault.test_vectors import generate_function_test_vectors, generate_simulator_test_vectors
 from magma.simulator.coreir_simulator import CoreIRSimulator
 
 def test_add():
     width = 4
     mask = 2**width-1
     Add = DefineAdd(width)
-    assert function_test(Add, lambda x, y: (x + y) & mask) == simulator_test(Add)
+    assert generate_function_test_vectors(Add, lambda x, y: (x + y) & mask) == \
+        generate_simulator_test_vectors(Add)
 
 def test_add_cout_one():
     args = ['I0', In(Bits(1)), 'I1', In(Bits(1)), 'O', Out(Bits(1)), 'COUT',  Out(Bit)] + \

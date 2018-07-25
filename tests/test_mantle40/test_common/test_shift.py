@@ -1,8 +1,7 @@
 import pytest
 import magma
 from magma import compile
-from magma.simulator.python_simulator import testvectors as simtest
-from magma.testing.newfunction import testvectors as funtest
+from fault.test_vectors import generate_function_test_vectors, generate_simulator_test_vectors
 from magma.testing import check_files_equal
 from mantle import DefineLSR, DefineLSL, DefineASR
 
@@ -12,10 +11,8 @@ height = 2
 
 def sim(Test, TestFun):
     return
-    tvsim = simtest(Test)
-    print(tvsim)
-    tvfun = funtest(Test, TestFun)
-    print(tvfun)
+    tvsim = generate_simulator_test_vectors(Test)
+    tvfun = generate_function_test_vectors(Test, TestFun)
     assert tvsim == tvfun
 
 def com(Test, name):

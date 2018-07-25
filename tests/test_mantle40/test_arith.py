@@ -7,16 +7,16 @@ from mantle.lattice.mantle40.halfadder import HalfAdder
 import mantle
 from mantle.lattice.mantle40.arith import \
     DefineAdd, DefineSub, DefineNegate
+from fault.test_vectors import generate_function_test_vectors, \
+    generate_simulator_test_vectors
 
 width = 2
 mask = 2**width-1
 shift = 2
 
 def sim(Test, TestFun):
-    tvsim = simtest(Test)
-    print(tvsim)
-    tvfun = funtest(Test, TestFun)
-    print(tvfun)
+    tvsim = generate_simulator_test_vectors(Test)
+    tvfun = generate_function_test_vectors(Test, TestFun)
     assert tvsim == tvfun
 
 def com(Test, name):

@@ -3,6 +3,8 @@ import operator
 import pytest
 import magma
 import mantle
+from fault.test_vectors import generate_function_test_vectors, \
+    generate_simulator_test_vectors
 
 HEIGHTS = [2, 4, 8]
 WIDTHS = [2, 4, 8]
@@ -23,7 +25,6 @@ def sim(Test, TestFun):
     if TestFun is None:
          return
     return
-    from fault.test_vectors import generate_function_test_vectors, generate_simulator_test_vectors
     tvsim = generate_simulator_test_vectors(Test)
     tvfun = generate_function_test_vectors(Test, TestFun)
     assert tvsim == tvfun

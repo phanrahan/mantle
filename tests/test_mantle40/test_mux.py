@@ -1,14 +1,13 @@
 import magma
 
 from mantle.lattice.mantle40 import Mux2, Mux4, Mux8, Mux16, DefineMux
+from fault.test_vectors import generate_function_test_vectors, generate_simulator_test_vectors
 
 def sim(Test, TestFun):
     from magma.simulator.python_simulator import testvectors as simtest
     from magma.testing.newfunction import testvectors as funtest
-    tvsim = simtest(Test)
-    print(tvsim)
-    tvfun = funtest(Test, TestFun)
-    print(tvfun)
+    tvsim = generate_simulator_test_vectors(Test)
+    tvfun = generate_function_test_vectors(Test, TestFun)
     assert tvsim == tvfun
 
 def com(Test, name):

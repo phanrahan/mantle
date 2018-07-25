@@ -5,7 +5,7 @@ from magma.testing import check_files_equal
 from mantle.lattice.mantle40.compare import \
     DefineEQ, DefineNE, \
     DefineUGE, DefineULE, DefineUGT, DefineULT, \
-    DefineSGE, DefineSLE, DefineSGT, DefineSLT \
+    DefineSGE, DefineSLE, DefineSGT, DefineSLT
 from fault.test_vectors import generate_function_test_vectors, \
     generate_simulator_test_vectors
 
@@ -13,8 +13,10 @@ width = 2
 mask = 2**width-1
 
 def sim(Test, TestFun):
-    tvsim = generate_simulator_test_vectors(Test)
-    tvfun = generate_function_test_vectors(Test, TestFun)
+    tvsim = simtest(Test)
+    print(tvsim)
+    tvfun = funtest(Test, TestFun)
+    print(tvfun)
     assert tvsim == tvfun
 
 def com(Test, name):

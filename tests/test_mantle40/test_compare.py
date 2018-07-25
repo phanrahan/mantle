@@ -13,10 +13,8 @@ width = 2
 mask = 2**width-1
 
 def sim(Test, TestFun):
-    tvsim = simtest(Test)
-    print(tvsim)
-    tvfun = funtest(Test, TestFun)
-    print(tvfun)
+    tvsim = generate_simulator_test_vectors(Test)
+    tvfun = generate_function_test_vectors(Test, TestFun)
     assert tvsim == tvfun
 
 def com(Test, name):

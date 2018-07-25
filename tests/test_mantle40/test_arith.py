@@ -1,8 +1,6 @@
 import pytest
 from magma import compile
 from magma.testing import check_files_equal
-from magma.testing.newfunction import testvectors as funtest
-from magma.simulator.python_simulator import testvectors as simtest
 from mantle.lattice.mantle40.halfadder import HalfAdder
 import mantle
 from mantle.lattice.mantle40.arith import \

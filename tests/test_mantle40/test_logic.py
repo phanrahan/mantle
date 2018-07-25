@@ -1,8 +1,6 @@
 import pytest
 import magma
 from magma import compile
-from magma.simulator.python_simulator import testvectors as simtest
-from magma.testing.newfunction import testvectors as funtest
 from magma.testing import check_files_equal
 from mantle.lattice.mantle40.logic import \
     DefineReduceAnd, DefineReduceNAnd, \

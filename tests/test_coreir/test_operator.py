@@ -143,3 +143,16 @@ def test_binary_op(op, N, T, TType):
     m.compile(f'build/{_name}', TestCircuit)
     assert check_files_equal(__file__, f"build/{_name}.v",
                              f"gold/{_name}.v")
+
+
+def test_dyanmic_mux_getitem():
+    class TestDynamicMuxGetItem(m.Circuit):
+        IO = ["I", m.In(m.Bits(2)), "S", m.In(m.Bit), "O", m.Out(m.Bit)]
+
+        @classmethod
+        def definition(io):
+            m.wire(io.O, io.I[io.S])
+    m.compile("build/test_dynamic_mux_getitem", TestDynamicMuxGetItem,
+              output="coreir")
+    assert check_files_equal(__file__, f"build/test_dynamic_mux_getitem.json",
+                             f"gold/test_dynamic_mux_getitem.json")

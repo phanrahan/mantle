@@ -26,7 +26,9 @@ def DefineOneBitOneDimensionalLineBuffer(pixel_per_clock: int,
               'O', Out(Array(window_width, Bit)),
               'ready', Out(Bit),
               'valid', Out(Bit)] + ClockInterface(has_ce=True)
-
+        @classmethod
+        def definition(cls):
+            pass
 
     return _LB
 

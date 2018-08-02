@@ -319,6 +319,27 @@ def DefineInvert(width):
 def Invert(width=None, **kwargs):
     return DefineInvert(width)(**kwargs)
 
+@cache_definition
+def DefineWire(width):
+    T = Bits(width)
+    decl = DeclareCircuit("Wire{}".format(width),
+            'in', In(T), 'out', Out(T),
+            simulate       = simulate_bits_invert,
+            verilog_name   = "coreir_wire",
+            coreir_name    = "wire",
+            coreir_lib     = "coreir",
+            coreir_genargs = {"width": width})
+    circ = DefineCircuit("Wire{}_wrapped".format(width),
+        "I", In(T), "O", Out(T))
+    prim = decl()
+    wire(circ.I, getattr(prim, "in"))
+    wire(circ.O, prim.out)
+    EndDefine()
+    return circ
+
+def Wire(width=None, **kwargs):
+    return DefineWire(width)(**kwargs)
+
 
 def invert(arg, **kwargs):
     return Invert(get_length(arg), **kwargs)(arg)

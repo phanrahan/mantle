@@ -9,13 +9,10 @@
           ["out",["Array",16,"Bit"]]
         ]],
         "instances":{
-          "bit_const_GND":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
-          },
-          "bit_const_VCC":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",true]}
+          "const_4540231576":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"16'h0001"]}
           },
           "inst0":{
             "modref":"global.MantleReg55"
@@ -26,22 +23,7 @@
           }
         },
         "connections":[
-          ["inst1.in0.10","bit_const_GND.out"],
-          ["inst1.in0.11","bit_const_GND.out"],
-          ["inst1.in0.12","bit_const_GND.out"],
-          ["inst1.in0.13","bit_const_GND.out"],
-          ["inst1.in0.14","bit_const_GND.out"],
-          ["inst1.in0.15","bit_const_GND.out"],
-          ["inst1.in0.1","bit_const_GND.out"],
-          ["inst1.in0.2","bit_const_GND.out"],
-          ["inst1.in0.3","bit_const_GND.out"],
-          ["inst1.in0.4","bit_const_GND.out"],
-          ["inst1.in0.5","bit_const_GND.out"],
-          ["inst1.in0.6","bit_const_GND.out"],
-          ["inst1.in0.7","bit_const_GND.out"],
-          ["inst1.in0.8","bit_const_GND.out"],
-          ["inst1.in0.9","bit_const_GND.out"],
-          ["inst1.in0.0","bit_const_VCC.out"],
+          ["inst1.in0","const_4540231576.out"],
           ["self.clk","inst0.clk"],
           ["self.clr","inst0.clr"],
           ["inst1.out","inst0.in"],
@@ -60,20 +42,20 @@
           "count1":{
             "modref":"global.Counter16"
           },
-          "mywire":{
+          "mywire0":{
             "modref":"global.Wire16_wrapped"
           },
-          "mywire_2":{
+          "mywire1":{
             "modref":"global.Wire16_wrapped"
           }
         },
         "connections":[
           ["self.clk","count0.clk"],
-          ["mywire_2.O.8","count0.clr"],
-          ["mywire.I","count0.out"],
+          ["mywire1.O.8","count0.clr"],
+          ["mywire0.I","count0.out"],
           ["self.clk","count1.clk"],
-          ["mywire.O.4","count1.clr"],
-          ["mywire_2.I","count1.out"]
+          ["mywire0.O.4","count1.clr"],
+          ["mywire1.I","count1.out"]
         ]
       },
       "MantleReg55":{
@@ -84,9 +66,10 @@
           ["clr","BitIn"]
         ]],
         "instances":{
-          "bit_const_GND":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
+          "const_4540230568":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
           },
           "inst0":{
             "genref":"coreir.mux",
@@ -99,22 +82,7 @@
           }
         },
         "connections":[
-          ["inst0.in1.0","bit_const_GND.out"],
-          ["inst0.in1.10","bit_const_GND.out"],
-          ["inst0.in1.11","bit_const_GND.out"],
-          ["inst0.in1.12","bit_const_GND.out"],
-          ["inst0.in1.13","bit_const_GND.out"],
-          ["inst0.in1.14","bit_const_GND.out"],
-          ["inst0.in1.15","bit_const_GND.out"],
-          ["inst0.in1.1","bit_const_GND.out"],
-          ["inst0.in1.2","bit_const_GND.out"],
-          ["inst0.in1.3","bit_const_GND.out"],
-          ["inst0.in1.4","bit_const_GND.out"],
-          ["inst0.in1.5","bit_const_GND.out"],
-          ["inst0.in1.6","bit_const_GND.out"],
-          ["inst0.in1.7","bit_const_GND.out"],
-          ["inst0.in1.8","bit_const_GND.out"],
-          ["inst0.in1.9","bit_const_GND.out"],
+          ["inst0.in1","const_4540230568.out"],
           ["self.in","inst0.in0"],
           ["inst1.in","inst0.out"],
           ["self.clr","inst0.sel"],

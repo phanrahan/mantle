@@ -7,14 +7,14 @@
           ["out",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "const_4482516416":{
+          "const_8":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",4]},
             "modargs":{"value":[["BitVector",4],"4'h8"]}
           }
         },
         "connections":[
-          ["self.out","const_4482516416.out"]
+          ["self.out","const_8.out"]
         ]
       }
     }

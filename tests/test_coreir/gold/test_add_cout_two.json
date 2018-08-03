@@ -10,7 +10,7 @@
           ["COUT","Bit"]
         ]],
         "instances":{
-          "bit_const_0":{
+          "bit_const_0_None":{
             "modref":"corebit.const",
             "modargs":{"value":["Bool",false]}
           },
@@ -20,8 +20,8 @@
           }
         },
         "connections":[
-          ["inst0.in0.4","bit_const_0.out"],
-          ["inst0.in1.4","bit_const_0.out"],
+          ["inst0.in0.4","bit_const_0_None.out"],
+          ["inst0.in1.4","bit_const_0_None.out"],
           ["self.I0.0","inst0.in0.0"],
           ["self.I0.1","inst0.in0.1"],
           ["self.I0.2","inst0.in0.2"],

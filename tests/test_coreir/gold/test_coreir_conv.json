@@ -120,13 +120,13 @@
           ["out","Bit"]
         ]],
         "instances":{
-          "bit_const_1":{
+          "bit_const_1_None":{
             "modref":"corebit.const",
             "modargs":{"value":["Bool",true]}
           }
         },
         "connections":[
-          ["self.out","bit_const_1.out"]
+          ["self.out","bit_const_1_None.out"]
         ]
       },
       "corebit_term":{
@@ -139,14 +139,14 @@
           ["out",["Array",16,"Bit"]]
         ]],
         "instances":{
-          "const_0":{
+          "const_0_16":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],"16'h0000"]}
           }
         },
         "connections":[
-          ["self.out","const_0.out"]
+          ["self.out","const_0_16.out"]
         ]
       },
       "coreir_const167":{
@@ -154,14 +154,14 @@
           ["out",["Array",16,"Bit"]]
         ]],
         "instances":{
-          "const_7":{
+          "const_7_16":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",16]},
             "modargs":{"value":[["BitVector",16],"16'h0007"]}
           }
         },
         "connections":[
-          ["self.out","const_7.out"]
+          ["self.out","const_7_16.out"]
         ]
       },
       "coreir_const40":{
@@ -169,14 +169,14 @@
           ["out",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "const_0":{
+          "const_0_4":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",4]},
             "modargs":{"value":[["BitVector",4],"4'h0"]}
           }
         },
         "connections":[
-          ["self.out","const_0.out"]
+          ["self.out","const_0_4.out"]
         ]
       },
       "coreir_const41":{
@@ -184,14 +184,14 @@
           ["out",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "const_1":{
+          "const_1_4":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",4]},
             "modargs":{"value":[["BitVector",4],"4'h1"]}
           }
         },
         "connections":[
-          ["self.out","const_1.out"]
+          ["self.out","const_1_4.out"]
         ]
       },
       "coreir_const410":{
@@ -199,14 +199,14 @@
           ["out",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "const_10":{
+          "const_10_4":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",4]},
             "modargs":{"value":[["BitVector",4],"4'ha"]}
           }
         },
         "connections":[
-          ["self.out","const_10.out"]
+          ["self.out","const_10_4.out"]
         ]
       },
       "global_DesignTop":{

@@ -3,6 +3,8 @@ import magma as m
 import mantle
 from magma.testing import check_files_equal
 from collections import namedtuple
+import fault
+from bit_vector import BitVector
 
 op = namedtuple("op", ["name", "operator"])
 
@@ -156,3 +158,13 @@ def test_dyanmic_mux_getitem():
               output="coreir")
     assert check_files_equal(__file__, f"build/test_dynamic_mux_getitem.json",
                              f"gold/test_dynamic_mux_getitem.json")
+
+    tester = fault.Tester(TestDynamicMuxGetItem)
+    tester.poke(TestDynamicMuxGetItem.I, BitVector(2, 2))
+    tester.poke(TestDynamicMuxGetItem.S, 0)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, 0)
+    tester.poke(TestDynamicMuxGetItem.S, 1)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, 1)
+    tester.compile_and_run(target='python')

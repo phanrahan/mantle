@@ -246,3 +246,19 @@ def mux(I, S):
     elif S.const():
         return I[seq2int(S.bits())]
     return Mux(len(I), get_length(I[0]))(*I, S)
+
+
+orig_get_item = m.ArrayType.__getitem__
+
+
+def dynamic_mux_select(self, S):
+    if isinstance(S, m.Type):
+        if isinstance(self.T, m._BitKind):
+            length = None
+        else:
+            length = len(self.T)
+        return Mux(len(self), length)(m.bits(self.ts), S)
+    return orig_get_item(self, S)
+
+
+setattr(m.ArrayType, "__getitem__", dynamic_mux_select)

@@ -162,6 +162,7 @@ def test_dyanmic_mux_getitem():
     tester = fault.Tester(TestDynamicMuxGetItem)
     tester.poke(TestDynamicMuxGetItem.I, BitVector(2, 2))
     tester.poke(TestDynamicMuxGetItem.S, 0)
+    tester.expect(TestDynamicMuxGetItem.O, 0)
     tester.eval()
     tester.expect(TestDynamicMuxGetItem.O, 0)
     tester.poke(TestDynamicMuxGetItem.S, 1)

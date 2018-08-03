@@ -9,13 +9,10 @@
           ["out",["Array",16,"Bit"]]
         ]],
         "instances":{
-          "bit_const_GND":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
-          },
-          "bit_const_VCC":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",true]}
+          "const_4420662272":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"16'h0001"]}
           },
           "inst0":{
             "modref":"global.MantleReg55"
@@ -26,27 +23,12 @@
           }
         },
         "connections":[
-          ["bit_const_GND.out","inst1.in0.1"],
-          ["bit_const_GND.out","inst1.in0.10"],
-          ["bit_const_GND.out","inst1.in0.11"],
-          ["bit_const_GND.out","inst1.in0.12"],
-          ["bit_const_GND.out","inst1.in0.13"],
-          ["bit_const_GND.out","inst1.in0.14"],
-          ["bit_const_GND.out","inst1.in0.15"],
-          ["bit_const_GND.out","inst1.in0.2"],
-          ["bit_const_GND.out","inst1.in0.3"],
-          ["bit_const_GND.out","inst1.in0.4"],
-          ["bit_const_GND.out","inst1.in0.5"],
-          ["bit_const_GND.out","inst1.in0.6"],
-          ["bit_const_GND.out","inst1.in0.7"],
-          ["bit_const_GND.out","inst1.in0.8"],
-          ["bit_const_GND.out","inst1.in0.9"],
-          ["bit_const_VCC.out","inst1.in0.0"],
-          ["inst0.clk","self.clk"],
-          ["inst0.clr","self.clr"],
-          ["inst0.in","inst1.out"],
-          ["inst0.out","inst1.in1"],
-          ["inst0.out","self.out"]
+          ["inst1.in0","const_4420662272.out"],
+          ["self.clk","inst0.clk"],
+          ["self.clr","inst0.clr"],
+          ["inst1.out","inst0.in"],
+          ["inst1.in1","inst0.out"],
+          ["self.out","inst0.out"]
         ]
       },
       "Counters":{
@@ -62,10 +44,10 @@
           }
         },
         "connections":[
-          ["inst0.clk","self.clk"],
-          ["inst0.clr","inst1.out.8"],
-          ["inst1.clk","self.clk"],
-          ["inst1.clr","inst0.out.4"]
+          ["self.clk","inst0.clk"],
+          ["inst1.out.8","inst0.clr"],
+          ["inst1.clr","inst0.out.4"],
+          ["self.clk","inst1.clk"]
         ]
       },
       "MantleReg55":{
@@ -76,42 +58,28 @@
           ["clr","BitIn"]
         ]],
         "instances":{
-          "bit_const_GND":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
+          "const_4420680168":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"value":[["BitVector",16],"16'h0000"]}
           },
           "inst0":{
             "genref":"coreir.mux",
             "genargs":{"width":["Int",16]}
           },
           "inst1":{
-            "genref":"mantle.reg",
-            "genargs":{"has_clr":["Bool",false], "has_en":["Bool",false], "has_rst":["Bool",false], "width":["Int",16]},
-            "modargs":{"init":[["BitVector",16],"16'h0037"]}
+            "genref":"coreir.reg",
+            "genargs":{"width":["Int",16]},
+            "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",16],"16'h0037"]}
           }
         },
         "connections":[
-          ["bit_const_GND.out","inst0.in1.0"],
-          ["bit_const_GND.out","inst0.in1.1"],
-          ["bit_const_GND.out","inst0.in1.10"],
-          ["bit_const_GND.out","inst0.in1.11"],
-          ["bit_const_GND.out","inst0.in1.12"],
-          ["bit_const_GND.out","inst0.in1.13"],
-          ["bit_const_GND.out","inst0.in1.14"],
-          ["bit_const_GND.out","inst0.in1.15"],
-          ["bit_const_GND.out","inst0.in1.2"],
-          ["bit_const_GND.out","inst0.in1.3"],
-          ["bit_const_GND.out","inst0.in1.4"],
-          ["bit_const_GND.out","inst0.in1.5"],
-          ["bit_const_GND.out","inst0.in1.6"],
-          ["bit_const_GND.out","inst0.in1.7"],
-          ["bit_const_GND.out","inst0.in1.8"],
-          ["bit_const_GND.out","inst0.in1.9"],
-          ["inst0.in0","self.in"],
-          ["inst0.out","inst1.in"],
-          ["inst0.sel","self.clr"],
-          ["inst1.clk","self.clk"],
-          ["inst1.out","self.out"]
+          ["inst0.in1","const_4420680168.out"],
+          ["self.in","inst0.in0"],
+          ["inst1.in","inst0.out"],
+          ["self.clr","inst0.sel"],
+          ["self.clk","inst1.clk"],
+          ["self.out","inst1.out"]
         ]
       }
     }

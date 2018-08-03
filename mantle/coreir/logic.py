@@ -319,12 +319,17 @@ def DefineInvert(width):
 def Invert(width=None, **kwargs):
     return DefineInvert(width)(**kwargs)
 
+
+def simulate_wire(self, value_store, state_store):
+    value_store.set_value(self.out, value_store.get_value(getattr(self, "in")))
+
+
 @cache_definition
 def DefineWire(width):
     T = Bits(width)
     decl = DeclareCircuit("Wire{}".format(width),
             'in', In(T), 'out', Out(T),
-            simulate       = simulate_bits_invert,
+            simulate       = simulate_wire,
             verilog_name   = "coreir_wire",
             coreir_name    = "wire",
             coreir_lib     = "coreir",

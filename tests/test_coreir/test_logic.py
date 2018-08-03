@@ -4,8 +4,9 @@ from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, ReduceXOr
 from mantle.coreir import NAnd, NOr, NXOr, ReduceNAnd, ReduceNOr, ReduceNXOr
-from mantle.coreir import static_left_shift, static_right_shift
+from mantle.coreir import static_left_shift, static_right_shift, Wire
 from mantle import lsl, lsr
+import fault
 
 
 def test_coreir_bit():
@@ -142,6 +143,26 @@ def test_ls():
     compile("build/test_coreir_ls", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
             "build/test_coreir_ls.json", "gold/test_coreir_ls.json")
+
+
+def test_wire():
+    width = 4
+    class TestCircuit(Circuit):
+        name = "test_coreir_wire"
+        IO = ["a", In(Bits(width)), "b", Out(Bits(width))]
+        @classmethod
+        def definition(circuit):
+            c = Wire(width, name="c")
+            wire(c(circuit.a), circuit.b)
+    compile("build/test_coreir_wire", TestCircuit, output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_coreir_wire.json", "gold/test_coreir_wire.json")
+    tester = fault.Tester(TestCircuit)
+    for i in range(0, 1 << 4):
+        tester.poke(TestCircuit.a, i)
+        tester.eval()
+        tester.expect(TestCircuit.b, i)
+    tester.compile_and_run(target="python")
 
 # def test_coreir_uint():
 #     class TestCircuit(Circuit):

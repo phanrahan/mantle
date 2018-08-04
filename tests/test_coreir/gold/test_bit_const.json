@@ -7,13 +7,13 @@
           ["out","Bit"]
         ]],
         "instances":{
-          "bit_const_1":{
+          "bit_const_1_None":{
             "modref":"corebit.const",
             "modargs":{"value":["Bool",true]}
           }
         },
         "connections":[
-          ["self.out","bit_const_1.out"]
+          ["self.out","bit_const_1_None.out"]
         ]
       }
     }

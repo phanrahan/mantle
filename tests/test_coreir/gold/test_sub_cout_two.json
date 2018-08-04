@@ -11,7 +11,7 @@
           ["CIN","BitIn"]
         ]],
         "instances":{
-          "bit_const_0":{
+          "bit_const_0_None":{
             "modref":"corebit.const",
             "modargs":{"value":["Bool",false]}
           },
@@ -25,12 +25,12 @@
           }
         },
         "connections":[
-          ["inst0.in1.4","bit_const_0.out"],
-          ["inst1.in0.1","bit_const_0.out"],
-          ["inst1.in0.2","bit_const_0.out"],
-          ["inst1.in0.3","bit_const_0.out"],
-          ["inst1.in0.4","bit_const_0.out"],
-          ["inst1.in1.4","bit_const_0.out"],
+          ["inst0.in1.4","bit_const_0_None.out"],
+          ["inst1.in0.1","bit_const_0_None.out"],
+          ["inst1.in0.2","bit_const_0_None.out"],
+          ["inst1.in0.3","bit_const_0_None.out"],
+          ["inst1.in0.4","bit_const_0_None.out"],
+          ["inst1.in1.4","bit_const_0_None.out"],
           ["inst1.out","inst0.in0"],
           ["self.I1.0","inst0.in1.0"],
           ["self.I1.1","inst0.in1.1"],
@@ -72,7 +72,7 @@
           ["COUT","Bit"]
         ]],
         "instances":{
-          "bit_const_1":{
+          "bit_const_1_None":{
             "modref":"corebit.const",
             "modargs":{"value":["Bool",true]}
           },
@@ -84,7 +84,7 @@
           }
         },
         "connections":[
-          ["inst1.CIN","bit_const_1.out"],
+          ["inst1.CIN","bit_const_1_None.out"],
           ["self.I1","inst0.I"],
           ["inst1.I1","inst0.O"],
           ["self.COUT","inst1.COUT"],

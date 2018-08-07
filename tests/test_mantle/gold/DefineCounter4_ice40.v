@@ -7,7 +7,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add4Cout (input [3:0] I0, input [3:0] I1, output [3:0] O, output  COUT);
+module Add4_COUT (input [3:0] I0, input [3:0] I1, output [3:0] O, output  COUT);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;
@@ -36,11 +36,11 @@ SB_DFF inst3 (.C(CLK), .D(I[3]), .Q(inst3_Q));
 assign O = {inst3_Q,inst2_Q,inst1_Q,inst0_Q};
 endmodule
 
-module Counter4 (output [3:0] O, output  COUT, input  CLK);
+module Counter4_COUT (output [3:0] O, output  COUT, input  CLK);
 wire [3:0] inst0_O;
 wire  inst0_COUT;
 wire [3:0] inst1_O;
-Add4Cout inst0 (.I0(inst1_O), .I1({1'b0,1'b0,1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
+Add4_COUT inst0 (.I0(inst1_O), .I1({1'b0,1'b0,1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
 Register4 inst1 (.I(inst0_O), .O(inst1_O), .CLK(CLK));
 assign O = inst1_O;
 assign COUT = inst0_COUT;

@@ -7,7 +7,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add8Cout (input [7:0] I0, input [7:0] I1, output [7:0] O, output  COUT);
+module Add8_COUT (input [7:0] I0, input [7:0] I1, output [7:0] O, output  COUT);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;
@@ -56,11 +56,11 @@ SB_DFF inst7 (.C(CLK), .D(I[7]), .Q(inst7_Q));
 assign O = {inst7_Q,inst6_Q,inst5_Q,inst4_Q,inst3_Q,inst2_Q,inst1_Q,inst0_Q};
 endmodule
 
-module Counter8 (output [7:0] O, output  COUT, input  CLK);
+module Counter8_COUT (output [7:0] O, output  COUT, input  CLK);
 wire [7:0] inst0_O;
 wire  inst0_COUT;
 wire [7:0] inst1_O;
-Add8Cout inst0 (.I0(inst1_O), .I1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
+Add8_COUT inst0 (.I0(inst1_O), .I1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
 Register8 inst1 (.I(inst0_O), .O(inst1_O), .CLK(CLK));
 assign O = inst1_O;
 assign COUT = inst0_COUT;

@@ -24,7 +24,8 @@ def com(Test, name):
 def sim(Test, TestFun):
     if TestFun is None:
          return
-    return
+    if magma.mantle_target in ['spartan3', 'spartan6']:
+         return
     tvsim = generate_simulator_test_vectors(Test)
     tvfun = generate_function_test_vectors(Test, TestFun)
     assert tvsim == tvfun
@@ -85,36 +86,36 @@ def test_lut4():
 
 def test_mux2():
     Test = mantle.Mux2
-    sim( Test, lambda i, s: i[s] )
+    #sim( Test, lambda i, s: i[s] )
     com( Test, 'mux2' )
 
 def test_mux4():
     Test = mantle.Mux4
-    sim( Test, lambda i, s: i[s] )
+    #sim( Test, lambda i, s: i[s] )
     com( Test, 'mux4' )
 
 def test_mux8():
     Test = mantle.Mux8
-    sim( Test, lambda i, s: i[s] )
+    #sim( Test, lambda i, s: i[s] )
     com( Test, 'mux8' )
 
 # this test if very expensive becuase it tests all possible inputs
 @pytest.mark.skip
 def test_mux16():
     Test = mantle.Mux16
-    sim( Test, lambda i, s: i[s] )
+    #sim( Test, lambda i, s: i[s] )
     com( Test, 'mux16' )
 
 @pytest.mark.parametrize("height", HEIGHTS)
 @pytest.mark.parametrize("width", WIDTHS)
 def test_mux(height, width):
     Test = mantle.DefineMux(height,width)
-    sim( Test, None )
+    #sim( Test, None )
     com( Test, f'mux{height}x{width}' )
 
 def test_not():
     Test = mantle.Not
-    sim( Test, operator.invert )
+    #sim( Test, operator.invert )
     com( Test, 'not' )
 
 @pytest.mark.parametrize("op", [
@@ -130,33 +131,34 @@ def test_not():
 def test_logic(op, height):
     Define = getattr(mantle, op.name)
     Test = Define(height, height)
-    sim( Test, op.func )
+    #sim( Test, op.func )
     com( Test, f'{op.name}{height}' )
 
 @pytest.mark.parametrize("op", [
-    op('DefineAnd',  operator.and_),
-    op('DefineNAnd', lambda x, y: ~(x&y)),
-    op('DefineOr',   operator.or_),
-    op('DefineNOr',  lambda x, y: ~(x|y)),
-    op('DefineXOr',  operator.xor),
-    op('DefineNXOr',  lambda x, y: ~(x^y))
+    op('DefineAnd',  lambda x, y: x&y),
+    #op('DefineNAnd', lambda x, y: ~(x&y)),
+    op('DefineOr',   lambda x, y: x|y),
+    #op('DefineNOr',  lambda x, y: ~(x|y)),
+    op('DefineXOr',  lambda x, y: x^y),
+    #op('DefineNXOr',  lambda x, y: ~(x^y))
 ])
 @pytest.mark.parametrize("height", HEIGHTS)
 @pytest.mark.parametrize("width", WIDTHS)
 def test_logic(op, height, width):
     Define = getattr(mantle, op.name)
     Test = Define(height, width)
-    sim( Test, op.func )
+    if height == 2 and width == 2:
+        sim( Test, op.func )
     com( Test, f'{op.name}{height}x{width}' )
 
 def test_ha():
     Test = mantle.HalfAdder
-    sim( Test, None)
+    #sim( Test, None)
     com( Test, 'ha' )
 
 def test_fa():
     Test = mantle.FullAdder
-    sim( Test, None)
+    #sim( Test, None)
     com( Test, 'fa' )
 
 @pytest.mark.parametrize("op", [
@@ -169,14 +171,14 @@ def test_fa():
 def test_arith(op, cin, cout, width):
     Define = getattr(mantle, op.name)
     Test = Define(width, cin=cin, cout=cout)
-    sim( Test, op.func )
+    #sim( Test, op.func )
     com( Test, f'{op.name}{width}{"_cin" if cin else ""}{"_cout" if cout else ""}' )
 
 @pytest.mark.parametrize("width", WIDTHS)
 def test_negate(width):
     Define = mantle.Negate
     Test = Define(width)
-    sim( Test, operator.neg)
+    #sim( Test, operator.neg)
     com( Test, f'Negate{width}' )
 
 @pytest.mark.parametrize("op", [
@@ -195,7 +197,7 @@ def test_negate(width):
 def test_compare(op, width):
     Define = getattr(mantle, op.name)
     Test = Define(width)
-    sim( Test, op.func )
+    #sim( Test, op.func )
     com( Test, f'{op.name}{width}' )
 
 @pytest.mark.parametrize("op", [
@@ -209,14 +211,14 @@ def test_compare(op, width):
 def test_shift(op, width):
     Define = getattr(mantle, op.name)
     Test = Define(width)
-    sim( Test, op.func )
+    #sim( Test, op.func )
     com( Test, f'{op.name}{width}' )
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_dff():
     DFF = mantle.DFF
     Test = DFF()
-    sim( Test, None)
+    #sim( Test, None)
     com( Test, 'DFF' )
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
@@ -229,7 +231,7 @@ def test_dff():
 def test_ff(op):
     FF = getattr(mantle, op.name)
     Test = FF()
-    #sim( Test, op.func)
+    ##sim( Test, op.func)
     com( Test, f'{op.name}' )
 
 @pytest.mark.parametrize("op", [
@@ -250,6 +252,6 @@ def test_ff(op):
 def test_decode(op, width):
     Define = getattr(mantle, op.name)
     Test = Define(width)
-    sim( Test, op.func)
+    #sim( Test, op.func)
     com( Test, f'{op.name}{width}' )
 

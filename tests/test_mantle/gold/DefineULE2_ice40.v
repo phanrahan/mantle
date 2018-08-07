@@ -15,7 +15,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add2CinCout (input [1:0] I0, input [1:0] I1, input  CIN, output [1:0] O, output  COUT);
+module Add2_CIN_COUT (input [1:0] I0, input [1:0] I1, input  CIN, output [1:0] O, output  COUT);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;
@@ -26,12 +26,12 @@ assign O = {inst1_O,inst0_O};
 assign COUT = inst1_COUT;
 endmodule
 
-module Sub2Cout (input [1:0] I0, input [1:0] I1, output [1:0] O, output  COUT);
+module Sub2_COUT (input [1:0] I0, input [1:0] I1, output [1:0] O, output  COUT);
 wire [1:0] inst0_O;
 wire [1:0] inst1_O;
 wire  inst1_COUT;
 Invert2 inst0 (.I(I1), .O(inst0_O));
-Add2CinCout inst1 (.I0(I0), .I1(inst0_O), .CIN(1'b1), .O(inst1_O), .COUT(inst1_COUT));
+Add2_CIN_COUT inst1 (.I0(I0), .I1(inst0_O), .CIN(1'b1), .O(inst1_O), .COUT(inst1_COUT));
 assign O = inst1_O;
 assign COUT = inst1_COUT;
 endmodule
@@ -39,7 +39,7 @@ endmodule
 module ULE2 (input [1:0] I0, input [1:0] I1, output  O);
 wire [1:0] inst0_O;
 wire  inst0_COUT;
-Sub2Cout inst0 (.I0(I1), .I1(I0), .O(inst0_O), .COUT(inst0_COUT));
+Sub2_COUT inst0 (.I0(I1), .I1(I0), .O(inst0_O), .COUT(inst0_COUT));
 assign O = inst0_COUT;
 endmodule
 

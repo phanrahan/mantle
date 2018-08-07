@@ -19,7 +19,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add4Cin (input [3:0] I0, input [3:0] I1, input  CIN, output [3:0] O);
+module Add4_CIN (input [3:0] I0, input [3:0] I1, input  CIN, output [3:0] O);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;
@@ -39,7 +39,7 @@ module Sub4 (input [3:0] I0, input [3:0] I1, output [3:0] O);
 wire [3:0] inst0_O;
 wire [3:0] inst1_O;
 Invert4 inst0 (.I(I1), .O(inst0_O));
-Add4Cin inst1 (.I0(I0), .I1(inst0_O), .CIN(1'b1), .O(inst1_O));
+Add4_CIN inst1 (.I0(I0), .I1(inst0_O), .CIN(1'b1), .O(inst1_O));
 assign O = inst1_O;
 endmodule
 

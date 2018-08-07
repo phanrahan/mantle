@@ -7,7 +7,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add2Cin (input [1:0] I0, input [1:0] I1, input  CIN, output [1:0] O);
+module Add2_CIN (input [1:0] I0, input [1:0] I1, input  CIN, output [1:0] O);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;

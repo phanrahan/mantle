@@ -79,7 +79,7 @@ FDRSE #(.INIT(1'h0)) inst7 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(I[7]), .Q
 assign O = {inst7_Q,inst6_Q,inst5_Q,inst4_Q,inst3_Q,inst2_Q,inst1_Q,inst0_Q};
 endmodule
 
-module Counter8 (output [7:0] O, output  COUT, input  CLK);
+module Counter8_COUT (output [7:0] O, output  COUT, input  CLK);
 wire [7:0] inst0_O;
 wire  inst0_COUT;
 wire [7:0] inst1_O;

@@ -2,10 +2,8 @@ from collections import OrderedDict
 from magma import *
 from magma.bitutils import log2
 
-__all__  = ['RAMB16BWER']
-__all__ += ['RAMB16', 'RAMB16D']
+__all__  = ['RAMB16', 'RAMB16D', 'RAMB16BWER']
 __all__ += ['ROMB16']
-__all__ += ['ROMB']
 
 
 RAMB16BWER = DeclareCircuit("RAMB16BWER",
@@ -141,14 +139,12 @@ def RAMB16(rom, width, init=None):
 
 
 def ROMB16(rom, width, init=None):
-    rom = RAMB16(rom, width, init=init)
+    ramb = RAMB16(rom, width, init=init)
 
-    wire(array((width*[0])), rom.I)
-    wire(1, rom.CE)
+    wire(array((width*[0])), ramb.I)
+    wire(1, ramb.CE)
 
-    return AnonymousCircuit("A", rom.A, "O", rom.O, 'CLK', rom.CLK)
-
-ROMB = ROMB16
+    return AnonymousCircuit("A", ramb.A, "O", ramb.O, 'CLK', ramb.CLK)
 
 # functions to set up io pins
 

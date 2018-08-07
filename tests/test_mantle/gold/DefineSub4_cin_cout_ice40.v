@@ -19,7 +19,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add4CinCout (input [3:0] I0, input [3:0] I1, input  CIN, output [3:0] O, output  COUT);
+module Add4_CIN_COUT (input [3:0] I0, input [3:0] I1, input  CIN, output [3:0] O, output  COUT);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;
@@ -36,13 +36,13 @@ assign O = {inst3_O,inst2_O,inst1_O,inst0_O};
 assign COUT = inst3_COUT;
 endmodule
 
-module Sub4CinCout (input [3:0] I0, input [3:0] I1, input  CIN, output [3:0] O, output  COUT);
+module Sub4_CIN_COUT (input [3:0] I0, input [3:0] I1, input  CIN, output [3:0] O, output  COUT);
 wire [3:0] inst0_O;
 wire [3:0] inst1_O;
 wire  inst1_COUT;
 wire  inst2_O;
 Invert4 inst0 (.I(I1), .O(inst0_O));
-Add4CinCout inst1 (.I0(I0), .I1(inst0_O), .CIN(inst2_O), .O(inst1_O), .COUT(inst1_COUT));
+Add4_CIN_COUT inst1 (.I0(I0), .I1(inst0_O), .CIN(inst2_O), .O(inst1_O), .COUT(inst1_COUT));
 SB_LUT4 #(.LUT_INIT(16'h5555)) inst2 (.I0(CIN), .I1(1'b0), .I2(1'b0), .I3(1'b0), .O(inst2_O));
 assign O = inst1_O;
 assign COUT = inst1_COUT;

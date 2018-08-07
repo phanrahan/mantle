@@ -30,8 +30,6 @@ if m.mantle_target in ['coreir',
                        'cyclone4',
     ]:
 
-    #from mantle.primitives import *
-
     if m.mantle_target == 'coreir':
         from mantle.coreir import *
     elif m.mantle_target in ['ice40']:
@@ -40,6 +38,8 @@ if m.mantle_target in ['coreir',
         from mantle.xilinx import *
     elif m.mantle_target in ['cyclone4']:
         from mantle.altera import *
+    #elif m.mantle_target in ['greenpak4']:
+    #    from mantle.silego import *
     elif m.mantle_target == 'verilog':
         from mantle.verilog import *
 
@@ -48,4 +48,5 @@ if m.mantle_target in ['coreir',
         weak_import(f"common.{module}", globals())
 
 else:
-    raise RuntimeError(f"MANTLE_TARGET={m.mantle_target} not supported")
+    if m.mantle_target not in ['greenpak4']:
+        raise RuntimeError(f"MANTLE_TARGET={m.mantle_target} not supported")

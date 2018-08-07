@@ -2,14 +2,9 @@ from magma import *
 from mantle import And, DefineAdd
 from mantle import Mux
 from .register import Register
+from .counter import _CounterName
 
 __all__ = ['DefineCounterLoad', 'CounterLoad']
-
-def _CounterName(name, n, ce, r):
-    name += '%d' % n
-    if ce: name += 'CE'
-    if r:  name += 'R'
-    return name
 
 #
 # Create an n-bit counter with increment and load
@@ -17,9 +12,9 @@ def _CounterName(name, n, ce, r):
 #   DATA : In(UInt(n)), LOAD : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
 #
 @cache_definition
-def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False, has_reset=False):
+def DefineCounterLoad(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False):
 
-    name = _CounterName('CounterLoad', n, has_ce, has_reset)
+    name = _CounterName(f'CounterLoad{n}', incr, has_ce, has_reset, cin, cout)
 
     args = []
     args += ['DATA', In(UInt(n))]
@@ -48,6 +43,7 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
 
     reg(mux.O)
 
+    next = False
     if next:
         wire( mux.O, Counter.O )
     else:
@@ -68,7 +64,7 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, next=False, has_ce=False,
 def CounterLoad(n, cin=False, cout=True, incr=1,
         has_ce=False, has_reset=False, **kwargs):
     """Construct a n-bit counter."""
-    return DefineCounterLoad(n, cin=cin, cout=cout, incr=incr, next=next,
+    return DefineCounterLoad(n, cin=cin, cout=cout, incr=incr, 
                has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 

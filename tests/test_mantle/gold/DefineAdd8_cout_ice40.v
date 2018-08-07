@@ -7,7 +7,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add8Cout (input [7:0] I0, input [7:0] I1, output [7:0] O, output  COUT);
+module Add8_COUT (input [7:0] I0, input [7:0] I1, output [7:0] O, output  COUT);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;

@@ -39,7 +39,7 @@ FDRSE #(.INIT(1'h0)) inst1 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(I[1]), .Q
 assign O = {inst1_Q,inst0_Q};
 endmodule
 
-module CounterLoad2 (input [1:0] DATA, input  LOAD, output [1:0] O, output  COUT, input  CLK);
+module CounterLoad2_COUT (input [1:0] DATA, input  LOAD, output [1:0] O, output  COUT, input  CLK);
 wire [1:0] inst0_O;
 wire  inst0_COUT;
 wire [1:0] inst1_O;

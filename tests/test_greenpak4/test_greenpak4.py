@@ -1,25 +1,24 @@
 import pytest
 
 import magma as m
-from magma import compile
-from magma.simulator.python_simulator import testvectors as simtest
-from magma.testing.newfunction import testvectors as funtest
-from magma.testing import check_files_equal
+from fault.test_vectors import generate_function_test_vectors, \
+    generate_simulator_test_vectors
 
-from mantle.silego import greenpak4
+import mantle.silego.greenpak4 as greenpak4
 
-def sim(Test, TestFun):
-    tvsim = simtest(Test)
-    print(tvsim)
-    tvfun = funtest(Test, TestFun)
-    print(tvfun)
-    assert tvsim == tvfun
+#def sim(Test, TestFun):
+#    tvsim = simtest(Test)
+#    print(tvsim)
+#    tvfun = funtest(Test, TestFun)
+#    print(tvfun)
+#    assert tvsim == tvfun
 
 def com(Test, name):
+    from magma.testing import check_files_equal
     name = f'test_{name}'
     build = f'build/{name}'
     gold = f'gold/{name}'
-    compile(build, Test)
+    m.compile(build, Test)
     assert check_files_equal(__file__, build+'.v', gold+'.v')
 
 def test_inv():

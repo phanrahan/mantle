@@ -4,7 +4,7 @@ from mantle.lattice.ice40.RAMB import ROMB, RAMB
 from magma.simulator import PythonSimulator
 
 
-def test_rom():
+def test_romb():
     main = DefineCircuit("test_romb",
                          "RDATAOUT", Out(Bits(8)),
                          "CLK", In(Clock)) # FIXME: hack
@@ -21,10 +21,10 @@ def test_rom():
 
     sim.advance(2)
 
-    assert sim.get_value(main.RDATAOUT) == BitVector(0b11111111, num_bits=8)
+    assert BitVector(sim.get_value(main.RDATAOUT)) == BitVector(0b11111111, num_bits=8)
 
 
-def test_ram():
+def test_ramb():
     main = DefineCircuit("test_ramb",
                          "RDATA", Out(Bits(8)),
                          "WDATA", In(Bits(8)),
@@ -48,7 +48,7 @@ def test_ram():
 
     sim.advance(2)
 
-    assert sim.get_value(main.RDATA) == BitVector(0b11111111, num_bits=8)
+    assert BitVector(sim.get_value(main.RDATA)) == BitVector(0b11111111, num_bits=8)
 
     # Write 0xBE to WADDR = 1
     sim.set_value(main.WE, True)
@@ -62,4 +62,4 @@ def test_ram():
 
     sim.advance(2)
 
-    assert sim.get_value(main.RDATA) == BitVector(0xBE, num_bits=8)
+    assert BitVector(sim.get_value(main.RDATA)) == BitVector(0xBE, num_bits=8)

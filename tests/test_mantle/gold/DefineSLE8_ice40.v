@@ -27,7 +27,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add8Cin (input [7:0] I0, input [7:0] I1, input  CIN, output [7:0] O);
+module Add8_CIN (input [7:0] I0, input [7:0] I1, input  CIN, output [7:0] O);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;
@@ -59,7 +59,7 @@ module Sub8 (input [7:0] I0, input [7:0] I1, output [7:0] O);
 wire [7:0] inst0_O;
 wire [7:0] inst1_O;
 Invert8 inst0 (.I(I1), .O(inst0_O));
-Add8Cin inst1 (.I0(I0), .I1(inst0_O), .CIN(1'b1), .O(inst1_O));
+Add8_CIN inst1 (.I0(I0), .I1(inst0_O), .CIN(1'b1), .O(inst1_O));
 assign O = inst1_O;
 endmodule
 

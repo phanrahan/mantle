@@ -7,7 +7,7 @@ assign O = inst0_O;
 assign COUT = inst1_CO;
 endmodule
 
-module Add2Cout (input [1:0] I0, input [1:0] I1, output [1:0] O, output  COUT);
+module Add2_COUT (input [1:0] I0, input [1:0] I1, output [1:0] O, output  COUT);
 wire  inst0_O;
 wire  inst0_COUT;
 wire  inst1_O;
@@ -40,12 +40,12 @@ SB_DFF inst1 (.C(CLK), .D(I[1]), .Q(inst1_Q));
 assign O = {inst1_Q,inst0_Q};
 endmodule
 
-module CounterLoad2 (input [1:0] DATA, input  LOAD, output [1:0] O, output  COUT, input  CLK);
+module CounterLoad2_COUT (input [1:0] DATA, input  LOAD, output [1:0] O, output  COUT, input  CLK);
 wire [1:0] inst0_O;
 wire  inst0_COUT;
 wire [1:0] inst1_O;
 wire [1:0] inst2_O;
-Add2Cout inst0 (.I0(inst2_O), .I1({1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
+Add2_COUT inst0 (.I0(inst2_O), .I1({1'b0,1'b1}), .O(inst0_O), .COUT(inst0_COUT));
 Mux2x2 inst1 (.I0(inst0_O), .I1(DATA), .S(LOAD), .O(inst1_O));
 Register2 inst2 (.I(inst1_O), .O(inst2_O), .CLK(CLK));
 assign O = inst2_O;

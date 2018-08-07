@@ -1,33 +1,19 @@
+import math
 from magma import *
 from mantle import And, Decode, Or
-from .counter import Counter
-import math
+from .counter import Counter, _CounterName
 
 __all__ = ['DefineUpCounterModM', 'UpCounterModM']
-#__all__ += ['DefineDownCounterModM', 'DownCounterModM']
 __all__ += ['DefineCounterModM', 'CounterModM', 'SizedCounterModM']
-
-def _CounterName(name, n, m, cin, cout, ce, r, s):
-    name += '{}'.format(n)
-    name += 'Mod{}'.format(m)
-    if cin: name += 'CIN'
-    if cout: name += 'COUT'
-    if ce: name += 'CE'
-    if r:  name += 'R'
-    if s:  name += 'S'
-    return name
 
 #
 # Create an n-bit mod-m counter
 #
 @cache_definition
-def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
+def DefineCounterModM(m, n, cin=False, cout=True, incr=1, 
     has_ce=False, has_reset=False):
 
-    r = has_reset
-    s = False
-    name = _CounterName('Counter', n, m, cin, cout, has_ce, r, s)
-
+    name = _CounterName(f'Counter{n}_Mod{m}', incr, has_ce, has_reset, cin, cout)
     args = []
     if cin:
         args += ['CIN', In(Bit)]
@@ -36,11 +22,11 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
     if cout:
         args += ["COUT", Out(Bit)]
 
-    args += ClockInterface(has_ce, r, s)
+    args += ClockInterface(has_ce, has_reset)
 
     CounterModM = DefineCircuit(name, *args)
 
-    counter = Counter(n, cin=cin, cout=False, incr=incr, next=next,
+    counter = Counter(n, cin=cin, cout=False, incr=incr, 
                    has_ce=has_ce, has_reset=True)
     reset = Decode(m - 1, n)(counter.O)
 
@@ -72,11 +58,11 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1, next=False,
 
     return CounterModM
 
-def CounterModM(m, n, cin=False, cout=True, incr=1, next=False,
+def CounterModM(m, n, cin=False, cout=True, incr=1, 
     has_ce=False, has_reset=False, **kwargs):
-    return DefineCounterModM(m, n, cin, cout, incr, next, has_ce, has_reset=has_reset)(**kwargs)
+    return DefineCounterModM(m, n, cin, cout, incr, has_ce, has_reset=has_reset)(**kwargs)
 
-def SizedCounterModM(m, cin=False, cout=False, incr=1, next=False,
+def SizedCounterModM(m, cin=False, cout=False, incr=1, 
     has_ce=False, **kwargs):
     """
     This is that counts from 0 to m - 1 that uses the minimum number of bits
@@ -84,12 +70,11 @@ def SizedCounterModM(m, cin=False, cout=False, incr=1, next=False,
     :param cin: Whether this counter should have a carry input
     :param cout: Whether this counter should a carry output
     :param incr: How much this counter should increment by per clock. Default is 1.
-    :param next:
     :param has_ce: Whether this counter should a clock-enable input
     :param kwargs: Args passed to the counter circuit when it is being initialized
     :return: A counter circuit
     """
-    return DefineCounterModM(m, math.ceil(math.log(m, 2)), cin, cout, incr, next, has_ce)(**kwargs)
+    return DefineCounterModM(m, math.ceil(math.log(m, 2)), cin, cout, incr, has_ce)(**kwargs)
 
 DefineUpCounterModM = DefineCounterModM
 UpCounterModM = CounterModM

@@ -31,7 +31,7 @@ DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse inst7 (.I(I[7]), .O(in
 assign O = {inst7_O,inst6_O,inst5_O,inst4_O,inst3_O,inst2_O,inst1_O,inst0_O};
 endmodule
 
-module Counter8 (output [7:0] O, output  COUT, input  CLK);
+module Counter8_COUT (output [7:0] O, output  COUT, input  CLK);
 wire [7:0] inst0_O;
 wire  inst0_COUT;
 wire [7:0] inst1_O;

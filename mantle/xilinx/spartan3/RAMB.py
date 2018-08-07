@@ -9,7 +9,6 @@ __all__  = ['RAMB16_S2',
             'RAMB16_S18_S18']
 __all__ += ['RAMB16', 'RAMB16D']
 __all__ += ['ROMB16']
-__all__ += ['ROMB']
 
 RAMB16_S2 = DeclareCircuit("RAMB16_S2",
             "DI", In(Bits(2)),
@@ -157,26 +156,26 @@ def RAMB16D(rom, init = None):
     # reverse the order DI
     #IA = [ram.DIA[ram.DIA.N-1-i] for i in range(ram.DIA.N)]
     IA = [ram.DIA[i] for i in range(ram.DIA.N)]
-    OA = [ram.DOA[i] for i in range(ram.DOA.N)]
-    OA = [ram.DOA[i] for i in range(ram.DOA.N)]
-
     IA = array(IA)
+
+    OA = [ram.DOA[i] for i in range(ram.DOA.N)]
     OA = array(OA)
 
     args += ['IA', IA, "AA", AA, "OA", OA]
 
-   # reverse the address bits
+    # reverse the address bits
     #AB = [ram.ADDRB[logn-1-i] for i in range(logn)]
     AB = [ram.ADDRB[i] for i in range(logn)]
     AB = array(AB)
 
     # reverse the order DI
     #IB = [ram.DIB[ram.DIB.N-1-i] for i in range(ram.DIB.N)]
-    #OB = [ram.DOB[ram.DOB.N-1-i] for i in range(ram.DOB.N)]
     IB = [ram.DIB[i] for i in range(ram.DIB.N)]
-    OB = [ram.DOB[i] for i in range(ram.DOB.N)]
-
     IB = array(IB)
+
+    # reverse the order DI
+    #OB = [ram.DOB[ram.DOB.N-1-i] for i in range(ram.DOB.N)]
+    OB = [ram.DOB[i] for i in range(ram.DOB.N)]
     OB = array(OB)
 
     args += ['IB', IB, "AB", AB, "OB", OB]
@@ -239,20 +238,22 @@ def RAMB16(rom, width, init=None):
 
     # reverse the order DI
     #I = [ram.DI[ram.DI.N-1-i] for i in range(ram.DI.N)]
-    #O = [ram.DO[ram.DO.N-1-i] for i in range(ram.DO.N)]
     I = [ram.DI[i] for i in range(ram.DI.N)]
+
+    # reverse the order DI
+    #O = [ram.DO[ram.DO.N-1-i] for i in range(ram.DO.N)]
     O = [ram.DO[i] for i in range(ram.DO.N)]
+
     if   width == 8:
         wire(0, ram.DIP[0])
     elif width == 9:
-        #I += [ram.DIP[0]]
-        #O += [ram.DOP[0]]
         I += [ram.DIP[0]]
         O += [ram.DOP[0]]
     elif width == 16:
         wire(0, ram.DIP[0])
         wire(0, ram.DIP[1])
     elif width == 18:
+        # reverse
         #I += [ram.DIP[1], ram.DIP[0]]
         #O += [ram.DOP[1], ram.DOP[0]]
         I += [ram.DIP[0], ram.DIP[1]]
@@ -274,13 +275,10 @@ def RAMB16(rom, width, init=None):
 def ROMB16(rom, width, init=None):
     rom = RAMB16(rom, width, init=init)
 
-    wire(array((width*[0])), rom.I)
+    wire(array(width*[0]), rom.I)
     wire(1, rom.CE)
 
     return AnonymousCircuit("A", rom.A, "O", rom.O, 'CLK', rom.CLK)
-
-ROMB = ROMB16
-
 
 # functions to format INIT strings
 

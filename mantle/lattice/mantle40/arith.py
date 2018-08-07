@@ -7,11 +7,10 @@ __all__ += ['DefineSub']
 __all__ += ['DefineNegate']
 
 def _AdderName(basename, n, cin, cout):
-    return "{}{}{}{}".format(
-        basename, n,
-        "Cin"  if cin  else "",
-        "Cout" if cout else ""
-    )
+    name = f"{basename}{n}"
+    if cin: name += '_CIN'
+    if cout: name += '_COUT'
+    return name
 
 def _AdderArgs(n, cin, cout):
     T = Bits(n)

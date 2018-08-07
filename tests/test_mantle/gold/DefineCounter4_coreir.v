@@ -23,7 +23,7 @@ DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse inst3 (.I(I[3]), .O(in
 assign O = {inst3_O,inst2_O,inst1_O,inst0_O};
 endmodule
 
-module Counter4 (output [3:0] O, output  COUT, input  CLK);
+module Counter4_COUT (output [3:0] O, output  COUT, input  CLK);
 wire [3:0] inst0_O;
 wire  inst0_COUT;
 wire [3:0] inst1_O;

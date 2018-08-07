@@ -10,10 +10,12 @@ __all__ += ['DefineDownCounter', 'DownCounter']
 __all__ += ['DefineUpDownCounter', 'UpDownCounter']
 
 
-def _CounterName(name, n, ce, r):
-    name += '%d' % n
-    if ce: name += 'CE'
-    if r:  name += 'R'
+def _CounterName(name, incr, has_ce, has_reset, cin, cout):
+    if incr != 1: name += f'_{incr}'
+    if has_ce: name += 'CE'
+    if has_reset:  name += 'R'
+    if cin: name += '_CIN' 
+    if cout: name += '_COUT' 
     return name
 
 #
@@ -22,10 +24,9 @@ def _CounterName(name, n, ce, r):
 # O : Out(UInt(n)), COUT : Out(Bit)
 #
 @cache_definition
-def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
-    has_ce=False, has_reset=False):
+def DefineCounter(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False):
 
-    name = _CounterName('Counter', n, has_ce, has_reset)
+    name = _CounterName(f'Counter{n}', incr, has_ce, has_reset, cin, cout)
 
     args = []
     if cin:
@@ -47,6 +48,7 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
 
     reg(add.O)
 
+    next = False
     if next:
         wire( add.O, Counter.O )
     else:
@@ -65,10 +67,10 @@ def DefineCounter(n, cin=False, cout=True, incr=1, next=False,
 
     return Counter
 
-def Counter(n, cin=False, cout=True, incr=1, next=False,
+def Counter(n, cin=False, cout=True, incr=1, 
              has_ce=False, has_reset=False, **kwargs):
     """Construct a n-bit up counter."""
-    return DefineUpCounter(n, cin=cin, cout=cout, incr=incr, next=next,
+    return DefineUpCounter(n, cin=cin, cout=cout, incr=incr, 
                has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 DefineUpCounter = DefineCounter
@@ -79,15 +81,15 @@ UpCounter = Counter
 #
 # O : Out(UInt(n)), COUT : Out(Bit)
 #
-def DefineDownCounter(n, cin=False, cout=True, decr=1, next=False,
+def DefineDownCounter(n, cin=False, cout=True, decr=1, 
     has_ce=False, has_reset=False):
     incr = (1 << n) - (decr)
-    return DefineCounter(n, cin=cin, cout=cout, incr=incr, next=False,
+    return DefineCounter(n, cin=cin, cout=cout, incr=incr, 
                has_ce=has_ce, has_reset=has_reset)
 
-def DownCounter(n, cin=False, cout=True, decr=1, next=False,
+def DownCounter(n, cin=False, cout=True, decr=1, 
     has_ce=False, has_reset=False, **kwargs):
-    return DefineDownCounter(n, cin=cin, cout=cout, decr=decr, next=next,
+    return DefineDownCounter(n, cin=cin, cout=cout, decr=decr, 
                has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 
@@ -96,10 +98,9 @@ def DownCounter(n, cin=False, cout=True, decr=1, next=False,
 #
 # U : In(Bit), D : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
 #
-def DefineUpDownCounter(n, cout=True, next=False,
-    has_ce=False, has_reset=False):
+def DefineUpDownCounter(n, cout=True, has_ce=False, has_reset=False):
 
-    name = _CounterName('UpDownCounter', n, has_ce, has_reset)
+    name = _CounterName(f'UpDownCounter{n}', 1, has_ce, has_reset, False, cout)
 
     args = []
 
@@ -123,6 +124,7 @@ def DefineUpDownCounter(n, cout=True, next=False,
 
     reg(add)
 
+    next = False
     if next:
         wire( add.O, Counter.O )
     else:
@@ -137,10 +139,9 @@ def DefineUpDownCounter(n, cout=True, next=False,
 
     return Counter
 
-def UpDownCounter(n, cout=True, next=False,
-                    has_ce=False, has_reset=False, **kwargs):
+def UpDownCounter(n, cout=True, has_ce=False, has_reset=False, **kwargs):
     """Construct an n-bit updown counter."""
-    return DefineUpDownCounter(n, cout=cout, next=next,
-                 has_ce=has_ce, has_reset=has_reset)(**kwargs)
+    return DefineUpDownCounter(n, cout=cout, 
+              has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 

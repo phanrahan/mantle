@@ -23,7 +23,9 @@ setup(
     install_requires=[
         "six",
         "coreir",
-        "fault"
+        "fault==0.15",
+        "coreir==0.23a0",
+        "bit_vector==0.30a0"
     ],
     url='https://github.com/phanrahan/mantle',
     maintainer='Leonard Truong',

@@ -3,6 +3,7 @@ from magma.bit_vector import BitVector
 from mantle.coreir.MUX import Mux
 import coreir
 
+from .util import DeclareCoreirCircuit
 
 def gen_sim_register(N, init, has_ce, has_reset):
     def sim_register(self, value_store, state_store):
@@ -30,7 +31,7 @@ def gen_sim_register(N, init, has_ce, has_reset):
         new_val = state_store['cur_val'].as_bool_list() if N is not None else state_store['cur_val']
 
         if clock_edge:
-            new_val = value_store.get_value(getattr(self, "in"))
+            new_val = value_store.get_value(self.I)
 
         if has_reset and cur_reset:
             new_val = BitVector(init, num_bits=N) if N is not None else bool(init)
@@ -39,7 +40,7 @@ def gen_sim_register(N, init, has_ce, has_reset):
 
         state_store['prev_clock'] = cur_clock
         state_store['cur_val'] = BitVector(new_val, num_bits=N) if N is not None else new_val
-        value_store.set_value(self.out, new_val)
+        value_store.set_value(self.O, new_val)
     return sim_register
 
 
@@ -50,7 +51,7 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     config_args = {"init": coreir.type.BitVector(init, num_bits=width)}
     gen_args = {"width": width}
     T = T(width)
-    io = ["in", In(T), "clk", In(Clock), "out", Out(T)]
+    io = ["I", In(T), "clk", In(Clock), "O", Out(T)]
     methods = []
 
     def reset(self, condition):
@@ -77,7 +78,7 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     default_kwargs = {"init": coreir.type.BitVector(init, num_bits=width)}
     # default_kwargs.update(config_args)
 
-    return DeclareCircuit(
+    return DeclareCoreirCircuit(
         name,
         *io,
         stateful=True,

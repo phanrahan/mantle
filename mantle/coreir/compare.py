@@ -1,26 +1,27 @@
 from magma import *
-from magma.bit_vector import BitVector 
+from magma.bit_vector import BitVector
 from .arith import declare_binop, get_length
 from .logic import not_, XOr
 import operator
+from .util import DefineCoreirCircuit, DeclareCoreirCircuit
 
 
-def DefineCoreirEq(width):
+def DefineEQ(width):
     def simulate(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0))
-        in1 = BitVector(value_store.get_value(self.in1))
-        out = operator.eq(in0, in1).as_bool_list()[0]
-        value_store.set_value(self.out, out)
+        I0 = BitVector(value_store.get_value(self.I0))
+        I1 = BitVector(value_store.get_value(self.I1))
+        O = operator.eq(I0, I1).as_bool_list()[0]
+        value_store.set_value(self.O, O)
     if width is None:
-        circ = DefineCircuit('corebit_eq', 'in0', In(Bit), 'in1', In(Bit), 'out', Out(Bit))
-        wire(circ.out, not_(XOr(2, None)(circ.in0, circ.in1)))
+        circ = DefineCoreirCircuit('corebit_eq', 'I0', In(Bit), 'I1', In(Bit), 'O', Out(Bit))
+        wire(circ.O, not_(XOr(2, None)(circ.I0, circ.I1)))
         EndDefine()
         return circ
     else:
         T = Bits(width)
-        return DeclareCircuit("coreir_eq_{}".format(width),
-                              'in0', In(T), 'in1', In(T),
-                              'out', Out(Bit),
+        return DeclareCoreirCircuit("coreir_eq_{}".format(width),
+                              'I0', In(T), 'I1', In(T),
+                              'O', Out(Bit),
                               stateful=False,
                               simulate=simulate,
                               verilog_name="coreir_eq",
@@ -28,21 +29,7 @@ def DefineCoreirEq(width):
                               coreir_lib = "coreir",
                               coreir_genargs={"width": width})
 
-
-@cache_definition
-def DefineEQ(n):
-    if n is None:
-        T = Bit
-    else:
-        T = Bits(n)
-    IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("EQ{}".format(n), *IO)
-    coreir_eq = DefineCoreirEq(n)()
-    wire(circ.I0, coreir_eq.in0)
-    wire(circ.I1, coreir_eq.in1)
-    wire(coreir_eq.out, circ.O)
-    EndDefine()
-    return circ
+DefineCoreirEq = DefineEQ
 
 def EQ(n, **kwargs):
     return DefineEQ(n)(**kwargs)
@@ -56,11 +43,11 @@ def DefineNE(n):
         T = Bit
     else:
         T = Bits(n)
-    circ = DefineCircuit("NE{}".format(n),
+    circ = DefineCoreirCircuit("NE{}".format(n),
         "I0", In(T), "I1", In(T), "O", Out(Bit))
     eq = EQ(n)
-    out = not_(eq(circ.I0, circ.I1))
-    wire(out, circ.O)
+    O = not_(eq(circ.I0, circ.I1))
+    wire(O, circ.O)
     EndDefine()
     return circ
 
@@ -78,11 +65,11 @@ def DefineULT(n):
     else:
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("ULT{}".format(n), *IO)
+    circ = DefineCoreirCircuit("ULT{}".format(n), *IO)
     coreir_ult = DefineCoreirUlt(n, Bits)()
-    wire(circ.I0, coreir_ult.in0)
-    wire(circ.I1, coreir_ult.in1)
-    wire(coreir_ult.out, circ.O)
+    wire(circ.I0, coreir_ult.I0)
+    wire(circ.I1, coreir_ult.I1)
+    wire(coreir_ult.O, circ.O)
     EndDefine()
     return circ
 
@@ -100,11 +87,11 @@ def DefineULE(n):
     else:
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("ULE{}".format(n), *IO)
+    circ = DefineCoreirCircuit("ULE{}".format(n), *IO)
     coreir_ule = DefineCoreirUle(n, Bits)()
-    wire(circ.I0, coreir_ule.in0)
-    wire(circ.I1, coreir_ule.in1)
-    wire(coreir_ule.out, circ.O)
+    wire(circ.I0, coreir_ule.I0)
+    wire(circ.I1, coreir_ule.I1)
+    wire(coreir_ule.O, circ.O)
     EndDefine()
     return circ
 
@@ -122,11 +109,11 @@ def DefineUGT(n):
     else:
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("UGT{}".format(n), *IO)
+    circ = DefineCoreirCircuit("UGT{}".format(n), *IO)
     coreir_ugt = DefineCoreirUgt(n, Bits)()
-    wire(circ.I0, coreir_ugt.in0)
-    wire(circ.I1, coreir_ugt.in1)
-    wire(coreir_ugt.out, circ.O)
+    wire(circ.I0, coreir_ugt.I0)
+    wire(circ.I1, coreir_ugt.I1)
+    wire(coreir_ugt.O, circ.O)
     EndDefine()
     return circ
 
@@ -144,11 +131,11 @@ def DefineUGE(n):
     else:
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("UGE{}".format(n), *IO)
+    circ = DefineCoreirCircuit("UGE{}".format(n), *IO)
     coreir_uge = DefineCoreirUge(n, Bits)()
-    wire(circ.I0, coreir_uge.in0)
-    wire(circ.I1, coreir_uge.in1)
-    wire(coreir_uge.out, circ.O)
+    wire(circ.I0, coreir_uge.I0)
+    wire(circ.I1, coreir_uge.I1)
+    wire(coreir_uge.O, circ.O)
     EndDefine()
     return circ
 
@@ -166,11 +153,11 @@ def DefineSLT(n):
     else:
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("SLT{}".format(n), *IO)
+    circ = DefineCoreirCircuit("SLT{}".format(n), *IO)
     coreir_slt = DefineCoreirSlt(n, Bits)()
-    wire(circ.I0, coreir_slt.in0)
-    wire(circ.I1, coreir_slt.in1)
-    wire(coreir_slt.out, circ.O)
+    wire(circ.I0, coreir_slt.I0)
+    wire(circ.I1, coreir_slt.I1)
+    wire(coreir_slt.O, circ.O)
     EndDefine()
     return circ
 
@@ -188,11 +175,11 @@ def DefineSLE(n):
     else:
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("SLE{}".format(n), *IO)
+    circ = DefineCoreirCircuit("SLE{}".format(n), *IO)
     coreir_sle = DefineCoreirSle(n, Bits)()
-    wire(circ.I0, coreir_sle.in0)
-    wire(circ.I1, coreir_sle.in1)
-    wire(coreir_sle.out, circ.O)
+    wire(circ.I0, coreir_sle.I0)
+    wire(circ.I1, coreir_sle.I1)
+    wire(coreir_sle.O, circ.O)
     EndDefine()
     return circ
 
@@ -210,11 +197,11 @@ def DefineSGT(n):
     else:
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("SGT{}".format(n), *IO)
+    circ = DefineCoreirCircuit("SGT{}".format(n), *IO)
     coreir_sgt = DefineCoreirSgt(n, Bits)()
-    wire(circ.I0, coreir_sgt.in0)
-    wire(circ.I1, coreir_sgt.in1)
-    wire(coreir_sgt.out, circ.O)
+    wire(circ.I0, coreir_sgt.I0)
+    wire(circ.I1, coreir_sgt.I1)
+    wire(coreir_sgt.O, circ.O)
     EndDefine()
     return circ
 
@@ -232,11 +219,11 @@ def DefineSGE(n):
     else:
         T = Bits(n)
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
-    circ = DefineCircuit("SGE{}".format(n), *IO)
+    circ = DefineCoreirCircuit("SGE{}".format(n), *IO)
     coreir_sge = DefineCoreirSge(n, Bits)()
-    wire(circ.I0, coreir_sge.in0)
-    wire(circ.I1, coreir_sge.in1)
-    wire(coreir_sge.out, circ.O)
+    wire(circ.I0, coreir_sge.I0)
+    wire(circ.I1, coreir_sge.I1)
+    wire(coreir_sge.O, circ.O)
     EndDefine()
     return circ
 

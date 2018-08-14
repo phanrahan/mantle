@@ -12,6 +12,7 @@ def check(circuit_type):
         IO = ["a", In(T), "b", In(T), "c", Out(Bit)]
         @classmethod
         def definition(circuit):
+            print(repr(circuit))
             c = circuit_type(4)(circuit.a, circuit.b)
             wire(c, circuit.c)
     print(repr(TestCircuit))

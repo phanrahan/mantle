@@ -5,25 +5,27 @@ from magma.compatibility import IntegerTypes
 from magma.bit_vector import BitVector
 import mantle.primitives
 from .logic import DefineFoldOp, get_length, Invert, Not
+from .util import DeclareCoreirCircuit
+from magma.logging import warning
 
 
 def declare_binop(name, python_op, out_type=None, signed=False):
     def simulate(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0), signed=signed)
-        in1 = BitVector(value_store.get_value(self.in1), signed=signed)
-        out = python_op(in0, in1).as_bool_list()
+        I0 = BitVector(value_store.get_value(self.I0), signed=signed)
+        I1 = BitVector(value_store.get_value(self.I1), signed=signed)
+        O = python_op(I0, I1).as_bool_list()
         if out_type is Bit:
-            assert len(out) == 1, "out_type is Bit but the operation returned a list of length {}".format(len(out))
-            out = out[0]
-        value_store.set_value(self.out, out)
+            assert len(O) == 1, "out_type is Bit but the operation returned a list of length {}".format(len(O))
+            O = O[0]
+        value_store.set_value(self.O, O)
 
     @cache_definition
     def Declare(width, type_=Bits):
         if width is None:
             T = Bit
             return DeclareCircuit("coreir_bit_{}{}".format(name, width),
-                                  'in0', In(T), 'in1', In(T),
-                                  'out', Out(out_type if out_type else T),
+                                  'I0', In(T), 'I1', In(T),
+                                  'O', Out(out_type if out_type else T),
                                   stateful=False,
                                   simulate=simulate,
                                   verilog_name="coreir_" + name,
@@ -32,8 +34,8 @@ def declare_binop(name, python_op, out_type=None, signed=False):
         else:
             T = type_(width)
             return DeclareCircuit("coreir_{}{}".format(name, width),
-                                  'in0', In(T), 'in1', In(T),
-                                  'out', Out(out_type if out_type else T),
+                                  'I0', In(T), 'I1', In(T),
+                                  'O', Out(out_type if out_type else T),
                                   stateful=False,
                                   simulate=simulate,
                                   verilog_name="coreir_" + name,
@@ -49,20 +51,30 @@ DefineCoreirMul = declare_binop("mul", operator.mul)
 def DefineCoreirAdd(width):
     coreir_genargs = {"width": width} # , "has_cout": has_cout, "has_cin": has_cin}
     def simulate_coreir_add(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0), width)
-        in1 = BitVector(value_store.get_value(self.in1), width)
-        value_store.set_value(self.out, in0 + in1)
+        I0 = BitVector(value_store.get_value(self.I0), width)
+        I1 = BitVector(value_store.get_value(self.I1), width)
+        value_store.set_value(self.out, I0 + I1)
     T = Bits(width)
-    coreir_io = ['in0', In(T), 'in1', In(T), 'out', Out(T)]
-    return DeclareCircuit(f"coreir_add{width}", *coreir_io,
+    coreir_io = ['I0', In(T),
+                 'I1', In(T),
+                 'O', Out(T)]
+    return DeclareCoreirCircuit(f"coreir_add{width}", *coreir_io,
             coreir_name="add", coreir_lib="coreir",
             coreir_genargs=coreir_genargs,
             simulate=simulate_coreir_add)
 
 @circuit_generator
-def DefineAdd(N, cout=False, cin=False):
+def DefineAdd(N=None, cout=False, cin=False, width=None):
+    if N is None:
+        if width is None:
+            raise ValueError("Either N or width must be not None")
+        N = width
+    elif width is not None:
+        warning("Both N and width are not None, using N")
     has_cout = cout
     has_cin = cin
+    if not has_cout and not has_cin:
+        return DefineCoreirAdd(N)
     class Add(mantle.primitives.DeclareAdd(N, cin=has_cin, cout=has_cout)):
         @classmethod
         def definition(add):
@@ -78,12 +90,12 @@ def DefineAdd(N, cout=False, cin=False):
                 I1 = concat(add.I1, bits(0, n=1))
             if has_cin:
                 coreir_add_cin = CoreirAdd()
-                wire(coreir_add_cin.in0, concat(bits(add.CIN), bits(0,
+                wire(coreir_add_cin.I0, concat(bits(add.CIN), bits(0,
                     n=width-1)))
-                wire(coreir_add_cin.in1, I0)
+                wire(coreir_add_cin.I1, I0)
                 I0 = coreir_add_cin.out
-            wire(I0, coreir_add.in0)
-            wire(I1, coreir_add.in1)
+            wire(I0, coreir_add.I0)
+            wire(I1, coreir_add.I1)
             O = coreir_add.out
             if has_cout:
                 COUT = O[-1]

@@ -7,9 +7,9 @@ err=0
 trap 'err=1' ERR
 
 py.test tests/test_verilog
-#py.test --target coreir tests/test_coreir
+py.test --target coreir tests/test_coreir
 
-py.test --target ice40 tests/test_ice40 
+py.test --target ice40 tests/test_ice40
 #py.test --target ice40 tests/test_ice40 tests/test_mantle40
 py.test --target spartan3 tests/test_spartan3
 py.test --target spartan6 tests/test_spartan6

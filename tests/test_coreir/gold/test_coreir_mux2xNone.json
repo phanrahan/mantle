@@ -1,23 +1,25 @@
-{"top":"global._Mux2",
+{"top":"global.Mux2xNone",
 "namespaces":{
   "global":{
     "modules":{
-      "_Mux2":{
+      "Mux2xNone":{
         "type":["Record",[
-          ["I",["Array",2,"BitIn"]],
+          ["I0","BitIn"],
+          ["I1","BitIn"],
           ["S","BitIn"],
           ["O","Bit"]
         ]],
         "instances":{
           "inst0":{
-            "modref":"corebit.mux"
+            "genref":"commonlib.muxn",
+            "genargs":{"N":["Int",2], "width":["Int",1]}
           }
         },
         "connections":[
-          ["self.I.0","inst0.in0"],
-          ["self.I.1","inst0.in1"],
-          ["self.O","inst0.out"],
-          ["self.S","inst0.sel"]
+          ["self.I0","inst0.in.data.0.0"],
+          ["self.I1","inst0.in.data.1.0"],
+          ["self.S","inst0.in.sel.0"],
+          ["self.O","inst0.out.0"]
         ]
       }
     }

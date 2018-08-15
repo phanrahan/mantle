@@ -11,46 +11,15 @@
         ]],
         "instances":{
           "inst0":{
-            "modref":"global._Mux2"
-          },
-          "inst1":{
-            "modref":"global._Mux2"
-          },
-          "inst2":{
-            "modref":"global._Mux2"
+            "genref":"commonlib.muxn",
+            "genargs":{"N":["Int",2], "width":["Int",3]}
           }
         },
         "connections":[
-          ["self.I0.0","inst0.I.0"],
-          ["self.I1.0","inst0.I.1"],
-          ["self.O.0","inst0.O"],
-          ["self.S","inst0.S"],
-          ["self.I0.1","inst1.I.0"],
-          ["self.I1.1","inst1.I.1"],
-          ["self.O.1","inst1.O"],
-          ["self.S","inst1.S"],
-          ["self.I0.2","inst2.I.0"],
-          ["self.I1.2","inst2.I.1"],
-          ["self.O.2","inst2.O"],
-          ["self.S","inst2.S"]
-        ]
-      },
-      "_Mux2":{
-        "type":["Record",[
-          ["I",["Array",2,"BitIn"]],
-          ["S","BitIn"],
-          ["O","Bit"]
-        ]],
-        "instances":{
-          "inst0":{
-            "modref":"corebit.mux"
-          }
-        },
-        "connections":[
-          ["self.I.0","inst0.in0"],
-          ["self.I.1","inst0.in1"],
-          ["self.O","inst0.out"],
-          ["self.S","inst0.sel"]
+          ["self.I0","inst0.in.data.0"],
+          ["self.I1","inst0.in.data.1"],
+          ["self.S","inst0.in.sel.0"],
+          ["self.O","inst0.out"]
         ]
       }
     }

@@ -168,4 +168,4 @@ def test_dyanmic_mux_getitem():
     tester.poke(TestDynamicMuxGetItem.S, 1)
     tester.eval()
     tester.expect(TestDynamicMuxGetItem.O, 1)
-    tester.compile_and_run(target='python')
+    tester.compile_and_run(target='coreir')

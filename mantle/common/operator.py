@@ -257,7 +257,7 @@ def dynamic_mux_select(self, S):
             length = None
         else:
             length = len(self.T)
-        return Mux(len(self), length)(m.bits(self.ts), S)
+        return Mux(len(self), length)(self.ts, S)
     return orig_get_item(self, S)
 
 

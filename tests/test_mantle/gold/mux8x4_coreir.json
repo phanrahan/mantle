@@ -1,0 +1,40 @@
+{"top":"global.Mux8x4",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Mux8x4":{
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["I2",["Array",4,"BitIn"]],
+          ["I3",["Array",4,"BitIn"]],
+          ["I4",["Array",4,"BitIn"]],
+          ["I5",["Array",4,"BitIn"]],
+          ["I6",["Array",4,"BitIn"]],
+          ["I7",["Array",4,"BitIn"]],
+          ["S",["Array",3,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "genref":"commonlib.muxn",
+            "genargs":{"N":["Int",8], "width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["self.I0","inst0.in.data.0"],
+          ["self.I1","inst0.in.data.1"],
+          ["self.I2","inst0.in.data.2"],
+          ["self.I3","inst0.in.data.3"],
+          ["self.I4","inst0.in.data.4"],
+          ["self.I5","inst0.in.data.5"],
+          ["self.I6","inst0.in.data.6"],
+          ["self.I7","inst0.in.data.7"],
+          ["self.S","inst0.in.sel"],
+          ["self.O","inst0.out"]
+        ]
+      }
+    }
+  }
+}
+}

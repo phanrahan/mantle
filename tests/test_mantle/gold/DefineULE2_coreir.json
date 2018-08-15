@@ -1,0 +1,26 @@
+{"top":"global.ULE2",
+"namespaces":{
+  "global":{
+    "modules":{
+      "ULE2":{
+        "type":["Record",[
+          ["I0",["Array",2,"BitIn"]],
+          ["I1",["Array",2,"BitIn"]],
+          ["O","Bit"]
+        ]],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.ule",
+            "genargs":{"width":["Int",2]}
+          }
+        },
+        "connections":[
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["self.O","inst0.out"]
+        ]
+      }
+    }
+  }
+}
+}

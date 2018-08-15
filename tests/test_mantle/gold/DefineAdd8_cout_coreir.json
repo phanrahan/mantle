@@ -1,0 +1,55 @@
+{"top":"global.Add8_cout",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Add8_cout":{
+        "type":["Record",[
+          ["I0",["Array",8,"BitIn"]],
+          ["I1",["Array",8,"BitIn"]],
+          ["O",["Array",8,"Bit"]],
+          ["COUT","Bit"]
+        ]],
+        "instances":{
+          "bit_const_0_None":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "inst0":{
+            "genref":"coreir.add",
+            "genargs":{"width":["Int",9]}
+          }
+        },
+        "connections":[
+          ["inst0.in0.8","bit_const_0_None.out"],
+          ["inst0.in1.8","bit_const_0_None.out"],
+          ["self.I0.0","inst0.in0.0"],
+          ["self.I0.1","inst0.in0.1"],
+          ["self.I0.2","inst0.in0.2"],
+          ["self.I0.3","inst0.in0.3"],
+          ["self.I0.4","inst0.in0.4"],
+          ["self.I0.5","inst0.in0.5"],
+          ["self.I0.6","inst0.in0.6"],
+          ["self.I0.7","inst0.in0.7"],
+          ["self.I1.0","inst0.in1.0"],
+          ["self.I1.1","inst0.in1.1"],
+          ["self.I1.2","inst0.in1.2"],
+          ["self.I1.3","inst0.in1.3"],
+          ["self.I1.4","inst0.in1.4"],
+          ["self.I1.5","inst0.in1.5"],
+          ["self.I1.6","inst0.in1.6"],
+          ["self.I1.7","inst0.in1.7"],
+          ["self.O.0","inst0.out.0"],
+          ["self.O.1","inst0.out.1"],
+          ["self.O.2","inst0.out.2"],
+          ["self.O.3","inst0.out.3"],
+          ["self.O.4","inst0.out.4"],
+          ["self.O.5","inst0.out.5"],
+          ["self.O.6","inst0.out.6"],
+          ["self.O.7","inst0.out.7"],
+          ["self.COUT","inst0.out.8"]
+        ]
+      }
+    }
+  }
+}
+}

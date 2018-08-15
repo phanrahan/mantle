@@ -8,13 +8,17 @@ def test_ram():
 
     ram = mantle.RAM(4, 1)
 
-    waddr = mantle.Counter(4)
-    wdata = mantle.Counter(1)
+    waddr = mantle.Counter(4, cout=False)
+    wdata = mantle.Counter(1, cout=False)
     we = 1
-    raddr = mantle.FF()(mantle.Counter(4))
+    raddr = mantle.Counter(4, cout=False)
 
     ram(raddr, waddr, wdata, we, CLK=main.CLKIN)
 
-    m.wire(ram.RDATA, main.rdata)
+    m.wire(ram.RDATA[0], main.rdata)
     m.EndDefine()
-    m.compile("build/test_common_ram", main)
+    if m.mantle_target == "coreir":
+        output = "coreir"
+    else:
+        output = "verilog"
+    m.compile("build/test_common_ram", main, output)

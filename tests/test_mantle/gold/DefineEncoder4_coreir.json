@@ -1,0 +1,47 @@
+{"top":"global.Encoder4",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Encoder4":{
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["O",["Array",2,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "modref":"global.or_wrapped"
+          },
+          "inst1":{
+            "modref":"global.or_wrapped"
+          }
+        },
+        "connections":[
+          ["self.I.1","inst0.I0"],
+          ["self.I.3","inst0.I1"],
+          ["self.O.0","inst0.O"],
+          ["self.I.2","inst1.I0"],
+          ["self.I.3","inst1.I1"],
+          ["self.O.1","inst1.O"]
+        ]
+      },
+      "or_wrapped":{
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["O","Bit"]
+        ]],
+        "instances":{
+          "inst0":{
+            "modref":"corebit.or"
+          }
+        },
+        "connections":[
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["self.O","inst0.out"]
+        ]
+      }
+    }
+  }
+}
+}

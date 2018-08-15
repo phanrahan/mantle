@@ -1,0 +1,26 @@
+{"top":"global.and2_wrapped",
+"namespaces":{
+  "global":{
+    "modules":{
+      "and2_wrapped":{
+        "type":["Record",[
+          ["I0",["Array",2,"BitIn"]],
+          ["I1",["Array",2,"BitIn"]],
+          ["O",["Array",2,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.and",
+            "genargs":{"width":["Int",2]}
+          }
+        },
+        "connections":[
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["self.O","inst0.out"]
+        ]
+      }
+    }
+  }
+}
+}

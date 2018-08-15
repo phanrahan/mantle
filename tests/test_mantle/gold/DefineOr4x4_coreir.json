@@ -1,0 +1,57 @@
+{"top":"global.Or4x4",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Or4x4":{
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["I2",["Array",4,"BitIn"]],
+          ["I3",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.orr",
+            "genargs":{"width":["Int",4]}
+          },
+          "inst1":{
+            "genref":"coreir.orr",
+            "genargs":{"width":["Int",4]}
+          },
+          "inst2":{
+            "genref":"coreir.orr",
+            "genargs":{"width":["Int",4]}
+          },
+          "inst3":{
+            "genref":"coreir.orr",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["self.I0.0","inst0.in.0"],
+          ["self.I1.0","inst0.in.1"],
+          ["self.I2.0","inst0.in.2"],
+          ["self.I3.0","inst0.in.3"],
+          ["self.O.0","inst0.out"],
+          ["self.I0.1","inst1.in.0"],
+          ["self.I1.1","inst1.in.1"],
+          ["self.I2.1","inst1.in.2"],
+          ["self.I3.1","inst1.in.3"],
+          ["self.O.1","inst1.out"],
+          ["self.I0.2","inst2.in.0"],
+          ["self.I1.2","inst2.in.1"],
+          ["self.I2.2","inst2.in.2"],
+          ["self.I3.2","inst2.in.3"],
+          ["self.O.2","inst2.out"],
+          ["self.I0.3","inst3.in.0"],
+          ["self.I1.3","inst3.in.1"],
+          ["self.I2.3","inst3.in.2"],
+          ["self.I3.3","inst3.in.3"],
+          ["self.O.3","inst3.out"]
+        ]
+      }
+    }
+  }
+}
+}

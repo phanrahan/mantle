@@ -18,8 +18,14 @@ def com(Test, name):
     name = f'{name}_{magma.mantle_target}'
     build = 'build/' + name
     gold = 'gold/' + name
-    compile(build, Test)
-    assert check_files_equal(__file__, build+'.v', gold+'.v')
+    if magma.mantle_target == "coreir":
+        output = "coreir"
+        suffix = ".json"
+    else:
+        output = "verilog"
+        suffix = ".v"
+    compile(build, Test, output=output)
+    assert check_files_equal(__file__, build+suffix, gold+suffix)
 
 def sim(Test, TestFun):
     if TestFun is None:
@@ -114,6 +120,8 @@ def test_mux(height, width):
     com( Test, f'mux{height}x{width}' )
 
 def test_not():
+    if magma.mantle_target == "coreir":
+        pytest.skip("Not circuit is wrapper around coreir declaration, cannot compile")
     Test = mantle.Not
     #sim( Test, operator.invert )
     com( Test, 'not' )
@@ -176,6 +184,8 @@ def test_arith(op, cin, cout, width):
 
 @pytest.mark.parametrize("width", WIDTHS)
 def test_negate(width):
+    if magma.mantle_target == "coreir":
+        pytest.skip("Negate circuits are wrappers around coreir declarations, cannot compile")
     Define = mantle.Negate
     Test = Define(width)
     #sim( Test, operator.neg)
@@ -209,6 +219,8 @@ def test_compare(op, width):
 ])
 @pytest.mark.parametrize("width", WIDTHS)
 def test_shift(op, width):
+    if magma.mantle_target == "coreir":
+        pytest.skip("Shift operators are wrappers around coreir declarations, cannot compile")
     Define = getattr(mantle, op.name)
     Test = Define(width)
     #sim( Test, op.func )

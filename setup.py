@@ -23,7 +23,7 @@ setup(
     install_requires=[
         "six",
         "coreir",
-        "fault==0.17",
+        "fault==0.18",
         "coreir==0.23a0",
         "bit_vector==0.30a0"
     ],

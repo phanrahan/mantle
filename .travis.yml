@@ -5,7 +5,7 @@ python:
 sudo: true  # Needed for coreir-dev branch building coreir from source (installing g++-4.9 through apt)
 
 before_install:
-    - git clone -b rename-ports https://github.com/phanrahan/magma.git
+    - git clone https://github.com/phanrahan/magma.git
     - if [[ $TRAVIS_BRANCH == 'coreir-dev' ]]; then git -C magma checkout coreir-dev; fi
     - pip install -e magma
     - source magma/.travis/install_coreir.sh

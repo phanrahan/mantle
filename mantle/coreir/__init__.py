@@ -71,3 +71,5 @@ def DefineCorebitTerm():
 
 def CorebitTerm():
     return DefineCorebitTerm()()
+
+from .register import DefineRegister

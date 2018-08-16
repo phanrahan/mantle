@@ -1,4 +1,5 @@
 from magma import *
+import magma as m
 
 from magma.simulator import PythonSimulator
 from magma.scope import Scope
@@ -32,3 +33,7 @@ def test_shift_register():
         actual.append(seq2int(simulator.get_value(ShiftRegister.O)))
 
     assert actual == expected
+
+    m.compile("build/ShiftRegister", ShiftRegister, output="coreir")
+    assert m.testing.check_files_equal(__file__,
+            "build/ShiftRegister.json", "gold/ShiftRegister.json")

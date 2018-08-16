@@ -1,8 +1,8 @@
-{"top":"global.SLE2",
+{"top":"global.coreir_sle2_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "SLE2":{
+      "coreir_sle2_wrapped":{
         "type":["Record",[
           ["I0",["Array",2,"BitIn"]],
           ["I1",["Array",2,"BitIn"]],

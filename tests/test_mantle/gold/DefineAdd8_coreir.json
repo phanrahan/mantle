@@ -1,8 +1,8 @@
-{"top":"global.Add8",
+{"top":"global.coreir_add8_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "Add8":{
+      "coreir_add8_wrapped":{
         "type":["Record",[
           ["I0",["Array",8,"BitIn"]],
           ["I1",["Array",8,"BitIn"]],

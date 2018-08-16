@@ -1,8 +1,8 @@
-{"top":"global.UGE4",
+{"top":"global.coreir_uge4_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "UGE4":{
+      "coreir_uge4_wrapped":{
         "type":["Record",[
           ["I0",["Array",4,"BitIn"]],
           ["I1",["Array",4,"BitIn"]],

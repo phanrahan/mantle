@@ -1,3 +1,4 @@
+from bit_vector import BitVector
 from .logic import (
     And      , DefineAnd   , ReduceAnd ,
     NAnd     , DefineNAnd  , ReduceNAnd,
@@ -45,7 +46,8 @@ def DefineCoreirConst(width, value):
         value_store.set_value(self.O, value)
     return DeclareCoreirCircuit(f"coreir_const{width}{value}", "O", Out(Bits(width)),
             coreir_name="const", coreir_lib="coreir",
-            coreir_genargs={"width": width, "value": value},
+            coreir_genargs={"width": width},
+            coreir_configargs={"value": BitVector(value, width)},
             simulate=simulate_coreir_const)
 
 @cache_definition
@@ -56,7 +58,7 @@ def DefineCorebitConst(value):
         value_store.set_value(self.O, value)
     return DeclareCoreirCircuit(f"corebit_const{value}", "O", Out(Bit),
             coreir_name="const", coreir_lib="corebit",
-            coreir_genargs={"value": value},
+            default_kwargs={"value": bool(value)},
             simulate=simulate_corebit_const)
 
 @cache_definition
@@ -65,7 +67,6 @@ def DefineCorebitTerm():
         pass
     return DeclareCoreirCircuit(f"corebit_term", "I", In(Bit),
             coreir_name="term", coreir_lib="corebit",
-            coreir_genargs={},
             simulate=simulate_corebit_term)
 
 def CorebitTerm():

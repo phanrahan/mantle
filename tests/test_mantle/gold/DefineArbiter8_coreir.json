@@ -2,24 +2,6 @@
 "namespaces":{
   "global":{
     "modules":{
-      "Add8":{
-        "type":["Record",[
-          ["I0",["Array",8,"BitIn"]],
-          ["I1",["Array",8,"BitIn"]],
-          ["O",["Array",8,"Bit"]]
-        ]],
-        "instances":{
-          "inst0":{
-            "genref":"coreir.add",
-            "genargs":{"width":["Int",8]}
-          }
-        },
-        "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"]
-        ]
-      },
       "Arbiter8":{
         "type":["Record",[
           ["I",["Array",8,"BitIn"]],
@@ -32,7 +14,8 @@
             "modargs":{"value":[["BitVector",8],"8'hff"]}
           },
           "inst0":{
-            "modref":"global.Add8"
+            "genref":"coreir.add",
+            "genargs":{"width":["Int",8]}
           },
           "inst1":{
             "modref":"global.LUT2_2"
@@ -60,16 +43,16 @@
           }
         },
         "connections":[
-          ["inst0.I1","const_255_8.out"],
-          ["self.I","inst0.I0"],
-          ["inst1.I1","inst0.O.0"],
-          ["inst2.I1","inst0.O.1"],
-          ["inst3.I1","inst0.O.2"],
-          ["inst4.I1","inst0.O.3"],
-          ["inst5.I1","inst0.O.4"],
-          ["inst6.I1","inst0.O.5"],
-          ["inst7.I1","inst0.O.6"],
-          ["inst8.I1","inst0.O.7"],
+          ["inst0.in1","const_255_8.out"],
+          ["self.I","inst0.in0"],
+          ["inst1.I1","inst0.out.0"],
+          ["inst2.I1","inst0.out.1"],
+          ["inst3.I1","inst0.out.2"],
+          ["inst4.I1","inst0.out.3"],
+          ["inst5.I1","inst0.out.4"],
+          ["inst6.I1","inst0.out.5"],
+          ["inst7.I1","inst0.out.6"],
+          ["inst8.I1","inst0.out.7"],
           ["self.I.0","inst1.I0"],
           ["self.O.0","inst1.O"],
           ["self.I.1","inst2.I0"],

@@ -23,7 +23,7 @@ def declare_binop(name, python_op, out_type=None, signed=False):
     def Declare(width, type_=Bits):
         if width is None:
             T = Bit
-            return DeclareCircuit("coreir_bit_{}{}".format(name, width),
+            return DeclareCoreirCircuit("coreir_bit_{}{}".format(name, width),
                                   'I0', In(T), 'I1', In(T),
                                   'O', Out(out_type if out_type else T),
                                   stateful=False,
@@ -33,7 +33,7 @@ def declare_binop(name, python_op, out_type=None, signed=False):
                                   coreir_lib = "corebit")
         else:
             T = type_(width)
-            return DeclareCircuit("coreir_{}{}".format(name, width),
+            return DeclareCoreirCircuit("coreir_{}{}".format(name, width),
                                   'I0', In(T), 'I1', In(T),
                                   'O', Out(out_type if out_type else T),
                                   stateful=False,
@@ -53,7 +53,7 @@ def DefineCoreirAdd(width):
     def simulate_coreir_add(self, value_store, state_store):
         I0 = BitVector(value_store.get_value(self.I0), width)
         I1 = BitVector(value_store.get_value(self.I1), width)
-        value_store.set_value(self.out, I0 + I1)
+        value_store.set_value(self.O, I0 + I1)
     T = Bits(width)
     coreir_io = ['I0', In(T),
                  'I1', In(T),
@@ -93,10 +93,10 @@ def DefineAdd(N=None, cout=False, cin=False, width=None):
                 wire(coreir_add_cin.I0, concat(bits(add.CIN), bits(0,
                     n=width-1)))
                 wire(coreir_add_cin.I1, I0)
-                I0 = coreir_add_cin.out
+                I0 = coreir_add_cin.O
             wire(I0, coreir_add.I0)
             wire(I1, coreir_add.I1)
-            O = coreir_add.out
+            O = coreir_add.O
             if has_cout:
                 COUT = O[-1]
                 O = O[:-1]

@@ -1,8 +1,8 @@
-{"top":"global.ULE4",
+{"top":"global.coreir_ule4_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "ULE4":{
+      "coreir_ule4_wrapped":{
         "type":["Record",[
           ["I0",["Array",4,"BitIn"]],
           ["I1",["Array",4,"BitIn"]],

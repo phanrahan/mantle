@@ -1,0 +1,29 @@
+{"top":"global.TestsCircuit_invert_4_Bit_BitType",
+"namespaces":{
+  "global":{
+    "modules":{
+      "TestsCircuit_invert_4_Bit_BitType":{
+        "type":["Record",[
+          ["I","BitIn"],
+          ["O0","Bit"],
+          ["O1","Bit"]
+        ]],
+        "instances":{
+          "inst0":{
+            "modref":"corebit.not"
+          },
+          "inst1":{
+            "modref":"corebit.not"
+          }
+        },
+        "connections":[
+          ["self.I","inst0.in"],
+          ["self.O0","inst0.out"],
+          ["self.I","inst1.in"],
+          ["self.O1","inst1.out"]
+        ]
+      }
+    }
+  }
+}
+}

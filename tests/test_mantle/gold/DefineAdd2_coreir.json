@@ -1,8 +1,8 @@
-{"top":"global.Add2",
+{"top":"global.coreir_add2_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "Add2":{
+      "coreir_add2_wrapped":{
         "type":["Record",[
           ["I0",["Array",2,"BitIn"]],
           ["I1",["Array",2,"BitIn"]],

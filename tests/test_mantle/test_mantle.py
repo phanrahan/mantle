@@ -5,6 +5,7 @@ import magma
 import mantle
 from fault.test_vectors import generate_function_test_vectors, \
     generate_simulator_test_vectors
+from ..test_coreir.util import wrap
 
 HEIGHTS = [2, 4, 8]
 WIDTHS = [2, 4, 8]
@@ -24,6 +25,8 @@ def com(Test, name):
     else:
         output = "verilog"
         suffix = ".v"
+    if not Test.is_definition:
+        Test = wrap(Test)
     compile(build, Test, output=output)
     assert check_files_equal(__file__, build+suffix, gold+suffix)
 

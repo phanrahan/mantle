@@ -1,19 +1,19 @@
-{"top":"global.corebit_const1",
+{"top":"global.corebit_const1_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "corebit_const1":{
+      "corebit_const1_wrapped":{
         "type":["Record",[
-          ["out","Bit"]
+          ["O","Bit"]
         ]],
         "instances":{
-          "bit_const_1_None":{
+          "inst0":{
             "modref":"corebit.const",
             "modargs":{"value":["Bool",true]}
           }
         },
         "connections":[
-          ["self.out","bit_const_1_None.out"]
+          ["self.O","inst0.out"]
         ]
       }
     }

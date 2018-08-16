@@ -1,8 +1,8 @@
-{"top":"global.EQ4",
+{"top":"global.coreir_eq_4_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "EQ4":{
+      "coreir_eq_4_wrapped":{
         "type":["Record",[
           ["I0",["Array",4,"BitIn"]],
           ["I1",["Array",4,"BitIn"]],

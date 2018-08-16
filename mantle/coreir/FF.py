@@ -121,9 +121,9 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False):
     if has_reset:
         I = Mux()(circ.I, bit(init), circ.RESET)
     if has_ce:
-        I = Mux()(getattr(reg, "out")[0], I, circ.CE)
-    wire(I, getattr(reg, "in")[0])
-    wire(reg.out[0], circ.O)
+        I = Mux()(reg.O[0], I, circ.CE)
+    wire(I, reg.I[0])
+    wire(reg.O[0], circ.O)
     EndDefine()
     return circ
 

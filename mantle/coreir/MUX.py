@@ -21,18 +21,18 @@ def DefineCoreirMux(width=None):
         O = I1 if S.as_int() else in0
         value_store.set_value(self.O, O)
     if width is None:
-        return DeclareCircuit("coreir_mux{}".format(N),
+        return DeclareCoreirCircuit("coreir_mux{}".format(N),
             *["I0", In(Bit), "I1", In(Bit), "S", In(Bit),
-             "out", Out(Bit)],
+             "O", Out(Bit)],
             verilog_name="coreir_bitmux",
             coreir_name="mux",
             coreir_lib="corebit",
             simulate=simulate
         )
     else:
-        return DeclareCircuit("coreir_mux{}".format(N),
+        return DeclareCoreirCircuit("coreir_mux{}".format(N),
             *["I0", In(Bits(N)), "I1", In(Bits(N)), "S", In(Bit),
-             "out", Out(Bits(N))],
+             "O", Out(Bits(N))],
             verilog_name="coreir_mux",
             coreir_name="mux",
             coreir_lib="coreir",
@@ -49,7 +49,7 @@ def _declare_muxn(height, width):
         sel = BitVector(value_store.get_value(self.I.sel))
         out = BitVector(value_store.get_value(self.I.data[sel.as_int]))
         value_store.set_value(self.O, out)
-    return DeclareCircuit(f"coreir_commonlib_mux{height}x{width}",
+    return DeclareCoreirCircuit(f"coreir_commonlib_mux{height}x{width}",
         *["I", In(Tuple(data=Array(height, Bits(width)),
                          sel=Bits(m.bitutils.clog2(height)))),
           "O", Out(Bits(width))],

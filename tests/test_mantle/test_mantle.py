@@ -25,7 +25,7 @@ def com(Test, name):
     else:
         output = "verilog"
         suffix = ".v"
-    if not Test.is_definition:
+    if magma.circuit.isprimitive(Test):
         Test = wrap(Test)
     compile(build, Test, output=output)
     assert check_files_equal(__file__, build+suffix, gold+suffix)

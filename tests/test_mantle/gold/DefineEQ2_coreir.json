@@ -1,8 +1,8 @@
-{"top":"global.EQ2",
+{"top":"global.coreir_eq_2_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "EQ2":{
+      "coreir_eq_2_wrapped":{
         "type":["Record",[
           ["I0",["Array",2,"BitIn"]],
           ["I1",["Array",2,"BitIn"]],

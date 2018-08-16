@@ -1,8 +1,8 @@
-{"top":"global.UGT8",
+{"top":"global.coreir_ugt8_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "UGT8":{
+      "coreir_ugt8_wrapped":{
         "type":["Record",[
           ["I0",["Array",8,"BitIn"]],
           ["I1",["Array",8,"BitIn"]],

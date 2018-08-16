@@ -2,24 +2,6 @@
 "namespaces":{
   "global":{
     "modules":{
-      "UGE4":{
-        "type":["Record",[
-          ["I0",["Array",4,"BitIn"]],
-          ["I1",["Array",4,"BitIn"]],
-          ["O","Bit"]
-        ]],
-        "instances":{
-          "inst0":{
-            "genref":"coreir.uge",
-            "genargs":{"width":["Int",4]}
-          }
-        },
-        "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"]
-        ]
-      },
       "test_UGE_two":{
         "type":["Record",[
           ["a",["Array",4,"BitIn"]],
@@ -28,13 +10,14 @@
         ]],
         "instances":{
           "inst0":{
-            "modref":"global.UGE4"
+            "genref":"coreir.uge",
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.a","inst0.I0"],
-          ["self.b","inst0.I1"],
-          ["self.c","inst0.O"]
+          ["self.a","inst0.in0"],
+          ["self.b","inst0.in1"],
+          ["self.c","inst0.out"]
         ]
       }
     }

@@ -2,7 +2,7 @@ import pytest
 coreir = pytest.importorskip("coreir")
 from magma import *
 from magma.testing import check_files_equal
-from mantle.coreir import DefineCoreirMem
+from mantle.coreir.memory import DefineCoreirMem
 
 
 def test_coreir_rom():

@@ -1,8 +1,8 @@
-{"top":"global.SLT4",
+{"top":"global.coreir_slt4_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "SLT4":{
+      "coreir_slt4_wrapped":{
         "type":["Record",[
           ["I0",["Array",4,"BitIn"]],
           ["I1",["Array",4,"BitIn"]],

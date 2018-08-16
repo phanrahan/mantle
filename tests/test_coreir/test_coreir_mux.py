@@ -51,7 +51,7 @@ def test_two_coreir_muxes():
     testcircuit = DefineCircuit('test_partition', *args)
     coreir_mux = DefineCoreirMux(None)()
     coreir_mux(testcircuit.I[0], testcircuit.I[1], testcircuit.S)
-    wire(coreir_mux.out, testcircuit.O[0])
+    wire(coreir_mux.O, testcircuit.O[0])
     cmux = CommonlibMuxN(cirb, 2, 1)
     wire(cmux.I.data[0][0], testcircuit.I[0])
     wire(cmux.I.data[1][0], testcircuit.I[1])

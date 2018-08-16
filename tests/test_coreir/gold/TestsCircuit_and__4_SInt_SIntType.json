@@ -1,0 +1,34 @@
+{"top":"global.TestsCircuit_and__4_SInt_SIntType",
+"namespaces":{
+  "global":{
+    "modules":{
+      "TestsCircuit_and__4_SInt_SIntType":{
+        "type":["Record",[
+          ["I0",["Array",4,"BitIn"]],
+          ["I1",["Array",4,"BitIn"]],
+          ["O0",["Array",4,"Bit"]],
+          ["O1",["Array",4,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.and",
+            "genargs":{"width":["Int",4]}
+          },
+          "inst1":{
+            "genref":"coreir.and",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["self.O0","inst0.out"],
+          ["self.I0","inst1.in0"],
+          ["self.I1","inst1.in1"],
+          ["self.O1","inst1.out"]
+        ]
+      }
+    }
+  }
+}
+}

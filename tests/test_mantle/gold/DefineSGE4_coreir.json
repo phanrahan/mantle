@@ -1,8 +1,8 @@
-{"top":"global.SGE4",
+{"top":"global.coreir_sge4_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "SGE4":{
+      "coreir_sge4_wrapped":{
         "type":["Record",[
           ["I0",["Array",4,"BitIn"]],
           ["I1",["Array",4,"BitIn"]],

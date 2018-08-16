@@ -1,8 +1,8 @@
-{"top":"global.ULT2",
+{"top":"global.coreir_ult2_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "ULT2":{
+      "coreir_ult2_wrapped":{
         "type":["Record",[
           ["I0",["Array",2,"BitIn"]],
           ["I1",["Array",2,"BitIn"]],

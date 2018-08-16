@@ -17,8 +17,3 @@ def test_pop_count():
         sim.set_value(PopCount8.I, BitVector(I, 8), scope)
         sim.evaluate()
         assert BitVector(sim.get_value(PopCount8.O, scope), 8).as_int() == expected_O
-
-
-    m.compile('build/popcount8', PopCount8, output="verilog")
-    assert check_files_equal(__file__,
-            "build/popcount8.v", "gold/popcount8.v")

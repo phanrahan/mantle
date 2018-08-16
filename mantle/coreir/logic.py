@@ -3,6 +3,7 @@ from magma.bit_vector import BitVector
 from magma.compatibility import IntegerTypes
 import operator
 from functools import reduce
+from .util import DeclareCoreirCircuit
 
 
 def get_length(value):
@@ -35,33 +36,25 @@ def DefineFoldOp(DefineOp, name, height, width):
 
 def declare_bit_binop(name, python_op):
     def simulate(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0))
-        in1 = BitVector(value_store.get_value(self.in1))
-        out = python_op(in0, in1).as_bool_list()[0]
-        value_store.set_value(self.out, out)
+        I0 = BitVector(value_store.get_value(self.I0))
+        I1 = BitVector(value_store.get_value(self.I1))
+        O = python_op(I0, I1).as_bool_list()[0]
+        value_store.set_value(self.O, O)
 
-    coreir_circ = DeclareCircuit("{}".format(name),
-                          'in0', In(Bit), 'in1', In(Bit), 'out', Out(Bit),
-                          simulate=simulate,
-                          verilog_name = "coreir_" + name,
-                          firrtl_op  = name,
-                          coreir_lib = "corebit")
+    return DeclareCoreirCircuit("{}".format(name),
+                                'I0', In(Bit), 'I1', In(Bit), 'O', Out(Bit),
+                                simulate=simulate,
+                                verilog_name = "coreir_" + name,
+                                firrtl_op  = name,
+                                coreir_lib = "corebit")
 
-    circ = DefineCircuit("{}_wrapped".format(name),
-        'I0', In(Bit), 'I1', In(Bit), 'O', Out(Bit))
-    inst = coreir_circ()
-    wire(circ.I0, inst.in0)
-    wire(circ.I1, inst.in1)
-    wire(circ.O, inst.out)
-    EndDefine()
-    return circ
 
 def DefineCoreirReduce(op_name, python_op, width):
     def simulate(self, value_store, state_store):
-        in_ = BitVector(value_store.get_value(getattr(self, "in")))
-        out = reduce(python_op, in_)
-        value_store.set_value(self.out, out)
-    decl = DeclareCircuit(op_name, "in", In(Bits(width)), "out", Out(Bit),
+        in_ = BitVector(value_store.get_value(self.I))
+        O = reduce(python_op, in_)
+        value_store.set_value(self.O, O)
+    decl = DeclareCoreirCircuit(op_name, "I", In(Bits(width)), "O", Out(Bit),
             coreir_name = op_name,
             coreir_lib = "coreir",
             coreir_genargs = {"width": width},
@@ -86,30 +79,22 @@ def DefineCoreirReduceOr(width):
 
 def declare_bits_binop(name, python_op):
     def simulate(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0))
-        in1 = BitVector(value_store.get_value(self.in1))
-        out = python_op(in0, in1).as_bool_list()
-        # print(f"{python_op}({in0}, {in1}), {out}")
-        value_store.set_value(self.out, out)
+        I0 = BitVector(value_store.get_value(self.I0))
+        I1 = BitVector(value_store.get_value(self.I1))
+        O = python_op(I0, I1).as_bool_list()
+        # print(f"{python_op}({I0}, {I1}), {out}")
+        value_store.set_value(self.O, O)
 
     @cache_definition
     def Declare(N):
         T = Bits(N)
-        coreir_circ = DeclareCircuit("{}{}".format(name, N),
-                              'in0', In(T), 'in1', In(T), 'out', Out(T),
-                              simulate       = simulate,
-                              verilog_name   = "coreir_" + name,
-                              coreir_name    = name,
-                              coreir_lib     = "coreir",
-                              coreir_genargs = {"width": N})
-        circ = DefineCircuit("{}{}_wrapped".format(name, N),
-            'I0', In(T), 'I1', In(T), 'O', Out(T))
-        inst = coreir_circ()
-        wire(circ.I0, inst.in0)
-        wire(circ.I1, inst.in1)
-        wire(circ.O, inst.out)
-        EndDefine()
-        return circ
+        return DeclareCoreirCircuit("{}{}".format(name, N),
+                                    'I0', In(T), 'I1', In(T), 'O', Out(T),
+                                    simulate       = simulate,
+                                    verilog_name   = "coreir_" + name,
+                                    coreir_name    = name,
+                                    coreir_lib     = "coreir",
+                                    coreir_genargs = {"width": N})
 
     return Declare
 
@@ -126,14 +111,14 @@ def DefineOp(op_name, DefineCoreirReduce, height, width):
     if width is None:
         reduce = DefineCoreirReduce(height)()
         for j in range(height):
-            wire(getattr(reduce, "in")[j], getattr(circ, f"I{j}"))
-        wire(reduce.out, circ.O)
+            wire(reduce.I[j], getattr(circ, f"I{j}"))
+        wire(reduce.O, circ.O)
     else:
         for i in range(width):
             reduce = DefineCoreirReduce(height)()
             for j in range(height):
-                wire(getattr(reduce, "in")[j], getattr(circ, f"I{j}")[i])
-            wire(reduce.out, circ.O[i])
+                wire(reduce.I[j], getattr(circ, f"I{j}")[i])
+            wire(reduce.O, circ.O[i])
     EndDefine()
     return circ
 
@@ -171,8 +156,8 @@ def DefineNAnd(height=2, width=None):
         inv = Not()
     else:
         inv = Invert(width)
-    out = inv(And(height, width)(*inputs))
-    wire(out, circ.O)
+    O = inv(And(height, width)(*inputs))
+    wire(O, circ.O)
     EndDefine()
     return circ
 
@@ -185,12 +170,12 @@ def ReduceNAnd(height=2, **kwargs):
 
 
 def simulate_bit_not(self, value_store, state_store):
-    _in = BitVector(value_store.get_value(getattr(self, "in")))
-    out = (~_in).as_bool_list()[0]
-    value_store.set_value(self.out, out)
+    _in = BitVector(value_store.get_value(self.I))
+    O = (~_in).as_bool_list()[0]
+    value_store.set_value(self.O, O)
 
 
-Not = DeclareCircuit("not", 'in', In(Bit), 'out', Out(Bit),
+Not = DeclareCoreirCircuit("not", 'in', In(Bit), 'O', Out(Bit),
     simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="corebit")
 
 
@@ -232,8 +217,8 @@ def DefineNOr(height=2, width=None):
         inv = Not()
     else:
         inv = Invert(width)
-    out = inv(Or(height, width)(*inputs))
-    wire(out, circ.O)
+    O = inv(Or(height, width)(*inputs))
+    wire(O, circ.O)
     EndDefine()
     return circ
 
@@ -271,17 +256,17 @@ def DefineNXOr(height=2, width=None):
         T = Bits(width)
     IO = []
     for i in range(height):
-        IO += ["in{}".format(i), In(T)]
-    IO += ["out", Out(T)]
+        IO += ["I{}".format(i), In(T)]
+    IO += ["O", Out(T)]
     circ = DefineCircuit("NXOr{}{}".format(height, width),
         *IO)
-    inputs = [getattr(circ, 'in{}'.format(i)) for i in range(height)]
+    inputs = [getattr(circ, 'I{}'.format(i)) for i in range(height)]
     if width is None:
         inv = Not()
     else:
         inv = Invert(width)
-    out = inv(XOr(height, width)(*inputs))
-    wire(out, circ.out)
+    O = inv(XOr(height, width)(*inputs))
+    wire(O, circ.O)
     EndDefine()
     return circ
 
@@ -290,31 +275,24 @@ def NXOr(height, width=None, **kwargs):
     return DefineNXOr(height, width)(**kwargs)
 
 def ReduceNXOr(height=2, **kwargs):
-    return uncurry(NXOr(height, **kwargs), "in")
+    return uncurry(NXOr(height, **kwargs))
 
 
 def simulate_bits_invert(self, value_store, state_store):
-    _in = BitVector(value_store.get_value(getattr(self, "in")))
-    out = (~_in).as_bool_list()
-    value_store.set_value(self.out, out)
+    _in = BitVector(value_store.get_value(self.I))
+    O = (~_in).as_bool_list()
+    value_store.set_value(self.O, O)
 
 @cache_definition
 def DefineInvert(width):
     T = Bits(width)
-    decl = DeclareCircuit("Invert{}".format(width),
-            'in', In(T), 'out', Out(T),
+    return DeclareCoreirCircuit("Invert{}".format(width),
+            'I', In(T), 'O', Out(T),
             simulate       = simulate_bits_invert,
             verilog_name   = "coreir_not",
             coreir_name    = "not",
             coreir_lib     = "coreir",
             coreir_genargs = {"width": width})
-    circ = DefineCircuit("Invert{}_wrapped".format(width),
-        "I", In(T), "O", Out(T))
-    prim = decl()
-    wire(circ.I, getattr(prim, "in"))
-    wire(circ.O, prim.out)
-    EndDefine()
-    return circ
 
 def Invert(width=None, **kwargs):
     return DefineInvert(width)(**kwargs)
@@ -328,13 +306,13 @@ def invert(arg, **kwargs):
 def DefineLSL(width):
     T = Bits(width)
     def simulate(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0))
-        in1 = BitVector(value_store.get_value(self.in1))
-        out = (in0 << in1).as_bool_list()
-        value_store.set_value(self.out, out)
+        I0 = BitVector(value_store.get_value(self.I0))
+        I1 = BitVector(value_store.get_value(self.I1))
+        O = (I0 << I1).as_bool_list()
+        value_store.set_value(self.O, O)
 
-    return DeclareCircuit("shl{}".format(width), 'in0', In(T), 'in1',
-            In(UInt(width)), 'out', Out(T), verilog_name="coreir_shl",
+    return DeclareCoreirCircuit("shl{}".format(width), 'I0', In(T), 'I1',
+            In(UInt(width)), 'O', Out(T), verilog_name="coreir_shl",
             coreir_name="shl", coreir_lib="coreir", simulate=simulate,
             coreir_genargs={"width": width})
 
@@ -347,13 +325,13 @@ def LSL(width, **kwargs):
 def DefineLSR(width):
     T = Bits(width)
     def simulate(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0))
-        in1 = BitVector(value_store.get_value(self.in1))
-        out = (in0 << in1).as_bool_list()
-        value_store.set_value(self.out, out)
+        I0 = BitVector(value_store.get_value(self.I0))
+        I1 = BitVector(value_store.get_value(self.I1))
+        O = (I0 << I1).as_bool_list()
+        value_store.set_value(self.O, O)
 
-    return DeclareCircuit("lshr{}".format(width), 'in0', In(T), 'in1',
-            In(UInt(width)), 'out', Out(T), verilog_name="coreir_lshr",
+    return DeclareCoreirCircuit("lshr{}".format(width), 'I0', In(T), 'I1',
+            In(UInt(width)), 'O', Out(T), verilog_name="coreir_lshr",
             coreir_name="lshr", coreir_lib="coreir", simulate=simulate,
             coreir_genargs={"width": width})
 

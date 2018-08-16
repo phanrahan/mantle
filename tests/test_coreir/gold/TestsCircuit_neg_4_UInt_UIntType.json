@@ -1,0 +1,45 @@
+{"top":"global.TestsCircuit_neg_4_UInt_UIntType",
+"namespaces":{
+  "global":{
+    "modules":{
+      "Negate4":{
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["O",["Array",4,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.neg",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["self.I","inst0.in"],
+          ["self.O","inst0.out"]
+        ]
+      },
+      "TestsCircuit_neg_4_UInt_UIntType":{
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["O0",["Array",4,"Bit"]],
+          ["O1",["Array",4,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "modref":"global.Negate4"
+          },
+          "inst1":{
+            "modref":"global.Negate4"
+          }
+        },
+        "connections":[
+          ["self.I","inst0.I"],
+          ["self.O0","inst0.O"],
+          ["self.I","inst1.I"],
+          ["self.O1","inst1.O"]
+        ]
+      }
+    }
+  }
+}
+}

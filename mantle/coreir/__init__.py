@@ -1,3 +1,4 @@
+from bit_vector import BitVector
 from .logic import (
     And      , DefineAnd   , ReduceAnd ,
     NAnd     , DefineNAnd  , ReduceNAnd,
@@ -36,38 +37,39 @@ from .compare import \
 
 
 from magma import bits, cache_definition, Circuit, Bits, wire, Out, In, Bit
+import magma as m
+from .util import DeclareCoreirCircuit
 
 @cache_definition
 def DefineCoreirConst(width, value):
-    class CoreirConst(Circuit):
-        name = f"coreir_const{width}{value}"
-        IO = ["out", Out(Bits(width))]
-        @classmethod
-        def definition(io):
-            wire(io.out, bits(value, width))
-    return CoreirConst
+    def simulate_coreir_const(self, value_store, state_store):
+        value_store.set_value(self.O, value)
+    return DeclareCoreirCircuit(f"coreir_const{width}{value}", "O", Out(Bits(width)),
+            coreir_name="const", coreir_lib="coreir",
+            coreir_genargs={"width": width},
+            coreir_configargs={"value": BitVector(value, width)},
+            simulate=simulate_coreir_const)
 
 @cache_definition
 def DefineCorebitConst(value):
     if not isinstance(value, bool) and not (isinstance(value, int) and value in {0, 1}):
         raise ValueError("DefineCorebitConst expects a boolean value or 0 or 1")
-    class CorebitConst(Circuit):
-        name = f"corebit_const{value}"
-        IO = ["out", Out(Bit)]
-        @classmethod
-        def definition(io):
-            wire(io.out, value)
-    return CorebitConst
+    def simulate_corebit_const(self, value_store, state_store):
+        value_store.set_value(self.O, value)
+    return DeclareCoreirCircuit(f"corebit_const{value}", "O", Out(Bit),
+            coreir_name="const", coreir_lib="corebit",
+            default_kwargs={"value": bool(value)},
+            simulate=simulate_corebit_const)
 
 @cache_definition
 def DefineCorebitTerm():
-    class CorebitTerm(Circuit):
-        name = f"corebit_term"
-        IO = ["in", In(Bit)]
-        @classmethod
-        def definition(io):
-            pass
-    return CorebitTerm
+    def simulate_corebit_term(self, value_store, state_store):
+        pass
+    return DeclareCoreirCircuit(f"corebit_term", "I", In(Bit),
+            coreir_name="term", coreir_lib="corebit",
+            simulate=simulate_corebit_term)
 
 def CorebitTerm():
     return DefineCorebitTerm()()
+
+from .register import DefineRegister

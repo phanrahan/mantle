@@ -32,22 +32,6 @@
           ["self.I0","inst1.in1"]
         ]
       },
-      "Invert2_wrapped":{
-        "type":["Record",[
-          ["I",["Array",2,"BitIn"]],
-          ["O",["Array",2,"Bit"]]
-        ]],
-        "instances":{
-          "inst0":{
-            "genref":"coreir.not",
-            "genargs":{"width":["Int",2]}
-          }
-        },
-        "connections":[
-          ["self.I","inst0.in"],
-          ["self.O","inst0.out"]
-        ]
-      },
       "Sub2_cin":{
         "type":["Record",[
           ["I0",["Array",2,"BitIn"]],
@@ -57,7 +41,8 @@
         ]],
         "instances":{
           "inst0":{
-            "modref":"global.Invert2_wrapped"
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",2]}
           },
           "inst1":{
             "modref":"global.Add2_cin"
@@ -67,8 +52,8 @@
           }
         },
         "connections":[
-          ["self.I1","inst0.I"],
-          ["inst1.I1","inst0.O"],
+          ["self.I1","inst0.in"],
+          ["inst1.I1","inst0.out"],
           ["inst2.out","inst1.CIN"],
           ["self.I0","inst1.I0"],
           ["self.O","inst1.O"],

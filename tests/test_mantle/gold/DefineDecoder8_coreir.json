@@ -14,13 +14,14 @@
             "modargs":{"value":[["BitVector",8],"8'h00"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_0_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_0_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1008":{
@@ -35,13 +36,14 @@
             "modargs":{"value":[["BitVector",8],"8'h64"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_100_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_100_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1018":{
@@ -56,13 +58,14 @@
             "modargs":{"value":[["BitVector",8],"8'h65"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_101_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_101_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1028":{
@@ -77,13 +80,14 @@
             "modargs":{"value":[["BitVector",8],"8'h66"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_102_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_102_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1038":{
@@ -98,13 +102,14 @@
             "modargs":{"value":[["BitVector",8],"8'h67"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_103_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_103_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1048":{
@@ -119,13 +124,14 @@
             "modargs":{"value":[["BitVector",8],"8'h68"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_104_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_104_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1058":{
@@ -140,13 +146,14 @@
             "modargs":{"value":[["BitVector",8],"8'h69"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_105_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_105_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1068":{
@@ -161,13 +168,14 @@
             "modargs":{"value":[["BitVector",8],"8'h6a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_106_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_106_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1078":{
@@ -182,13 +190,14 @@
             "modargs":{"value":[["BitVector",8],"8'h6b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_107_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_107_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode108":{
@@ -203,13 +212,14 @@
             "modargs":{"value":[["BitVector",8],"8'h0a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_10_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_10_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1088":{
@@ -224,13 +234,14 @@
             "modargs":{"value":[["BitVector",8],"8'h6c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_108_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_108_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1098":{
@@ -245,13 +256,14 @@
             "modargs":{"value":[["BitVector",8],"8'h6d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_109_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_109_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1108":{
@@ -266,13 +278,14 @@
             "modargs":{"value":[["BitVector",8],"8'h6e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_110_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_110_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1118":{
@@ -287,13 +300,14 @@
             "modargs":{"value":[["BitVector",8],"8'h6f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_111_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_111_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1128":{
@@ -308,13 +322,14 @@
             "modargs":{"value":[["BitVector",8],"8'h70"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_112_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_112_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1138":{
@@ -329,13 +344,14 @@
             "modargs":{"value":[["BitVector",8],"8'h71"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_113_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_113_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1148":{
@@ -350,13 +366,14 @@
             "modargs":{"value":[["BitVector",8],"8'h72"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_114_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_114_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1158":{
@@ -371,13 +388,14 @@
             "modargs":{"value":[["BitVector",8],"8'h73"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_115_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_115_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1168":{
@@ -392,13 +410,14 @@
             "modargs":{"value":[["BitVector",8],"8'h74"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_116_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_116_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1178":{
@@ -413,13 +432,14 @@
             "modargs":{"value":[["BitVector",8],"8'h75"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_117_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_117_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode118":{
@@ -434,13 +454,14 @@
             "modargs":{"value":[["BitVector",8],"8'h0b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_11_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_11_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1188":{
@@ -455,13 +476,14 @@
             "modargs":{"value":[["BitVector",8],"8'h76"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_118_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_118_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1198":{
@@ -476,13 +498,14 @@
             "modargs":{"value":[["BitVector",8],"8'h77"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_119_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_119_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1208":{
@@ -497,13 +520,14 @@
             "modargs":{"value":[["BitVector",8],"8'h78"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_120_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_120_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1218":{
@@ -518,13 +542,14 @@
             "modargs":{"value":[["BitVector",8],"8'h79"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_121_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_121_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1228":{
@@ -539,13 +564,14 @@
             "modargs":{"value":[["BitVector",8],"8'h7a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_122_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_122_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1238":{
@@ -560,13 +586,14 @@
             "modargs":{"value":[["BitVector",8],"8'h7b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_123_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_123_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1248":{
@@ -581,13 +608,14 @@
             "modargs":{"value":[["BitVector",8],"8'h7c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_124_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_124_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1258":{
@@ -602,13 +630,14 @@
             "modargs":{"value":[["BitVector",8],"8'h7d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_125_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_125_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1268":{
@@ -623,13 +652,14 @@
             "modargs":{"value":[["BitVector",8],"8'h7e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_126_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_126_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1278":{
@@ -644,13 +674,14 @@
             "modargs":{"value":[["BitVector",8],"8'h7f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_127_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_127_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode128":{
@@ -665,13 +696,14 @@
             "modargs":{"value":[["BitVector",8],"8'h0c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_12_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_12_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1288":{
@@ -686,13 +718,14 @@
             "modargs":{"value":[["BitVector",8],"8'h80"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_128_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_128_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1298":{
@@ -707,13 +740,14 @@
             "modargs":{"value":[["BitVector",8],"8'h81"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_129_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_129_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1308":{
@@ -728,13 +762,14 @@
             "modargs":{"value":[["BitVector",8],"8'h82"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_130_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_130_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1318":{
@@ -749,13 +784,14 @@
             "modargs":{"value":[["BitVector",8],"8'h83"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_131_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_131_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1328":{
@@ -770,13 +806,14 @@
             "modargs":{"value":[["BitVector",8],"8'h84"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_132_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_132_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1338":{
@@ -791,13 +828,14 @@
             "modargs":{"value":[["BitVector",8],"8'h85"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_133_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_133_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1348":{
@@ -812,13 +850,14 @@
             "modargs":{"value":[["BitVector",8],"8'h86"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_134_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_134_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1358":{
@@ -833,13 +872,14 @@
             "modargs":{"value":[["BitVector",8],"8'h87"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_135_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_135_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1368":{
@@ -854,13 +894,14 @@
             "modargs":{"value":[["BitVector",8],"8'h88"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_136_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_136_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1378":{
@@ -875,13 +916,14 @@
             "modargs":{"value":[["BitVector",8],"8'h89"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_137_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_137_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode138":{
@@ -896,13 +938,14 @@
             "modargs":{"value":[["BitVector",8],"8'h0d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_13_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_13_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1388":{
@@ -917,13 +960,14 @@
             "modargs":{"value":[["BitVector",8],"8'h8a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_138_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_138_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1398":{
@@ -938,13 +982,14 @@
             "modargs":{"value":[["BitVector",8],"8'h8b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_139_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_139_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1408":{
@@ -959,13 +1004,14 @@
             "modargs":{"value":[["BitVector",8],"8'h8c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_140_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_140_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1418":{
@@ -980,13 +1026,14 @@
             "modargs":{"value":[["BitVector",8],"8'h8d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_141_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_141_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1428":{
@@ -1001,13 +1048,14 @@
             "modargs":{"value":[["BitVector",8],"8'h8e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_142_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_142_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1438":{
@@ -1022,13 +1070,14 @@
             "modargs":{"value":[["BitVector",8],"8'h8f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_143_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_143_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1448":{
@@ -1043,13 +1092,14 @@
             "modargs":{"value":[["BitVector",8],"8'h90"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_144_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_144_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1458":{
@@ -1064,13 +1114,14 @@
             "modargs":{"value":[["BitVector",8],"8'h91"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_145_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_145_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1468":{
@@ -1085,13 +1136,14 @@
             "modargs":{"value":[["BitVector",8],"8'h92"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_146_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_146_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1478":{
@@ -1106,13 +1158,14 @@
             "modargs":{"value":[["BitVector",8],"8'h93"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_147_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_147_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode148":{
@@ -1127,13 +1180,14 @@
             "modargs":{"value":[["BitVector",8],"8'h0e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_14_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_14_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1488":{
@@ -1148,13 +1202,14 @@
             "modargs":{"value":[["BitVector",8],"8'h94"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_148_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_148_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1498":{
@@ -1169,13 +1224,14 @@
             "modargs":{"value":[["BitVector",8],"8'h95"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_149_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_149_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1508":{
@@ -1190,13 +1246,14 @@
             "modargs":{"value":[["BitVector",8],"8'h96"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_150_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_150_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1518":{
@@ -1211,13 +1268,14 @@
             "modargs":{"value":[["BitVector",8],"8'h97"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_151_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_151_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1528":{
@@ -1232,13 +1290,14 @@
             "modargs":{"value":[["BitVector",8],"8'h98"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_152_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_152_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1538":{
@@ -1253,13 +1312,14 @@
             "modargs":{"value":[["BitVector",8],"8'h99"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_153_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_153_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1548":{
@@ -1274,13 +1334,14 @@
             "modargs":{"value":[["BitVector",8],"8'h9a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_154_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_154_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1558":{
@@ -1295,13 +1356,14 @@
             "modargs":{"value":[["BitVector",8],"8'h9b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_155_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_155_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1568":{
@@ -1316,13 +1378,14 @@
             "modargs":{"value":[["BitVector",8],"8'h9c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_156_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_156_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1578":{
@@ -1337,13 +1400,14 @@
             "modargs":{"value":[["BitVector",8],"8'h9d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_157_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_157_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode158":{
@@ -1358,13 +1422,14 @@
             "modargs":{"value":[["BitVector",8],"8'h0f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_15_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_15_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1588":{
@@ -1379,13 +1444,14 @@
             "modargs":{"value":[["BitVector",8],"8'h9e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_158_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_158_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1598":{
@@ -1400,13 +1466,14 @@
             "modargs":{"value":[["BitVector",8],"8'h9f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_159_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_159_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1608":{
@@ -1421,13 +1488,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha0"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_160_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_160_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1618":{
@@ -1442,13 +1510,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha1"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_161_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_161_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1628":{
@@ -1463,13 +1532,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha2"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_162_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_162_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1638":{
@@ -1484,13 +1554,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha3"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_163_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_163_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1648":{
@@ -1505,13 +1576,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha4"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_164_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_164_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1658":{
@@ -1526,13 +1598,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha5"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_165_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_165_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1668":{
@@ -1547,13 +1620,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha6"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_166_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_166_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1678":{
@@ -1568,13 +1642,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha7"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_167_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_167_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode168":{
@@ -1589,13 +1664,14 @@
             "modargs":{"value":[["BitVector",8],"8'h10"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_16_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_16_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1688":{
@@ -1610,13 +1686,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha8"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_168_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_168_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1698":{
@@ -1631,13 +1708,14 @@
             "modargs":{"value":[["BitVector",8],"8'ha9"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_169_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_169_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1708":{
@@ -1652,13 +1730,14 @@
             "modargs":{"value":[["BitVector",8],"8'haa"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_170_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_170_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1718":{
@@ -1673,13 +1752,14 @@
             "modargs":{"value":[["BitVector",8],"8'hab"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_171_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_171_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1728":{
@@ -1694,13 +1774,14 @@
             "modargs":{"value":[["BitVector",8],"8'hac"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_172_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_172_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1738":{
@@ -1715,13 +1796,14 @@
             "modargs":{"value":[["BitVector",8],"8'had"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_173_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_173_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1748":{
@@ -1736,13 +1818,14 @@
             "modargs":{"value":[["BitVector",8],"8'hae"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_174_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_174_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1758":{
@@ -1757,13 +1840,14 @@
             "modargs":{"value":[["BitVector",8],"8'haf"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_175_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_175_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1768":{
@@ -1778,13 +1862,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb0"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_176_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_176_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1778":{
@@ -1799,13 +1884,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb1"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_177_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_177_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode178":{
@@ -1820,13 +1906,14 @@
             "modargs":{"value":[["BitVector",8],"8'h11"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_17_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_17_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1788":{
@@ -1841,13 +1928,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb2"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_178_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_178_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1798":{
@@ -1862,13 +1950,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb3"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_179_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_179_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode18":{
@@ -1883,13 +1972,14 @@
             "modargs":{"value":[["BitVector",8],"8'h01"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_1_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_1_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1808":{
@@ -1904,13 +1994,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb4"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_180_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_180_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1818":{
@@ -1925,13 +2016,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb5"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_181_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_181_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1828":{
@@ -1946,13 +2038,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb6"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_182_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_182_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1838":{
@@ -1967,13 +2060,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb7"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_183_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_183_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1848":{
@@ -1988,13 +2082,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb8"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_184_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_184_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1858":{
@@ -2009,13 +2104,14 @@
             "modargs":{"value":[["BitVector",8],"8'hb9"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_185_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_185_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1868":{
@@ -2030,13 +2126,14 @@
             "modargs":{"value":[["BitVector",8],"8'hba"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_186_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_186_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1878":{
@@ -2051,13 +2148,14 @@
             "modargs":{"value":[["BitVector",8],"8'hbb"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_187_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_187_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode188":{
@@ -2072,13 +2170,14 @@
             "modargs":{"value":[["BitVector",8],"8'h12"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_18_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_18_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1888":{
@@ -2093,13 +2192,14 @@
             "modargs":{"value":[["BitVector",8],"8'hbc"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_188_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_188_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1898":{
@@ -2114,13 +2214,14 @@
             "modargs":{"value":[["BitVector",8],"8'hbd"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_189_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_189_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1908":{
@@ -2135,13 +2236,14 @@
             "modargs":{"value":[["BitVector",8],"8'hbe"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_190_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_190_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1918":{
@@ -2156,13 +2258,14 @@
             "modargs":{"value":[["BitVector",8],"8'hbf"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_191_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_191_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1928":{
@@ -2177,13 +2280,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc0"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_192_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_192_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1938":{
@@ -2198,13 +2302,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc1"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_193_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_193_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1948":{
@@ -2219,13 +2324,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc2"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_194_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_194_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1958":{
@@ -2240,13 +2346,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc3"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_195_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_195_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1968":{
@@ -2261,13 +2368,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc4"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_196_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_196_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1978":{
@@ -2282,13 +2390,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc5"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_197_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_197_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode198":{
@@ -2303,13 +2412,14 @@
             "modargs":{"value":[["BitVector",8],"8'h13"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_19_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_19_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1988":{
@@ -2324,13 +2434,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc6"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_198_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_198_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode1998":{
@@ -2345,13 +2456,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc7"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_199_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_199_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2008":{
@@ -2366,13 +2478,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc8"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_200_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_200_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2018":{
@@ -2387,13 +2500,14 @@
             "modargs":{"value":[["BitVector",8],"8'hc9"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_201_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_201_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2028":{
@@ -2408,13 +2522,14 @@
             "modargs":{"value":[["BitVector",8],"8'hca"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_202_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_202_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2038":{
@@ -2429,13 +2544,14 @@
             "modargs":{"value":[["BitVector",8],"8'hcb"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_203_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_203_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2048":{
@@ -2450,13 +2566,14 @@
             "modargs":{"value":[["BitVector",8],"8'hcc"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_204_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_204_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2058":{
@@ -2471,13 +2588,14 @@
             "modargs":{"value":[["BitVector",8],"8'hcd"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_205_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_205_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2068":{
@@ -2492,13 +2610,14 @@
             "modargs":{"value":[["BitVector",8],"8'hce"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_206_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_206_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2078":{
@@ -2513,13 +2632,14 @@
             "modargs":{"value":[["BitVector",8],"8'hcf"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_207_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_207_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode208":{
@@ -2534,13 +2654,14 @@
             "modargs":{"value":[["BitVector",8],"8'h14"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_20_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_20_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2088":{
@@ -2555,13 +2676,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd0"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_208_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_208_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2098":{
@@ -2576,13 +2698,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd1"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_209_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_209_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2108":{
@@ -2597,13 +2720,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd2"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_210_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_210_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2118":{
@@ -2618,13 +2742,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd3"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_211_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_211_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2128":{
@@ -2639,13 +2764,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd4"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_212_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_212_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2138":{
@@ -2660,13 +2786,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd5"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_213_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_213_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2148":{
@@ -2681,13 +2808,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd6"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_214_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_214_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2158":{
@@ -2702,13 +2830,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd7"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_215_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_215_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2168":{
@@ -2723,13 +2852,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd8"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_216_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_216_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2178":{
@@ -2744,13 +2874,14 @@
             "modargs":{"value":[["BitVector",8],"8'hd9"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_217_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_217_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode218":{
@@ -2765,13 +2896,14 @@
             "modargs":{"value":[["BitVector",8],"8'h15"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_21_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_21_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2188":{
@@ -2786,13 +2918,14 @@
             "modargs":{"value":[["BitVector",8],"8'hda"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_218_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_218_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2198":{
@@ -2807,13 +2940,14 @@
             "modargs":{"value":[["BitVector",8],"8'hdb"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_219_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_219_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2208":{
@@ -2828,13 +2962,14 @@
             "modargs":{"value":[["BitVector",8],"8'hdc"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_220_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_220_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2218":{
@@ -2849,13 +2984,14 @@
             "modargs":{"value":[["BitVector",8],"8'hdd"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_221_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_221_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2228":{
@@ -2870,13 +3006,14 @@
             "modargs":{"value":[["BitVector",8],"8'hde"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_222_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_222_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2238":{
@@ -2891,13 +3028,14 @@
             "modargs":{"value":[["BitVector",8],"8'hdf"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_223_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_223_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2248":{
@@ -2912,13 +3050,14 @@
             "modargs":{"value":[["BitVector",8],"8'he0"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_224_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_224_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2258":{
@@ -2933,13 +3072,14 @@
             "modargs":{"value":[["BitVector",8],"8'he1"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_225_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_225_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2268":{
@@ -2954,13 +3094,14 @@
             "modargs":{"value":[["BitVector",8],"8'he2"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_226_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_226_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2278":{
@@ -2975,13 +3116,14 @@
             "modargs":{"value":[["BitVector",8],"8'he3"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_227_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_227_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode228":{
@@ -2996,13 +3138,14 @@
             "modargs":{"value":[["BitVector",8],"8'h16"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_22_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_22_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2288":{
@@ -3017,13 +3160,14 @@
             "modargs":{"value":[["BitVector",8],"8'he4"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_228_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_228_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2298":{
@@ -3038,13 +3182,14 @@
             "modargs":{"value":[["BitVector",8],"8'he5"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_229_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_229_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2308":{
@@ -3059,13 +3204,14 @@
             "modargs":{"value":[["BitVector",8],"8'he6"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_230_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_230_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2318":{
@@ -3080,13 +3226,14 @@
             "modargs":{"value":[["BitVector",8],"8'he7"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_231_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_231_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2328":{
@@ -3101,13 +3248,14 @@
             "modargs":{"value":[["BitVector",8],"8'he8"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_232_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_232_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2338":{
@@ -3122,13 +3270,14 @@
             "modargs":{"value":[["BitVector",8],"8'he9"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_233_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_233_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2348":{
@@ -3143,13 +3292,14 @@
             "modargs":{"value":[["BitVector",8],"8'hea"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_234_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_234_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2358":{
@@ -3164,13 +3314,14 @@
             "modargs":{"value":[["BitVector",8],"8'heb"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_235_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_235_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2368":{
@@ -3185,13 +3336,14 @@
             "modargs":{"value":[["BitVector",8],"8'hec"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_236_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_236_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2378":{
@@ -3206,13 +3358,14 @@
             "modargs":{"value":[["BitVector",8],"8'hed"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_237_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_237_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode238":{
@@ -3227,13 +3380,14 @@
             "modargs":{"value":[["BitVector",8],"8'h17"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_23_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_23_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2388":{
@@ -3248,13 +3402,14 @@
             "modargs":{"value":[["BitVector",8],"8'hee"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_238_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_238_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2398":{
@@ -3269,13 +3424,14 @@
             "modargs":{"value":[["BitVector",8],"8'hef"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_239_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_239_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2408":{
@@ -3290,13 +3446,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf0"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_240_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_240_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2418":{
@@ -3311,13 +3468,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf1"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_241_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_241_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2428":{
@@ -3332,13 +3490,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf2"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_242_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_242_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2438":{
@@ -3353,13 +3512,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf3"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_243_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_243_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2448":{
@@ -3374,13 +3534,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf4"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_244_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_244_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2458":{
@@ -3395,13 +3556,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf5"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_245_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_245_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2468":{
@@ -3416,13 +3578,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf6"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_246_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_246_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2478":{
@@ -3437,13 +3600,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf7"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_247_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_247_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode248":{
@@ -3458,13 +3622,14 @@
             "modargs":{"value":[["BitVector",8],"8'h18"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_24_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_24_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2488":{
@@ -3479,13 +3644,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf8"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_248_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_248_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2498":{
@@ -3500,13 +3666,14 @@
             "modargs":{"value":[["BitVector",8],"8'hf9"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_249_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_249_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2508":{
@@ -3521,13 +3688,14 @@
             "modargs":{"value":[["BitVector",8],"8'hfa"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_250_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_250_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2518":{
@@ -3542,13 +3710,14 @@
             "modargs":{"value":[["BitVector",8],"8'hfb"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_251_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_251_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2528":{
@@ -3563,13 +3732,14 @@
             "modargs":{"value":[["BitVector",8],"8'hfc"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_252_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_252_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2538":{
@@ -3584,13 +3754,14 @@
             "modargs":{"value":[["BitVector",8],"8'hfd"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_253_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_253_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2548":{
@@ -3605,13 +3776,14 @@
             "modargs":{"value":[["BitVector",8],"8'hfe"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_254_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_254_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode2558":{
@@ -3626,13 +3798,14 @@
             "modargs":{"value":[["BitVector",8],"8'hff"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_255_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_255_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode258":{
@@ -3647,13 +3820,14 @@
             "modargs":{"value":[["BitVector",8],"8'h19"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_25_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_25_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode268":{
@@ -3668,13 +3842,14 @@
             "modargs":{"value":[["BitVector",8],"8'h1a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_26_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_26_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode278":{
@@ -3689,13 +3864,14 @@
             "modargs":{"value":[["BitVector",8],"8'h1b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_27_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_27_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode28":{
@@ -3710,13 +3886,14 @@
             "modargs":{"value":[["BitVector",8],"8'h02"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_2_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_2_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode288":{
@@ -3731,13 +3908,14 @@
             "modargs":{"value":[["BitVector",8],"8'h1c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_28_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_28_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode298":{
@@ -3752,13 +3930,14 @@
             "modargs":{"value":[["BitVector",8],"8'h1d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_29_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_29_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode308":{
@@ -3773,13 +3952,14 @@
             "modargs":{"value":[["BitVector",8],"8'h1e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_30_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_30_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode318":{
@@ -3794,13 +3974,14 @@
             "modargs":{"value":[["BitVector",8],"8'h1f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_31_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_31_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode328":{
@@ -3815,13 +3996,14 @@
             "modargs":{"value":[["BitVector",8],"8'h20"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_32_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_32_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode338":{
@@ -3836,13 +4018,14 @@
             "modargs":{"value":[["BitVector",8],"8'h21"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_33_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_33_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode348":{
@@ -3857,13 +4040,14 @@
             "modargs":{"value":[["BitVector",8],"8'h22"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_34_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_34_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode358":{
@@ -3878,13 +4062,14 @@
             "modargs":{"value":[["BitVector",8],"8'h23"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_35_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_35_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode368":{
@@ -3899,13 +4084,14 @@
             "modargs":{"value":[["BitVector",8],"8'h24"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_36_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_36_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode378":{
@@ -3920,13 +4106,14 @@
             "modargs":{"value":[["BitVector",8],"8'h25"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_37_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_37_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode38":{
@@ -3941,13 +4128,14 @@
             "modargs":{"value":[["BitVector",8],"8'h03"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_3_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_3_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode388":{
@@ -3962,13 +4150,14 @@
             "modargs":{"value":[["BitVector",8],"8'h26"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_38_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_38_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode398":{
@@ -3983,13 +4172,14 @@
             "modargs":{"value":[["BitVector",8],"8'h27"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_39_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_39_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode408":{
@@ -4004,13 +4194,14 @@
             "modargs":{"value":[["BitVector",8],"8'h28"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_40_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_40_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode418":{
@@ -4025,13 +4216,14 @@
             "modargs":{"value":[["BitVector",8],"8'h29"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_41_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_41_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode428":{
@@ -4046,13 +4238,14 @@
             "modargs":{"value":[["BitVector",8],"8'h2a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_42_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_42_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode438":{
@@ -4067,13 +4260,14 @@
             "modargs":{"value":[["BitVector",8],"8'h2b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_43_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_43_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode448":{
@@ -4088,13 +4282,14 @@
             "modargs":{"value":[["BitVector",8],"8'h2c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_44_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_44_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode458":{
@@ -4109,13 +4304,14 @@
             "modargs":{"value":[["BitVector",8],"8'h2d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_45_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_45_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode468":{
@@ -4130,13 +4326,14 @@
             "modargs":{"value":[["BitVector",8],"8'h2e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_46_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_46_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode478":{
@@ -4151,13 +4348,14 @@
             "modargs":{"value":[["BitVector",8],"8'h2f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_47_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_47_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode48":{
@@ -4172,13 +4370,14 @@
             "modargs":{"value":[["BitVector",8],"8'h04"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_4_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_4_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode488":{
@@ -4193,13 +4392,14 @@
             "modargs":{"value":[["BitVector",8],"8'h30"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_48_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_48_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode498":{
@@ -4214,13 +4414,14 @@
             "modargs":{"value":[["BitVector",8],"8'h31"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_49_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_49_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode508":{
@@ -4235,13 +4436,14 @@
             "modargs":{"value":[["BitVector",8],"8'h32"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_50_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_50_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode518":{
@@ -4256,13 +4458,14 @@
             "modargs":{"value":[["BitVector",8],"8'h33"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_51_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_51_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode528":{
@@ -4277,13 +4480,14 @@
             "modargs":{"value":[["BitVector",8],"8'h34"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_52_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_52_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode538":{
@@ -4298,13 +4502,14 @@
             "modargs":{"value":[["BitVector",8],"8'h35"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_53_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_53_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode548":{
@@ -4319,13 +4524,14 @@
             "modargs":{"value":[["BitVector",8],"8'h36"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_54_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_54_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode558":{
@@ -4340,13 +4546,14 @@
             "modargs":{"value":[["BitVector",8],"8'h37"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_55_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_55_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode568":{
@@ -4361,13 +4568,14 @@
             "modargs":{"value":[["BitVector",8],"8'h38"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_56_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_56_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode578":{
@@ -4382,13 +4590,14 @@
             "modargs":{"value":[["BitVector",8],"8'h39"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_57_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_57_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode58":{
@@ -4403,13 +4612,14 @@
             "modargs":{"value":[["BitVector",8],"8'h05"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_5_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_5_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode588":{
@@ -4424,13 +4634,14 @@
             "modargs":{"value":[["BitVector",8],"8'h3a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_58_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_58_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode598":{
@@ -4445,13 +4656,14 @@
             "modargs":{"value":[["BitVector",8],"8'h3b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_59_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_59_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode608":{
@@ -4466,13 +4678,14 @@
             "modargs":{"value":[["BitVector",8],"8'h3c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_60_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_60_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode618":{
@@ -4487,13 +4700,14 @@
             "modargs":{"value":[["BitVector",8],"8'h3d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_61_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_61_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode628":{
@@ -4508,13 +4722,14 @@
             "modargs":{"value":[["BitVector",8],"8'h3e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_62_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_62_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode638":{
@@ -4529,13 +4744,14 @@
             "modargs":{"value":[["BitVector",8],"8'h3f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_63_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_63_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode648":{
@@ -4550,13 +4766,14 @@
             "modargs":{"value":[["BitVector",8],"8'h40"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_64_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_64_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode658":{
@@ -4571,13 +4788,14 @@
             "modargs":{"value":[["BitVector",8],"8'h41"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_65_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_65_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode668":{
@@ -4592,13 +4810,14 @@
             "modargs":{"value":[["BitVector",8],"8'h42"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_66_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_66_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode678":{
@@ -4613,13 +4832,14 @@
             "modargs":{"value":[["BitVector",8],"8'h43"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_67_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_67_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode68":{
@@ -4634,13 +4854,14 @@
             "modargs":{"value":[["BitVector",8],"8'h06"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_6_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_6_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode688":{
@@ -4655,13 +4876,14 @@
             "modargs":{"value":[["BitVector",8],"8'h44"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_68_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_68_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode698":{
@@ -4676,13 +4898,14 @@
             "modargs":{"value":[["BitVector",8],"8'h45"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_69_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_69_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode708":{
@@ -4697,13 +4920,14 @@
             "modargs":{"value":[["BitVector",8],"8'h46"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_70_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_70_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode718":{
@@ -4718,13 +4942,14 @@
             "modargs":{"value":[["BitVector",8],"8'h47"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_71_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_71_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode728":{
@@ -4739,13 +4964,14 @@
             "modargs":{"value":[["BitVector",8],"8'h48"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_72_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_72_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode738":{
@@ -4760,13 +4986,14 @@
             "modargs":{"value":[["BitVector",8],"8'h49"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_73_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_73_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode748":{
@@ -4781,13 +5008,14 @@
             "modargs":{"value":[["BitVector",8],"8'h4a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_74_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_74_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode758":{
@@ -4802,13 +5030,14 @@
             "modargs":{"value":[["BitVector",8],"8'h4b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_75_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_75_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode768":{
@@ -4823,13 +5052,14 @@
             "modargs":{"value":[["BitVector",8],"8'h4c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_76_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_76_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode778":{
@@ -4844,13 +5074,14 @@
             "modargs":{"value":[["BitVector",8],"8'h4d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_77_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_77_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode78":{
@@ -4865,13 +5096,14 @@
             "modargs":{"value":[["BitVector",8],"8'h07"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_7_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_7_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode788":{
@@ -4886,13 +5118,14 @@
             "modargs":{"value":[["BitVector",8],"8'h4e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_78_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_78_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode798":{
@@ -4907,13 +5140,14 @@
             "modargs":{"value":[["BitVector",8],"8'h4f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_79_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_79_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode808":{
@@ -4928,13 +5162,14 @@
             "modargs":{"value":[["BitVector",8],"8'h50"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_80_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_80_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode818":{
@@ -4949,13 +5184,14 @@
             "modargs":{"value":[["BitVector",8],"8'h51"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_81_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_81_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode828":{
@@ -4970,13 +5206,14 @@
             "modargs":{"value":[["BitVector",8],"8'h52"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_82_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_82_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode838":{
@@ -4991,13 +5228,14 @@
             "modargs":{"value":[["BitVector",8],"8'h53"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_83_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_83_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode848":{
@@ -5012,13 +5250,14 @@
             "modargs":{"value":[["BitVector",8],"8'h54"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_84_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_84_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode858":{
@@ -5033,13 +5272,14 @@
             "modargs":{"value":[["BitVector",8],"8'h55"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_85_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_85_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode868":{
@@ -5054,13 +5294,14 @@
             "modargs":{"value":[["BitVector",8],"8'h56"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_86_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_86_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode878":{
@@ -5075,13 +5316,14 @@
             "modargs":{"value":[["BitVector",8],"8'h57"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_87_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_87_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode88":{
@@ -5096,13 +5338,14 @@
             "modargs":{"value":[["BitVector",8],"8'h08"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_8_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_8_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode888":{
@@ -5117,13 +5360,14 @@
             "modargs":{"value":[["BitVector",8],"8'h58"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_88_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_88_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode898":{
@@ -5138,13 +5382,14 @@
             "modargs":{"value":[["BitVector",8],"8'h59"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_89_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_89_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode908":{
@@ -5159,13 +5404,14 @@
             "modargs":{"value":[["BitVector",8],"8'h5a"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_90_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_90_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode918":{
@@ -5180,13 +5426,14 @@
             "modargs":{"value":[["BitVector",8],"8'h5b"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_91_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_91_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode928":{
@@ -5201,13 +5448,14 @@
             "modargs":{"value":[["BitVector",8],"8'h5c"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_92_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_92_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode938":{
@@ -5222,13 +5470,14 @@
             "modargs":{"value":[["BitVector",8],"8'h5d"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_93_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_93_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode948":{
@@ -5243,13 +5492,14 @@
             "modargs":{"value":[["BitVector",8],"8'h5e"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_94_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_94_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode958":{
@@ -5264,13 +5514,14 @@
             "modargs":{"value":[["BitVector",8],"8'h5f"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_95_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_95_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode968":{
@@ -5285,13 +5536,14 @@
             "modargs":{"value":[["BitVector",8],"8'h60"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_96_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_96_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode978":{
@@ -5306,13 +5558,14 @@
             "modargs":{"value":[["BitVector",8],"8'h61"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_97_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_97_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode98":{
@@ -5327,13 +5580,14 @@
             "modargs":{"value":[["BitVector",8],"8'h09"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_9_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_9_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode988":{
@@ -5348,13 +5602,14 @@
             "modargs":{"value":[["BitVector",8],"8'h62"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_98_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_98_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decode998":{
@@ -5369,13 +5624,14 @@
             "modargs":{"value":[["BitVector",8],"8'h63"]}
           },
           "inst0":{
-            "modref":"global.EQ8"
+            "genref":"coreir.eq",
+            "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst0.I1","const_99_8.out"],
-          ["self.I","inst0.I0"],
-          ["self.O","inst0.O"]
+          ["inst0.in1","const_99_8.out"],
+          ["self.I","inst0.in0"],
+          ["self.O","inst0.out"]
         ]
       },
       "Decoder8":{
@@ -6666,24 +6922,6 @@
           ["self.O.98","inst98.O"],
           ["self.I","inst99.I"],
           ["self.O.99","inst99.O"]
-        ]
-      },
-      "EQ8":{
-        "type":["Record",[
-          ["I0",["Array",8,"BitIn"]],
-          ["I1",["Array",8,"BitIn"]],
-          ["O","Bit"]
-        ]],
-        "instances":{
-          "inst0":{
-            "genref":"coreir.eq",
-            "genargs":{"width":["Int",8]}
-          }
-        },
-        "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"]
         ]
       }
     }

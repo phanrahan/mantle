@@ -46,22 +46,6 @@
           ["self.O.3","inst3.out"]
         ]
       },
-      "Invert4_wrapped":{
-        "type":["Record",[
-          ["I",["Array",4,"BitIn"]],
-          ["O",["Array",4,"Bit"]]
-        ]],
-        "instances":{
-          "inst0":{
-            "genref":"coreir.not",
-            "genargs":{"width":["Int",4]}
-          }
-        },
-        "connections":[
-          ["self.I","inst0.in"],
-          ["self.O","inst0.out"]
-        ]
-      },
       "Or3x4":{
         "type":["Record",[
           ["I0",["Array",4,"BitIn"]],
@@ -115,18 +99,20 @@
         ]],
         "instances":{
           "inst0":{
-            "modref":"global.xor4_wrapped"
+            "genref":"coreir.xor",
+            "genargs":{"width":["Int",4]}
           },
           "inst1":{
-            "modref":"global.xor4_wrapped"
+            "genref":"coreir.xor",
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I0","inst0.I0"],
-          ["self.I1","inst0.I1"],
-          ["inst1.I0","inst0.O"],
-          ["self.I2","inst1.I1"],
-          ["self.O","inst1.O"]
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["inst1.in0","inst0.out"],
+          ["self.I2","inst1.in1"],
+          ["self.O","inst1.out"]
         ]
       },
       "test_coreir_three_args":{
@@ -141,7 +127,8 @@
             "modref":"global.Or3x4"
           },
           "inst1":{
-            "modref":"global.Invert4_wrapped"
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",4]}
           },
           "inst2":{
             "modref":"global.And3x4"
@@ -152,34 +139,16 @@
         },
         "connections":[
           ["self.a","inst0.I0"],
-          ["inst1.O","inst0.I1"],
+          ["inst1.out","inst0.I1"],
           ["inst3.O","inst0.I2"],
           ["self.d","inst0.O"],
-          ["inst2.O","inst1.I"],
+          ["inst2.O","inst1.in"],
           ["self.a","inst2.I0"],
           ["self.b","inst2.I1"],
           ["self.c","inst2.I2"],
           ["self.b","inst3.I0"],
           ["self.c","inst3.I1"],
           ["self.a","inst3.I2"]
-        ]
-      },
-      "xor4_wrapped":{
-        "type":["Record",[
-          ["I0",["Array",4,"BitIn"]],
-          ["I1",["Array",4,"BitIn"]],
-          ["O",["Array",4,"Bit"]]
-        ]],
-        "instances":{
-          "inst0":{
-            "genref":"coreir.xor",
-            "genargs":{"width":["Int",4]}
-          }
-        },
-        "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"]
         ]
       }
     }

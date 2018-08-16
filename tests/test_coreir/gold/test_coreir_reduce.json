@@ -76,23 +76,23 @@
         ]],
         "instances":{
           "inst0":{
-            "modref":"global.xor_wrapped"
+            "modref":"corebit.xor"
           },
           "inst1":{
-            "modref":"global.xor_wrapped"
+            "modref":"corebit.xor"
           },
           "inst2":{
-            "modref":"global.xor_wrapped"
+            "modref":"corebit.xor"
           }
         },
         "connections":[
-          ["self.I0","inst0.I0"],
-          ["self.I1","inst0.I1"],
-          ["inst1.I0","inst0.O"],
-          ["self.I2","inst1.I1"],
-          ["inst2.I0","inst1.O"],
-          ["self.I3","inst2.I1"],
-          ["self.O","inst2.O"]
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["inst1.in0","inst0.out"],
+          ["self.I2","inst1.in1"],
+          ["inst2.in0","inst1.out"],
+          ["self.I3","inst2.in1"],
+          ["self.O","inst2.out"]
         ]
       },
       "test_coreir_reduce":{
@@ -133,23 +133,6 @@
           ["self.b.1","inst3.I1"],
           ["self.b.2","inst3.I2"],
           ["self.b.3","inst3.I3"]
-        ]
-      },
-      "xor_wrapped":{
-        "type":["Record",[
-          ["I0","BitIn"],
-          ["I1","BitIn"],
-          ["O","Bit"]
-        ]],
-        "instances":{
-          "inst0":{
-            "modref":"corebit.xor"
-          }
-        },
-        "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"]
         ]
       }
     }

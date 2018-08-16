@@ -5,6 +5,7 @@ import magma
 import mantle
 from fault.test_vectors import generate_function_test_vectors, \
     generate_simulator_test_vectors
+from ..test_coreir.util import wrap
 
 HEIGHTS = [2, 4, 8]
 WIDTHS = [2, 4, 8]
@@ -24,6 +25,8 @@ def com(Test, name):
     else:
         output = "verilog"
         suffix = ".v"
+    if magma.circuit.isprimitive(Test):
+        Test = wrap(Test)
     compile(build, Test, output=output)
     assert check_files_equal(__file__, build+suffix, gold+suffix)
 
@@ -156,6 +159,8 @@ def test_logic(op, height, width):
     Define = getattr(mantle, op.name)
     Test = Define(height, width)
     if height == 2 and width == 2:
+        if magma.circuit.isprimitive(Test):
+            Test = wrap(Test)
         sim( Test, op.func )
     com( Test, f'{op.name}{height}x{width}' )
 

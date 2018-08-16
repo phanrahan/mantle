@@ -6,6 +6,7 @@ import magma as m
 from magma.bit_vector import BitVector
 from magma.backend.coreir_ import CoreIRBackend
 from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper
+from .util import DeclareCoreirCircuit
 
 import math
 
@@ -14,24 +15,24 @@ import math
 def DefineCoreirMux(width=None):
     N = width
     def simulate(self, value_store, state_store):
-        in0 = BitVector(value_store.get_value(self.in0))
-        in1 = BitVector(value_store.get_value(self.in1))
-        sel = BitVector(value_store.get_value(self.sel))
-        out = in1 if sel.as_int() else in0
-        value_store.set_value(self.out, out)
+        I0 = BitVector(value_store.get_value(self.I0))
+        I1 = BitVector(value_store.get_value(self.I1))
+        S = BitVector(value_store.get_value(self.S))
+        O = I1 if S.as_int() else in0
+        value_store.set_value(self.O, O)
     if width is None:
-        return DeclareCircuit("coreir_mux{}".format(N),
-            *["in0", In(Bit), "in1", In(Bit), "sel", In(Bit),
-             "out", Out(Bit)],
+        return DeclareCoreirCircuit("coreir_mux{}".format(N),
+            *["I0", In(Bit), "I1", In(Bit), "S", In(Bit),
+             "O", Out(Bit)],
             verilog_name="coreir_bitmux",
             coreir_name="mux",
             coreir_lib="corebit",
             simulate=simulate
         )
     else:
-        return DeclareCircuit("coreir_mux{}".format(N),
-            *["in0", In(Bits(N)), "in1", In(Bits(N)), "sel", In(Bit),
-             "out", Out(Bits(N))],
+        return DeclareCoreirCircuit("coreir_mux{}".format(N),
+            *["I0", In(Bits(N)), "I1", In(Bits(N)), "S", In(Bit),
+             "O", Out(Bits(N))],
             verilog_name="coreir_mux",
             coreir_name="mux",
             coreir_lib="coreir",
@@ -45,13 +46,13 @@ is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
 
 def _declare_muxn(height, width):
     def simulate(self, value_store, state_store):
-        sel = BitVector(value_store.get_value(getattr(self, "in").sel))
-        out = BitVector(value_store.get_value(getattr(self, "in").data[sel.as_int]))
-        value_store.set_value(self.out, out)
-    return DeclareCircuit(f"coreir_commonlib_mux{height}x{width}",
-        *["in", In(Tuple(data=Array(height, Bits(width)),
+        sel = BitVector(value_store.get_value(self.I.sel))
+        out = BitVector(value_store.get_value(self.I.data[sel.as_int]))
+        value_store.set_value(self.O, out)
+    return DeclareCoreirCircuit(f"coreir_commonlib_mux{height}x{width}",
+        *["I", In(Tuple(data=Array(height, Bits(width)),
                          sel=Bits(m.bitutils.clog2(height)))),
-          "out", Out(Bits(width))],
+          "O", Out(Bits(width))],
         coreir_name="muxn",
         coreir_lib="commonlib",
         simulate=simulate,
@@ -87,17 +88,17 @@ def DefineMux(height=2, width=None):
                 mux = _declare_muxn(height, width)()
             for i in range(height):
                 if width is None:
-                    m.wire(getattr(interface, f"I{i}"), getattr(mux, "in").data[i][0])
+                    m.wire(getattr(interface, f"I{i}"), mux.I.data[i][0])
                 else:
-                    m.wire(getattr(interface, f"I{i}"), getattr(mux, "in").data[i])
+                    m.wire(getattr(interface, f"I{i}"), mux.I.data[i])
             if height == 2:
-                m.wire(interface.S, getattr(mux, "in").sel[0])
+                m.wire(interface.S, mux.I.sel[0])
             else:
-                m.wire(interface.S, getattr(mux, "in").sel)
+                m.wire(interface.S, mux.I.sel)
             if width is None:
-                wire(mux.out[0], interface.O)
+                wire(mux.O[0], interface.O)
             else:
-                wire(mux.out, interface.O)
+                wire(mux.O, interface.O)
     return _Mux
 
 

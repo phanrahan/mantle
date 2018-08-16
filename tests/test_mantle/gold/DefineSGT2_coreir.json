@@ -1,8 +1,8 @@
-{"top":"global.SGT2",
+{"top":"global.coreir_sgt2_wrapped",
 "namespaces":{
   "global":{
     "modules":{
-      "SGT2":{
+      "coreir_sgt2_wrapped":{
         "type":["Record",[
           ["I0",["Array",2,"BitIn"]],
           ["I1",["Array",2,"BitIn"]],

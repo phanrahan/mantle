@@ -68,9 +68,9 @@ def test_unary_op(op, N, T, TType):
                 res_operator = eval(f"{op.operator} io.I")
                 m.wire(res_operator, io.O1)
 
-    m.compile(f'build/{_name}', TestCircuit)
-    assert check_files_equal(__file__, f"build/{_name}.v",
-                             f"gold/{_name}.v")
+    m.compile(f'build/{_name}', TestCircuit, output="coreir")
+    assert check_files_equal(__file__, f"build/{_name}.json",
+                             f"gold/{_name}.json")
 
 
 @pytest.mark.parametrize("op", [
@@ -142,9 +142,9 @@ def test_binary_op(op, N, T, TType):
                 res_operator = eval(f"io.I0 {op.operator} io.I1")
                 m.wire(res_operator, io.O1)
 
-    m.compile(f'build/{_name}', TestCircuit)
-    assert check_files_equal(__file__, f"build/{_name}.v",
-                             f"gold/{_name}.v")
+    m.compile(f'build/{_name}', TestCircuit, output="coreir")
+    assert check_files_equal(__file__, f"build/{_name}.json",
+                             f"gold/{_name}.json")
 
 
 def test_dyanmic_mux_getitem():

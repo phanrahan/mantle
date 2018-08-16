@@ -1,0 +1,31 @@
+{"top":"global.TestsCircuit_invert_4_UInt_UIntType",
+"namespaces":{
+  "global":{
+    "modules":{
+      "TestsCircuit_invert_4_UInt_UIntType":{
+        "type":["Record",[
+          ["I",["Array",4,"BitIn"]],
+          ["O0",["Array",4,"Bit"]],
+          ["O1",["Array",4,"Bit"]]
+        ]],
+        "instances":{
+          "inst0":{
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",4]}
+          },
+          "inst1":{
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",4]}
+          }
+        },
+        "connections":[
+          ["self.I","inst0.in"],
+          ["self.O0","inst0.out"],
+          ["self.I","inst1.in"],
+          ["self.O1","inst1.out"]
+        ]
+      }
+    }
+  }
+}
+}

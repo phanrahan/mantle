@@ -76,11 +76,11 @@
       },
       "NXOr4None":{
         "type":["Record",[
-          ["in0","BitIn"],
-          ["in1","BitIn"],
-          ["in2","BitIn"],
-          ["in3","BitIn"],
-          ["out","Bit"]
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["I2","BitIn"],
+          ["I3","BitIn"],
+          ["O","Bit"]
         ]],
         "instances":{
           "inst0":{
@@ -92,11 +92,11 @@
         },
         "connections":[
           ["inst1.O","inst0.in"],
-          ["self.out","inst0.out"],
-          ["self.in0","inst1.I0"],
-          ["self.in1","inst1.I1"],
-          ["self.in2","inst1.I2"],
-          ["self.in3","inst1.I3"]
+          ["self.O","inst0.out"],
+          ["self.I0","inst1.I0"],
+          ["self.I1","inst1.I1"],
+          ["self.I2","inst1.I2"],
+          ["self.I3","inst1.I3"]
         ]
       },
       "Or3xNone":{
@@ -151,23 +151,23 @@
         ]],
         "instances":{
           "inst0":{
-            "modref":"global.xor_wrapped"
+            "modref":"corebit.xor"
           },
           "inst1":{
-            "modref":"global.xor_wrapped"
+            "modref":"corebit.xor"
           },
           "inst2":{
-            "modref":"global.xor_wrapped"
+            "modref":"corebit.xor"
           }
         },
         "connections":[
-          ["self.I0","inst0.I0"],
-          ["self.I1","inst0.I1"],
-          ["inst1.I0","inst0.O"],
-          ["self.I2","inst1.I1"],
-          ["inst2.I0","inst1.O"],
-          ["self.I3","inst2.I1"],
-          ["self.O","inst2.O"]
+          ["self.I0","inst0.in0"],
+          ["self.I1","inst0.in1"],
+          ["inst1.in0","inst0.out"],
+          ["self.I2","inst1.in1"],
+          ["inst2.in0","inst1.out"],
+          ["self.I3","inst2.in1"],
+          ["self.O","inst2.out"]
         ]
       },
       "test_coreir_reduce_2":{
@@ -194,7 +194,7 @@
         "connections":[
           ["inst1.O","inst0.I0"],
           ["inst2.O","inst0.I1"],
-          ["inst3.out","inst0.I2"],
+          ["inst3.O","inst0.I2"],
           ["self.d","inst0.O"],
           ["self.a.0","inst1.I0"],
           ["self.a.1","inst1.I1"],
@@ -204,27 +204,10 @@
           ["self.b.1","inst2.I1"],
           ["self.b.2","inst2.I2"],
           ["self.b.3","inst2.I3"],
-          ["self.b.0","inst3.in0"],
-          ["self.b.1","inst3.in1"],
-          ["self.b.2","inst3.in2"],
-          ["self.b.3","inst3.in3"]
-        ]
-      },
-      "xor_wrapped":{
-        "type":["Record",[
-          ["I0","BitIn"],
-          ["I1","BitIn"],
-          ["O","Bit"]
-        ]],
-        "instances":{
-          "inst0":{
-            "modref":"corebit.xor"
-          }
-        },
-        "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"]
+          ["self.b.0","inst3.I0"],
+          ["self.b.1","inst3.I1"],
+          ["self.b.2","inst3.I2"],
+          ["self.b.3","inst3.I3"]
         ]
       }
     }

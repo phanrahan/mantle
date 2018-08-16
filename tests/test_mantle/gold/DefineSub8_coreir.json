@@ -38,22 +38,6 @@
           ["self.I0","inst1.in1"]
         ]
       },
-      "Invert8_wrapped":{
-        "type":["Record",[
-          ["I",["Array",8,"BitIn"]],
-          ["O",["Array",8,"Bit"]]
-        ]],
-        "instances":{
-          "inst0":{
-            "genref":"coreir.not",
-            "genargs":{"width":["Int",8]}
-          }
-        },
-        "connections":[
-          ["self.I","inst0.in"],
-          ["self.O","inst0.out"]
-        ]
-      },
       "Sub8":{
         "type":["Record",[
           ["I0",["Array",8,"BitIn"]],
@@ -66,7 +50,8 @@
             "modargs":{"value":["Bool",true]}
           },
           "inst0":{
-            "modref":"global.Invert8_wrapped"
+            "genref":"coreir.not",
+            "genargs":{"width":["Int",8]}
           },
           "inst1":{
             "modref":"global.Add8_cin"
@@ -74,8 +59,8 @@
         },
         "connections":[
           ["inst1.CIN","bit_const_1_None.out"],
-          ["self.I1","inst0.I"],
-          ["inst1.I1","inst0.O"],
+          ["self.I1","inst0.in"],
+          ["inst1.I1","inst0.out"],
           ["self.I0","inst1.I0"],
           ["self.O","inst1.O"]
         ]

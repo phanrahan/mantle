@@ -159,6 +159,8 @@ def test_logic(op, height, width):
     Define = getattr(mantle, op.name)
     Test = Define(height, width)
     if height == 2 and width == 2:
+        if magma.circuit.isprimitive(Test):
+            Test = wrap(Test)
         sim( Test, op.func )
     com( Test, f'{op.name}{height}x{width}' )
 

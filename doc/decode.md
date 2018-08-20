@@ -1,16 +1,15 @@
 ### Decoders, Encoders, and Arbiters
 
-Mantle has a decoders, encoders, and arbiters.
-
 Decode returns circuit that computes whether the n-bit input is equal to `i`.
 
 ```
 op = Decode(i,n) :: I:In(Bits(n)), O:Out(Bit)
 ```
-For example, ```Decode(3,4)``` returns whether the 4-bit input is
-is equal to 3.
+For example, ```Decode(3,4)``` returns 
+whether the 4-bit input is is equal to 3.
+It is basically an optimized version of `I == m.bits(i,n)`.
 
-Decoder maps from single input to multiple outouts.
+Decoder maps from single input to multiple outputs.
 Decoder accepts a single n-bit input,
 and returns `2^n` single bit outputs.
 The ith output is 1, if the input is equal to i.

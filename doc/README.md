@@ -2,14 +2,13 @@
 
 Mantle can be configured to synthesize low-level primitives
 for a particular FPGA.
-
 For example, to use mantle with the Lattice ice40,
-set the `MANTLE_TARGET`  environment variable.
-```bash
-export MANTLE_TARGET=ice40
+set the `Mantle` target
+```python
+import magma
+magma.set_mantle_target('ice40')
 ```
-
-The default configuration is to generate generic `coreir`.
+The default target is to generate `coreir`.
 
 
 ### Combinational Logic

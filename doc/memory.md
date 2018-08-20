@@ -64,31 +64,59 @@ lut = LUTN(init, n=None) :: I0:Bit, ..., In:Bit -> O:Bit
 
 ### ROM
 
+A ROM implemented as a register file.
+
 ```
 # DefineROM :: 
 #  RADDR:In(Bits(height)), 
-#  RDATA:Out(Bits(width)),
-#  CLK:In(Clock)
+#  RDATA:Out(Bits(width))
 ROM = DefineROM(height, width)
 
 # ROM :: 
 #  RADDR:In(Bits(height)), 
 #  RDATA:Out(Bits(width)),
-#  CLK:In(Clock)
 rom = ROM(height, width) 
 ```
 
 ### RAM
 
+A RAM implemented as a register file.
+
 ```
-# DefineROM :: 
+# DefineRAM :: 
 #  RADDR:In(Bits(height)), 
 #  RDATA:Out(Bits(width)),
 #  WADDR:In(Bits(height)), 
 #  WDATA:Out(Bits(width)),
-#  CLK:In(Clock),
-#  WE,In(Bit)
+#  WE,In(Bit),
+#  CLK:In(Clock)
 RAM = DefineRAM(height, width)
+```
+
+```
+# RAM :: 
+#  RADDR0:In(Bits(height)), 
+#  RDATA0:Out(Bits(width)),
+#  RADDR1:In(Bits(height)), 
+#  RDATA1:Out(Bits(width)),
+#  WADDR:In(Bits(height)), 
+#  WDATA:In(Bits(width)),
+#  WE,In(Bit),
+#  CLK:In(Clock)
+ram = RAM(height, width)
+```
+
+```
+# DefineDualRAM :: 
+#  RADDR0:In(Bits(height)), 
+#  RDATA0:Out(Bits(width)),
+#  RADDR1:In(Bits(height)), 
+#  RDATA1:Out(Bits(width)),
+#  WADDR:In(Bits(height)), 
+#  WDATA:Out(Bits(width)),
+#  WE,In(Bit),
+#  CLK:In(Clock)
+DualRAM = DefineDualRAM(height, width)
 ```
 
 ```
@@ -97,12 +125,17 @@ RAM = DefineRAM(height, width)
 #  RDATA:Out(Bits(width)),
 #  WADDR:In(Bits(height)), 
 #  WDATA:In(Bits(width)),
-#  CLK:In(Clock),
-#  WE,In(Bit)
+#  WE,In(Bit),
+#  CLK:In(Clock)
 ram = RAM(height, width)
 ```
 
 ### Memory
+
+Implement a blocked or SRAM.
+Currently all SRAMs are 4k bits.
+Only certain heights and widths are currently supported:
+(height, width) = (256, 16), (512,8), (1024, 4), (2048, 2)
 
 ```
 # if readonly:
@@ -113,14 +146,15 @@ ram = RAM(height, width)
 #    "RE",    In(Bit)
 # else:
 #   RAM :: 
-#    "RDATA", Out(Bits(16)),
-#    "RADDR", In(Bits(11)),
+#    "RDATA", Out(Bits(height)),
+#    "RADDR", In(Bits(width)),
 #    "RCLK",  In(Clock),
 #    "RE",    In(Bit),
-#    "WADDR", In(Bits(11)),
-#    "WDATA", In(Bits(16))
+#    "WADDR", In(Bits(height)),
+#    "WDATA", In(Bits(width))
 #    "WCLK",  In(Clock),
 #    "WE",    In(Bit),
 
-rom = Mem( rom, height, width, readonly=False )
+mem = Memory( height, width, data=None, readonly=False )
 ```
+

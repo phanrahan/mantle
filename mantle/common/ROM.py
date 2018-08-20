@@ -15,23 +15,6 @@ def ROM4s(n, width, data):
 def MUXs(n, width):
     return [Mux(2,width) for i in range(n)]
 
-#def readport(height, width, roms, raddr):
-#
-#    n = 1 << height
-#    muxs = MUXs(n-1, width)
-#    for i in range(n//2):
-#        muxs[i](roms[2*i], roms[2*i+1], raddr[0])
-#    k = 0
-#    l = 1 << (height-1)
-#    for i in range(height-1):
-#        for j in range(l//2):
-#            muxs[k+l+j](muxs[k+2*j], muxs[k+2*j+1], raddr[i+1])
-#        k += l
-#        l //= 2
-#
-#    return muxs[n-2]
-
-
 def interleave16(data, width):
     n = len(data)
     bits = [int2seq(data[i], width) for i in range(n)]
@@ -51,7 +34,7 @@ def DefineROM(height, width, data):
     TDATA = Bits(width)
 
     class _ROM(Circuit):
-        name = 'ROM{}x{}'.format(n,width)
+        name = f'ROM{n}x{width}'
         IO = ['RADDR', In(TADDR), 'RDATA', Out(TDATA)]
 
         @classmethod

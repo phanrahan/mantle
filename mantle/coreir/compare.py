@@ -13,7 +13,7 @@ def DefineEQ(width):
         O = operator.eq(I0, I1).as_bool_list()[0]
         value_store.set_value(self.O, O)
     if width is None:
-        circ = DefineCoreirCircuit('corebit_eq', 'I0', In(Bit), 'I1', In(Bit), 'O', Out(Bit))
+        circ = DefineCircuit('corebit_eq', 'I0', In(Bit), 'I1', In(Bit), 'O', Out(Bit))
         wire(circ.O, not_(XOr(2, None)(circ.I0, circ.I1)))
         EndDefine()
         return circ

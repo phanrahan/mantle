@@ -6,7 +6,6 @@ import operator
 from .util import DefineCoreirCircuit, DeclareCoreirCircuit
 
 
-@cache_definition
 def DefineEQ(width):
     def simulate(self, value_store, state_store):
         I0 = BitVector(value_store.get_value(self.I0))

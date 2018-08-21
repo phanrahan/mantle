@@ -30,7 +30,7 @@ class Mux4(Circuit):
         mux0 = Mux2()
         mux1 = Mux2()
         mux = Mux2()
-        mux0(mux4.I[0:2],mux4.S[0]) 
+        mux0(mux4.I[0:2],mux4.S[0])
         mux1(mux4.I[2:4],mux4.S[0])
         mux( array( [mux0.O, mux1.O] ), mux4.S[1] )
         wire( mux.O, mux4.O )
@@ -43,7 +43,7 @@ class Mux8(Circuit):
         mux0 = Mux4()
         mux1 = Mux4()
         mux = Mux2()
-        mux0(mux8.I[0:4], mux8.S[0:2]) 
+        mux0(mux8.I[0:4], mux8.S[0:2])
         mux1(mux8.I[4:8], mux8.S[0:2])
         mux( array( [mux0.O, mux1.O] ), mux8.S[2] )
         wire( mux.O, mux8.O )
@@ -80,17 +80,17 @@ def _MuxName(height, width):
 def _MuxInterface(height, width):
     AW = In(Bits(width))
     if   height == 2:
-        args = ['I0', AW, 
+        args = ['I0', AW,
                 'I1', AW]
         args += ['S', In(Bit)]
     elif height == 4:
-        args = ['I0', AW, 
+        args = ['I0', AW,
                 'I1', AW,
                 'I2', AW,
                 'I3', AW]
         args += ['S', In(Bits(2))]
     elif height == 8:
-        args = ['I0', AW, 
+        args = ['I0', AW,
                 'I1', AW,
                 'I2', AW,
                 'I3', AW,
@@ -100,7 +100,7 @@ def _MuxInterface(height, width):
                 'I7', AW]
         args += ['S', In(Bits(3))]
     elif height == 16:
-        args = ['I0',  AW, 
+        args = ['I0',  AW,
                 'I1',  AW,
                 'I2',  AW,
                 'I3',  AW,
@@ -108,7 +108,7 @@ def _MuxInterface(height, width):
                 'I5',  AW,
                 'I6',  AW,
                 'I7',  AW,
-                'I8',  AW, 
+                'I8',  AW,
                 'I9',  AW,
                 'I10', AW,
                 'I11', AW,
@@ -154,17 +154,17 @@ def DefineMux(height=2, width=1):
 
             if   height == 2:  mux( Mux.I0, Mux.I1, Mux.S )
             elif height == 4:  mux( Mux.I0, Mux.I1, Mux.I2, Mux.I3, Mux.S )
-            elif height == 8:  mux( Mux.I0, Mux.I1, Mux.I2, Mux.I3, 
+            elif height == 8:  mux( Mux.I0, Mux.I1, Mux.I2, Mux.I3,
                                     Mux.I4, Mux.I5, Mux.I6, Mux.I7, Mux.S )
-            elif height == 16: mux( Mux.I0, Mux.I1, Mux.I2, Mux.I3, 
-                                    Mux.I4, Mux.I5, Mux.I6, Mux.I7, 
-                                    Mux.I8, Mux.I9, Mux.I10, Mux.I11, 
+            elif height == 16: mux( Mux.I0, Mux.I1, Mux.I2, Mux.I3,
+                                    Mux.I4, Mux.I5, Mux.I6, Mux.I7,
+                                    Mux.I8, Mux.I9, Mux.I10, Mux.I11,
                                     Mux.I12, Mux.I13, Mux.I14, Mux.I15, Mux.S )
             wire( mux.O, Mux.O )
     return _Mux
 
 def Mux(height=2, width=None, **kwargs):
     if width is None:
-       return MuxN(height, **kwargs)
+       return curry(MuxN(height, **kwargs), prefix="I")
     return DefineMux(height, width)(**kwargs)
 

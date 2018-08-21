@@ -264,6 +264,8 @@ def dynamic_mux_select(self, S):
                 raise NotImplementedError()
             orig_height = height
             height = 2 ** m.bitutils.clog2(height)
+            if not isinstance(inputs[0], m._BitType):
+                raise NotImplementedError(type(inputs[0]))
             inputs.extend([m.bit(0) for _ in range(height - orig_height)])
 
         return Mux(height, length)(*inputs, S)

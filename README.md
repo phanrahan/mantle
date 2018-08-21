@@ -1,4 +1,5 @@
 # Mantle
+[![Documentation Status](https://readthedocs.org/projects/magma-mantle/badge/?version=latest)](https://magma-mantle.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/phanrahan/mantle.svg?branch=master)](https://travis-ci.org/phanrahan/mantle)
 
 Mantle is part of the Magma ecosystem
@@ -34,6 +35,10 @@ A Xilinx (spartan3, spartan6, zynq) backends will be released soon.
 An Altera backend is in the works.
 
 ## Documentation
+
+Documentation is hosted at http://magma-mantle.readthedocs.io/
+
+You can also browse the markdown files contained in `docs/` directly.
 
 - Combinational logic
   - [Logical Operators](doc/logic.md)

@@ -46,3 +46,4 @@ Counter wraps around to 0 when count equals m-1.
 # CounterLoad :: DATA:In(Bits(n), LOAD:In(Bit), O:Out(Bits(n), COUT:Out(Bit)
 counter = CounterLoad(n, cin=False, cout=True, incr=1,
             has_ce=False, has_reset=False)
+```

@@ -47,3 +47,33 @@ and bitwise invert
 ```
 op = Invert(n) :: I:In(Bits(n)), O:Out(Bits(n))
 ```
+
+Create a logical-shift-right barrel shifter.
+The logical shift unit shifts 0s into the most-significant bits.
+```
+# LSR :: I:In(Bits(n)), S:In(Bits(clog(n))), O:Out(Bits(n))
+lsr = LSR(n)
+```
+
+Create a logical-shift-left barrel shifter.
+The logical shift unit shifts 0s into the least-significant bits.
+```
+# LSL :: I:In(Bits(n)), S:In(Bits(clog(n))), O:Out(Bits(n))
+lsl = LSL(n)
+```
+
+Create a rotate-right unit.
+The rotate right unit rotates the bits rightwards;
+the bits exiting on the right enter on the left.
+```
+# ROR :: I:In(Bits(n)), S:In(Bits(clog(n))), O:Out(Bits(n))
+ror = ROR(n)
+```
+
+Create a rotate-left unit.
+The rotate left unit rotates the bits leftwards;
+the bits exiting on the left enter on the right.
+```
+# ROL :: I:In(Bits(n)), S:In(Bits(clog(n))), O:Out(Bits(n))
+rol = ROL(n)
+```

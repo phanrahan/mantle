@@ -40,7 +40,7 @@ Setting `cin` or `cout` to `True` causes the subtractor
 have a `CIN` or `COUT` argument.
 
 
-Create n-bit negate..
+Create n-bit negate.
 ```
 # Negate :: I:In(Bits(n)), O:Out(Bits(n))
 neg = Negate(n)
@@ -53,3 +53,11 @@ mul = Mul(n, m)
 ```
 
 Division is NYI.
+
+Create a arithmetic-shift-right barrel shifter.
+The arithmetic shift unit propagates the most-significant-bit
+(the sign-bit).
+```
+# ASR :: I:In(Bits(n)), S:In(Bits(clog(n))), O:Out(Bits(n))
+asr = ASR(n)
+```

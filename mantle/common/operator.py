@@ -257,7 +257,16 @@ def dynamic_mux_select(self, S):
             length = None
         else:
             length = len(self.T)
-        return Mux(len(self), length)(*self.ts, S)
+        height = len(self)
+        inputs = self.ts[:]
+        if m.mantle_target == "ice40" and height not in [2, 4, 8, 16]:
+            if height > 16:
+                raise NotImplementedError()
+            orig_height = height
+            height = 2 ** m.bitutils.clog2(height)
+            inputs.extend([m.bit(0) for _ in range(height - orig_height)])
+
+        return Mux(height, length)(*inputs, S)
     return orig_get_item(self, S)
 
 

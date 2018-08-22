@@ -1,5 +1,4 @@
 import magma as m
-from .util import DeclareCoreirCircuit
 from .FF import DefineCoreirReg
 import mantle
 
@@ -16,6 +15,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
             name = f"Register__has_ce_{has_ce}__has_reset_{has_reset}__" \
                    f"has_async_reset__{has_async_reset}__type_{_type.__name__}"
             IO = ["I", m.In(T), "clk", m.In(m.Clock), "O", m.Out(T)]
+
             @classmethod
             def definition(io):
                 reg = DefineCoreirReg(n, init, has_async_reset, _type)()
@@ -29,3 +29,27 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
         return Register
     else:
         return DefineCoreirReg(n, init, has_async_reset, _type)
+
+
+def Register(n, init=0, has_ce=False, has_reset=False, has_async_reset=False,
+             **kwargs):
+    return DefineRegister(n, init, has_ce, has_reset,
+                          has_async_reset)(**kwargs)
+
+
+def register(I, ce=None, reset=None, async_reset=None, **kwargs):
+    has_ce = ce is not None
+    has_reset = reset is not None
+    has_async_reset = async_reset is not None
+    reg = Register(len(I),
+                   has_ce=has_ce,
+                   has_reset=has_reset,
+                   has_async_reset=has_async_reset,
+                   **kwargs)
+    reg(I)
+    if has_ce:
+        m.wire(ce, reg.CE)
+    if has_reset:
+        m.wire(reset, reg.RESET)
+    if has_async_reset:
+        m.wire(reset, reg.ASYNCRESET)

@@ -1,8 +1,8 @@
 from magma import *
 from mantle import And, DefineAdd
 from mantle import Mux
-from .arith import Add
-from .register import Register
+from mantle import Add
+from mantle import Register
 
 __all__  = ['DefineCounter', 'Counter']
 __all__ += ['DefineUpCounter', 'UpCounter']
@@ -14,8 +14,8 @@ def _CounterName(name, incr, has_ce, has_reset, cin, cout):
     if incr != 1: name += f'_{incr}'
     if has_ce: name += 'CE'
     if has_reset:  name += 'R'
-    if cin: name += '_CIN' 
-    if cout: name += '_COUT' 
+    if cin: name += '_CIN'
+    if cout: name += '_COUT'
     return name
 
 #
@@ -67,10 +67,10 @@ def DefineCounter(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False
 
     return Counter
 
-def Counter(n, cin=False, cout=True, incr=1, 
+def Counter(n, cin=False, cout=True, incr=1,
              has_ce=False, has_reset=False, **kwargs):
     """Construct a n-bit up counter."""
-    return DefineUpCounter(n, cin=cin, cout=cout, incr=incr, 
+    return DefineUpCounter(n, cin=cin, cout=cout, incr=incr,
                has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 DefineUpCounter = DefineCounter
@@ -81,15 +81,15 @@ UpCounter = Counter
 #
 # O : Out(UInt(n)), COUT : Out(Bit)
 #
-def DefineDownCounter(n, cin=False, cout=True, decr=1, 
+def DefineDownCounter(n, cin=False, cout=True, decr=1,
     has_ce=False, has_reset=False):
     incr = (1 << n) - (decr)
-    return DefineCounter(n, cin=cin, cout=cout, incr=incr, 
+    return DefineCounter(n, cin=cin, cout=cout, incr=incr,
                has_ce=has_ce, has_reset=has_reset)
 
-def DownCounter(n, cin=False, cout=True, decr=1, 
+def DownCounter(n, cin=False, cout=True, decr=1,
     has_ce=False, has_reset=False, **kwargs):
-    return DefineDownCounter(n, cin=cin, cout=cout, decr=decr, 
+    return DefineDownCounter(n, cin=cin, cout=cout, decr=decr,
                has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 
@@ -141,7 +141,7 @@ def DefineUpDownCounter(n, cout=True, has_ce=False, has_reset=False):
 
 def UpDownCounter(n, cout=True, has_ce=False, has_reset=False, **kwargs):
     """Construct an n-bit updown counter."""
-    return DefineUpDownCounter(n, cout=cout, 
+    return DefineUpDownCounter(n, cout=cout,
               has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 

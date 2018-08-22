@@ -140,14 +140,14 @@ Only certain heights and widths are currently supported:
 ```
 # if readonly:
 #   ROM :: 
-#    "RDATA", Out(Bits(height)),
-#    "RADDR", In(Bits(width)),
+#    "RDATA", Out(Bits(width)),
+#    "RADDR", In(Bits(clog2(height))),
 #    "RCLK",  In(Clock),
 #    "RE",    In(Bit)
 # else:
 #   RAM :: 
-#    "RDATA", Out(Bits(height)),
-#    "RADDR", In(Bits(width)),
+#    "RDATA", Out(Bits(width)),
+#    "RADDR", In(Bits(clog2(height))),
 #    "RCLK",  In(Clock),
 #    "RE",    In(Bit),
 #    "WADDR", In(Bits(height)),

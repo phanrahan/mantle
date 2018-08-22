@@ -78,7 +78,7 @@ def ULE(n, **kwargs):
     return DefineULE(n)(**kwargs)
 
 
-DefineCoreirUgt = declare_binop("ugt", operator.lt, out_type=Bit)
+DefineCoreirUgt = declare_binop("ugt", operator.gt, out_type=Bit)
 
 
 @cache_definition
@@ -89,7 +89,7 @@ def UGT(n, **kwargs):
     return DefineUGT(n)(**kwargs)
 
 
-DefineCoreirUge = declare_binop("uge", operator.le, out_type=Bit)
+DefineCoreirUge = declare_binop("uge", operator.ge, out_type=Bit)
 
 
 @cache_definition
@@ -122,7 +122,7 @@ def SLE(n, **kwargs):
     return DefineSLE(n)(**kwargs)
 
 
-DefineCoreirSgt = declare_binop("sgt", operator.lt, out_type=Bit)
+DefineCoreirSgt = declare_binop("sgt", operator.gt, out_type=Bit)
 
 
 @cache_definition
@@ -133,7 +133,7 @@ def SGT(n, **kwargs):
     return DefineSGT(n)(**kwargs)
 
 
-DefineCoreirSge = declare_binop("sge", operator.le, out_type=Bit)
+DefineCoreirSge = declare_binop("sge", operator.ge, out_type=Bit)
 
 
 @cache_definition

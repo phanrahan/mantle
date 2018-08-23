@@ -13,7 +13,8 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
     if has_reset or has_ce:
         class Register(m.Circuit):
             name = f"Register__has_ce_{has_ce}__has_reset_{has_reset}__" \
-                   f"has_async_reset__{has_async_reset}__type_{_type.__name__}"
+                   f"has_async_reset__{has_async_reset}__" \
+                   f"type_{_type.__name__}__n_{n}"
             IO = ["I", m.In(T), "clk", m.In(m.Clock), "O", m.Out(T)]
             if has_ce:
                 IO += ["CE", m.In(m.Enable)]

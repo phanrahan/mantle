@@ -15,15 +15,19 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
             name = f"Register__has_ce_{has_ce}__has_reset_{has_reset}__" \
                    f"has_async_reset__{has_async_reset}__type_{_type.__name__}"
             IO = ["I", m.In(T), "clk", m.In(m.Clock), "O", m.Out(T)]
+            if has_ce:
+                IO += ["CE", m.In(m.Enable)]
+            if has_reset:
+                IO += ["RESET", m.In(m.Reset)]
 
             @classmethod
             def definition(io):
                 reg = DefineCoreirReg(n, init, has_async_reset, _type)()
                 I = io.I
                 if has_reset:
-                    I = mantle.Mux(n)(circ.I, m.bits(init, n), circ.RESET)
+                    I = mantle.mux([io.I, m.bits(init, n)], io.RESET)
                 if has_ce:
-                    I = Mux(n)(reg.O, I, circ.CE)
+                    I = mantle.mux([reg.O, I], io.CE)
                 m.wire(I, reg.I)
                 m.wire(io.O, reg.O)
         return Register

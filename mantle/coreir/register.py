@@ -19,6 +19,8 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
                 IO += ["CE", m.In(m.Enable)]
             if has_reset:
                 IO += ["RESET", m.In(m.Reset)]
+            if has_async_reset:
+                IO += ["ASYNCRESET", m.In(m.AsyncReset)]
 
             @classmethod
             def definition(io):

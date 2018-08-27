@@ -2,35 +2,26 @@
 "namespaces":{
   "global":{
     "modules":{
-      "Wire4_wrapped":{
-        "type":["Record",[
-          ["I",["Array",4,"BitIn"]],
-          ["O",["Array",4,"Bit"]]
-        ]],
-        "instances":{
-          "inst0":{
-            "genref":"coreir.wire",
-            "genargs":{"width":["Int",4]}
-          }
-        },
-        "connections":[
-          ["self.I","inst0.in"],
-          ["self.O","inst0.out"]
-        ]
-      },
       "test_coreir_wire":{
         "type":["Record",[
           ["a",["Array",4,"BitIn"]],
-          ["b",["Array",4,"Bit"]]
+          ["b",["Array",4,"Bit"]],
+          ["e","Bit"]
         ]],
         "instances":{
           "c":{
-            "modref":"global.Wire4_wrapped"
+            "genref":"coreir.wire",
+            "genargs":{"width":["Int",4]}
+          },
+          "d":{
+            "modref":"corebit.wire"
           }
         },
         "connections":[
-          ["self.a","c.I"],
-          ["self.b","c.O"]
+          ["self.a","c.in"],
+          ["self.b","c.out"],
+          ["self.a.0","d.in"],
+          ["self.e","d.out"]
         ]
       }
     }

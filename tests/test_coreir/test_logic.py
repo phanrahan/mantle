@@ -149,11 +149,13 @@ def test_wire():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_wire"
-        IO = ["a", In(Bits(width)), "b", Out(Bits(width))]
+        IO = ["a", In(Bits(width)), "b", Out(Bits(width)), "e", Out(Bit)]
         @classmethod
         def definition(circuit):
             c = Wire(width, name="c")
             wire(c(circuit.a), circuit.b)
+            d = Wire(None, name="d")
+            wire(d(circuit.a[0]), circuit.e)
     compile("build/test_coreir_wire", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
             "build/test_coreir_wire.json", "gold/test_coreir_wire.json")

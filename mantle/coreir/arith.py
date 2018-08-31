@@ -5,14 +5,14 @@ from magma.compatibility import IntegerTypes
 from magma.bit_vector import BitVector
 import mantle.primitives
 from .logic import DefineFoldOp, get_length, Invert, Not
-from .util import DeclareCoreirCircuit
+from .util import DeclareCoreirCircuit, get_int_vector_type
 from magma.logging import warning
 
 
 def declare_binop(name, python_op, out_type=None, signed=False):
     def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0), signed=signed)
-        I1 = BitVector(value_store.get_value(self.I1), signed=signed)
+        I0 = get_int_vector_type(signed)(value_store.get_value(self.I0))
+        I1 = get_int_vector_type(signed)(value_store.get_value(self.I1))
         O = python_op(I0, I1).as_bool_list()
         if out_type is Bit:
             assert len(O) == 1, "out_type is Bit but the operation returned a list of length {}".format(len(O))

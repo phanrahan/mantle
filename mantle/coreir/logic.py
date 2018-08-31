@@ -175,7 +175,7 @@ def simulate_bit_not(self, value_store, state_store):
     value_store.set_value(self.O, O)
 
 
-Not = DeclareCoreirCircuit("not", 'in', In(Bit), 'O', Out(Bit),
+Not = DeclareCoreirCircuit("not", 'I', In(Bit), 'O', Out(Bit),
     simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="corebit")
 
 

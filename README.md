@@ -83,20 +83,5 @@ $ git clone https://github.com/phanrahan/mantle
 $ cd mantle
 $ pip install pytest
 $ pip install -e .
-$ pytest
-```
-
-You should see something like
-```
-==================================== test session starts =====================================
-platform darwin -- Python 3.6.2, pytest-3.1.3, py-1.4.34, pluggy-0.4.0
-rootdir: .../mantle, inifile:
-collected 7 items
-
-tests/ice40/test_ff.py .
-tests/mantle40/test_mux.py ..
-tests/verilog/test_dff.py .
-tests/verilog/test_gates.py ...
-
-================================== 7 passed in 2.78 seconds ==================================
+$ ./scripts/run_tests.sh  # this should pass
 ```

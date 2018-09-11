@@ -119,6 +119,8 @@ def DefineOp(opname, op, height=2, width=1):
     I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
     T = Bits(width)
+    if width == 1:
+        T = Bit
     class _Op(Circuit):
 
         name = '{}{}x{}'.format(opname, height, width)
@@ -132,8 +134,14 @@ def DefineOp(opname, op, height=2, width=1):
                 return curry(op(height))
             opmxn = join(col(opm, width))
             for port in ('I{}'.format(i) for i in range(height)):
-                wire(getattr(io, port), getattr(opmxn, port))
-            wire(opmxn.O, io.O)
+                inp = getattr(io, port)
+                if width == 1:
+                    inp = bits(inp, 1)
+                wire(inp, getattr(opmxn, port))
+            o = opmxn.O
+            if width == 1:
+                o = o[0]
+            wire(o, io.O)
     return _Op
 
 @cache_definition

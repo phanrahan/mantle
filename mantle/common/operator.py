@@ -2,7 +2,7 @@ from functools import wraps
 
 import magma as m
 from magma.bitutils import seq2int
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, UDiv, SDiv
 from mantle import ASR
 from mantle import EQ, NE, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
 from mantle import Mux
@@ -81,7 +81,8 @@ for _operator_name, _Circuit in (
     ("sub", Sub),
     # TODO: These lack implementations
     # ("mul", Mul),
-    # ("div", Div)
+    ("udiv", UDiv),
+    ("sdiv", SDiv)
 ):
     __all__ += [_operator_name]
 
@@ -93,7 +94,7 @@ for _operator_name, _Circuit in (
     @check_operator_args
     @_pass_closure_vars_as_args(_Circuit, _operator_name)
     def operator(circuit, name, width, *args, **kwargs):
-        if name in ["add", "sub"]:
+        if name in ["add", "sub", "mul", "udiv", "sdiv"]:
             # These don't have a height
             if len(args) > 2:
                 raise Exception(f"{name} operator expects 2 arguments")
@@ -170,7 +171,6 @@ arithmetic_ops = [
     ("__add__", add),
     ("__sub__", sub),
     # ("__mul__", mul),
-    # ("__div__", div)
 ]
 
 
@@ -232,6 +232,9 @@ relational_ops = [
 for method, op in arithmetic_ops + relational_ops:
     setattr(m.SIntType, method, op)
     setattr(m.UIntType, method, op)
+
+m.SIntType.__truediv__ = sdiv
+m.UIntType.__truediv__ = udiv
 
 for type_ in (m._BitType, m.ArrayType):
     setattr(type_, "__eq__", eq)

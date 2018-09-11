@@ -1,7 +1,7 @@
 import magma as m
 from magma import *
 from magma.testing import check_files_equal
-from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate, DefineASR
+from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineUDiv, DefineSDiv
 from fault.test_vectors import generate_function_test_vectors, generate_simulator_test_vectors
 from magma.simulator.coreir_simulator import CoreIRSimulator
 from .util import wrap
@@ -60,3 +60,15 @@ def test_asr():
     compile("build/test_asr", DefineASR(4), output="coreir")
     assert check_files_equal(__file__,
             "build/test_asr.json", "gold/test_asr.json")
+
+
+def test_udiv():
+    compile("build/test_udiv", wrap(DefineUDiv(4)), output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_udiv.json", "gold/test_udiv.json")
+
+
+def test_sdiv():
+    compile("build/test_sdiv", wrap(DefineSDiv(4)), output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_sdiv.json", "gold/test_sdiv.json")

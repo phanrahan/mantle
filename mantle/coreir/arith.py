@@ -161,3 +161,12 @@ def DefineASR(width):
 def ASR(width, **kwargs):
     return DefineASR(width)(**kwargs)
 
+
+DefineCoreirUDiv = declare_binop("udiv", operator.truediv)
+
+DefineUDiv = DefineCoreirUDiv
+
+
+DefineCoreirSDiv = declare_binop("sdiv", operator.truediv)
+
+DefineSDiv = DefineCoreirSDiv

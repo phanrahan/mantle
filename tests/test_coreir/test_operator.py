@@ -87,7 +87,8 @@ def test_unary_op(op, N, T, TType):
     op(name="sub", operator="-"),
     # TODO: Enable these once we have implementations
     # op(name="mul", operator="*"),
-    # op(name="div", operator="/"),
+    op(name="udiv", operator="/"),
+    op(name="sdiv", operator="/"),
     op(name="eq", operator="=="),
     op(name="ne", operator="!="),
     op(name="lt", operator="<"),
@@ -104,6 +105,11 @@ def test_binary_op(op, N, T, TType):
     Tests mantle.operator by using the operator.{op.name} method directly and
     using the overloaded {op.operator} if it is not None.
     """
+
+    if op.name == "udiv" and T != m.UInt:
+        pytest.skip("udiv only defined for m.UInt")
+    elif op.name == "sdiv" and T != m.SInt:
+        pytest.skip("sdiv only defined for m.SInt")
     def to_str(x):
         if callable(x):
             return x.__name__

@@ -170,3 +170,13 @@ DefineUDiv = DefineCoreirUDiv
 DefineCoreirSDiv = declare_binop("sdiv", operator.truediv)
 
 DefineSDiv = DefineCoreirSDiv
+
+
+DefineCoreirUMod = declare_binop("urem", operator.mod)
+
+DefineUMod = DefineCoreirUMod
+
+
+DefineCoreirSMod = declare_binop("srem", operator.mod)
+
+DefineSMod = DefineCoreirSMod

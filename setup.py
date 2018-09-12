@@ -22,7 +22,7 @@ setup(
 
     install_requires=[
         "six",
-        "fault==0.20",
+        "fault>=0.20, <=0.21",
     ],
     url='https://github.com/phanrahan/mantle',
     maintainer='Leonard Truong',

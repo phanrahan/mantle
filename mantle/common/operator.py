@@ -16,8 +16,19 @@ def get_length(value):
         return None
     elif isinstance(value, m.ArrayType):
         return len(value)
+    elif isinstance(value, int):
+        return value.bit_length()
     else:
         raise NotImplementedError(f"Cannot get_length of {type(value)}")
+
+def check_widths(width, args):
+    for arg in args:
+        arg_len = get_length(arg)
+        # Allow integers with widths less than the width (they will be
+        # promoted)
+        if arg_len != width and not (isinstance(arg, int) and arg_len < width):
+            raise ValueError(
+                f"All arguments should have the same length: {args}")
 
 
 def check_operator_args(fn):
@@ -27,9 +38,7 @@ def check_operator_args(fn):
             raise RuntimeError(
                 f"{fn.__name__} requires at least 2 arguments")
         width = get_length(args[0])
-        if not all(get_length(x) == width for x in args):
-            raise ValueError(
-                f"All arguments should have the same length: {args}")
+        check_widths(width, args)
         T = type(args[0])
         if not (all(issubclass(type(x).__class__, T.__class__) for x in args) or (
                 all(issubclass(T.__class__, type(x).__class__) for x in args))):

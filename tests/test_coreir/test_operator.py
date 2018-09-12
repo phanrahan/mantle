@@ -129,7 +129,7 @@ def test_binary_op(op, N, T, TType):
     class TestCircuit(m.Circuit):
         name = _name
         IO = ["I0", m.In(T(N)), "I1", m.In(T(N)),
-              "O0", out_T, "O1", out_T]
+              "O0", out_T, "O1", out_T, "O2", out_T]
 
         @classmethod
         def definition(io):
@@ -147,6 +147,9 @@ def test_binary_op(op, N, T, TType):
             else:
                 res_operator = eval(f"io.I0 {op.operator} io.I1")
                 m.wire(res_operator, io.O1)
+            # Test integer promotion
+            res = getattr(mantle, op.name)(io.I0, 1)
+            m.wire(res, io.O2)
 
     m.compile(f'build/{_name}', TestCircuit, output="coreir")
     assert check_files_equal(__file__, f"build/{_name}.json",

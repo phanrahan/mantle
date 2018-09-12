@@ -30,7 +30,8 @@
           ["I0",["Array",4,"BitIn"]],
           ["I1",["Array",4,"BitIn"]],
           ["O0",["Array",4,"Bit"]],
-          ["O1",["Array",4,"Bit"]]
+          ["O1",["Array",4,"Bit"]],
+          ["O2",["Array",4,"Bit"]]
         ]],
         "instances":{
           "const_0_4":{
@@ -38,15 +39,26 @@
             "genargs":{"width":["Int",4]},
             "modargs":{"value":[["BitVector",4],"4'h0"]}
           },
+          "const_1_4":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",4]},
+            "modargs":{"value":[["BitVector",4],"4'h1"]}
+          },
           "inst0":{
+            "modref":"global.NAnd24"
+          },
+          "inst1":{
             "modref":"global.NAnd24"
           }
         },
         "connections":[
           ["self.O1","const_0_4.out"],
+          ["inst1.I1","const_1_4.out"],
           ["self.I0","inst0.I0"],
           ["self.I1","inst0.I1"],
-          ["self.O0","inst0.O"]
+          ["self.O0","inst0.O"],
+          ["self.I0","inst1.I0"],
+          ["self.O2","inst1.O"]
         ]
       }
     }

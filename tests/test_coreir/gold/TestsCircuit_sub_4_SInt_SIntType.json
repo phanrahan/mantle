@@ -66,23 +66,35 @@
           ["I0",["Array",4,"BitIn"]],
           ["I1",["Array",4,"BitIn"]],
           ["O0",["Array",4,"Bit"]],
-          ["O1",["Array",4,"Bit"]]
+          ["O1",["Array",4,"Bit"]],
+          ["O2",["Array",4,"Bit"]]
         ]],
         "instances":{
+          "const_1_4":{
+            "genref":"coreir.const",
+            "genargs":{"width":["Int",4]},
+            "modargs":{"value":[["BitVector",4],"4'h1"]}
+          },
           "inst0":{
             "modref":"global.Sub4"
           },
           "inst1":{
             "modref":"global.Sub4"
+          },
+          "inst2":{
+            "modref":"global.Sub4"
           }
         },
         "connections":[
+          ["inst2.I1","const_1_4.out"],
           ["self.I0","inst0.I0"],
           ["self.I1","inst0.I1"],
           ["self.O0","inst0.O"],
           ["self.I0","inst1.I0"],
           ["self.I1","inst1.I1"],
-          ["self.O1","inst1.O"]
+          ["self.O1","inst1.O"],
+          ["self.I0","inst2.I0"],
+          ["self.O2","inst2.O"]
         ]
       }
     }

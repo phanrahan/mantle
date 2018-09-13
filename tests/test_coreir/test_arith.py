@@ -1,7 +1,8 @@
 import magma as m
 from magma import *
 from magma.testing import check_files_equal
-from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate, DefineASR, DefineUDiv, DefineSDiv
+from mantle.coreir.arith import DefineAdd, DefineSub, DefineNegate, DefineASR, \
+    DefineUDiv, DefineSDiv, DefineUMod, DefineSMod
 from fault.test_vectors import generate_function_test_vectors, generate_simulator_test_vectors
 from magma.simulator.coreir_simulator import CoreIRSimulator
 from .util import wrap
@@ -72,3 +73,15 @@ def test_sdiv():
     compile("build/test_sdiv", wrap(DefineSDiv(4)), output="coreir")
     assert check_files_equal(__file__,
             "build/test_sdiv.json", "gold/test_sdiv.json")
+
+
+def test_umod():
+    compile("build/test_umod", wrap(DefineUMod(4)), output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_umod.json", "gold/test_umod.json")
+
+
+def test_smod():
+    compile("build/test_smod", wrap(DefineSMod(4)), output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_smod.json", "gold/test_smod.json")

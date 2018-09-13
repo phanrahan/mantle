@@ -1,7 +1,7 @@
 import magma as m
 from mantle import DefineAdd, DefineSub, DefineNegate
 
-__all__ = [ "Add", "Sub", "Negate", "UDiv", "SDiv" ]
+__all__ = [ "Add", "Sub", "Negate", "UDiv", "SDiv", "UMod", "SMod" ]
 
 
 def Add(n, cin=False, cout=False, **kwargs):
@@ -34,3 +34,23 @@ def SDiv(width, **kwargs):
     # if guard
     from mantle import DefineSDiv
     return DefineSDiv(width)(**kwargs)
+
+
+def UMod(width, **kwargs):
+    if m.mantle_target != "coreir":
+        raise NotImplementedError(
+            "Modulo not implemented for mantle target {m.mantle_target}")
+    # Workaround import error for other targets by delaying import until after
+    # if guard
+    from mantle import DefineUMod
+    return DefineUMod(width)(**kwargs)
+
+
+def SMod(width, **kwargs):
+    if m.mantle_target != "coreir":
+        raise NotImplementedError(
+            "Modulo not implemented for mantle target {m.mantle_target}")
+    # Workaround import error for other targets by delaying import until after
+    # if guard
+    from mantle import DefineSMod
+    return DefineSMod(width)(**kwargs)

@@ -4,8 +4,10 @@ from magma.testing.utils import check_files_equal
 import magma as m
 m.set_mantle_target("coreir")
 import mantle
+import pytest
 
 
+@pytest.mark.skip("depends on magma branch check-mantle-dependency-coreir")
 def test_compile(caplog):
     And2 = m.DeclareCircuit('And2', "I0", m.In(m.Bit), "I1", m.In(m.Bit),
                             "O", m.Out(m.Bit))

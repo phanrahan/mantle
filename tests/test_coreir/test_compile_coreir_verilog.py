@@ -9,9 +9,6 @@ import pytest
 
 @pytest.mark.skip("depends on magma branch check-mantle-dependency-coreir")
 def test_compile(caplog):
-    And2 = m.DeclareCircuit('And2', "I0", m.In(m.Bit), "I1", m.In(m.Bit),
-                            "O", m.Out(m.Bit))
-
     main = m.DefineCircuit("main", "I", m.In(m.Bits(2)), "O", m.Out(m.Bit))
 
     and2 = mantle.And(2)

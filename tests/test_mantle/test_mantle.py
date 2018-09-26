@@ -132,7 +132,7 @@ def test_mux(height, width):
 def test_not():
     if magma.mantle_target == "coreir":
         pytest.skip("Not circuit is wrapper around coreir declaration, cannot compile")
-    if magma.mantle_target == "spartan3":
+    if magma.mantle_target in ["spartan3", "spartan6"]:
         pytest.skip("Not circuit is function, cannot compile")
     Test = mantle.Not
     #sim( Test, operator.invert )

@@ -2,7 +2,9 @@ import pytest
 coreir = pytest.importorskip("coreir")
 from magma import *
 from magma.testing import check_files_equal
-from mantle.coreir.memory import DefineCoreirMem
+from mantle.coreir.memory import DefineCoreirMem, DefineRAM
+from magma.simulator.coreir_simulator import CoreIRSimulator
+from magma.backend.coreir_ import CoreIRBackend
 
 
 def test_coreir_rom():
@@ -28,3 +30,10 @@ def test_coreir_rom():
     compile("build/test_coreir_mem", Mem, output="coreir")
     assert check_files_equal(__file__,
             "build/test_coreir_mem.json", "gold/test_coreir_mem.json")
+
+def test_ram1x8():
+    c = coreir.Context()
+    cirb = CoreIRBackend(c)
+
+    testcircuit = DefineRAM(1, 8)
+    CoreIRSimulator(testcircuit, testcircuit.CLK, context=cirb.context)

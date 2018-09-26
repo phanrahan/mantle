@@ -1,3 +1,4 @@
+import re
 from collections import namedtuple
 import operator
 import pytest
@@ -40,6 +41,12 @@ def sim(Test, TestFun):
     assert tvsim == tvfun
 
 
+def strip_anonymous_circuits(string):
+    # These names are generated based on the object ID so they change between
+    # test runs
+    return re.sub(r'AnonymousCircuitType[0-9]+', '', string)
+
+
 def test_lut1():
     target = magma.mantle_target
     if target == 'coreir':
@@ -49,7 +56,7 @@ def test_lut1():
     if target == 'spartan3' or target == 'spartan6':
         assert 'LUT1(INIT=0x2)' == repr(test)
     elif target == 'ice40':
-        assert 'AnonymousCircuitType("I0", .I0, "O", .O)' == repr(test)
+        assert 'AnonymousCircuitType("I0", .I0, "O", .O)' == strip_anonymous_circuits(repr(test))
     elif target == 'coreir':
         assert 'LUT1_2()' == repr(test)
 
@@ -63,7 +70,7 @@ def test_lut2():
     if target == 'spartan3' or target == 'spartan6':
         assert 'LUT2(INIT=0x8)' == repr(test)
     elif target == 'ice40':
-        assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "O", .O)' == repr(test)
+        assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "O", .O)' == strip_anonymous_circuits(repr(test))
     elif target == 'coreir':
         assert 'LUT2_8()' == repr(test)
 
@@ -76,7 +83,7 @@ def test_lut3():
     if target == 'spartan3' or target == 'spartan6':
         assert 'LUT3(INIT=0x80)' == repr(test)
     elif target == 'ice40':
-        assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "I2", .I2, "O", .O)' == repr(test)
+        assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "I2", .I2, "O", .O)' == strip_anonymous_circuits(repr(test))
     elif target == 'coreir':
         assert 'LUT3_128()' == repr(test)
 
@@ -125,6 +132,8 @@ def test_mux(height, width):
 def test_not():
     if magma.mantle_target == "coreir":
         pytest.skip("Not circuit is wrapper around coreir declaration, cannot compile")
+    if magma.mantle_target == "spartan3":
+        pytest.skip("Not circuit is function, cannot compile")
     Test = mantle.Not
     #sim( Test, operator.invert )
     com( Test, 'not' )

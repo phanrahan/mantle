@@ -1,7 +1,7 @@
 from magma import *
-from magma.bit_vector import BitVector
 from mantle.coreir.MUX import Mux
 import coreir
+from bit_vector import BitVector
 
 from .util import DeclareCoreirCircuit
 

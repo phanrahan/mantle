@@ -1,5 +1,5 @@
 from magma import *
-from magma.bit_vector import BitVector
+from bit_vector import BitVector
 from mantle.lattice.ice40.RAMB import ROMB, RAMB
 from magma.simulator import PythonSimulator
 

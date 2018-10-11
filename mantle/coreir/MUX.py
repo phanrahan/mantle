@@ -3,10 +3,10 @@ from __future__ import division
 
 from magma import *
 import magma as m
-from magma.bit_vector import BitVector
 from magma.backend.coreir_ import CoreIRBackend
 from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper
 from .util import DeclareCoreirCircuit
+from bit_vector import BitVector
 
 import math
 

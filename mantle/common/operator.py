@@ -26,7 +26,9 @@ def check_widths(width, args):
         arg_len = get_length(arg)
         # Allow integers with widths less than the width (they will be
         # promoted)
-        if arg_len != width and not (isinstance(arg, int) and arg_len < width):
+        if arg_len != width \
+                and not ((isinstance(arg, int) and arg_len is 1 and width is None) or \
+                         (isinstance(arg, int) and arg_len < width)):
             raise ValueError(
                 f"All arguments should have the same length: {args}")
 

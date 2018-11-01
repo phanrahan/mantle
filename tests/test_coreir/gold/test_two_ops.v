@@ -33,9 +33,9 @@ module Sub8 (
 
   assign inst1__I1[7:0] = ~I1;
 
-  assign O[7:0] = inst1__O[7:0];
-
   assign inst1__I0[7:0] = I0[7:0];
+
+  assign O[7:0] = inst1__O[7:0];
 
 
 endmodule  // Sub8

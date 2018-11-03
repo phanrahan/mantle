@@ -7,7 +7,7 @@ setup(
     license='MIT',
     maintainer='Lenny Truong',
     maintainer_email='lenny@cs.stanford.edu',
-    description='Library of hardware primitives for programming FPGAs',
+    description='The magma standard library',
     packages=[
         "mantle",
         "mantle.common",

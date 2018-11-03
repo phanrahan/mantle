@@ -3,6 +3,10 @@ from setuptools import setup
 setup(
     name='mantle',
     version='0.1.1',
+    url='https://github.com/phanrahan/mantle',
+    license='MIT',
+    maintainer='Lenny Truong',
+    maintainer_email='lenny@cs.stanford.edu',
     description='Library of hardware primitives for programming FPGAs',
     packages=[
         "mantle",

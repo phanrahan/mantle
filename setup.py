@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='mantle',
-    version='0.1',
+    version='0.1.1',
     description='Library of hardware primitives for programming FPGAs',
     packages=[
         "mantle",

@@ -1,24 +1,29 @@
 language: python
 python:
-    - "3.6"
-
+- '3.6'
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.9
-
+    - g++-4.9
 before_install:
-    - git clone https://github.com/phanrahan/magma.git
-    - if [[ $TRAVIS_BRANCH == 'coreir-dev' ]]; then git -C magma checkout coreir-dev; fi
-    - pip install -e magma
-    - source magma/.travis/install_coreir.sh
-
+- git clone https://github.com/phanrahan/magma.git
+- if [[ $TRAVIS_BRANCH == 'coreir-dev' ]]; then git -C magma checkout coreir-dev;
+  fi
+- pip install -e magma
+- source magma/.travis/install_coreir.sh
 install:
-    - pip install pytest-cov
-    - pip install fabricate delegator.py
-    - pip install -e .
-
+- pip install pytest-cov
+- pip install fabricate delegator.py
+- pip install -e .
 script:
-    - ./scripts/run_tests.sh
+- "./scripts/run_tests.sh"
+deploy:
+  provider: pypi
+  user: leonardt
+  on:
+    tags: true
+    branch: master
+  password:
+    secure: bjJJEoxTByzd7SO8mqJTdUbb2EjZveoLxUFsXoR40/FXSAfISKQE2F11fe/uOlyzSTFLd/0aEfS7onNwHAOVD4jC6Y7/p6SJOTYwtWzd1m3nkV9QVEf4gDgCo/3dGI/7PH5WRsVsdU1QmJkJzMLBid953elpKYeuPW3AQGwAyM3FBFOFNCd7gy6x6PZWn3SV/QMXAh8r7OGzP2fciLv9w6Wsqt45XXcBIzFhR30SwX0+dSSzXVnVyot5S09/pLg1eZfRAoygL5M2HGdsyipzL1r2JR5uA3NKSN7kvnN3UT9RwdP0qsKWwebZhSG7Xjw2k2+R0PFTScyJcwT3H0dnED3d9WknUuvdwnONKtOKL2YjrC+LQyO6lZdeFpPc4SWt1j3KDfuXglepqnEn4+ZSZc5uipZffEkpnBWf1ReVOvxtuB8eWJp6Dq7d73etyCDrZiG4DtMuECZ+Y4t+SltUDA7AaTR5HIEeqHhmVNAMurkUU/FhtrEuEfzXvNraj6WG/8j9k+k7fngvTajkbeW+1LRA6B5BkNyqksXcWgXa2neOtqZieO/wF9bA/lorUn1cIqD++QmPaB+ieKnGebDGUukSeAzLiLkYpZ56pRholE3rdQKqPdX1cg5LbsqIJJhM9hgGUqXmprJxqUoUihrUO+XLBbJKnBT1EW7RaygeLPo=

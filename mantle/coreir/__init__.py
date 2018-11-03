@@ -18,8 +18,8 @@ from .logic import (
 #from .fulladder import FullAdder
 #from .halfadder import HalfAdder
 from .arith import DefineAdd, DefineSub, DefineNegate, DefineASR, ASR, \
-    DefineCoreirAdd, DefineCoreirMul, DefineUDiv, DefineSDiv, DefineUMod, \
-    DefineSMod
+    DefineCoreirAdd, DefineCoreirMul, DefineMul, DefineUDiv, DefineSDiv, \
+    DefineUMod, DefineSMod
 
 from .FF import FF, DFF, DefineDFF, DefineCoreirReg
 from .LUT import LUT

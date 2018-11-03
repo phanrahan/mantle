@@ -162,6 +162,11 @@ def ASR(width, **kwargs):
     return DefineASR(width)(**kwargs)
 
 
+DefineCoreirMul = declare_binop("mul", operator.mul)
+
+DefineMul = DefineCoreirMul
+
+
 DefineCoreirUDiv = declare_binop("udiv", operator.truediv)
 
 DefineUDiv = DefineCoreirUDiv

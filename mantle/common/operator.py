@@ -2,7 +2,7 @@ from functools import wraps
 
 import magma as m
 from magma.bitutils import seq2int
-from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, UDiv, SDiv, UMod, SMod
+from mantle import And, NAnd, Or, NOr, XOr, NXOr, LSL, LSR, Not, Invert, UDiv, SDiv, UMod, SMod, Mul
 from mantle import ASR
 from mantle import EQ, NE, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
 from mantle import Mux
@@ -90,8 +90,7 @@ for _operator_name, _Circuit in (
     ("nxor", NXOr),
     ("add", Add),
     ("sub", Sub),
-    # TODO: These lack implementations
-    # ("mul", Mul),
+    ("mul", Mul),
     ("udiv", UDiv),
     ("sdiv", SDiv),
     ("umod", UMod),
@@ -183,7 +182,7 @@ arithmetic_ops = [
     ("__neg__", neg),
     ("__add__", add),
     ("__sub__", sub),
-    # ("__mul__", mul),
+    ("__mul__", mul),
 ]
 
 

@@ -1,7 +1,7 @@
 import magma as m
 from mantle import DefineAdd, DefineSub, DefineNegate
 
-__all__ = [ "Add", "Sub", "Negate", "UDiv", "SDiv", "UMod", "SMod" ]
+__all__ = [ "Add", "Sub", "Negate", "UDiv", "SDiv", "UMod", "SMod", "Mul"]
 
 
 def Add(n, cin=False, cout=False, **kwargs):
@@ -14,6 +14,16 @@ def Sub(n, cin=False, cout=False, **kwargs):
 
 def Negate(width, **kwargs):
     return DefineNegate(width)(**kwargs)
+
+
+def Mul(width, **kwargs):
+    if m.mantle_target != "coreir":
+        raise NotImplementedError(
+            "Mul not implemented for mantle target {m.mantle_target}")
+    # Workaround import error for other targets by delaying import until after
+    # if guard
+    from mantle import DefineMul
+    return DefineMul(width)(**kwargs)
 
 
 def UDiv(width, **kwargs):

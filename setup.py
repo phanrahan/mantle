@@ -28,8 +28,5 @@ setup(
         "six",
         "fault>=0.20, <=0.28",
     ],
-    url='https://github.com/phanrahan/mantle',
-    maintainer='Leonard Truong',
-    maintainer_email='lenny@cs.stanford.edu',
     python_requires='>=3.6'
 )

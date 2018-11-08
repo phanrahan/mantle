@@ -106,13 +106,31 @@ for _operator_name, _Circuit in (
     @check_operator_args
     @_pass_closure_vars_as_args(_Circuit, _operator_name)
     def operator(circuit, name, width, *args, **kwargs):
-        if name in ["add", "sub", "mul", "udiv", "sdiv", 'umod', 'smod']:
-            # These don't have a height
-            if len(args) > 2:
-                raise Exception(f"{name} operator expects 2 arguments")
-            return circuit(width, **kwargs)(*args)
+        for arg in args:
+            if not isinstance(arg, (m.Type, int)):
+                raise TypeError("Operators only defined on magma types and Python ints")
+        if name == "le" and args[0].isinput :
+            assert len(args) == 2, "Expected two arguments for assignment (<=)"
+            if not isinstance(args[1], int) and not args[1].isoutput():
+                raise TypeError("Can only assign an output to an input")
         else:
-            return circuit(len(args), width, **kwargs)(*args)
+            for arg in args:
+                if not isinstance(arg, int) and not arg.isoutput():
+                    raise TypeError("Non-assigment operators are only defined on output types")
+
+        if name == "le" and args[0].isinput():
+            # We could just call wire here, but we dispatch to the default
+            # magma implementation so we only have to maintain the logic in one
+            # place
+            m.Type.__le__(args[0], args[1])
+        else:
+            if name in ["add", "sub", "mul", "udiv", "sdiv", 'umod', 'smod']:
+                # These don't have a height
+                if len(args) > 2:
+                    raise Exception(f"{name} operator expects 2 arguments")
+                return circuit(width, **kwargs)(*args)
+            else:
+                return circuit(len(args), width, **kwargs)(*args)
     operator.__name__ = _operator_name
     operator.__qualname__ = _operator_name
     operators[_operator_name] = operator

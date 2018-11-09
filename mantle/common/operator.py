@@ -216,6 +216,8 @@ def lt(width, I0, I1, **kwargs):
 @export
 @check_operator_args
 def le(width, I0, I1, **kwargs):
+    if I0.isinput():
+        return m.Type.__le__(I0, I1)
     if isinstance(I0, m.SIntType):
         return SLE(width, **kwargs)(I0, I1)
     else:

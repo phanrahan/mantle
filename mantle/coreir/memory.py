@@ -32,7 +32,7 @@ def gen_sim_mem(depth, width):
 
 
 @cache_definition
-def DefineCoreirMem(depth, width):
+def DefineCoreirMem(depth, width, init=None):
     name = "coreir_mem{}x{}".format(depth,width)
     addr_width = getRAMAddrWidth(depth)
     IO = ["raddr", In(Bits(addr_width)),
@@ -41,11 +41,14 @@ def DefineCoreirMem(depth, width):
           "wdata", In(Bits(width)),
           "clk", In(Clock),
           "wen", In(Bit) ]
+    coreir_configargs = {}
+    if init:
+        coreir_configargs["init"] = init
     return DeclareCircuit(name, *IO, verilog_name="coreir_mem",
             coreir_name="mem", coreir_lib="coreir",
             simulate=gen_sim_mem(depth, width),
-            coreir_genargs={"width": width, "depth": depth})
-            # coreir_configargs={"init": "0"})
+            coreir_genargs={"width": width, "depth": depth, "has_init": init is not None},
+            coreir_configargs=coreir_configargs)
 
 def CoreirMem(cirb, depth, width):
     return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "mem", "CoreIRmem_w{}_d{}".format(width, depth),

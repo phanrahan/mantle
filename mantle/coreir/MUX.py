@@ -61,11 +61,19 @@ def _declare_muxn(height, width):
 
 
 @cache_definition
-def DefineMux(height=2, width=None):
-    if width is None:
-        T = Bit
+def DefineMux(height=2, width=None, T=None):
+    if T is not None:
+        assert width is None, "Can only specify width **or** T"
+        # Sanitize names for verilog by removing parens
+        # TODO: Make this a reuseable feature
+        suffix = str(T).replace("(", "$").replace(")", "$").replace(",", "$")
+        T = T
     else:
-        T = Bits(width)
+        suffix = f"{width}"
+        if width is None:
+            T = Bit
+        else:
+            T = Bits(width)
 
     io = []
     for i in range(height):
@@ -78,32 +86,42 @@ def DefineMux(height=2, width=None):
     io += ['O', Out(T)]
 
     class _Mux(Circuit):
-        name = "Mux{}x{}".format(height, width)
+        name = "Mux{}x{}".format(height, suffix)
         IO = io
         @classmethod
         def definition(interface):
-            if width is None:
-                mux = _declare_muxn(height, 1)()
-            else:
-                mux = _declare_muxn(height, width)()
-            for i in range(height):
-                if width is None:
-                    m.wire(getattr(interface, f"I{i}"), mux.I.data[i][0])
+            print(T is not None and not isinstance(T, m.BitKind) or isinstance(T, m.ArrayKind) and not isinstance(T.T, m.BitKind))
+            if T is not None and not (isinstance(T, m.BitKind) or isinstance(T, m.ArrayKind) and isinstance(T.T, m.BitKind)):
+                if isinstance(T, m.TupleKind):
+                    raise NotImplementedError()
                 else:
-                    m.wire(getattr(interface, f"I{i}"), mux.I.data[i])
-            if height == 2:
-                m.wire(interface.S, mux.I.sel[0])
+                    assert isinstance(T, m.ArrayKind), f"Expected array or type type, got {T}, type is {type(T)}"
+                    for i in range(len(T)):
+                        Is = [getattr(interface, f"I{j}")[i] for j in range(height)]
+                        interface.O[i] <= DefineMux(height, T=type(Is[0]))()(*Is, interface.S)
             else:
-                m.wire(interface.S, mux.I.sel)
-            if width is None:
-                wire(mux.O[0], interface.O)
-            else:
-                wire(mux.O, interface.O)
+                if T is None and width is None or isinstance(T, m.BitKind):
+                    mux = _declare_muxn(height, 1)()
+                else:
+                    mux = _declare_muxn(height, width if T is None else T.size())()
+                for i in range(height):
+                    if T is None and width is None or isinstance(T, m.BitKind):
+                        m.wire(getattr(interface, f"I{i}"), mux.I.data[i][0])
+                    else:
+                        m.wire(getattr(interface, f"I{i}"), mux.I.data[i])
+                if height == 2:
+                    m.wire(interface.S, mux.I.sel[0])
+                else:
+                    m.wire(interface.S, mux.I.sel)
+                if T is None and width is None or isinstance(T, m.BitKind):
+                    wire(mux.O[0], interface.O)
+                else:
+                    wire(mux.O, interface.O)
     return _Mux
 
 
-def Mux(height=2, width=None, **kwargs):
-    return DefineMux(height, width)(**kwargs)
+def Mux(height=2, width=None, T=None, **kwargs):
+    return DefineMux(height, width, T=T)(**kwargs)
 
 Mux2 = DefineMux(2)
 Mux4 = DefineMux(4)

@@ -283,7 +283,7 @@ def mux(I, S):
         return I[S]
     elif S.const():
         return I[seq2int(S.bits())]
-    return Mux(len(I), get_length(I[0]))(*I, S)
+    return Mux(len(I), T=type(I[0]))(*I, S)
 
 
 orig_get_item = m.ArrayType.__getitem__

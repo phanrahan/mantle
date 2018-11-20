@@ -85,8 +85,7 @@ def test_unary_op(op, N, T, TType):
     op(name="asr", operator=None),
     op(name="add", operator="+"),
     op(name="sub", operator="-"),
-    # TODO: Enable these once we have implementations
-    # op(name="mul", operator="*"),
+    op(name="mul", operator="*"),
     op(name="udiv", operator="/"),
     op(name="sdiv", operator="/"),
     op(name="umod", operator="%"),
@@ -108,6 +107,8 @@ def test_binary_op(op, N, T, TType):
     using the overloaded {op.operator} if it is not None.
     """
 
+    if op.name in ["mul"] and T not in (m.UInt, m.SInt):
+        pytest.skip(f"{op.name} only defined for m.UInt and m.SInt")
     if op.name in ["udiv", "umod"] and T != m.UInt:
         pytest.skip(f"{op.name} only defined for m.UInt")
     elif op.name in ["sdiv", "smod"] and T != m.SInt:

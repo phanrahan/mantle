@@ -90,7 +90,6 @@ def DefineMux(height=2, width=None, T=None):
         IO = io
         @classmethod
         def definition(interface):
-            print(T is not None and not isinstance(T, m.BitKind) or isinstance(T, m.ArrayKind) and not isinstance(T.T, m.BitKind))
             if T is not None and not (isinstance(T, m.BitKind) or isinstance(T, m.ArrayKind) and isinstance(T.T, m.BitKind)):
                 if isinstance(T, m.TupleKind):
                     raise NotImplementedError()

@@ -3,7 +3,13 @@ import sys, getopt
 import magma as m
 
 def usage():
-    print("usage: mantle generator [arg=val] ...")
+    print("usage: mantle [-p] [-t target] [-f format] [-o output] generator [parameters]")
+    print("  -p           print generator interface")
+    print("  -o output    output file")
+    print("  -f format    format of the output (coreir, verilog)")
+    print("  -t target    mantle target (coreir, ice40, ...)")
+    print("  generator    name")
+    print("  parameters   key1=val1 key2=val2 ...")
     sys.exit(0)
 
 def parse(args):

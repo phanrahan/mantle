@@ -1,0 +1,70 @@
+from inspect import signature
+import sys, getopt
+import magma as m
+
+def usage():
+    print("usage: mantle generator [arg=val] ...")
+    sys.exit(0)
+
+def parse(args):
+    name = args[0]
+
+    parameters = {}
+    for arg in args[1:]:
+        a = arg.split('=')
+        key, val = a[0], a[1]
+        if val[0].isdigit():
+            val = int(val)
+        parameters[key] = val
+
+    return name, parameters
+
+opts, args = getopt.getopt(sys.argv[1:], 'pt:o:f:')
+
+if len(args) < 1:
+    usage()
+
+target = 'ice40'
+format = 'coreir'
+output = None
+print_interface = False
+
+for o, a in opts:
+    if o == '-h':
+        usage()
+    elif o == '-t':
+        if a not in ['ice40', 'spartan3', 'spartan6', 'kintex7', 'cyclone4', 'greenpak4']:
+            usage()
+        target = a
+    elif o == '-f':
+        if a not in ['verilog', 'coreir', 'firrtl', 'blif']:
+            usage()
+        format = a
+    elif o == '-o':
+        output = a
+    elif o == '-p':
+        print_interface = True
+
+name, parameters = parse(args)
+
+if not output:
+    output = name
+
+m.set_mantle_target(target)
+import mantle
+
+generator = getattr(mantle, name)
+if not generator:
+    print(name,'not found in mantle')
+    sys.exit(0)
+sig = signature(generator)
+
+if print_interface:
+    print(name,sig)
+else:
+    circuit = generator(**parameters)
+    #print(repr(circuit))
+    m.compile(output,circuit,format)
+
+
+

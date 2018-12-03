@@ -81,10 +81,10 @@ Issues:
 
 Generators:
 * `DFF(init, has_ce, has_reset, edge, sync)`
-* `SRFF(init, has_ce, has_reset, edge, sync)` - **TODO: Missing from corier**
-* `RSFF(init, has_ce, has_reset, edge, sync)` - **TODO: Missing from corier**
-* `JKFF(init, has_ce, has_reset, edge, sync)` - **TODO: Missing from corier**
-* `TFF(init, has_ce, has_reset, edge, sync)` - **TODO: Missing from corier**
+* `SRFF(init, has_ce, has_reset, edge, sync)` - **TODO: Missing from mantle.coreir**
+* `RSFF(init, has_ce, has_reset, edge, sync)` - **TODO: Missing from mantle.coreir**
+* `JKFF(init, has_ce, has_reset, edge, sync)` - **TODO: Missing from mantle.coreir**
+* `TFF(init, has_ce, has_reset, edge, sync)` - **TODO: Missing from mantle.coreir**
 
 ## LUT
 Issues:

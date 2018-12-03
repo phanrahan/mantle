@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='mantle',
-    version='0.1.3',
+    version='0.1.4',
     url='https://github.com/phanrahan/mantle',
     license='MIT',
     maintainer='Lenny Truong',
@@ -26,7 +26,7 @@ setup(
 
     install_requires=[
         "six",
-        "fault>=0.20, <=0.28",
+        "fault>=0.20, <=0.35",
     ],
     python_requires='>=3.6'
 )

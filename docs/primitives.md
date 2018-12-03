@@ -88,7 +88,7 @@ Generators:
 
 ## LUT
 Issues:
-* coreir uses `init` parameter instead of `rom` (used by mantle40) and `N`
+* mantle.coreir uses `init` parameter instead of `rom` (used by mantle40) and `N`
   instead of `n`
 
 Generators:
@@ -98,7 +98,7 @@ Generators:
 ## Memory
 
 Issues:
-* coreir has custom RAM implementation, should it just use the common.RAM?
+* mantle.coreir has custom RAM implementation, should it just use the common.RAM?
 
 Generators:
 * `Memory(height, width, rom, readonly)` - **TODO: mantle.coreir does not have rom parameter and does not support ROMs. I think this is an old artifact of coreir lacking support for ROMs, which it should now support. also missing define+instance variant**

@@ -17,9 +17,9 @@ module DFF (input  D, input  CLK, output  Q);
 endmodule
 
 module main (input  I, output  O, input  CLK);
-wire  inst0_Q;
-DFF inst0 (.D(I), .CLK(CLK), .Q(inst0_Q));
-assign O = inst0_Q;
+wire  DFF_inst0_Q;
+DFF DFF_inst0 (.D(I), .CLK(CLK), .Q(DFF_inst0_Q));
+assign O = DFF_inst0_Q;
 endmodule
 
 '''

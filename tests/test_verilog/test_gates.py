@@ -25,17 +25,17 @@ def test_and2():
 
     assert repr(And2) == '''\
 And2 = DefineCircuit("And2", "I0", In(Bit), "I1", In(Bit), "O", Out(Bit))
-inst0 = and()
-wire(And2.I0, inst0[1])
-wire(And2.I1, inst0[2])
-wire(inst0[0], And2.O)
+and_inst0 = and()
+wire(And2.I0, and_inst0[1])
+wire(And2.I1, and_inst0[2])
+wire(and_inst0[0], And2.O)
 EndCircuit()'''
 
     assert compile(And2) == '''\
 module And2 (input  I0, input  I1, output  O);
-wire  inst0_0;
-and inst0 (inst0_0, I0, I1);
-assign O = inst0_0;
+wire  and_inst0_0;
+and and_inst0 (and_inst0_0, I0, I1);
+assign O = and_inst0_0;
 endmodule
 
 '''
@@ -50,17 +50,17 @@ def test_nand2():
 
     assert repr(NAnd2) == '''\
 NAnd2 = DefineCircuit("NAnd2", "I0", In(Bit), "I1", In(Bit), "O", Out(Bit))
-inst0 = nand()
-wire(NAnd2.I0, inst0[1])
-wire(NAnd2.I1, inst0[2])
-wire(inst0[0], NAnd2.O)
+nand_inst0 = nand()
+wire(NAnd2.I0, nand_inst0[1])
+wire(NAnd2.I1, nand_inst0[2])
+wire(nand_inst0[0], NAnd2.O)
 EndCircuit()'''
 
     assert compile(NAnd2) == '''\
 module NAnd2 (input  I0, input  I1, output  O);
-wire  inst0_0;
-nand inst0 (inst0_0, I0, I1);
-assign O = inst0_0;
+wire  nand_inst0_0;
+nand nand_inst0 (nand_inst0_0, I0, I1);
+assign O = nand_inst0_0;
 endmodule
 
 '''
@@ -75,17 +75,17 @@ def test_or2():
 
     assert repr(or2) == '''\
 or2 = DefineCircuit("or2", "I0", In(Bit), "I1", In(Bit), "O", Out(Bit))
-inst0 = or()
-wire(or2.I0, inst0[1])
-wire(or2.I1, inst0[2])
-wire(inst0[0], or2.O)
+or_inst0 = or()
+wire(or2.I0, or_inst0[1])
+wire(or2.I1, or_inst0[2])
+wire(or_inst0[0], or2.O)
 EndCircuit()'''
 
     assert compile(or2) == '''\
 module or2 (input  I0, input  I1, output  O);
-wire  inst0_0;
-or inst0 (inst0_0, I0, I1);
-assign O = inst0_0;
+wire  or_inst0_0;
+or or_inst0 (or_inst0_0, I0, I1);
+assign O = or_inst0_0;
 endmodule
 
 '''
@@ -100,17 +100,17 @@ def test_nor2():
 
     assert repr(nor2) == '''\
 nor2 = DefineCircuit("nor2", "I0", In(Bit), "I1", In(Bit), "O", Out(Bit))
-inst0 = nor()
-wire(nor2.I0, inst0[1])
-wire(nor2.I1, inst0[2])
-wire(inst0[0], nor2.O)
+nor_inst0 = nor()
+wire(nor2.I0, nor_inst0[1])
+wire(nor2.I1, nor_inst0[2])
+wire(nor_inst0[0], nor2.O)
 EndCircuit()'''
 
     assert compile(nor2) == '''\
 module nor2 (input  I0, input  I1, output  O);
-wire  inst0_0;
-nor inst0 (inst0_0, I0, I1);
-assign O = inst0_0;
+wire  nor_inst0_0;
+nor nor_inst0 (nor_inst0_0, I0, I1);
+assign O = nor_inst0_0;
 endmodule
 
 '''
@@ -125,17 +125,17 @@ def test_xor2():
 
     assert repr(xor2) == '''\
 xor2 = DefineCircuit("xor2", "I0", In(Bit), "I1", In(Bit), "O", Out(Bit))
-inst0 = xor()
-wire(xor2.I0, inst0[1])
-wire(xor2.I1, inst0[2])
-wire(inst0[0], xor2.O)
+xor_inst0 = xor()
+wire(xor2.I0, xor_inst0[1])
+wire(xor2.I1, xor_inst0[2])
+wire(xor_inst0[0], xor2.O)
 EndCircuit()'''
 
     assert compile(xor2) == '''\
 module xor2 (input  I0, input  I1, output  O);
-wire  inst0_0;
-xor inst0 (inst0_0, I0, I1);
-assign O = inst0_0;
+wire  xor_inst0_0;
+xor xor_inst0 (xor_inst0_0, I0, I1);
+assign O = xor_inst0_0;
 endmodule
 
 '''
@@ -150,17 +150,17 @@ def test_nxor2():
 
     assert repr(nxor2) == '''\
 nxor2 = DefineCircuit("nxor2", "I0", In(Bit), "I1", In(Bit), "O", Out(Bit))
-inst0 = nxor()
-wire(nxor2.I0, inst0[1])
-wire(nxor2.I1, inst0[2])
-wire(inst0[0], nxor2.O)
+nxor_inst0 = nxor()
+wire(nxor2.I0, nxor_inst0[1])
+wire(nxor2.I1, nxor_inst0[2])
+wire(nxor_inst0[0], nxor2.O)
 EndCircuit()'''
 
     assert compile(nxor2) == '''\
 module nxor2 (input  I0, input  I1, output  O);
-wire  inst0_0;
-nxor inst0 (inst0_0, I0, I1);
-assign O = inst0_0;
+wire  nxor_inst0_0;
+nxor nxor_inst0 (nxor_inst0_0, I0, I1);
+assign O = nxor_inst0_0;
 endmodule
 
 '''
@@ -174,16 +174,16 @@ def test_buf():
 
     assert repr(buffer) == '''\
 buffer = DefineCircuit("buffer", "I", In(Bit), "O", Out(Bit))
-inst0 = buf()
-wire(buffer.I, inst0[1])
-wire(inst0[0], buffer.O)
+buf_inst0 = buf()
+wire(buffer.I, buf_inst0[1])
+wire(buf_inst0[0], buffer.O)
 EndCircuit()'''
 
     assert compile(buffer) == '''\
 module buffer (input  I, output  O);
-wire  inst0_0;
-buf inst0 (inst0_0, I);
-assign O = inst0_0;
+wire  buf_inst0_0;
+buf buf_inst0 (buf_inst0_0, I);
+assign O = buf_inst0_0;
 endmodule
 
 '''
@@ -197,16 +197,16 @@ def test_not():
 
     assert repr(n) == '''\
 n = DefineCircuit("n", "I", In(Bit), "O", Out(Bit))
-inst0 = not()
-wire(n.I, inst0[1])
-wire(inst0[0], n.O)
+not_inst0 = not()
+wire(n.I, not_inst0[1])
+wire(not_inst0[0], n.O)
 EndCircuit()'''
 
     assert compile(n) == '''\
 module n (input  I, output  O);
-wire  inst0_0;
-not inst0 (inst0_0, I);
-assign O = inst0_0;
+wire  not_inst0_0;
+not not_inst0 (not_inst0_0, I);
+assign O = not_inst0_0;
 endmodule
 
 '''

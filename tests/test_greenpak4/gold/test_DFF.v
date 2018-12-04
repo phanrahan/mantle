@@ -1,6 +1,6 @@
 module DFF (input  I, input  CLK, output  O);
-wire  inst0_Q;
-GP_DFF inst0 (.D(I), .CLK(CLK), .Q(inst0_Q));
-assign O = inst0_Q;
+wire  GP_DFF_inst0_Q;
+GP_DFF GP_DFF_inst0 (.D(I), .CLK(CLK), .Q(GP_DFF_inst0_Q));
+assign O = GP_DFF_inst0_Q;
 endmodule
 

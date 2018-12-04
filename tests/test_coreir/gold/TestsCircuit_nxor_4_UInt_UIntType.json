@@ -9,20 +9,20 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "Invert4_inst0":{
             "genref":"coreir.not",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "xor4_inst0":{
             "genref":"coreir.xor",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst1.out","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.in0"],
-          ["self.I1","inst1.in1"]
+          ["xor4_inst0.out","Invert4_inst0.in"],
+          ["self.O","Invert4_inst0.out"],
+          ["xor4_inst0.in0","self.I0"],
+          ["xor4_inst0.in1","self.I1"]
         ]
       },
       "TestsCircuit_nxor_4_UInt_UIntType":{
@@ -34,6 +34,12 @@
           ["O2",["Array",4,"Bit"]]
         ]],
         "instances":{
+          "NXOr24_inst0":{
+            "modref":"global.NXOr24"
+          },
+          "NXOr24_inst1":{
+            "modref":"global.NXOr24"
+          },
           "const_0_4":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",4]},
@@ -43,22 +49,16 @@
             "genref":"coreir.const",
             "genargs":{"width":["Int",4]},
             "modargs":{"value":[["BitVector",4],"4'h1"]}
-          },
-          "inst0":{
-            "modref":"global.NXOr24"
-          },
-          "inst1":{
-            "modref":"global.NXOr24"
           }
         },
         "connections":[
-          ["self.O1","const_0_4.out"],
-          ["inst1.I1","const_1_4.out"],
-          ["self.I0","inst0.I0"],
-          ["self.I1","inst0.I1"],
-          ["self.O0","inst0.O"],
-          ["self.I0","inst1.I0"],
-          ["self.O2","inst1.O"]
+          ["self.I0","NXOr24_inst0.I0"],
+          ["self.I1","NXOr24_inst0.I1"],
+          ["self.O0","NXOr24_inst0.O"],
+          ["self.I0","NXOr24_inst1.I0"],
+          ["const_1_4.out","NXOr24_inst1.I1"],
+          ["self.O2","NXOr24_inst1.O"],
+          ["self.O1","const_0_4.out"]
         ]
       }
     }

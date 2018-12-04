@@ -9,18 +9,18 @@
           ["O1","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "not_inst0":{
             "modref":"corebit.not"
           },
-          "inst1":{
+          "not_inst1":{
             "modref":"corebit.not"
           }
         },
         "connections":[
-          ["self.I","inst0.in"],
-          ["self.O0","inst0.out"],
-          ["self.I","inst1.in"],
-          ["self.O1","inst1.out"]
+          ["self.I","not_inst0.in"],
+          ["self.O0","not_inst0.out"],
+          ["self.I","not_inst1.in"],
+          ["self.O1","not_inst1.out"]
         ]
       }
     }

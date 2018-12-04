@@ -7,12 +7,12 @@
           ["I","BitIn"]
         ]],
         "instances":{
-          "inst0":{
+          "corebit_term_inst0":{
             "modref":"corebit.term"
           }
         },
         "connections":[
-          ["self.I","inst0.in"]
+          ["self.I","corebit_term_inst0.in"]
         ]
       }
     }

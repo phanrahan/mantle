@@ -12,18 +12,18 @@
           ["wen","BitIn"]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_mem4x16_inst0":{
             "genref":"coreir.mem",
             "genargs":{"depth":["Int",4], "has_init":["Bool",false], "width":["Int",16]}
           }
         },
         "connections":[
-          ["self.clk","inst0.clk"],
-          ["self.raddr","inst0.raddr"],
-          ["self.rdata","inst0.rdata"],
-          ["self.waddr","inst0.waddr"],
-          ["self.wdata","inst0.wdata"],
-          ["self.wen","inst0.wen"]
+          ["self.clk","coreir_mem4x16_inst0.clk"],
+          ["self.raddr","coreir_mem4x16_inst0.raddr"],
+          ["self.rdata","coreir_mem4x16_inst0.rdata"],
+          ["self.waddr","coreir_mem4x16_inst0.waddr"],
+          ["self.wdata","coreir_mem4x16_inst0.wdata"],
+          ["self.wen","coreir_mem4x16_inst0.wen"]
         ]
       }
     }

@@ -9,27 +9,27 @@
           ["c",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "lshr4_inst0":{
+            "genref":"coreir.lshr",
+            "genargs":{"width":["Int",4]}
+          },
+          "or4_inst0":{
             "genref":"coreir.or",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "shl4_inst0":{
             "genref":"coreir.shl",
-            "genargs":{"width":["Int",4]}
-          },
-          "inst2":{
-            "genref":"coreir.lshr",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst1.out","inst0.in0"],
-          ["inst2.out","inst0.in1"],
-          ["self.c","inst0.out"],
-          ["self.a","inst1.in0"],
-          ["self.b","inst1.in1"],
-          ["self.a","inst2.in0"],
-          ["self.b","inst2.in1"]
+          ["self.a","lshr4_inst0.in0"],
+          ["self.b","lshr4_inst0.in1"],
+          ["or4_inst0.in1","lshr4_inst0.out"],
+          ["shl4_inst0.out","or4_inst0.in0"],
+          ["self.c","or4_inst0.out"],
+          ["shl4_inst0.in0","self.a"],
+          ["shl4_inst0.in1","self.b"]
         ]
       }
     }

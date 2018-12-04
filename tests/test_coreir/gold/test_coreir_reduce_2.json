@@ -11,17 +11,17 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "andr_inst0":{
             "genref":"coreir.andr",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.0"],
-          ["self.I1","inst0.in.1"],
-          ["self.I2","inst0.in.2"],
-          ["self.I3","inst0.in.3"],
-          ["self.O","inst0.out"]
+          ["self.I0","andr_inst0.in.0"],
+          ["self.I1","andr_inst0.in.1"],
+          ["self.I2","andr_inst0.in.2"],
+          ["self.I3","andr_inst0.in.3"],
+          ["self.O","andr_inst0.out"]
         ]
       },
       "NAnd4None":{
@@ -33,20 +33,20 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
-            "modref":"corebit.not"
-          },
-          "inst1":{
+          "And4xNone_inst0":{
             "modref":"global.And4xNone"
+          },
+          "not_inst0":{
+            "modref":"corebit.not"
           }
         },
         "connections":[
-          ["inst1.O","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.I0"],
-          ["self.I1","inst1.I1"],
-          ["self.I2","inst1.I2"],
-          ["self.I3","inst1.I3"]
+          ["self.I0","And4xNone_inst0.I0"],
+          ["self.I1","And4xNone_inst0.I1"],
+          ["self.I2","And4xNone_inst0.I2"],
+          ["self.I3","And4xNone_inst0.I3"],
+          ["not_inst0.in","And4xNone_inst0.O"],
+          ["self.O","not_inst0.out"]
         ]
       },
       "NOr4None":{
@@ -58,20 +58,20 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
-            "modref":"corebit.not"
-          },
-          "inst1":{
+          "Or4xNone_inst0":{
             "modref":"global.Or4xNone"
+          },
+          "not_inst0":{
+            "modref":"corebit.not"
           }
         },
         "connections":[
-          ["inst1.O","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.I0"],
-          ["self.I1","inst1.I1"],
-          ["self.I2","inst1.I2"],
-          ["self.I3","inst1.I3"]
+          ["self.I0","Or4xNone_inst0.I0"],
+          ["self.I1","Or4xNone_inst0.I1"],
+          ["self.I2","Or4xNone_inst0.I2"],
+          ["self.I3","Or4xNone_inst0.I3"],
+          ["not_inst0.in","Or4xNone_inst0.O"],
+          ["self.O","not_inst0.out"]
         ]
       },
       "NXOr4None":{
@@ -83,20 +83,20 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
-            "modref":"corebit.not"
-          },
-          "inst1":{
+          "fold_xor4None_inst0":{
             "modref":"global.fold_xor4None"
+          },
+          "not_inst0":{
+            "modref":"corebit.not"
           }
         },
         "connections":[
-          ["inst1.O","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.I0"],
-          ["self.I1","inst1.I1"],
-          ["self.I2","inst1.I2"],
-          ["self.I3","inst1.I3"]
+          ["self.I0","fold_xor4None_inst0.I0"],
+          ["self.I1","fold_xor4None_inst0.I1"],
+          ["self.I2","fold_xor4None_inst0.I2"],
+          ["self.I3","fold_xor4None_inst0.I3"],
+          ["not_inst0.in","fold_xor4None_inst0.O"],
+          ["self.O","not_inst0.out"]
         ]
       },
       "Or3xNone":{
@@ -107,16 +107,16 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "orr_inst0":{
             "genref":"coreir.orr",
             "genargs":{"width":["Int",3]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.0"],
-          ["self.I1","inst0.in.1"],
-          ["self.I2","inst0.in.2"],
-          ["self.O","inst0.out"]
+          ["self.I0","orr_inst0.in.0"],
+          ["self.I1","orr_inst0.in.1"],
+          ["self.I2","orr_inst0.in.2"],
+          ["self.O","orr_inst0.out"]
         ]
       },
       "Or4xNone":{
@@ -128,17 +128,17 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "orr_inst0":{
             "genref":"coreir.orr",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.0"],
-          ["self.I1","inst0.in.1"],
-          ["self.I2","inst0.in.2"],
-          ["self.I3","inst0.in.3"],
-          ["self.O","inst0.out"]
+          ["self.I0","orr_inst0.in.0"],
+          ["self.I1","orr_inst0.in.1"],
+          ["self.I2","orr_inst0.in.2"],
+          ["self.I3","orr_inst0.in.3"],
+          ["self.O","orr_inst0.out"]
         ]
       },
       "fold_xor4None":{
@@ -150,24 +150,24 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "xor_inst0":{
             "modref":"corebit.xor"
           },
-          "inst1":{
+          "xor_inst1":{
             "modref":"corebit.xor"
           },
-          "inst2":{
+          "xor_inst2":{
             "modref":"corebit.xor"
           }
         },
         "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["inst1.in0","inst0.out"],
-          ["self.I2","inst1.in1"],
-          ["inst2.in0","inst1.out"],
-          ["self.I3","inst2.in1"],
-          ["self.O","inst2.out"]
+          ["xor_inst0.in0","self.I0"],
+          ["xor_inst0.in1","self.I1"],
+          ["xor_inst1.in1","self.I2"],
+          ["xor_inst2.in1","self.I3"],
+          ["xor_inst2.out","self.O"],
+          ["xor_inst1.in0","xor_inst0.out"],
+          ["xor_inst2.in0","xor_inst1.out"]
         ]
       },
       "test_coreir_reduce_2":{
@@ -178,36 +178,36 @@
           ["d","Bit"]
         ]],
         "instances":{
-          "inst0":{
-            "modref":"global.Or3xNone"
-          },
-          "inst1":{
+          "NAnd4None_inst0":{
             "modref":"global.NAnd4None"
           },
-          "inst2":{
+          "NOr4None_inst0":{
             "modref":"global.NOr4None"
           },
-          "inst3":{
+          "NXOr4None_inst0":{
             "modref":"global.NXOr4None"
+          },
+          "Or3xNone_inst0":{
+            "modref":"global.Or3xNone"
           }
         },
         "connections":[
-          ["inst1.O","inst0.I0"],
-          ["inst2.O","inst0.I1"],
-          ["inst3.O","inst0.I2"],
-          ["self.d","inst0.O"],
-          ["self.a.0","inst1.I0"],
-          ["self.a.1","inst1.I1"],
-          ["self.a.2","inst1.I2"],
-          ["self.a.3","inst1.I3"],
-          ["self.b.0","inst2.I0"],
-          ["self.b.1","inst2.I1"],
-          ["self.b.2","inst2.I2"],
-          ["self.b.3","inst2.I3"],
-          ["self.b.0","inst3.I0"],
-          ["self.b.1","inst3.I1"],
-          ["self.b.2","inst3.I2"],
-          ["self.b.3","inst3.I3"]
+          ["self.a.0","NAnd4None_inst0.I0"],
+          ["self.a.1","NAnd4None_inst0.I1"],
+          ["self.a.2","NAnd4None_inst0.I2"],
+          ["self.a.3","NAnd4None_inst0.I3"],
+          ["Or3xNone_inst0.I0","NAnd4None_inst0.O"],
+          ["self.b.0","NOr4None_inst0.I0"],
+          ["self.b.1","NOr4None_inst0.I1"],
+          ["self.b.2","NOr4None_inst0.I2"],
+          ["self.b.3","NOr4None_inst0.I3"],
+          ["Or3xNone_inst0.I1","NOr4None_inst0.O"],
+          ["self.b.0","NXOr4None_inst0.I0"],
+          ["self.b.1","NXOr4None_inst0.I1"],
+          ["self.b.2","NXOr4None_inst0.I2"],
+          ["self.b.3","NXOr4None_inst0.I3"],
+          ["Or3xNone_inst0.I2","NXOr4None_inst0.O"],
+          ["self.d","Or3xNone_inst0.O"]
         ]
       }
     }

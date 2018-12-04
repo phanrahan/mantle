@@ -9,15 +9,15 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_mul4_inst0":{
             "genref":"coreir.mul",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"]
+          ["self.I0","coreir_mul4_inst0.in0"],
+          ["self.I1","coreir_mul4_inst0.in1"],
+          ["self.O","coreir_mul4_inst0.out"]
         ]
       }
     }

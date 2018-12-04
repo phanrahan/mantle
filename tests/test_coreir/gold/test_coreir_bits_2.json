@@ -9,20 +9,20 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "Invert4_inst0":{
             "genref":"coreir.not",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "and4_inst0":{
             "genref":"coreir.and",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst1.out","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.in0"],
-          ["self.I1","inst1.in1"]
+          ["and4_inst0.out","Invert4_inst0.in"],
+          ["self.O","Invert4_inst0.out"],
+          ["self.I0","and4_inst0.in0"],
+          ["self.I1","and4_inst0.in1"]
         ]
       },
       "NOr24":{
@@ -32,20 +32,20 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "Invert4_inst0":{
             "genref":"coreir.not",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "or4_inst0":{
             "genref":"coreir.or",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst1.out","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.in0"],
-          ["self.I1","inst1.in1"]
+          ["or4_inst0.out","Invert4_inst0.in"],
+          ["self.O","Invert4_inst0.out"],
+          ["self.I0","or4_inst0.in0"],
+          ["self.I1","or4_inst0.in1"]
         ]
       },
       "NXOr24":{
@@ -55,20 +55,20 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "Invert4_inst0":{
             "genref":"coreir.not",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "xor4_inst0":{
             "genref":"coreir.xor",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst1.out","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.in0"],
-          ["self.I1","inst1.in1"]
+          ["xor4_inst0.out","Invert4_inst0.in"],
+          ["self.O","Invert4_inst0.out"],
+          ["xor4_inst0.in0","self.I0"],
+          ["xor4_inst0.in1","self.I1"]
         ]
       },
       "test_coreir_bits_2":{
@@ -79,24 +79,24 @@
           ["d",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
-            "modref":"global.NOr24"
-          },
-          "inst1":{
+          "NAnd24_inst0":{
             "modref":"global.NAnd24"
           },
-          "inst2":{
+          "NOr24_inst0":{
+            "modref":"global.NOr24"
+          },
+          "NXOr24_inst0":{
             "modref":"global.NXOr24"
           }
         },
         "connections":[
-          ["inst1.O","inst0.I0"],
-          ["inst2.O","inst0.I1"],
-          ["self.d","inst0.O"],
-          ["self.a","inst1.I0"],
-          ["self.b","inst1.I1"],
-          ["self.b","inst2.I0"],
-          ["self.c","inst2.I1"]
+          ["self.a","NAnd24_inst0.I0"],
+          ["self.b","NAnd24_inst0.I1"],
+          ["NOr24_inst0.I0","NAnd24_inst0.O"],
+          ["NXOr24_inst0.O","NOr24_inst0.I1"],
+          ["self.d","NOr24_inst0.O"],
+          ["self.b","NXOr24_inst0.I0"],
+          ["self.c","NXOr24_inst0.I1"]
         ]
       }
     }

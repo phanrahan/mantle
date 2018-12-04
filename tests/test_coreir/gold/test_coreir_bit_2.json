@@ -9,18 +9,18 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
-            "modref":"corebit.not"
-          },
-          "inst1":{
+          "and_inst0":{
             "modref":"corebit.and"
+          },
+          "not_inst0":{
+            "modref":"corebit.not"
           }
         },
         "connections":[
-          ["inst1.out","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.in0"],
-          ["self.I1","inst1.in1"]
+          ["self.I0","and_inst0.in0"],
+          ["self.I1","and_inst0.in1"],
+          ["not_inst0.in","and_inst0.out"],
+          ["self.O","not_inst0.out"]
         ]
       },
       "NOr2None":{
@@ -30,18 +30,18 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "not_inst0":{
             "modref":"corebit.not"
           },
-          "inst1":{
+          "or_inst0":{
             "modref":"corebit.or"
           }
         },
         "connections":[
-          ["inst1.out","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.in0"],
-          ["self.I1","inst1.in1"]
+          ["or_inst0.out","not_inst0.in"],
+          ["self.O","not_inst0.out"],
+          ["self.I0","or_inst0.in0"],
+          ["self.I1","or_inst0.in1"]
         ]
       },
       "NXOr2None":{
@@ -51,18 +51,18 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "not_inst0":{
             "modref":"corebit.not"
           },
-          "inst1":{
+          "xor_inst0":{
             "modref":"corebit.xor"
           }
         },
         "connections":[
-          ["inst1.out","inst0.in"],
-          ["self.O","inst0.out"],
-          ["self.I0","inst1.in0"],
-          ["self.I1","inst1.in1"]
+          ["xor_inst0.out","not_inst0.in"],
+          ["self.O","not_inst0.out"],
+          ["xor_inst0.in0","self.I0"],
+          ["xor_inst0.in1","self.I1"]
         ]
       },
       "test_coreir_bit_2":{
@@ -73,24 +73,24 @@
           ["d","Bit"]
         ]],
         "instances":{
-          "inst0":{
-            "modref":"global.NOr2None"
-          },
-          "inst1":{
+          "NAnd2None_inst0":{
             "modref":"global.NAnd2None"
           },
-          "inst2":{
+          "NOr2None_inst0":{
+            "modref":"global.NOr2None"
+          },
+          "NXOr2None_inst0":{
             "modref":"global.NXOr2None"
           }
         },
         "connections":[
-          ["inst1.O","inst0.I0"],
-          ["inst2.O","inst0.I1"],
-          ["self.d","inst0.O"],
-          ["self.a","inst1.I0"],
-          ["self.b","inst1.I1"],
-          ["self.b","inst2.I0"],
-          ["self.c","inst2.I1"]
+          ["self.a","NAnd2None_inst0.I0"],
+          ["self.b","NAnd2None_inst0.I1"],
+          ["NOr2None_inst0.I0","NAnd2None_inst0.O"],
+          ["NXOr2None_inst0.O","NOr2None_inst0.I1"],
+          ["self.d","NOr2None_inst0.O"],
+          ["self.b","NXOr2None_inst0.I0"],
+          ["self.c","NXOr2None_inst0.I1"]
         ]
       }
     }

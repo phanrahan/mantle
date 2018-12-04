@@ -10,32 +10,32 @@
           ["d",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
-            "genref":"coreir.or",
-            "genargs":{"width":["Int",4]}
-          },
-          "inst1":{
+          "Invert4_inst0":{
             "genref":"coreir.not",
             "genargs":{"width":["Int",4]}
           },
-          "inst2":{
+          "and4_inst0":{
             "genref":"coreir.and",
             "genargs":{"width":["Int",4]}
           },
-          "inst3":{
+          "or4_inst0":{
+            "genref":"coreir.or",
+            "genargs":{"width":["Int",4]}
+          },
+          "xor4_inst0":{
             "genref":"coreir.xor",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst1.out","inst0.in0"],
-          ["inst3.out","inst0.in1"],
-          ["self.d","inst0.out"],
-          ["inst2.out","inst1.in"],
-          ["self.a","inst2.in0"],
-          ["self.b","inst2.in1"],
-          ["self.b","inst3.in0"],
-          ["self.c","inst3.in1"]
+          ["and4_inst0.out","Invert4_inst0.in"],
+          ["or4_inst0.in0","Invert4_inst0.out"],
+          ["self.a","and4_inst0.in0"],
+          ["self.b","and4_inst0.in1"],
+          ["xor4_inst0.out","or4_inst0.in1"],
+          ["self.d","or4_inst0.out"],
+          ["xor4_inst0.in0","self.b"],
+          ["xor4_inst0.in1","self.c"]
         ]
       }
     }

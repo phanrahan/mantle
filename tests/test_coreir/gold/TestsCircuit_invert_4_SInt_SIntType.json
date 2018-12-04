@@ -9,20 +9,20 @@
           ["O1",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "Invert4_inst0":{
             "genref":"coreir.not",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "Invert4_inst1":{
             "genref":"coreir.not",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I","inst0.in"],
-          ["self.O0","inst0.out"],
-          ["self.I","inst1.in"],
-          ["self.O1","inst1.out"]
+          ["self.I","Invert4_inst0.in"],
+          ["self.O0","Invert4_inst0.out"],
+          ["self.I","Invert4_inst1.in"],
+          ["self.O1","Invert4_inst1.out"]
         ]
       }
     }

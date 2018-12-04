@@ -9,16 +9,16 @@
           ["O",["Array",8,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "reg_P_inst0":{
             "genref":"coreir.reg",
             "genargs":{"width":["Int",8]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",8],"8'h00"]}
           }
         },
         "connections":[
-          ["self.clk","inst0.clk"],
-          ["self.I","inst0.in"],
-          ["self.O","inst0.out"]
+          ["self.clk","reg_P_inst0.clk"],
+          ["self.I","reg_P_inst0.in"],
+          ["self.O","reg_P_inst0.out"]
         ]
       }
     }

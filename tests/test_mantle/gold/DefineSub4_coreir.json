@@ -14,24 +14,24 @@
             "modref":"corebit.const",
             "modargs":{"value":["Bool",false]}
           },
-          "inst0":{
+          "coreir_add4_inst0":{
             "genref":"coreir.add",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "coreir_add4_inst1":{
             "genref":"coreir.add",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst1.in0.1","bit_const_0_None.out"],
-          ["inst1.in0.2","bit_const_0_None.out"],
-          ["inst1.in0.3","bit_const_0_None.out"],
-          ["inst1.out","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"],
-          ["self.CIN","inst1.in0.0"],
-          ["self.I0","inst1.in1"]
+          ["coreir_add4_inst1.in0.1","bit_const_0_None.out"],
+          ["coreir_add4_inst1.in0.2","bit_const_0_None.out"],
+          ["coreir_add4_inst1.in0.3","bit_const_0_None.out"],
+          ["coreir_add4_inst1.out","coreir_add4_inst0.in0"],
+          ["self.I1","coreir_add4_inst0.in1"],
+          ["self.O","coreir_add4_inst0.out"],
+          ["self.CIN","coreir_add4_inst1.in0.0"],
+          ["self.I0","coreir_add4_inst1.in1"]
         ]
       },
       "Sub4":{
@@ -41,24 +41,24 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "bit_const_1_None":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",true]}
+          "Add4_cin_inst0":{
+            "modref":"global.Add4_cin"
           },
-          "inst0":{
+          "Invert4_inst0":{
             "genref":"coreir.not",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
-            "modref":"global.Add4_cin"
+          "bit_const_1_None":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",true]}
           }
         },
         "connections":[
-          ["inst1.CIN","bit_const_1_None.out"],
-          ["self.I1","inst0.in"],
-          ["inst1.I1","inst0.out"],
-          ["self.I0","inst1.I0"],
-          ["self.O","inst1.O"]
+          ["bit_const_1_None.out","Add4_cin_inst0.CIN"],
+          ["self.I0","Add4_cin_inst0.I0"],
+          ["Invert4_inst0.out","Add4_cin_inst0.I1"],
+          ["self.O","Add4_cin_inst0.O"],
+          ["self.I1","Invert4_inst0.in"]
         ]
       }
     }

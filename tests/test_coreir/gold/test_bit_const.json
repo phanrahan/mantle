@@ -7,13 +7,13 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "corebit_const1_inst0":{
             "modref":"corebit.const",
             "modargs":{"value":["Bool",true]}
           }
         },
         "connections":[
-          ["self.O","inst0.out"]
+          ["self.O","corebit_const1_inst0.out"]
         ]
       }
     }

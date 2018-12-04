@@ -9,15 +9,15 @@
           ["c","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_ugt4_inst0":{
             "genref":"coreir.ugt",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.a","inst0.in0"],
-          ["self.b","inst0.in1"],
-          ["self.c","inst0.out"]
+          ["self.a","coreir_ugt4_inst0.in0"],
+          ["self.b","coreir_ugt4_inst0.in1"],
+          ["self.c","coreir_ugt4_inst0.out"]
         ]
       }
     }

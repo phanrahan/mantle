@@ -45,23 +45,23 @@
           ["c",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
-            "genref":"coreir.or",
-            "genargs":{"width":["Int",4]}
-          },
-          "inst1":{
+          "StaticLeftShift_42_inst0":{
             "modref":"global.StaticLeftShift_42"
           },
-          "inst2":{
+          "StaticRightShift_43_inst0":{
             "modref":"global.StaticRightShift_43"
+          },
+          "or4_inst0":{
+            "genref":"coreir.or",
+            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["inst1.O","inst0.in0"],
-          ["inst2.O","inst0.in1"],
-          ["self.c","inst0.out"],
-          ["self.a","inst1.I"],
-          ["self.b","inst2.I"]
+          ["self.a","StaticLeftShift_42_inst0.I"],
+          ["or4_inst0.in0","StaticLeftShift_42_inst0.O"],
+          ["self.b","StaticRightShift_43_inst0.I"],
+          ["or4_inst0.in1","StaticRightShift_43_inst0.O"],
+          ["self.c","or4_inst0.out"]
         ]
       }
     }

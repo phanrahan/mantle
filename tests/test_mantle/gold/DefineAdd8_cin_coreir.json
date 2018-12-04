@@ -14,28 +14,28 @@
             "modref":"corebit.const",
             "modargs":{"value":["Bool",false]}
           },
-          "inst0":{
+          "coreir_add8_inst0":{
             "genref":"coreir.add",
             "genargs":{"width":["Int",8]}
           },
-          "inst1":{
+          "coreir_add8_inst1":{
             "genref":"coreir.add",
             "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["inst1.in0.1","bit_const_0_None.out"],
-          ["inst1.in0.2","bit_const_0_None.out"],
-          ["inst1.in0.3","bit_const_0_None.out"],
-          ["inst1.in0.4","bit_const_0_None.out"],
-          ["inst1.in0.5","bit_const_0_None.out"],
-          ["inst1.in0.6","bit_const_0_None.out"],
-          ["inst1.in0.7","bit_const_0_None.out"],
-          ["inst1.out","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["self.O","inst0.out"],
-          ["self.CIN","inst1.in0.0"],
-          ["self.I0","inst1.in1"]
+          ["coreir_add8_inst1.in0.1","bit_const_0_None.out"],
+          ["coreir_add8_inst1.in0.2","bit_const_0_None.out"],
+          ["coreir_add8_inst1.in0.3","bit_const_0_None.out"],
+          ["coreir_add8_inst1.in0.4","bit_const_0_None.out"],
+          ["coreir_add8_inst1.in0.5","bit_const_0_None.out"],
+          ["coreir_add8_inst1.in0.6","bit_const_0_None.out"],
+          ["coreir_add8_inst1.in0.7","bit_const_0_None.out"],
+          ["coreir_add8_inst1.out","coreir_add8_inst0.in0"],
+          ["self.I1","coreir_add8_inst0.in1"],
+          ["self.O","coreir_add8_inst0.out"],
+          ["self.CIN","coreir_add8_inst1.in0.0"],
+          ["self.I0","coreir_add8_inst1.in1"]
         ]
       }
     }

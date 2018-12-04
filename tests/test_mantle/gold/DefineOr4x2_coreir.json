@@ -11,26 +11,26 @@
           ["O",["Array",2,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "orr_inst0":{
             "genref":"coreir.orr",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "orr_inst1":{
             "genref":"coreir.orr",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I0.0","inst0.in.0"],
-          ["self.I1.0","inst0.in.1"],
-          ["self.I2.0","inst0.in.2"],
-          ["self.I3.0","inst0.in.3"],
-          ["self.O.0","inst0.out"],
-          ["self.I0.1","inst1.in.0"],
-          ["self.I1.1","inst1.in.1"],
-          ["self.I2.1","inst1.in.2"],
-          ["self.I3.1","inst1.in.3"],
-          ["self.O.1","inst1.out"]
+          ["self.I0.0","orr_inst0.in.0"],
+          ["self.I1.0","orr_inst0.in.1"],
+          ["self.I2.0","orr_inst0.in.2"],
+          ["self.I3.0","orr_inst0.in.3"],
+          ["self.O.0","orr_inst0.out"],
+          ["self.I0.1","orr_inst1.in.0"],
+          ["self.I1.1","orr_inst1.in.1"],
+          ["self.I2.1","orr_inst1.in.2"],
+          ["self.I3.1","orr_inst1.in.3"],
+          ["self.O.1","orr_inst1.out"]
         ]
       }
     }

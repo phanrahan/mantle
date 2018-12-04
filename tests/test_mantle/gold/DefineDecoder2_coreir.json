@@ -8,32 +8,32 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "LUT2_1_inst0":{
             "modref":"global.LUT2_1"
           },
-          "inst1":{
+          "LUT2_2_inst0":{
             "modref":"global.LUT2_2"
           },
-          "inst2":{
+          "LUT2_4_inst0":{
             "modref":"global.LUT2_4"
           },
-          "inst3":{
+          "LUT2_8_inst0":{
             "modref":"global.LUT2_8"
           }
         },
         "connections":[
-          ["self.I.0","inst0.I0"],
-          ["self.I.1","inst0.I1"],
-          ["self.O.0","inst0.O"],
-          ["self.I.0","inst1.I0"],
-          ["self.I.1","inst1.I1"],
-          ["self.O.1","inst1.O"],
-          ["self.I.0","inst2.I0"],
-          ["self.I.1","inst2.I1"],
-          ["self.O.2","inst2.O"],
-          ["self.I.0","inst3.I0"],
-          ["self.I.1","inst3.I1"],
-          ["self.O.3","inst3.O"]
+          ["self.I.0","LUT2_1_inst0.I0"],
+          ["self.I.1","LUT2_1_inst0.I1"],
+          ["self.O.0","LUT2_1_inst0.O"],
+          ["self.I.0","LUT2_2_inst0.I0"],
+          ["self.I.1","LUT2_2_inst0.I1"],
+          ["self.O.1","LUT2_2_inst0.O"],
+          ["self.I.0","LUT2_4_inst0.I0"],
+          ["self.I.1","LUT2_4_inst0.I1"],
+          ["self.O.2","LUT2_4_inst0.O"],
+          ["self.I.0","LUT2_8_inst0.I0"],
+          ["self.I.1","LUT2_8_inst0.I1"],
+          ["self.O.3","LUT2_8_inst0.O"]
         ]
       },
       "LUT2_1":{
@@ -43,16 +43,16 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_lut2_inst0":{
             "genref":"commonlib.lutN",
             "genargs":{"N":["Int",2]},
             "modargs":{"init":[["BitVector",4],"4'h1"]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.0"],
-          ["self.I1","inst0.in.1"],
-          ["self.O","inst0.out"]
+          ["self.I0","coreir_lut2_inst0.in.0"],
+          ["self.I1","coreir_lut2_inst0.in.1"],
+          ["self.O","coreir_lut2_inst0.out"]
         ]
       },
       "LUT2_2":{
@@ -62,16 +62,16 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_lut2_inst0":{
             "genref":"commonlib.lutN",
             "genargs":{"N":["Int",2]},
             "modargs":{"init":[["BitVector",4],"4'h2"]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.0"],
-          ["self.I1","inst0.in.1"],
-          ["self.O","inst0.out"]
+          ["self.I0","coreir_lut2_inst0.in.0"],
+          ["self.I1","coreir_lut2_inst0.in.1"],
+          ["self.O","coreir_lut2_inst0.out"]
         ]
       },
       "LUT2_4":{
@@ -81,16 +81,16 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_lut2_inst0":{
             "genref":"commonlib.lutN",
             "genargs":{"N":["Int",2]},
             "modargs":{"init":[["BitVector",4],"4'h4"]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.0"],
-          ["self.I1","inst0.in.1"],
-          ["self.O","inst0.out"]
+          ["self.I0","coreir_lut2_inst0.in.0"],
+          ["self.I1","coreir_lut2_inst0.in.1"],
+          ["self.O","coreir_lut2_inst0.out"]
         ]
       },
       "LUT2_8":{
@@ -100,16 +100,16 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_lut2_inst0":{
             "genref":"commonlib.lutN",
             "genargs":{"N":["Int",2]},
             "modargs":{"init":[["BitVector",4],"4'h8"]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.0"],
-          ["self.I1","inst0.in.1"],
-          ["self.O","inst0.out"]
+          ["self.I0","coreir_lut2_inst0.in.0"],
+          ["self.I1","coreir_lut2_inst0.in.1"],
+          ["self.O","coreir_lut2_inst0.out"]
         ]
       }
     }

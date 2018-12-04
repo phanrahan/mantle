@@ -9,37 +9,37 @@
           ["CLK",["Named","coreir.clkIn"]]
         ]],
         "instances":{
-          "inst0":{
+          "reg_P_inst0":{
             "genref":"coreir.reg",
             "genargs":{"width":["Int",4]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
           },
-          "inst1":{
+          "reg_P_inst1":{
             "genref":"coreir.reg",
             "genargs":{"width":["Int",4]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
           },
-          "inst2":{
+          "reg_P_inst2":{
             "genref":"coreir.reg",
             "genargs":{"width":["Int",4]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
           },
-          "inst3":{
+          "reg_P_inst3":{
             "genref":"coreir.reg",
             "genargs":{"width":["Int",4]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
           }
         },
         "connections":[
-          ["self.CLK","inst0.clk"],
-          ["self.I","inst0.in"],
-          ["inst1.in","inst0.out"],
-          ["self.CLK","inst1.clk"],
-          ["inst2.in","inst1.out"],
-          ["self.CLK","inst2.clk"],
-          ["inst3.in","inst2.out"],
-          ["self.CLK","inst3.clk"],
-          ["self.O","inst3.out"]
+          ["self.CLK","reg_P_inst0.clk"],
+          ["self.I","reg_P_inst0.in"],
+          ["reg_P_inst1.in","reg_P_inst0.out"],
+          ["self.CLK","reg_P_inst1.clk"],
+          ["reg_P_inst2.in","reg_P_inst1.out"],
+          ["self.CLK","reg_P_inst2.clk"],
+          ["reg_P_inst3.in","reg_P_inst2.out"],
+          ["self.CLK","reg_P_inst3.clk"],
+          ["self.O","reg_P_inst3.out"]
         ]
       }
     }

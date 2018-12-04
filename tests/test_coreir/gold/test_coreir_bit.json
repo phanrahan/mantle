@@ -10,28 +10,28 @@
           ["d","Bit"]
         ]],
         "instances":{
-          "inst0":{
-            "modref":"corebit.or"
-          },
-          "inst1":{
-            "modref":"corebit.not"
-          },
-          "inst2":{
+          "and_inst0":{
             "modref":"corebit.and"
           },
-          "inst3":{
+          "not_inst0":{
+            "modref":"corebit.not"
+          },
+          "or_inst0":{
+            "modref":"corebit.or"
+          },
+          "xor_inst0":{
             "modref":"corebit.xor"
           }
         },
         "connections":[
-          ["inst1.out","inst0.in0"],
-          ["inst3.out","inst0.in1"],
-          ["self.d","inst0.out"],
-          ["inst2.out","inst1.in"],
-          ["self.a","inst2.in0"],
-          ["self.b","inst2.in1"],
-          ["self.b","inst3.in0"],
-          ["self.c","inst3.in1"]
+          ["self.a","and_inst0.in0"],
+          ["self.b","and_inst0.in1"],
+          ["not_inst0.in","and_inst0.out"],
+          ["or_inst0.in0","not_inst0.out"],
+          ["xor_inst0.out","or_inst0.in1"],
+          ["self.d","or_inst0.out"],
+          ["xor_inst0.in0","self.b"],
+          ["xor_inst0.in1","self.c"]
         ]
       }
     }

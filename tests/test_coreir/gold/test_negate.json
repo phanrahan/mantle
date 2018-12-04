@@ -8,14 +8,14 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_neg_inst0":{
             "genref":"coreir.neg",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I","inst0.in"],
-          ["self.O","inst0.out"]
+          ["self.I","coreir_neg_inst0.in"],
+          ["self.O","coreir_neg_inst0.out"]
         ]
       }
     }

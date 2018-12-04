@@ -1,8 +1,8 @@
 module test_romb (output [7:0] O, input  CLK);
-wire [31:0] inst0_DOA;
-wire [3:0] inst0_DOPA;
-wire [31:0] inst0_DOB;
-wire [3:0] inst0_DOPB;
+wire [31:0] RAMB16BWER_inst0_DOA;
+wire [3:0] RAMB16BWER_inst0_DOPA;
+wire [31:0] RAMB16BWER_inst0_DOB;
+wire [3:0] RAMB16BWER_inst0_DOPB;
 RAMB16BWER #(.DATA_WIDTH_A(9),
 .DATA_WIDTH_B(9),
 .INIT_00(256'h1F1E1D1C1B1A191817161514131211100F0E0D0C0B0A09080706050403020100),
@@ -74,7 +74,7 @@ RAMB16BWER #(.DATA_WIDTH_A(9),
 .SRVAL_A(8'h00),
 .SRVAL_B(8'h00),
 .WRITE_MODE_A("WRITE_FIRST"),
-.WRITE_MODE_B("WRITE_FIRST")) inst0 (.DIA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}), .DIPA({1'b0,1'b0,1'b0,1'b0}), .DOA(inst0_DOA), .DOPA(inst0_DOPA), .ADDRA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1,1'b0,1'b0,1'b0}), .CLKA(CLK), .ENA(1'b1), .WEA({1'b0,1'b0,1'b0,1'b0}), .RSTA(1'b0), .REGCEA(1'b0), .DOB(inst0_DOB), .DOPB(inst0_DOPB), .CLKB(1'b0), .ENB(1'b0), .WEB({1'b0,1'b0,1'b0,1'b0}), .RSTB(1'b0), .REGCEB(1'b0));
-assign O = {inst0_DOA[7],inst0_DOA[6],inst0_DOA[5],inst0_DOA[4],inst0_DOA[3],inst0_DOA[2],inst0_DOA[1],inst0_DOA[0]};
+.WRITE_MODE_B("WRITE_FIRST")) RAMB16BWER_inst0 (.DIA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}), .DIPA({1'b0,1'b0,1'b0,1'b0}), .DOA(RAMB16BWER_inst0_DOA), .DOPA(RAMB16BWER_inst0_DOPA), .ADDRA({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1,1'b0,1'b0,1'b0}), .CLKA(CLK), .ENA(1'b1), .WEA({1'b0,1'b0,1'b0,1'b0}), .RSTA(1'b0), .REGCEA(1'b0), .DOB(RAMB16BWER_inst0_DOB), .DOPB(RAMB16BWER_inst0_DOPB), .CLKB(1'b0), .ENB(1'b0), .WEB({1'b0,1'b0,1'b0,1'b0}), .RSTB(1'b0), .REGCEB(1'b0));
+assign O = {RAMB16BWER_inst0_DOA[7],RAMB16BWER_inst0_DOA[6],RAMB16BWER_inst0_DOA[5],RAMB16BWER_inst0_DOA[4],RAMB16BWER_inst0_DOA[3],RAMB16BWER_inst0_DOA[2],RAMB16BWER_inst0_DOA[1],RAMB16BWER_inst0_DOA[0]};
 endmodule
 

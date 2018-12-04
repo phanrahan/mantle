@@ -15,34 +15,34 @@
           ["O",["Array",2,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "orr_inst0":{
             "genref":"coreir.orr",
             "genargs":{"width":["Int",8]}
           },
-          "inst1":{
+          "orr_inst1":{
             "genref":"coreir.orr",
             "genargs":{"width":["Int",8]}
           }
         },
         "connections":[
-          ["self.I0.0","inst0.in.0"],
-          ["self.I1.0","inst0.in.1"],
-          ["self.I2.0","inst0.in.2"],
-          ["self.I3.0","inst0.in.3"],
-          ["self.I4.0","inst0.in.4"],
-          ["self.I5.0","inst0.in.5"],
-          ["self.I6.0","inst0.in.6"],
-          ["self.I7.0","inst0.in.7"],
-          ["self.O.0","inst0.out"],
-          ["self.I0.1","inst1.in.0"],
-          ["self.I1.1","inst1.in.1"],
-          ["self.I2.1","inst1.in.2"],
-          ["self.I3.1","inst1.in.3"],
-          ["self.I4.1","inst1.in.4"],
-          ["self.I5.1","inst1.in.5"],
-          ["self.I6.1","inst1.in.6"],
-          ["self.I7.1","inst1.in.7"],
-          ["self.O.1","inst1.out"]
+          ["self.I0.0","orr_inst0.in.0"],
+          ["self.I1.0","orr_inst0.in.1"],
+          ["self.I2.0","orr_inst0.in.2"],
+          ["self.I3.0","orr_inst0.in.3"],
+          ["self.I4.0","orr_inst0.in.4"],
+          ["self.I5.0","orr_inst0.in.5"],
+          ["self.I6.0","orr_inst0.in.6"],
+          ["self.I7.0","orr_inst0.in.7"],
+          ["self.O.0","orr_inst0.out"],
+          ["self.I0.1","orr_inst1.in.0"],
+          ["self.I1.1","orr_inst1.in.1"],
+          ["self.I2.1","orr_inst1.in.2"],
+          ["self.I3.1","orr_inst1.in.3"],
+          ["self.I4.1","orr_inst1.in.4"],
+          ["self.I5.1","orr_inst1.in.5"],
+          ["self.I6.1","orr_inst1.in.6"],
+          ["self.I7.1","orr_inst1.in.7"],
+          ["self.O.1","orr_inst1.out"]
         ]
       }
     }

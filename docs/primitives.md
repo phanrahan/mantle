@@ -13,12 +13,12 @@ Generators:
 * `Add(n, cin, cout)` - **TODO: Different than coreir.add, which doesn't have cin or cout**
 * `Sub(n, cin, cout)` - **TODO: Same issue as add**
 * `Negate(width)`
-* `ASR(width)` - **TODO: Missing in mantle**
-* `Mul(width)` - **TODO: Missing in mantle**
-* `UDiv(width)` - **TODO: Missing in mantle**
-* `SDiv(width)` - **TODO: Missing in mantle**
-* `UMod(width)` - **TODO: Missing in mantle**
-* `SMod(width)` - **TODO: Missing in mantle**
+* `ASR(width)` - **TODO: Missing in mantle40**
+* `Mul(width)` - **TODO: Missing in mantle40**
+* `UDiv(width)` - **TODO: Missing in mantle40**
+* `SDiv(width)` - **TODO: Missing in mantle40**
+* `UMod(width)` - **TODO: Missing in mantle40**
+* `SMod(width)` - **TODO: Missing in mantle40**
 
 ## Logic
 

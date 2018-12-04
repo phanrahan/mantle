@@ -14,21 +14,21 @@
             "modref":"corebit.const",
             "modargs":{"value":["Bool",false]}
           },
-          "inst0":{
+          "coreir_add3_inst0":{
             "genref":"coreir.add",
             "genargs":{"width":["Int",3]}
           }
         },
         "connections":[
-          ["inst0.in0.2","bit_const_0_None.out"],
-          ["inst0.in1.2","bit_const_0_None.out"],
-          ["self.I0.0","inst0.in0.0"],
-          ["self.I0.1","inst0.in0.1"],
-          ["self.I1.0","inst0.in1.0"],
-          ["self.I1.1","inst0.in1.1"],
-          ["self.O.0","inst0.out.0"],
-          ["self.O.1","inst0.out.1"],
-          ["self.COUT","inst0.out.2"]
+          ["coreir_add3_inst0.in0.2","bit_const_0_None.out"],
+          ["coreir_add3_inst0.in1.2","bit_const_0_None.out"],
+          ["self.I0.0","coreir_add3_inst0.in0.0"],
+          ["self.I0.1","coreir_add3_inst0.in0.1"],
+          ["self.I1.0","coreir_add3_inst0.in1.0"],
+          ["self.I1.1","coreir_add3_inst0.in1.1"],
+          ["self.O.0","coreir_add3_inst0.out.0"],
+          ["self.O.1","coreir_add3_inst0.out.1"],
+          ["self.COUT","coreir_add3_inst0.out.2"]
         ]
       },
       "Counter2_COUT":{
@@ -38,27 +38,27 @@
           ["CLK",["Named","coreir.clkIn"]]
         ]],
         "instances":{
+          "Add2_cout_inst0":{
+            "modref":"global.Add2_cout"
+          },
           "const_1_2":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",2]},
             "modargs":{"value":[["BitVector",2],"2'h1"]}
           },
-          "inst0":{
-            "modref":"global.Add2_cout"
-          },
-          "inst1":{
+          "reg_P_inst0":{
             "genref":"coreir.reg",
             "genargs":{"width":["Int",2]},
             "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",2],"2'h0"]}
           }
         },
         "connections":[
-          ["inst0.I1","const_1_2.out"],
-          ["self.COUT","inst0.COUT"],
-          ["inst1.out","inst0.I0"],
-          ["inst1.in","inst0.O"],
-          ["self.CLK","inst1.clk"],
-          ["self.O","inst1.out"]
+          ["self.COUT","Add2_cout_inst0.COUT"],
+          ["reg_P_inst0.out","Add2_cout_inst0.I0"],
+          ["const_1_2.out","Add2_cout_inst0.I1"],
+          ["reg_P_inst0.in","Add2_cout_inst0.O"],
+          ["self.CLK","reg_P_inst0.clk"],
+          ["self.O","reg_P_inst0.out"]
         ]
       }
     }

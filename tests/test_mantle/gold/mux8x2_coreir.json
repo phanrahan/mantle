@@ -16,22 +16,22 @@
           ["O",["Array",2,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_commonlib_mux8x2_inst0":{
             "genref":"commonlib.muxn",
             "genargs":{"N":["Int",8], "width":["Int",2]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.data.0"],
-          ["self.I1","inst0.in.data.1"],
-          ["self.I2","inst0.in.data.2"],
-          ["self.I3","inst0.in.data.3"],
-          ["self.I4","inst0.in.data.4"],
-          ["self.I5","inst0.in.data.5"],
-          ["self.I6","inst0.in.data.6"],
-          ["self.I7","inst0.in.data.7"],
-          ["self.S","inst0.in.sel"],
-          ["self.O","inst0.out"]
+          ["self.I0","coreir_commonlib_mux8x2_inst0.in.data.0"],
+          ["self.I1","coreir_commonlib_mux8x2_inst0.in.data.1"],
+          ["self.I2","coreir_commonlib_mux8x2_inst0.in.data.2"],
+          ["self.I3","coreir_commonlib_mux8x2_inst0.in.data.3"],
+          ["self.I4","coreir_commonlib_mux8x2_inst0.in.data.4"],
+          ["self.I5","coreir_commonlib_mux8x2_inst0.in.data.5"],
+          ["self.I6","coreir_commonlib_mux8x2_inst0.in.data.6"],
+          ["self.I7","coreir_commonlib_mux8x2_inst0.in.data.7"],
+          ["self.S","coreir_commonlib_mux8x2_inst0.in.sel"],
+          ["self.O","coreir_commonlib_mux8x2_inst0.out"]
         ]
       }
     }

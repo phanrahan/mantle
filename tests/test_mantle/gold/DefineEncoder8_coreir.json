@@ -8,32 +8,32 @@
           ["O",["Array",3,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "Or4xNone_inst0":{
             "modref":"global.Or4xNone"
           },
-          "inst1":{
+          "Or4xNone_inst1":{
             "modref":"global.Or4xNone"
           },
-          "inst2":{
+          "Or4xNone_inst2":{
             "modref":"global.Or4xNone"
           }
         },
         "connections":[
-          ["self.I.1","inst0.I0"],
-          ["self.I.3","inst0.I1"],
-          ["self.I.5","inst0.I2"],
-          ["self.I.7","inst0.I3"],
-          ["self.O.0","inst0.O"],
-          ["self.I.2","inst1.I0"],
-          ["self.I.3","inst1.I1"],
-          ["self.I.6","inst1.I2"],
-          ["self.I.7","inst1.I3"],
-          ["self.O.1","inst1.O"],
-          ["self.I.4","inst2.I0"],
-          ["self.I.5","inst2.I1"],
-          ["self.I.6","inst2.I2"],
-          ["self.I.7","inst2.I3"],
-          ["self.O.2","inst2.O"]
+          ["self.I.1","Or4xNone_inst0.I0"],
+          ["self.I.3","Or4xNone_inst0.I1"],
+          ["self.I.5","Or4xNone_inst0.I2"],
+          ["self.I.7","Or4xNone_inst0.I3"],
+          ["self.O.0","Or4xNone_inst0.O"],
+          ["self.I.2","Or4xNone_inst1.I0"],
+          ["self.I.3","Or4xNone_inst1.I1"],
+          ["self.I.6","Or4xNone_inst1.I2"],
+          ["self.I.7","Or4xNone_inst1.I3"],
+          ["self.O.1","Or4xNone_inst1.O"],
+          ["self.I.4","Or4xNone_inst2.I0"],
+          ["self.I.5","Or4xNone_inst2.I1"],
+          ["self.I.6","Or4xNone_inst2.I2"],
+          ["self.I.7","Or4xNone_inst2.I3"],
+          ["self.O.2","Or4xNone_inst2.O"]
         ]
       },
       "Or4xNone":{
@@ -45,17 +45,17 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "orr_inst0":{
             "genref":"coreir.orr",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I0","inst0.in.0"],
-          ["self.I1","inst0.in.1"],
-          ["self.I2","inst0.in.2"],
-          ["self.I3","inst0.in.3"],
-          ["self.O","inst0.out"]
+          ["self.I0","orr_inst0.in.0"],
+          ["self.I1","orr_inst0.in.1"],
+          ["self.I2","orr_inst0.in.2"],
+          ["self.I3","orr_inst0.in.3"],
+          ["self.O","orr_inst0.out"]
         ]
       }
     }

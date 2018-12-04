@@ -1,12 +1,12 @@
 module SISO4 (input  I, output  O, input  CLK);
-wire  inst0_Q;
-wire  inst1_Q;
-wire  inst2_Q;
-wire  inst3_Q;
-FDRSE #(.INIT(1'h0)) inst0 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(I), .Q(inst0_Q));
-FDRSE #(.INIT(1'h0)) inst1 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(inst0_Q), .Q(inst1_Q));
-FDRSE #(.INIT(1'h0)) inst2 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(inst1_Q), .Q(inst2_Q));
-FDRSE #(.INIT(1'h0)) inst3 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(inst2_Q), .Q(inst3_Q));
-assign O = inst3_Q;
+wire  FDRSE_inst0_Q;
+wire  FDRSE_inst1_Q;
+wire  FDRSE_inst2_Q;
+wire  FDRSE_inst3_Q;
+FDRSE #(.INIT(1'h0)) FDRSE_inst0 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(I), .Q(FDRSE_inst0_Q));
+FDRSE #(.INIT(1'h0)) FDRSE_inst1 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(FDRSE_inst0_Q), .Q(FDRSE_inst1_Q));
+FDRSE #(.INIT(1'h0)) FDRSE_inst2 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(FDRSE_inst1_Q), .Q(FDRSE_inst2_Q));
+FDRSE #(.INIT(1'h0)) FDRSE_inst3 (.C(CLK), .CE(1'b1), .R(1'b0), .S(1'b0), .D(FDRSE_inst2_Q), .Q(FDRSE_inst3_Q));
+assign O = FDRSE_inst3_Q;
 endmodule
 

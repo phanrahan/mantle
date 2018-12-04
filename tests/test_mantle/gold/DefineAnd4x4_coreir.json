@@ -11,44 +11,44 @@
           ["O",["Array",4,"Bit"]]
         ]],
         "instances":{
-          "inst0":{
+          "andr_inst0":{
             "genref":"coreir.andr",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "andr_inst1":{
             "genref":"coreir.andr",
             "genargs":{"width":["Int",4]}
           },
-          "inst2":{
+          "andr_inst2":{
             "genref":"coreir.andr",
             "genargs":{"width":["Int",4]}
           },
-          "inst3":{
+          "andr_inst3":{
             "genref":"coreir.andr",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["self.I0.0","inst0.in.0"],
-          ["self.I1.0","inst0.in.1"],
-          ["self.I2.0","inst0.in.2"],
-          ["self.I3.0","inst0.in.3"],
-          ["self.O.0","inst0.out"],
-          ["self.I0.1","inst1.in.0"],
-          ["self.I1.1","inst1.in.1"],
-          ["self.I2.1","inst1.in.2"],
-          ["self.I3.1","inst1.in.3"],
-          ["self.O.1","inst1.out"],
-          ["self.I0.2","inst2.in.0"],
-          ["self.I1.2","inst2.in.1"],
-          ["self.I2.2","inst2.in.2"],
-          ["self.I3.2","inst2.in.3"],
-          ["self.O.2","inst2.out"],
-          ["self.I0.3","inst3.in.0"],
-          ["self.I1.3","inst3.in.1"],
-          ["self.I2.3","inst3.in.2"],
-          ["self.I3.3","inst3.in.3"],
-          ["self.O.3","inst3.out"]
+          ["self.I0.0","andr_inst0.in.0"],
+          ["self.I1.0","andr_inst0.in.1"],
+          ["self.I2.0","andr_inst0.in.2"],
+          ["self.I3.0","andr_inst0.in.3"],
+          ["self.O.0","andr_inst0.out"],
+          ["self.I0.1","andr_inst1.in.0"],
+          ["self.I1.1","andr_inst1.in.1"],
+          ["self.I2.1","andr_inst1.in.2"],
+          ["self.I3.1","andr_inst1.in.3"],
+          ["self.O.1","andr_inst1.out"],
+          ["self.I0.2","andr_inst2.in.0"],
+          ["self.I1.2","andr_inst2.in.1"],
+          ["self.I2.2","andr_inst2.in.2"],
+          ["self.I3.2","andr_inst2.in.3"],
+          ["self.O.2","andr_inst2.out"],
+          ["self.I0.3","andr_inst3.in.0"],
+          ["self.I1.3","andr_inst3.in.1"],
+          ["self.I2.3","andr_inst3.in.2"],
+          ["self.I3.3","andr_inst3.in.3"],
+          ["self.O.3","andr_inst3.out"]
         ]
       }
     }

@@ -9,19 +9,19 @@
           ["O","Bit"]
         ]],
         "instances":{
-          "inst0":{
+          "coreir_eq_4_inst0":{
             "genref":"coreir.eq",
             "genargs":{"width":["Int",4]}
           },
-          "inst1":{
+          "not_inst0":{
             "modref":"corebit.not"
           }
         },
         "connections":[
-          ["self.I0","inst0.in0"],
-          ["self.I1","inst0.in1"],
-          ["inst1.in","inst0.out"],
-          ["self.O","inst1.out"]
+          ["self.I0","coreir_eq_4_inst0.in0"],
+          ["self.I1","coreir_eq_4_inst0.in1"],
+          ["not_inst0.in","coreir_eq_4_inst0.out"],
+          ["self.O","not_inst0.out"]
         ]
       }
     }

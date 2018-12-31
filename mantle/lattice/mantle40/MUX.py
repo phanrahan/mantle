@@ -1,5 +1,5 @@
 from magma import *
-#from ..ice40.PLB import *
+import magma as m
 from .LUT import LUT3, A0, A1, A2
 
 __all__  = ['Mux2', 'Mux4', 'Mux8', 'Mux16']
@@ -163,8 +163,14 @@ def DefineMux(height=2, width=1):
             wire( mux.O, Mux.O )
     return _Mux
 
-def Mux(height=2, width=None, **kwargs):
-    if width is None:
-       return curry(MuxN(height, **kwargs), prefix="I")
+def Mux(height=2, width=None, T=None, **kwargs):
+    if T is not None:
+        assert width is None, "Can only specify width **or** T"
+        if not isinstance(T, m.BitsKind):
+            raise NotImplementedError(type(T))
+        width = len(T)
+    elif width is None:
+        return curry(MuxN(height, **kwargs), prefix="I")
+
     return DefineMux(height, width)(**kwargs)
 

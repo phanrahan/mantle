@@ -166,10 +166,14 @@ def DefineMux(height=2, width=1):
 def Mux(height=2, width=None, T=None, **kwargs):
     if T is not None:
         assert width is None, "Can only specify width **or** T"
-        if not isinstance(T, m.BitsKind):
+        if isinstance(T, m.BitKind):
+            width = None
+        elif isinstance(T, m.BitsKind) or \
+                isinstance(T, m.ArrayKind) and isinstance(T.T, m.BitKind):
+            width = len(T)
+        else:
             raise NotImplementedError(type(T))
-        width = len(T)
-    elif width is None:
+    if width is None:
         return curry(MuxN(height, **kwargs), prefix="I")
 
     return DefineMux(height, width)(**kwargs)

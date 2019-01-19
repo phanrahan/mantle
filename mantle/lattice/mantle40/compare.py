@@ -168,7 +168,7 @@ def DefineSCMP(opname, op, reverse, n):
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
         @classmethod
         def definition(io):
-            sub = DefineSub(n)()
+            sub = DefineSub(n, cin=False, cout=False)()
             cmp = LUT3(op)
             if not reverse:
                 wire(cmp( sub(io.I0, io.I1)[-1], io.I0[-1], io.I1[-1] ), io.O)

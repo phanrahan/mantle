@@ -4,7 +4,6 @@ from .register import _RegisterName, Register, FFs
 
 __all__ = ['DefinePISO', 'PISO']
 
-@cache_definition
 def DefinePISO(n, init=0, has_ce=False, has_reset=False):
     """
     Generate Parallel-In, Serial-Out shift register.

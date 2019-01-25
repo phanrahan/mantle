@@ -4,7 +4,6 @@ from .compressor import compressor
 
 __all__ = ['DefinePopCount', 'PopCount', 'popcount']
 
-@cache_definition
 def DefinePopCount(n):
     class _PopCount(Circuit):
         name = 'PopCount{}'.format(n)

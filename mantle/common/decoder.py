@@ -3,7 +3,6 @@ from mantle import Decode
 
 __all__  = ['DefineDecoder', 'Decoder', 'decoder']
 
-@cache_definition
 def DefineDecoder(n, invert=False):
     """
     n-bit to 2^n decoder.

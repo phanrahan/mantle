@@ -106,7 +106,6 @@ def define_wrap(type_, type_name, in_type):
         simulate=sim_wrap
     )
 
-@cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False):
     Reg = DefineCoreirReg(None, init, has_async_reset)
     IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce=has_ce, has_reset=has_reset, has_async_reset=has_async_reset)

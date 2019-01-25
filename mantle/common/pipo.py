@@ -4,7 +4,6 @@ from .register import _RegisterName, Register
 
 __all__ = ['DefinePIPO', 'PIPO']
 
-@cache_definition
 def DefinePIPO(n, init=0, has_ce=False, has_reset=False):
     """
     Generate Parallel-In, Parallel-Out shift register.

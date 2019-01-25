@@ -3,7 +3,6 @@ from magma.testing import check_files_equal
 from mantle import *
 import mantle.coreir
 
-@cache_definition
 def Define_mantle_reg_U6(init):
   class mantle_reg_U6(Circuit):
     name = f"mantle_reg_U6_{init}"

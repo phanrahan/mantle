@@ -25,9 +25,8 @@ if mantle_target == "ice40":
         n3to2s = n3to2s + 1
         return fork([LUT3(I0^I1^I2), LUT3((I0&I1)|(I1&I2)|(I2&I0))])
 else:
-    @cache_definition
     def Define3to2Op():
-        Op = DefineCircuit("Op", "I0", In(Bit), "I1", In(Bit), "I2", In(Bit), "O", Out(Bit))
+        Op = DefineCircuit("_3to2Op", "I0", In(Bit), "I1", In(Bit), "I2", In(Bit), "O", Out(Bit))
         a = And(2)(Op.I0, Op.I1)
         b = And(2)(Op.I1, Op.I2)
         c = And(2)(Op.I2, Op.I0)

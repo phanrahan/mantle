@@ -19,7 +19,6 @@ def declare_binop(name, python_op, out_type=None, signed=False):
             O = O[0]
         value_store.set_value(self.O, O)
 
-    @cache_definition
     def Declare(width, type_=Bits):
         if width is None:
             T = Bit
@@ -47,7 +46,6 @@ def declare_binop(name, python_op, out_type=None, signed=False):
 
 DefineCoreirMul = declare_binop("mul", operator.mul)
 
-@cache_definition
 def DefineCoreirAdd(width):
     coreir_genargs = {"width": width} # , "has_cout": has_cout, "has_cin": has_cin}
     def simulate_coreir_add(self, value_store, state_store):
@@ -128,7 +126,6 @@ def DefineSub(N, cout=False, cin=False):
     return Sub
 
 
-@cache_definition
 def DefineNegate(width):
     T = Bits(width)
     class _Negate(mantle.primitives.DeclareNegate(width)):
@@ -143,7 +140,6 @@ def DefineNegate(width):
     return _Negate
 
 
-@cache_definition
 def DefineASR(width):
     T = Bits(width)
     class _ASR(mantle.primitives.DeclareASR(width)):

@@ -31,7 +31,6 @@ class EQ2(Circuit):
     def definition(io):
         wire( LUT4(EQ2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
 
-@cache_definition
 def DefineEQ(n):
     assert n % 2 == 0
     T = Bits(n)
@@ -72,7 +71,6 @@ class NE2(Circuit):
     def definition(io):
         wire( LUT4(NE2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
 
-@cache_definition
 def DefineNE(n):
     assert n % 2 == 0
     T = Bits(n)
@@ -118,19 +116,15 @@ def DefineUCMP(opname, reverse, negate, n):
                 wire(Not()(sub.COUT), io.O)
     return _UCMP
 
-@cache_definition
 def DefineUGE(n):
     return DefineUCMP('UGE', False, False, n)
 
-@cache_definition
 def DefineULE(n):
     return DefineUCMP('ULE', True, False, n)
 
-@cache_definition
 def DefineULT(n):
     return DefineUCMP('ULT', False, True, n)
 
-@cache_definition
 def DefineUGT(n):
     return DefineUCMP('UGT', True, True, n)
 
@@ -158,19 +152,15 @@ def DefineSCMP(opname, op, reverse, n):
                 wire(cmp( sub(io.I1, io.I0)[-1], io.I1[-1], io.I0[-1] ), io.O)
     return _SCMP
 
-@cache_definition
 def DefineSGE(n):
     return DefineSCMP('SGE', _sge, False, n)
 
-@cache_definition
 def DefineSLE(n):
     return DefineSCMP('SLE', _sge, True, n)
 
-@cache_definition
 def DefineSLT(n):
     return DefineSCMP('SLT', _slt, False, n)
 
-@cache_definition
 def DefineSGT(n):
     return DefineSCMP('SGT', _slt, True, n)
 

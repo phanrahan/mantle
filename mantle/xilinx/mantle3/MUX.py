@@ -129,7 +129,6 @@ def MuxN(height, **kwargs):
     elif height == 16:
         return Mux16(**kwargs)
 
-@cache_definition
 def DefineMux(height=2, width=1):
 
     """

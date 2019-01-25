@@ -31,7 +31,6 @@ def gen_sim_mem(depth, width):
     return sim_mem
 
 
-@cache_definition
 def DefineCoreirMem(depth, width):
     name = "coreir_mem{}x{}".format(depth,width)
     addr_width = getRAMAddrWidth(depth)

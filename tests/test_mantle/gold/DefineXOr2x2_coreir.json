@@ -19,6 +19,24 @@
           ["xor2_inst0.in1","self.I1"],
           ["xor2_inst0.out","self.O"]
         ]
+      },
+      "xor2_wrapped_flattened":{
+        "type":["Record",[
+          ["I0",["Array",2,"BitIn"]],
+          ["I1",["Array",2,"BitIn"]],
+          ["O",["Array",2,"Bit"]]
+        ]],
+        "instances":{
+          "xor2_inst0":{
+            "genref":"coreir.xor",
+            "genargs":{"width":["Int",2]}
+          }
+        },
+        "connections":[
+          ["xor2_inst0.in0","self.I0"],
+          ["xor2_inst0.in1","self.I1"],
+          ["xor2_inst0.out","self.O"]
+        ]
       }
     }
   }

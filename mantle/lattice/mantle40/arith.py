@@ -53,7 +53,6 @@ def DefineAdders(name, n, cin, cout, forkargs=[]):
 # if cin, CIN is added to the circuit
 # if cout: COUT is added to the circuit
 #
-@cache_definition
 def DefineAdd(n, cin=False, cout=False):
     class _Add(Circuit):
         name = _AdderName('Add', n, cin, cout)
@@ -77,7 +76,6 @@ def DefineAdd(n, cin=False, cout=False):
     return _Add
     
 
-@cache_definition
 def DefineSub(n, cin=False, cout=False):
     class _Sub(Circuit):
         name = _AdderName('Sub', n, cin, cout)
@@ -100,7 +98,6 @@ def DefineSub(n, cin=False, cout=False):
     
     
 
-@cache_definition
 def DefineNegate(width):
     T = Bits(width)
     class _Negate(Circuit):

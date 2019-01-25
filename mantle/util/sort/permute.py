@@ -52,7 +52,6 @@ def _reverseriffle(n):
 def _unreverseriffle(n):
     return inverse(_reverseriffle(n))
 
-@cache_definition
 def DefinePermute(na,permutation):
     n = len(permutation)
     class Permute(Circuit):

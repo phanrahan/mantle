@@ -42,7 +42,6 @@ def _RegisterName(name, n, init, ce, r):
     return name
 
 
-@cache_definition
 def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_async_reset=False, _type=Bits):
     """
     Generate an n-bit register

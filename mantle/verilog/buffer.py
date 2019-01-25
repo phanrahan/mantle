@@ -51,7 +51,6 @@ def DefineOpW(name, height, width, op):
         wire(op(c.I0, c.I1, c.I2, c.I3), c.O)
     return c
 
-@cache_definition
 def DefineBuf(width=None):
     if width is None:
         return DefineOp('Buf', 1, gatesbuf)

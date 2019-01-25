@@ -43,7 +43,6 @@ from magma import bits, cache_definition, Circuit, Bits, wire, Out, In, Bit
 import magma as m
 from .util import DeclareCoreirCircuit
 
-@cache_definition
 def DefineCoreirConst(width, value):
     def simulate_coreir_const(self, value_store, state_store):
         value_store.set_value(self.O, value)
@@ -53,7 +52,6 @@ def DefineCoreirConst(width, value):
             coreir_configargs={"value": BitVector(value, width)},
             simulate=simulate_coreir_const)
 
-@cache_definition
 def DefineCorebitConst(value):
     if not isinstance(value, bool) and not (isinstance(value, int) and value in {0, 1}):
         raise ValueError("DefineCorebitConst expects a boolean value or 0 or 1")
@@ -64,7 +62,6 @@ def DefineCorebitConst(value):
             default_kwargs={"value": bool(value)},
             simulate=simulate_corebit_const)
 
-@cache_definition
 def DefineCorebitTerm():
     def simulate_corebit_term(self, value_store, state_store):
         pass

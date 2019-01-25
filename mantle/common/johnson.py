@@ -4,7 +4,6 @@ from .register import _RegisterName, FFs
 
 __all__ = ['DefineJohnson', 'Johnson']
 
-@cache_definition
 def DefineJohnson(n, has_ce=False, has_reset=False):
     """
     Generate a n-bit johnson counter.

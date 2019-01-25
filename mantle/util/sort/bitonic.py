@@ -10,7 +10,6 @@ __all__ += ['DefineSorter', 'Sorter', 'sorter']
 #
 # HalfCleaner(n) => 2 BitonicSorter(n//2)
 #
-@cache_definition
 def DefineBitonicSorter(n):
     assert n in [2, 4, 8, 16]
     T = Bits(n)
@@ -42,7 +41,6 @@ def bitonicsorter(I):
 #
 # 2 BitonicSorter(n/2) => ReverseHalfCleaner
 #
-@cache_definition
 def DefineMerger(n):
     assert n in [2, 4, 8, 16]
     T = Bits(n)
@@ -73,7 +71,6 @@ def merger(I):
 #
 # 2 Sorters(n/2) => Merger(n) 
 #
-@cache_definition
 def DefineSorter(n):
     assert n in [2, 4, 8, 16]
     T = Bits(n)

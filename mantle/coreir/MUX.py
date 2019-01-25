@@ -11,7 +11,6 @@ from bit_vector import BitVector
 import math
 
 
-@cache_definition
 def DefineCoreirMux(width=None):
     N = width
     def simulate(self, value_store, state_store):
@@ -60,7 +59,6 @@ def _declare_muxn(height, width):
     )
 
 
-@cache_definition
 def DefineMux(height=2, width=None, T=None):
     if T is not None:
         assert width is None, "Can only specify width **or** T"

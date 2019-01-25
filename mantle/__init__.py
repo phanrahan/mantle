@@ -28,6 +28,7 @@ if m.mantle_target in ['coreir',
                        'spartan6',
                        'kintex7',
                        'cyclone4',
+                       'verilog'
     ]:
 
     if m.mantle_target == 'coreir':
@@ -43,9 +44,12 @@ if m.mantle_target in ['coreir',
     elif m.mantle_target == 'verilog':
         from mantle.verilog import *
 
-    import mantle.common
-    for module in mantle.common.modules:
-        weak_import(f"common.{module}", globals())
+    if m.mantle_target == 'verilog':
+        print("Warning: verilog mantle target does not support common, will not be imported")
+    else:
+        import mantle.common
+        for module in mantle.common.modules:
+            weak_import(f"common.{module}", globals())
 
 else:
     if m.mantle_target not in ['greenpak4']:

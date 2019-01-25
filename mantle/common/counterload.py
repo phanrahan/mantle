@@ -11,7 +11,6 @@ __all__ = ['DefineCounterLoad', 'CounterLoad']
 #
 #   DATA : In(UInt(n)), LOAD : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
 #
-@cache_definition
 def DefineCounterLoad(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False):
 
     name = _CounterName(f'CounterLoad{n}', incr, has_ce, has_reset, cin, cout)

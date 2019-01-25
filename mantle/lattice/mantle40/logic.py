@@ -62,7 +62,6 @@ def DefineReduceOp(opname, n, luts, cascadeexpr, cin):
             wire(a(io.I), io.O)
     return _ReduceOp
 
-@cache_definition
 def DefineReduceAnd(n):
     luts = [A0, A0&A1, A0&A1&A2, A0&A1&A2&A3]
     return DefineReduceOp('And', n, luts, A0 & A1, 1)
@@ -70,7 +69,6 @@ def DefineReduceAnd(n):
 def ReduceAnd(height=2, **kwargs):
     return DefineReduceAnd(height)(**kwargs)
 
-@cache_definition
 def DefineReduceNAnd(n):
     luts = [~A0, ~(A0&A1), ~(A0&A1&A2), ~(A0&A1&A2&A3)]
     return DefineReduceOp('NAnd', n, luts, A0 & ~A1, 0)
@@ -78,7 +76,6 @@ def DefineReduceNAnd(n):
 def ReduceNAnd(height=2, **kwargs):
     return DefineReduceNAnd(height)(**kwargs)
 
-@cache_definition
 def DefineReduceOr(n):
     luts = [A0, A0|A1, A0|A1|A2, A0|A1|A2|A3]
     return DefineReduceOp('Or', n, luts, A0 | A1, 0)
@@ -86,7 +83,6 @@ def DefineReduceOr(n):
 def ReduceOr(height=2, **kwargs):
     return DefineReduceOr(height)(**kwargs)
 
-@cache_definition
 def DefineReduceNOr(n):
     luts = [~A0, ~(A0|A1), ~(A0|A1|A2), ~(A0|A1|A2|A3)]
     return DefineReduceOp('NOr', n, luts, A0 | ~A1, 1)
@@ -94,7 +90,6 @@ def DefineReduceNOr(n):
 def ReduceNOr(height=2, **kwargs):
     return DefineReduceNOr(height)(**kwargs)
 
-@cache_definition
 def DefineReduceXOr(n):
     luts = [A0, A0^A1, A0^A1^A2, A0^A1^A2^A3]
     return DefineReduceOp('XOr', n, luts, A0 ^ A1, 0)
@@ -102,7 +97,6 @@ def DefineReduceXOr(n):
 def ReduceXOr(height=2, **kwargs):
     return DefineReduceXOr(height)(**kwargs)
 
-@cache_definition
 def DefineReduceNXOr(n):
     luts = [~A0, ~(A0^A1), ~(A0^A1^A2), ~(A0^A1^A2^A3)]
     return DefineReduceOp('NXOr', n, luts, A0 ^ ~A1, 1)
@@ -111,7 +105,6 @@ def ReduceNXOr(height=2, **kwargs):
     return DefineReduceNXOr(height)(**kwargs)
 
 
-@cache_definition
 def DefineOp(opname, op, height=2, width=1):
     """
     Generate Op module
@@ -136,7 +129,6 @@ def DefineOp(opname, op, height=2, width=1):
             wire(opmxn.O, io.O)
     return _Op
 
-@cache_definition
 def DefineAnd(height=2, width=1):
     return DefineOp('And', ReduceAnd, height, width)
 
@@ -145,7 +137,6 @@ def And(height=2, width=None, **kwargs):
         return curry(ReduceAnd(height, **kwargs))
     return DefineAnd(height, width)(**kwargs)
 
-@cache_definition
 def DefineNAnd(height=2, width=None):
     return DefineOp('NAnd', ReduceNAnd, height, width)
 
@@ -154,7 +145,6 @@ def NAnd(height=2, width=None, **kwargs):
         return curry(ReduceNAnd(height, **kwargs))
     return DefineNAnd(height, width)(**kwargs)
 
-@cache_definition
 def DefineOr(height=2, width=None):
     return DefineOp('Or', ReduceOr, height, width)
 
@@ -163,7 +153,6 @@ def Or(height=2, width=None, **kwargs):
         return curry(ReduceOr(height, **kwargs))
     return DefineOr(height, width)(**kwargs)
 
-@cache_definition
 def DefineNOr(height=2, width=None):
     return DefineOp('NOr', ReduceNOr, height, width)
 
@@ -172,7 +161,6 @@ def NOr(height=2, width=None, **kwargs):
         return curry(ReduceNOr(height, **kwargs))
     return DefineNOr(height, width)(**kwargs)
 
-@cache_definition
 def DefineXOr(height=2, width=None):
     return DefineOp('XOr', ReduceXOr, height, width)
 
@@ -181,7 +169,6 @@ def XOr(height=2, width=None, **kwargs):
         return curry(ReduceXOr(height, **kwargs))
     return DefineXOr(height, width)(**kwargs)
 
-@cache_definition
 def DefineNXOr(height=2, width=None):
     return DefineOp('NXOr', ReduceNXOr, height, width)
 
@@ -191,7 +178,6 @@ def NXOr(height=2, width=None, **kwargs):
     return DefineNXOr(height, width)(**kwargs)
 
 
-@cache_definition
 def DefineInvert(width):
     """
     Generate Invert module

@@ -16,7 +16,6 @@ def get_length(value):
                 " {}".format(type(value)))
 
 
-@cache_definition
 def DefineFoldOp(DefineOp, name, height, width):
     if width is None:
         T = Bit
@@ -85,7 +84,6 @@ def declare_bits_binop(name, python_op):
         # print(f"{python_op}({I0}, {I1}), {out}")
         value_store.set_value(self.O, O)
 
-    @cache_definition
     def Declare(N):
         T = Bits(N)
         return DeclareCoreirCircuit("{}{}".format(name, N),
@@ -122,7 +120,6 @@ def DefineOp(op_name, DefineCoreirReduce, height, width):
     EndDefine()
     return circ
 
-@cache_definition
 def DefineAnd(height=2, width=None):
     if height is 2:
         if width is None:
@@ -139,7 +136,6 @@ def ReduceAnd(height=2, **kwargs):
     return uncurry(And(height, **kwargs))
 
 
-@cache_definition
 def DefineNAnd(height=2, width=None):
     if width is None:
         T = Bit
@@ -183,7 +179,6 @@ def not_(arg, **kwargs):
     return Not(get_length(arg), **kwargs)(arg)
 
 
-@cache_definition
 def DefineOr(height=2, width=None):
     if height is 2:
         if width is None:
@@ -200,7 +195,6 @@ def ReduceOr(height=2, **kwargs):
     return uncurry(Or(height, **kwargs))
 
 
-@cache_definition
 def DefineNOr(height=2, width=None):
     if width is None:
         T = Bit
@@ -230,7 +224,6 @@ def ReduceNOr(height=2, **kwargs):
     return uncurry(NOr(height, **kwargs))
 
 
-@cache_definition
 def DefineXOr(height=2, width=None):
     if height is 2:
         if width is None:
@@ -248,7 +241,6 @@ def ReduceXOr(height=2, **kwargs):
     return uncurry(XOr(height, **kwargs))
 
 
-@cache_definition
 def DefineNXOr(height=2, width=None):
     if width is None:
         T = Bit
@@ -283,7 +275,6 @@ def simulate_bits_invert(self, value_store, state_store):
     O = (~_in).as_bool_list()
     value_store.set_value(self.O, O)
 
-@cache_definition
 def DefineInvert(width):
     T = Bits(width)
     return DeclareCoreirCircuit("Invert{}".format(width),
@@ -302,7 +293,6 @@ def simulate_wire(self, value_store, state_store):
     value_store.set_value(self.O, value_store.get_value(self.I))
 
 
-@cache_definition
 def DefineWire(width):
     if width is None:
         T = Bit
@@ -327,7 +317,6 @@ def invert(arg, **kwargs):
     return Invert(get_length(arg), **kwargs)(arg)
 
 
-@cache_definition
 def DefineLSL(width):
     T = Bits(width)
     def simulate(self, value_store, state_store):
@@ -346,7 +335,6 @@ def LSL(width, **kwargs):
     return DefineLSL(width)(**kwargs)
 
 
-@cache_definition
 def DefineLSR(width):
     T = Bits(width)
     def simulate(self, value_store, state_store):
@@ -365,7 +353,6 @@ def LSR(width, **kwargs):
     return DefineLSR(width)(**kwargs)
 
 
-@cache_definition
 def DefineStaticLeftShift(width, shift_amount):
     T = Bits(width)
     class _StaticLeftShift(Circuit):
@@ -386,7 +373,6 @@ def static_left_shift(arg, shift_amount, **kwargs):
     width = get_length(arg)
     return StaticLeftShift(width, shift_amount, **kwargs)(arg)
 
-@cache_definition
 def DefineStaticRightShift(width, shift_amount):
     T = Bits(width)
     class _StaticRightShift(Circuit):

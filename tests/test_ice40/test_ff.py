@@ -1,4 +1,5 @@
 import magma as m
+m.config.set_database_hash_backend("verilog")
 from magma.backend.verilog import compile
 from mantle.lattice.ice40 import SB_DFF
 

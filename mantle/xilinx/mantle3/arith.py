@@ -40,7 +40,6 @@ def _Args(n, cin, cout):
 # if cin, CIN is added to the circuit
 # if cout: COUT is added to the circuit
 #
-@cache_definition
 def DefineAdd(n, cin=0, cout=False):
     class _Add(Circuit):
         name = _Name('Add', n, cin, cout)
@@ -58,7 +57,6 @@ def DefineAdd(n, cin=0, cout=False):
     return _Add
     
 
-@cache_definition
 def DefineSub(n, cin=1, cout=False):
     class _Sub(Circuit):
         name = _Name('Sub', n, cin, cout)
@@ -75,7 +73,6 @@ def DefineSub(n, cin=1, cout=False):
                 wire(sub.COUT, io.COUT)
     return _Sub
 
-@cache_definition
 def DefineNegate(n):
     T = Bits(n)
     class _Negate(Circuit):

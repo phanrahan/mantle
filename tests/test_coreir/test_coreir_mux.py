@@ -41,8 +41,7 @@ def test_coreir_mux_4x3():
 
 def test_two_coreir_muxes():
     width = 2
-    c = coreir.Context()
-    cirb = CoreIRBackend(c)
+    cirb = CoreIRBackend()
     scope = Scope()
     inType = Array(width, In(BitIn))
     outType = Array(width, Out(Bit))
@@ -60,5 +59,5 @@ def test_two_coreir_muxes():
 
     EndCircuit()
 
-    sim = CoreIRSimulator(testcircuit, testcircuit.CLK, context=c,
+    sim = CoreIRSimulator(testcircuit, testcircuit.CLK, context=cirb.context,
                           namespaces=["commonlib", "mantle", "coreir", "global"])

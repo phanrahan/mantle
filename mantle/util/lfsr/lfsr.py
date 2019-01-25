@@ -8,7 +8,6 @@ __all__ = ['DefineLFSR', '_lfsrtaps']
 _lfsrtaps = {}
 
 
-@cache_definition
 def DefineLFSR(n, init=1, has_ce=False, has_reset=False):
     def readtaps():
         global _lfsrtaps

@@ -15,18 +15,14 @@ __all__ += ['DefineASR']
 # if cin, CIN is added to the circuit
 # if cout: COUT is added to the circuit
 #
-@cache_definition
 def DefineAdd(n, cin=False, cout=False):
     pass
 
-@cache_definition
 def DefineSub(n, cin=False, cout=False):
     pass
 
-@cache_definition
 def DefineNegate(width):
     pass
 
-@cache_definition
 def DefineASR(width, shift):
     pass

@@ -3,7 +3,6 @@ from .register import _RegisterName, FFs
 
 __all__ = ['DefineSISO', 'SISO']
 
-@cache_definition
 def DefineSISO(n, init=0, has_ce=False, has_reset=False):
     """
     Generate Serial-In, Serial-Out shift register.

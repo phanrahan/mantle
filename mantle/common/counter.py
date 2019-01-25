@@ -23,7 +23,6 @@ def _CounterName(name, incr, has_ce, has_reset, cin, cout):
 #
 # O : Out(UInt(n)), COUT : Out(Bit)
 #
-@cache_definition
 def DefineCounter(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False):
 
     name = _CounterName(f'Counter{n}', incr, has_ce, has_reset, cin, cout)

@@ -6,7 +6,7 @@ err=0
 # run (so that we may catch multiple errors)
 trap 'err=1' ERR
 
-py.test tests/test_verilog
+py.test --target verilog tests/test_verilog
 py.test --target coreir tests/test_coreir
 
 py.test --target ice40 tests/test_ice40

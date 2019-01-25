@@ -20,7 +20,6 @@ def DeclareCoreirLUT(N, init):
             coreir_genargs = {"N": N},
             coreir_configargs = {"init": BitVector(init, 1 << N)})
 
-@cache_definition
 def DefineLUT(init, N):
     io = []
     for i in range(N):

@@ -3,7 +3,6 @@ from .register import _RegisterName, FFs
 
 __all__ = ['DefineSIPO', 'SIPO']
 
-@cache_definition
 def DefineSIPO(n, init=0, has_ce=False, has_reset=False):
     """
     Generate Serial-In, Parallel-Out shift register.

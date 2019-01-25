@@ -6,7 +6,6 @@ import operator
 from .util import DefineCoreirCircuit, DeclareCoreirCircuit
 
 
-@cache_definition
 def DefineEQ(width):
     def simulate(self, value_store, state_store):
         I0 = BitVector(value_store.get_value(self.I0))
@@ -38,7 +37,6 @@ def EQ(n, **kwargs):
 
 DefineCoreirNeq = declare_binop("neq", operator.ne, out_type=Bit)
 
-@cache_definition
 def DefineNE(n):
     if n is None:
         T = Bit
@@ -59,7 +57,6 @@ def NE(n, **kwargs):
 DefineCoreirUlt = declare_binop("ult", operator.lt, out_type=Bit)
 
 
-@cache_definition
 def DefineULT(n):
     return DefineCoreirUlt(n)
 
@@ -70,7 +67,6 @@ def ULT(n, **kwargs):
 DefineCoreirUle = declare_binop("ule", operator.le, out_type=Bit)
 
 
-@cache_definition
 def DefineULE(n):
     return DefineCoreirUle(n)
 
@@ -81,7 +77,6 @@ def ULE(n, **kwargs):
 DefineCoreirUgt = declare_binop("ugt", operator.gt, out_type=Bit)
 
 
-@cache_definition
 def DefineUGT(n):
     return DefineCoreirUgt(n)
 
@@ -92,7 +87,6 @@ def UGT(n, **kwargs):
 DefineCoreirUge = declare_binop("uge", operator.ge, out_type=Bit)
 
 
-@cache_definition
 def DefineUGE(n):
     return DefineCoreirUge(n)
 
@@ -103,7 +97,6 @@ def UGE(n, **kwargs):
 DefineCoreirSlt = declare_binop("slt", operator.lt, out_type=Bit)
 
 
-@cache_definition
 def DefineSLT(n):
     return DefineCoreirSlt(n)
 
@@ -114,7 +107,6 @@ def SLT(n, **kwargs):
 DefineCoreirSle = declare_binop("sle", operator.le, out_type=Bit)
 
 
-@cache_definition
 def DefineSLE(n):
     return DefineCoreirSle(n)
 
@@ -125,7 +117,6 @@ def SLE(n, **kwargs):
 DefineCoreirSgt = declare_binop("sgt", operator.gt, out_type=Bit)
 
 
-@cache_definition
 def DefineSGT(n):
     return DefineCoreirSgt(n)
 
@@ -136,7 +127,6 @@ def SGT(n, **kwargs):
 DefineCoreirSge = declare_binop("sge", operator.ge, out_type=Bit)
 
 
-@cache_definition
 def DefineSGE(n):
     return DefineCoreirSge(n)
 

@@ -10,7 +10,6 @@ __all__  = ['DefineEvenOddSorter', 'EvenOddSorter', 'evenoddsorter']
 #
 # EvenOdd(n) => 2 EvenOddMerger(n//2) => EvenOddSwaps(n)) 
 #
-@cache_definition
 def DefineEvenOddMerger(n):
     assert n in [2, 4, 8, 16]
     T = Bits(n)
@@ -44,7 +43,6 @@ def evenoddmerger(I):
 #
 # 2 EvenOddSorter(n//2) => EvenOddMerger(n)) 
 #
-@cache_definition
 def DefineEvenOddSorter(n):
     assert n in [2, 4, 8, 16]
     T = Bits(n)

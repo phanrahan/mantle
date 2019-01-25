@@ -88,7 +88,6 @@ def sub(*args, **kwargs):
             curr = next_
     return curr.O
 
-@cache_definition
 def DeclareNegate(width):
     T = Bits(width)
     class _Negate(Circuit):
@@ -97,7 +96,6 @@ def DeclareNegate(width):
     return _Negate
 
 
-@cache_definition
 def DeclareASR(width):
     T = Bits(width)
     class _ASR(Circuit):

@@ -20,7 +20,6 @@ def swap(I):
     return Swap()(I)
 
 
-@cache_definition
 def DefineSwaps(n):
     class Swaps(Circuit):
         name = 'Swap{}'.format(n)
@@ -38,7 +37,6 @@ def swaps(I):
     return Swaps(len(I))(I)
 
 
-@cache_definition
 def DefineEvenOddSwaps(n):
     class EvenOddSwaps(Circuit):
         name = 'EvenOddSwap{}'.format(n)

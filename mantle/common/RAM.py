@@ -43,7 +43,6 @@ def writeport(height, width, regs, WADDR, I, WE):
         regs[i](I, CE=enable.O[i])
 
 
-@cache_definition
 def DefineRAM(height, width):
     n = 1 << height
     TADDR = Bits(height)
@@ -71,7 +70,6 @@ def RAM(height, width):
     return DefineRAM(height, width)()
 
 
-@cache_definition
 def DefineDualRAM(height, width):
     n = 1 << height
     TADDR = Bits(height)

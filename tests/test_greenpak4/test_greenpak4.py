@@ -1,3 +1,5 @@
+import magma
+magma.config.set_database_hash_backend("verilog")
 import pytest
 
 import magma as m

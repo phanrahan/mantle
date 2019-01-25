@@ -9,7 +9,6 @@ __all__ += ['DefineCounterModM', 'CounterModM', 'SizedCounterModM']
 #
 # Create an n-bit mod-m counter
 #
-@cache_definition
 def DefineCounterModM(m, n, cin=False, cout=True, incr=1, 
     has_ce=False, has_reset=False):
 

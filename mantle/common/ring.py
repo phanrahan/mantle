@@ -3,7 +3,6 @@ from .register import _RegisterName, FFs
 
 __all__  = ['DefineRing', 'Ring']
 
-@cache_definition
 def DefineRing(n, init=1, has_ce=False, has_reset=False):
     """
     Generate a n-bit ring counter.

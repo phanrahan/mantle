@@ -1,4 +1,8 @@
 import magma as m
+
+if m.mantle_target != "coreir":
+    m.config.set_database_hash_backend("verilog")
+
 import mantle
 
 

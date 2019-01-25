@@ -1,4 +1,5 @@
 from magma import *
+magma.config.set_database_hash_backend("verilog")
 from magma.backend.verilog import compile
 from mantle.verilog import DFF
 

@@ -66,7 +66,7 @@ def DefineMux(height=2, width=None, T=None):
         assert width is None, "Can only specify width **or** T"
         # Sanitize names for verilog by removing parens
         # TODO: Make this a reuseable feature
-        suffix = str(T).replace("(", "$").replace(")", "$").replace(",", "$")
+        suffix = str(T).replace("(", "").replace(")", "").replace(",", "_")
         T = T
     else:
         suffix = f"{width}"

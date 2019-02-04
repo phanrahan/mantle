@@ -90,7 +90,7 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
         coreir_genargs=gen_args,
         coreir_configargs=config_args,
         coreir_name="reg_arst" if has_reset else "reg",
-        verilog_name="coreir_" + name,
+        verilog_name="coreir_" + ("reg_arst" if has_reset else "reg"),
         coreir_lib="coreir"
     )
 

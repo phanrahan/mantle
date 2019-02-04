@@ -12,9 +12,9 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
 
     if has_reset or has_ce:
         class Register(m.Circuit):
-            name = f"Register__has_ce_{has_ce}__has_reset_{has_reset}__" \
-                   f"has_async_reset__{has_async_reset}__" \
-                   f"type_{_type.__name__}__n_{n}"
+            name = f"Register_has_ce_{has_ce}_has_reset_{has_reset}_" \
+                   f"has_async_reset_{has_async_reset}_" \
+                   f"type_{_type.__name__}_n_{n}"
             IO = ["I", m.In(T), "O", m.Out(T)]
             IO += m.ClockInterface(has_ce=has_ce,
                                    has_reset=has_reset,
@@ -22,12 +22,12 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
 
             @classmethod
             def definition(io):
-                reg = DefineCoreirReg(n, init, has_async_reset, _type)()
+                reg = DefineCoreirReg(n, init, has_async_reset, _type)(name="value")
                 I = io.I
                 if has_reset:
                     I = mantle.mux([io.I, m.bits(init, n)], io.RESET)
                 if has_ce:
-                    I = mantle.mux([reg.O, I], io.CE)
+                    I = mantle.mux([reg.O, I], io.CE, name="enable_mux")
                 m.wire(I, reg.I)
                 m.wire(io.O, reg.O)
         return Register

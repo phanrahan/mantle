@@ -278,12 +278,12 @@ for type_ in (m._BitType, m.ArrayType):
 
 @export
 @preserve_type
-def mux(I, S):
+def mux(I, S, **kwargs):
     if isinstance(S, int):
         return I[S]
     elif S.const():
         return I[seq2int(S.bits())]
-    return Mux(len(I), T=type(I[0]))(*I, S)
+    return Mux(len(I), T=type(I[0]), **kwargs)(*I, S)
 
 
 orig_get_item = m.ArrayType.__getitem__

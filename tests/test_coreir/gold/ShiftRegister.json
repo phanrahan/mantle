@@ -41,46 +41,6 @@
           ["self.CLK","reg_P_inst3.clk"],
           ["self.O","reg_P_inst3.out"]
         ]
-      },
-      "ShiftRegister_flattened":{
-        "type":["Record",[
-          ["I",["Array",4,"BitIn"]],
-          ["O",["Array",4,"Bit"]],
-          ["CLK",["Named","coreir.clkIn"]]
-        ]],
-        "instances":{
-          "reg_P_inst0":{
-            "genref":"coreir.reg",
-            "genargs":{"width":["Int",4]},
-            "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
-          },
-          "reg_P_inst1":{
-            "genref":"coreir.reg",
-            "genargs":{"width":["Int",4]},
-            "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
-          },
-          "reg_P_inst2":{
-            "genref":"coreir.reg",
-            "genargs":{"width":["Int",4]},
-            "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
-          },
-          "reg_P_inst3":{
-            "genref":"coreir.reg",
-            "genargs":{"width":["Int",4]},
-            "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",4],"4'h0"]}
-          }
-        },
-        "connections":[
-          ["self.CLK","reg_P_inst0.clk"],
-          ["self.I","reg_P_inst0.in"],
-          ["reg_P_inst1.in","reg_P_inst0.out"],
-          ["self.CLK","reg_P_inst1.clk"],
-          ["reg_P_inst2.in","reg_P_inst1.out"],
-          ["self.CLK","reg_P_inst2.clk"],
-          ["reg_P_inst3.in","reg_P_inst2.out"],
-          ["self.CLK","reg_P_inst3.clk"],
-          ["self.O","reg_P_inst3.out"]
-        ]
       }
     }
   }

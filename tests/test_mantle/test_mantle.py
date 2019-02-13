@@ -10,7 +10,7 @@ if magma.mantle_target == "coreir":
 else:
     output = "verilog"
     suffix = ".v"
-    magma.config.set_database_hash_backend("verilog")
+    
 
 import mantle
 from fault.test_vectors import generate_function_test_vectors, \

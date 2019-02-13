@@ -1,5 +1,5 @@
 import magma
-magma.config.set_database_hash_backend("verilog")
+
 from magma import DefineCircuit, EndCircuit, In, Out, Bit, Clock, wire
 from magma.backend.verilog import compile
 from mantle.xilinx.spartan3 import FDCE

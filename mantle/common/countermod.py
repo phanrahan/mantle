@@ -27,7 +27,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1,
 
     counter = Counter(n, cin=cin, cout=False, incr=incr, 
                    has_ce=has_ce, has_reset=True)
-    reset = Decode(m - 1, n)(counter.O)
+    reset = (m-1) == counter.O
 
     if has_reset:
         reset = Or(2)(reset, CounterModM.RESET)

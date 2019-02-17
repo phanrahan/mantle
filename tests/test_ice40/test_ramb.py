@@ -81,3 +81,7 @@ def test_romb_coreir():
     compile("build/test_romb_coreir", main, output="coreir")
     assert check_files_equal(__file__,
             "build/test_romb_coreir.json", "gold/test_romb_coreir.json")
+
+    compile("build/test_romb_coreir", main, output="coreir-verilog")
+    assert check_files_equal(__file__,
+            "build/test_romb_coreir.v", "gold/test_romb_coreir.v")

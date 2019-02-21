@@ -1,6 +1,5 @@
 from magma import *
 import magma as m
-m.config.set_database_hash_backend("verilog")
 from bit_vector import BitVector
 from mantle.lattice.ice40.RAMB import ROMB, RAMB
 from magma.simulator import PythonSimulator

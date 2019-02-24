@@ -66,7 +66,7 @@ def DefineMux(height=2, width=None, T=None):
         assert width is None, "Can only specify width **or** T"
         # Sanitize names for verilog by removing parens
         # TODO: Make this a reuseable feature
-        suffix = str(T).replace("(", "").replace(")", "").replace(",", "_")
+        suffix = str(T).replace("(", "").replace(")", "").replace(",", "_").replace("=", "_")
         T = T
     else:
         suffix = f"{width}"
@@ -92,7 +92,9 @@ def DefineMux(height=2, width=None, T=None):
         def definition(interface):
             if T is not None and not (isinstance(T, m.BitKind) or isinstance(T, m.ArrayKind) and isinstance(T.T, m.BitKind)):
                 if isinstance(T, m.TupleKind):
-                    raise NotImplementedError()
+                    for i in range(len(T.Ks)):
+                        Is = [getattr(interface, f"I{j}")[T.Ks[i]] for j in range(height)]
+                        interface.O[i] <= DefineMux(height, T=T.Ts[i])()(*Is, interface.S)
                 else:
                     assert isinstance(T, m.ArrayKind), f"Expected array or type type, got {T}, type is {type(T)}"
                     for i in range(len(T)):

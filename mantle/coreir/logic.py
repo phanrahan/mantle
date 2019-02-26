@@ -96,6 +96,8 @@ def declare_bits_binop(name, python_op):
 
     return Declare
 
+
+@cache_definition
 def DefineOp(op_name, DefineCoreirReduce, height, width):
     if width is None:
         T = Bit

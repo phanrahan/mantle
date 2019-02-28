@@ -51,7 +51,7 @@ def CoreirMem(cirb, depth, width):
     return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "mem", "CoreIRmem_w{}_d{}".format(width, depth),
                                                ["global"], {"width": width, "depth": depth})
 
-def DefineROM(height, width,read_latency):
+def DefineROM(height, width,read_latency=0):
     """
     coreir doesn't have a ROM primitive yet
     """

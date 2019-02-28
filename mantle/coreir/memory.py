@@ -60,7 +60,7 @@ def DefineROM(height, width,read_latency):
 def getRAMAddrWidth(height):
     return max((height - 1).bit_length(), 1)
 
-def DefineRAM(height, width, read_latency):
+def DefineRAM(height, width, read_latency=0):
     addr_width = getRAMAddrWidth(height)
     circ = DefineCircuit("RAM{}x{}".format(height, width),
         "RADDR", In(Bits(addr_width)),

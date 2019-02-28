@@ -57,3 +57,4 @@ def register(I, ce=None, reset=None, async_reset=None, **kwargs):
         m.wire(reset, reg.RESET)
     if has_async_reset:
         m.wire(reset, reg.ASYNCRESET)
+    return reg.O

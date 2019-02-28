@@ -1,6 +1,7 @@
 from magma import *
 from bit_vector import BitVector
 from magma.frontend.coreir_ import CircuitInstanceFromGeneratorWrapper
+from .register import register
 
 
 def gen_sim_mem(depth, width):
@@ -50,7 +51,7 @@ def CoreirMem(cirb, depth, width):
     return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "mem", "CoreIRmem_w{}_d{}".format(width, depth),
                                                ["global"], {"width": width, "depth": depth})
 
-def DefineROM(height, width):
+def DefineROM(height, width,read_latency):
     """
     coreir doesn't have a ROM primitive yet
     """
@@ -59,7 +60,7 @@ def DefineROM(height, width):
 def getRAMAddrWidth(height):
     return max((height - 1).bit_length(), 1)
 
-def DefineRAM(height, width):
+def DefineRAM(height, width, read_latency):
     addr_width = getRAMAddrWidth(height)
     circ = DefineCircuit("RAM{}x{}".format(height, width),
         "RADDR", In(Bits(addr_width)),
@@ -71,16 +72,24 @@ def DefineRAM(height, width):
     )
     coreir_mem = DefineCoreirMem(height, width)()
     wire(circ.RADDR, coreir_mem.raddr)
-    wire(circ.RDATA, coreir_mem.rdata)
     wire(circ.CLK, coreir_mem.clk)
     wire(circ.WADDR, coreir_mem.waddr)
     wire(circ.WDATA, coreir_mem.wdata)
     wire(circ.WE, coreir_mem.wen)
+    
+    #Register chain for memory
+    rd_out = coreir_mem.rdata
+    for i in range(read_latency):
+        rd_out = register(rd_out)
+    wire(circ.RDATA, rd_out)
+    
     EndDefine()
     return circ
 
-def DefineMemory(height, width, readonly=False):
+def DefineMemory(height, width, readonly=False, read_latency=0):
+    if read_latency < 0:
+        raise ValueError("read_latency cannot be negative")
     if readonly:
-        return DefineROM(height, width)
+        return DefineROM(height, width, read_latency)
     else:
-        return DefineRAM(height, width)
+        return DefineRAM(height, width, read_latency)

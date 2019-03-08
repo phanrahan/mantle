@@ -24,10 +24,10 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
             def definition(io):
                 reg = DefineCoreirReg(n, init, has_async_reset, _type)(name="value")
                 I = io.I
-                if has_reset:
-                    I = mantle.mux([io.I, m.bits(init, n)], io.RESET)
                 if has_ce:
                     I = mantle.mux([reg.O, I], io.CE, name="enable_mux")
+                if has_reset:
+                    I = mantle.mux([io.I, m.bits(init, n)], io.RESET)
                 m.wire(I, reg.I)
                 m.wire(io.O, reg.O)
         return Register

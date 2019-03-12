@@ -1,4 +1,4 @@
-from bit_vector import BitVector
+from hwtypes import BitVector
 import magma as m
 from mantle.util.compressor.pop import DefinePopCount
 from magma.testing import check_files_equal

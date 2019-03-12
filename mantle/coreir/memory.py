@@ -1,5 +1,5 @@
 from magma import *
-from bit_vector import BitVector
+from hwtypes import BitVector
 from magma.frontend.coreir_ import CircuitInstanceFromGeneratorWrapper
 from .register import register
 

@@ -4,7 +4,7 @@ import coreir
 from magma.bitutils import clog2, seq2int, int2seq, fun2seq
 from types import FunctionType
 from collections import Sequence
-from bit_vector import BitVector
+from hwtypes import BitVector
 
 
 @circuit_generator

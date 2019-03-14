@@ -1,5 +1,5 @@
 from magma import *
-from bit_vector import BitVector
+from hwtypes import BitVector
 from magma.compatibility import IntegerTypes
 import operator
 from functools import reduce

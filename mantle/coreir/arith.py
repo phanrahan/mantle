@@ -2,7 +2,7 @@ import operator
 
 from magma import *
 from magma.compatibility import IntegerTypes
-from bit_vector import BitVector
+from hwtypes import BitVector
 import mantle.primitives
 from .logic import DefineFoldOp, get_length, Invert, Not
 from .util import DeclareCoreirCircuit, get_int_vector_type

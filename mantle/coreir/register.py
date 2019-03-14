@@ -6,7 +6,7 @@ import mantle
 @m.cache_definition
 def DefineRegister(n, init=0, has_ce=False, has_reset=False,
                    has_async_reset=False, _type=m.Bits):
-    T = _type(n)
+    T = _type[n]
     if has_reset and has_async_reset:
         raise ValueError("Cannot have synchronous and asynchronous reset")
 

@@ -1,5 +1,4 @@
 from magma import *
-magma.config.set_database_hash_backend("verilog")
 from magma.backend.verilog import compile
 from magma.testing import check_files_equal
 from mantle.verilog import gates

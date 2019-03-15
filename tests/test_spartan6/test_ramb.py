@@ -1,5 +1,5 @@
 import magma
-magma.config.set_database_hash_backend("verilog")
+
 import pytest
 from fault.test_vectors import generate_function_test_vectors, \
     generate_simulator_test_vectors

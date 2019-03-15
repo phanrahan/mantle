@@ -1,5 +1,5 @@
 import magma as m
-from bit_vector import SIntVector, UIntVector
+from hwtypes import SIntVector, UIntVector
 
 default_port_mapping = {
     "I": "in",

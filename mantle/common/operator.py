@@ -273,17 +273,22 @@ m.UIntType.__mod__ = umod
 
 for type_ in (m._BitType, m.ArrayType):
     setattr(type_, "__eq__", eq)
-    setattr(type_, "__neq__", ne)
+    setattr(type_, "__ne__", ne)
 
 
 @export
 @preserve_type
-def mux(I, S):
+def mux(I, S, **kwargs):
     if isinstance(S, int):
         return I[S]
     elif S.const():
         return I[seq2int(S.bits())]
-    return Mux(len(I), T=type(I[0]))(*I, S)
+    T = type(I[0])
+    # Support using Bits(1) for select on 2 elements
+    if len(I) == 2 and isinstance(S, m.ArrayType) and \
+            isinstance(S.T, m.BitKind) and len(S) == 1:
+        S = S[0]
+    return Mux(len(I), T=T, **kwargs)(*I, S)
 
 
 orig_get_item = m.ArrayType.__getitem__

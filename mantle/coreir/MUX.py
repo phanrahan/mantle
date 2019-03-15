@@ -6,7 +6,7 @@ import magma as m
 from magma.backend.coreir_ import CoreIRBackend
 from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper
 from .util import DeclareCoreirCircuit
-from bit_vector import BitVector
+from hwtypes import BitVector
 
 import math
 
@@ -43,6 +43,7 @@ def DefineCoreirMux(width=None):
 is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
 
 
+@m.cache_definition
 def _declare_muxn(height, width):
     def simulate(self, value_store, state_store):
         sel = BitVector(value_store.get_value(self.I.sel))
@@ -59,12 +60,13 @@ def _declare_muxn(height, width):
     )
 
 
+@m.cache_definition
 def DefineMux(height=2, width=None, T=None):
     if T is not None:
         assert width is None, "Can only specify width **or** T"
         # Sanitize names for verilog by removing parens
         # TODO: Make this a reuseable feature
-        suffix = str(T).replace("(", "$").replace(")", "$").replace(",", "$")
+        suffix = str(T).replace("(", "").replace(")", "").replace(",", "_").replace("=", "_")
         T = T
     else:
         suffix = f"{width}"
@@ -90,7 +92,9 @@ def DefineMux(height=2, width=None, T=None):
         def definition(interface):
             if T is not None and not (isinstance(T, m.BitKind) or isinstance(T, m.ArrayKind) and isinstance(T.T, m.BitKind)):
                 if isinstance(T, m.TupleKind):
-                    raise NotImplementedError()
+                    for i in range(len(T.Ks)):
+                        Is = [getattr(interface, f"I{j}")[T.Ks[i]] for j in range(height)]
+                        interface.O[i] <= DefineMux(height, T=T.Ts[i])()(*Is, interface.S)
                 else:
                     assert isinstance(T, m.ArrayKind), f"Expected array or type type, got {T}, type is {type(T)}"
                     for i in range(len(T)):

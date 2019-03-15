@@ -1,7 +1,8 @@
 from magma import *
+import magma as m
 from mantle.coreir.MUX import Mux
 import coreir
-from bit_vector import BitVector
+from hwtypes import BitVector
 
 from .util import DeclareCoreirCircuit
 
@@ -14,7 +15,7 @@ def gen_sim_register(N, init, has_ce, has_reset):
 
         if not state_store:
             state_store['prev_clock'] = cur_clock
-            state_store['cur_val'] = BitVector(init, num_bits=N) if N is not None else bool(init)
+            state_store['cur_val'] = BitVector(init, N) if N is not None else bool(init)
 
         if has_reset:
             cur_reset = value_store.get_value(self.arst)
@@ -34,21 +35,22 @@ def gen_sim_register(N, init, has_ce, has_reset):
             new_val = value_store.get_value(self.I)
 
         if has_reset and cur_reset:
-            new_val = BitVector(init, num_bits=N) if N is not None else bool(init)
+            new_val = BitVector(init, N) if N is not None else bool(init)
         # if s and not sy and cur_s:
         #     new_val = True
 
         state_store['prev_clock'] = cur_clock
-        state_store['cur_val'] = BitVector(new_val, num_bits=N) if N is not None else new_val
+        state_store['cur_val'] = BitVector(new_val, N) if N is not None else new_val
         value_store.set_value(self.O, new_val)
     return sim_register
 
 
+@m.cache_definition
 def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     if width is None:
         width = 1
     name = "reg_P"  # TODO: Add support for clock interface
-    config_args = {"init": coreir.type.BitVector(init, num_bits=width)}
+    config_args = {"init": coreir.type.BitVector(init, width)}
     gen_args = {"width": width}
     T = T(width)
     io = ["I", In(T), "clk", In(Clock), "O", Out(T)]
@@ -75,7 +77,7 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     #     gen_args["has_en"] = True
 
     # default_kwargs = gen_args.copy()
-    default_kwargs = {"init": coreir.type.BitVector(init, num_bits=width)}
+    default_kwargs = {"init": coreir.type.BitVector(init, width)}
     # default_kwargs.update(config_args)
 
     return DeclareCoreirCircuit(
@@ -88,7 +90,7 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
         coreir_genargs=gen_args,
         coreir_configargs=config_args,
         coreir_name="reg_arst" if has_reset else "reg",
-        verilog_name="coreir_" + name,
+        verilog_name="coreir_" + ("reg_arst" if has_reset else "reg"),
         coreir_lib="coreir"
     )
 
@@ -106,6 +108,7 @@ def define_wrap(type_, type_name, in_type):
         simulate=sim_wrap
     )
 
+@m.cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False):
     Reg = DefineCoreirReg(None, init, has_async_reset)
     IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce=has_ce, has_reset=has_reset, has_async_reset=has_async_reset)

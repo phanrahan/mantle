@@ -1,5 +1,5 @@
 from magma import *
-from bit_vector import BitVector
+from hwtypes import BitVector
 from .arith import declare_binop, get_length
 from .logic import not_, XOr
 import operator

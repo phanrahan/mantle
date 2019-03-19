@@ -4,7 +4,7 @@ import mantle
 from magma.testing import check_files_equal
 from collections import namedtuple
 import fault
-from bit_vector import BitVector
+from hwtypes import BitVector
 
 op = namedtuple("op", ["name", "operator"])
 

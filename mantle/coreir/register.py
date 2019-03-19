@@ -33,12 +33,13 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
                 if has_ce:
                     I = mantle.mux([O, I], io.CE, name="enable_mux")
                 if has_reset:
-                    I = mantle.mux([io.I, m.bits(init, n)], io.RESET)
+                    I = mantle.mux([I, m.bits(init, n)], io.RESET)
                 if n is None:
                     m.wire(I, reg.I[0])
                 else:
                     m.wire(I, reg.I)
                 m.wire(io.O, O)
+
         return Register
     elif n is None:
         if _type is not m.Bits:

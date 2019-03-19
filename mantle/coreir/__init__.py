@@ -1,4 +1,4 @@
-from bit_vector import BitVector
+from hwtypes import BitVector
 from .logic import (
     And      , DefineAnd   , ReduceAnd ,
     NAnd     , DefineNAnd  , ReduceNAnd,
@@ -62,12 +62,27 @@ def DefineCorebitConst(value):
             default_kwargs={"value": bool(value)},
             simulate=simulate_corebit_const)
 
+
+def DefineTerm(width):
+    def simulate_term(self, value_store, state_store):
+        pass
+    return DeclareCoreirCircuit(f"term", "I", In(Bits(width)),
+                                coreir_name="term", coreir_lib="coreir",
+                                coreir_genargs={"width": width},
+                                simulate=simulate_term)
+
+
+def Term(width):
+    return DefineTerm(width)()
+
+
 def DefineCorebitTerm():
     def simulate_corebit_term(self, value_store, state_store):
         pass
     return DeclareCoreirCircuit(f"corebit_term", "I", In(Bit),
-            coreir_name="term", coreir_lib="corebit",
-            simulate=simulate_corebit_term)
+                                coreir_name="term", coreir_lib="corebit",
+                                simulate=simulate_corebit_term)
+
 
 def CorebitTerm():
     return DefineCorebitTerm()()

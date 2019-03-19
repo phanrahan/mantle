@@ -6,7 +6,7 @@ import magma as m
 from magma.backend.coreir_ import CoreIRBackend
 from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper
 from .util import DeclareCoreirCircuit
-from bit_vector import BitVector
+from hwtypes import BitVector
 
 import math
 

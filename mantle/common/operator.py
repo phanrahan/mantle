@@ -115,8 +115,8 @@ for _operator_name, _Circuit in (
                 raise TypeError("Can only assign an output to an input")
         else:
             for arg in args:
-                if not isinstance(arg, int) and not arg.isoutput():
-                    raise TypeError("Non-assigment operators are only defined on output types")
+                if not isinstance(arg, int) and arg.isinput():
+                    raise TypeError("Non-assigment operators are only defined on non input types")
 
         if name == "le" and args[0].isinput():
             # We could just call wire here, but we dispatch to the default
@@ -182,6 +182,19 @@ def neg(arg, **kwargs):
     return Negate(get_length(arg), **kwargs)(arg)
 
 
+def ite(self, a, b):
+    assert type(a) == type(b)
+    T = type(a)
+
+    @m.circuit.combinational
+    def ite(s: m.Bit, a: T, b: T) -> T:
+        if s:
+            return a
+        else:
+            return b
+    return ite(self, a, b)
+
+
 bitwise_ops = [
     ("__and__", and_),
     ("__or__", or_),
@@ -189,6 +202,7 @@ bitwise_ops = [
     ("__invert__", invert),
     ("__lshift__", lsl),
     ("__rshift__", lsr),
+    ("ite", ite),
 ]
 
 for method, op in bitwise_ops:
@@ -196,11 +210,40 @@ for method, op in bitwise_ops:
         setattr(m.BitType, method, op)
     setattr(m.BitsType, method, op)
 
+
+def adc(self, other, carry):
+    assert type(self) == type(other)
+    T = type(self)
+
+    @m.circuit.combinational
+    def adc(a: T, b: T, c: m.Bit) -> (T, m.Bit):
+        a = m.uint(m.zext(a, 1))
+        b = m.uint(m.zext(b, 1))
+        c = m.uint(m.zext(m.bits(c, 1), len(T)))
+        res = a + b + c
+        return res[0:-1], res[-1]
+    return adc(self, other, carry)
+
+
+def overflow(self, other, result):
+    assert type(self) == type(other)
+    T = type(self)
+    @m.circuit.combinational
+    def overflow(a: T, b: T, res: T) -> m.Bit:
+        msb_a = a[-1]
+        msb_b = b[-1]
+        N = res[-1]
+        return (msb_a & msb_b & ~N) | (~msb_a & ~msb_b & N)
+    return overflow(self, other, result)
+
+
 arithmetic_ops = [
     ("__neg__", neg),
     ("__add__", add),
     ("__sub__", sub),
     ("__mul__", mul),
+    ("adc", adc),
+    ("overflow", overflow),
 ]
 
 

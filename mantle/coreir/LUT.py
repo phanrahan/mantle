@@ -13,7 +13,7 @@ def DeclareCoreirLUT(N, init):
         in_ = value_store.get_value(getattr(self, "in"))
         value_store.set_value(self.out, [bool(i) for i in int2seq(init, 2 ** N)][seq2int(in_)])
     return DeclareCircuit("coreir_lut{}".format(N),
-            'in', In(Bits(N)), 'out', Out(Bit),
+            'in', In(Bits[ N ]), 'out', Out(Bit),
             simulate=simulate,
             coreir_name = "lutN",
             coreir_lib  = "commonlib",

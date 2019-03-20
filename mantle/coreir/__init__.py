@@ -46,7 +46,7 @@ from .util import DeclareCoreirCircuit
 def DefineCoreirConst(width, value):
     def simulate_coreir_const(self, value_store, state_store):
         value_store.set_value(self.O, value)
-    return DeclareCoreirCircuit(f"coreir_const{width}{value}", "O", Out(Bits(width)),
+    return DeclareCoreirCircuit(f"coreir_const{width}{value}", "O", Out(Bits[ width ]),
             coreir_name="const", coreir_lib="coreir",
             coreir_genargs={"width": width},
             coreir_configargs={"value": BitVector(value, width)},
@@ -66,7 +66,7 @@ def DefineCorebitConst(value):
 def DefineTerm(width):
     def simulate_term(self, value_store, state_store):
         pass
-    return DeclareCoreirCircuit(f"term", "I", In(Bits(width)),
+    return DeclareCoreirCircuit(f"term", "I", In(Bits[ width ]),
                                 coreir_name="term", coreir_lib="coreir",
                                 coreir_genargs={"width": width},
                                 simulate=simulate_term)

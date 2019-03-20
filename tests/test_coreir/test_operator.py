@@ -23,7 +23,7 @@ def test_unary_op(op, N, T, TType):
     Tests mantle.operator by using the operator.{op.name} method directly and
     using the overloaded {op.operator} if it is not None.
     """
-    if op.name == "neg" and T not in (m.UInt, m.SInt):
+    if op.name == "neg" and T is not m.UInt and T is not m.SInt:
         return
 
     def to_str(x):
@@ -31,7 +31,7 @@ def test_unary_op(op, N, T, TType):
             return x.__name__
         return str(x)
     _name = "TestsCircuit_" + \
-        "_".join(to_str(x) for x in (op.name, N, T, TType))
+        "_".join(to_str(x) for x in (op.name, N, T, T.__name__ + "Type"))
     # List of comparison ops so we can special case them (output type and
     # wiring 0)
     comparisons = ["lt", "le", "gt", "ge"]
@@ -39,13 +39,13 @@ def test_unary_op(op, N, T, TType):
         out_T = m.Out(m.Bit)
         expected_res_type = m.BitType
     else:
-        out_T = m.Out(T(N))
+        out_T = m.Out(T[N])
         expected_res_type = TType
 
     if T is m.Bit:
         in_T = m.Bit
     else:
-        in_T = T(N)
+        in_T = T[N]
 
     class TestCircuit(m.Circuit):
         name = _name
@@ -107,18 +107,18 @@ def test_binary_op(op, N, T, TType):
     using the overloaded {op.operator} if it is not None.
     """
 
-    if op.name in ["mul"] and T not in (m.UInt, m.SInt):
+    if op.name in ["mul"] and T is not m.UInt and T is not m.SInt:
         pytest.skip(f"{op.name} only defined for m.UInt and m.SInt")
-    if op.name in ["udiv", "umod"] and T != m.UInt:
+    if op.name in ["udiv", "umod"] and T is not m.UInt:
         pytest.skip(f"{op.name} only defined for m.UInt")
-    elif op.name in ["sdiv", "smod"] and T != m.SInt:
+    elif op.name in ["sdiv", "smod"] and T is not m.SInt:
         pytest.skip(f"{op.name} only defined for m.SInt")
     def to_str(x):
         if callable(x):
             return x.__name__
         return str(x)
     _name = "TestsCircuit_" + \
-        "_".join(to_str(x) for x in (op.name, N, T, TType))
+        "_".join(to_str(x) for x in (op.name, N, T, T.__name__ + "Type"))
     # List of comparison ops so we can special case them (output type and
     # wiring 0)
     comparisons = ["lt", "le", "gt", "ge"]
@@ -126,12 +126,12 @@ def test_binary_op(op, N, T, TType):
         out_T = m.Out(m.Bit)
         expected_res_type = m.BitType
     else:
-        out_T = m.Out(T(N))
+        out_T = m.Out(T[N])
         expected_res_type = TType
 
     class TestCircuit(m.Circuit):
         name = _name
-        IO = ["I0", m.In(T(N)), "I1", m.In(T(N)),
+        IO = ["I0", m.In(T[N]), "I1", m.In(T[N]),
               "O0", out_T, "O1", out_T, "O2", out_T]
 
         @classmethod
@@ -142,7 +142,7 @@ def test_binary_op(op, N, T, TType):
             m.wire(res, io.O0)
             # Test using the operator if it exists, otherwise wire 0 to O1
             if op.operator is None or (
-                    op.name in ["sub", "add"] + comparisons and T == m.Bits):
+                    op.name in ["sub", "add"] + comparisons and T is m.Bits):
                 if op.name in comparisons:
                     m.wire(0, io.O1)
                 else:
@@ -161,7 +161,7 @@ def test_binary_op(op, N, T, TType):
 
 def test_dyanmic_mux_getitem():
     class TestDynamicMuxGetItem(m.Circuit):
-        IO = ["I", m.In(m.Bits(2)), "S", m.In(m.Bit), "O", m.Out(m.Bit)]
+        IO = ["I", m.In(m.Bits[ 2 ]), "S", m.In(m.Bit), "O", m.Out(m.Bit)]
 
         @classmethod
         def definition(io):

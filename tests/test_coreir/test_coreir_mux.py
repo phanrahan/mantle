@@ -25,8 +25,8 @@ def test_coreir_mux_2x3():
 
 
 def test_coreir_mux_2xTuple():
-    A = Tuple(a=Bit, b=Bits(2))
-    B = Tuple(a=A, b=Bits(3))
+    A = Tuple(a=Bit, b=Bits[2])
+    B = Tuple(a=A, b=Bits[3])
     mux = DefineMux(2, T=B)
     print(repr(mux))
     compile("build/test_coreir_mux2xTuple", mux, output="coreir")
@@ -53,8 +53,8 @@ def test_two_coreir_muxes():
     width = 2
     cirb = CoreIRBackend()
     scope = Scope()
-    inType = Array(width, In(BitIn))
-    outType = Array(width, Out(Bit))
+    inType = Array[ width, In(BitIn) ]
+    outType = Array[ width, Out(Bit) ]
     args = ['I', inType, 'S', In(Bit), 'O', outType] + ClockInterface(False, False)
 
     testcircuit = DefineCircuit('test_partition', *args)

@@ -35,10 +35,10 @@ def gen_sim_mem(depth, width):
 def DefineCoreirMem(depth, width):
     name = "coreir_mem{}x{}".format(depth,width)
     addr_width = getRAMAddrWidth(depth)
-    IO = ["raddr", In(Bits(addr_width)),
-          "rdata", Out(Bits(width)),
-          "waddr", In(Bits(addr_width)),
-          "wdata", In(Bits(width)),
+    IO = ["raddr", In(Bits[ addr_width ]),
+          "rdata", Out(Bits[ width ]),
+          "waddr", In(Bits[ addr_width ]),
+          "wdata", In(Bits[ width ]),
           "clk", In(Clock),
           "wen", In(Bit) ]
     return DeclareCircuit(name, *IO, verilog_name="coreir_mem",
@@ -63,10 +63,10 @@ def getRAMAddrWidth(height):
 def DefineRAM(height, width, read_latency=0):
     addr_width = getRAMAddrWidth(height)
     circ = DefineCircuit("RAM{}x{}".format(height, width),
-        "RADDR", In(Bits(addr_width)),
-        "RDATA", Out(Bits(width)),
-        "WADDR", In(Bits(addr_width)),
-        "WDATA", In(Bits(width)),
+        "RADDR", In(Bits[ addr_width ]),
+        "RDATA", Out(Bits[ width ]),
+        "WADDR", In(Bits[ addr_width ]),
+        "WDATA", In(Bits[ width ]),
         "CLK",   In(Clock),
         "WE",    In(Bit),
     )

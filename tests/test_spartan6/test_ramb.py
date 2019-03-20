@@ -19,7 +19,7 @@ from mantle.xilinx.spartan6 import ROMB16, RAMB16
 
 def test_romb():
     main = m.DefineCircuit("test_romb",
-                         "O", m.Out(m.Bits(8)),
+                         "O", m.Out(m.Bits[8]),
                          "CLK", m.In(m.Clock)) 
     rom = [i % 256 for i in range(2048)]
     romb = ROMB16(rom, 8)
@@ -31,8 +31,8 @@ def test_romb():
 @pytest.mark.skip(reason='NYI')
 def test_ramb():
     main = m.DefineCircuit("test_ramb",
-                         "RDATA", m.Out(m.Bits(8)),
-                         "WDATA", m.In(m.Bits(8)),
+                         "RDATA", m.Out(m.Bits[8]),
+                         "WDATA", m.In(m.Bits[8]),
                          "WE",   m.In(m.Bit),
                          "CLK", m.In(m.Clock))
     ram = [i % 256 for i in range(2048)]

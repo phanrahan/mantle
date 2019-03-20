@@ -6,7 +6,7 @@ __all__  = ['DefineDecode', 'Decode', 'decode']
 
 @m.cache_definition
 def DefineDecode(i, n):
-    circ = m.DefineCircuit(f"Decode{i}{n}", "I", m.In(m.Bits(n)), "O", m.Out(m.Bit))
+    circ = m.DefineCircuit(f"Decode{i}{n}", "I", m.In(m.Bits[n]), "O", m.Out(m.Bit))
     m.wire(circ.O, EQ(n)(circ.I, m.bits(i, n)))
     m.EndDefine()
     return circ

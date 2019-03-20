@@ -99,7 +99,7 @@ def DefineSub(n, cin=False, cout=False):
     
 
 def DefineNegate(width):
-    T = Bits(width)
+    T = Bits[width]
     class _Negate(Circuit):
         name = 'Negate{}'.format(width)
         IO = ['I', In(T), 'O', Out(T)]

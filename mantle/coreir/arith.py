@@ -1,5 +1,6 @@
 import operator
 
+import magma as m
 from magma import *
 from magma.compatibility import IntegerTypes
 from hwtypes import BitVector
@@ -19,7 +20,7 @@ def declare_binop(name, python_op, out_type=None, signed=False):
             O = O[0]
         value_store.set_value(self.O, O)
 
-    def Declare(width, type_=Bits):
+    def Declare(width, T=Bits):
         if width is None:
             T = Bit
             return DeclareCoreirCircuit("coreir_bit_{}{}".format(name, width),
@@ -31,7 +32,15 @@ def declare_binop(name, python_op, out_type=None, signed=False):
                                   coreir_name=name,
                                   coreir_lib = "corebit")
         else:
-            T = type_[width]
+            if isinstance(T, m.BFloatKind):
+                coreir_lib = "float"
+                if T.N != 16:
+                    raise NotImplementedError("Only BFloat16 supported")
+                coreir_genargs = {"exp_bits": 8, "frac_bits": 7}
+            else:
+                coreir_lib = "coreir"
+                coreir_genargs = {"width": width}
+            T = T[width]
             return DeclareCoreirCircuit("coreir_{}{}".format(name, width),
                                   'I0', In(T), 'I1', In(T),
                                   'O', Out(out_type if out_type else T),
@@ -39,30 +48,37 @@ def declare_binop(name, python_op, out_type=None, signed=False):
                                   simulate=simulate,
                                   verilog_name="coreir_" + name,
                                   coreir_name=name,
-                                  coreir_lib = "coreir",
-                                  coreir_genargs={"width": width})
+                                  coreir_lib = coreir_lib,
+                                  coreir_genargs=coreir_genargs)
 
     return Declare
 
 DefineCoreirMul = declare_binop("mul", operator.mul)
 
-def DefineCoreirAdd(width):
-    coreir_genargs = {"width": width} # , "has_cout": has_cout, "has_cin": has_cin}
+def DefineCoreirAdd(width, T=m.Bits):
     def simulate_coreir_add(self, value_store, state_store):
         I0 = BitVector(value_store.get_value(self.I0), width)
         I1 = BitVector(value_store.get_value(self.I1), width)
         value_store.set_value(self.O, I0 + I1)
-    T = Bits[width]
+    if isinstance(T, m.BFloatKind):
+        coreir_lib = "float"
+        if T.N != 16:
+            raise NotImplementedError("Only BFloat16 supported")
+        coreir_genargs = {"exp_bits": 8, "frac_bits": 7} # , "has_cout": has_cout, "has_cin": has_cin}
+    else:
+        coreir_lib = "coreir"
+        coreir_genargs = {"width": width} # , "has_cout": has_cout, "has_cin": has_cin}
+    T = T[width]
     coreir_io = ['I0', In(T),
                  'I1', In(T),
                  'O', Out(T)]
     return DeclareCoreirCircuit(f"coreir_add{width}", *coreir_io,
-            coreir_name="add", coreir_lib="coreir",
+            coreir_name="add", coreir_lib=coreir_lib,
             coreir_genargs=coreir_genargs,
             simulate=simulate_coreir_add)
 
 @circuit_generator
-def DefineAdd(N=None, cout=False, cin=False, width=None):
+def DefineAdd(N=None, cout=False, cin=False, width=None, T=m.Bits):
     if N is None:
         if width is None:
             raise ValueError("Either N or width must be not None")
@@ -72,14 +88,14 @@ def DefineAdd(N=None, cout=False, cin=False, width=None):
     has_cout = cout
     has_cin = cin
     if not has_cout and not has_cin:
-        return DefineCoreirAdd(N)
+        return DefineCoreirAdd(N, T)
     class Add(mantle.primitives.DeclareAdd(N, cin=has_cin, cout=has_cout)):
         @classmethod
         def definition(add):
             width = N
             if has_cout:
                 width += 1
-            CoreirAdd = DefineCoreirAdd(width)
+            CoreirAdd = DefineCoreirAdd(width, T)
             coreir_add = CoreirAdd()
             I0 = add.I0
             I1 = add.I1
@@ -105,10 +121,10 @@ def DefineAdd(N=None, cout=False, cin=False, width=None):
 
 
 @circuit_generator
-def DefineSub(N, cout=False, cin=False):
+def DefineSub(N, cout=False, cin=False, T=m.Bits):
     has_cout = cout
     has_cin = cin
-    class Sub(mantle.primitives.DeclareSub(N, cin=has_cin, cout=has_cout)):
+    class Sub(mantle.primitives.DeclareSub(N, cin=has_cin, cout=has_cout, T=T)):
         @classmethod
         def definition(io):
             invert = Invert(N)

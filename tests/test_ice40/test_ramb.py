@@ -7,7 +7,7 @@ from magma.simulator import PythonSimulator
 
 def test_romb():
     main = DefineCircuit("test_romb",
-                         "RDATAOUT", Out(Bits(8)),
+                         "RDATAOUT", Out(Bits[ 8 ]),
                          "CLK", In(Clock)) # FIXME: hack
     romb = ROMB(512, 8, [0b00000001, 0b11111111] + [0] * 510)
     wire(romb.RADDR, uint(1, 9))
@@ -27,8 +27,8 @@ def test_romb():
 
 def test_ramb():
     main = DefineCircuit("test_ramb",
-                         "RDATA", Out(Bits(8)),
-                         "WDATA", In(Bits(8)),
+                         "RDATA", Out(Bits[ 8 ]),
+                         "WDATA", In(Bits[ 8 ]),
                          "WE",   In(Bit),
                          "CLK", In(Clock))
     ramb = RAMB(512, 8, [0b00000001, 0b11111111] + [0] * 510)

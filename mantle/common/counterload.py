@@ -16,12 +16,12 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=F
     name = _CounterName(f'CounterLoad{n}', incr, has_ce, has_reset, cin, cout)
 
     args = []
-    args += ['DATA', In(UInt(n))]
+    args += ['DATA', In(UInt[ n ])]
     args += ['LOAD', In(Bit)]
     if cin:
         args += ['CIN', In(Bit)]
 
-    args += ["O", Out(UInt(n))]
+    args += ["O", Out(UInt[ n ])]
     if cout:
         args += ["COUT", Out(Bit)]
 

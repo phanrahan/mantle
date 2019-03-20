@@ -13,7 +13,7 @@ def _AdderName(basename, n, cin, cout):
     return name
 
 def _AdderArgs(n, cin, cout):
-    T = Bits(n)
+    T = Bits[ n ]
 
     args = ["I0", In(T), "I1", In(T)]
     if cin:

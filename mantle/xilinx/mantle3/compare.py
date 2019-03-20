@@ -25,7 +25,7 @@ class EQ1(Circuit):
         wire( LUT2(EQ1LUT)(io.I0, io.I1), io.O )
 
 class EQ2(Circuit):
-    T = Bits(2)
+    T = Bits[ 2 ]
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     @classmethod
     def definition(io):
@@ -33,7 +33,7 @@ class EQ2(Circuit):
 
 def DefineEQ(n):
     assert n % 2 == 0
-    T = Bits(n)
+    T = Bits[ n ]
     class _EQ(Circuit):
         name = "EQ{}".format(n)
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
@@ -65,7 +65,7 @@ class NE1(Circuit):
         wire( LUT2(NE1LUT)(io.I0, io.I1), io.O )
 
 class NE2(Circuit):
-    T = Bits(2)
+    T = Bits[ 2 ]
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     @classmethod
     def definition(io):
@@ -73,7 +73,7 @@ class NE2(Circuit):
 
 def DefineNE(n):
     assert n % 2 == 0
-    T = Bits(n)
+    T = Bits[ n ]
     class _NE(Circuit):
         name = "NE{}".format(n)
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]

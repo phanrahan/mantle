@@ -189,10 +189,10 @@ def CARRY(I0, I1, CIN):
 CARRY4 = DeclareCircuit('CARRY4',
                "CYINIT", In(Bit),# 0
                "CI", In(Bit),    # CIN
-               "S", In(Bits(4)), # I0
-               "DI", In(Bits(4)), # I1
-               "O", Out(Bits(4)),
-               "outout CO", Out(Bits(4)))
+               "S", In(Bits[ 4 ]), # I0
+               "DI", In(Bits[ 4 ]), # I1
+               "O", Out(Bits[ 4 ]),
+               "outout CO", Out(Bits[ 4 ]))
 
 if __name__ == '__main__':
      print("%016X" % (A0&~A0))

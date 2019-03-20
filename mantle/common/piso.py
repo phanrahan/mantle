@@ -11,7 +11,7 @@ def DefinePISO(n, init=0, has_ce=False, has_reset=False):
     SI : In(Bit), PI : Out(Bits(n)), LOAD : In(Bit), O : Out(Bit)
     """
 
-    T = Bits(n)
+    T = Bits[ n ]
     class _PISO(Circuit):
         name = _RegisterName('PISO', n, init, has_ce, has_reset)
         IO = ['SI', In(Bit), 'PI', In(T), 'LOAD', In(Bit),

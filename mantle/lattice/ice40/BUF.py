@@ -9,7 +9,7 @@ def DefineBuf(width=1):
 
     I : In(Bits(width)), O : Out(Bits(width))
     """
-    T = Bits(width)
+    T = Bits[ width ]
     class BufN(Circuit):
 
         name = 'Buf{}'.format(width)

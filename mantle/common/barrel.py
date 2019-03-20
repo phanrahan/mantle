@@ -13,7 +13,7 @@ __all__ += ['DefineROR', 'ROR']
 
 def DefineShiftK(n, k, op):
     assert k < n
-    T = Bits(n)
+    T = Bits[ n ]
     class _ShiftK(Circuit):
         name = f'{op.upper()}{n}_{k}'
         IO = ['I', In(T), 'S', In(Bit), "O", Out(T)]
@@ -45,10 +45,10 @@ def ShiftK(n, k, op):
 def DefineShift(n, op):
     assert n in [2, 4, 8, 16]
     logn = log2(n)
-    T = Bits(n)
+    T = Bits[ n ]
     class _Shift(Circuit):
         name = f'{op.upper()}{n}'
-        IO = ['I', In(T), 'S', In(Bits(logn)), "O", Out(T)]
+        IO = ['I', In(T), 'S', In(Bits[ logn ]), "O", Out(T)]
         @classmethod
         def definition(io):
             I = io.I
@@ -83,7 +83,7 @@ def ASR(n):
 
 def DefineRotateK(n, k, op):
     assert k < n
-    T = Bits(n)
+    T = Bits[ n ]
     class _RotateK(Circuit):
         name = f'{op.upper()}{n}_{k}'
         IO = ['I', In(T), 'S', In(Bit), "O", Out(T)]
@@ -112,10 +112,10 @@ def RotateK(n, k, op):
 def DefineRotate(n, op):
     assert n in [2, 4, 8, 16]
     logn = log2(n)
-    T = Bits(n)
+    T = Bits[ n ]
     class _Rotate(Circuit):
         name = f'{op.upper()}{n}'
-        IO = ['I', In(T), 'S', In(Bits(logn)), "O", Out(T)]
+        IO = ['I', In(T), 'S', In(Bits[ logn ]), "O", Out(T)]
         @classmethod
         def definition(io):
             I = io.I

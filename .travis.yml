@@ -24,7 +24,7 @@ before_install:
 
 - git clone https://github.com/phanrahan/magma.git
 - if [[ $TRAVIS_BRANCH == 'coreir-dev' ]]; then git -C magma checkout coreir-dev; fi
-- if [[ $TRAVIS_BRANCH == 'lassen' ]]; then git -C magma checkout lassen; fi
+- git -C magma checkout lassen
 - pip install -r magma/requirements.txt
 - pip install -e magma
 - source magma/.travis/install_coreir.sh

@@ -31,7 +31,7 @@ def DefineCounter(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False
     if cin:
         args += ['CIN', In(Bit)]
 
-    args += ["O", Out(UInt(n))]
+    args += ["O", Out(UInt[ n ])]
     if cout:
         args += ["COUT", Out(Bit)]
 
@@ -106,7 +106,7 @@ def DefineUpDownCounter(n, cout=True, has_ce=False, has_reset=False):
     args += ["U", In(Bit)]
     args += ["D", In(Bit)]
 
-    args += ["O", Out(UInt(n))]
+    args += ["O", Out(UInt[ n ])]
     if cout:
         args += ["COUT", Out(Bit)]
 

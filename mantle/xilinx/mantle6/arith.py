@@ -18,7 +18,7 @@ def _Name(basename, n, cin, cout):
     return name
 
 def _Args(n, cin, cout):
-    T = Bits(n)
+    T = Bits[ n ]
 
     args = ["I0", In(T), "I1", In(T)]
 
@@ -74,7 +74,7 @@ def DefineSub(n, cin=1, cout=False):
     return _Sub
 
 def DefineNegate(n):
-    T = Bits(n)
+    T = Bits[ n ]
     class _Negate(Circuit):
         name = 'Negate{}'.format(n)
         IO = ['I', In(T), 'O', Out(T)]

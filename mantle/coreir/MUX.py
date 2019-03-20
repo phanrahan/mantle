@@ -30,8 +30,8 @@ def DefineCoreirMux(width=None):
         )
     else:
         return DeclareCoreirCircuit("coreir_mux{}".format(N),
-            *["I0", In(Bits(N)), "I1", In(Bits(N)), "S", In(Bit),
-             "O", Out(Bits(N))],
+            *["I0", In(Bits[N]), "I1", In(Bits[N]), "S", In(Bit),
+             "O", Out(Bits[N])],
             verilog_name="coreir_mux",
             coreir_name="mux",
             coreir_lib="coreir",
@@ -50,9 +50,9 @@ def _declare_muxn(height, width):
         out = BitVector(value_store.get_value(self.I.data[sel.as_int]))
         value_store.set_value(self.O, out)
     return DeclareCoreirCircuit(f"coreir_commonlib_mux{height}x{width}",
-        *["I", In(Tuple(data=Array(height, Bits(width)),
-                         sel=Bits(m.bitutils.clog2(height)))),
-          "O", Out(Bits(width))],
+        *["I", In(Tuple(data=Array[height, Bits[width]],
+                         sel=Bits[m.bitutils.clog2(height)])),
+          "O", Out(Bits[width])],
         coreir_name="muxn",
         coreir_lib="commonlib",
         simulate=simulate,
@@ -73,7 +73,7 @@ def DefineMux(height=2, width=None, T=None):
         if width is None:
             T = Bit
         else:
-            T = Bits(width)
+            T = Bits[width]
 
     io = []
     for i in range(height):
@@ -81,7 +81,7 @@ def DefineMux(height=2, width=None, T=None):
     if height == 2:
         select_type = Bit
     else:
-        select_type = Bits(m.bitutils.clog2(height))
+        select_type = Bits[m.bitutils.clog2(height)]
     io += ['S', In(select_type)]
     io += ['O', Out(T)]
 

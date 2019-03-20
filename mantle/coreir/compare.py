@@ -18,7 +18,7 @@ def DefineEQ(width):
         EndDefine()
         return circ
     else:
-        T = Bits(width)
+        T = Bits[width]
         return DeclareCoreirCircuit("coreir_eq_{}".format(width),
                               'I0', In(T), 'I1', In(T),
                               'O', Out(Bit),
@@ -41,7 +41,7 @@ def DefineNE(n):
     if n is None:
         T = Bit
     else:
-        T = Bits(n)
+        T = Bits[n]
     circ = DefineCircuit("NE{}".format(n),
         "I0", In(T), "I1", In(T), "O", Out(Bit))
     eq = EQ(n)

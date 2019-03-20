@@ -13,7 +13,7 @@ def _AdderName(basename, n, cin, cout):
     return name
 
 def _AdderArgs(n, cin, cout):
-    T = Bits(n)
+    T = Bits[ n ]
 
     args = ["I0", In(T), "I1", In(T)]
     if cin:
@@ -99,7 +99,7 @@ def DefineSub(n, cin=False, cout=False):
     
 
 def DefineNegate(width):
-    T = Bits(width)
+    T = Bits[width]
     class _Negate(Circuit):
         name = 'Negate{}'.format(width)
         IO = ['I', In(T), 'O', Out(T)]

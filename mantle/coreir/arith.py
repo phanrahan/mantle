@@ -31,7 +31,7 @@ def declare_binop(name, python_op, out_type=None, signed=False):
                                   coreir_name=name,
                                   coreir_lib = "corebit")
         else:
-            T = type_(width)
+            T = type_[width]
             return DeclareCoreirCircuit("coreir_{}{}".format(name, width),
                                   'I0', In(T), 'I1', In(T),
                                   'O', Out(out_type if out_type else T),
@@ -52,7 +52,7 @@ def DefineCoreirAdd(width):
         I0 = BitVector(value_store.get_value(self.I0), width)
         I1 = BitVector(value_store.get_value(self.I1), width)
         value_store.set_value(self.O, I0 + I1)
-    T = Bits(width)
+    T = Bits[width]
     coreir_io = ['I0', In(T),
                  'I1', In(T),
                  'O', Out(T)]
@@ -127,7 +127,7 @@ def DefineSub(N, cout=False, cin=False):
 
 
 def DefineNegate(width):
-    T = Bits(width)
+    T = Bits[width]
     class _Negate(mantle.primitives.DeclareNegate(width)):
         @classmethod
         def definition(neg):
@@ -141,7 +141,7 @@ def DefineNegate(width):
 
 
 def DefineASR(width):
-    T = Bits(width)
+    T = Bits[width]
     class _ASR(mantle.primitives.DeclareASR(width)):
         @classmethod
         def definition(asr):

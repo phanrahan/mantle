@@ -20,7 +20,7 @@ __all__ += ['RAM64QxN', 'DefineRAM64QxN']
 __all__ += ['read_ram_bits']
 
 RAM256x1S = DeclareCircuit("RAM256X1S",
-                            "A", In(Bits(8)),
+                            "A", In(Bits[ 8 ]),
                             "D", In(Bit),
                             "O", Out(Bit),
                             "WE", In(Bit),
@@ -41,8 +41,8 @@ RAM128x1S = DeclareCircuit("RAM128X1S",
 
 
 RAM128x1D = DeclareCircuit("RAM128X1D",
-                            "A", In(Bits(7)),
-                            "DPRA", In(Bits(7)),
+                            "A", In(Bits[ 7 ]),
+                            "DPRA", In(Bits[ 7 ]),
 
                             "D", In(Bit),
 
@@ -148,30 +148,30 @@ RAM32x1D = DeclareCircuit("RAM32X1D",
                            "WCLK", In(Clock) )
 
 RAM32M = DeclareCircuit("RAM32M",
-                            "ADDRA", In(Bits(5)),
-                            "ADDRB", In(Bits(5)),
-                            "ADDRC", In(Bits(5)),
-                            "ADDRD", In(Bits(5)),
+                            "ADDRA", In(Bits[ 5 ]),
+                            "ADDRB", In(Bits[ 5 ]),
+                            "ADDRC", In(Bits[ 5 ]),
+                            "ADDRD", In(Bits[ 5 ]),
 
-                            "DIA",   In(Bits(2)),
-                            "DIB",   In(Bits(2)),
-                            "DIC",   In(Bits(2)),
-                            "DID",   In(Bits(2)),
+                            "DIA",   In(Bits[ 2 ]),
+                            "DIB",   In(Bits[ 2 ]),
+                            "DIC",   In(Bits[ 2 ]),
+                            "DID",   In(Bits[ 2 ]),
 
-                            "DOA",   Out(Bits(2)),
-                            "DOB",   Out(Bits(2)),
-                            "DOC",   Out(Bits(2)),
-                            "DOD",   Out(Bits(2)),
+                            "DOA",   Out(Bits[ 2 ]),
+                            "DOB",   Out(Bits[ 2 ]),
+                            "DOC",   Out(Bits[ 2 ]),
+                            "DOD",   Out(Bits[ 2 ]),
 
                             "WE", In(Bit),
                             "WCLK", In(Clock))
 
 
 RAM64M = DeclareCircuit("RAM64M",
-                            "ADDRA", In(Bits(6)),
-                            "ADDRB", In(Bits(6)),
-                            "ADDRC", In(Bits(6)),
-                            "ADDRD", In(Bits(6)),
+                            "ADDRA", In(Bits[ 6 ]),
+                            "ADDRB", In(Bits[ 6 ]),
+                            "ADDRC", In(Bits[ 6 ]),
+                            "ADDRD", In(Bits[ 6 ]),
 
                             "DIA",   In(Bit),
                             "DIB",   In(Bit),
@@ -455,11 +455,11 @@ def DefineRAM16DxN(n, init=0):
     if name in RAMCache:
          return RAMCache[name]
 
-    args =  ["A0",  In(Bits(4)),
-             "A1",  In(Bits(4)),
-             "O0", Out(Bits(4)),
-             "O1", Out(Bits(4)),
-             "I",   In(Bits(4)),
+    args =  ["A0",  In(Bits[ 4 ]),
+             "A1",  In(Bits[ 4 ]),
+             "O0", Out(Bits[ 4 ]),
+             "O1", Out(Bits[ 4 ]),
+             "I",   In(Bits[ 4 ]),
              "WE",  In(Bit),
              "CLK", In(Clock)]
 
@@ -488,15 +488,15 @@ def DefineRAM64QxN(n, init=0):
     if name in RAMCache:
         return RAMCache[name]
 
-    args = ["A0", In(Bits(6)),
-            "A1", In(Bits(6)),
-            "A2", In(Bits(6)),
-            "A3", In(Bits(6)),
-            "O0", Out(Bits(n)),
-            "O1", Out(Bits(n)),
-            "O2", Out(Bits(n)),
-            "O3", Out(Bits(n)),
-            "I", In(Bits(n)),
+    args = ["A0", In(Bits[ 6 ]),
+            "A1", In(Bits[ 6 ]),
+            "A2", In(Bits[ 6 ]),
+            "A3", In(Bits[ 6 ]),
+            "O0", Out(Bits[ n ]),
+            "O1", Out(Bits[ n ]),
+            "O2", Out(Bits[ n ]),
+            "O3", Out(Bits[ n ]),
+            "I", In(Bits[ n ]),
             "WE", In(Bit),
             "CLK", In(Clock)]
     define = DefineCircuit(name, *args)

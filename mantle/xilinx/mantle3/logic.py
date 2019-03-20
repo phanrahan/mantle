@@ -35,7 +35,7 @@ __all__ += ['Not']
 #
 def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
     #assert n % 4 == 0
-    T = Bits(n)
+    T = Bits[ n ]
     class _ReduceOp(Circuit):
         name = '{}{}'.format(opname, n)
         IO = ['I', In(T), 'O', Out(Bit)]
@@ -101,7 +101,7 @@ def LUTCascade(n, k, expr, cin):
         return AnonymousCircuit( ['I', c.I[0:n], 'O', c.O] )
 
 def DefineReduceLUT(opname, n, luts, cascadeexpr, cin):
-    T = Bits(n)
+    T = Bits[ n ]
     class _ReduceLUT(Circuit):
         name = '{}{}'.format(opname, n)
         IO = ['I', In(T), 'O', Out(Bit)]
@@ -137,7 +137,7 @@ def DefineOp(opname, op, height=2, width=1):
 
     I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
-    T = Bits(width)
+    T = Bits[ width ]
     class _Op(Circuit):
 
         name = '{}{}x{}'.format(opname, height, width)
@@ -211,7 +211,7 @@ def DefineInvert(width):
     I0 : Bits(width) -> O : Bits(width)
     """
 
-    T = Bits(width)
+    T = Bits[ width ]
     class _Invert(Circuit):
         name = 'Invert%d' % width
         IO  = ['I', In(T), 'O', Out(T)]

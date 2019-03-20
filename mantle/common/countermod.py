@@ -17,7 +17,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1,
     if cin:
         args += ['CIN', In(Bit)]
 
-    args += ["O", Out(UInt(n))]
+    args += ["O", Out(UInt[n])]
     if cout:
         args += ["COUT", Out(Bit)]
 

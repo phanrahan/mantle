@@ -14,7 +14,7 @@ def DefineJohnson(n, has_ce=False, has_reset=False):
     """
     class Johnson(Circuit):
         name = _RegisterName('Johnson', n, 0, has_ce, has_reset)
-        IO = ['O', Out(Bits(n))] + ClockInterface(has_ce,has_reset)
+        IO = ['O', Out(Bits[ n ])] + ClockInterface(has_ce,has_reset)
         @classmethod
         def definition(johnson):
             ffs = FFs(n, has_ce=has_ce, has_reset=has_reset)

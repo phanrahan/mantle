@@ -8,17 +8,17 @@ __all__ += ['RAMB', 'ROMB']
 
 # posedge read clock, posedge write clock
 SB_RAM40_4K = DeclareCircuit("SB_RAM40_4K",
-    "RDATA", Out(Bits(16)),
-    "RADDR", In(Bits(11)),
+    "RDATA", Out(Bits[ 16 ]),
+    "RADDR", In(Bits[ 11 ]),
     "RCLK",  In(Clock),
     "RCLKE", In(Enable),
     "RE",    In(Enable),
     "WCLK",  In(Clock),
     "WCLKE", In(Enable),
     "WE",    In(Enable),
-    "WADDR", In(Bits(11)),
-    "MASK",  In(Bits(16)),
-    "WDATA", In(Bits(16)),
+    "WADDR", In(Bits[ 11 ]),
+    "MASK",  In(Bits[ 16 ]),
+    "WDATA", In(Bits[ 16 ]),
     stateful=True,
     simulate=gen_sb_ram40_4k_sim(prc=True, pwc=True))
 

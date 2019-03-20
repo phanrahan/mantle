@@ -48,13 +48,13 @@ class EQNone(Circuit):
         wire( LUT2(EQ1LUT)(io.I0, io.I1), io.O )
 
 class EQ1(Circuit):
-    IO = ["I0", In(Bits(1)), "I1", In(Bits(1)), "O", Out(Bit)]
+    IO = ["I0", In(Bits[ 1 ]), "I1", In(Bits[ 1 ]), "O", Out(Bit)]
     @classmethod
     def definition(io):
         wire(EQNone()(io.I0[0], io.I1[0]), io.O)
 
 class EQ2(Circuit):
-    T = Bits(2)
+    T = Bits[ 2 ]
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     @classmethod
     def definition(io):
@@ -62,7 +62,7 @@ class EQ2(Circuit):
         wire( LUT4(EQ2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
 
 def DefineEQ(n):
-    T = Bits(n)
+    T = Bits[ n ]
     class _EQ(Circuit):
         name = "EQ{}".format(n)
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
@@ -90,7 +90,7 @@ class NE1(Circuit):
         wire( LUT2(NE1LUT)(io.I0, io.I1), io.O )
 
 class NE2(Circuit):
-    T = Bits(2)
+    T = Bits[ 2 ]
     IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
     @classmethod
     def definition(io):
@@ -98,7 +98,7 @@ class NE2(Circuit):
         wire( LUT4(NE2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
 
 def DefineNE(n):
-    T = Bits(n)
+    T = Bits[ n ]
     class _NE(Circuit):
         name = "NE{}".format(n)
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
@@ -119,7 +119,7 @@ def NE(n, **kwargs):
 # unsigned comparisons
 
 def DefineUCMP(opname, reverse, negate, n):
-    T = UInt(n)
+    T = UInt[n]
     class _UCMP(Circuit):
         name = "{}{}".format(opname, n)
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
@@ -158,7 +158,7 @@ def _slt(c_msb, a_msb, b_msb):
     return int((~(a_msb ^ b_msb) & c_msb) | (a_msb & ~b_msb)) & 1
 
 def DefineSCMP(opname, op, reverse, n):
-    T = SInt(n)
+    T = SInt[n]
     class _SCMP(Circuit):
         name = "{}{}".format(opname,n)
         IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]

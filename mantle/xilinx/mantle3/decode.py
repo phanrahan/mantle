@@ -14,7 +14,7 @@ def DefineDecode(i, n, invert=False):
 
     class _Decode(Circuit):
         name = 'Decode_{}_{}'.format(i, n)
-        IO = ['I', In(Bits(n)), 'O', Out(Bit)]
+        IO = ['I', In(Bits[n]), 'O', Out(Bit)]
 
         @classmethod
         def definition(io):

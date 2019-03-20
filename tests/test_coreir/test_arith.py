@@ -15,7 +15,7 @@ def test_add():
         generate_simulator_test_vectors(Add)
 
 def test_add_cout_one():
-    args = ['I0', In(Bits(1)), 'I1', In(Bits(1)), 'O', Out(Bits(1)), 'COUT',  Out(Bit)] + \
+    args = ['I0', In(Bits[ 1 ]), 'I1', In(Bits[ 1 ]), 'O', Out(Bits[ 1 ]), 'COUT',  Out(Bit)] + \
         ClockInterface(False, False)
     testcircuit = DefineCircuit('test_add_cout_one', *args)
     add = DefineAdd(1, cout=True)()

@@ -52,7 +52,7 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     name = "reg_P"  # TODO: Add support for clock interface
     config_args = {"init": coreir.type.BitVector(init, width)}
     gen_args = {"width": width}
-    T = T(width)
+    T = T[width]
     io = ["I", In(T), "clk", In(Clock), "O", Out(T)]
     methods = []
 

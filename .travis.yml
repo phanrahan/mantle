@@ -29,6 +29,7 @@ before_install:
 - pip install -e magma
 - source magma/.travis/install_coreir.sh
 install:
+- pip install twine
 - pip install pytest-cov
 - pip install delegator.py
 - pip install -e .

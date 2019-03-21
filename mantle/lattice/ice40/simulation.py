@@ -182,13 +182,13 @@ def gen_sb_ram40_4k_sim(prc=True, pwc=True):
 
             for i in range(n_r_blocks):
                 if n_r_blocks == 16:
-                    RDATA[i] = r_data[i]
+                    RDATA[i] = bool(r_data[i])
                 elif n_r_blocks == 8:
-                    RDATA[i * 2] = r_data[i]
+                    RDATA[i * 2] = bool(r_data[i])
                 elif n_r_blocks == 4:
-                    RDATA[1 + i * 4] = r_data[i]
+                    RDATA[1 + i * 4] = bool(r_data[i])
                 elif n_r_blocks == 2:
-                    RDATA[3 + i * 8] = r_data[i]
+                    RDATA[3 + i * 8] = bool(r_data[i])
 
             value_store.set_value(self.RDATA, RDATA)
 

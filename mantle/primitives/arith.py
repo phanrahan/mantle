@@ -1,4 +1,5 @@
 from magma import *
+import magma as m
 
 
 @circuit_generator
@@ -46,10 +47,10 @@ def add(*args, **kwargs):
 
 
 @circuit_generator
-def DeclareSub(N, cin=False, cout=False):
+def DeclareSub(N, cin=False, cout=False, T=m.Bits):
     has_cin = cin
     has_cout = cout
-    T = Bits[N]
+    T = T[N]
     IO_ = ['I0', In(T), 'I1', In(T), 'O', Out(T)]
     name_ = "Sub{}".format(N)
     if has_cout:

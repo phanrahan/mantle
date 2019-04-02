@@ -7,7 +7,7 @@ from .util import wrap
 def test_const():
     Const8 = DefineCoreirConst(width=4, value=8)
     assert repr(Const8) == """\
-coreir_const48 = DeclareCircuit("coreir_const48", "O", Out(Bits(4)))"""
+coreir_const48 = DeclareCircuit("coreir_const48", "O", Out(Bits[4]))"""
     compile("build/test_const", wrap(Const8), output="coreir")
     assert check_files_equal(__file__,
             "build/test_const.json", "gold/test_const.json")

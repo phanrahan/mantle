@@ -128,7 +128,7 @@ for _operator_name, _Circuit in (
                 # These don't have a height
                 if len(args) > 2:
                     raise Exception(f"{name} operator expects 2 arguments")
-                return circuit(width, **kwargs)(*args)
+                return circuit(width, T=type(args[0]), **kwargs)(*args)
             else:
                 return circuit(len(args), width, **kwargs)(*args)
     operator.__name__ = _operator_name
@@ -307,6 +307,7 @@ relational_ops = [
 for method, op in arithmetic_ops + relational_ops:
     setattr(m.SIntType, method, op)
     setattr(m.UIntType, method, op)
+    setattr(m.BFloat, method, op)
 
 m.SIntType.__truediv__ = sdiv
 m.UIntType.__truediv__ = udiv

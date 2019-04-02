@@ -23,7 +23,6 @@ before_install:
 # End install conda
 
 - git clone https://github.com/phanrahan/magma.git
-- git -C magma checkout lassen-bfloat
 - if [[ $TRAVIS_BRANCH == 'coreir-dev' ]]; then git -C magma checkout coreir-dev; fi
 - pip install -r magma/requirements.txt
 - pip install -e magma

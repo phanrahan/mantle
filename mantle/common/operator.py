@@ -315,6 +315,8 @@ m.UIntType.__truediv__ = udiv
 m.SIntType.__mod__ = smod
 m.UIntType.__mod__ = umod
 
+m.SIntType.__rshift__ = asr
+
 for type_ in (m._BitType, m.ArrayType):
     setattr(type_, "__eq__", eq)
     setattr(type_, "__ne__", ne)

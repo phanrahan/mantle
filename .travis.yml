@@ -28,13 +28,10 @@ install:
 - pip install -e .
 script:
 - "./scripts/run_tests.sh"
-before_deploy:
-- pip install twine
 deploy:
-  provider: pypi
-  user: leonardt
+  provider: script
+  script: /bin/bash .travis/deploy.sh
+  skip_cleanup: true
   on:
     tags: true
     branch: master
-  password:
-    secure: bjJJEoxTByzd7SO8mqJTdUbb2EjZveoLxUFsXoR40/FXSAfISKQE2F11fe/uOlyzSTFLd/0aEfS7onNwHAOVD4jC6Y7/p6SJOTYwtWzd1m3nkV9QVEf4gDgCo/3dGI/7PH5WRsVsdU1QmJkJzMLBid953elpKYeuPW3AQGwAyM3FBFOFNCd7gy6x6PZWn3SV/QMXAh8r7OGzP2fciLv9w6Wsqt45XXcBIzFhR30SwX0+dSSzXVnVyot5S09/pLg1eZfRAoygL5M2HGdsyipzL1r2JR5uA3NKSN7kvnN3UT9RwdP0qsKWwebZhSG7Xjw2k2+R0PFTScyJcwT3H0dnED3d9WknUuvdwnONKtOKL2YjrC+LQyO6lZdeFpPc4SWt1j3KDfuXglepqnEn4+ZSZc5uipZffEkpnBWf1ReVOvxtuB8eWJp6Dq7d73etyCDrZiG4DtMuECZ+Y4t+SltUDA7AaTR5HIEeqHhmVNAMurkUU/FhtrEuEfzXvNraj6WG/8j9k+k7fngvTajkbeW+1LRA6B5BkNyqksXcWgXa2neOtqZieO/wF9bA/lorUn1cIqD++QmPaB+ieKnGebDGUukSeAzLiLkYpZ56pRholE3rdQKqPdX1cg5LbsqIJJhM9hgGUqXmprJxqUoUihrUO+XLBbJKnBT1EW7RaygeLPo=

@@ -35,10 +35,8 @@
           "ASR4_inst1":{
             "modref":"global.ASR4"
           },
-          "const_0_4":{
-            "genref":"coreir.const",
-            "genargs":{"width":["Int",4]},
-            "modargs":{"value":[["BitVector",4],"4'h0"]}
+          "ASR4_inst2":{
+            "modref":"global.ASR4"
           },
           "const_1_4":{
             "genref":"coreir.const",
@@ -51,9 +49,11 @@
           ["self.I1","ASR4_inst0.I1"],
           ["self.O0","ASR4_inst0.O"],
           ["self.I0","ASR4_inst1.I0"],
-          ["const_1_4.out","ASR4_inst1.I1"],
-          ["self.O2","ASR4_inst1.O"],
-          ["self.O1","const_0_4.out"]
+          ["self.I1","ASR4_inst1.I1"],
+          ["self.O1","ASR4_inst1.O"],
+          ["self.I0","ASR4_inst2.I0"],
+          ["const_1_4.out","ASR4_inst2.I1"],
+          ["self.O2","ASR4_inst2.O"]
         ]
       }
     }

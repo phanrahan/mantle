@@ -23,12 +23,13 @@ before_install:
 # End install conda
 
 install:
-- pip install twine
 - pip install pytest-cov
 - pip install delegator.py
 - pip install -e .
 script:
 - "./scripts/run_tests.sh"
+before_deploy:
+- pip install twine
 deploy:
   provider: pypi
   user: leonardt

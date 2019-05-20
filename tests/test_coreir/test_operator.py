@@ -82,7 +82,6 @@ def test_unary_op(op, N, T, TType):
     op(name="nxor", operator=None),
     op(name="lsl", operator="<<"),
     op(name="lsr", operator=">>"),
-    op(name="asr", operator=None),
     op(name="add", operator="+"),
     op(name="sub", operator="-"),
     op(name="mul", operator="*"),
@@ -113,6 +112,10 @@ def test_binary_op(op, N, T, TType):
         pytest.skip(f"{op.name} only defined for m.UInt")
     elif op.name in ["sdiv", "smod"] and T is not m.SInt:
         pytest.skip(f"{op.name} only defined for m.SInt")
+    if op.name == "lsr" and T is m.SInt:
+        # Redefine here because it's shadowed by the `op` param
+        op_tuple = namedtuple("op", ["name", "operator"])
+        op = op_tuple(name="asr", operator=">>")
     def to_str(x):
         if callable(x):
             return x.__name__

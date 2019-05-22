@@ -5,7 +5,8 @@ import mantle
 
 @m.cache_definition
 def DefineRegister(n, init=0, has_ce=False, has_reset=False,
-                   has_async_reset=False, _type=m.Bits):
+                   has_async_reset=False, _type=m.Bits,
+                   reset_priority=True):
     if has_reset and has_async_reset:
         raise ValueError("Cannot have synchronous and asynchronous reset")
 
@@ -30,9 +31,16 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
                 O = reg.O
                 if n is None:
                     O = O[0]
-                if has_ce:
+                if has_reset and has_ce:
+                    if reset_priority:
+                        I = mantle.mux([O, I], io.CE, name="enable_mux")
+                        I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                    else:
+                        I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                        I = mantle.mux([O, I], io.CE, name="enable_mux")
+                elif has_ce:
                     I = mantle.mux([O, I], io.CE, name="enable_mux")
-                if has_reset:
+                elif has_reset:
                     I = mantle.mux([I, m.bits(init, n)], io.RESET)
                 if n is None:
                     m.wire(I, reg.I[0])

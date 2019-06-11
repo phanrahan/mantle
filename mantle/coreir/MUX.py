@@ -4,7 +4,7 @@ from __future__ import division
 from magma import *
 import magma as m
 from magma.backend.coreir_ import CoreIRBackend
-from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper
+from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper, GetCoreIRBackend
 from .util import DeclareCoreirCircuit
 from hwtypes import BitVector
 
@@ -129,7 +129,8 @@ Mux4 = DefineMux(4)
 Mux8 = DefineMux(8)
 Mux16 = DefineMux(16)
 
-def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
+@cache_definition
+def DefineCommonlibMuxN(N: int, width: int):
     """
     Get a Mux that handles any number of inputs
 
@@ -144,9 +145,9 @@ def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
     Note: even though this isn't a RAM, the AddrWidth computation is the same.
     """
     name = "CommonlibMuxN_n{}_w{}".format(str(N), str(width))
-    return DefineCircuitFromGeneratorWrapper(cirb, "commonlib", "muxn",
+    return DefineCircuitFromGeneratorWrapper(GetCoreIRBackend(), "commonlib", "muxn",
                                              name, ["mantle", "coreir", "global"],
                                              {"N": N, "width": width})
 
-def CommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
-    return DefineCommonlibMuxN(cirb, N, width)()
+def CommonlibMuxN(N: int, width: int):
+    return DefineCommonlibMuxN(N, width)()

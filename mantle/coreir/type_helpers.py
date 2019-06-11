@@ -1,7 +1,8 @@
-from magma.backend.coreir_ import CoreIRBackend
-from magma.frontend.coreir_ import CircuitInstanceFromGeneratorWrapper
+from magma.frontend.coreir_ import CircuitInstanceFromGeneratorWrapper, GetCoreIRBackend
+from magma import cache_definition
 
-def Term(cirb: CoreIRBackend, width: int):
+@cache_definition
+def Term(width: int):
     """
     Take in an array of wires and connect it to nothing so that you don't get an unconnected
 
@@ -9,5 +10,5 @@ def Term(cirb: CoreIRBackend, width: int):
     :param width: The width of the element to absorb
     :return:
     """
-    return CircuitInstanceFromGeneratorWrapper(cirb, "coreir", "term", "term_w" + str(width), ["global"],
+    return CircuitInstanceFromGeneratorWrapper(GetCoreIRBackend(), "coreir", "term", "term_w" + str(width), ["global"],
                                                {"width": width})

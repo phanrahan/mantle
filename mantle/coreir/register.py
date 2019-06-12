@@ -52,7 +52,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
     elif n is None:
         if _type is not m.Bits:
             raise NotImplementedError()
-        return DefineDFF(init, has_ce, has_async_reset)
+        return DefineDFF(init, has_ce, has_async_reset=has_async_reset)
     else:
         return DefineCoreirReg(n, init, has_async_reset, _type)
 

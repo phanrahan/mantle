@@ -35,5 +35,5 @@ def mantle_test():
     from magma import clear_cachedFunctions
     clear_cachedFunctions()
 
-    magma.backend.coreir_.__reset_context()
+    magma.backend.coreir_.CoreIRContextSingleton().reset_instance()
 

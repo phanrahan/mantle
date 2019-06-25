@@ -51,7 +51,6 @@ def test_coreir_mux_4x3():
 
 def test_two_coreir_muxes():
     width = 2
-    cirb = CoreIRBackend()
     scope = Scope()
     inType = Array[ width, In(BitIn) ]
     outType = Array[ width, Out(Bit) ]
@@ -61,7 +60,7 @@ def test_two_coreir_muxes():
     coreir_mux = DefineCoreirMux(None)()
     coreir_mux(testcircuit.I[0], testcircuit.I[1], testcircuit.S)
     wire(coreir_mux.O, testcircuit.O[0])
-    cmux = CommonlibMuxN(cirb, 2, 1)
+    cmux = CommonlibMuxN(2, 1)
     wire(cmux.I.data[0][0], testcircuit.I[0])
     wire(cmux.I.data[1][0], testcircuit.I[1])
     wire(cmux.I.sel[0], testcircuit.S)
@@ -69,5 +68,5 @@ def test_two_coreir_muxes():
 
     EndCircuit()
 
-    sim = CoreIRSimulator(testcircuit, testcircuit.CLK, context=cirb.context,
+    sim = CoreIRSimulator(testcircuit, testcircuit.CLK,
                           namespaces=["commonlib", "mantle", "coreir", "global"])

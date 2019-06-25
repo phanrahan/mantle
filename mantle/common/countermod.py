@@ -62,7 +62,7 @@ def CounterModM(m, n, cin=False, cout=True, incr=1,
     return DefineCounterModM(m, n, cin, cout, incr, has_ce, has_reset=has_reset)(**kwargs)
 
 def SizedCounterModM(m, cin=False, cout=False, incr=1, 
-    has_ce=False, **kwargs):
+    has_ce=False, has_reset=False, **kwargs):
     """
     This is that counts from 0 to m - 1 that uses the minimum number of bits
     :param m: The value the counter counts up to
@@ -73,7 +73,7 @@ def SizedCounterModM(m, cin=False, cout=False, incr=1,
     :param kwargs: Args passed to the counter circuit when it is being initialized
     :return: A counter circuit
     """
-    return DefineCounterModM(m, math.ceil(math.log(m, 2)), cin, cout, incr, has_ce)(**kwargs)
+    return DefineCounterModM(m, math.ceil(math.log(m, 2)), cin, cout, incr, has_ce, has_reset)(**kwargs)
 
 DefineUpCounterModM = DefineCounterModM
 UpCounterModM = CounterModM

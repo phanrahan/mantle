@@ -146,7 +146,7 @@ def UpDownCounter(n, cout=True, has_ce=False, has_reset=False, **kwargs):
               has_ce=has_ce, has_reset=has_reset)(**kwargs)
 
 
-def DefineCeilFloorUpDownCounter(m, cout=True, has_ce=False, has_reset=False):
+def DefineCeilFloorUpDownCounter(m, has_ce=False, has_reset=False):
     """
     Counter between 0 and m - 1 that uses the minimum number of bits.
     
@@ -157,20 +157,17 @@ def DefineCeilFloorUpDownCounter(m, cout=True, has_ce=False, has_reset=False):
     down by 1 has nefect if already at 0.
     
     :param m: The value the counter counts up to
-    :param cout: Whether this counter should a carry output
     :param has_ce: Whether this counter should a clock-enable input
     :return: An updown counter circuit
     """
     class CeilFloorUpDownCounter(Circuit):
         num_bits = math.ceil(math.log(m, 2))
-        name = "CeilFloorUpDownCounter_m{}_cout{}_hasCE{}_hasReset{}".format(str(m), str(cout),
-                                                                             str(has_ce), str(has_reset))
+        name = "CeilFloorUpDownCounter_m{}_hasCE{}_hasReset{}".format(str(m), str(has_ce), str(has_reset))
         IO = ['U', In(Bit), 'D', In(Bit), 'O', Out(UInt[num_bits])] + ClockInterface(has_ce, has_reset)
-        if cout:
-            IO += ["COUT", Out(Bit)]
+
         @classmethod
         def definition(ceilFloorUpDownCounter):
-            up_down_counter = UpDownCounter(ceilFloorUpDownCounter.num_bits, cout, has_ce, has_reset)
+            up_down_counter = UpDownCounter(ceilFloorUpDownCounter.num_bits, False, has_ce, has_reset)
             at_max = Decode(m - 1, up_down_counter.O.N)(up_down_counter.O)
             at_min = Decode(0, up_down_counter.O.N)(up_down_counter.O)
 
@@ -182,10 +179,8 @@ def DefineCeilFloorUpDownCounter(m, cout=True, has_ce=False, has_reset=False):
             wire(should_decrease, up_down_counter.D)
 
             wire(up_down_counter.O, ceilFloorUpDownCounter.O)
-            if cout:
-                wire(up_down_counter.COUT, ceilFloorUpDownCounter.COUT)
 
     return CeilFloorUpDownCounter
 
-def CeilFloorUpDownCounter(m, cout=True, has_ce=False, has_reset=False):
-    return DefineCeilFloorUpDownCounter(m, cout, has_ce, has_reset)()
+def CeilFloorUpDownCounter(m, has_ce=False, has_reset=False):
+    return DefineCeilFloorUpDownCounter(m, has_ce, has_reset)()

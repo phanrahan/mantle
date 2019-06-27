@@ -148,7 +148,7 @@ def UpDownCounter(n, cout=True, has_ce=False, has_reset=False, **kwargs):
 
 def DefineCeilFloorUpDownCounter(m, cout=True, has_ce=False, has_reset=False):
     """
-    Counter between 0 and m - 1 that ses the minimum number of bits.
+    Counter between 0 and m - 1 that uses the minimum number of bits.
     
     This counter counts up by 1 if U is True and D is False, down by 1 if U is False and D is True,
     no change if both are False or True

@@ -49,7 +49,7 @@ def DefineCoreirConst(width, value):
     return DeclareCoreirCircuit(f"coreir_const{width}{value}", "O", Out(Bits[ width ]),
             coreir_name="const", coreir_lib="coreir",
             coreir_genargs={"width": width},
-            coreir_configargs={"value": BitVector(value, width)},
+            coreir_configargs={"value": BitVector[width](value)},
             simulate=simulate_coreir_const)
 
 def DefineCorebitConst(value):

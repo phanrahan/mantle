@@ -18,7 +18,7 @@ def DeclareCoreirLUT(N, init):
             coreir_name = "lutN",
             coreir_lib  = "commonlib",
             coreir_genargs = {"N": N},
-            coreir_configargs = {"init": BitVector(init, 1 << N)})
+            coreir_configargs = {"init": BitVector[1 << N](init)})
 
 def DefineLUT(init, N):
     io = []

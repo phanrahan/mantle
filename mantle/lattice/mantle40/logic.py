@@ -3,7 +3,7 @@ import sys
 if sys.version_info > (3, 0):
     from functools import reduce
     from functools import lru_cache
-from collections import Sequence
+from collections.abc import Sequence
 from magma import *
 from .LUT import LUT, LUT1, LUT2, LUT3, LUT4, A0, A1, A2, A3
 

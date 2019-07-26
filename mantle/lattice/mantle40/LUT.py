@@ -1,4 +1,4 @@
-from collections import Sequence
+from collections.abc import Sequence
 from magma import *
 from magma.compatibility import IntegerTypes
 from magma.bitutils import lutinit, int2seq

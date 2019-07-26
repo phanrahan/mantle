@@ -53,7 +53,7 @@ def test_ramb():
 
     # Write 0xBE to WADDR = 1
     sim.set_value(main.WE, True)
-    sim.set_value(main.WDATA, BitVector(0xBE, num_bits=8))
+    sim.set_value(main.WDATA, BitVector[8](0xBE))
 
     sim.advance(2)
 

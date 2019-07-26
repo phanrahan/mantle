@@ -2,7 +2,7 @@ from magma import *
 from magma.compatibility import IntegerTypes
 from magma.bitutils import int2seq, seq2int
 from mantle import FF
-from collections import Sequence
+from collections.abc import Sequence
 
 __all__  = ['FFs']
 

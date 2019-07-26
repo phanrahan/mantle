@@ -1,4 +1,4 @@
-from collections import Sequence
+from collections.abc import Sequence
 from magma import *
 from ..spartan3.CLB import ANDCY, XORCY, MUXCY
 from .LUT import LUT, LOG_BITS_PER_LUT, A0, A1, A2, A3, ZERO, ONE

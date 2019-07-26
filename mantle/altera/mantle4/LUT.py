@@ -1,4 +1,4 @@
-from collections import Sequence
+from collections.abc import Sequence
 from magma import *
 
 __all__  = ['LUT1', 'LUT2', 'LUT3', 'LUT4']

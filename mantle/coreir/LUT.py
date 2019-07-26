@@ -3,7 +3,7 @@ from magma import *
 import coreir
 from magma.bitutils import clog2, seq2int, int2seq, fun2seq
 from types import FunctionType
-from collections import Sequence
+from collections.abc import Sequence
 from hwtypes import BitVector
 
 

@@ -1,5 +1,6 @@
 from magma import *
 from hwtypes import BitVector
+import hwtypes as ht
 from magma.compatibility import IntegerTypes
 import operator
 from functools import reduce
@@ -35,8 +36,8 @@ def DefineFoldOp(DefineOp, name, height, width):
 
 def declare_bit_binop(name, python_op):
     def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0))
-        I1 = BitVector(value_store.get_value(self.I1))
+        I0 = ht.Bit(value_store.get_value(self.I0))
+        I1 = ht.Bit(value_store.get_value(self.I1))
         O = python_op(I0, I1).as_bool_list()[0]
         value_store.set_value(self.O, O)
 
@@ -50,7 +51,7 @@ def declare_bit_binop(name, python_op):
 
 def DefineCoreirReduce(op_name, python_op, width):
     def simulate(self, value_store, state_store):
-        in_ = BitVector(value_store.get_value(self.I))
+        in_ = BitVector[width](value_store.get_value(self.I))
         O = reduce(python_op, in_)
         value_store.set_value(self.O, O)
     decl = DeclareCoreirCircuit(op_name, "I", In(Bits[width]), "O", Out(Bit),
@@ -77,14 +78,14 @@ def DefineCoreirReduceOr(width):
 
 
 def declare_bits_binop(name, python_op):
-    def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0))
-        I1 = BitVector(value_store.get_value(self.I1))
-        O = python_op(I0, I1).as_bool_list()
-        # print(f"{python_op}({I0}, {I1}), {out}")
-        value_store.set_value(self.O, O)
 
     def Declare(N):
+        def simulate(self, value_store, state_store):
+            I0 = BitVector[N](value_store.get_value(self.I0))
+            I1 = BitVector[N](value_store.get_value(self.I1))
+            O = python_op(I0, I1).as_bool_list()
+            # print(f"{python_op}({I0}, {I1}), {out}")
+            value_store.set_value(self.O, O)
         T = Bits[N]
         return DeclareCoreirCircuit("{}{}".format(name, N),
                                     'I0', In(T), 'I1', In(T), 'O', Out(T),
@@ -168,7 +169,7 @@ def ReduceNAnd(height=2, **kwargs):
 
 
 def simulate_bit_not(self, value_store, state_store):
-    _in = BitVector(value_store.get_value(self.I))
+    _in = Bit(value_store.get_value(self.I))
     O = (~_in).as_bool_list()[0]
     value_store.set_value(self.O, O)
 
@@ -271,14 +272,14 @@ def NXOr(height, width=None, **kwargs):
 def ReduceNXOr(height=2, **kwargs):
     return uncurry(NXOr(height, **kwargs))
 
-
-def simulate_bits_invert(self, value_store, state_store):
-    _in = BitVector(value_store.get_value(self.I))
-    O = (~_in).as_bool_list()
-    value_store.set_value(self.O, O)
-
 def DefineInvert(width):
     T = Bits[width]
+
+
+    def simulate_bits_invert(self, value_store, state_store):
+        _in = BitVector[width](value_store.get_value(self.I))
+        O = (~_in).as_bool_list()
+        value_store.set_value(self.O, O)
     return DeclareCoreirCircuit("Invert{}".format(width),
             'I', In(T), 'O', Out(T),
             simulate       = simulate_bits_invert,
@@ -322,8 +323,8 @@ def invert(arg, **kwargs):
 def DefineLSL(width):
     T = Bits[width]
     def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0))
-        I1 = BitVector(value_store.get_value(self.I1))
+        I0 = BitVector[width](value_store.get_value(self.I0))
+        I1 = BitVector[width](value_store.get_value(self.I1))
         O = (I0 << I1).as_bool_list()
         value_store.set_value(self.O, O)
 
@@ -340,8 +341,8 @@ def LSL(width, **kwargs):
 def DefineLSR(width):
     T = Bits[width]
     def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0))
-        I1 = BitVector(value_store.get_value(self.I1))
+        I0 = BitVector[width](value_store.get_value(self.I0))
+        I1 = BitVector[width](value_store.get_value(self.I1))
         O = (I0 << I1).as_bool_list()
         value_store.set_value(self.O, O)
 

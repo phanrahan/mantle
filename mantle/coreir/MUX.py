@@ -14,9 +14,9 @@ import math
 def DefineCoreirMux(width=None):
     N = width
     def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0))
-        I1 = BitVector(value_store.get_value(self.I1))
-        S = BitVector(value_store.get_value(self.S))
+        I0 = BitVector[N](value_store.get_value(self.I0))
+        I1 = BitVector[N](value_store.get_value(self.I1))
+        S = BitVector[N](value_store.get_value(self.S))
         O = I1 if S.as_int() else in0
         value_store.set_value(self.O, O)
     if width is None:
@@ -46,8 +46,8 @@ is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
 @m.cache_definition
 def _declare_muxn(height, width):
     def simulate(self, value_store, state_store):
-        sel = BitVector(value_store.get_value(self.I.sel))
-        out = BitVector(value_store.get_value(self.I.data[sel.as_int]))
+        sel = BitVector[m.bitutils.clog2(height)](value_store.get_value(self.I.sel))
+        out = BitVector[width](value_store.get_value(self.I.data[sel.as_int]))
         value_store.set_value(self.O, out)
     return DeclareCoreirCircuit(f"coreir_commonlib_mux{height}x{width}",
         *["I", In(Tuple(data=Array[height, Bits[width]],

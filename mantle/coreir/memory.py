@@ -5,12 +5,13 @@ from .register import register
 
 
 def gen_sim_mem(depth, width):
+    addr_width = getRAMAddrWidth(depth)
     def sim_mem(self, value_store, state_store):
         cur_clk = value_store.get_value(self.clk)
 
         if not state_store:
             state_store['mem'] = [
-                BitVector(0, width) for _ in range(depth)
+                BitVector[width](0) for _ in range(depth)
             ]
             state_store['prev_clk'] = cur_clk
 
@@ -20,12 +21,12 @@ def gen_sim_mem(depth, width):
         rdata = value_store.get_value(self.rdata)
 
         if clk_edge:
-            index = BitVector(value_store.get_value(self.raddr)).as_int()
+            index = BitVector[addr_width](value_store.get_value(self.raddr)).as_int()
             rdata = state_store['mem'][index].as_bool_list()
         if clk_edge:
             if value_store.get_value(self.wen):
-                index = BitVector(value_store.get_value(self.waddr)).as_int()
-                state_store['mem'][index] = BitVector(value_store.get_value(self.wdata))
+                index = BitVector[addr_width](value_store.get_value(self.waddr)).as_int()
+                state_store['mem'][index] = BitVector[width](value_store.get_value(self.wdata))
 
         state_store['prev_clk'] = cur_clk
         value_store.set_value(self.rdata, rdata)

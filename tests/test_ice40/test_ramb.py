@@ -22,7 +22,7 @@ def test_romb():
 
     sim.advance(2)
 
-    assert BitVector(sim.get_value(main.RDATAOUT)) == BitVector(0b11111111, num_bits=8)
+    assert BitVector[8](sim.get_value(main.RDATAOUT)) == BitVector[8](0b11111111)
 
 
 def test_ramb():
@@ -49,7 +49,7 @@ def test_ramb():
 
     sim.advance(2)
 
-    assert BitVector(sim.get_value(main.RDATA)) == BitVector(0b11111111, num_bits=8)
+    assert BitVector[8](sim.get_value(main.RDATA)) == BitVector[8](0b11111111)
 
     # Write 0xBE to WADDR = 1
     sim.set_value(main.WE, True)
@@ -63,4 +63,4 @@ def test_ramb():
 
     sim.advance(2)
 
-    assert BitVector(sim.get_value(main.RDATA)) == BitVector(0xBE, num_bits=8)
+    assert BitVector[8](sim.get_value(main.RDATA)) == BitVector[8](0xBE)

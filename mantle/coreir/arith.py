@@ -57,8 +57,8 @@ DefineCoreirMul = declare_binop("mul", operator.mul)
 
 def DefineCoreirAdd(width, T=m.Bits):
     def simulate_coreir_add(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0), width)
-        I1 = BitVector(value_store.get_value(self.I1), width)
+        I0 = BitVector[width](value_store.get_value(self.I0))
+        I1 = BitVector[width](value_store.get_value(self.I1))
         value_store.set_value(self.O, I0 + I1)
     if isinstance(T, m.BFloatKind):
         coreir_lib = "float"

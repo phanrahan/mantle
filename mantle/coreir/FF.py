@@ -15,7 +15,7 @@ def gen_sim_register(N, init, has_ce, has_reset):
 
         if not state_store:
             state_store['prev_clock'] = cur_clock
-            state_store['cur_val'] = BitVector(init, N) if N is not None else bool(init)
+            state_store['cur_val'] = BitVector[N](init) if N is not None else bool(init)
 
         if has_reset:
             cur_reset = value_store.get_value(self.arst)
@@ -35,12 +35,12 @@ def gen_sim_register(N, init, has_ce, has_reset):
             new_val = value_store.get_value(self.I)
 
         if has_reset and cur_reset:
-            new_val = BitVector(init, N) if N is not None else bool(init)
+            new_val = BitVector[N](init) if N is not None else bool(init)
         # if s and not sy and cur_s:
         #     new_val = True
 
         state_store['prev_clock'] = cur_clock
-        state_store['cur_val'] = BitVector(new_val, N) if N is not None else new_val
+        state_store['cur_val'] = BitVector[N](new_val) if N is not None else new_val
         value_store.set_value(self.O, new_val)
     return sim_register
 

@@ -8,8 +8,8 @@ from .util import DefineCoreirCircuit, DeclareCoreirCircuit
 
 def DefineEQ(width):
     def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0))
-        I1 = BitVector(value_store.get_value(self.I1))
+        I0 = BitVector[width](value_store.get_value(self.I0))
+        I1 = BitVector[width](value_store.get_value(self.I1))
         O = operator.eq(I0, I1).as_bool_list()[0]
         value_store.set_value(self.O, O)
     if width is None:

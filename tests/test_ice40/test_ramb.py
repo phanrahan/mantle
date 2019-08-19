@@ -3,6 +3,7 @@ import magma as m
 from hwtypes import BitVector
 from mantle.lattice.ice40.RAMB import ROMB, RAMB
 from magma.simulator import PythonSimulator
+from magma.testing import check_files_equal
 
 
 def test_romb():
@@ -64,3 +65,23 @@ def test_ramb():
     sim.advance(2)
 
     assert BitVector[8](sim.get_value(main.RDATA)) == BitVector[8](0xBE)
+
+
+def test_romb_coreir():
+    main = DefineCircuit("test_romb_coreir",
+                         "RDATAOUT", Out(Bits(16)),
+                         "CLK", In(Clock))
+    romb = ROMB(256, 16, [0b00000001, 0b11111111] + [0] * 254)
+    wire(romb.RADDR, uint(1, 8))
+    wire(romb.RCLK, main.CLK)
+    wire(romb.RE, 1)
+    wire(romb.RDATA, main.RDATAOUT)
+    EndCircuit()
+
+    compile("build/test_romb_coreir", main, output="coreir")
+    assert check_files_equal(__file__,
+            "build/test_romb_coreir.json", "gold/test_romb_coreir.json")
+
+    compile("build/test_romb_coreir", main, output="coreir-verilog")
+    assert check_files_equal(__file__,
+            "build/test_romb_coreir.v", "gold/test_romb_coreir.v")

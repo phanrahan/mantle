@@ -20,7 +20,8 @@ SB_RAM40_4K = DeclareCircuit("SB_RAM40_4K",
     "MASK",  In(Bits[ 16 ]),
     "WDATA", In(Bits[ 16 ]),
     stateful=True,
-    simulate=gen_sb_ram40_4k_sim(prc=True, pwc=True))
+    simulate=gen_sb_ram40_4k_sim(prc=True, pwc=True),
+    coreir_lib='ice40')
 
 # posedge read clock, negedge write clock
 # negedge read clock, posedge write clock
@@ -38,8 +39,8 @@ SB_RAM40_4K = DeclareCircuit("SB_RAM40_4K",
 def init(rom,N,mode=0):
     # INIT_%x 256 bits = 32 bytes = 64 nibbles
     params = OrderedDict({})
-    params['WRITE_MODE'] = str(mode)
-    params['READ_MODE'] = str(mode)
+    params['WRITE_MODE'] = mode
+    params['READ_MODE'] = mode
 
     # M is the number of high (>8) address values
     #  e.g. if N == 8, then there are 2 high address values

@@ -69,7 +69,7 @@ def test_ramb():
 
 def test_romb_coreir():
     main = DefineCircuit("test_romb_coreir",
-                         "RDATAOUT", Out(Bits(16)),
+                         "RDATAOUT", Out(Bits[16]),
                          "CLK", In(Clock))
     romb = ROMB(256, 16, [0b00000001, 0b11111111] + [0] * 254)
     wire(romb.RADDR, uint(1, 8))

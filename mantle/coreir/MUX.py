@@ -4,9 +4,9 @@ from __future__ import division
 from magma import *
 import magma as m
 from magma.backend.coreir_ import CoreIRBackend
-from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper
+from magma.frontend.coreir_ import DefineCircuitFromGeneratorWrapper, GetCoreIRBackend
 from .util import DeclareCoreirCircuit
-from bit_vector import BitVector
+from hwtypes import BitVector
 
 import math
 
@@ -14,9 +14,9 @@ import math
 def DefineCoreirMux(width=None):
     N = width
     def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0))
-        I1 = BitVector(value_store.get_value(self.I1))
-        S = BitVector(value_store.get_value(self.S))
+        I0 = BitVector[N](value_store.get_value(self.I0))
+        I1 = BitVector[N](value_store.get_value(self.I1))
+        S = BitVector[N](value_store.get_value(self.S))
         O = I1 if S.as_int() else in0
         value_store.set_value(self.O, O)
     if width is None:
@@ -30,8 +30,8 @@ def DefineCoreirMux(width=None):
         )
     else:
         return DeclareCoreirCircuit("coreir_mux{}".format(N),
-            *["I0", In(Bits(N)), "I1", In(Bits(N)), "S", In(Bit),
-             "O", Out(Bits(N))],
+            *["I0", In(Bits[N]), "I1", In(Bits[N]), "S", In(Bit),
+             "O", Out(Bits[N])],
             verilog_name="coreir_mux",
             coreir_name="mux",
             coreir_lib="coreir",
@@ -46,13 +46,13 @@ is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
 @m.cache_definition
 def _declare_muxn(height, width):
     def simulate(self, value_store, state_store):
-        sel = BitVector(value_store.get_value(self.I.sel))
-        out = BitVector(value_store.get_value(self.I.data[sel.as_int]))
+        sel = BitVector[m.bitutils.clog2(height)](value_store.get_value(self.I.sel))
+        out = BitVector[width](value_store.get_value(self.I.data[sel.as_int]))
         value_store.set_value(self.O, out)
     return DeclareCoreirCircuit(f"coreir_commonlib_mux{height}x{width}",
-        *["I", In(Tuple(data=Array(height, Bits(width)),
-                         sel=Bits(m.bitutils.clog2(height)))),
-          "O", Out(Bits(width))],
+        *["I", In(Tuple(data=Array[height, Bits[width]],
+                         sel=Bits[m.bitutils.clog2(height)])),
+          "O", Out(Bits[width])],
         coreir_name="muxn",
         coreir_lib="commonlib",
         simulate=simulate,
@@ -66,14 +66,14 @@ def DefineMux(height=2, width=None, T=None):
         assert width is None, "Can only specify width **or** T"
         # Sanitize names for verilog by removing parens
         # TODO: Make this a reuseable feature
-        suffix = str(T).replace("(", "").replace(")", "").replace(",", "_")
+        suffix = str(T).replace("(", "").replace(")", "").replace(",", "_").replace("=", "_").replace("[", "").replace("]", "")
         T = T
     else:
         suffix = f"{width}"
         if width is None:
             T = Bit
         else:
-            T = Bits(width)
+            T = Bits[width]
 
     io = []
     for i in range(height):
@@ -81,7 +81,7 @@ def DefineMux(height=2, width=None, T=None):
     if height == 2:
         select_type = Bit
     else:
-        select_type = Bits(m.bitutils.clog2(height))
+        select_type = Bits[m.bitutils.clog2(height)]
     io += ['S', In(select_type)]
     io += ['O', Out(T)]
 
@@ -92,7 +92,9 @@ def DefineMux(height=2, width=None, T=None):
         def definition(interface):
             if T is not None and not (isinstance(T, m.BitKind) or isinstance(T, m.ArrayKind) and isinstance(T.T, m.BitKind)):
                 if isinstance(T, m.TupleKind):
-                    raise NotImplementedError()
+                    for i in range(len(T.Ks)):
+                        Is = [getattr(interface, f"I{j}")[T.Ks[i]] for j in range(height)]
+                        interface.O[i] <= DefineMux(height, T=T.Ts[i])()(*Is, interface.S)
                 else:
                     assert isinstance(T, m.ArrayKind), f"Expected array or type type, got {T}, type is {type(T)}"
                     for i in range(len(T)):
@@ -127,7 +129,8 @@ Mux4 = DefineMux(4)
 Mux8 = DefineMux(8)
 Mux16 = DefineMux(16)
 
-def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
+@cache_definition
+def DefineCommonlibMuxN(N: int, width: int):
     """
     Get a Mux that handles any number of inputs
 
@@ -142,9 +145,9 @@ def DefineCommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
     Note: even though this isn't a RAM, the AddrWidth computation is the same.
     """
     name = "CommonlibMuxN_n{}_w{}".format(str(N), str(width))
-    return DefineCircuitFromGeneratorWrapper(cirb, "commonlib", "muxn",
+    return DefineCircuitFromGeneratorWrapper(GetCoreIRBackend(), "commonlib", "muxn",
                                              name, ["mantle", "coreir", "global"],
                                              {"N": N, "width": width})
 
-def CommonlibMuxN(cirb: CoreIRBackend, N: int, width: int):
-    return DefineCommonlibMuxN(cirb, N, width)()
+def CommonlibMuxN(N: int, width: int):
+    return DefineCommonlibMuxN(N, width)()

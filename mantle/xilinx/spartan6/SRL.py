@@ -27,7 +27,7 @@ SRLC16E = DeclareCircuit('SRLC16E',
             "CLK", In(Clock))
 
 SRL32E = DeclareCircuit('SRLC32E',
-            "A", In(Bits(5)),
+            "A", In(Bits[ 5 ]),
             "D", In(Bit),
             "Q", Out(Bit),
             "Q31", Out(Bit),

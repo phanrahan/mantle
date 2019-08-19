@@ -1,11 +1,12 @@
 from magma import *
+import magma as m
 
 
 @circuit_generator
 def DeclareAdd(N, cin=False, cout=False):
     has_cin = cin
     has_cout = cout
-    T = Bits(N)
+    T = Bits[N]
     IO_ = ['I0', In(T), 'I1', In(T), 'O', Out(T)]
     name_ = "Add{}".format(N)
     if has_cout:
@@ -46,10 +47,10 @@ def add(*args, **kwargs):
 
 
 @circuit_generator
-def DeclareSub(N, cin=False, cout=False):
+def DeclareSub(N, cin=False, cout=False, T=m.Bits):
     has_cin = cin
     has_cout = cout
-    T = Bits(N)
+    T = T[N]
     IO_ = ['I0', In(T), 'I1', In(T), 'O', Out(T)]
     name_ = "Sub{}".format(N)
     if has_cout:
@@ -89,7 +90,7 @@ def sub(*args, **kwargs):
     return curr.O
 
 def DeclareNegate(width):
-    T = Bits(width)
+    T = Bits[width]
     class _Negate(Circuit):
         name = 'Negate{}'.format(width)
         IO = ['I', In(T), 'O', Out(T)]
@@ -97,7 +98,7 @@ def DeclareNegate(width):
 
 
 def DeclareASR(width):
-    T = Bits(width)
+    T = Bits[width]
     class _ASR(Circuit):
         name = 'ASR{}'.format(width)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]

@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='mantle',
-    version='0.1.14',
+    version='1.0.9',
     url='https://github.com/phanrahan/mantle',
     license='MIT',
     maintainer='Lenny Truong',
@@ -27,7 +27,7 @@ setup(
     install_requires=[
         "six",
         "fault>=1.0.*",
-        "magma-lang>=0.1.*"
+        "magma-lang>=1.0.*",
     ],
     python_requires='>=3.6'
 )

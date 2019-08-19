@@ -1,6 +1,6 @@
 from magma import *
 import magma as m
-from bit_vector import BitVector
+from hwtypes import BitVector
 from mantle.lattice.ice40.RAMB import ROMB, RAMB
 from magma.simulator import PythonSimulator
 from magma.testing import check_files_equal
@@ -8,7 +8,7 @@ from magma.testing import check_files_equal
 
 def test_romb():
     main = DefineCircuit("test_romb",
-                         "RDATAOUT", Out(Bits(8)),
+                         "RDATAOUT", Out(Bits[ 8 ]),
                          "CLK", In(Clock)) # FIXME: hack
     romb = ROMB(512, 8, [0b00000001, 0b11111111] + [0] * 510)
     wire(romb.RADDR, uint(1, 9))
@@ -23,13 +23,13 @@ def test_romb():
 
     sim.advance(2)
 
-    assert BitVector(sim.get_value(main.RDATAOUT)) == BitVector(0b11111111, num_bits=8)
+    assert BitVector[8](sim.get_value(main.RDATAOUT)) == BitVector[8](0b11111111)
 
 
 def test_ramb():
     main = DefineCircuit("test_ramb",
-                         "RDATA", Out(Bits(8)),
-                         "WDATA", In(Bits(8)),
+                         "RDATA", Out(Bits[ 8 ]),
+                         "WDATA", In(Bits[ 8 ]),
                          "WE",   In(Bit),
                          "CLK", In(Clock))
     ramb = RAMB(512, 8, [0b00000001, 0b11111111] + [0] * 510)
@@ -50,11 +50,11 @@ def test_ramb():
 
     sim.advance(2)
 
-    assert BitVector(sim.get_value(main.RDATA)) == BitVector(0b11111111, num_bits=8)
+    assert BitVector[8](sim.get_value(main.RDATA)) == BitVector[8](0b11111111)
 
     # Write 0xBE to WADDR = 1
     sim.set_value(main.WE, True)
-    sim.set_value(main.WDATA, BitVector(0xBE, num_bits=8))
+    sim.set_value(main.WDATA, BitVector[8](0xBE))
 
     sim.advance(2)
 
@@ -64,7 +64,7 @@ def test_ramb():
 
     sim.advance(2)
 
-    assert BitVector(sim.get_value(main.RDATA)) == BitVector(0xBE, num_bits=8)
+    assert BitVector[8](sim.get_value(main.RDATA)) == BitVector[8](0xBE)
 
 
 def test_romb_coreir():

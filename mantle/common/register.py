@@ -2,7 +2,7 @@ from magma import *
 from magma.compatibility import IntegerTypes
 from magma.bitutils import int2seq, seq2int
 from mantle import FF
-from collections import Sequence
+from collections.abc import Sequence
 
 __all__  = ['FFs']
 
@@ -56,7 +56,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_async_reset=Fal
     """
     if _type not in {Bits, UInt, SInt}:
         raise ValueError("Argument _type must be Bits, UInt, or SInt")
-    T = _type(n)
+    T = _type[n]
     class _Register(Circuit):
         name = _RegisterName('Register', n, init, has_ce, has_reset)
         IO  = ['I', In(T), 'O', Out(T)] + ClockInterface(has_ce=has_ce,has_reset=has_reset,has_async_reset=has_async_reset)

@@ -45,8 +45,8 @@ def writeport(height, width, regs, WADDR, I, WE):
 
 def DefineRAM(height, width):
     n = 1 << height
-    TADDR = Bits(height)
-    TDATA = Bits(width)
+    TADDR = Bits[ height ]
+    TDATA = Bits[ width ]
 
     class _RAM(Circuit):
         name = f'RAM{n}x{width}'
@@ -72,8 +72,8 @@ def RAM(height, width):
 
 def DefineDualRAM(height, width):
     n = 1 << height
-    TADDR = Bits(height)
-    TDATA = Bits(width)
+    TADDR = Bits[ height ]
+    TDATA = Bits[ width ]
 
     class _DualRAM(Circuit):
         name = f'DualRAM{n}x{width}'

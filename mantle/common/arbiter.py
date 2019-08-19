@@ -9,7 +9,7 @@ __all__ = ['DefineArbiter', 'Arbiter', 'arbiter']
 # in this case the lowest bit set is retained
 #
 def DefineArbiter(n):
-    T = Bits(n)
+    T = Bits[ n ]
     class _Arbiter(Circuit):
         name = 'Arbiter'+str(n)
         IO = ['I', In(T), 'O', Out(T)]

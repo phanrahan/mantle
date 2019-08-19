@@ -1,16 +1,20 @@
 import magma as m
-from .FF import DefineCoreirReg
+from .FF import DefineCoreirReg, DefineDFF
 import mantle
 
 
 @m.cache_definition
 def DefineRegister(n, init=0, has_ce=False, has_reset=False,
-                   has_async_reset=False, _type=m.Bits):
-    T = _type(n)
+                   has_async_reset=False, _type=m.Bits,
+                   reset_priority=True):
     if has_reset and has_async_reset:
         raise ValueError("Cannot have synchronous and asynchronous reset")
 
     if has_reset or has_ce:
+        if n is None:
+            T = m.Bit
+        else:
+            T = _type[n]
         class Register(m.Circuit):
             name = f"Register_has_ce_{has_ce}_has_reset_{has_reset}_" \
                    f"has_async_reset_{has_async_reset}_" \
@@ -24,13 +28,31 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
             def definition(io):
                 reg = DefineCoreirReg(n, init, has_async_reset, _type)(name="value")
                 I = io.I
-                if has_reset:
-                    I = mantle.mux([io.I, m.bits(init, n)], io.RESET)
-                if has_ce:
-                    I = mantle.mux([reg.O, I], io.CE, name="enable_mux")
-                m.wire(I, reg.I)
-                m.wire(io.O, reg.O)
+                O = reg.O
+                if n is None:
+                    O = O[0]
+                if has_reset and has_ce:
+                    if reset_priority:
+                        I = mantle.mux([O, I], io.CE, name="enable_mux")
+                        I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                    else:
+                        I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                        I = mantle.mux([O, I], io.CE, name="enable_mux")
+                elif has_ce:
+                    I = mantle.mux([O, I], io.CE, name="enable_mux")
+                elif has_reset:
+                    I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                if n is None:
+                    m.wire(I, reg.I[0])
+                else:
+                    m.wire(I, reg.I)
+                m.wire(io.O, O)
+
         return Register
+    elif n is None:
+        if _type is not m.Bits:
+            raise NotImplementedError()
+        return DefineDFF(init, has_ce, has_async_reset=has_async_reset)
     else:
         return DefineCoreirReg(n, init, has_async_reset, _type)
 
@@ -57,3 +79,4 @@ def register(I, ce=None, reset=None, async_reset=None, **kwargs):
         m.wire(reset, reg.RESET)
     if has_async_reset:
         m.wire(reset, reg.ASYNCRESET)
+    return reg.O

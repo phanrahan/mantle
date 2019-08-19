@@ -1,4 +1,4 @@
-from bit_vector import BitVector
+from hwtypes import BitVector
 from .logic import (
     And      , DefineAnd   , ReduceAnd ,
     NAnd     , DefineNAnd  , ReduceNAnd,
@@ -46,10 +46,10 @@ from .util import DeclareCoreirCircuit
 def DefineCoreirConst(width, value):
     def simulate_coreir_const(self, value_store, state_store):
         value_store.set_value(self.O, value)
-    return DeclareCoreirCircuit(f"coreir_const{width}{value}", "O", Out(Bits(width)),
+    return DeclareCoreirCircuit(f"coreir_const{width}{value}", "O", Out(Bits[ width ]),
             coreir_name="const", coreir_lib="coreir",
             coreir_genargs={"width": width},
-            coreir_configargs={"value": BitVector(value, width)},
+            coreir_configargs={"value": BitVector[width](value)},
             simulate=simulate_coreir_const)
 
 def DefineCorebitConst(value):
@@ -62,12 +62,27 @@ def DefineCorebitConst(value):
             default_kwargs={"value": bool(value)},
             simulate=simulate_corebit_const)
 
+
+def DefineTerm(width):
+    def simulate_term(self, value_store, state_store):
+        pass
+    return DeclareCoreirCircuit(f"term", "I", In(Bits[ width ]),
+                                coreir_name="term", coreir_lib="coreir",
+                                coreir_genargs={"width": width},
+                                simulate=simulate_term)
+
+
+def Term(width):
+    return DefineTerm(width)()
+
+
 def DefineCorebitTerm():
     def simulate_corebit_term(self, value_store, state_store):
         pass
     return DeclareCoreirCircuit(f"corebit_term", "I", In(Bit),
-            coreir_name="term", coreir_lib="corebit",
-            simulate=simulate_corebit_term)
+                                coreir_name="term", coreir_lib="corebit",
+                                simulate=simulate_corebit_term)
+
 
 def CorebitTerm():
     return DefineCorebitTerm()()

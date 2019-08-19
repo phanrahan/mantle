@@ -1,4 +1,4 @@
-from collections import Sequence
+from collections.abc import Sequence
 from magma import *
 from ..ice40.PLB import *
 from .LUT import LUT2, LUT3

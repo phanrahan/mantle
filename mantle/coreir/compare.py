@@ -1,5 +1,5 @@
 from magma import *
-from bit_vector import BitVector
+from hwtypes import BitVector
 from .arith import declare_binop, get_length
 from .logic import not_, XOr
 import operator
@@ -8,8 +8,8 @@ from .util import DefineCoreirCircuit, DeclareCoreirCircuit
 
 def DefineEQ(width):
     def simulate(self, value_store, state_store):
-        I0 = BitVector(value_store.get_value(self.I0))
-        I1 = BitVector(value_store.get_value(self.I1))
+        I0 = BitVector[width](value_store.get_value(self.I0))
+        I1 = BitVector[width](value_store.get_value(self.I1))
         O = operator.eq(I0, I1).as_bool_list()[0]
         value_store.set_value(self.O, O)
     if width is None:
@@ -18,7 +18,7 @@ def DefineEQ(width):
         EndDefine()
         return circ
     else:
-        T = Bits(width)
+        T = Bits[width]
         return DeclareCoreirCircuit("coreir_eq_{}".format(width),
                               'I0', In(T), 'I1', In(T),
                               'O', Out(Bit),
@@ -41,7 +41,7 @@ def DefineNE(n):
     if n is None:
         T = Bit
     else:
-        T = Bits(n)
+        T = Bits[n]
     circ = DefineCircuit("NE{}".format(n),
         "I0", In(T), "I1", In(T), "O", Out(Bit))
     eq = EQ(n)

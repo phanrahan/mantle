@@ -39,18 +39,13 @@
           "NE4_inst1":{
             "modref":"global.NE4"
           },
-          "bit_const_0_None":{
-            "modref":"corebit.const",
-            "modargs":{"value":["Bool",false]}
+          "NE4_inst2":{
+            "modref":"global.NE4"
           },
           "const_1_4":{
             "genref":"coreir.const",
             "genargs":{"width":["Int",4]},
             "modargs":{"value":[["BitVector",4],"4'h1"]}
-          },
-          "coreir_eq_4_inst0":{
-            "genref":"coreir.eq",
-            "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
@@ -58,11 +53,11 @@
           ["self.I1","NE4_inst0.I1"],
           ["self.O0","NE4_inst0.O"],
           ["self.I0","NE4_inst1.I0"],
-          ["const_1_4.out","NE4_inst1.I1"],
-          ["self.O2","NE4_inst1.O"],
-          ["self.O1","bit_const_0_None.out"],
-          ["self.I0","coreir_eq_4_inst0.in0"],
-          ["self.I1","coreir_eq_4_inst0.in1"]
+          ["self.I1","NE4_inst1.I1"],
+          ["self.O1","NE4_inst1.O"],
+          ["self.I0","NE4_inst2.I0"],
+          ["const_1_4.out","NE4_inst2.I1"],
+          ["self.O2","NE4_inst2.O"]
         ]
       }
     }

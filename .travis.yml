@@ -1,30 +1,41 @@
 language: python
-python:
-- '3.6'
+# python managed by conda until 3.7 available
+# python:
+# - '3.6'
 addons:
   apt:
-    sources:
-    - ubuntu-toolchain-r-test
     packages:
-    - g++-4.9
+    - libgmp-dev
+    - libmpfr-dev
+    - libmpc-dev
 before_install:
-- git clone https://github.com/phanrahan/magma.git
-- if [[ $TRAVIS_BRANCH == 'coreir-dev' ]]; then git -C magma checkout coreir-dev;
-  fi
-- pip install -r magma/requirements.txt
-- pip install -e magma
-- source magma/.travis/install_coreir.sh
+# install conda for py 3.7
+- wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+- chmod +x miniconda.sh
+- ./miniconda.sh -b -p $TRAVIS_BUILD_DIR/miniconda
+- export PATH=$TRAVIS_BUILD_DIR/miniconda/bin:$PATH
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda update -q conda 
+- conda create -q -n test-env python=3.7
+- source activate test-env
+- conda install pip
+# End install conda
+- curl -s -L https://github.com/rdaly525/coreir/releases/latest | grep "href.*coreir-${TRAVIS_OS_NAME}.tar.gz" | cut -d \" -f 2 | xargs -I {} wget https://github.com"{}"
+- mkdir coreir_release;
+- tar -xf coreir-${TRAVIS_OS_NAME}.tar.gz -C coreir_release --strip-components 1;
+- cd coreir_release && sudo make install && cd ..
+
 install:
 - pip install pytest-cov
-- pip install fabricate delegator.py
+- pip install delegator.py
 - pip install -e .
 script:
 - "./scripts/run_tests.sh"
 deploy:
-  provider: pypi
-  user: leonardt
+  provider: script
+  script: /bin/bash .travis/deploy.sh
+  skip_cleanup: true
   on:
     tags: true
     branch: master
-  password:
-    secure: bjJJEoxTByzd7SO8mqJTdUbb2EjZveoLxUFsXoR40/FXSAfISKQE2F11fe/uOlyzSTFLd/0aEfS7onNwHAOVD4jC6Y7/p6SJOTYwtWzd1m3nkV9QVEf4gDgCo/3dGI/7PH5WRsVsdU1QmJkJzMLBid953elpKYeuPW3AQGwAyM3FBFOFNCd7gy6x6PZWn3SV/QMXAh8r7OGzP2fciLv9w6Wsqt45XXcBIzFhR30SwX0+dSSzXVnVyot5S09/pLg1eZfRAoygL5M2HGdsyipzL1r2JR5uA3NKSN7kvnN3UT9RwdP0qsKWwebZhSG7Xjw2k2+R0PFTScyJcwT3H0dnED3d9WknUuvdwnONKtOKL2YjrC+LQyO6lZdeFpPc4SWt1j3KDfuXglepqnEn4+ZSZc5uipZffEkpnBWf1ReVOvxtuB8eWJp6Dq7d73etyCDrZiG4DtMuECZ+Y4t+SltUDA7AaTR5HIEeqHhmVNAMurkUU/FhtrEuEfzXvNraj6WG/8j9k+k7fngvTajkbeW+1LRA6B5BkNyqksXcWgXa2neOtqZieO/wF9bA/lorUn1cIqD++QmPaB+ieKnGebDGUukSeAzLiLkYpZ56pRholE3rdQKqPdX1cg5LbsqIJJhM9hgGUqXmprJxqUoUihrUO+XLBbJKnBT1EW7RaygeLPo=

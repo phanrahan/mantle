@@ -6,7 +6,7 @@ from mantle.coreir.compare import EQ, NE, ULT, ULE, UGT, UGE, SLT, SLE, SGT, \
 def check(circuit_type):
     circuit_type_name = circuit_type.__name__
     print(circuit_type_name)
-    T = UInt(4)
+    T = UInt[ 4 ]
     class TestCircuit(Circuit):
         name = "test_{}_two".format(circuit_type_name)
         IO = ["a", In(T), "b", In(T), "c", Out(Bit)]

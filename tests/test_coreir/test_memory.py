@@ -2,20 +2,20 @@ import pytest
 coreir = pytest.importorskip("coreir")
 from magma import *
 from magma.testing import check_files_equal
-from mantle.coreir.memory import DefineCoreirMem, DefineRAM
+from mantle.coreir.memory import DefineCoreirMem, DefineRAM, DefineMemory
 from magma.simulator.coreir_simulator import CoreIRSimulator
 from magma.backend.coreir_ import CoreIRBackend
-
+import os
 
 def test_coreir_rom():
     addr_width = 2
     width = 16
     class Mem(Circuit):
         name = "test_coreir_mem"
-        IO = ["raddr", In(Bits(addr_width)),
-              "rdata", Out(Bits(width)),
-              "waddr", In(Bits(addr_width)),
-              "wdata", In(Bits(width)),
+        IO = ["raddr", In(Bits[ addr_width ]),
+              "rdata", Out(Bits[ width ]),
+              "waddr", In(Bits[ addr_width ]),
+              "wdata", In(Bits[ width ]),
               "clk", In(Clock),
               "wen", In(Bit) ]
         @classmethod
@@ -37,3 +37,9 @@ def test_ram1x8():
 
     testcircuit = DefineRAM(1, 8)
     CoreIRSimulator(testcircuit, testcircuit.CLK, context=cirb.context)
+
+def test_ram_latency1():
+    mem = DefineMemory(height=256,width=16,read_latency=1)
+    compile("build/test_latency", mem, output='coreir-verilog')
+    assert check_files_equal(__file__,"build/test_latency.v","gold/test_latency.v")
+

@@ -2,7 +2,7 @@ from magma import *
 import magma as m
 from mantle.coreir.MUX import Mux
 import coreir
-from bit_vector import BitVector
+from hwtypes import BitVector
 
 from .util import DeclareCoreirCircuit
 
@@ -15,7 +15,7 @@ def gen_sim_register(N, init, has_ce, has_reset):
 
         if not state_store:
             state_store['prev_clock'] = cur_clock
-            state_store['cur_val'] = BitVector(init, num_bits=N) if N is not None else bool(init)
+            state_store['cur_val'] = BitVector[N](init) if N is not None else bool(init)
 
         if has_reset:
             cur_reset = value_store.get_value(self.arst)
@@ -35,12 +35,12 @@ def gen_sim_register(N, init, has_ce, has_reset):
             new_val = value_store.get_value(self.I)
 
         if has_reset and cur_reset:
-            new_val = BitVector(init, num_bits=N) if N is not None else bool(init)
+            new_val = BitVector[N](init) if N is not None else bool(init)
         # if s and not sy and cur_s:
         #     new_val = True
 
         state_store['prev_clock'] = cur_clock
-        state_store['cur_val'] = BitVector(new_val, num_bits=N) if N is not None else new_val
+        state_store['cur_val'] = BitVector[N](new_val) if N is not None else new_val
         value_store.set_value(self.O, new_val)
     return sim_register
 
@@ -50,9 +50,9 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     if width is None:
         width = 1
     name = "reg_P"  # TODO: Add support for clock interface
-    config_args = {"init": coreir.type.BitVector(init, num_bits=width)}
+    config_args = {"init": coreir.type.BitVector[width](init)}
     gen_args = {"width": width}
-    T = T(width)
+    T = T[width]
     io = ["I", In(T), "clk", In(Clock), "O", Out(T)]
     methods = []
 
@@ -77,7 +77,7 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     #     gen_args["has_en"] = True
 
     # default_kwargs = gen_args.copy()
-    default_kwargs = {"init": coreir.type.BitVector(init, num_bits=width)}
+    default_kwargs = {"init": coreir.type.BitVector[width](init)}
     # default_kwargs.update(config_args)
 
     return DeclareCoreirCircuit(

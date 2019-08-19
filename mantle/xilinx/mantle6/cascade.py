@@ -1,4 +1,4 @@
-from collections import Sequence
+from collections.abc import Sequence
 from magma import *
 from ..spartan6.CLB import XORCY, MUXCY
 from ..spartan6.LUT import LUT5x2

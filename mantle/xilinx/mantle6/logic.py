@@ -3,7 +3,7 @@ import sys
 if sys.version_info > (3, 0):
     from functools import reduce
     from functools import lru_cache
-from collections import Sequence
+from collections.abc import Sequence
 
 from magma import *
 from .LUT import LUT, LUT1, LUT2, LUT3, LUT4, A0, A1, A2, A3, ZERO, ONE
@@ -34,7 +34,7 @@ __all__ += ['Not']
 # Efficient Reduction using carry chain and FlatHalfCascade
 #
 def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
-    T = Bits(n)
+    T = Bits[ n ]
     class _ReduceOp(Circuit):
         name = f'{opname}{n}'
         IO = ['I', In(T), 'O', Out(Bit)]
@@ -101,7 +101,7 @@ def LUTCascade(n, k, expr, cin):
         return AnonymousCircuit( ['I', c.I[0:n], 'O', c.O] )
 
 def DefineReduceLUT(opname, n, luts, cascadeexpr, cin):
-    T = Bits(n)
+    T = Bits[ n ]
     class _ReduceLUT(Circuit):
         name = '{}{}'.format(opname, n)
         IO = ['I', In(T), 'O', Out(Bit)]
@@ -137,7 +137,7 @@ def DefineOp(opname, op, height=2, width=1):
 
     I0 : In(Bits(width)), I1 : In(Bits(width)), O : Out(Bits(width))
     """
-    T = Bits(width)
+    T = Bits[ width ]
     class _Op(Circuit):
 
         name = '{}{}x{}'.format(opname, height, width)
@@ -211,7 +211,7 @@ def DefineInvert(width):
     I0 : Bits(width) -> O : Bits(width)
     """
 
-    T = Bits(width)
+    T = Bits[ width ]
     class _Invert(Circuit):
         name = 'Invert%d' % width
         IO  = ['I', In(T), 'O', Out(T)]

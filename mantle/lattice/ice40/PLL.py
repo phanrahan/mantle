@@ -8,7 +8,8 @@ SB_PLL40_CORE = DeclareCircuit('SB_PLL40_CORE',
             "RESETB", In(Bit),
             "BYPASS", In(Bit),
             "PLLOUTCORE", Out(Bit),
-            "PLLOUTGLOBAL", Out(Bit))
+            "PLLOUTGLOBAL", Out(Bit),
+            coreir_lib='ice40')
 
 def SB_PLL( freqout, freqin=12000000 ):
 
@@ -17,15 +18,15 @@ def SB_PLL( freqout, freqin=12000000 ):
     divr, divf, divq, filter = findparams(freqin, freqout)
 
     params = {}
-    params["FEEDBACK_PATH"] = '"SIMPLE"'
-    params["PLLOUT_SELECT"] = '"GENCLK"'
+    params["FEEDBACK_PATH"] = "SIMPLE"
+    params["PLLOUT_SELECT"] = "GENCLK"
     # Reference clock divider (div+1) [0, ..., 15]
-    params["DIVR"] = bstr(divr,4)
+    params["DIVR"] = (divr, 4)
     # Feedback divider (div+1) [0, ..., 63]
-    params["DIVF"] = bstr(divf,7)
+    params["DIVF"] = (divf, 7)
     # VCO divider (divq+1) [0, ..., 6]
-    params["DIVQ"] = bstr(divq,3)
-    params["FILTER_RANGE"] = bstr(filter,3)
+    params["DIVQ"] = (divq, 3)
+    params["FILTER_RANGE"] = (filter, 3)
 
     pll = SB_PLL40_CORE(**params)
 

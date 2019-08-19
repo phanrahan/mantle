@@ -1,4 +1,4 @@
-from bit_vector import BitVector
+from hwtypes import BitVector
 import magma as m
 from mantle.util.compressor.pop import DefinePopCount
 from magma.testing import check_files_equal
@@ -14,6 +14,6 @@ def test_pop_count():
     scope = Scope()
     sim = CoreIRSimulator(PopCount8, None)
     for I, expected_O in [(1, 1), (2, 1), (3, 2)]:
-        sim.set_value(PopCount8.I, BitVector(I, 8), scope)
+        sim.set_value(PopCount8.I, BitVector[8](I), scope)
         sim.evaluate()
-        assert BitVector(sim.get_value(PopCount8.O, scope), 8).as_int() == expected_O
+        assert BitVector[8](sim.get_value(PopCount8.O, scope)).as_int() == expected_O

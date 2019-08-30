@@ -7,6 +7,7 @@ from mantle import ASR
 from mantle import EQ, NE, ULT, ULE, UGT, UGE, SLT, SLE, SGT, SGE
 from mantle import Mux
 from .arith import Add, Sub, Negate
+import ast_tools
 
 __all__ = []
 
@@ -186,7 +187,9 @@ def ite(self, a, b):
     assert type(a) == type(b)
     T = type(a)
 
-    @m.circuit.combinational
+    @ast_tools.passes.end_rewrite()
+    @m.circuit.combinational()
+    @ast_tools.passes.begin_rewrite()
     def ite(s: m.Bit, a: T, b: T) -> T:
         if s:
             return a
@@ -215,7 +218,9 @@ def adc(self, other, carry):
     assert type(self) == type(other)
     T = type(self)
 
-    @m.circuit.combinational
+    @ast_tools.passes.end_rewrite()
+    @m.circuit.combinational()
+    @ast_tools.passes.begin_rewrite()
     def adc(a: T, b: T, c: m.Bit) -> (T, m.Bit):
         a = m.uint(m.zext(a, 1))
         b = m.uint(m.zext(b, 1))

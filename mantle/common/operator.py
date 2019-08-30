@@ -195,7 +195,7 @@ def ite(self, a, b):
             return a
         else:
             return b
-    return ite(self, a, b)
+    return ite()(self, a, b)
 
 
 bitwise_ops = [
@@ -227,19 +227,21 @@ def adc(self, other, carry):
         c = m.uint(m.zext(m.bits(c, 1), len(T)))
         res = a + b + c
         return res[0:-1], res[-1]
-    return adc(self, other, carry)
+    return adc()(self, other, carry)
 
 
 def overflow(self, other, result):
     assert type(self) == type(other)
     T = type(self)
-    @m.circuit.combinational
+    @ast_tools.passes.end_rewrite()
+    @m.circuit.combinational()
+    @ast_tools.passes.begin_rewrite()
     def overflow(a: T, b: T, res: T) -> m.Bit:
         msb_a = a[-1]
         msb_b = b[-1]
         N = res[-1]
         return (msb_a & msb_b & ~N) | (~msb_a & ~msb_b & N)
-    return overflow(self, other, result)
+    return overflow()(self, other, result)
 
 
 arithmetic_ops = [

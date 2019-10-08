@@ -38,7 +38,8 @@ def declare_bit_binop(name, python_op):
     def simulate(self, value_store, state_store):
         I0 = ht.Bit(value_store.get_value(self.I0))
         I1 = ht.Bit(value_store.get_value(self.I1))
-        O = python_op(I0, I1).as_bool_list()[0]
+        #O = python_op(I0, I1).as_bool_list()[0]
+        O = int(python_op(I0, I1))
         value_store.set_value(self.O, O)
 
     return DeclareCoreirCircuit("{}".format(name),

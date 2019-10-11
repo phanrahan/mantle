@@ -392,7 +392,9 @@ def unflatten_bits(T, bits_):
                 )
             )
             offset += child_length
-        if all(isinstance(k, int) for k in result.keys()):
+        if any(isinstance(k, int) for k in result.keys()):
+            assert all(isinstance(k, int) for k in result.keys()), \
+                "Found tuple with partial integer keys"
             return m.tuple_(tuple(result[k] for k in sorted(result.keys())))
         else:
             return m.namedtuple(**result)

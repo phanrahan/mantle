@@ -340,14 +340,77 @@ def mux(I, S, **kwargs):
 orig_get_item = m.ArrayType.__getitem__
 
 
+def flat_length(T):
+    if isinstance(T, m._BitKind):
+        return 1
+    elif isinstance(T, m.ArrayKind):
+        return len(T) * flat_length(T.T)
+    else:
+        assert isinstance(T, m.TupleKind)
+        length = 0
+        for v in T.Ts:
+            length += flat_length(v)
+        return length
+
+
+def flatten_to_bits(T):
+    if isinstance(T, (m._BitType, m._BitKind)):
+        return m.bits(T, 1)
+    elif isinstance(T, (m.ArrayType, m.TupleType)):
+        return m.concat(*(flatten_to_bits(t) for t in T.ts))
+    elif isinstance(T, (m.ArrayKind, m.TupleKind)):
+        return m.concat(*(flatten_to_bits(t) for t in T.Ts))
+    else:
+        raise NotImplementedError(T)
+
+
+def unflatten_bits(T, bits_):
+    if isinstance(T, (m._BitType, m._BitKind)):
+        assert len(bits_) == 1, len(bits_)
+        return bits_[0]
+    elif isinstance(T, (m.ArrayType, m.ArrayKind)):
+        child_length = flat_length(T.T)
+        result = []
+        for i in range(len(T)):
+            result.append(
+                unflatten_bits(
+                    T.T,
+                    bits_[i * child_length:(i + 1) * child_length]
+                )
+            )
+        return m.array(result)
+    else:
+        assert isinstance(T, m.TupleKind)
+        result = {}
+        offset = 0
+        for k, v in zip(T.Ks, T.Ts):
+            child_length = flat_length(v)
+            result[k] = (
+                unflatten_bits(
+                    v,
+                    bits_[offset:offset + child_length]
+                )
+            )
+            offset += child_length
+        if all(isinstance(k, int) for k in result.keys()):
+            return m.tuple_(tuple(result[k] for k in sorted(result.keys())))
+        else:
+            return m.namedtuple(**result)
+
+
+
 def dynamic_mux_select(self, S):
     if isinstance(S, m.Type):
         if isinstance(self.T, m._BitKind):
             length = None
-        else:
+            inputs = self.ts[:]
+        elif isinstance(self.T, m.ArrayKind) and isinstance(self.T.T, m._BitKind):
             length = len(self.T)
+            inputs = self.ts[:]
+        else:
+            length = flat_length(self.T)
+            inputs = [flatten_to_bits(t) for t in self.ts]
         height = len(self)
-        inputs = self.ts[:]
         if m.mantle_target == "ice40" and height not in [2, 4, 8, 16]:
             if height > 16:
                 raise NotImplementedError()
@@ -357,7 +420,11 @@ def dynamic_mux_select(self, S):
                 raise NotImplementedError(type(inputs[0]))
             inputs.extend([m.bit(0) for _ in range(height - orig_height)])
 
-        return Mux(height, length)(*inputs, S)
+        O = Mux(height, length)(*inputs, S)
+        if not isinstance(self.T, m._BitKind) or \
+                isinstance(self.T, m.ArrayKind) and isinstance(self.T.T, m._BitKind):
+            O = unflatten_bits(self.T, O.ts)
+        return O
     return orig_get_item(self, S)
 
 

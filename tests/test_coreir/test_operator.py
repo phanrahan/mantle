@@ -162,7 +162,7 @@ def test_binary_op(op, N, T, TType):
                              f"gold/{_name}.json")
 
 
-def test_dyanmic_mux_getitem():
+def test_dynamic_mux_getitem():
     class TestDynamicMuxGetItem(m.Circuit):
         IO = ["I", m.In(m.Bits[ 2 ]), "S", m.In(m.Bit), "O", m.Out(m.Bit)]
 
@@ -183,4 +183,108 @@ def test_dyanmic_mux_getitem():
     tester.poke(TestDynamicMuxGetItem.S, 1)
     tester.eval()
     tester.expect(TestDynamicMuxGetItem.O, 1)
+    tester.compile_and_run(target='coreir')
+
+
+def test_dynamic_mux_getitem_array():
+    class TestDynamicMuxGetItem(m.Circuit):
+        IO = ["I", m.In(m.Array[2, m.Bits[ 2 ]]), "S", m.In(m.Bit), "O", m.Out(m.Bits[2])]
+
+        @classmethod
+        def definition(io):
+            m.wire(io.O, io.I[io.S])
+    m.compile("build/test_dynamic_mux_getitem_array", TestDynamicMuxGetItem,
+              output="coreir")
+    assert check_files_equal(__file__, f"build/test_dynamic_mux_getitem_array.json",
+                             f"gold/test_dynamic_mux_getitem_array.json")
+
+    tester = fault.Tester(TestDynamicMuxGetItem)
+    tester.poke(TestDynamicMuxGetItem.I, [BitVector[2](1), BitVector[2](2)])
+    tester.poke(TestDynamicMuxGetItem.S, 0)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, BitVector[2](1))
+    tester.poke(TestDynamicMuxGetItem.S, 1)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, BitVector[2](2))
+    tester.compile_and_run(target='coreir')
+
+
+def test_dynamic_mux_getitem_nested_array():
+    class TestDynamicMuxGetItem(m.Circuit):
+        IO = ["I", m.In(m.Array[2, m.Array[2, m.Bits[ 2 ]]]), "S", m.In(m.Bit),
+              "O", m.Out(m.Array[2, m.Bits[2]])]
+
+        @classmethod
+        def definition(io):
+            m.wire(io.O, io.I[io.S])
+    m.compile("build/test_dynamic_mux_getitem_nested_array", TestDynamicMuxGetItem,
+              output="coreir")
+    assert check_files_equal(__file__, f"build/test_dynamic_mux_getitem_nested_array.json",
+                             f"gold/test_dynamic_mux_getitem_nested_array.json")
+
+    tester = fault.Tester(TestDynamicMuxGetItem)
+    tester.poke(TestDynamicMuxGetItem.I, [
+        [BitVector[2](0), BitVector[2](1)],
+        [BitVector[2](2), BitVector[2](3)]
+    ])
+    tester.poke(TestDynamicMuxGetItem.S, 0)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, [BitVector[2](0), BitVector[2](1)])
+    tester.poke(TestDynamicMuxGetItem.S, 1)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, [BitVector[2](2), BitVector[2](3)])
+    tester.compile_and_run(target='coreir')
+
+
+def test_dynamic_mux_getitem_nested_tuple():
+    class TestDynamicMuxGetItem(m.Circuit):
+        IO = ["I", m.In(m.Array[2, m.Tuple(a=m.Bits[3], b=m.Bits[ 2 ])]), "S", m.In(m.Bit),
+              "O", m.Out(m.Tuple(a=m.Bits[3], b=m.Bits[2]))]
+
+        @classmethod
+        def definition(io):
+            m.wire(io.O, io.I[io.S])
+    m.compile("build/test_dynamic_mux_getitem_nested_tuple", TestDynamicMuxGetItem,
+              output="coreir")
+    assert check_files_equal(__file__, f"build/test_dynamic_mux_getitem_nested_tuple.json",
+                             f"gold/test_dynamic_mux_getitem_nested_tuple.json")
+
+    tester = fault.Tester(TestDynamicMuxGetItem)
+    tester.poke(TestDynamicMuxGetItem.I, [
+        (BitVector[2](0), BitVector[2](1)),
+        (BitVector[2](2), BitVector[2](3))
+    ])
+    tester.poke(TestDynamicMuxGetItem.S, 0)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, (BitVector[2](0), BitVector[2](1)))
+    tester.poke(TestDynamicMuxGetItem.S, 1)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, (BitVector[2](2), BitVector[2](3)))
+    tester.compile_and_run(target='coreir')
+
+
+def test_dynamic_mux_getitem_nested_anon_tuple():
+    class TestDynamicMuxGetItem(m.Circuit):
+        IO = ["I", m.In(m.Array[2, m.Tuple(m.Bits[3], m.Bits[ 2 ])]), "S", m.In(m.Bit),
+              "O", m.Out(m.Tuple(m.Bits[3], m.Bits[2]))]
+
+        @classmethod
+        def definition(io):
+            m.wire(io.O, io.I[io.S])
+    m.compile("build/test_dynamic_mux_getitem_nested_anon_tuple", TestDynamicMuxGetItem,
+              output="coreir")
+    assert check_files_equal(__file__, f"build/test_dynamic_mux_getitem_nested_anon_tuple.json",
+                             f"gold/test_dynamic_mux_getitem_nested_anon_tuple.json")
+
+    tester = fault.Tester(TestDynamicMuxGetItem)
+    tester.poke(TestDynamicMuxGetItem.I, [
+        (BitVector[2](0), BitVector[2](1)),
+        (BitVector[2](2), BitVector[2](3))
+    ])
+    tester.poke(TestDynamicMuxGetItem.S, 0)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, (BitVector[2](0), BitVector[2](1)))
+    tester.poke(TestDynamicMuxGetItem.S, 1)
+    tester.eval()
+    tester.expect(TestDynamicMuxGetItem.O, (BitVector[2](2), BitVector[2](3)))
     tester.compile_and_run(target='coreir')

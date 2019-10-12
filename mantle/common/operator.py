@@ -422,11 +422,35 @@ def dynamic_mux_select(self, S):
                 raise NotImplementedError(type(inputs[0]))
             inputs.extend([m.bit(0) for _ in range(height - orig_height)])
 
-        O = Mux(height, length)(*inputs, S)
-        if not isinstance(self.T, m._BitKind) or \
-                isinstance(self.T, m.ArrayKind) and isinstance(self.T.T, m._BitKind):
-            O = unflatten_bits(self.T, O.ts)
-        return O
+        if self.isoutput():
+            O = Mux(height, length)(*inputs, S)
+            if not isinstance(self.T, m._BitKind) or \
+                    isinstance(self.T, m.ArrayKind) and isinstance(self.T.T, m._BitKind):
+                O = unflatten_bits(self.T, O.ts)
+            return O
+        else:
+            I = self.T()
+            if all(t.trace() for t in self.ts):
+                trace = [t.trace()for t in self.ts]
+                self.unwire(trace)
+            else:
+                trace = self.ts
+                self.ts = [self.T() for _ in range(len(self))]
+            # Default value
+            if not (isinstance(self.T, m.ArrayKind) and \
+                    isinstance(self.T.T, m._BitKind)):
+                m.wire(
+                    mux(trace, S),
+                    I
+                )
+            for i in range(len(self)):
+                if len(self) <= 2:
+                    i_magma = m.bit(i)
+                else:
+                    i_magma = m.bits(i, m.bitutils.clog2(len(self)))
+                m.wire(mux([I, trace[i]], S == i_magma), self[i])
+            return I
+
     return orig_get_item(self, S)
 
 

@@ -53,7 +53,7 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     config_args = {"init": coreir.type.BitVector[width](init)}
     gen_args = {"width": width}
     T = T[width]
-    io = ["I", In(T), "clk", In(Clock), "O", Out(T)]
+    io = ["I", In(T), "CLK", In(Clock), "O", Out(T)]
     methods = []
 
     def reset(self, condition):

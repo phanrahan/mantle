@@ -7,6 +7,7 @@ default_port_mapping = {
     "I1": "in1",
     "O": "out",
     "S": "sel",
+    "CLK": "clk",
 }
 
 

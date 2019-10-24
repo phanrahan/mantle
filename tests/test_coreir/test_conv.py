@@ -15,7 +15,7 @@ def Define_mantle_reg_U6(init):
       wire(enMux.I1, io.I)
       wire(reg0.I, enMux.O)
       wire(enMux.S, io.en)
-      wire(reg0.clk, io.clk)
+      wire(reg0.CLK, io.clk)
       wire(io.O, reg0.O)
   return mantle_reg_U6
 

@@ -5,10 +5,12 @@ import mantle
 
 @m.cache_definition
 def DefineRegister(n, init=0, has_ce=False, has_reset=False,
-                   has_async_reset=False, _type=m.Bits,
-                   reset_priority=True):
-    if has_reset and has_async_reset:
+                   has_async_reset=False, has_async_resetn=False, _type=m.Bits,
+                   reset_priority=True, ):
+    if has_reset and (has_async_reset or has_async_resetn):
         raise ValueError("Cannot have synchronous and asynchronous reset")
+    if has_async_resetn and has_async_reset:
+        raise ValueError("Cannot have posedge and negedge asynchronous reset")
 
     if has_reset or has_ce:
         if n is None:
@@ -22,11 +24,13 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
             IO = ["I", m.In(T), "O", m.Out(T)]
             IO += m.ClockInterface(has_ce=has_ce,
                                    has_reset=has_reset,
-                                   has_async_reset=has_async_reset)
+                                   has_async_reset=has_async_reset,
+                                   has_async_resetn=has_async_resetn)
 
             @classmethod
             def definition(io):
-                reg = DefineCoreirReg(n, init, has_async_reset, _type)(name="value")
+                reg = DefineCoreirReg(n, init, has_async_reset,
+                                      has_async_resetn, _type)(name="value")
                 I = io.I
                 O = reg.O
                 if n is None:
@@ -54,13 +58,14 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
             raise NotImplementedError()
         return DefineDFF(init, has_ce, has_async_reset=has_async_reset)
     else:
-        return DefineCoreirReg(n, init, has_async_reset, _type)
+        return DefineCoreirReg(n, init, has_async_reset, has_async_resetn,
+                               _type)
 
 
 def Register(n, init=0, has_ce=False, has_reset=False, has_async_reset=False,
-             **kwargs):
-    return DefineRegister(n, init, has_ce, has_reset,
-                          has_async_reset)(**kwargs)
+             has_async_resetn=False, **kwargs):
+    return DefineRegister(n, init, has_ce, has_reset, has_async_reset,
+                          has_async_resetn=has_async_resetn)(**kwargs)
 
 
 def register(I, ce=None, reset=None, async_reset=None, **kwargs):

@@ -6,18 +6,20 @@ from hwtypes import BitVector
 
 from .util import DeclareCoreirCircuit
 
-def gen_sim_register(N, init, has_ce, has_reset):
+def gen_sim_register(N, init, has_ce, has_async_reset, has_async_resetn):
     def sim_register(self, value_store, state_store):
         """
         Adapted from Brennan's SB_DFF simulation in mantle
         """
+        if has_async_resetn and has_async_reset:
+            raise ValueError("Cannot have posedge and negedge asynchronous reset")
         cur_clock = value_store.get_value(self.CLK)
 
         if not state_store:
             state_store['prev_clock'] = cur_clock
             state_store['cur_val'] = BitVector[N](init) if N is not None else bool(init)
 
-        if has_reset:
+        if has_async_reset or has_async_resetn:
             cur_reset = value_store.get_value(self.arst)
         # if s:
         #     cur_s = value_store.get_value(self.S)
@@ -34,7 +36,7 @@ def gen_sim_register(N, init, has_ce, has_reset):
         if clock_edge:
             new_val = value_store.get_value(self.I)
 
-        if has_reset and cur_reset:
+        if has_async_reset and cur_reset or has_async_resetn and not cur_reset:
             new_val = BitVector[N](init) if N is not None else bool(init)
         # if s and not sy and cur_s:
         #     new_val = True
@@ -46,7 +48,8 @@ def gen_sim_register(N, init, has_ce, has_reset):
 
 
 @m.cache_definition
-def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
+def DefineCoreirReg(width, init=0, has_async_reset=False,
+                    has_async_resetn=False, T=Bits):
     if width is None:
         width = 1
     name = "reg_P"  # TODO: Add support for clock interface
@@ -60,11 +63,16 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
         wire(condition, self.rst)
         return self
 
-    if has_reset:
-        io.extend(["arst", In(AsyncReset)])
+    if has_async_resetn and has_async_reset:
+        raise ValueError("Cannot have posedge and negedge asynchronous reset")
+    if has_async_reset:
+        io.extend(["arst", In(AsyncResetIn)])
         name += "R"  # TODO: This assumes ordering of clock parameters
-        # methods.append(circuit_type_method("reset", reset))
-        # gen_args["has_rst"] = True
+        config_args["arst_posedge"] = True
+    if has_async_resetn:
+        io.extend(["arst", In(AsyncResetNIn)])
+        name += "R"  # TODO: This assumes ordering of clock parameters
+        config_args["arst_posedge"] = False
 
     def when(self, condition):
         wire(condition, self.en)
@@ -80,17 +88,20 @@ def DefineCoreirReg(width, init=0, has_reset=False, T=Bits):
     default_kwargs = {"init": coreir.type.BitVector[width](init)}
     # default_kwargs.update(config_args)
 
+    coreir_name = "reg_arst" if (has_async_reset or has_async_resetn) else "reg"
+
     return DeclareCoreirCircuit(
         name,
         *io,
         stateful=True,
-        simulate=gen_sim_register(width, init, False, has_reset),
+        simulate=gen_sim_register(width, init, False, has_async_reset,
+                                  has_async_resetn),
         circuit_type_methods=methods,
         default_kwargs=default_kwargs,
         coreir_genargs=gen_args,
         coreir_configargs=config_args,
-        coreir_name="reg_arst" if has_reset else "reg",
-        verilog_name="coreir_" + ("reg_arst" if has_reset else "reg"),
+        coreir_name=coreir_name,
+        verilog_name="coreir_" + coreir_name,
         coreir_lib="coreir"
     )
 
@@ -109,17 +120,23 @@ def define_wrap(type_, type_name, in_type):
     )
 
 @m.cache_definition
-def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False):
-    Reg = DefineCoreirReg(None, init, has_async_reset)
-    IO = ["I", In(Bit), "O", Out(Bit)] + ClockInterface(has_ce=has_ce, has_reset=has_reset, has_async_reset=has_async_reset)
-    circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}_has_async_reset{}".format(init, has_ce, has_reset, has_async_reset),
+def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False, has_async_resetn=False):
+    Reg = DefineCoreirReg(None, init, has_async_reset, has_async_resetn)
+    IO = ["I", In(Bit), "O", Out(Bit)]
+    IO += ClockInterface(has_ce=has_ce, has_reset=has_reset,
+                         has_async_reset=has_async_reset,
+                         has_async_resetn=has_async_resetn)
+    circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}_has_async_reset{}".format(
+        init, has_ce, has_reset, has_async_reset, has_async_resetn),
         *IO)
     reg = Reg()
     wiredefaultclock(circ, reg)
     wireclock(circ, reg)
     I = circ.I
-    if has_reset and has_async_reset:
+    if has_reset and (has_async_reset or has_async_resetn):
         raise ValueError("Cannot have synchronous and asynchronous reset")
+    if has_async_resetn and has_async_reset:
+        raise ValueError("Cannot have posedge and negedge asynchronous reset")
     if has_reset:
         I = Mux()(circ.I, bit(init), circ.RESET)
     if has_ce:

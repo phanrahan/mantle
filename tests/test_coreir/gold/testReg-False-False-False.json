@@ -5,9 +5,9 @@
       "test":{
         "type":["Record",[
           ["clk",["Named","coreir.clkIn"]],
-          ["ce","BitIn"],
           ["In0",["Array",1,"BitIn"]],
-          ["Out0",["Array",1,"Bit"]]
+          ["Out0",["Array",1,"Bit"]],
+          ["CLK",["Named","coreir.clkIn"]]
         ]],
         "instances":{
           "reg_P_inst0":{

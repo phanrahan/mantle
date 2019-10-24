@@ -1,0 +1,30 @@
+{"top":"global.test",
+"namespaces":{
+  "global":{
+    "modules":{
+      "test":{
+        "type":["Record",[
+          ["clk",["Named","coreir.clkIn"]],
+          ["In0",["Array",1,"BitIn"]],
+          ["Out0",["Array",1,"Bit"]],
+          ["CLK",["Named","coreir.clkIn"]],
+          ["ASYNCRESETN",["Named","coreir.arstIn"]]
+        ]],
+        "instances":{
+          "reg_PR_inst0":{
+            "genref":"coreir.reg_arst",
+            "genargs":{"width":["Int",1]},
+            "modargs":{"arst_posedge":["Bool",false], "clk_posedge":["Bool",true], "init":[["BitVector",1],"1'h0"]}
+          }
+        },
+        "connections":[
+          ["self.ASYNCRESETN","reg_PR_inst0.arst"],
+          ["self.clk","reg_PR_inst0.clk"],
+          ["self.In0","reg_PR_inst0.in"],
+          ["self.Out0","reg_PR_inst0.out"]
+        ]
+      }
+    }
+  }
+}
+}

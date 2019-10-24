@@ -51,9 +51,10 @@
       "test":{
         "type":["Record",[
           ["clk",["Named","coreir.clkIn"]],
-          ["ce","BitIn"],
           ["In0",["Array",1,"BitIn"]],
-          ["Out0",["Array",1,"Bit"]]
+          ["Out0",["Array",1,"Bit"]],
+          ["CLK",["Named","coreir.clkIn"]],
+          ["CE","BitIn"]
         ]],
         "instances":{
           "Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0":{
@@ -61,7 +62,7 @@
           }
         },
         "connections":[
-          ["self.ce","Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0.CE"],
+          ["self.CE","Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0.CE"],
           ["self.clk","Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0.CLK"],
           ["self.In0","Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0.I"],
           ["self.Out0","Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0.O"]

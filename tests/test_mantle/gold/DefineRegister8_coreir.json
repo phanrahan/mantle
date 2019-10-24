@@ -5,7 +5,7 @@
       "reg_P_wrapped":{
         "type":["Record",[
           ["I",["Array",8,"BitIn"]],
-          ["clk",["Named","coreir.clkIn"]],
+          ["CLK",["Named","coreir.clkIn"]],
           ["O",["Array",8,"Bit"]]
         ]],
         "instances":{
@@ -16,7 +16,7 @@
           }
         },
         "connections":[
-          ["self.clk","reg_P_inst0.clk"],
+          ["self.CLK","reg_P_inst0.clk"],
           ["self.I","reg_P_inst0.in"],
           ["self.O","reg_P_inst0.out"]
         ]

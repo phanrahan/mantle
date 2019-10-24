@@ -22,7 +22,7 @@
           ["self.O","coreir_commonlib_mux2x1_inst0.out"]
         ]
       },
-      "Register_has_ce_True_has_reset_False_has_async_reset_True_type_Bits_n_1":{
+      "Register_has_ce_True_has_reset_False_has_async_reset_True_has_async_resetn_False_type_Bits_n_1":{
         "type":["Record",[
           ["I",["Array",1,"BitIn"]],
           ["O",["Array",1,"Bit"]],
@@ -60,16 +60,16 @@
           ["ASYNCRESET",["Named","coreir.arstIn"]]
         ]],
         "instances":{
-          "Register_has_ce_True_has_reset_False_has_async_reset_True_type_Bits_n_1_inst0":{
-            "modref":"global.Register_has_ce_True_has_reset_False_has_async_reset_True_type_Bits_n_1"
+          "Register_has_ce_True_has_reset_False_has_async_reset_True_has_async_resetn_False_type_Bits_n_1_inst0":{
+            "modref":"global.Register_has_ce_True_has_reset_False_has_async_reset_True_has_async_resetn_False_type_Bits_n_1"
           }
         },
         "connections":[
-          ["self.ASYNCRESET","Register_has_ce_True_has_reset_False_has_async_reset_True_type_Bits_n_1_inst0.ASYNCRESET"],
-          ["self.CE","Register_has_ce_True_has_reset_False_has_async_reset_True_type_Bits_n_1_inst0.CE"],
-          ["self.clk","Register_has_ce_True_has_reset_False_has_async_reset_True_type_Bits_n_1_inst0.CLK"],
-          ["self.In0","Register_has_ce_True_has_reset_False_has_async_reset_True_type_Bits_n_1_inst0.I"],
-          ["self.Out0","Register_has_ce_True_has_reset_False_has_async_reset_True_type_Bits_n_1_inst0.O"]
+          ["self.ASYNCRESET","Register_has_ce_True_has_reset_False_has_async_reset_True_has_async_resetn_False_type_Bits_n_1_inst0.ASYNCRESET"],
+          ["self.CE","Register_has_ce_True_has_reset_False_has_async_reset_True_has_async_resetn_False_type_Bits_n_1_inst0.CE"],
+          ["self.clk","Register_has_ce_True_has_reset_False_has_async_reset_True_has_async_resetn_False_type_Bits_n_1_inst0.CLK"],
+          ["self.In0","Register_has_ce_True_has_reset_False_has_async_reset_True_has_async_resetn_False_type_Bits_n_1_inst0.I"],
+          ["self.Out0","Register_has_ce_True_has_reset_False_has_async_reset_True_has_async_resetn_False_type_Bits_n_1_inst0.O"]
         ]
       }
     }

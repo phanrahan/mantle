@@ -20,6 +20,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
         class Register(m.Circuit):
             name = f"Register_has_ce_{has_ce}_has_reset_{has_reset}_" \
                    f"has_async_reset_{has_async_reset}_" \
+                   f"has_async_resetn_{has_async_resetn}_" \
                    f"type_{_type.__name__}_n_{n}"
             IO = ["I", m.In(T), "O", m.Out(T)]
             IO += m.ClockInterface(has_ce=has_ce,

@@ -27,7 +27,7 @@ commonlib_muxn__N2__width1 coreir_commonlib_mux2x1_inst0(.in_data_0(I0), .in_dat
 assign O = coreir_commonlib_mux2x1_inst0_out;
 endmodule
 
-module Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1 (input ASYNCRESETN, input CE, input CLK, input [0:0] I, output [0:0] O);
+module Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_True_type_Bits_n_1 (input ASYNCRESETN, input CE, input CLK, input [0:0] I, output [0:0] O);
 wire [0:0] enable_mux_O;
 wire [0:0] value_out;
 Mux2xOutBits1 enable_mux(.I0(value_out), .I1(I), .O(enable_mux_O), .S(CE));
@@ -36,8 +36,8 @@ assign O = value_out;
 endmodule
 
 module test (input ASYNCRESETN, input CE, input CLK, input [0:0] In0, output [0:0] Out0, input clk);
-wire [0:0] Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0_O;
-Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1 Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0(.ASYNCRESETN(ASYNCRESETN), .CE(CE), .CLK(clk), .I(In0), .O(Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0_O));
-assign Out0 = Register_has_ce_True_has_reset_False_has_async_reset_False_type_Bits_n_1_inst0_O;
+wire [0:0] Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_True_type_Bits_n_1_inst0_O;
+Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_True_type_Bits_n_1 Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_True_type_Bits_n_1_inst0(.ASYNCRESETN(ASYNCRESETN), .CE(CE), .CLK(clk), .I(In0), .O(Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_True_type_Bits_n_1_inst0_O));
+assign Out0 = Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_True_type_Bits_n_1_inst0_O;
 endmodule
 

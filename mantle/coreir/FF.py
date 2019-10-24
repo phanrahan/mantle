@@ -11,7 +11,7 @@ def gen_sim_register(N, init, has_ce, has_reset):
         """
         Adapted from Brennan's SB_DFF simulation in mantle
         """
-        cur_clock = value_store.get_value(self.clk)
+        cur_clock = value_store.get_value(self.CLK)
 
         if not state_store:
             state_store['prev_clock'] = cur_clock

@@ -10,7 +10,8 @@ def DefineEQ(width):
     def simulate(self, value_store, state_store):
         I0 = BitVector[width](value_store.get_value(self.I0))
         I1 = BitVector[width](value_store.get_value(self.I1))
-        O = operator.eq(I0, I1).as_bool_list()[0]
+        #O = operator.eq(I0, I1).as_bool_list()[0]
+        O = int(operator.eq(I0, I1))
         value_store.set_value(self.O, O)
     if width is None:
         circ = DefineCircuit('corebit_eq', 'I0', In(Bit), 'I1', In(Bit), 'O', Out(Bit))

@@ -47,6 +47,8 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
                 else:
                     m.wire(I, reg.I)
                 m.wire(io.O, O)
+                m.wireclock(io, reg)
+                m.wiredefaultclock(io, reg)
 
         return Register
     elif n is None:
@@ -58,9 +60,9 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
 
 
 def Register(n, init=0, has_ce=False, has_reset=False, has_async_reset=False,
-             **kwargs):
+    _type = m.Bits, **kwargs):
     return DefineRegister(n, init, has_ce, has_reset,
-                          has_async_reset)(**kwargs)
+                          has_async_reset, _type)(**kwargs)
 
 
 def register(I, ce=None, reset=None, async_reset=None, **kwargs):

@@ -69,8 +69,8 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_async_reset=Fal
             wiredefaultclock(reg, ffs)
     return _Register
 
-def Register(n, init=0, has_ce=False, has_reset=False, has_async_reset=False, **kwargs):
-    return DefineRegister(n, init, has_ce, has_reset, has_async_reset)(**kwargs)
+def Register(n, init=0, has_ce=False, has_reset=False, has_async_reset=False, _type=Bits, **kwargs):
+    return DefineRegister(n, init, has_ce, has_reset, has_async_reset, _type)(**kwargs)
 
 def register(I, ce=None, reset=None, async_reset=None, **kwargs):
     has_ce = ce is not None

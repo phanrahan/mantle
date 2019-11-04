@@ -66,8 +66,8 @@ def DefineRAM(height, width):
 
     return _RAM
 
-def RAM(height, width):
-    return DefineRAM(height, width)()
+def RAM(height, width, **kwargs):
+    return DefineRAM(height, width)(**kwargs)
 
 
 def DefineDualRAM(height, width):
@@ -95,7 +95,7 @@ def DefineDualRAM(height, width):
 
     return _DualRAM
 
-def DualRAM(height, width):
-    return DefineDualRAM(height, width)()
+def DualRAM(height, width, **kwargs):
+    return DefineDualRAM(height, width)(**kwargs)
 
 

@@ -1,4 +1,5 @@
 from magma import *
+import magma as m
 from magma.bitutils import lutinit
 from ..spartan3.CLB import *
 
@@ -129,14 +130,14 @@ def MuxN(height, **kwargs):
     elif height == 16:
         return Mux16(**kwargs)
 
-def DefineMux(height=2, width=1):
+def DefineMux(height=2, width=1, T=None):
 
     """
     Construct a Mux. Height inputs are width bits wide.
     """
 
     assert height in [2, 4, 8, 16]
-    if width is None:
+    if width is None and (T is None or isinstance(T, m.BitKind)):
         if height == 2:
             return Mux2
         elif height == 4:
@@ -145,6 +146,9 @@ def DefineMux(height=2, width=1):
             return Mux8
         elif height == 16:
             return Mux16
+    if T is not None:
+        assert width is None, "Can only specify width **or** T"
+        width = len(T)
 
     class _Mux(Circuit):
         name = _MuxName(height, width)
@@ -168,8 +172,6 @@ def DefineMux(height=2, width=1):
             wire( mux.O, Mux.O )
     return _Mux
 
-def Mux(height=2, width=None, **kwargs):
-    if width is None:
-       return MuxN(height, **kwargs)
-    return DefineMux(height, width)(**kwargs)
+def Mux(height=2, width=None, T=None, **kwargs):
+    return DefineMux(height, width, T)(**kwargs)
 

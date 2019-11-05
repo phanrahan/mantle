@@ -170,9 +170,10 @@ def ReduceNAnd(height=2, **kwargs):
 
 
 def simulate_bit_not(self, value_store, state_store):
-    _in = Bit(value_store.get_value(self.I))
-    O = (~_in).as_bool_list()[0]
-    value_store.set_value(self.O, O)
+    _in = ht.Bit(value_store.get_value(self.I))
+    #O = (~_in).as_bool_list()[0]
+    O = ~_in
+    value_store.set_value(self.O, bool(O))
 
 
 Not = DeclareCoreirCircuit("not", 'I', In(Bit), 'O', Out(Bit),

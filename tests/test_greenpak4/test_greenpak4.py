@@ -20,7 +20,7 @@ def com(Test, name):
     name = f'test_{name}'
     build = f'build/{name}'
     gold = f'gold/{name}'
-    m.compile(build, Test)
+    m.compile(build, Test, output="verilog")
     assert check_files_equal(__file__, build+'.v', gold+'.v')
 
 def test_inv():

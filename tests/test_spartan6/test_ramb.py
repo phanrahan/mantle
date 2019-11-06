@@ -11,7 +11,7 @@ def com(Test, name):
     name = f'{name}_{magma.mantle_target}'
     build = 'build/' + name
     gold = 'gold/' + name
-    compile(build, Test)
+    compile(build, Test, output="verilog")
     assert check_files_equal(__file__, build+'.v', gold+'.v')
 
 import magma as m

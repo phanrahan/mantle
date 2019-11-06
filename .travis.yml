@@ -28,7 +28,6 @@ before_install:
 
 install:
 - pip install pytest-cov
-- pip install -e git+git://github.com/leonardt/Pyverilog.git@add-nd-arrays#egg=pyverilog
 - pip install delegator.py
 - pip install -e .
 script:

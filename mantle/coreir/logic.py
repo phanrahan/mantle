@@ -8,9 +8,9 @@ from .util import DeclareCoreirCircuit
 
 
 def get_length(value):
-    if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
+    if issubclass(value.type_, (Bit, Clock, Enable, Reset)):
         return None
-    elif isinstance(value, ArrayType):
+    elif issubclass(value.type_, Array):
         return len(value)
     else:
         raise NotImplementedError("Cannot get_length of"

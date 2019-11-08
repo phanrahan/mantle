@@ -24,21 +24,21 @@
             "genref":"coreir.eq",
             "genargs":{"width":["Int",4]}
           },
-          "coreir_eq_4_inst2":{
+          "magma_Bits_4_eq_inst0":{
             "genref":"coreir.eq",
             "genargs":{"width":["Int",4]}
           }
         },
         "connections":[
-          ["coreir_eq_4_inst2.in1","const_1_4.out"],
+          ["coreir_eq_4_inst1.in1","const_1_4.out"],
           ["self.I0","coreir_eq_4_inst0.in0"],
           ["self.I1","coreir_eq_4_inst0.in1"],
           ["self.O0","coreir_eq_4_inst0.out"],
           ["self.I0","coreir_eq_4_inst1.in0"],
-          ["self.I1","coreir_eq_4_inst1.in1"],
-          ["self.O1","coreir_eq_4_inst1.out"],
-          ["self.I0","coreir_eq_4_inst2.in0"],
-          ["self.O2","coreir_eq_4_inst2.out"]
+          ["self.O2","coreir_eq_4_inst1.out"],
+          ["self.I0","magma_Bits_4_eq_inst0.in0"],
+          ["self.I1","magma_Bits_4_eq_inst0.in1"],
+          ["self.O1","magma_Bits_4_eq_inst0.out"]
         ]
       }
     }

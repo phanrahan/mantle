@@ -115,9 +115,9 @@ def RAMB16(rom, width, init=None):
 
     A = array([ram.ADDRB[i] for i in range(14)])
 
-    I = array([ram.DIB[i] for i in range(ram.DIB.N)])
+    I = array([ram.DIB[i] for i in range(len(ram.DIB))])
 
-    IP = array([ram.DIPB[i] for i in range(ram.DIPB.N)])
+    IP = array([ram.DIPB[i] for i in range(len(ram.DIPB))])
 
     wire(array([0,0,0,0]), ram.WEB)
     wire(0, ram.CLKB)
@@ -165,7 +165,7 @@ def config_ramb16_io_pins(width, ram, p = "A"):
     if width == 8 or width == 9:
         I = [rDIA[i] for i in range(8)]
         O = [rDOA[i] for i in range(8)]
-        for i in range(8, rDIA.N):
+        for i in range(8, len(rDIA)):
             wire(0, rDIA[i])
         if   width == 8:
             for i in range(4):
@@ -178,7 +178,7 @@ def config_ramb16_io_pins(width, ram, p = "A"):
     if width == 16 or width == 18:
         I = [rDIA[i] for i in range(16)]
         O = [rDOA[i] for i in range(16)]
-        for i in range(16, rDIA.N):
+        for i in range(16, len(rDIA)):
             wire(0, rDIA[i])
         if width == 16:
             for i in range(4):

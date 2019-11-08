@@ -49,9 +49,11 @@ def _declare_muxn(height, width):
         sel = BitVector[m.bitutils.clog2(height)](value_store.get_value(self.I.sel))
         out = BitVector[width](value_store.get_value(self.I.data[sel.as_int]))
         value_store.set_value(self.O, out)
-    return DeclareCoreirCircuit(f"coreir_commonlib_mux{height}x{width}",
-        *["I", In(Tuple(data=Array[height, Bits[width]],
-                         sel=Bits[m.bitutils.clog2(height)])),
+    return DeclareCoreirCircuit(
+        f"coreir_commonlib_mux{height}x{width}",
+        *["I", In(Product.from_fields("T",
+            {"data": Array[height, Bits[width]],
+             "sel": Bits[m.bitutils.clog2(height)]}, cache=True)),
           "O", Out(Bits[width])],
         coreir_name="muxn",
         coreir_lib="commonlib",
@@ -90,23 +92,25 @@ def DefineMux(height=2, width=None, T=None):
         IO = io
         @classmethod
         def definition(interface):
-            if T is not None and not (isinstance(T, m.BitKind) or isinstance(T, m.ArrayKind) and isinstance(T.T, m.BitKind)):
-                if isinstance(T, m.TupleKind):
-                    for i in range(len(T.Ks)):
-                        Is = [getattr(interface, f"I{j}")[T.Ks[i]] for j in range(height)]
-                        interface.O[i] <= DefineMux(height, T=T.Ts[i])()(*Is, interface.S)
+            if T is not None and not (issubclass(T, m.Bit) or issubclass(T, m.Array) and issubclass(T.T, m.Bit)):
+                if issubclass(T, m.Tuple):
+                    Ks = list(T.field_dict.keys())
+                    Ts = list(T.field_dict.values())
+                    for i in range(len(Ks)):
+                        Is = [getattr(getattr(interface, f"I{j}"), Ks[i]) for j in range(height)]
+                        interface.O[i] <= DefineMux(height, T=Ts[i])()(*Is, interface.S)
                 else:
-                    assert isinstance(T, m.ArrayKind), f"Expected array or type type, got {T}, type is {type(T)}"
+                    assert issubclass(T, m.Array), f"Expected array or type type, got {T}, type is {type(T)}"
                     for i in range(len(T)):
                         Is = [getattr(interface, f"I{j}")[i] for j in range(height)]
                         interface.O[i] <= DefineMux(height, T=type(Is[0]))()(*Is, interface.S)
             else:
-                if T is None and width is None or isinstance(T, m.BitKind):
+                if T is None and width is None or issubclass(T, m.Bit):
                     mux = _declare_muxn(height, 1)()
                 else:
-                    mux = _declare_muxn(height, width if T is None else T.size())()
+                    mux = _declare_muxn(height, width if T is None else len(T))()
                 for i in range(height):
-                    if T is None and width is None or isinstance(T, m.BitKind):
+                    if T is None and width is None or issubclass(T, m.Bit):
                         m.wire(getattr(interface, f"I{i}"), mux.I.data[i][0])
                     else:
                         m.wire(getattr(interface, f"I{i}"), mux.I.data[i])
@@ -114,7 +118,7 @@ def DefineMux(height=2, width=None, T=None):
                     m.wire(interface.S, mux.I.sel[0])
                 else:
                     m.wire(interface.S, mux.I.sel)
-                if T is None and width is None or isinstance(T, m.BitKind):
+                if T is None and width is None or issubclass(T, m.Bit):
                     wire(mux.O[0], interface.O)
                 else:
                     wire(mux.O, interface.O)

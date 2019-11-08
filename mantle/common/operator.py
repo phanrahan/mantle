@@ -12,9 +12,11 @@ __all__ = []
 
 
 def get_length(value):
-    if isinstance(value, m._BitType):
+    if isinstance(value, m.Wire):
+        value = value._value
+    if isinstance(value, m.Digital):
         return None
-    elif isinstance(value, m.ArrayType):
+    elif isinstance(value, m.Array):
         return len(value)
     elif isinstance(value, int):
         return value.bit_length()
@@ -72,10 +74,13 @@ def preserve_type(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         retval = fn(*args, **kwargs)
-        T = type(args[0])
-        if isinstance(T, m.UIntKind):
+        if isinstance(args[0], m.Wire):
+            T = args[0].type_
+        else:
+            T = type(args[0])
+        if issubclass(T, m.UInt):
             return m.uint(retval)
-        elif isinstance(T, m.SIntKind):
+        elif issubclass(T, m.SInt):
             return m.sint(retval)
         return retval
     return wrapper
@@ -107,8 +112,8 @@ for _operator_name, _Circuit in (
     @_pass_closure_vars_as_args(_Circuit, _operator_name)
     def operator(circuit, name, width, *args, **kwargs):
         for arg in args:
-            if not isinstance(arg, (m.Type, int)):
-                raise TypeError("Operators only defined on magma types and Python ints")
+            if not isinstance(arg, (m.Type, m.Wire, int)):
+                raise TypeError("Operators only defined on magma types, wires, and Python ints")
         if name == "le" and args[0].isinput :
             assert len(args) == 2, "Expected two arguments for assignment (<=)"
             if not isinstance(args[1], int) and not args[1].isoutput():
@@ -128,7 +133,11 @@ for _operator_name, _Circuit in (
                 # These don't have a height
                 if len(args) > 2:
                     raise Exception(f"{name} operator expects 2 arguments")
-                return circuit(width, T=type(args[0]), **kwargs)(*args)
+                if isinstance(args[0], m.Wire):
+                    T = args[0].type_
+                else:
+                    T = type(args[0])
+                return circuit(width, T=T, **kwargs)(*args)
             else:
                 return circuit(len(args), width, **kwargs)(*args)
     operator.__name__ = _operator_name
@@ -207,8 +216,8 @@ bitwise_ops = [
 
 for method, op in bitwise_ops:
     if op not in (lsl, lsr):
-        setattr(m.BitType, method, op)
-    setattr(m.BitsType, method, op)
+        setattr(m.Bit, method, op)
+    setattr(m.Bits, method, op)
 
 
 def adc(self, other, carry):
@@ -250,7 +259,11 @@ arithmetic_ops = [
 @export
 @check_operator_args
 def lt(width, I0, I1, **kwargs):
-    if isinstance(I0, m.SIntType):
+    if isinstance(I0, m.Wire):
+        T = I0.type_
+    else:
+        T = type(I0)
+    if issubclass(T, m.SInt):
         return SLT(width, **kwargs)(I0, I1)
     else:
         return ULT(width, **kwargs)(I0, I1)
@@ -261,7 +274,11 @@ def lt(width, I0, I1, **kwargs):
 def le(width, I0, I1, **kwargs):
     if I0.isinput():
         return m.Type.__le__(I0, I1)
-    if isinstance(I0, m.SIntType):
+    if isinstance(I0, m.Wire):
+        T = I0.type_
+    else:
+        T = type(I0)
+    if issubclass(T, m.SInt):
         return SLE(width, **kwargs)(I0, I1)
     else:
         return ULE(width, **kwargs)(I0, I1)
@@ -270,7 +287,11 @@ def le(width, I0, I1, **kwargs):
 @export
 @check_operator_args
 def gt(width, I0, I1, **kwargs):
-    if isinstance(I0, m.SIntType):
+    if isinstance(I0, m.Wire):
+        T = I0.type_
+    else:
+        T = type(I0)
+    if issubclass(T, m.SInt):
         return SGT(width, **kwargs)(I0, I1)
     else:
         return UGT(width, **kwargs)(I0, I1)
@@ -279,7 +300,11 @@ def gt(width, I0, I1, **kwargs):
 @export
 @check_operator_args
 def ge(width, I0, I1, **kwargs):
-    if isinstance(I0, m.SIntType):
+    if isinstance(I0, m.Wire):
+        T = I0.type_
+    else:
+        T = type(I0)
+    if issubclass(T, m.SInt):
         return SGE(width, **kwargs)(I0, I1)
     else:
         return UGE(width, **kwargs)(I0, I1)
@@ -305,19 +330,19 @@ relational_ops = [
 ]
 
 for method, op in arithmetic_ops + relational_ops:
-    setattr(m.SIntType, method, op)
-    setattr(m.UIntType, method, op)
+    setattr(m.SInt, method, op)
+    setattr(m.UInt, method, op)
     setattr(m.BFloat, method, op)
 
-m.SIntType.__truediv__ = sdiv
-m.UIntType.__truediv__ = udiv
+m.SInt.__truediv__ = sdiv
+m.UInt.__truediv__ = udiv
 
-m.SIntType.__mod__ = smod
-m.UIntType.__mod__ = umod
+m.SInt.__mod__ = smod
+m.UInt.__mod__ = umod
 
-m.SIntType.__rshift__ = asr
+m.SInt.__rshift__ = asr
 
-for type_ in (m._BitType, m.ArrayType):
+for type_ in (m.Digital, m.Array):
     setattr(type_, "__eq__", eq)
     setattr(type_, "__ne__", ne)
 
@@ -329,20 +354,27 @@ def mux(I, S, **kwargs):
         return I[S]
     elif S.const():
         return I[seq2int(S.bits())]
-    T = type(I[0])
+    if isinstance(I[0], m.Wire):
+        T = I[0].type_
+    else:
+        T = type(I[0])
     # Support using Bits(1) for select on 2 elements
-    if len(I) == 2 and isinstance(S, m.ArrayType) and \
-            isinstance(S.T, m.BitKind) and len(S) == 1:
+    if len(I) == 2 and isinstance(S, m.Array) and \
+            issubclass(S.T, m.Bit) and len(S) == 1:
         S = S[0]
     return Mux(len(I), T=T, **kwargs)(*I, S)
 
 
-orig_get_item = m.ArrayType.__getitem__
+orig_get_item = m.Array.__getitem__
 
 
 def dynamic_mux_select(self, S):
-    if isinstance(S, m.Type):
-        if isinstance(self.T, m._BitKind):
+    if isinstance(S, m.Wire):
+        T = S.type_
+    else:
+        T = type(S)
+    if issubclass(T, m.Type):
+        if issubclass(self.T, m.Digital):
             length = None
         else:
             length = len(self.T)
@@ -353,7 +385,7 @@ def dynamic_mux_select(self, S):
                 raise NotImplementedError()
             orig_height = height
             height = 2 ** m.bitutils.clog2(height)
-            if not isinstance(inputs[0], m._BitType):
+            if not isinstance(inputs[0], m.Digital):
                 raise NotImplementedError(type(inputs[0]))
             inputs.extend([m.bit(0) for _ in range(height - orig_height)])
 
@@ -361,4 +393,4 @@ def dynamic_mux_select(self, S):
     return orig_get_item(self, S)
 
 
-setattr(m.ArrayType, "__getitem__", dynamic_mux_select)
+setattr(m.Array, "__getitem__", dynamic_mux_select)

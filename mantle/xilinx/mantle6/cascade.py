@@ -44,7 +44,7 @@ def halfcarry(k, lutexpr, andexpr, use_rom):
         else:
             wire(0, lut.I4)
 
-    CIN = Bit()
+    CIN = Wire(Bit)
 
     mux = MUXCY()
     wire(lut.O6, mux.S)

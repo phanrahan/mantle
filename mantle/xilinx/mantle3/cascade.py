@@ -20,19 +20,19 @@ def halfcarry(k, lutexpr, andexpr, use_rom):
         lut = ROMN(lutexpr,k)
         args += ['I', lut.I]
         if k >= 1:
-            I0 = Bit()
+            I0 = Wire(Bit)
             wire(I0, lut.I[0])
         if k >= 2:
-            I1 = Bit()
+            I1 = Wire(Bit)
             wire(I1, lut.I[1])
     else:
         lut = LUT(lutexpr, k)
         if k >= 1:
-            I0 = Bit()
+            I0 = Wire(Bit)
             wire(I0, lut.I0)
             args += ['I0', I0]
         if k >= 2:
-            I1 = Bit()
+            I1 = Wire(Bit)
             wire(I1, lut.I1)
             args += ['I1', I1]
         if k >= 3:
@@ -57,7 +57,7 @@ def halfcarry(k, lutexpr, andexpr, use_rom):
     elif andexpr == ONE:
         DI = 1
 
-    CIN = Bit()
+    CIN = Wire(Bit)
 
     mux = MUXCY()
     wire(lut.O, mux.S)

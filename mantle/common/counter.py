@@ -168,8 +168,8 @@ def DefineCeilFloorUpDownCounter(m, has_ce=False, has_reset=False):
         @classmethod
         def definition(ceilFloorUpDownCounter):
             up_down_counter = UpDownCounter(ceilFloorUpDownCounter.num_bits, False, has_ce, has_reset)
-            at_max = Decode(m - 1, up_down_counter.O.N)(up_down_counter.O)
-            at_min = Decode(0, up_down_counter.O.N)(up_down_counter.O)
+            at_max = Decode(m - 1, len(up_down_counter.O))(up_down_counter.O)
+            at_min = Decode(0, len(up_down_counter.O))(up_down_counter.O)
 
             # only increase counter if input says to increase and not at max
             should_increase = ~at_max & ceilFloorUpDownCounter.U & ~ceilFloorUpDownCounter.D

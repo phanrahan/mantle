@@ -67,8 +67,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
 
 def Register(n, init=0, has_ce=False, has_reset=False, has_async_reset=False,
              has_async_resetn=False, _type = m.Bits, **kwargs):
-    return DefineRegister(n, init, has_ce, has_reset, has_async_reset,
-                          has_async_resetn=has_async_resetn, _type=_type)(**kwargs)
+    return DefineRegister(n, init, has_ce, has_reset, has_async_reset, has_async_resetn=has_async_resetn, _type=_type)(**kwargs)
 
 
 def register(I, ce=None, reset=None, async_reset=None, **kwargs):

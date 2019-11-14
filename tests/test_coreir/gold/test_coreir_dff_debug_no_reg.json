@@ -1,0 +1,58 @@
+{"top":"global.DFF_init0_has_ceFalse_has_resetTrue_has_async_resetFalse",
+"namespaces":{
+  "global":{
+    "modules":{
+      "DFF_init0_has_ceFalse_has_resetTrue_has_async_resetFalse":{
+        "type":["Record",[
+          ["I","BitIn"],
+          ["O","Bit"],
+          ["CLK",["Named","coreir.clkIn"]],
+          ["RESET","BitIn"]
+        ]],
+        "instances":{
+          "Mux2xNone_inst0":{
+            "modref":"global.Mux2xNone"
+          },
+          "bit_const_0_None":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "value":{
+            "genref":"coreir.reg",
+            "genargs":{"width":["Int",1]},
+            "modargs":{"clk_posedge":["Bool",true], "init":[["BitVector",1],"1'h0"]}
+          }
+        },
+        "connections":[
+          ["self.I","Mux2xNone_inst0.I0"],
+          ["bit_const_0_None.out","Mux2xNone_inst0.I1"],
+          ["value.in.0","Mux2xNone_inst0.O"],
+          ["self.RESET","Mux2xNone_inst0.S"],
+          ["value.clk","self.CLK"],
+          ["value.out.0","self.O"]
+        ]
+      },
+      "Mux2xNone":{
+        "type":["Record",[
+          ["I0","BitIn"],
+          ["I1","BitIn"],
+          ["S","BitIn"],
+          ["O","Bit"]
+        ]],
+        "instances":{
+          "mux":{
+            "genref":"commonlib.muxn",
+            "genargs":{"N":["Int",2], "width":["Int",1]}
+          }
+        },
+        "connections":[
+          ["self.I0","mux.in.data.0.0"],
+          ["self.I1","mux.in.data.1.0"],
+          ["self.S","mux.in.sel.0"],
+          ["self.O","mux.out.0"]
+        ]
+      }
+    }
+  }
+}
+}

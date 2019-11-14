@@ -129,9 +129,9 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False, has_
     circ = DefineCircuit("DFF_init{}_has_ce{}_has_reset{}_has_async_reset{}".format(
         init, has_ce, has_reset, has_async_reset, has_async_resetn),
         *IO)
-    reg = Reg()
-    wiredefaultclock(circ, reg)
-    wireclock(circ, reg)
+    value = Reg()
+    wiredefaultclock(circ, value)
+    wireclock(circ, value)
     I = circ.I
     if has_reset and (has_async_reset or has_async_resetn):
         raise ValueError("Cannot have synchronous and asynchronous reset")
@@ -140,9 +140,9 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False, has_
     if has_reset:
         I = Mux()(circ.I, bit(init), circ.RESET)
     if has_ce:
-        I = Mux()(reg.O[0], I, circ.CE)
-    wire(I, reg.I[0])
-    wire(reg.O[0], circ.O)
+        I = Mux()(value.O[0], I, circ.CE)
+    wire(I, value.I[0])
+    wire(value.O[0], circ.O)
     EndDefine()
     return circ
 

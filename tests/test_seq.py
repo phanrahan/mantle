@@ -1,4 +1,5 @@
 import magma as m
+from magma.testing import check_files_equal
 
 def compile_and_check(output_file, circuit_definition, target):
     m.compile(f"build/{output_file}", circuit_definition, output=target)
@@ -42,7 +43,7 @@ def test_bug(target):
             self.reg: Reg = Reg()
 
         def __call__(self, in_ : Data, sel : m.Bit) -> Data:
-            r = self.reg(in_, m.Bit(1))
+            r = self.reg(in_, m.Bit(0))
             if sel:
                 return r
             else:

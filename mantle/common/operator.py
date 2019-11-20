@@ -358,9 +358,6 @@ def mux(I, S, **kwargs):
         T = I[0].type_
     else:
         T = type(I[0])
-    #A really bad hack to get single bit muxes to work
-    if T is m.Out(m.Digital):
-        T = None
     # Support using Bits(1) for select on 2 elements
     if len(I) == 2 and isinstance(S, m.Array) and \
             issubclass(S.T, m.Bit) and len(S) == 1:

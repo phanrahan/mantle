@@ -128,7 +128,7 @@ def DefineMux(height=2, width=1, T=None):
     """
 
     assert height in [2, 4, 8, 16]
-    if width is None and (T is None or isinstance(T, m.BitKind)):
+    if width is None and (T is None or issubclass(T, m.Digital)):
         if height == 2:
             return Mux2
         elif height == 4:

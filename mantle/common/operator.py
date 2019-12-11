@@ -12,9 +12,9 @@ __all__ = []
 
 
 def get_length(value):
-    if isinstance(value, m._BitType):
+    if isinstance(value, m.Digital):
         return None
-    elif isinstance(value, m.ArrayType):
+    elif isinstance(value, m.Array):
         return len(value)
     elif isinstance(value, int):
         return value.bit_length()
@@ -73,9 +73,9 @@ def preserve_type(fn):
     def wrapper(*args, **kwargs):
         retval = fn(*args, **kwargs)
         T = type(args[0])
-        if isinstance(T, m.UIntKind):
+        if issubclass(T, m.UInt):
             return m.uint(retval)
-        elif isinstance(T, m.SIntKind):
+        elif issubclass(T, m.SInt):
             return m.sint(retval)
         return retval
     return wrapper
@@ -195,22 +195,6 @@ def ite(self, a, b):
     return ite(self, a, b)
 
 
-bitwise_ops = [
-    ("__and__", and_),
-    ("__or__", or_),
-    ("__xor__", xor),
-    ("__invert__", invert),
-    ("__lshift__", lsl),
-    ("__rshift__", lsr),
-    ("ite", ite),
-]
-
-for method, op in bitwise_ops:
-    if op not in (lsl, lsr):
-        setattr(m.BitType, method, op)
-    setattr(m.BitsType, method, op)
-
-
 def adc(self, other, carry):
     assert type(self) == type(other)
     T = type(self)
@@ -297,31 +281,6 @@ def ne(width, I0, I1, **kwargs):
     return NE(width, **kwargs)(I0, I1)
 
 
-relational_ops = [
-    ("__lt__", lt),
-    ("__le__", le),
-    ("__gt__", gt),
-    ("__ge__", ge),
-]
-
-for method, op in arithmetic_ops + relational_ops:
-    setattr(m.SIntType, method, op)
-    setattr(m.UIntType, method, op)
-    setattr(m.BFloat, method, op)
-
-m.SIntType.__truediv__ = sdiv
-m.UIntType.__truediv__ = udiv
-
-m.SIntType.__mod__ = smod
-m.UIntType.__mod__ = umod
-
-m.SIntType.__rshift__ = asr
-
-for type_ in (m._BitType, m.ArrayType):
-    setattr(type_, "__eq__", eq)
-    setattr(type_, "__ne__", ne)
-
-
 @export
 @preserve_type
 def mux(I, S, **kwargs):
@@ -331,18 +290,18 @@ def mux(I, S, **kwargs):
         return I[seq2int(S.bits())]
     T = type(I[0])
     # Support using Bits(1) for select on 2 elements
-    if len(I) == 2 and isinstance(S, m.ArrayType) and \
-            isinstance(S.T, m.BitKind) and len(S) == 1:
+    if len(I) == 2 and isinstance(S, m.Array) and \
+            issubclass(S.T, m.Digital) and len(S) == 1:
         S = S[0]
     return Mux(len(I), T=T, **kwargs)(*I, S)
 
 
-orig_get_item = m.ArrayType.__getitem__
+orig_get_item = m.Array.__getitem__
 
 
 def dynamic_mux_select(self, S):
     if isinstance(S, m.Type):
-        if isinstance(self.T, m._BitKind):
+        if issubclass(self.T, m.Digital):
             length = None
         else:
             length = len(self.T)
@@ -353,7 +312,7 @@ def dynamic_mux_select(self, S):
                 raise NotImplementedError()
             orig_height = height
             height = 2 ** m.bitutils.clog2(height)
-            if not isinstance(inputs[0], m._BitType):
+            if not isinstance(inputs[0], m.Digital):
                 raise NotImplementedError(type(inputs[0]))
             inputs.extend([m.bit(0) for _ in range(height - orig_height)])
 
@@ -361,4 +320,4 @@ def dynamic_mux_select(self, S):
     return orig_get_item(self, S)
 
 
-setattr(m.ArrayType, "__getitem__", dynamic_mux_select)
+setattr(m.Array, "__getitem__", dynamic_mux_select)

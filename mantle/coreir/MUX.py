@@ -105,8 +105,7 @@ def DefineMux(height=2, width=None, T=None):
                 if T is None and width is None or issubclass(T, m.Digital):
                     mux = _declare_muxn(height, 1)()
                 else:
-                    mux = _declare_muxn(height, width if T is None else
-                                        len(T))()
+                    mux = _declare_muxn(height, width if T is None else len(T))()
                 for i in range(height):
                     if T is None and width is None or issubclass(T, m.Digital):
                         m.wire(getattr(interface, f"I{i}"), mux.I.data[i][0])

@@ -10,7 +10,7 @@ endmodule
 
 module test (input CLK, input [0:0] In0, output [0:0] Out0, input clk);
 wire [0:0] reg_P_inst0_out;
-coreir_reg #(.clk_posedge(1), .init(1'h0), .width(1)) reg_P_inst0(.clk(clk), .in(In0), .out(reg_P_inst0_out));
+coreir_reg #(.clk_posedge(1'b1), .init(1'h0), .width(1)) reg_P_inst0(.clk(clk), .in(In0), .out(reg_P_inst0_out));
 assign Out0 = reg_P_inst0_out;
 endmodule
 

@@ -40,7 +40,7 @@ def com(Test, name):
                                  "-verilog.v")
         # Test inline code path
         compile(build + "-verilog-inline", Test, output="coreir-verilog",
-                opts={"inline": True})
+                inline=True)
         assert check_files_equal(__file__, build + "-verilog-inline.v", gold +
                                  "-verilog-inline.v")
 

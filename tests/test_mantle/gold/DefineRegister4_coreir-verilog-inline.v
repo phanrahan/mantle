@@ -9,8 +9,6 @@ module coreir_reg #(parameter width = 1, parameter clk_posedge = 1, parameter in
 endmodule
 
 module reg_P_wrapped (input CLK, input [3:0] I, output [3:0] O);
-wire [3:0] reg_P_inst0_out;
-coreir_reg #(.clk_posedge(1'b1), .init(4'h0), .width(4)) reg_P_inst0(.clk(CLK), .in(I), .out(reg_P_inst0_out));
-assign O = reg_P_inst0_out;
+coreir_reg #(.clk_posedge(1'b1), .init(4'h0), .width(4)) reg_P_inst0(.clk(CLK), .in(I), .out(O));
 endmodule
 

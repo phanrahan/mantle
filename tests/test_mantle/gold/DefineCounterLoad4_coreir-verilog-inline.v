@@ -12,28 +12,12 @@ module coreir_mux #(parameter width = 1) (input [width-1:0] in0, input [width-1:
   assign out = sel ? in1 : in0;
 endmodule
 
-module coreir_const #(parameter width = 1, parameter value = 1) (output [width-1:0] out);
-  assign out = value;
-endmodule
-
-module coreir_add #(parameter width = 1) (input [width-1:0] in0, input [width-1:0] in1, output [width-1:0] out);
-  assign out = in0 + in1;
-endmodule
-
-module corebit_const #(parameter value = 1) (output out);
-  assign out = value;
-endmodule
-
 module commonlib_muxn__N2__width4 (input [3:0] in_data_0, input [3:0] in_data_1, input [0:0] in_sel, output [3:0] out);
-wire [3:0] _join_out;
-coreir_mux #(.width(4)) _join(.in0(in_data_0), .in1(in_data_1), .out(_join_out), .sel(in_sel[0]));
-assign out = _join_out;
+coreir_mux #(.width(4)) _join(.in0(in_data_0), .in1(in_data_1), .out(out), .sel(in_sel[0]));
 endmodule
 
 module Mux2x4 (input [3:0] I0, input [3:0] I1, output [3:0] O, input S);
-wire [3:0] coreir_commonlib_mux2x4_inst0_out;
-commonlib_muxn__N2__width4 coreir_commonlib_mux2x4_inst0(.in_data_0(I0), .in_data_1(I1), .in_sel(S), .out(coreir_commonlib_mux2x4_inst0_out));
-assign O = coreir_commonlib_mux2x4_inst0_out;
+commonlib_muxn__N2__width4 coreir_commonlib_mux2x4_inst0(.in_data_0(I0), .in_data_1(I1), .in_sel(S), .out(O));
 endmodule
 
 module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (input CLK, input I, output O);
@@ -55,25 +39,17 @@ assign O = {DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O,DF
 endmodule
 
 module Add4_cout (output COUT, input [3:0] I0, input [3:0] I1, output [3:0] O);
-wire bit_const_0_None_out;
 wire [4:0] coreir_add5_inst0_out;
-corebit_const #(.value(1'b0)) bit_const_0_None(.out(bit_const_0_None_out));
-coreir_add #(.width(5)) coreir_add5_inst0(.in0({bit_const_0_None_out,I0[3],I0[2],I0[1],I0[0]}), .in1({bit_const_0_None_out,I1[3],I1[2],I1[1],I1[0]}), .out(coreir_add5_inst0_out));
+assign coreir_add5_inst0_out = ({1'b0,I0[3],I0[2],I0[1],I0[0]}) + ({1'b0,I1[3],I1[2],I1[1],I1[0]});
 assign COUT = coreir_add5_inst0_out[4];
 assign O = {coreir_add5_inst0_out[3],coreir_add5_inst0_out[2],coreir_add5_inst0_out[1],coreir_add5_inst0_out[0]};
 endmodule
 
 module CounterLoad4_COUT (input CLK, output COUT, input [3:0] DATA, input LOAD, output [3:0] O);
-wire Add4_cout_inst0_COUT;
 wire [3:0] Add4_cout_inst0_O;
 wire [3:0] Mux2x4_inst0_O;
-wire [3:0] Register4_inst0_O;
-wire [3:0] const_1_4_out;
-Add4_cout Add4_cout_inst0(.COUT(Add4_cout_inst0_COUT), .I0(Register4_inst0_O), .I1(const_1_4_out), .O(Add4_cout_inst0_O));
+Add4_cout Add4_cout_inst0(.COUT(COUT), .I0(O), .I1(4'h1), .O(Add4_cout_inst0_O));
 Mux2x4 Mux2x4_inst0(.I0(Add4_cout_inst0_O), .I1(DATA), .O(Mux2x4_inst0_O), .S(LOAD));
-Register4 Register4_inst0(.CLK(CLK), .I(Mux2x4_inst0_O), .O(Register4_inst0_O));
-coreir_const #(.value(4'h1), .width(4)) const_1_4(.out(const_1_4_out));
-assign COUT = Add4_cout_inst0_COUT;
-assign O = Register4_inst0_O;
+Register4 Register4_inst0(.CLK(CLK), .I(Mux2x4_inst0_O), .O(O));
 endmodule
 

@@ -3,9 +3,7 @@ module coreir_orr #(parameter width = 1) (input [width-1:0] in, output out);
 endmodule
 
 module Or4xNone (input I0, input I1, input I2, input I3, output O);
-wire orr_inst0_out;
-coreir_orr #(.width(4)) orr_inst0(.in({I3,I2,I1,I0}), .out(orr_inst0_out));
-assign O = orr_inst0_out;
+coreir_orr #(.width(4)) orr_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module Encoder8 (input [7:0] I, output [2:0] O);

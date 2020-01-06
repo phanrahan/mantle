@@ -3,99 +3,67 @@ module lutN #(parameter N = 1, parameter init = 1) (input [N-1:0] in, output out
 endmodule
 
 module LUT4_8192 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h2000), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h2000), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_8 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0008), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0008), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_64 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0040), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0040), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_512 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0200), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0200), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_4096 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h1000), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h1000), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_4 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0004), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0004), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_32768 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h8000), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h8000), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_32 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0020), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0020), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_256 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0100), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0100), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_2048 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0800), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0800), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_2 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0002), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0002), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_16384 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h4000), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h4000), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_16 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0010), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0010), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_128 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0080), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0080), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_1024 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0400), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0400), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module LUT4_1 (input I0, input I1, input I2, input I3, output O);
-wire coreir_lut4_inst0_out;
-lutN #(.init(16'h0001), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(coreir_lut4_inst0_out));
-assign O = coreir_lut4_inst0_out;
+lutN #(.init(16'h0001), .N(4)) coreir_lut4_inst0(.in({I3,I2,I1,I0}), .out(O));
 endmodule
 
 module Decoder4 (input [3:0] I, output [15:0] O);

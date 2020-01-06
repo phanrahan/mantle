@@ -3,27 +3,19 @@ module lutN #(parameter N = 1, parameter init = 1) (input [N-1:0] in, output out
 endmodule
 
 module LUT2_8 (input I0, input I1, output O);
-wire coreir_lut2_inst0_out;
-lutN #(.init(4'h8), .N(2)) coreir_lut2_inst0(.in({I1,I0}), .out(coreir_lut2_inst0_out));
-assign O = coreir_lut2_inst0_out;
+lutN #(.init(4'h8), .N(2)) coreir_lut2_inst0(.in({I1,I0}), .out(O));
 endmodule
 
 module LUT2_4 (input I0, input I1, output O);
-wire coreir_lut2_inst0_out;
-lutN #(.init(4'h4), .N(2)) coreir_lut2_inst0(.in({I1,I0}), .out(coreir_lut2_inst0_out));
-assign O = coreir_lut2_inst0_out;
+lutN #(.init(4'h4), .N(2)) coreir_lut2_inst0(.in({I1,I0}), .out(O));
 endmodule
 
 module LUT2_2 (input I0, input I1, output O);
-wire coreir_lut2_inst0_out;
-lutN #(.init(4'h2), .N(2)) coreir_lut2_inst0(.in({I1,I0}), .out(coreir_lut2_inst0_out));
-assign O = coreir_lut2_inst0_out;
+lutN #(.init(4'h2), .N(2)) coreir_lut2_inst0(.in({I1,I0}), .out(O));
 endmodule
 
 module LUT2_1 (input I0, input I1, output O);
-wire coreir_lut2_inst0_out;
-lutN #(.init(4'h1), .N(2)) coreir_lut2_inst0(.in({I1,I0}), .out(coreir_lut2_inst0_out));
-assign O = coreir_lut2_inst0_out;
+lutN #(.init(4'h1), .N(2)) coreir_lut2_inst0(.in({I1,I0}), .out(O));
 endmodule
 
 module Decoder2 (input [1:0] I, output [3:0] O);

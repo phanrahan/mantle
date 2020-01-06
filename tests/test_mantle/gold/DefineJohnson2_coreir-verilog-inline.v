@@ -8,10 +8,6 @@ module coreir_reg #(parameter width = 1, parameter clk_posedge = 1, parameter in
   assign out = outReg;
 endmodule
 
-module corebit_not (input in, output out);
-  assign out = ~in;
-endmodule
-
 module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (input CLK, input I, output O);
 wire [0:0] reg_P_inst0_out;
 coreir_reg #(.clk_posedge(1'b1), .init(1'h0), .width(1)) reg_P_inst0(.clk(CLK), .in(I), .out(reg_P_inst0_out));

@@ -1,1029 +1,1025 @@
-module coreir_eq #(parameter width = 1) (input [width-1:0] in0, input [width-1:0] in1, output out);
-  assign out = in0 == in1;
-endmodule
-
 module Decode998 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h63), .out(O));
+assign O = I == 8'h63;
 endmodule
 
 module Decode988 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h62), .out(O));
+assign O = I == 8'h62;
 endmodule
 
 module Decode98 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h09), .out(O));
+assign O = I == 8'h09;
 endmodule
 
 module Decode978 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h61), .out(O));
+assign O = I == 8'h61;
 endmodule
 
 module Decode968 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h60), .out(O));
+assign O = I == 8'h60;
 endmodule
 
 module Decode958 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h5f), .out(O));
+assign O = I == 8'h5f;
 endmodule
 
 module Decode948 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h5e), .out(O));
+assign O = I == 8'h5e;
 endmodule
 
 module Decode938 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h5d), .out(O));
+assign O = I == 8'h5d;
 endmodule
 
 module Decode928 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h5c), .out(O));
+assign O = I == 8'h5c;
 endmodule
 
 module Decode918 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h5b), .out(O));
+assign O = I == 8'h5b;
 endmodule
 
 module Decode908 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h5a), .out(O));
+assign O = I == 8'h5a;
 endmodule
 
 module Decode898 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h59), .out(O));
+assign O = I == 8'h59;
 endmodule
 
 module Decode888 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h58), .out(O));
+assign O = I == 8'h58;
 endmodule
 
 module Decode88 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h08), .out(O));
+assign O = I == 8'h08;
 endmodule
 
 module Decode878 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h57), .out(O));
+assign O = I == 8'h57;
 endmodule
 
 module Decode868 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h56), .out(O));
+assign O = I == 8'h56;
 endmodule
 
 module Decode858 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h55), .out(O));
+assign O = I == 8'h55;
 endmodule
 
 module Decode848 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h54), .out(O));
+assign O = I == 8'h54;
 endmodule
 
 module Decode838 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h53), .out(O));
+assign O = I == 8'h53;
 endmodule
 
 module Decode828 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h52), .out(O));
+assign O = I == 8'h52;
 endmodule
 
 module Decode818 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h51), .out(O));
+assign O = I == 8'h51;
 endmodule
 
 module Decode808 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h50), .out(O));
+assign O = I == 8'h50;
 endmodule
 
 module Decode798 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h4f), .out(O));
+assign O = I == 8'h4f;
 endmodule
 
 module Decode788 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h4e), .out(O));
+assign O = I == 8'h4e;
 endmodule
 
 module Decode78 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h07), .out(O));
+assign O = I == 8'h07;
 endmodule
 
 module Decode778 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h4d), .out(O));
+assign O = I == 8'h4d;
 endmodule
 
 module Decode768 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h4c), .out(O));
+assign O = I == 8'h4c;
 endmodule
 
 module Decode758 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h4b), .out(O));
+assign O = I == 8'h4b;
 endmodule
 
 module Decode748 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h4a), .out(O));
+assign O = I == 8'h4a;
 endmodule
 
 module Decode738 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h49), .out(O));
+assign O = I == 8'h49;
 endmodule
 
 module Decode728 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h48), .out(O));
+assign O = I == 8'h48;
 endmodule
 
 module Decode718 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h47), .out(O));
+assign O = I == 8'h47;
 endmodule
 
 module Decode708 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h46), .out(O));
+assign O = I == 8'h46;
 endmodule
 
 module Decode698 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h45), .out(O));
+assign O = I == 8'h45;
 endmodule
 
 module Decode688 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h44), .out(O));
+assign O = I == 8'h44;
 endmodule
 
 module Decode68 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h06), .out(O));
+assign O = I == 8'h06;
 endmodule
 
 module Decode678 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h43), .out(O));
+assign O = I == 8'h43;
 endmodule
 
 module Decode668 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h42), .out(O));
+assign O = I == 8'h42;
 endmodule
 
 module Decode658 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h41), .out(O));
+assign O = I == 8'h41;
 endmodule
 
 module Decode648 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h40), .out(O));
+assign O = I == 8'h40;
 endmodule
 
 module Decode638 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h3f), .out(O));
+assign O = I == 8'h3f;
 endmodule
 
 module Decode628 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h3e), .out(O));
+assign O = I == 8'h3e;
 endmodule
 
 module Decode618 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h3d), .out(O));
+assign O = I == 8'h3d;
 endmodule
 
 module Decode608 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h3c), .out(O));
+assign O = I == 8'h3c;
 endmodule
 
 module Decode598 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h3b), .out(O));
+assign O = I == 8'h3b;
 endmodule
 
 module Decode588 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h3a), .out(O));
+assign O = I == 8'h3a;
 endmodule
 
 module Decode58 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h05), .out(O));
+assign O = I == 8'h05;
 endmodule
 
 module Decode578 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h39), .out(O));
+assign O = I == 8'h39;
 endmodule
 
 module Decode568 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h38), .out(O));
+assign O = I == 8'h38;
 endmodule
 
 module Decode558 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h37), .out(O));
+assign O = I == 8'h37;
 endmodule
 
 module Decode548 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h36), .out(O));
+assign O = I == 8'h36;
 endmodule
 
 module Decode538 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h35), .out(O));
+assign O = I == 8'h35;
 endmodule
 
 module Decode528 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h34), .out(O));
+assign O = I == 8'h34;
 endmodule
 
 module Decode518 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h33), .out(O));
+assign O = I == 8'h33;
 endmodule
 
 module Decode508 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h32), .out(O));
+assign O = I == 8'h32;
 endmodule
 
 module Decode498 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h31), .out(O));
+assign O = I == 8'h31;
 endmodule
 
 module Decode488 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h30), .out(O));
+assign O = I == 8'h30;
 endmodule
 
 module Decode48 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h04), .out(O));
+assign O = I == 8'h04;
 endmodule
 
 module Decode478 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h2f), .out(O));
+assign O = I == 8'h2f;
 endmodule
 
 module Decode468 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h2e), .out(O));
+assign O = I == 8'h2e;
 endmodule
 
 module Decode458 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h2d), .out(O));
+assign O = I == 8'h2d;
 endmodule
 
 module Decode448 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h2c), .out(O));
+assign O = I == 8'h2c;
 endmodule
 
 module Decode438 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h2b), .out(O));
+assign O = I == 8'h2b;
 endmodule
 
 module Decode428 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h2a), .out(O));
+assign O = I == 8'h2a;
 endmodule
 
 module Decode418 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h29), .out(O));
+assign O = I == 8'h29;
 endmodule
 
 module Decode408 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h28), .out(O));
+assign O = I == 8'h28;
 endmodule
 
 module Decode398 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h27), .out(O));
+assign O = I == 8'h27;
 endmodule
 
 module Decode388 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h26), .out(O));
+assign O = I == 8'h26;
 endmodule
 
 module Decode38 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h03), .out(O));
+assign O = I == 8'h03;
 endmodule
 
 module Decode378 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h25), .out(O));
+assign O = I == 8'h25;
 endmodule
 
 module Decode368 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h24), .out(O));
+assign O = I == 8'h24;
 endmodule
 
 module Decode358 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h23), .out(O));
+assign O = I == 8'h23;
 endmodule
 
 module Decode348 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h22), .out(O));
+assign O = I == 8'h22;
 endmodule
 
 module Decode338 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h21), .out(O));
+assign O = I == 8'h21;
 endmodule
 
 module Decode328 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h20), .out(O));
+assign O = I == 8'h20;
 endmodule
 
 module Decode318 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h1f), .out(O));
+assign O = I == 8'h1f;
 endmodule
 
 module Decode308 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h1e), .out(O));
+assign O = I == 8'h1e;
 endmodule
 
 module Decode298 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h1d), .out(O));
+assign O = I == 8'h1d;
 endmodule
 
 module Decode288 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h1c), .out(O));
+assign O = I == 8'h1c;
 endmodule
 
 module Decode28 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h02), .out(O));
+assign O = I == 8'h02;
 endmodule
 
 module Decode278 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h1b), .out(O));
+assign O = I == 8'h1b;
 endmodule
 
 module Decode268 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h1a), .out(O));
+assign O = I == 8'h1a;
 endmodule
 
 module Decode258 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h19), .out(O));
+assign O = I == 8'h19;
 endmodule
 
 module Decode2558 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hff), .out(O));
+assign O = I == 8'hff;
 endmodule
 
 module Decode2548 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hfe), .out(O));
+assign O = I == 8'hfe;
 endmodule
 
 module Decode2538 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hfd), .out(O));
+assign O = I == 8'hfd;
 endmodule
 
 module Decode2528 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hfc), .out(O));
+assign O = I == 8'hfc;
 endmodule
 
 module Decode2518 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hfb), .out(O));
+assign O = I == 8'hfb;
 endmodule
 
 module Decode2508 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hfa), .out(O));
+assign O = I == 8'hfa;
 endmodule
 
 module Decode2498 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf9), .out(O));
+assign O = I == 8'hf9;
 endmodule
 
 module Decode2488 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf8), .out(O));
+assign O = I == 8'hf8;
 endmodule
 
 module Decode248 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h18), .out(O));
+assign O = I == 8'h18;
 endmodule
 
 module Decode2478 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf7), .out(O));
+assign O = I == 8'hf7;
 endmodule
 
 module Decode2468 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf6), .out(O));
+assign O = I == 8'hf6;
 endmodule
 
 module Decode2458 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf5), .out(O));
+assign O = I == 8'hf5;
 endmodule
 
 module Decode2448 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf4), .out(O));
+assign O = I == 8'hf4;
 endmodule
 
 module Decode2438 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf3), .out(O));
+assign O = I == 8'hf3;
 endmodule
 
 module Decode2428 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf2), .out(O));
+assign O = I == 8'hf2;
 endmodule
 
 module Decode2418 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf1), .out(O));
+assign O = I == 8'hf1;
 endmodule
 
 module Decode2408 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hf0), .out(O));
+assign O = I == 8'hf0;
 endmodule
 
 module Decode2398 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hef), .out(O));
+assign O = I == 8'hef;
 endmodule
 
 module Decode2388 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hee), .out(O));
+assign O = I == 8'hee;
 endmodule
 
 module Decode238 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h17), .out(O));
+assign O = I == 8'h17;
 endmodule
 
 module Decode2378 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hed), .out(O));
+assign O = I == 8'hed;
 endmodule
 
 module Decode2368 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hec), .out(O));
+assign O = I == 8'hec;
 endmodule
 
 module Decode2358 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'heb), .out(O));
+assign O = I == 8'heb;
 endmodule
 
 module Decode2348 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hea), .out(O));
+assign O = I == 8'hea;
 endmodule
 
 module Decode2338 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he9), .out(O));
+assign O = I == 8'he9;
 endmodule
 
 module Decode2328 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he8), .out(O));
+assign O = I == 8'he8;
 endmodule
 
 module Decode2318 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he7), .out(O));
+assign O = I == 8'he7;
 endmodule
 
 module Decode2308 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he6), .out(O));
+assign O = I == 8'he6;
 endmodule
 
 module Decode2298 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he5), .out(O));
+assign O = I == 8'he5;
 endmodule
 
 module Decode2288 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he4), .out(O));
+assign O = I == 8'he4;
 endmodule
 
 module Decode228 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h16), .out(O));
+assign O = I == 8'h16;
 endmodule
 
 module Decode2278 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he3), .out(O));
+assign O = I == 8'he3;
 endmodule
 
 module Decode2268 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he2), .out(O));
+assign O = I == 8'he2;
 endmodule
 
 module Decode2258 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he1), .out(O));
+assign O = I == 8'he1;
 endmodule
 
 module Decode2248 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'he0), .out(O));
+assign O = I == 8'he0;
 endmodule
 
 module Decode2238 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hdf), .out(O));
+assign O = I == 8'hdf;
 endmodule
 
 module Decode2228 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hde), .out(O));
+assign O = I == 8'hde;
 endmodule
 
 module Decode2218 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hdd), .out(O));
+assign O = I == 8'hdd;
 endmodule
 
 module Decode2208 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hdc), .out(O));
+assign O = I == 8'hdc;
 endmodule
 
 module Decode2198 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hdb), .out(O));
+assign O = I == 8'hdb;
 endmodule
 
 module Decode2188 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hda), .out(O));
+assign O = I == 8'hda;
 endmodule
 
 module Decode218 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h15), .out(O));
+assign O = I == 8'h15;
 endmodule
 
 module Decode2178 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd9), .out(O));
+assign O = I == 8'hd9;
 endmodule
 
 module Decode2168 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd8), .out(O));
+assign O = I == 8'hd8;
 endmodule
 
 module Decode2158 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd7), .out(O));
+assign O = I == 8'hd7;
 endmodule
 
 module Decode2148 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd6), .out(O));
+assign O = I == 8'hd6;
 endmodule
 
 module Decode2138 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd5), .out(O));
+assign O = I == 8'hd5;
 endmodule
 
 module Decode2128 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd4), .out(O));
+assign O = I == 8'hd4;
 endmodule
 
 module Decode2118 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd3), .out(O));
+assign O = I == 8'hd3;
 endmodule
 
 module Decode2108 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd2), .out(O));
+assign O = I == 8'hd2;
 endmodule
 
 module Decode2098 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd1), .out(O));
+assign O = I == 8'hd1;
 endmodule
 
 module Decode2088 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hd0), .out(O));
+assign O = I == 8'hd0;
 endmodule
 
 module Decode208 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h14), .out(O));
+assign O = I == 8'h14;
 endmodule
 
 module Decode2078 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hcf), .out(O));
+assign O = I == 8'hcf;
 endmodule
 
 module Decode2068 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hce), .out(O));
+assign O = I == 8'hce;
 endmodule
 
 module Decode2058 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hcd), .out(O));
+assign O = I == 8'hcd;
 endmodule
 
 module Decode2048 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hcc), .out(O));
+assign O = I == 8'hcc;
 endmodule
 
 module Decode2038 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hcb), .out(O));
+assign O = I == 8'hcb;
 endmodule
 
 module Decode2028 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hca), .out(O));
+assign O = I == 8'hca;
 endmodule
 
 module Decode2018 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc9), .out(O));
+assign O = I == 8'hc9;
 endmodule
 
 module Decode2008 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc8), .out(O));
+assign O = I == 8'hc8;
 endmodule
 
 module Decode1998 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc7), .out(O));
+assign O = I == 8'hc7;
 endmodule
 
 module Decode1988 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc6), .out(O));
+assign O = I == 8'hc6;
 endmodule
 
 module Decode198 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h13), .out(O));
+assign O = I == 8'h13;
 endmodule
 
 module Decode1978 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc5), .out(O));
+assign O = I == 8'hc5;
 endmodule
 
 module Decode1968 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc4), .out(O));
+assign O = I == 8'hc4;
 endmodule
 
 module Decode1958 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc3), .out(O));
+assign O = I == 8'hc3;
 endmodule
 
 module Decode1948 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc2), .out(O));
+assign O = I == 8'hc2;
 endmodule
 
 module Decode1938 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc1), .out(O));
+assign O = I == 8'hc1;
 endmodule
 
 module Decode1928 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hc0), .out(O));
+assign O = I == 8'hc0;
 endmodule
 
 module Decode1918 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hbf), .out(O));
+assign O = I == 8'hbf;
 endmodule
 
 module Decode1908 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hbe), .out(O));
+assign O = I == 8'hbe;
 endmodule
 
 module Decode1898 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hbd), .out(O));
+assign O = I == 8'hbd;
 endmodule
 
 module Decode1888 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hbc), .out(O));
+assign O = I == 8'hbc;
 endmodule
 
 module Decode188 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h12), .out(O));
+assign O = I == 8'h12;
 endmodule
 
 module Decode1878 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hbb), .out(O));
+assign O = I == 8'hbb;
 endmodule
 
 module Decode1868 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hba), .out(O));
+assign O = I == 8'hba;
 endmodule
 
 module Decode1858 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb9), .out(O));
+assign O = I == 8'hb9;
 endmodule
 
 module Decode1848 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb8), .out(O));
+assign O = I == 8'hb8;
 endmodule
 
 module Decode1838 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb7), .out(O));
+assign O = I == 8'hb7;
 endmodule
 
 module Decode1828 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb6), .out(O));
+assign O = I == 8'hb6;
 endmodule
 
 module Decode1818 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb5), .out(O));
+assign O = I == 8'hb5;
 endmodule
 
 module Decode1808 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb4), .out(O));
+assign O = I == 8'hb4;
 endmodule
 
 module Decode18 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h01), .out(O));
+assign O = I == 8'h01;
 endmodule
 
 module Decode1798 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb3), .out(O));
+assign O = I == 8'hb3;
 endmodule
 
 module Decode1788 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb2), .out(O));
+assign O = I == 8'hb2;
 endmodule
 
 module Decode178 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h11), .out(O));
+assign O = I == 8'h11;
 endmodule
 
 module Decode1778 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb1), .out(O));
+assign O = I == 8'hb1;
 endmodule
 
 module Decode1768 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hb0), .out(O));
+assign O = I == 8'hb0;
 endmodule
 
 module Decode1758 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'haf), .out(O));
+assign O = I == 8'haf;
 endmodule
 
 module Decode1748 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hae), .out(O));
+assign O = I == 8'hae;
 endmodule
 
 module Decode1738 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'had), .out(O));
+assign O = I == 8'had;
 endmodule
 
 module Decode1728 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hac), .out(O));
+assign O = I == 8'hac;
 endmodule
 
 module Decode1718 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'hab), .out(O));
+assign O = I == 8'hab;
 endmodule
 
 module Decode1708 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'haa), .out(O));
+assign O = I == 8'haa;
 endmodule
 
 module Decode1698 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha9), .out(O));
+assign O = I == 8'ha9;
 endmodule
 
 module Decode1688 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha8), .out(O));
+assign O = I == 8'ha8;
 endmodule
 
 module Decode168 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h10), .out(O));
+assign O = I == 8'h10;
 endmodule
 
 module Decode1678 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha7), .out(O));
+assign O = I == 8'ha7;
 endmodule
 
 module Decode1668 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha6), .out(O));
+assign O = I == 8'ha6;
 endmodule
 
 module Decode1658 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha5), .out(O));
+assign O = I == 8'ha5;
 endmodule
 
 module Decode1648 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha4), .out(O));
+assign O = I == 8'ha4;
 endmodule
 
 module Decode1638 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha3), .out(O));
+assign O = I == 8'ha3;
 endmodule
 
 module Decode1628 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha2), .out(O));
+assign O = I == 8'ha2;
 endmodule
 
 module Decode1618 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha1), .out(O));
+assign O = I == 8'ha1;
 endmodule
 
 module Decode1608 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'ha0), .out(O));
+assign O = I == 8'ha0;
 endmodule
 
 module Decode1598 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h9f), .out(O));
+assign O = I == 8'h9f;
 endmodule
 
 module Decode1588 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h9e), .out(O));
+assign O = I == 8'h9e;
 endmodule
 
 module Decode158 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h0f), .out(O));
+assign O = I == 8'h0f;
 endmodule
 
 module Decode1578 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h9d), .out(O));
+assign O = I == 8'h9d;
 endmodule
 
 module Decode1568 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h9c), .out(O));
+assign O = I == 8'h9c;
 endmodule
 
 module Decode1558 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h9b), .out(O));
+assign O = I == 8'h9b;
 endmodule
 
 module Decode1548 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h9a), .out(O));
+assign O = I == 8'h9a;
 endmodule
 
 module Decode1538 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h99), .out(O));
+assign O = I == 8'h99;
 endmodule
 
 module Decode1528 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h98), .out(O));
+assign O = I == 8'h98;
 endmodule
 
 module Decode1518 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h97), .out(O));
+assign O = I == 8'h97;
 endmodule
 
 module Decode1508 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h96), .out(O));
+assign O = I == 8'h96;
 endmodule
 
 module Decode1498 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h95), .out(O));
+assign O = I == 8'h95;
 endmodule
 
 module Decode1488 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h94), .out(O));
+assign O = I == 8'h94;
 endmodule
 
 module Decode148 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h0e), .out(O));
+assign O = I == 8'h0e;
 endmodule
 
 module Decode1478 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h93), .out(O));
+assign O = I == 8'h93;
 endmodule
 
 module Decode1468 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h92), .out(O));
+assign O = I == 8'h92;
 endmodule
 
 module Decode1458 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h91), .out(O));
+assign O = I == 8'h91;
 endmodule
 
 module Decode1448 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h90), .out(O));
+assign O = I == 8'h90;
 endmodule
 
 module Decode1438 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h8f), .out(O));
+assign O = I == 8'h8f;
 endmodule
 
 module Decode1428 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h8e), .out(O));
+assign O = I == 8'h8e;
 endmodule
 
 module Decode1418 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h8d), .out(O));
+assign O = I == 8'h8d;
 endmodule
 
 module Decode1408 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h8c), .out(O));
+assign O = I == 8'h8c;
 endmodule
 
 module Decode1398 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h8b), .out(O));
+assign O = I == 8'h8b;
 endmodule
 
 module Decode1388 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h8a), .out(O));
+assign O = I == 8'h8a;
 endmodule
 
 module Decode138 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h0d), .out(O));
+assign O = I == 8'h0d;
 endmodule
 
 module Decode1378 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h89), .out(O));
+assign O = I == 8'h89;
 endmodule
 
 module Decode1368 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h88), .out(O));
+assign O = I == 8'h88;
 endmodule
 
 module Decode1358 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h87), .out(O));
+assign O = I == 8'h87;
 endmodule
 
 module Decode1348 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h86), .out(O));
+assign O = I == 8'h86;
 endmodule
 
 module Decode1338 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h85), .out(O));
+assign O = I == 8'h85;
 endmodule
 
 module Decode1328 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h84), .out(O));
+assign O = I == 8'h84;
 endmodule
 
 module Decode1318 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h83), .out(O));
+assign O = I == 8'h83;
 endmodule
 
 module Decode1308 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h82), .out(O));
+assign O = I == 8'h82;
 endmodule
 
 module Decode1298 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h81), .out(O));
+assign O = I == 8'h81;
 endmodule
 
 module Decode1288 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h80), .out(O));
+assign O = I == 8'h80;
 endmodule
 
 module Decode128 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h0c), .out(O));
+assign O = I == 8'h0c;
 endmodule
 
 module Decode1278 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h7f), .out(O));
+assign O = I == 8'h7f;
 endmodule
 
 module Decode1268 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h7e), .out(O));
+assign O = I == 8'h7e;
 endmodule
 
 module Decode1258 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h7d), .out(O));
+assign O = I == 8'h7d;
 endmodule
 
 module Decode1248 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h7c), .out(O));
+assign O = I == 8'h7c;
 endmodule
 
 module Decode1238 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h7b), .out(O));
+assign O = I == 8'h7b;
 endmodule
 
 module Decode1228 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h7a), .out(O));
+assign O = I == 8'h7a;
 endmodule
 
 module Decode1218 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h79), .out(O));
+assign O = I == 8'h79;
 endmodule
 
 module Decode1208 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h78), .out(O));
+assign O = I == 8'h78;
 endmodule
 
 module Decode1198 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h77), .out(O));
+assign O = I == 8'h77;
 endmodule
 
 module Decode1188 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h76), .out(O));
+assign O = I == 8'h76;
 endmodule
 
 module Decode118 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h0b), .out(O));
+assign O = I == 8'h0b;
 endmodule
 
 module Decode1178 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h75), .out(O));
+assign O = I == 8'h75;
 endmodule
 
 module Decode1168 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h74), .out(O));
+assign O = I == 8'h74;
 endmodule
 
 module Decode1158 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h73), .out(O));
+assign O = I == 8'h73;
 endmodule
 
 module Decode1148 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h72), .out(O));
+assign O = I == 8'h72;
 endmodule
 
 module Decode1138 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h71), .out(O));
+assign O = I == 8'h71;
 endmodule
 
 module Decode1128 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h70), .out(O));
+assign O = I == 8'h70;
 endmodule
 
 module Decode1118 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h6f), .out(O));
+assign O = I == 8'h6f;
 endmodule
 
 module Decode1108 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h6e), .out(O));
+assign O = I == 8'h6e;
 endmodule
 
 module Decode1098 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h6d), .out(O));
+assign O = I == 8'h6d;
 endmodule
 
 module Decode1088 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h6c), .out(O));
+assign O = I == 8'h6c;
 endmodule
 
 module Decode108 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h0a), .out(O));
+assign O = I == 8'h0a;
 endmodule
 
 module Decode1078 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h6b), .out(O));
+assign O = I == 8'h6b;
 endmodule
 
 module Decode1068 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h6a), .out(O));
+assign O = I == 8'h6a;
 endmodule
 
 module Decode1058 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h69), .out(O));
+assign O = I == 8'h69;
 endmodule
 
 module Decode1048 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h68), .out(O));
+assign O = I == 8'h68;
 endmodule
 
 module Decode1038 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h67), .out(O));
+assign O = I == 8'h67;
 endmodule
 
 module Decode1028 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h66), .out(O));
+assign O = I == 8'h66;
 endmodule
 
 module Decode1018 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h65), .out(O));
+assign O = I == 8'h65;
 endmodule
 
 module Decode1008 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h64), .out(O));
+assign O = I == 8'h64;
 endmodule
 
 module Decode08 (input [7:0] I, output O);
-coreir_eq #(.width(8)) coreir_eq_8_inst0(.in0(I), .in1(8'h00), .out(O));
+assign O = I == 8'h00;
 endmodule
 
 module Decoder8 (input [7:0] I, output [255:0] O);

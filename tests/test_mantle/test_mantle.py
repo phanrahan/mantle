@@ -33,6 +33,11 @@ def com(Test, name):
         Test = wrap(Test)
     compile(build, Test, output=output)
     assert check_files_equal(__file__, build+suffix, gold+suffix)
+    if output == "coreir":
+        # Check verilog compile through coreir
+        compile(build + "-verilog", Test, output="coreir-verilog")
+        assert check_files_equal(__file__, build + "-verilog.v", gold +
+                                 "-verilog.v")
 
 def sim(Test, TestFun):
     if TestFun is None:

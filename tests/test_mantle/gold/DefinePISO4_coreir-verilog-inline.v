@@ -8,12 +8,8 @@ module coreir_reg #(parameter width = 1, parameter clk_posedge = 1, parameter in
   assign out = outReg;
 endmodule
 
-module coreir_mux #(parameter width = 1) (input [width-1:0] in0, input [width-1:0] in1, input sel, output [width-1:0] out);
-  assign out = sel ? in1 : in0;
-endmodule
-
 module commonlib_muxn__N2__width1 (input [0:0] in_data_0, input [0:0] in_data_1, input [0:0] in_sel, output [0:0] out);
-coreir_mux #(.width(1)) _join(.in0(in_data_0), .in1(in_data_1), .out(out), .sel(in_sel[0]));
+assign out = in_sel[0] ? in_data_1 : in_data_0;
 endmodule
 
 module Mux2xNone (input I0, input I1, output O, input S);

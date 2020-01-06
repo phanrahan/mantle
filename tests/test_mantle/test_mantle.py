@@ -38,6 +38,11 @@ def com(Test, name):
         compile(build + "-verilog", Test, output="coreir-verilog")
         assert check_files_equal(__file__, build + "-verilog.v", gold +
                                  "-verilog.v")
+        # Test inline code path
+        compile(build + "-verilog-inline", Test, output="coreir-verilog",
+                opts={"inline": True})
+        assert check_files_equal(__file__, build + "-verilog-inline.v", gold +
+                                 "-verilog-inline.v")
 
 def sim(Test, TestFun):
     if TestFun is None:

@@ -1,9 +1,5 @@
-module coreir_orr #(parameter width = 1) (input [width-1:0] in, output out);
-  assign out = |in;
-endmodule
-
 module Or1xNone (input I0, output O);
-coreir_orr #(.width(1)) orr_inst0(.in(I0), .out(O));
+assign O = | I0;
 endmodule
 
 module Encoder2 (input [1:0] I, output [0:0] O);

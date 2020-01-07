@@ -1,7 +1,3 @@
-module coreir_orr #(parameter width = 1) (input [width-1:0] in, output out);
-  assign out = |in;
-endmodule
-
 module fold_xor3None (input I0, input I1, input I2, output O);
 wire xor_inst0_out;
 corebit_xor xor_inst0(.in0(I0), .in1(I1), .out(xor_inst0_out));
@@ -9,7 +5,7 @@ corebit_xor xor_inst1(.in0(xor_inst0_out), .in1(I2), .out(O));
 endmodule
 
 module Or3xNone (input I0, input I1, input I2, output O);
-coreir_orr #(.width(3)) orr_inst0(.in({I2,I1,I0}), .out(O));
+assign O = | ({I2,I1,I0});
 endmodule
 
 module FullAdder (input CIN, output COUT, input I0, input I1, output O);

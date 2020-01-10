@@ -165,10 +165,10 @@ def DefineMux(height=2, width=1):
 def Mux(height=2, width=None, T=None, **kwargs):
     if T is not None:
         assert width is None, "Can only specify width **or** T"
-        if isinstance(T, m.BitKind):
+        if issubclass(T, m.Bit):
             width = None
-        elif isinstance(T, m.BitsKind) or \
-                isinstance(T, m.ArrayKind) and isinstance(T.T, m.BitKind):
+        elif issubclass(T, m.Bits) or \
+                issubclass(T, m.Array) and issubclass(T.T, m.Bit):
             width = len(T)
         else:
             raise NotImplementedError(type(T))

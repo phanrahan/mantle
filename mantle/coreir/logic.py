@@ -1,4 +1,5 @@
 from magma import *
+import magma as m
 from hwtypes import BitVector
 import hwtypes as ht
 from magma.compatibility import IntegerTypes
@@ -8,9 +9,9 @@ from .util import DeclareCoreirCircuit
 
 
 def get_length(value):
-    if isinstance(value, (BitType, ClockType, EnableType, ResetType)):
+    if isinstance(value, m.Digital):
         return None
-    elif isinstance(value, ArrayType):
+    elif isinstance(value, m.Array):
         return len(value)
     else:
         raise NotImplementedError("Cannot get_length of"

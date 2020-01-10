@@ -25,8 +25,8 @@ def test_coreir_mux_2x3():
 
 
 def test_coreir_mux_2xTuple():
-    A = Tuple(a=Bit, b=Bits[2])
-    B = Tuple(a=A, b=Bits[3])
+    A = Product.from_fields("anon", dict(a=Bit, b=Bits[2]))
+    B = Product.from_fields("anon", dict(a=A, b=Bits[3]))
     mux = DefineMux(2, T=B)
     print(repr(mux))
     compile("build/test_coreir_mux2xTuple", mux, output="coreir")

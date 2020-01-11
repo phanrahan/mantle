@@ -28,7 +28,7 @@ module Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_rese
 wire [0:0] enable_mux_O;
 wire [0:0] value_out;
 Mux2xOutBits1 enable_mux(.I0(value_out), .I1(I), .O(enable_mux_O), .S(CE));
-coreir_reg #(.clk_posedge(1), .init(1'h0), .width(1)) value(.clk(CLK), .in(enable_mux_O), .out(value_out));
+coreir_reg #(.clk_posedge(1'b1), .init(1'h0), .width(1)) value(.clk(CLK), .in(enable_mux_O), .out(value_out));
 assign O = value_out;
 endmodule
 

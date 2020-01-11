@@ -13,7 +13,7 @@ endmodule
 
 module test (input ASYNCRESETN, input CLK, input [0:0] In0, output [0:0] Out0, input clk);
 wire [0:0] reg_PR_inst0_out;
-coreir_reg_arst #(.arst_posedge(0), .clk_posedge(1), .init(1'h0), .width(1)) reg_PR_inst0(.arst(ASYNCRESETN), .clk(clk), .in(In0), .out(reg_PR_inst0_out));
+coreir_reg_arst #(.arst_posedge(1'b0), .clk_posedge(1'b1), .init(1'h0), .width(1)) reg_PR_inst0(.arst(ASYNCRESETN), .clk(clk), .in(In0), .out(reg_PR_inst0_out));
 assign Out0 = reg_PR_inst0_out;
 endmodule
 

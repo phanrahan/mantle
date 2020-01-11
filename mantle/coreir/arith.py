@@ -32,7 +32,7 @@ def declare_binop(name, python_op, out_type=None, signed=False):
                                   coreir_name=name,
                                   coreir_lib = "corebit")
         else:
-            if isinstance(T, m.BFloatKind):
+            if issubclass(T, m.BFloat):
                 coreir_lib = "float"
                 if T.N != 16:
                     raise NotImplementedError("Only BFloat16 supported")
@@ -60,7 +60,7 @@ def DefineCoreirAdd(width, T=m.Bits):
         I0 = BitVector[width](value_store.get_value(self.I0))
         I1 = BitVector[width](value_store.get_value(self.I1))
         value_store.set_value(self.O, I0 + I1)
-    if isinstance(T, m.BFloatKind):
+    if issubclass(T, m.BFloat):
         coreir_lib = "float"
         if T.N != 16:
             raise NotImplementedError("Only BFloat16 supported")

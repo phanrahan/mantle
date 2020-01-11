@@ -29,7 +29,6 @@ before_install:
 install:
 - pip install pytest-cov
 - pip install delegator.py
-- pip install -e git+git://github.com/leonardt/fault.git@hwtypes2#egg=fault
 - pip install -e .
 script:
 - "./scripts/run_tests.sh"

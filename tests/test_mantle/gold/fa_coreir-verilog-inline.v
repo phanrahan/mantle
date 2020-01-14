@@ -1,7 +1,5 @@
 module fold_xor3None (input I0, input I1, input I2, output O);
-wire xor_inst0_out;
-corebit_xor xor_inst0(.in0(I0), .in1(I1), .out(xor_inst0_out));
-corebit_xor xor_inst1(.in0(xor_inst0_out), .in1(I2), .out(O));
+assign O = (I0 ^ I1) ^ I2;
 endmodule
 
 module Or3xNone (input I0, input I1, input I2, output O);
@@ -9,13 +7,7 @@ assign O = | ({I2,I1,I0});
 endmodule
 
 module FullAdder (input CIN, output COUT, input I0, input I1, output O);
-wire and_inst0_out;
-wire and_inst1_out;
-wire and_inst2_out;
-Or3xNone Or3xNone_inst0(.I0(and_inst0_out), .I1(and_inst1_out), .I2(and_inst2_out), .O(COUT));
-corebit_and and_inst0(.in0(I0), .in1(I1), .out(and_inst0_out));
-corebit_and and_inst1(.in0(I1), .in1(CIN), .out(and_inst1_out));
-corebit_and and_inst2(.in0(I0), .in1(CIN), .out(and_inst2_out));
+Or3xNone Or3xNone_inst0(.I0(I0 & I1), .I1(I1 & CIN), .I2(I0 & CIN), .O(COUT));
 fold_xor3None fold_xor3None_inst0(.I0(I0), .I1(I1), .I2(CIN), .O(O));
 endmodule
 

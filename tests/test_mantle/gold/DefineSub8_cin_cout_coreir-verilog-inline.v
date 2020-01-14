@@ -6,8 +6,6 @@ assign O = {coreir_add9_inst0_out[7],coreir_add9_inst0_out[6],coreir_add9_inst0_
 endmodule
 
 module Sub8_cout_cin (input CIN, output COUT, input [7:0] I0, input [7:0] I1, output [7:0] O);
-wire not_inst0_out;
-Add8_cout_cin Add8_cout_cin_inst0(.CIN(not_inst0_out), .COUT(COUT), .I0(I0), .I1(~ I1), .O(O));
-corebit_not not_inst0(.in(CIN), .out(not_inst0_out));
+Add8_cout_cin Add8_cout_cin_inst0(.CIN(~ CIN), .COUT(COUT), .I0(I0), .I1(~ I1), .O(O));
 endmodule
 

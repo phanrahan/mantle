@@ -7,7 +7,10 @@ from hwtypes import BitVector
 import mantle.primitives
 from .logic import DefineFoldOp, get_length, Invert, Not
 from .util import DeclareCoreirCircuit, get_int_vector_type
-from magma.logging import warning
+from magma.logging import root_logger
+
+
+LOGGER = root_logger()
 
 
 def declare_binop(name, python_op, out_type=None, signed=False):
@@ -84,7 +87,7 @@ def DefineAdd(N=None, cout=False, cin=False, width=None, T=m.Bits):
             raise ValueError("Either N or width must be not None")
         N = width
     elif width is not None:
-        warning("Both N and width are not None, using N")
+        LOGGER.warning("Both N and width are not None, using N")
     has_cout = cout
     has_cin = cin
     if not has_cout and not has_cin:

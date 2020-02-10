@@ -1,11 +1,9 @@
-from magma import Circuit, In, Out, Clock, Bit, Bits, wire, bits, repeat, cache_definition
-from mantle import And
-from mantle import Mux
 from .register import Register
 from .decoder import Decoder
+from mantle import And, Mux
+from magma import Circuit, In, Out, Clock, Bit, Bits, wire, bits, repeat, cache_definition
 
-__all__  = ['DefineRAM', 'RAM']
-__all__ += ['DefineDualRAM', 'DualRAM']
+__all__ = ["DefineRAM", "DefineDualRAM"]
 
 def REGs(n, width, has_ce):
     return [Register(width, has_ce=has_ce) for i in range(n)]
@@ -66,9 +64,6 @@ def DefineRAM(height, width):
 
     return _RAM
 
-def RAM(height, width, **kwargs):
-    return DefineRAM(height, width)(**kwargs)
-
 
 def DefineDualRAM(height, width):
     n = 1 << height
@@ -94,8 +89,3 @@ def DefineDualRAM(height, width):
             wire( readport(height, width, regs, io.RADDR1), io.RDATA1 )
 
     return _DualRAM
-
-def DualRAM(height, width, **kwargs):
-    return DefineDualRAM(height, width)(**kwargs)
-
-

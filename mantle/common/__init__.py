@@ -34,5 +34,6 @@ modules = [
     "RAM",
     "ROM",
 
+    "primitives",
     "operator"
 ]

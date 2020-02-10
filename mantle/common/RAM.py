@@ -48,7 +48,7 @@ def DefineRAM(height, width):
     TDATA = Bits[ width ]
 
     class _RAM(Circuit):
-        name = f'RAM{n}x{width}'
+        name = f'RAM{height}x{width}'
         IO = ['RADDR', In(TADDR),
               'RDATA', Out(TDATA),
               'WADDR', In(TADDR),
@@ -72,7 +72,7 @@ def DefineDualRAM(height, width):
     TDATA = Bits[ width ]
 
     class _DualRAM(Circuit):
-        name = f'DualRAM{n}x{width}'
+        name = f'DualRAM{height}x{width}'
         IO = ['RADDR0', In(TADDR),
               'RDATA0', Out(TDATA),
               'RADDR1', In(TADDR),

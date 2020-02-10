@@ -12,16 +12,16 @@ def MUXs(n, width):
     return [Mux(2,width) for i in range(n)]
 
 
-def readport(height, width, regs, raddr):
-    n = 1 << height
+def readport(addr_width, width, regs, raddr):
+    n = 1 << addr_width
 
     muxs = MUXs(n-1, width)
     for i in range(n//2):
         muxs[i](regs[2*i], regs[2*i+1], raddr[0])
 
     k = 0
-    l = 1 << (height-1)
-    for i in range(height-1):
+    l = 1 << (addr_width-1)
+    for i in range(addr_width-1):
         for j in range(l//2):
             muxs[k+l+j](muxs[k+2*j], muxs[k+2*j+1], raddr[i+1])
         k += l
@@ -30,10 +30,10 @@ def readport(height, width, regs, raddr):
     return muxs[n-2]
 
 
-def writeport(height, width, regs, WADDR, I, WE):
-    n = 1 << height
+def writeport(addr_width, width, regs, WADDR, I, WE):
+    n = 1 << addr_width
 
-    decoder = Decoder(height)
+    decoder = Decoder(addr_width)
     enable = And(2,n)
     enable(decoder(WADDR), repeat(WE, n))
 
@@ -42,8 +42,8 @@ def writeport(height, width, regs, WADDR, I, WE):
 
 
 def DefineRAM(height, width):
-    n = 1 << height
-    TADDR = Bits[ height ]
+    addr_width = clog2(height)
+    TADDR = Bits[ addr_width ]
     TDATA = Bits[ width ]
 
     class _RAM(Circuit):
@@ -58,16 +58,16 @@ def DefineRAM(height, width):
 
         @classmethod
         def definition(io):
-            regs = REGs(n, width, has_ce=True)
-            writeport(height, width, regs, io.WADDR, io.WDATA, io.WE)
-            wire( readport(height, width, regs, io.RADDR), io.RDATA )
+            regs = REGs(height, width, has_ce=True)
+            writeport(addr_width, width, regs, io.WADDR, io.WDATA, io.WE)
+            wire( readport(addr_width, width, regs, io.RADDR), io.RDATA )
 
     return _RAM
 
 
 def DefineDualRAM(height, width):
-    n = 1 << height
-    TADDR = Bits[ height ]
+    addr_width = clog2(height)
+    TADDR = Bits[ addr_width ]
     TDATA = Bits[ width ]
 
     class _DualRAM(Circuit):
@@ -84,8 +84,8 @@ def DefineDualRAM(height, width):
         @classmethod
         def definition(io):
             regs = REGs(n, width, has_ce=True)
-            writeport(height, width, regs, io.WADDR, io.WDATA, io.WE)
-            wire( readport(height, width, regs, io.RADDR0), io.RDATA0 )
-            wire( readport(height, width, regs, io.RADDR1), io.RDATA1 )
+            writeport(addr_width, width, regs, io.WADDR, io.WDATA, io.WE)
+            wire( readport(addr_width, width, regs, io.RADDR0), io.RDATA0 )
+            wire( readport(addr_width, width, regs, io.RADDR1), io.RDATA1 )
 
     return _DualRAM

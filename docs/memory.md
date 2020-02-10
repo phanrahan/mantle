@@ -64,47 +64,45 @@ lut = LUTN(init, n=None) :: I0:Bit, ..., In:Bit -> O:Bit
 
 ### ROM
 
-A ROM implemented as a register file.
-
 ```
 # DefineROM :: 
-#  RADDR:In(Bits(height)), 
+#  RADDR:In(Bits(clog2(height))), 
 #  RDATA:Out(Bits(width))
 ROM = DefineROM(height, width)
 
 # ROM :: 
-#  RADDR:In(Bits(height)), 
+#  RADDR:In(Bits(clog2(height))), 
 #  RDATA:Out(Bits(width)),
 rom = ROM(height, width) 
 ```
 
 ### RAM
 
-A RAM implemented as a register file.
+1 read port, 1 write port RAM
 
 ```
 # DefineRAM :: 
-#  RADDR:In(Bits(height)), 
+#  RADDR:In(Bits(clog2(height))), 
 #  RDATA:Out(Bits(width)),
-#  WADDR:In(Bits(height)), 
+#  WADDR:In(Bits(clog2(height))), 
 #  WDATA:Out(Bits(width)),
 #  WE,In(Bit),
 #  CLK:In(Clock)
 RAM = DefineRAM(height, width)
-```
 
-```
 # RAM :: 
-#  RADDR0:In(Bits(height)), 
-#  RDATA0:Out(Bits(width)),
-#  RADDR1:In(Bits(height)), 
-#  RDATA1:Out(Bits(width)),
-#  WADDR:In(Bits(height)), 
-#  WDATA:In(Bits(width)),
+#  RADDR:In(Bits(clog2(height))), 
+#  RDATA:Out(Bits(width)),
+#  WADDR:In(Bits(clog2(height))), 
+#  WDATA:Out(Bits(width)),
 #  WE,In(Bit),
 #  CLK:In(Clock)
 ram = RAM(height, width)
 ```
+
+# DualRAM
+
+Two read port, one write port RAM
 
 ```
 # DefineDualRAM :: 
@@ -117,17 +115,17 @@ ram = RAM(height, width)
 #  WE,In(Bit),
 #  CLK:In(Clock)
 DualRAM = DefineDualRAM(height, width)
-```
 
-```
-# RAM :: 
-#  RADDR:In(Bits(height)), 
-#  RDATA:Out(Bits(width)),
+# DualRAM :: 
+#  RADDR0:In(Bits(height)), 
+#  RDATA0:Out(Bits(width)),
+#  RADDR1:In(Bits(height)), 
+#  RDATA1:Out(Bits(width)),
 #  WADDR:In(Bits(height)), 
-#  WDATA:In(Bits(width)),
+#  WDATA:Out(Bits(width)),
 #  WE,In(Bit),
 #  CLK:In(Clock)
-ram = RAM(height, width)
+ram = DualRAM(height, width)
 ```
 
 ### Memory

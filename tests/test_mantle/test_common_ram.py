@@ -10,10 +10,10 @@ def test_ram():
 
     ram = mantle.RAM(4, 1, name="ram")
 
-    waddr = mantle.Counter(4, cout=False)
+    waddr = mantle.Counter(2, cout=False)
     wdata = mantle.Counter(1, cout=False)
     we = 1
-    raddr = mantle.Counter(4, cout=False)
+    raddr = mantle.Counter(2, cout=False)
 
     ram(raddr, waddr, wdata, we, CLK=main.CLKIN)
 

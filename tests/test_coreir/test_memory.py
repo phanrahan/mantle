@@ -3,6 +3,7 @@ coreir = pytest.importorskip("coreir")
 from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir.memory import DefineCoreirMem, DefineRAM, DefineMemory
+from mantle import RAM
 from magma.simulator.coreir_simulator import CoreIRSimulator
 from magma.backend.coreir_ import CoreIRBackend
 import os
@@ -43,3 +44,6 @@ def test_ram_latency1():
     compile("build/test_latency", mem, output='coreir-verilog')
     assert check_files_equal(__file__,"build/test_latency.v","gold/test_latency.v")
 
+
+def test_generic_memory_import():
+    assert type(RAM(8, 8)) == DefineRAM(8, 8)

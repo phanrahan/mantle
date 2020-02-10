@@ -2,6 +2,7 @@ from magma import *
 from hwtypes import BitVector
 from magma.frontend.coreir_ import CircuitInstanceFromGeneratorWrapper, GetCoreIRBackend
 from .register import register
+from functools import lru_cache
 
 
 def gen_sim_mem(depth, width):
@@ -33,6 +34,7 @@ def gen_sim_mem(depth, width):
     return sim_mem
 
 
+@lru_cache(maxsize=None)
 def DefineCoreirMem(depth, width):
     name = "coreir_mem{}x{}".format(depth,width)
     addr_width = getRAMAddrWidth(depth)
@@ -61,6 +63,7 @@ def DefineROM(height, width,read_latency=0):
 def getRAMAddrWidth(height):
     return max((height - 1).bit_length(), 1)
 
+@lru_cache(maxsize=None)
 def DefineRAM(height, width, read_latency=0):
     addr_width = getRAMAddrWidth(height)
     circ = DefineCircuit("RAM{}x{}".format(height, width),
@@ -87,6 +90,7 @@ def DefineRAM(height, width, read_latency=0):
     EndDefine()
     return circ
 
+@lru_cache(maxsize=None)
 def DefineMemory(height, width, readonly=False, read_latency=0):
     if read_latency < 0:
         raise ValueError("read_latency cannot be negative")

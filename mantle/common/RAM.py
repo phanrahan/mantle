@@ -2,6 +2,7 @@ from .register import Register
 from .decoder import Decoder
 from mantle import And, Mux
 from magma import Circuit, In, Out, Clock, Bit, Bits, wire, bits, repeat, cache_definition
+from magma.bitutils import clog2
 
 __all__ = ["DefineRAM", "DefineDualRAM"]
 

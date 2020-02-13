@@ -92,12 +92,12 @@ def DefineMux(height=2, width=None, T=None):
         @classmethod
         def definition(interface):
             if T is not None and not (issubclass(T, m.Digital) or issubclass(T, m.Array) and issubclass(T.T, m.Bit)):
-                if isinstance(T, m.TupleKind):
+                if issubclass(T, m.Tuple):
                     for i in range(len(T.keys())):
                         Is = [getattr(interface, f"I{j}")[list(T.keys())[i]] for j in range(height)]
                         interface.O[i] <= DefineMux(height, T=list(T.types())[i])()(*Is, interface.S)
                 else:
-                    assert isinstance(T, m.ArrayKind), f"Expected array or type type, got {T}, type is {type(T)}"
+                    assert issubclass(T, m.Array), f"Expected array or type type, got {T}, type is {type(T)}"
                     for i in range(len(T)):
                         Is = [getattr(interface, f"I{j}")[i] for j in range(height)]
                         interface.O[i] <= DefineMux(height, T=type(Is[0]))()(*Is, interface.S)

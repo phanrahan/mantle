@@ -47,7 +47,7 @@ is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
 def _declare_muxn(height, width):
     def simulate(self, value_store, state_store):
         sel = BitVector[m.bitutils.clog2(height)](value_store.get_value(self.I.sel))
-        out = BitVector[width](value_store.get_value(self.I.data[sel.as_int]))
+        out = BitVector[width](value_store.get_value(self.I.data[int(sel)]))
         value_store.set_value(self.O, out)
     return DeclareCoreirCircuit(f"coreir_commonlib_mux{height}x{width}",
         *["I", In(Product.from_fields("anon",

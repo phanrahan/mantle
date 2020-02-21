@@ -6,7 +6,7 @@ module corebit_const #(parameter value = 1) (output out);
   assign out = value;
 endmodule
 
-module Add4_cin (input CIN, input [3:0] I0, input [3:0] I1, output [3:0] O);
+module Add4_cin (input [3:0] I0, input [3:0] I1, output [3:0] O, input CIN);
 wire bit_const_0_None_out;
 wire [3:0] coreir_add4_inst0_out;
 wire [3:0] coreir_add4_inst1_out;

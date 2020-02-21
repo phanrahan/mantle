@@ -1,5 +1,5 @@
-module HalfAdder (input CIN, output COUT, input I, output O);
-assign COUT = I & CIN;
+module HalfAdder (input I, input CIN, output O, output COUT);
 assign O = I ^ CIN;
+assign COUT = I & CIN;
 endmodule
 

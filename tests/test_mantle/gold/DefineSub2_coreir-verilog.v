@@ -10,7 +10,7 @@ module corebit_const #(parameter value = 1) (output out);
   assign out = value;
 endmodule
 
-module Add2_cin (input CIN, input [1:0] I0, input [1:0] I1, output [1:0] O);
+module Add2_cin (input [1:0] I0, input [1:0] I1, output [1:0] O, input CIN);
 wire bit_const_0_None_out;
 wire [1:0] coreir_add2_inst0_out;
 wire [1:0] coreir_add2_inst1_out;
@@ -24,7 +24,7 @@ module Sub2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
 wire [1:0] Add2_cin_inst0_O;
 wire [1:0] Invert2_inst0_out;
 wire bit_const_1_None_out;
-Add2_cin Add2_cin_inst0(.CIN(bit_const_1_None_out), .I0(I0), .I1(Invert2_inst0_out), .O(Add2_cin_inst0_O));
+Add2_cin Add2_cin_inst0(.I0(I0), .I1(Invert2_inst0_out), .O(Add2_cin_inst0_O), .CIN(bit_const_1_None_out));
 coreir_not #(.width(2)) Invert2_inst0(.in(I1), .out(Invert2_inst0_out));
 corebit_const #(.value(1'b1)) bit_const_1_None(.out(bit_const_1_None_out));
 assign O = Add2_cin_inst0_O;

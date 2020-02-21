@@ -11,9 +11,9 @@ module coreir_reg_arst #(parameter width = 1, parameter arst_posedge = 1, parame
   assign out = outReg;
 endmodule
 
-module test (input ASYNCRESETN, input CLK, input [0:0] In0, output [0:0] Out0, input clk);
+module test (input clk, input [0:0] In0, output [0:0] Out0, input CLK, input ASYNCRESETN);
 wire [0:0] reg_PR_inst0_out;
-coreir_reg_arst #(.arst_posedge(1'b0), .clk_posedge(1'b1), .init(1'h0), .width(1)) reg_PR_inst0(.arst(ASYNCRESETN), .clk(clk), .in(In0), .out(reg_PR_inst0_out));
+coreir_reg_arst #(.arst_posedge(1'b0), .clk_posedge(1'b1), .init(1'h0), .width(1)) reg_PR_inst0(.clk(clk), .arst(ASYNCRESETN), .in(In0), .out(reg_PR_inst0_out));
 assign Out0 = reg_PR_inst0_out;
 endmodule
 

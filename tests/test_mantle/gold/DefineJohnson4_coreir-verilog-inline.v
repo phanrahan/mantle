@@ -8,21 +8,21 @@ module coreir_reg #(parameter width = 1, parameter clk_posedge = 1, parameter in
   assign out = outReg;
 endmodule
 
-module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (input CLK, input I, output O);
+module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (input I, output O, input CLK);
 wire [0:0] reg_P_inst0_out;
 coreir_reg #(.clk_posedge(1'b1), .init(1'h0), .width(1)) reg_P_inst0(.clk(CLK), .in(I), .out(reg_P_inst0_out));
 assign O = reg_P_inst0_out[0];
 endmodule
 
-module Johnson4 (input CLK, output [3:0] O);
+module Johnson4 (output [3:0] O, input CLK);
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O;
-DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0(.CLK(CLK), .I(~ DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O));
-DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1(.CLK(CLK), .I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O));
-DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2(.CLK(CLK), .I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O));
-DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3(.CLK(CLK), .I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O));
+DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0(.I(~ DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O), .CLK(CLK));
+DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1(.I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O), .CLK(CLK));
+DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2(.I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O), .CLK(CLK));
+DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3(.I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O), .CLK(CLK));
 assign O = {DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O};
 endmodule
 

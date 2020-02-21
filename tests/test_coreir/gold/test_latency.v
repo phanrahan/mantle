@@ -18,10 +18,10 @@ module coreir_mem #(parameter has_init = 1'b0, parameter depth = 1, parameter wi
   assign rdata = data[raddr];
 endmodule
 
-module RAM256x16 (input CLK, input [7:0] RADDR, output [15:0] RDATA, input [7:0] WADDR, input [15:0] WDATA, input WE);
+module RAM256x16 (input [7:0] RADDR, output [15:0] RDATA, input [7:0] WADDR, input [15:0] WDATA, input CLK, input WE);
 wire [15:0] coreir_mem256x16_inst0_rdata;
 wire [15:0] reg_P_inst0_out;
-coreir_mem #(.depth(256), .has_init(1'b0), .width(16)) coreir_mem256x16_inst0(.clk(CLK), .raddr(RADDR), .rdata(coreir_mem256x16_inst0_rdata), .waddr(WADDR), .wdata(WDATA), .wen(WE));
+coreir_mem #(.depth(256), .has_init(1'b0), .width(16)) coreir_mem256x16_inst0(.clk(CLK), .wdata(WDATA), .waddr(WADDR), .wen(WE), .rdata(coreir_mem256x16_inst0_rdata), .raddr(RADDR));
 coreir_reg #(.clk_posedge(1'b1), .init(16'h0000), .width(16)) reg_P_inst0(.clk(CLK), .in(coreir_mem256x16_inst0_rdata), .out(reg_P_inst0_out));
 assign RDATA = reg_P_inst0_out;
 endmodule

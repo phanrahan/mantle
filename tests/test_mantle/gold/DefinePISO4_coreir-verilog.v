@@ -14,45 +14,45 @@ endmodule
 
 module commonlib_muxn__N2__width1 (input [0:0] in_data_0, input [0:0] in_data_1, input [0:0] in_sel, output [0:0] out);
 wire [0:0] _join_out;
-coreir_mux #(.width(1)) _join(.in0(in_data_0), .in1(in_data_1), .out(_join_out), .sel(in_sel[0]));
+coreir_mux #(.width(1)) _join(.in0(in_data_0), .in1(in_data_1), .sel(in_sel[0]), .out(_join_out));
 assign out = _join_out;
 endmodule
 
-module Mux2xNone (input I0, input I1, output O, input S);
+module Mux2xNone (input I0, input I1, input S, output O);
 wire [0:0] coreir_commonlib_mux2x1_inst0_out;
 commonlib_muxn__N2__width1 coreir_commonlib_mux2x1_inst0(.in_data_0(I0), .in_data_1(I1), .in_sel(S), .out(coreir_commonlib_mux2x1_inst0_out));
 assign O = coreir_commonlib_mux2x1_inst0_out[0];
 endmodule
 
-module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (input CLK, input I, output O);
+module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (input I, output O, input CLK);
 wire [0:0] reg_P_inst0_out;
 coreir_reg #(.clk_posedge(1'b1), .init(1'h0), .width(1)) reg_P_inst0(.clk(CLK), .in(I), .out(reg_P_inst0_out));
 assign O = reg_P_inst0_out[0];
 endmodule
 
-module Register4 (input CLK, input [3:0] I, output [3:0] O);
+module Register4 (input [3:0] I, output [3:0] O, input CLK);
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O;
-DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0(.CLK(CLK), .I(I[0]), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O));
-DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1(.CLK(CLK), .I(I[1]), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O));
-DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2(.CLK(CLK), .I(I[2]), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O));
-DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3(.CLK(CLK), .I(I[3]), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O));
+DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0(.I(I[0]), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O), .CLK(CLK));
+DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1(.I(I[1]), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O), .CLK(CLK));
+DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2(.I(I[2]), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O), .CLK(CLK));
+DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3(.I(I[3]), .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O), .CLK(CLK));
 assign O = {DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O};
 endmodule
 
-module PISO4 (input CLK, input LOAD, output O, input [3:0] PI, input SI);
+module PISO4 (input SI, input [3:0] PI, input LOAD, output O, input CLK);
 wire Mux2xNone_inst0_O;
 wire Mux2xNone_inst1_O;
 wire Mux2xNone_inst2_O;
 wire Mux2xNone_inst3_O;
 wire [3:0] Register4_inst0_O;
-Mux2xNone Mux2xNone_inst0(.I0(SI), .I1(PI[0]), .O(Mux2xNone_inst0_O), .S(LOAD));
-Mux2xNone Mux2xNone_inst1(.I0(Register4_inst0_O[0]), .I1(PI[1]), .O(Mux2xNone_inst1_O), .S(LOAD));
-Mux2xNone Mux2xNone_inst2(.I0(Register4_inst0_O[1]), .I1(PI[2]), .O(Mux2xNone_inst2_O), .S(LOAD));
-Mux2xNone Mux2xNone_inst3(.I0(Register4_inst0_O[2]), .I1(PI[3]), .O(Mux2xNone_inst3_O), .S(LOAD));
-Register4 Register4_inst0(.CLK(CLK), .I({Mux2xNone_inst3_O,Mux2xNone_inst2_O,Mux2xNone_inst1_O,Mux2xNone_inst0_O}), .O(Register4_inst0_O));
+Mux2xNone Mux2xNone_inst0(.I0(SI), .I1(PI[0]), .S(LOAD), .O(Mux2xNone_inst0_O));
+Mux2xNone Mux2xNone_inst1(.I0(Register4_inst0_O[0]), .I1(PI[1]), .S(LOAD), .O(Mux2xNone_inst1_O));
+Mux2xNone Mux2xNone_inst2(.I0(Register4_inst0_O[1]), .I1(PI[2]), .S(LOAD), .O(Mux2xNone_inst2_O));
+Mux2xNone Mux2xNone_inst3(.I0(Register4_inst0_O[2]), .I1(PI[3]), .S(LOAD), .O(Mux2xNone_inst3_O));
+Register4 Register4_inst0(.I({Mux2xNone_inst3_O,Mux2xNone_inst2_O,Mux2xNone_inst1_O,Mux2xNone_inst0_O}), .O(Register4_inst0_O), .CLK(CLK));
 assign O = Register4_inst0_O[3];
 endmodule
 

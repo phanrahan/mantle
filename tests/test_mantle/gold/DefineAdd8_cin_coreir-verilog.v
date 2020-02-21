@@ -6,7 +6,7 @@ module corebit_const #(parameter value = 1) (output out);
   assign out = value;
 endmodule
 
-module Add8_cin (input CIN, input [7:0] I0, input [7:0] I1, output [7:0] O);
+module Add8_cin (input [7:0] I0, input [7:0] I1, output [7:0] O, input CIN);
 wire bit_const_0_None_out;
 wire [7:0] coreir_add8_inst0_out;
 wire [7:0] coreir_add8_inst1_out;

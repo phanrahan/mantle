@@ -8,7 +8,7 @@ module coreir_reg #(parameter width = 1, parameter clk_posedge = 1, parameter in
   assign out = outReg;
 endmodule
 
-module reg_P_wrapped (input CLK, input [7:0] I, output [7:0] O);
+module reg_P_wrapped (input [7:0] I, input CLK, output [7:0] O);
 coreir_reg #(.clk_posedge(1'b1), .init(8'h00), .width(8)) reg_P_inst0(.clk(CLK), .in(I), .out(O));
 endmodule
 

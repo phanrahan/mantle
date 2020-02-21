@@ -6,12 +6,12 @@ module corebit_const #(parameter value = 1) (output out);
   assign out = value;
 endmodule
 
-module Add2_cout (output COUT, input [1:0] I0, input [1:0] I1, output [1:0] O);
+module Add2_cout (input [1:0] I0, input [1:0] I1, output [1:0] O, output COUT);
 wire bit_const_0_None_out;
 wire [2:0] coreir_add3_inst0_out;
 corebit_const #(.value(1'b0)) bit_const_0_None(.out(bit_const_0_None_out));
 coreir_add #(.width(3)) coreir_add3_inst0(.in0({bit_const_0_None_out,I0[1],I0[0]}), .in1({bit_const_0_None_out,I1[1],I1[0]}), .out(coreir_add3_inst0_out));
-assign COUT = coreir_add3_inst0_out[2];
 assign O = {coreir_add3_inst0_out[1],coreir_add3_inst0_out[0]};
+assign COUT = coreir_add3_inst0_out[2];
 endmodule
 

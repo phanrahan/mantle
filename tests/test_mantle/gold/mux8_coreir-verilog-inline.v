@@ -18,7 +18,7 @@ commonlib_muxn__N4__width1 muxN_1(.in_data_0(in_data_4), .in_data_1(in_data_5), 
 assign out = in_sel[2] ? muxN_1_out : muxN_0_out;
 endmodule
 
-module Mux8xNone (input I0, input I1, input I2, input I3, input I4, input I5, input I6, input I7, output O, input [2:0] S);
+module Mux8xNone (input I0, input I1, input I2, input I3, input I4, input I5, input I6, input I7, input [2:0] S, output O);
 wire [0:0] coreir_commonlib_mux8x1_inst0_out;
 commonlib_muxn__N8__width1 coreir_commonlib_mux8x1_inst0(.in_data_0(I0), .in_data_1(I1), .in_data_2(I2), .in_data_3(I3), .in_data_4(I4), .in_data_5(I5), .in_data_6(I6), .in_data_7(I7), .in_sel(S), .out(coreir_commonlib_mux8x1_inst0_out));
 assign O = coreir_commonlib_mux8x1_inst0_out[0];

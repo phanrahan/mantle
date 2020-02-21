@@ -8,7 +8,7 @@ endmodule
 
 module commonlib_muxn__N2__width2 (input [1:0] in_data_0, input [1:0] in_data_1, input [0:0] in_sel, output [1:0] out);
 wire [1:0] _join_out;
-coreir_mux #(.width(2)) _join(.in0(in_data_0), .in1(in_data_1), .out(_join_out), .sel(in_sel[0]));
+coreir_mux #(.width(2)) _join(.in0(in_data_0), .in1(in_data_1), .sel(in_sel[0]), .out(_join_out));
 assign out = _join_out;
 endmodule
 
@@ -18,7 +18,7 @@ wire [1:0] muxN_0_out;
 wire [1:0] muxN_1_out;
 wire [0:0] sel_slice0_out;
 wire [0:0] sel_slice1_out;
-coreir_mux #(.width(2)) _join(.in0(muxN_0_out), .in1(muxN_1_out), .out(_join_out), .sel(in_sel[1]));
+coreir_mux #(.width(2)) _join(.in0(muxN_0_out), .in1(muxN_1_out), .sel(in_sel[1]), .out(_join_out));
 commonlib_muxn__N2__width2 muxN_0(.in_data_0(in_data_0), .in_data_1(in_data_1), .in_sel(sel_slice0_out), .out(muxN_0_out));
 commonlib_muxn__N2__width2 muxN_1(.in_data_0(in_data_2), .in_data_1(in_data_3), .in_sel(sel_slice1_out), .out(muxN_1_out));
 coreir_slice #(.hi(1), .lo(0), .width(2)) sel_slice0(.in(in_sel), .out(sel_slice0_out));
@@ -26,7 +26,7 @@ coreir_slice #(.hi(1), .lo(0), .width(2)) sel_slice1(.in(in_sel), .out(sel_slice
 assign out = _join_out;
 endmodule
 
-module Mux4x2 (input [1:0] I0, input [1:0] I1, input [1:0] I2, input [1:0] I3, output [1:0] O, input [1:0] S);
+module Mux4x2 (input [1:0] I0, input [1:0] I1, input [1:0] I2, input [1:0] I3, input [1:0] S, output [1:0] O);
 wire [1:0] coreir_commonlib_mux4x2_inst0_out;
 commonlib_muxn__N4__width2 coreir_commonlib_mux4x2_inst0(.in_data_0(I0), .in_data_1(I1), .in_data_2(I2), .in_data_3(I3), .in_sel(S), .out(coreir_commonlib_mux4x2_inst0_out));
 assign O = coreir_commonlib_mux4x2_inst0_out;

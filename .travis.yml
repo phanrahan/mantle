@@ -11,7 +11,8 @@ addons:
 install:
 - pip install pytest-cov
 - pip install delegator.py
-- pip install -e git://github.com/phanrahan/magma.git@named-temporary-values#egg=fault
+- pip install -e git://github.com/phanrahan/magma.git@named-temporary-values#egg=magma
+- pip install -e git://github.com/leonardt/fault.git@magma-rm-port#egg=fault
 - pip install -e .
 script:
 - "./scripts/run_tests.sh"

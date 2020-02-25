@@ -24,7 +24,7 @@ def LUT4(rom, **kwargs):
 def LUT5(rom, **kwargs):
     if isinstance(rom, IntegerTypes):
         rom = int2seq(rom, 32)
-    I0, I1, I2, I3, I4 = In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)()
+    I0, I1, I2, I3, I4 = Bit(), Bit(), Bit(), Bit(), Bit()
     lut = fork( LUT4(rom[ 0:16]), LUT4(rom[16:32]) )
     lut(I0, I1, I2, I3)
     mux = MUXF5()
@@ -39,7 +39,7 @@ def LUT5(rom, **kwargs):
 def LUT6(rom, **kwargs):
     if isinstance(rom, IntegerTypes):
         rom = int2seq(rom, 64)
-    I0, I1, I2, I3, I4, I5 = In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)()
+    I0, I1, I2, I3, I4, I5 = Bit(), Bit(), Bit(), Bit(), Bit(), Bit()
     lut = fork( LUT5(rom[ 0:32]), LUT5(rom[32:64]))
     mux = MUXF6()
     lut(I0, I1, I2, I3, I4)
@@ -55,7 +55,7 @@ def LUT6(rom, **kwargs):
 def LUT7(rom, **kwargs):
     if isinstance(rom, IntegerTypes):
         rom = int2seq(rom, 128)
-    I0, I1, I2, I3, I4, I5, I6 = In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)()
+    I0, I1, I2, I3, I4, I5, I6 = Bit(), Bit(), Bit(), Bit(), Bit(), Bit(), Bit()
     lut = fork( LUT6(rom[ 0:64]), LUT6(rom[64:128]))
     mux = MUXF7()
     lut(I0, I1, I2, I3, I4, I5)
@@ -72,7 +72,7 @@ def LUT7(rom, **kwargs):
 def LUT8(rom, **kwargs):
     if isinstance(rom, IntegerTypes):
         rom = int2seq(rom, 256)
-    I0, I1, I2, I3, I4, I5, I6, I7 = In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)(), In(Bit)()
+    I0, I1, I2, I3, I4, I5, I6, I7 = Bit(), Bit(), Bit(), Bit(), Bit(), Bit(), Bit(), Bit()
     lut = fork( LUT7(rom[ 0:128]), LUT7(rom[128:256]))
     mux = MUXF8()
     lut(I0, I1, I2, I3, I4, I5, I6)

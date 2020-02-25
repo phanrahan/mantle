@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='mantle',
-    version='2.0.3',
+    version='2.0.4',
     url='https://github.com/phanrahan/mantle',
     license='MIT',
     maintainer='Lenny Truong',

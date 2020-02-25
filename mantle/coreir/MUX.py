@@ -45,20 +45,20 @@ is_power_of_two = lambda num: num != 0 and ((num & (num - 1)) == 0)
 
 @m.cache_definition
 def _declare_muxn(height, width):
-    def simulate(self, value_store, state_store):
-        sel = BitVector[m.bitutils.clog2(height)](value_store.get_value(self.I.sel))
-        out = BitVector[width](value_store.get_value(self.I.data[int(sel)]))
-        value_store.set_value(self.O, out)
-    return DeclareCoreirCircuit(f"coreir_commonlib_mux{height}x{width}",
-        *["I", In(Product.from_fields("anon",
-                                      dict(data=Array[height, Bits[width]],
-                                           sel=Bits[m.bitutils.clog2(height)]))),
-          "O", Out(Bits[width])],
-        coreir_name="muxn",
-        coreir_lib="commonlib",
-        simulate=simulate,
-        coreir_genargs={"width": width, "N": height}
-    )
+    class CoreIRCommonlibMux(m.Circuit):
+        name = f"coreir_commonlib_mux{height}x{width}"
+        I_T = Product.from_fields(
+            "anon", dict(data=Array[height, Bits[width]],
+                         sel=Bits[m.bitutils.clog2(height)]))
+        io = m.IO(I=In(I_T), O=Out(Bits[width]))
+        coreir_name = "muxn"
+        coreir_lib = "commonlib"
+        coreir_genargs = {"width": width, "N": height}
+        def simulate(self, value_store, state_store):
+            sel = BitVector[m.bitutils.clog2(height)](value_store.get_value(self.I.sel))
+            out = BitVector[width](value_store.get_value(self.I.data[int(sel)]))
+            value_store.set_value(self.O, out)
+    return CoreIRCommonlibMux
 
 
 @m.cache_definition
@@ -76,49 +76,50 @@ def DefineMux(height=2, width=None, T=None):
         else:
             T = Bits[width]
 
-    io = []
+    _IO = []
     for i in range(height):
-        io += ["I{}".format(i), In(T)]
+        _IO += ["I{}".format(i), In(T)]
     if height == 2:
         select_type = Bit
     else:
         select_type = Bits[m.bitutils.clog2(height)]
-    io += ['S', In(select_type)]
-    io += ['O', Out(T)]
+    _IO += ['S', In(select_type)]
+    _IO += ['O', Out(T)]
 
     class _Mux(Circuit):
         name = "Mux{}x{}".format(height, suffix)
-        IO = io
-        @classmethod
-        def definition(interface):
-            if T is not None and not (issubclass(T, m.Digital) or issubclass(T, m.Array) and issubclass(T.T, m.Bit)):
-                if issubclass(T, m.Tuple):
-                    for i in range(len(T.keys())):
-                        Is = [getattr(interface, f"I{j}")[list(T.keys())[i]] for j in range(height)]
-                        interface.O[i] <= DefineMux(height, T=list(T.types())[i])()(*Is, interface.S)
-                else:
-                    assert issubclass(T, m.Array), f"Expected array or type type, got {T}, type is {type(T)}"
-                    for i in range(len(T)):
-                        Is = [getattr(interface, f"I{j}")[i] for j in range(height)]
-                        interface.O[i] <= DefineMux(height, T=type(Is[0]))()(*Is, interface.S)
+        io_dict = {}
+        for key, value in zip(_IO[::2], _IO[1::2]):
+            io_dict[key] = value
+        io = m.IO(**io_dict)
+        if T is not None and not (issubclass(T, m.Digital) or issubclass(T, m.Array) and issubclass(T.T, m.Bit)):
+            if issubclass(T, m.Tuple):
+                for i in range(len(T.keys())):
+                    Is = [getattr(io, f"I{j}")[list(T.keys())[i]] for j in range(height)]
+                    io.O[i] <= DefineMux(height, T=list(T.types())[i])()(*Is, io.S)
             else:
+                assert issubclass(T, m.Array), f"Expected array or type type, got {T}, type is {type(T)}"
+                for i in range(len(T)):
+                    Is = [getattr(io, f"I{j}")[i] for j in range(height)]
+                    io.O[i] <= DefineMux(height, T=type(Is[0]))()(*Is, io.S)
+        else:
+            if T is None and width is None or issubclass(T, m.Digital):
+                mux = _declare_muxn(height, 1)()
+            else:
+                mux = _declare_muxn(height, width if T is None else len(T))()
+            for i in range(height):
                 if T is None and width is None or issubclass(T, m.Digital):
-                    mux = _declare_muxn(height, 1)()
+                    m.wire(getattr(io, f"I{i}"), mux.I.data[i][0])
                 else:
-                    mux = _declare_muxn(height, width if T is None else len(T))()
-                for i in range(height):
-                    if T is None and width is None or issubclass(T, m.Digital):
-                        m.wire(getattr(interface, f"I{i}"), mux.I.data[i][0])
-                    else:
-                        m.wire(getattr(interface, f"I{i}"), mux.I.data[i])
-                if height == 2:
-                    m.wire(interface.S, mux.I.sel[0])
-                else:
-                    m.wire(interface.S, mux.I.sel)
-                if T is None and width is None or issubclass(T, m.Digital):
-                    wire(mux.O[0], interface.O)
-                else:
-                    wire(mux.O, interface.O)
+                    m.wire(getattr(io, f"I{i}"), mux.I.data[i])
+            if height == 2:
+                m.wire(io.S, mux.I.sel[0])
+            else:
+                m.wire(io.S, mux.I.sel)
+            if T is None and width is None or issubclass(T, m.Digital):
+                wire(mux.O[0], io.O)
+            else:
+                wire(mux.O, io.O)
     return _Mux
 
 

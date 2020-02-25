@@ -22,38 +22,38 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
                    f"has_async_reset_{has_async_reset}_" \
                    f"has_async_resetn_{has_async_resetn}_" \
                    f"type_{_type.__name__}_n_{n}"
-            _IO = ["I", m.In(T), "O", m.Out(T)]
-            _IO += m.ClockInterface(has_ce=has_ce,
-                                    has_reset=has_reset,
-                                    has_async_reset=has_async_reset,
-                                    has_async_resetn=has_async_resetn)
-            io_dict = {}
-            for key, value in zip(_IO[::2], _IO[1::2]):
-                io_dict[key] = value
-            io = m.IO(**io_dict)
+            IO = ["I", m.In(T), "O", m.Out(T)]
+            IO += m.ClockInterface(has_ce=has_ce,
+                                   has_reset=has_reset,
+                                   has_async_reset=has_async_reset,
+                                   has_async_resetn=has_async_resetn)
 
-            reg = DefineCoreirReg(n, init, has_async_reset,
-                                  has_async_resetn, _type)(name="value")
-            I = io.I
-            O = reg.O
-            if n is None:
-                O = O[0]
-            if has_reset and has_ce:
-                if reset_priority:
+            @classmethod
+            def definition(io):
+                reg = DefineCoreirReg(n, init, has_async_reset,
+                                      has_async_resetn, _type)(name="value")
+                I = io.I
+                O = reg.O
+                if n is None:
+                    O = O[0]
+                if has_reset and has_ce:
+                    if reset_priority:
+                        I = mantle.mux([O, I], io.CE, name="enable_mux")
+                        I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                    else:
+                        I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                        I = mantle.mux([O, I], io.CE, name="enable_mux")
+                elif has_ce:
                     I = mantle.mux([O, I], io.CE, name="enable_mux")
+                elif has_reset:
                     I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                if n is None:
+                    m.wire(I, reg.I[0])
                 else:
-                    I = mantle.mux([I, m.bits(init, n)], io.RESET)
-                    I = mantle.mux([O, I], io.CE, name="enable_mux")
-            elif has_ce:
-                I = mantle.mux([O, I], io.CE, name="enable_mux")
-            elif has_reset:
-                I = mantle.mux([I, m.bits(init, n)], io.RESET)
-            if n is None:
-                m.wire(I, reg.I[0])
-            else:
-                m.wire(I, reg.I)
-            m.wire(io.O, O)
+                    m.wire(I, reg.I)
+                m.wire(io.O, O)
+                m.wireclock(io, reg)
+                m.wiredefaultclock(io, reg)
 
         return Register
     elif n is None:

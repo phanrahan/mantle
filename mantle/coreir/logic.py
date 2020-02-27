@@ -68,6 +68,9 @@ def DefineCoreirReduceAnd(width):
 
 def DefineCoreirReduceOr(width):
     return DefineCoreirReduce("orr", operator.or_, width)
+
+def DefineCoreirReduceXOr(width):
+    return DefineCoreirReduce("xorr", operator.xor, width)
     # class ReduceAnd(Circuit):
     #     name = f"reduce_and_{width}"
     #     IO = ["I", In(Bits(width)), "O", Out(Bit)]

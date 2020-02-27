@@ -50,7 +50,7 @@ def FullCarry(k, expr, din):
 def DefineFlatCascade(n, k, expr, input, din, cin):
     class _FlatCascade(Circuit):
         name = _Name(n, k, expr, input, din, cin)
-        IO = ["input I", Array(n, Bit), "output O", Bit]
+        io = m.IO("input I", Array(n, Bit), "output O", Bit)
         @classmethod
         def definition(carry):
             def f(y):

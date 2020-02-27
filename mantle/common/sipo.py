@@ -12,7 +12,7 @@ def DefineSIPO(n, init=0, has_ce=False, has_reset=False):
 
     class _SIPO(Circuit):
         name = _RegisterName('SIPO', n, init, has_ce, has_reset)
-        IO = ['I', In(Bit), 'O', Out(Bits[n])] + \
+        io = m.IO('I', In(Bit), 'O', Out(Bits[n])) + \
                 ClockInterface(has_ce,has_reset)
         @classmethod
         def definition(sipo):

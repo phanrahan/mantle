@@ -13,12 +13,12 @@ def test_coreir_rom():
     width = 16
     class Mem(Circuit):
         name = "test_coreir_mem"
-        IO = ["raddr", In(Bits[ addr_width ]),
-              "rdata", Out(Bits[ width ]),
-              "waddr", In(Bits[ addr_width ]),
-              "wdata", In(Bits[ width ]),
-              "clk", In(Clock),
-              "wen", In(Bit) ]
+        io = m.IO(raddr=In(Bits[ addr_width ]),
+              rdata=Out(Bits[ width ]),
+              waddr=In(Bits[ addr_width ]),
+              wdata=In(Bits[ width ]),
+              clk=In(Clock),
+              wen=In(Bit) )
         @classmethod
         def definition(io):
             mem = DefineCoreirMem(4, 16)()

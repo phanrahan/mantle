@@ -44,11 +44,11 @@ def DefineAnd(height, width):
         name = 'And%dx%d' % (height, width)
 
         if   height == 2:
-            IO  = ['input I0', T, 'input I1', T]
+            io = m.IO('input I0', T, 'input I1', T)
         elif height == 3:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T)
         elif height == 4:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T, 'input I3', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T, 'input I3', T)
         IO  += ['output O', T]
 
         @classmethod
@@ -119,11 +119,11 @@ def DefineNAnd(height, width):
         name = 'NAnd%dx%d' % (height, width)
 
         if   height == 2:
-            IO  = ['input I0', T, 'input I1', T]
+            io = m.IO('input I0', T, 'input I1', T)
         elif height == 3:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T)
         elif height == 4:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T, 'input I3', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T, 'input I3', T)
         IO  += ['output O', T]
 
         @classmethod
@@ -193,11 +193,11 @@ def DefineOr(height, width):
         name = 'Or%dx%d' % (height, width)
 
         if   height == 2:
-            IO  = ['input I0', T, 'input I1', T]
+            io = m.IO('input I0', T, 'input I1', T)
         elif height == 3:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T)
         elif height == 4:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T, 'input I3', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T, 'input I3', T)
         IO  += ['output O', T]
 
         @classmethod
@@ -267,11 +267,11 @@ def DefineNor(height, width):
         name = 'Nor%dx%d' % (height, width)
 
         if   height == 2:
-            IO  = ['input I0', T, 'input I1', T]
+            io = m.IO('input I0', T, 'input I1', T)
         elif height == 3:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T)
         elif height == 4:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T, 'input I3', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T, 'input I3', T)
         IO  += ['output O', T]
 
         @classmethod
@@ -341,11 +341,11 @@ def DefineXor(height, width):
         name = 'Xor%dx%d' % (height, width)
 
         if   height == 2:
-            IO  = ['input I0', T, 'input I1', T]
+            io = m.IO('input I0', T, 'input I1', T)
         elif height == 3:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T)
         elif height == 4:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T, 'input I3', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T, 'input I3', T)
         IO  += ['output O', T]
 
         @classmethod
@@ -414,11 +414,11 @@ def DefineNXor(height, width):
         name = 'NXor%dx%d' % (height, width)
 
         if   height == 2:
-            IO  = ['input I0', T, 'input I1', T]
+            io = m.IO('input I0', T, 'input I1', T)
         elif height == 3:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T)
         elif height == 4:
-            IO  = ['input I0', T, 'input I1', T, 'input I2', T, 'input I3', T]
+            io = m.IO('input I0', T, 'input I1', T, 'input I2', T, 'input I3', T)
         IO  += ['output O', T]
 
         @classmethod
@@ -472,7 +472,7 @@ def DefineBuffer(width):
     class _Buffer(Circuit):
 
         name = 'Buffer%d' % width
-        IO  = ['input I', T, 'output O', T]
+        io = m.IO('input I', T, 'output O', T)
 
         @classmethod
         def definition(def_):
@@ -503,7 +503,7 @@ def DefineInvert(width):
     class _Invert(Circuit):
         name = 'Invert%d' % width
 
-        IO  = ['input I', T, 'output O', T]
+        io = m.IO('input I', T, 'output O', T)
 
         @classmethod
         def definition(def_):

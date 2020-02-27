@@ -13,7 +13,7 @@ def test_reg(has_ce, has_async_reset, has_async_resetn):
     def DefineReg():
         class testReg(m.Circuit):
             name = "test"
-            IO = ["clk", m.In(m.Clock)]
+            io = m.IO(clk=m.In(m.Clock))
             IO += ["In0", m.In(m.Bits[1])]
             IO += ["Out0", m.Out(m.Bits[1])]
             IO += m.ClockInterface(has_ce=has_ce,

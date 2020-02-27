@@ -77,7 +77,7 @@ def DefineNegate(n):
     T = Bits[n]
     class _Negate(Circuit):
         name = 'Negate{}'.format(n)
-        IO = ['I', In(T), 'O', Out(T)]
+        io = m.IO('I', In(T), 'O', Out(T))
         @classmethod
         def definition(io):
             sub =  DefineSub(n)()

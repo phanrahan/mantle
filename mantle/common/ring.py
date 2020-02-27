@@ -11,7 +11,7 @@ def DefineRing(n, init=1, has_ce=False, has_reset=False):
     """
     class Ring(Circuit):
         name = _RegisterName('Ring', n, init, has_ce, has_reset)
-        IO = ['O', Out(Bits[ n ])] + ClockInterface(has_ce,has_reset)
+        io = m.IO('O', Out(Bits[ n ])) + ClockInterface(has_ce,has_reset)
         @classmethod
         def definition(ring):
             ffs = FFs(n, init=init, has_ce=has_ce, has_reset=has_reset)

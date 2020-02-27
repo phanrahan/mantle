@@ -49,13 +49,13 @@ def DefineRAM(height, width):
 
     class _RAM(Circuit):
         name = f'RAM{height}x{width}'
-        IO = ['RADDR', In(TADDR),
+        io = m.IO('RADDR', In(TADDR),
               'RDATA', Out(TDATA),
               'WADDR', In(TADDR),
               'WDATA', In(TDATA),
               'WE', In(Bit),
               'CLK', In(Clock)
-             ]
+             )
 
         @classmethod
         def definition(io):
@@ -73,14 +73,14 @@ def DefineDualRAM(height, width):
 
     class _DualRAM(Circuit):
         name = f'DualRAM{height}x{width}'
-        IO = ['RADDR0', In(TADDR),
+        io = m.IO('RADDR0', In(TADDR),
               'RDATA0', Out(TDATA),
               'RADDR1', In(TADDR),
               'RDATA1', Out(TDATA),
               'WADDR', In(TADDR),
               'WDATA', In(TDATA),
               'WE', In(Bit),
-              'CLK', In(Clock)]
+              'CLK', In(Clock))
 
         @classmethod
         def definition(io):

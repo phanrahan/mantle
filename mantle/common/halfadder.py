@@ -4,8 +4,8 @@ from mantle import XOr, And
 __all__ = [ "HalfAdder" ]
 
 class HalfAdder(m.Circuit):
-    IO = ["I", m.In(m.Bit), "CIN", m.In(m.Bit),
-          "O", m.Out(m.Bit), "COUT", m.Out(m.Bit)]
+    io = m.IO(I=m.In(m.Bit), CIN=m.In(m.Bit),
+          O=m.Out(m.Bit), COUT=m.Out(m.Bit))
 
     @classmethod
     def definition(io):

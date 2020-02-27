@@ -15,7 +15,7 @@ def DefineEvenOddMerger(n):
     T = Bits(n)
     class _EvenOddMerger(Circuit):
         name = 'EvenOddMerger{}'.format(n)
-        IO = ['I', In(T), "O", Out(T)]
+        io = m.IO('I', In(T), O=Out(T))
         @classmethod
         def definition(io):
             if n == 2: # Sort 2 element sequences
@@ -48,7 +48,7 @@ def DefineEvenOddSorter(n):
     T = Bits(n)
     class _EvenOddSorter(Circuit):
         name = 'EvenOddSorter{}'.format(n)
-        IO = ['I', In(T), "O", Out(T)]
+        io = m.IO('I', In(T), O=Out(T))
         @classmethod
         def definition(io):
             if n == 2: # Sort 2 element sequences

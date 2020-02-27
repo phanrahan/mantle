@@ -9,7 +9,7 @@ def check(circuit_type):
     T = UInt[ 4 ]
     class TestCircuit(Circuit):
         name = "test_{}_two".format(circuit_type_name)
-        IO = ["a", In(T), "b", In(T), "c", Out(Bit)]
+        io = m.IO(a=In(T), b=In(T), c=Out(Bit))
         @classmethod
         def definition(circuit):
             print(repr(circuit))

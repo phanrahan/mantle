@@ -39,11 +39,11 @@ def fsm_logic(current_state: m.Bits(2),
 
 
 class MagmaFSM(m.Circuit):
-    IO = ["frameValid", m.In(m.Bit),
-          "clk", m.In(m.Clock),
-          "rst", m.In(m.AsyncReset),
-          "real_href", m.In(m.Bit),
-          "pixel_valid", m.Out(m.Bit)]
+    io = m.IO(frameValid=m.In(m.Bit),
+          clk=m.In(m.Clock),
+          rst=m.In(m.AsyncReset),
+          real_href=m.In(m.Bit),
+          pixel_valid=m.Out(m.Bit))
 
     @classmethod
     def definition(io):

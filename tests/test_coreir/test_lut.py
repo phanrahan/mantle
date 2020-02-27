@@ -8,7 +8,7 @@ from magma.testing import check_files_equal
 def test_coreir_lut():
     class Test(m.Circuit):
         name = "test_coreir_lut3"
-        IO = ["I", m.In(m.Bits(3)), "O", Out(Bit)]
+        io = m.IO(I=m.In(m.Bits(3)), O=Out(Bit))
         @classmethod
         def definition(cls):
             lut3 = LUT(0xDE, 3)

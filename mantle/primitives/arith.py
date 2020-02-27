@@ -93,7 +93,7 @@ def DeclareNegate(width):
     T = Bits[width]
     class _Negate(Circuit):
         name = 'Negate{}'.format(width)
-        IO = ['I', In(T), 'O', Out(T)]
+        io = m.IO('I', In(T), 'O', Out(T))
     return _Negate
 
 
@@ -101,5 +101,5 @@ def DeclareASR(width):
     T = Bits[width]
     class _ASR(Circuit):
         name = 'ASR{}'.format(width)
-        IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
+        io = m.IO(I0=In(T), I1=In(T), O=Out(T))
     return _ASR

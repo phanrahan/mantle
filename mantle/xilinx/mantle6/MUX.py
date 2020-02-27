@@ -9,7 +9,7 @@ __all__ += ['DefineMux', 'Mux']
 
 # """Construct a Mux with 2 1-bit inputs."""
 class Mux2(Circuit):
-    IO = ["I", In(Bits[ 2 ]), "S", In(Bit), "O", Out(Bit) ]
+    io = m.IO(I=In(Bits[ 2 ]), S=In(Bit), O=Out(Bit) )
 
     @classmethod
     def definition(io):
@@ -19,7 +19,7 @@ class Mux2(Circuit):
 
 # """Construct a Mux with 4 1-bit inputs."""
 class Mux4(Circuit):
-    IO = ["I", In(Bits[ 4 ]), "S", In(Bits[ 2 ]), "O", Out(Bit) ]
+    io = m.IO(I=In(Bits[ 4 ]), S=In(Bits[ 2 ]), O=Out(Bit) )
 
     @classmethod
     def definition(io):
@@ -29,7 +29,7 @@ class Mux4(Circuit):
 
 # """Construct a Mux with 8 1-bit inputs."""
 class Mux8(Circuit):
-    IO = ["I", In(Bits[ 8 ]), "S", In(Bits[ 3 ]), "O", Out(Bit) ]
+    io = m.IO(I=In(Bits[ 8 ]), S=In(Bits[ 3 ]), O=Out(Bit) )
 
     @classmethod
     def definition(mux8):
@@ -45,7 +45,7 @@ class Mux8(Circuit):
 
 # """Construct a Mux with 16 1-bit inputs."""
 class Mux16(Circuit):
-    IO = ["I", In(Bits[ 16 ]), "S", In(Bits[ 4 ]), "O", Out(Bit) ]
+    io = m.IO(I=In(Bits[ 16 ]), S=In(Bits[ 4 ]), O=Out(Bit) )
 
     @classmethod
     def definition(mux16):

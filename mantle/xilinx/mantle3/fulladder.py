@@ -4,7 +4,7 @@ from .LUT import LUT3, A0, A1, A2
 __all__ = ['FullAdder', 'fulladder']
 
 class FullAdder(Circuit):
-    IO = ["I0", In(Bit), "I1", In(Bit), "I2", In(Bit), "O", Out(Bit), "COUT", Out(Bit)]
+    io = m.IO(I0=In(Bit), I1=In(Bit), I2=In(Bit), O=Out(Bit), COUT=Out(Bit))
     @classmethod
     def definition(io):
         s = LUT3(A0^A1^A2)

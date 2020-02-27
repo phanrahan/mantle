@@ -23,7 +23,7 @@ def DefineFoldOp(DefineOp, name, height, width):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
@@ -106,7 +106,7 @@ def DefineOp(op_name, DefineCoreirReduce, height, width):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
@@ -146,7 +146,7 @@ def DefineNAnd(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
@@ -206,7 +206,7 @@ def DefineNOr(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
@@ -252,7 +252,7 @@ def DefineNXOr(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
@@ -364,7 +364,7 @@ def DefineStaticLeftShift(width, shift_amount):
     class _StaticLeftShift(Circuit):
         name = 'StaticLeftShift_{}{}'.format(width, shift_amount)
 
-        IO = ["I", In(T), "O", Out(T)]
+        io = m.IO(I=In(T), O=Out(T))
 
         @classmethod
         def definition(io):
@@ -384,7 +384,7 @@ def DefineStaticRightShift(width, shift_amount):
     class _StaticRightShift(Circuit):
         name = 'StaticRightShift_{}{}'.format(width, shift_amount)
 
-        IO = ["I", In(T), "O", Out(T)]
+        io = m.IO(I=In(T), O=Out(T))
 
         @classmethod
         def definition(io):

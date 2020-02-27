@@ -38,12 +38,12 @@ def gen_sim_mem(depth, width):
 def DefineCoreirMem(depth, width):
     name = "coreir_mem{}x{}".format(depth,width)
     addr_width = getRAMAddrWidth(depth)
-    IO = ["raddr", In(Bits[ addr_width ]),
-          "rdata", Out(Bits[ width ]),
-          "waddr", In(Bits[ addr_width ]),
-          "wdata", In(Bits[ width ]),
-          "clk", In(Clock),
-          "wen", In(Bit) ]
+    io = m.IO(raddr=In(Bits[ addr_width ]),
+          rdata=Out(Bits[ width ]),
+          waddr=In(Bits[ addr_width ]),
+          wdata=In(Bits[ width ]),
+          clk=In(Clock),
+          wen=In(Bit) )
     return DeclareCircuit(name, *IO, verilog_name="coreir_mem",
             coreir_name="mem", coreir_lib="coreir",
             simulate=gen_sim_mem(depth, width),

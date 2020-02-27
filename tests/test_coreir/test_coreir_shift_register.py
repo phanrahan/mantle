@@ -10,7 +10,7 @@ def test_shift_register():
 
     class ShiftRegister(m.Circuit):
         name = "ShiftRegister"
-        IO = ["I", m.In(T), "O", m.Out(T), "CLK", m.In(m.Clock)]
+        io = m.IO(I=m.In(T), O=m.Out(T), CLK=m.In(m.Clock))
         @classmethod
         def definition(io):
             regs = [Register4() for _ in range(N)]

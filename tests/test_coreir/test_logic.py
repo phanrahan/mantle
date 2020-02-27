@@ -12,7 +12,7 @@ import fault
 def test_coreir_bit():
     class TestCircuit(Circuit):
         name = "test_coreir_bit"
-        IO = ["a", In(Bit), "b", In(Bit), "c", In(Bit), "d", Out(Bit)]
+        io = m.IO(a=In(Bit), b=In(Bit), c=In(Bit), d=Out(Bit))
         @classmethod
         def definition(circuit):
             d = Or(2)(Not()(And(2)(circuit.a, circuit.b)),
@@ -26,7 +26,7 @@ def test_coreir_bit():
 def test_coreir_bit_2():
     class TestCircuit(Circuit):
         name = "test_coreir_bit_2"
-        IO = ["a", In(Bit), "b", In(Bit), "c", In(Bit), "d", Out(Bit)]
+        io = m.IO(a=In(Bit), b=In(Bit), c=In(Bit), d=Out(Bit))
         @classmethod
         def definition(circuit):
             d = NOr(2)((NAnd(2)(circuit.a, circuit.b)),
@@ -41,7 +41,7 @@ def test_coreir_bits():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_bits"
-        IO = ["a", In(Bits[ width ]), "b", In(Bits[ width ]), "c", In(Bits[ width ]), "d", Out(Bits[ width ])]
+        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bits[ width ]))
         @classmethod
         def definition(circuit):
             d = Or(2, width)(Invert(width)(And(2, width)(circuit.a, circuit.b)),
@@ -56,7 +56,7 @@ def test_coreir_bits_2():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_bits_2"
-        IO = ["a", In(Bits[ width ]), "b", In(Bits[ width ]), "c", In(Bits[ width ]), "d", Out(Bits[ width ])]
+        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bits[ width ]))
         @classmethod
         def definition(circuit):
             d = NOr(2, width)(NAnd(2, width)(circuit.a, circuit.b),
@@ -71,7 +71,7 @@ def test_three_args():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_three_args"
-        IO = ["a", In(Bits[ width ]), "b", In(Bits[ width ]), "c", In(Bits[ width ]), "d", Out(Bits[ width ])]
+        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bits[ width ]))
         @classmethod
         def definition(circuit):
             d = Or(3, width)(circuit.a,
@@ -87,7 +87,7 @@ def test_reduce():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_reduce"
-        IO = ["a", In(Bits[ width ]), "b", In(Bits[ width ]), "c", In(Bits[ width ]), "d", Out(Bit)]
+        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bit))
         @classmethod
         def definition(circuit):
             d = Or(3, None)(ReduceAnd(width)(circuit.a),
@@ -103,7 +103,7 @@ def test_reduce_2():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_reduce_2"
-        IO = ["a", In(Bits[ width ]), "b", In(Bits[ width ]), "c", In(Bits[ width ]), "d", Out(Bit)]
+        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bit))
         @classmethod
         def definition(circuit):
             d = Or(3, None)(ReduceNAnd(width)(circuit.a),
@@ -119,7 +119,7 @@ def test_static_shift():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_static_shift"
-        IO = ["a", In(Bits[ width ]), "b", In(Bits[ width ]), "c", Out(Bits[ width ])]
+        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=Out(Bits[ width ]))
         @classmethod
         def definition(circuit):
             c = Or(2, width)(static_left_shift(circuit.a, 2),
@@ -134,7 +134,7 @@ def test_ls():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_ls"
-        IO = ["a", In(Bits[ width ]), "b", In(UInt[ width ]), "c", Out(Bits[ width ])]
+        io = m.IO(a=In(Bits[ width ]), b=In(UInt[ width ]), c=Out(Bits[ width ]))
         @classmethod
         def definition(circuit):
             c = Or(2, width)(lsl(circuit.a, circuit.b),
@@ -149,7 +149,7 @@ def test_wire():
     width = 4
     class TestCircuit(Circuit):
         name = "test_coreir_wire"
-        IO = ["a", In(Bits[ width ]), "b", Out(Bits[ width ]), "e", Out(Bit)]
+        io = m.IO(a=In(Bits[ width ]), b=Out(Bits[ width ]), e=Out(Bit))
         @classmethod
         def definition(circuit):
             c = Wire(width, name="c")

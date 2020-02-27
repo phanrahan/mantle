@@ -4,8 +4,8 @@ from mantle import XOr, And, Or
 __all__ = [ "FullAdder" ]
 
 class FullAdder(m.Circuit):
-    IO = ["I0", m.In(m.Bit), "I1", m.In(m.Bit), "CIN", m.In(m.Bit),
-          "O", m.Out(m.Bit), "COUT", m.Out(m.Bit)]
+    io = m.IO(I0=m.In(m.Bit), I1=m.In(m.Bit), CIN=m.In(m.Bit),
+          O=m.Out(m.Bit), COUT=m.Out(m.Bit))
 
     @classmethod
     def definition(io):

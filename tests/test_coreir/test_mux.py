@@ -8,12 +8,12 @@ import pytest
                                m.Array[2, m.Tuple[m.Bit, m.Bits[2]]]])
 def test_coreir_mux_complex(T):
     class Main(m.Circuit):
-        IO = [
-            "I0", m.In(T),
-            "I1", m.In(T),
-            "S", m.In(m.Bit),
-            "O", m.Out(T)
-        ]
+        io = m.IO(
+            I0=m.In(T),
+            I1=m.In(T),
+            S=m.In(m.Bit),
+            O=m.Out(T)
+        )
         @classmethod
         def definition(circuit):
             MuxT = mantle.DefineMux(2, T=type(circuit.I0))

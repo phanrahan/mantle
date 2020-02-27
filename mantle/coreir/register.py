@@ -22,7 +22,7 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
                    f"has_async_reset_{has_async_reset}_" \
                    f"has_async_resetn_{has_async_resetn}_" \
                    f"type_{_type.__name__}_n_{n}"
-            IO = ["I", m.In(T), "O", m.Out(T)]
+            io = m.IO(I=m.In(T), O=m.Out(T))
             IO += m.ClockInterface(has_ce=has_ce,
                                    has_reset=has_reset,
                                    has_async_reset=has_async_reset,

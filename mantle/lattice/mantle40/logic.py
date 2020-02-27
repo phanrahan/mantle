@@ -50,7 +50,7 @@ def DefineReduceOp(opname, n, luts, cascadeexpr, cin):
     T = Bits[ n ]
     class _ReduceOp(Circuit):
         name = '{}{}'.format(opname, n)
-        IO = ['I', In(T), 'O', Out(Bit)]
+        io = m.IO('I', In(T), 'O', Out(Bit))
 
         @classmethod
         def definition(io):
@@ -189,7 +189,7 @@ def DefineInvert(width):
     class _Invert(Circuit):
         name = 'Invert%d' % width
 
-        IO  = ['I', In(T), 'O', Out(T)]
+        io = m.IO('I', In(T), 'O', Out(T))
 
         @classmethod
         def definition(def_):

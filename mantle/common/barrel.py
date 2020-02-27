@@ -16,7 +16,7 @@ def DefineShiftK(n, k, op):
     T = Bits[ n ]
     class _ShiftK(Circuit):
         name = f'{op.upper()}{n}_{k}'
-        IO = ['I', In(T), 'S', In(Bit), "O", Out(T)]
+        io = m.IO('I', In(T), 'S', In(Bit), O=Out(T))
         @classmethod
         def definition(io):
             Is = [io.I[i] for i in range(n)]
@@ -48,7 +48,7 @@ def DefineShift(n, op):
     T = Bits[ n ]
     class _Shift(Circuit):
         name = f'{op.upper()}{n}'
-        IO = ['I', In(T), 'S', In(Bits[ logn ]), "O", Out(T)]
+        io = m.IO('I', In(T), 'S', In(Bits[ logn ]), O=Out(T))
         @classmethod
         def definition(io):
             I = io.I
@@ -86,7 +86,7 @@ def DefineRotateK(n, k, op):
     T = Bits[ n ]
     class _RotateK(Circuit):
         name = f'{op.upper()}{n}_{k}'
-        IO = ['I', In(T), 'S', In(Bit), "O", Out(T)]
+        io = m.IO('I', In(T), 'S', In(Bit), O=Out(T))
         @classmethod
         def definition(io):
             Is = [io.I[i] for i in range(n)]
@@ -115,7 +115,7 @@ def DefineRotate(n, op):
     T = Bits[ n ]
     class _Rotate(Circuit):
         name = f'{op.upper()}{n}'
-        IO = ['I', In(T), 'S', In(Bits[ logn ]), "O", Out(T)]
+        io = m.IO('I', In(T), 'S', In(Bits[ logn ]), O=Out(T))
         @classmethod
         def definition(io):
             I = io.I

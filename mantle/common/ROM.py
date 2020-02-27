@@ -35,7 +35,7 @@ def DefineROM(height, width, data):
 
     class _ROM(Circuit):
         name = f'ROM{n}x{width}'
-        IO = ['RADDR', In(TADDR), 'RDATA', Out(TDATA)]
+        io = m.IO('RADDR', In(TADDR), 'RDATA', Out(TDATA))
 
         @classmethod
         def definition(io):

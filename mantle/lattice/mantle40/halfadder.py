@@ -5,7 +5,7 @@ from .LUT import LUT2
 __all__  = ["HalfAdder", 'halfadder']
 
 class HalfAdder(Circuit):
-    IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit), "COUT", Out(Bit)]
+    io = m.IO(I0=In(Bit), I1=In(Bit), O=Out(Bit), COUT=Out(Bit))
     @classmethod
     def definition(io):
         sum = LUT2(A0^A1)

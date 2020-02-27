@@ -122,7 +122,7 @@ def define_wrap(type_, type_name, in_type):
 @m.cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False, has_async_resetn=False):
     Reg = DefineCoreirReg(None, init, has_async_reset, has_async_resetn)
-    IO = ["I", In(Bit), "O", Out(Bit)]
+    io = m.IO(I=In(Bit), O=Out(Bit))
     IO += ClockInterface(has_ce=has_ce, has_reset=has_reset,
                          has_async_reset=has_async_reset,
                          has_async_resetn=has_async_resetn)

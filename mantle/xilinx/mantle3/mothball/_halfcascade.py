@@ -46,7 +46,7 @@ def DefineFlatHalfCascade(n, k, lutexpr, andexpr, cin, name=None):
         nm = name + str(n)
     class _FlatHalfCascade(Circuit):
         name = nm
-        IO = ["I", In(Bits(n)), "O", Out(Bit)]
+        io = m.IO(I=In(Bits(n)), O=Out(Bit))
         @classmethod
         def definition(io):
             def f(y):

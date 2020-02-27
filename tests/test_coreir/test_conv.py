@@ -6,7 +6,7 @@ import mantle.coreir
 def Define_mantle_reg_U6(init):
   class mantle_reg_U6(Circuit):
     name = f"mantle_reg_U6_{init}"
-    IO = ["I", Array[ 4,In(Bit) ], "clk", In(Clock), "O", Array[ 4,Out(Bit) ], "en", In(Bit)]
+    io = m.IO(I=Array[ 4,In(Bit) ], clk=In(Clock), O=Array[ 4,Out(Bit) ], en=In(Bit))
     @classmethod
     def definition(io):
       enMux = mantle.coreir.DefineCoreirMux(width=4)(name="enMux")
@@ -21,7 +21,7 @@ def Define_mantle_reg_U6(init):
 
 class commonlib_LinebufferMem_U5(Circuit):
   name = "commonlib_LinebufferMem_U5"
-  IO = ["clk", In(Clock), "rdata", Array[ 16,Out(Bit) ], "valid", Out(Bit), "wdata", Array[ 16,In(Bit) ], "wen", In(Bit)]
+  io = m.IO(clk=In(Clock), rdata=Array[ 16,Out(Bit) ], valid=Out(Bit), wdata=Array[ 16,In(Bit) ], wen=In(Bit))
   @classmethod
   def definition(io):
     add_r = mantle.coreir.DefineCoreirAdd(width=4)(name="add_r")
@@ -69,7 +69,7 @@ class commonlib_LinebufferMem_U5(Circuit):
 
 class commonlib_Linebuffer_U3(Circuit):
   name = "commonlib_Linebuffer_U3"
-  IO = ["clk", In(Clock), "I", Array[ 16,In(Bit) ], "wen", In(Bit), "O", Array[ 2,Array[ 1,Array[ 16,Out(Bit) ] ] ]]
+  io = m.IO(clk=In(Clock), I=Array[ 16,In(Bit) ], wen=In(Bit), O=Array[ 2,Array[ 1,Array[ 16,Out(Bit) ] ] ])
   @classmethod
   def definition(io):
     mem_1 = commonlib_LinebufferMem_U5()
@@ -82,14 +82,14 @@ class commonlib_Linebuffer_U3(Circuit):
 
 class mantle_wire_U0(Circuit):
   name = "mantle_wire_U0"
-  IO = ["I", Array[ 16,In(Bit) ], "O", Array[ 16,Out(Bit) ]]
+  io = m.IO(I=Array[ 16,In(Bit) ], O=Array[ 16,Out(Bit) ])
   @classmethod
   def definition(io):
     wire(io.O, io.I)
 
 class global_DesignTop(Circuit):
   name = "global_DesignTop"
-  IO = ["clk", In(Clock), "I", Array[ 1,Array[ 16,In(Bit) ] ], "O", Array[ 16,Out(Bit) ]]
+  io = m.IO(clk=In(Clock), I=Array[ 1,Array[ 16,In(Bit) ] ], O=Array[ 16,Out(Bit) ])
   @classmethod
   def definition(io):
     _336_pt = mantle_wire_U0()

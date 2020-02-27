@@ -6,12 +6,12 @@ def DefineFIFO(height, width):
     T = m.Bits(width)
     address_width = m.bitutils.clog2(height)
     class FIFO(m.Circuit):
-        IO = ["enq_val", m.In(m.Bit),
-              "enq_rdy", m.Out(m.Bit),
-              "deq_val", m.Out(m.Bit),
-              "deq_rdy", m.In(m.Bit),
-              "enq_dat", m.In(T),
-              "deq_dat", m.Out(T)] + m.ClockInterface()
+        io = m.IO(enq_val=m.In(m.Bit),
+              enq_rdy=m.Out(m.Bit),
+              deq_val=m.Out(m.Bit),
+              deq_rdy=m.In(m.Bit),
+              enq_dat=m.In(T),
+              deq_dat=m.Out(T)) + m.ClockInterface()
         @classmethod
         def definition(io):
             enq_ptr = mantle.Register(address_width)

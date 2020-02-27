@@ -19,14 +19,14 @@ EQ1LUT = ((A0&A1)|(~A0&~A1))
 EQ2LUT = ((A0&A1)|(~A0&~A1)) & ((A2&A3)|(~A2&~A3))
 
 class EQ1(Circuit):
-    IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit)]
+    io = m.IO(I0=In(Bit), I1=In(Bit), O=Out(Bit))
     @classmethod
     def definition(io):
         wire( LUT2(EQ1LUT)(io.I0, io.I1), io.O )
 
 class EQ2(Circuit):
     T = Bits[ 2 ]
-    IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
+    io = m.IO(I0=In(T), I1=In(T), O=Out(Bit))
     @classmethod
     def definition(io):
         wire( LUT4(EQ2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
@@ -36,7 +36,7 @@ def DefineEQ(n):
     T = Bits[ n ]
     class _EQ(Circuit):
         name = "EQ{}".format(n)
-        IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
+        io = m.IO('I0', In(T), 'I1', In(T), O=Out(Bit))
         @classmethod
         def definition(io):
              eq = HalfCascade(n//2, 4, EQ2LUT, ZERO, 1)
@@ -59,14 +59,14 @@ NE1LUT = (A0^A1)
 NE2LUT = (A0^A1)|(A2^A3)
 
 class NE1(Circuit):
-    IO = ["I0", In(Bit), "I1", In(Bit), "O", Out(Bit)]
+    io = m.IO(I0=In(Bit), I1=In(Bit), O=Out(Bit))
     @classmethod
     def definition(io):
         wire( LUT2(NE1LUT)(io.I0, io.I1), io.O )
 
 class NE2(Circuit):
     T = Bits[ 2 ]
-    IO = ["I0", In(T), "I1", In(T), "O", Out(Bit)]
+    io = m.IO(I0=In(T), I1=In(T), O=Out(Bit))
     @classmethod
     def definition(io):
         wire( LUT4(NE2LUT)(io.I0[0], io.I1[0], io.I0[1], io.I1[1]), io.O )
@@ -76,7 +76,7 @@ def DefineNE(n):
     T = Bits[ n ]
     class _NE(Circuit):
         name = "NE{}".format(n)
-        IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
+        io = m.IO('I0', In(T), 'I1', In(T), O=Out(Bit))
         @classmethod
         def definition(io):
              ne =  HalfCascade(n//2, 4, NE2LUT, ZERO, 1)
@@ -102,7 +102,7 @@ def DefineUCMP(opname, reverse, negate, n):
     T = UInt[n]
     class _UCMP(Circuit):
         name = "{}{}".format(opname, n)
-        IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
+        io = m.IO('I0', In(T), 'I1', In(T), O=Out(Bit))
         @classmethod
         def definition(io):
             sub = DefineSub(n,1,True)()
@@ -141,7 +141,7 @@ def DefineSCMP(opname, op, reverse, n):
     T = SInt[n]
     class _SCMP(Circuit):
         name = "{}{}".format(opname,n)
-        IO = ['I0', In(T), 'I1', In(T), "O", Out(Bit)]
+        io = m.IO('I0', In(T), 'I1', In(T), O=Out(Bit))
         @classmethod
         def definition(io):
             sub = DefineSub(n)()

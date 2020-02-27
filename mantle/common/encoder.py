@@ -15,7 +15,7 @@ def DefineEncoder(n):
     logn = log2(n)
     class _Encoder(Circuit):
         name = 'Encoder'+str(n)
-        IO = ['I', In(Bits[ n ]), 'O', Out(Bits[ logn ])]
+        io = m.IO('I', In(Bits[ n ]), 'O', Out(Bits[ logn ]))
         @classmethod
         def definition(Enc):
             def f(y):

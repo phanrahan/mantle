@@ -56,7 +56,7 @@ def DefinePermute(na,permutation):
     n = len(permutation)
     class Permute(Circuit):
         name = na
-        IO = ["I", In(Bits(n)), "O", Out(Bits(n))]
+        io = m.IO(I=In(Bits(n)), O=Out(Bits(n)))
         @classmethod
         def definition(io):
             [wire(io.I[permutation[i]], io.O[i]) for i in range(len(io.I))]

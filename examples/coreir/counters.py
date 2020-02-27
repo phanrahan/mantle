@@ -8,7 +8,7 @@ import mantle.coreir
 def DefineMantleReg(init):
     class MantleReg(Circuit):
         name = f"MantleReg{init}"
-        IO = ["in", In(Bits(16)), "clk", In(Clock), "out", Out(Bits(16)), "clr", In(Bit)]
+        io = m.IO(in=In(Bits(16)), clk=In(Clock), out=Out(Bits(16)), clr=In(Bit))
         @classmethod
         def definition(io):
             c0 = bits(0, 16)
@@ -25,7 +25,7 @@ def DefineMantleReg(init):
 
 class Counter(Circuit):
     name = "Counter16"
-    IO = ["clk", In(Clock), "clr", In(Bit), "out", Out(Bits(16))]
+    io = m.IO(clk=In(Clock), clr=In(Bit), out=Out(Bits(16)))
 
     @classmethod
     def definition(io):
@@ -41,7 +41,7 @@ class Counter(Circuit):
 
 class Counters(Circuit):
     name = "Counters"
-    IO = ["clk", In(Clock)]
+    io = m.IO(clk=In(Clock))
     @classmethod
     def definition(io):
         count0 = Counter(16)

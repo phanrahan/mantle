@@ -1,12 +1,12 @@
+import fault
+from mantle import lsl, lsr
+from mantle.coreir import static_left_shift, static_right_shift, Wire
+from mantle.coreir import NAnd, NOr, NXOr, ReduceNAnd, ReduceNOr, ReduceNXOr
+from mantle.coreir import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, ReduceXOr
+from magma.testing import check_files_equal
+from magma import *
 import pytest
 coreir = pytest.importorskip("coreir")
-from magma import *
-from magma.testing import check_files_equal
-from mantle.coreir import And, Or, XOr, Not, Invert, ReduceAnd, ReduceOr, ReduceXOr
-from mantle.coreir import NAnd, NOr, NXOr, ReduceNAnd, ReduceNOr, ReduceNXOr
-from mantle.coreir import static_left_shift, static_right_shift, Wire
-from mantle import lsl, lsr
-import fault
 
 
 def test_coreir_bit():
@@ -20,7 +20,7 @@ def test_coreir_bit():
             wire(d, circuit.d)
     compile("build/test_coreir_bit", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_bit.json", "gold/test_coreir_bit.json")
+                             "build/test_coreir_bit.json", "gold/test_coreir_bit.json")
 
 
 def test_coreir_bit_2():
@@ -30,64 +30,77 @@ def test_coreir_bit_2():
         @classmethod
         def definition(circuit):
             d = NOr(2)((NAnd(2)(circuit.a, circuit.b)),
-                        NXOr(2)(circuit.b, circuit.c))
+                       NXOr(2)(circuit.b, circuit.c))
             wire(d, circuit.d)
     compile("build/test_coreir_bit_2", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_bit_2.json", "gold/test_coreir_bit_2.json")
+                             "build/test_coreir_bit_2.json", "gold/test_coreir_bit_2.json")
 
 
 def test_coreir_bits():
     width = 4
+
     class TestCircuit(Circuit):
         name = "test_coreir_bits"
-        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bits[ width ]))
+        io = m.IO(a=In(Bits[width]), b=In(Bits[width]),
+                  c=In(Bits[width]), d=Out(Bits[width]))
+
         @classmethod
         def definition(circuit):
             d = Or(2, width)(Invert(width)(And(2, width)(circuit.a, circuit.b)),
-                      XOr(2, width)(circuit.b, circuit.c))
+                             XOr(2, width)(circuit.b, circuit.c))
             wire(d, circuit.d)
     compile("build/test_coreir_bits", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_bits.json", "gold/test_coreir_bits.json")
+                             "build/test_coreir_bits.json", "gold/test_coreir_bits.json")
 
 
 def test_coreir_bits_2():
     width = 4
+
     class TestCircuit(Circuit):
         name = "test_coreir_bits_2"
-        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bits[ width ]))
+        io = m.IO(a=In(Bits[width]), b=In(Bits[width]),
+                  c=In(Bits[width]), d=Out(Bits[width]))
+
         @classmethod
         def definition(circuit):
             d = NOr(2, width)(NAnd(2, width)(circuit.a, circuit.b),
-                      NXOr(2, width)(circuit.b, circuit.c))
+                              NXOr(2, width)(circuit.b, circuit.c))
             wire(d, circuit.d)
     compile("build/test_coreir_bits_2", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_bits_2.json", "gold/test_coreir_bits_2.json")
+                             "build/test_coreir_bits_2.json", "gold/test_coreir_bits_2.json")
 
 
 def test_three_args():
     width = 4
+
     class TestCircuit(Circuit):
         name = "test_coreir_three_args"
-        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bits[ width ]))
+        io = m.IO(a=In(Bits[width]), b=In(Bits[width]),
+                  c=In(Bits[width]), d=Out(Bits[width]))
+
         @classmethod
         def definition(circuit):
             d = Or(3, width)(circuit.a,
-                             Invert(width)(And(3, width)(circuit.a, circuit.b, circuit.c)),
+                             Invert(width)(And(3, width)(
+                                 circuit.a, circuit.b, circuit.c)),
                              XOr(3, width)(circuit.b, circuit.c, circuit.a))
             wire(d, circuit.d)
     compile("build/test_coreir_three_args", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_three_args.json", "gold/test_coreir_three_args.json")
+                             "build/test_coreir_three_args.json", "gold/test_coreir_three_args.json")
 
 
 def test_reduce():
     width = 4
+
     class TestCircuit(Circuit):
         name = "test_coreir_reduce"
-        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bit))
+        io = m.IO(a=In(Bits[width]), b=In(Bits[width]),
+                  c=In(Bits[width]), d=Out(Bit))
+
         @classmethod
         def definition(circuit):
             d = Or(3, None)(ReduceAnd(width)(circuit.a),
@@ -96,14 +109,17 @@ def test_reduce():
             wire(d, circuit.d)
     compile("build/test_coreir_reduce", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_reduce.json", "gold/test_coreir_reduce.json")
+                             "build/test_coreir_reduce.json", "gold/test_coreir_reduce.json")
 
 
 def test_reduce_2():
     width = 4
+
     class TestCircuit(Circuit):
         name = "test_coreir_reduce_2"
-        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=In(Bits[ width ]), d=Out(Bit))
+        io = m.IO(a=In(Bits[width]), b=In(Bits[width]),
+                  c=In(Bits[width]), d=Out(Bit))
+
         @classmethod
         def definition(circuit):
             d = Or(3, None)(ReduceNAnd(width)(circuit.a),
@@ -112,14 +128,15 @@ def test_reduce_2():
             wire(d, circuit.d)
     compile("build/test_coreir_reduce_2", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_reduce_2.json", "gold/test_coreir_reduce_2.json")
+                             "build/test_coreir_reduce_2.json", "gold/test_coreir_reduce_2.json")
 
 
 def test_static_shift():
     width = 4
+
     class TestCircuit(Circuit):
         name = "test_coreir_static_shift"
-        io = m.IO(a=In(Bits[ width ]), b=In(Bits[ width ]), c=Out(Bits[ width ]))
+        io = m.IO(a=In(Bits[width]), b=In(Bits[width]), c=Out(Bits[width]))
         @classmethod
         def definition(circuit):
             c = Or(2, width)(static_left_shift(circuit.a, 2),
@@ -127,14 +144,15 @@ def test_static_shift():
             wire(c, circuit.c)
     compile("build/test_coreir_static_shift", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_static_shift.json", "gold/test_coreir_static_shift.json")
+                             "build/test_coreir_static_shift.json", "gold/test_coreir_static_shift.json")
 
 
 def test_ls():
     width = 4
+
     class TestCircuit(Circuit):
         name = "test_coreir_ls"
-        io = m.IO(a=In(Bits[ width ]), b=In(UInt[ width ]), c=Out(Bits[ width ]))
+        io = m.IO(a=In(Bits[width]), b=In(UInt[width]), c=Out(Bits[width]))
         @classmethod
         def definition(circuit):
             c = Or(2, width)(lsl(circuit.a, circuit.b),
@@ -142,14 +160,15 @@ def test_ls():
             wire(c, circuit.c)
     compile("build/test_coreir_ls", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_ls.json", "gold/test_coreir_ls.json")
+                             "build/test_coreir_ls.json", "gold/test_coreir_ls.json")
 
 
 def test_wire():
     width = 4
+
     class TestCircuit(Circuit):
         name = "test_coreir_wire"
-        io = m.IO(a=In(Bits[ width ]), b=Out(Bits[ width ]), e=Out(Bit))
+        io = m.IO(a=In(Bits[width]), b=Out(Bits[width]), e=Out(Bit))
         @classmethod
         def definition(circuit):
             c = Wire(width, name="c")
@@ -158,7 +177,7 @@ def test_wire():
             wire(d(circuit.a[0]), circuit.e)
     compile("build/test_coreir_wire", TestCircuit, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_coreir_wire.json", "gold/test_coreir_wire.json")
+                             "build/test_coreir_wire.json", "gold/test_coreir_wire.json")
     tester = fault.Tester(TestCircuit)
     for i in range(0, 1 << 4):
         tester.poke(TestCircuit.a, i)

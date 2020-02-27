@@ -15,6 +15,7 @@ def DeclareAdd(N, cin=False, cout=False):
     if has_cin:
         IO_ += ['CIN', In(Bit)]
         name_ += "_cin"
+
     class Add(Circuit):
         # Underscores because there's some weird scoping issue here with Python
         # when trying to capture name and IO
@@ -31,7 +32,7 @@ def add(*args, **kwargs):
     if not all(isinstance(arg, BitsType) for arg in args):
         # TODO: Something more specific than a ValueError?
         raise ValueError("Arguments to add should be all Bits"
-                " {}".format([(arg, type(arg)) for arg in args]))
+                         " {}".format([(arg, type(arg)) for arg in args]))
     adders = [Add(width, **kwargs) for _ in range(len(args) - 1)]
     curr = adders[0]
     wire(args[0], curr.I0)
@@ -59,6 +60,7 @@ def DeclareSub(N, cin=False, cout=False, T=m.Bits):
     if has_cin:
         IO_ += ['CIN', In(Bit)]
         name_ += "_cin"
+
     class Sub(Circuit):
         # Underscores because there's some weird scoping issue here with Python
         # when trying to capture name and IO
@@ -75,7 +77,7 @@ def sub(*args, **kwargs):
     if not all(isinstance(arg, BitsType) for arg in args):
         # TODO: Something more specific than a ValueError?
         raise ValueError("Arguments to sub should be all Bits"
-                " {}".format([(arg, type(arg)) for arg in args]))
+                         " {}".format([(arg, type(arg)) for arg in args]))
     subbers = [Sub(width, **kwargs) for _ in range(len(args) - 1)]
     curr = subbers[0]
     wire(args[0], curr.I0)
@@ -89,8 +91,10 @@ def sub(*args, **kwargs):
             curr = next_
     return curr.O
 
+
 def DeclareNegate(width):
     T = Bits[width]
+
     class _Negate(Circuit):
         name = 'Negate{}'.format(width)
         io = m.IO('I', In(T), 'O', Out(T))
@@ -99,6 +103,7 @@ def DeclareNegate(width):
 
 def DeclareASR(width):
     T = Bits[width]
+
     class _ASR(Circuit):
         name = 'ASR{}'.format(width)
         io = m.IO(I0=In(T), I1=In(T), O=Out(T))

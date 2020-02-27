@@ -6,8 +6,8 @@ from magma.testing import check_files_equal
 
 @pytest.mark.parametrize("has_ce", [True, False])
 @pytest.mark.parametrize("has_async_reset,has_async_resetn", [(True, False),
-                                                            (False, True),
-                                                            (False, False)])
+                                                              (False, True),
+                                                              (False, False)])
 def test_reg(has_ce, has_async_reset, has_async_resetn):
 
     def DefineReg():
@@ -31,7 +31,8 @@ def test_reg(has_ce, has_async_reset, has_async_resetn):
         return testReg
 
     test = DefineReg()
-    m.compile(f"build/testReg-{has_ce}-{has_async_reset}-{has_async_resetn}", test, output="coreir-verilog")
+    m.compile(
+        f"build/testReg-{has_ce}-{has_async_reset}-{has_async_resetn}", test, output="coreir-verilog")
 
     assert check_files_equal(
         __file__,

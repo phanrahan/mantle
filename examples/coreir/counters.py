@@ -1,8 +1,8 @@
+import mantle.coreir
+from mantle import *
+from magma import *
 import os
 os.environ['MANTLE'] = 'coreir'
-from magma import *
-from mantle import *
-import mantle.coreir
 
 
 def DefineMantleReg(init):
@@ -35,9 +35,11 @@ class Counter(Circuit):
         wire(c1, a.in0)
         wire(r.out, a.in1)
         wire(r.clk, io.clk)
-        wire(a.out, getattr(r, "in"))  # r.in doesn't work because in is a keyword
+        # r.in doesn't work because in is a keyword
+        wire(a.out, getattr(r, "in"))
         wire(r.out, io.out)
         wire(io.clr, r.clr)
+
 
 class Counters(Circuit):
     name = "Counters"

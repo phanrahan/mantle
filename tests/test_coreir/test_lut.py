@@ -18,4 +18,4 @@ def test_coreir_lut():
 
     m.compile("build/test_lut3", Test, output="coreir")
     assert check_files_equal(__file__,
-            "build/test_lut3.json", "gold/test_lut3.json")
+                             "build/test_lut3.json", "gold/test_lut3.json")

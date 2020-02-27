@@ -5,18 +5,21 @@ from .ROM import ROMN
 
 __all__ = ['FlatCascade', 'DefineFlatCascade']
 
+
 def _Name(n, k, expr, input, din, cin):
     if isinstance(expr, Sequence):
-        expr = "_".join(["%X" % uint(e, 1<<k) for e in expr])
+        expr = "_".join(["%X" % uint(e, 1 << k) for e in expr])
     else:
-        expr = "%016X" % uint(expr, 1<<k) 
+        expr = "%016X" % uint(expr, 1 << k)
     return 'FlatCascade%dx%d_%s_%d_%d_%d' % (n, k, expr, input, din, cin)
 
 #
-# create an And/NAnd gate using the carry chain 
+# create an And/NAnd gate using the carry chain
 #
 #  cout = MUXCY( din, cin, ROM4() )
 #
+
+
 def FullCarry(k, expr, din):
 
     rom = ROMN(expr, k)
@@ -28,8 +31,7 @@ def FullCarry(k, expr, din):
     wire(din,   mux.DI)
     wire(CIN,   mux.CI)
 
-    return AnonymousCircuit( 'input I', rom.I, "output O", mux.O, "input CIN", CIN )
-
+    return AnonymousCircuit('input I', rom.I, "output O", mux.O, "input CIN", CIN)
 
 
 #
@@ -58,7 +60,7 @@ def DefineFlatCascade(n, k, expr, input, din, cin):
                 return FullCarry(k, e, din)
 
             m = (n+LOG_BITS_PER_LUT-1)//LOG_BITS_PER_LUT
-            c = braid( col(f, m), flatargs=['I'], foldargs={"CIN":"O"})
+            c = braid(col(f, m), flatargs=['I'], foldargs={"CIN": "O"})
 
             for i in range(LOG_BITS_PER_LUT*m):
                 if i < n:
@@ -71,6 +73,6 @@ def DefineFlatCascade(n, k, expr, input, din, cin):
 
     return _FlatCascade
 
+
 def FlatCascade(n, k, expr, input, din, cin):
     return DefineFlatCascade(n, k, expr, input, din, cin)()
-

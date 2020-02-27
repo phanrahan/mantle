@@ -1,3 +1,4 @@
+import fault
 import magma as m
 import mantle
 
@@ -5,13 +6,15 @@ import mantle
 def DefineFIFO(height, width):
     T = m.Bits(width)
     address_width = m.bitutils.clog2(height)
+
     class FIFO(m.Circuit):
         io = m.IO(enq_val=m.In(m.Bit),
-              enq_rdy=m.Out(m.Bit),
-              deq_val=m.Out(m.Bit),
-              deq_rdy=m.In(m.Bit),
-              enq_dat=m.In(T),
-              deq_dat=m.Out(T)) + m.ClockInterface()
+                  enq_rdy=m.Out(m.Bit),
+                  deq_val=m.Out(m.Bit),
+                  deq_rdy=m.In(m.Bit),
+                  enq_dat=m.In(T),
+                  deq_dat=m.Out(T)) + m.ClockInterface()
+
         @classmethod
         def definition(io):
             enq_ptr = mantle.Register(address_width)
@@ -42,10 +45,9 @@ def DefineFIFO(height, width):
             m.wire(io.deq_val, ~is_empty)
     return FIFO
 
+
 FIFO4x8 = DefineFIFO(4, 8)
 m.compile('build/FIFO4x8', FIFO4x8)
-
-import fault
 
 
 tester = fault.Tester(FIFO4x8, FIFO4x8.CLK)

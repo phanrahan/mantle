@@ -6,7 +6,7 @@ from mantle import DefineRegister
 def test_shift_register():
     N = 4
     Register4 = DefineRegister(4)
-    T = m.Bits[ N ]
+    T = m.Bits[N]
 
     class ShiftRegister(m.Circuit):
         name = "ShiftRegister"

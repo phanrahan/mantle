@@ -40,7 +40,7 @@ def DefineReduceOp(opname, n, lutexprs, andexpr, cin):
 
     class _ReduceOp(Circuit):
         name = f'{opname}{n}'
-        io = m.IO('I', In(T), 'O', Out(Bit))
+        io = m.IO(I=In(T), O=Out(Bit))
 
         @classmethod
         def definition(io):
@@ -118,7 +118,7 @@ def DefineReduceLUT(opname, n, luts, cascadeexpr, cin):
 
     class _ReduceLUT(Circuit):
         name = '{}{}'.format(opname, n)
-        io = m.IO('I', In(T), 'O', Out(Bit))
+        io = m.IO(I=In(T), O=Out(Bit))
 
         @classmethod
         def definition(io):
@@ -250,7 +250,7 @@ def DefineInvert(width):
 
     class _Invert(Circuit):
         name = 'Invert%d' % width
-        io = m.IO('I', In(T), 'O', Out(T))
+        io = m.IO(I=In(T), O=Out(T))
 
         @classmethod
         def definition(def_):

@@ -14,7 +14,7 @@ def DefineBuf(width=1):
     class BufN(Circuit):
 
         name = 'Buf{}'.format(width)
-        io = m.IO('I', In(T), 'O', Out(T))
+        io = m.IO(I=In(T), O=Out(T))
 
         @classmethod
         def definition(def_):

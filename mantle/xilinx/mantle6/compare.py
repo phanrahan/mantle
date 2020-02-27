@@ -40,7 +40,7 @@ def DefineEQ(n):
 
     class _EQ(Circuit):
         name = "EQ{}".format(n)
-        io = m.IO('I0', In(T), 'I1', In(T), O=Out(Bit))
+        io = m.IO(I0=In(T), I1=In(T), O=Out(Bit))
         @classmethod
         def definition(io):
             eq = HalfCascade(n//2, 4, EQ2LUT, ZERO, 1)
@@ -86,7 +86,7 @@ def DefineNE(n):
 
     class _NE(Circuit):
         name = "NE{}".format(n)
-        io = m.IO('I0', In(T), 'I1', In(T), O=Out(Bit))
+        io = m.IO(I0=In(T), I1=In(T), O=Out(Bit))
         @classmethod
         def definition(io):
             ne = HalfCascade(n//2, 4, NE2LUT, ZERO, 1)
@@ -114,7 +114,7 @@ def DefineUCMP(opname, reverse, negate, n):
 
     class _UCMP(Circuit):
         name = "{}{}".format(opname, n)
-        io = m.IO('I0', In(T), 'I1', In(T), O=Out(Bit))
+        io = m.IO(I0=In(T), I1=In(T), O=Out(Bit))
         @classmethod
         def definition(io):
             sub = DefineSub(n, 1, True)()
@@ -160,7 +160,7 @@ def DefineSCMP(opname, op, reverse, n):
 
     class _SCMP(Circuit):
         name = "{}{}".format(opname, n)
-        io = m.IO('I0', In(T), 'I1', In(T), O=Out(Bit))
+        io = m.IO(I0=In(T), I1=In(T), O=Out(Bit))
         @classmethod
         def definition(io):
             sub = DefineSub(n)()

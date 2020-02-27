@@ -177,7 +177,7 @@ def DefineCeilFloorUpDownCounter(m, has_ce=False, has_reset=False):
         num_bits = math.ceil(math.log(m, 2))
         name = "CeilFloorUpDownCounter_m{}_hasCE{}_hasReset{}".format(
             str(m), str(has_ce), str(has_reset))
-        io = m.IO('U', In(Bit), 'D', In(Bit), 'O', Out(
+        io = m.IO(U=In(Bit), D=In(Bit), O=Out(
             UInt[num_bits])) + ClockInterface(has_ce, has_reset)
 
         @classmethod

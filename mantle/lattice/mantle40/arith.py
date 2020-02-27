@@ -109,7 +109,7 @@ def DefineNegate(width):
 
     class _Negate(Circuit):
         name = 'Negate{}'.format(width)
-        io = m.IO('I', In(T), 'O', Out(T))
+        io = m.IO(I=In(T), O=Out(T))
         @classmethod
         def definition(io):
             invert = DefineInvert(width)()

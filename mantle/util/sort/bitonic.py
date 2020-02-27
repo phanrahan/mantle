@@ -18,7 +18,7 @@ def DefineBitonicSorter(n):
 
     class _BitonicSorter(Circuit):
         name = 'BitonicSorter{}'.format(n)
-        io = m.IO('I', In(T), O=Out(T))
+        io = m.IO(I=In(T), O=Out(T))
         @classmethod
         def definition(io):
             if n == 2:
@@ -52,7 +52,7 @@ def DefineMerger(n):
 
     class _Merger(Circuit):
         name = 'Merger{}'.format(n)
-        io = m.IO('I', In(T), O=Out(T))
+        io = m.IO(I=In(T), O=Out(T))
         @classmethod
         def definition(io):
             if n == 2:
@@ -87,7 +87,7 @@ def DefineSorter(n):
 
     class _Sorter(Circuit):
         name = 'Sorter{}'.format(n)
-        io = m.IO('I', In(T), O=Out(T))
+        io = m.IO(I=In(T), O=Out(T))
         @classmethod
         def definition(io):
             if n == 2:  # Sort 2 element sequences

@@ -16,8 +16,8 @@ def DefinePISO(n, init=0, has_ce=False, has_reset=False):
 
     class _PISO(Circuit):
         name = _RegisterName('PISO', n, init, has_ce, has_reset)
-        io = m.IO('SI', In(Bit), 'PI', In(T), 'LOAD', In(Bit),
-                  'O', Out(Bit)) + ClockInterface(has_ce, has_reset)
+        io = m.IO(SI=In(Bit), PI=In(T), LOAD=In(Bit),
+                  O=Out(Bit)) + ClockInterface(has_ce, has_reset)
 
         @classmethod
         def definition(piso):

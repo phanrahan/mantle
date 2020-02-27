@@ -13,7 +13,7 @@ def DefineSISO(n, init=0, has_ce=False, has_reset=False):
 
     class _SISO(Circuit):
         name = _RegisterName('SISO', n, init, has_ce, has_reset)
-        io = m.IO('I', In(Bit), 'O', Out(Bit)) + \
+        io = m.IO(I=In(Bit), O=Out(Bit)) + \
             ClockInterface(has_ce, has_reset)
 
         @classmethod

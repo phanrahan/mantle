@@ -15,7 +15,7 @@ def DefineArbiter(n):
 
     class _Arbiter(Circuit):
         name = 'Arbiter'+str(n)
-        io = m.IO('I', In(T), 'O', Out(T))
+        io = m.IO(I=In(T), O=Out(T))
         @classmethod
         def definition(Arb):
             ones = n * [1]

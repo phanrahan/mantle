@@ -16,8 +16,8 @@ def DefinePIPO(n, init=0, has_ce=False, has_reset=False):
 
     class _PIPO(Circuit):
         name = _RegisterName('PIPO', n, init, has_ce, has_reset)
-        io = m.IO('SI', In(Bit), 'PI', In(T), 'LOAD', In(Bit),
-                  'O', Out(T)) + ClockInterface(has_ce, has_reset)
+        io = m.IO(SI=In(Bit), PI=In(T), LOAD=In(Bit),
+                  O=Out(T)) + ClockInterface(has_ce, has_reset)
 
         @classmethod
         def definition(pipo):

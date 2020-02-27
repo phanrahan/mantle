@@ -11,7 +11,7 @@ __all__ += ['DefineEvenOddSwaps', 'EvenOddSwaps', 'evenoddswaps']
 
 
 class Swap(Circuit):
-    io = m.IO('I', In(Bits(2)), O=Out(Bits(2)))
+    io = m.IO(I=In(Bits(2)), O=Out(Bits(2)))
     @classmethod
     def definition(io):
         swap = uncurry(fork(And(2), Or(2)), prefix="I")
@@ -26,7 +26,7 @@ def swap(I):
 def DefineSwaps(n):
     class Swaps(Circuit):
         name = 'Swap{}'.format(n)
-        io = m.IO('I', In(Bits(n)), O=Out(Bits(n)))
+        io = m.IO(I=In(Bits(n)), O=Out(Bits(n)))
         @classmethod
         def definition(io):
             s = flat(join(map_(Swap, n//2)), flatargs=['I', 'O'])
@@ -45,7 +45,7 @@ def swaps(I):
 def DefineEvenOddSwaps(n):
     class EvenOddSwaps(Circuit):
         name = 'EvenOddSwap{}'.format(n)
-        io = m.IO('I', In(Bits(n)), O=Out(Bits(n)))
+        io = m.IO(I=In(Bits(n)), O=Out(Bits(n)))
         @classmethod
         def definition(io):
             s = flat(join(map_(Swap, n//2-1)), flatargs=['I', 'O'])

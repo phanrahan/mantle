@@ -11,7 +11,7 @@ def DefineDecoder(n, invert=False):
 
     class _Decoder(Circuit):
         name = 'Decoder'+str(n)+("Invert" if invert else "")
-        io = m.IO('I', In(Bits[n]), 'O', Out(Bits[1 << n]))
+        io = m.IO(I=In(Bits[n]), O=Out(Bits[1 << n]))
         @classmethod
         def definition(io):
             def decode(y):

@@ -16,7 +16,7 @@ def DefineBrickSorter(n):
 
     class _BrickSorter(Circuit):
         name = 'BrickSorter{}'.format(n)
-        io = m.IO('I', In(T), O=Out(T))
+        io = m.IO(I=In(T), O=Out(T))
         @classmethod
         def definition(io):
             I = io.I

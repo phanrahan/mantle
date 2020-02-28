@@ -2,7 +2,7 @@ import magma as m
 
 
 def wrap(circ):
-    _IO = []
+    _io = m.IO()
     for key, value in circ.IO.items():
         _IO += [key, value]
 

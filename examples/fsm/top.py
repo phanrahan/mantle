@@ -28,7 +28,8 @@ def fsm_logic(current_state: m.Bits(2),
             next_state = State.HBLANK
             next_pixel_count = m.bits(0, 11)
     elif current_state == State.HACT:
-        next_state = State.HBLANK if pixel_count == m.bits(1, 11) else State.HACT
+        next_state = State.HBLANK if pixel_count == m.bits(
+            1, 11) else State.HACT
         # TODO: Support AugAssign node
         # next_pixel_count -= 1
         next_pixel_count = pixel_count - m.uint(1, 11)
@@ -39,11 +40,11 @@ def fsm_logic(current_state: m.Bits(2),
 
 
 class MagmaFSM(m.Circuit):
-    IO = ["frameValid", m.In(m.Bit),
-          "clk", m.In(m.Clock),
-          "rst", m.In(m.AsyncReset),
-          "real_href", m.In(m.Bit),
-          "pixel_valid", m.Out(m.Bit)]
+    io = m.IO(frameValid=m.In(m.Bit),
+              clk=m.In(m.Clock),
+              rst=m.In(m.AsyncReset),
+              real_href=m.In(m.Bit),
+              pixel_valid=m.Out(m.Bit))
 
     @classmethod
     def definition(io):

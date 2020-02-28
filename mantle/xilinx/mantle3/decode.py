@@ -3,7 +3,8 @@ from .LUT import ZERO
 from .ROM import ROMN
 from .cascade import FlatHalfCascade
 
-__all__  = ['DefineDecode', 'Decode', 'decode']
+__all__ = ['DefineDecode', 'Decode', 'decode']
+
 
 def DefineDecode(i, n, invert=False):
     """
@@ -14,7 +15,7 @@ def DefineDecode(i, n, invert=False):
 
     class _Decode(Circuit):
         name = 'Decode_{}_{}'.format(i, n)
-        IO = ['I', In(Bits[n]), 'O', Out(Bit)]
+        io = m.IO(I=In(Bits[n]), O=Out(Bit))
 
         @classmethod
         def definition(io):
@@ -29,15 +30,17 @@ def DefineDecode(i, n, invert=False):
                 nluts = (n + 3) // 4
                 data = nluts * [0]
                 for j in range(nluts):
-                    data[j] = (i >> 4*j) & 0xf # 4-bit pieces
+                    data[j] = (i >> 4*j) & 0xf  # 4-bit pieces
                 decode = FlatHalfCascade(n, 4, data, ZERO, 1)
             wire(io.I, decode.I)
             wire(decode.O, io.O)
 
     return _Decode
 
+
 def Decode(i, n, invert=False):
     return DefineDecode(i, n, invert=invert)()
+
 
 def decode(I, i, invert=False):
     return Decode(i, len(I), invert=invert)(I)

@@ -15,7 +15,7 @@ def get_length(value):
         return len(value)
     else:
         raise NotImplementedError("Cannot get_length of"
-                " {}".format(type(value)))
+                                  " {}".format(type(value)))
 
 
 def DefineFoldOp(DefineOp, name, height, width):
@@ -23,7 +23,7 @@ def DefineFoldOp(DefineOp, name, height, width):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
@@ -46,9 +46,9 @@ def declare_bit_binop(name, python_op):
     return DeclareCoreirCircuit("{}".format(name),
                                 'I0', In(Bit), 'I1', In(Bit), 'O', Out(Bit),
                                 simulate=simulate,
-                                verilog_name = "coreir_" + name,
-                                firrtl_op  = name,
-                                coreir_lib = "corebit")
+                                verilog_name="coreir_" + name,
+                                firrtl_op=name,
+                                coreir_lib="corebit")
 
 
 def DefineCoreirReduce(op_name, python_op, width):
@@ -57,14 +57,16 @@ def DefineCoreirReduce(op_name, python_op, width):
         O = reduce(python_op, in_)
         value_store.set_value(self.O, O)
     decl = DeclareCoreirCircuit(op_name, "I", In(Bits[width]), "O", Out(Bit),
-            coreir_name = op_name,
-            coreir_lib = "coreir",
-            coreir_genargs = {"width": width},
-            simulate = simulate)
+                                coreir_name=op_name,
+                                coreir_lib="coreir",
+                                coreir_genargs={"width": width},
+                                simulate=simulate)
     return decl
+
 
 def DefineCoreirReduceAnd(width):
     return DefineCoreirReduce("andr", operator.and_, width)
+
 
 def DefineCoreirReduceOr(width):
     return DefineCoreirReduce("orr", operator.or_, width)
@@ -94,11 +96,11 @@ def declare_bits_binop(name, python_op):
         T = Bits[N]
         return DeclareCoreirCircuit("{}{}".format(name, N),
                                     'I0', In(T), 'I1', In(T), 'O', Out(T),
-                                    simulate       = simulate,
-                                    verilog_name   = "coreir_" + name,
-                                    coreir_name    = name,
-                                    coreir_lib     = "coreir",
-                                    coreir_genargs = {"width": N})
+                                    simulate=simulate,
+                                    verilog_name="coreir_" + name,
+                                    coreir_name=name,
+                                    coreir_lib="coreir",
+                                    coreir_genargs={"width": N})
 
     return Declare
 
@@ -109,7 +111,7 @@ def DefineOp(op_name, DefineCoreirReduce, height, width):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
@@ -128,6 +130,7 @@ def DefineOp(op_name, DefineCoreirReduce, height, width):
     EndDefine()
     return circ
 
+
 def DefineAnd(height=2, width=None):
     if height is 2:
         if width is None:
@@ -140,6 +143,7 @@ def DefineAnd(height=2, width=None):
 def And(height, width=None, **kwargs):
     return DefineAnd(height, width)(**kwargs)
 
+
 def ReduceAnd(height=2, **kwargs):
     return uncurry(And(height, **kwargs))
 
@@ -149,12 +153,12 @@ def DefineNAnd(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
     circ = DefineCircuit("NAnd{}{}".format(height, width),
-        *IO)
+                         *IO)
     inputs = [getattr(circ, 'I{}'.format(i)) for i in range(height)]
     if width is None:
         inv = Not()
@@ -169,6 +173,7 @@ def DefineNAnd(height=2, width=None):
 def NAnd(height, width=None, **kwargs):
     return DefineNAnd(height, width)(**kwargs)
 
+
 def ReduceNAnd(height=2, **kwargs):
     return uncurry(NAnd(height, **kwargs))
 
@@ -181,7 +186,7 @@ def simulate_bit_not(self, value_store, state_store):
 
 
 Not = DeclareCoreirCircuit("not", 'I', In(Bit), 'O', Out(Bit),
-    simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="corebit")
+                           simulate=simulate_bit_not, verilog_name="coreir_bitnot", coreir_lib="corebit")
 
 
 def not_(arg, **kwargs):
@@ -200,6 +205,7 @@ def DefineOr(height=2, width=None):
 def Or(height, width=None, **kwargs):
     return DefineOr(height, width)(**kwargs)
 
+
 def ReduceOr(height=2, **kwargs):
     return uncurry(Or(height, **kwargs))
 
@@ -209,12 +215,12 @@ def DefineNOr(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
     circ = DefineCircuit("NOr{}{}".format(height, width),
-        *IO)
+                         *IO)
     inputs = [getattr(circ, 'I{}'.format(i)) for i in range(height)]
     if width is None:
         inv = Not()
@@ -228,6 +234,7 @@ def DefineNOr(height=2, width=None):
 
 def NOr(height, width=None, **kwargs):
     return DefineNOr(height, width)(**kwargs)
+
 
 def ReduceNOr(height=2, **kwargs):
     return uncurry(NOr(height, **kwargs))
@@ -246,6 +253,7 @@ def DefineXOr(height=2, width=None):
 def XOr(height, width=None, **kwargs):
     return DefineXOr(height, width)(**kwargs)
 
+
 def ReduceXOr(height=2, **kwargs):
     return uncurry(XOr(height, **kwargs))
 
@@ -255,12 +263,12 @@ def DefineNXOr(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    io = m.IO()
     for i in range(height):
         IO += ["I{}".format(i), In(T)]
     IO += ["O", Out(T)]
     circ = DefineCircuit("NXOr{}{}".format(height, width),
-        *IO)
+                         *IO)
     inputs = [getattr(circ, 'I{}'.format(i)) for i in range(height)]
     if width is None:
         inv = Not()
@@ -275,24 +283,26 @@ def DefineNXOr(height=2, width=None):
 def NXOr(height, width=None, **kwargs):
     return DefineNXOr(height, width)(**kwargs)
 
+
 def ReduceNXOr(height=2, **kwargs):
     return uncurry(NXOr(height, **kwargs))
 
+
 def DefineInvert(width):
     T = Bits[width]
-
 
     def simulate_bits_invert(self, value_store, state_store):
         _in = BitVector[width](value_store.get_value(self.I))
         O = (~_in).as_bool_list()
         value_store.set_value(self.O, O)
     return DeclareCoreirCircuit("Invert{}".format(width),
-            'I', In(T), 'O', Out(T),
-            simulate       = simulate_bits_invert,
-            verilog_name   = "coreir_not",
-            coreir_name    = "not",
-            coreir_lib     = "coreir",
-            coreir_genargs = {"width": width})
+                                'I', In(T), 'O', Out(T),
+                                simulate=simulate_bits_invert,
+                                verilog_name="coreir_not",
+                                coreir_name="not",
+                                coreir_lib="coreir",
+                                coreir_genargs={"width": width})
+
 
 def Invert(width=None, **kwargs):
     return DefineInvert(width)(**kwargs)
@@ -312,11 +322,12 @@ def DefineWire(width):
         coreir_lib = "coreir"
         genargs = {"width": width}
     return DeclareCoreirCircuit("Wire{}".format(width),
-            'I', In(T), 'O', Out(T),
-            simulate       = simulate_wire,
-            coreir_name    = "wire",
-            coreir_lib     = coreir_lib,
-            coreir_genargs = genargs)
+                                'I', In(T), 'O', Out(T),
+                                simulate=simulate_wire,
+                                coreir_name="wire",
+                                coreir_lib=coreir_lib,
+                                coreir_genargs=genargs)
+
 
 def Wire(width=None, **kwargs):
     return DefineWire(width)(**kwargs)
@@ -328,6 +339,7 @@ def invert(arg, **kwargs):
 
 def DefineLSL(width):
     T = Bits[width]
+
     def simulate(self, value_store, state_store):
         I0 = BitVector[width](value_store.get_value(self.I0))
         I1 = BitVector[width](value_store.get_value(self.I1))
@@ -335,9 +347,9 @@ def DefineLSL(width):
         value_store.set_value(self.O, O)
 
     return DeclareCoreirCircuit("shl{}".format(width), 'I0', In(T), 'I1',
-            In(UInt[width]), 'O', Out(T), verilog_name="coreir_shl",
-            coreir_name="shl", coreir_lib="coreir", simulate=simulate,
-            coreir_genargs={"width": width})
+                                In(UInt[width]), 'O', Out(T), verilog_name="coreir_shl",
+                                coreir_name="shl", coreir_lib="coreir", simulate=simulate,
+                                coreir_genargs={"width": width})
 
 
 def LSL(width, **kwargs):
@@ -346,6 +358,7 @@ def LSL(width, **kwargs):
 
 def DefineLSR(width):
     T = Bits[width]
+
     def simulate(self, value_store, state_store):
         I0 = BitVector[width](value_store.get_value(self.I0))
         I1 = BitVector[width](value_store.get_value(self.I1))
@@ -353,9 +366,9 @@ def DefineLSR(width):
         value_store.set_value(self.O, O)
 
     return DeclareCoreirCircuit("lshr{}".format(width), 'I0', In(T), 'I1',
-            In(UInt[width]), 'O', Out(T), verilog_name="coreir_lshr",
-            coreir_name="lshr", coreir_lib="coreir", simulate=simulate,
-            coreir_genargs={"width": width})
+                                In(UInt[width]), 'O', Out(T), verilog_name="coreir_lshr",
+                                coreir_name="lshr", coreir_lib="coreir", simulate=simulate,
+                                coreir_genargs={"width": width})
 
 
 def LSR(width, **kwargs):
@@ -364,10 +377,11 @@ def LSR(width, **kwargs):
 
 def DefineStaticLeftShift(width, shift_amount):
     T = Bits[width]
+
     class _StaticLeftShift(Circuit):
         name = 'StaticLeftShift_{}{}'.format(width, shift_amount)
 
-        IO = ["I", In(T), "O", Out(T)]
+        io = m.IO(I=In(T), O=Out(T))
 
         @classmethod
         def definition(io):
@@ -375,19 +389,23 @@ def DefineStaticLeftShift(width, shift_amount):
             wire(output, io.O)
     return _StaticLeftShift
 
+
 def StaticLeftShift(width, shift_amount, **kwargs):
     return DefineStaticLeftShift(width, shift_amount)(**kwargs)
+
 
 def static_left_shift(arg, shift_amount, **kwargs):
     width = get_length(arg)
     return StaticLeftShift(width, shift_amount, **kwargs)(arg)
 
+
 def DefineStaticRightShift(width, shift_amount):
     T = Bits[width]
+
     class _StaticRightShift(Circuit):
         name = 'StaticRightShift_{}{}'.format(width, shift_amount)
 
-        IO = ["I", In(T), "O", Out(T)]
+        io = m.IO(I=In(T), O=Out(T))
 
         @classmethod
         def definition(io):
@@ -395,8 +413,10 @@ def DefineStaticRightShift(width, shift_amount):
             wire(output, io.O)
     return _StaticRightShift
 
+
 def StaticRightShift(width, shift_amount, **kwargs):
     return DefineStaticRightShift(width, shift_amount)(**kwargs)
+
 
 def static_right_shift(arg, shift_amount, **kwargs):
     width = get_length(arg)

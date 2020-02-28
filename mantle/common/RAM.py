@@ -6,11 +6,13 @@ from magma.bitutils import clog2
 
 __all__ = ["DefineRAM", "DefineDualRAM"]
 
+
 def REGs(n, width, has_ce):
     return [Register(width, has_ce=has_ce) for i in range(n)]
 
+
 def MUXs(n, width):
-    return [Mux(2,width) for i in range(n)]
+    return [Mux(2, width) for i in range(n)]
 
 
 def readport(addr_width, width, regs, raddr):
@@ -35,7 +37,7 @@ def writeport(addr_width, width, regs, WADDR, I, WE):
     n = 1 << addr_width
 
     decoder = Decoder(addr_width)
-    enable = And(2,n)
+    enable = And(2, n)
     enable(decoder(WADDR), repeat(WE, n))
 
     for i in range(n):
@@ -44,49 +46,49 @@ def writeport(addr_width, width, regs, WADDR, I, WE):
 
 def DefineRAM(height, width):
     addr_width = clog2(height)
-    TADDR = Bits[ addr_width ]
-    TDATA = Bits[ width ]
+    TADDR = Bits[addr_width]
+    TDATA = Bits[width]
 
     class _RAM(Circuit):
         name = f'RAM{height}x{width}'
-        IO = ['RADDR', In(TADDR),
-              'RDATA', Out(TDATA),
-              'WADDR', In(TADDR),
-              'WDATA', In(TDATA),
-              'WE', In(Bit),
-              'CLK', In(Clock)
-             ]
+        io = m.IO(RADDR=In(TADDR),
+                  RDATA=Out(TDATA),
+                  WADDR=In(TADDR),
+                  WDATA=In(TDATA),
+                  WE=In(Bit),
+                  CLK=In(Clock)
+                  )
 
         @classmethod
         def definition(io):
             regs = REGs(height, width, has_ce=True)
             writeport(addr_width, width, regs, io.WADDR, io.WDATA, io.WE)
-            wire( readport(addr_width, width, regs, io.RADDR), io.RDATA )
+            wire(readport(addr_width, width, regs, io.RADDR), io.RDATA)
 
     return _RAM
 
 
 def DefineDualRAM(height, width):
     addr_width = clog2(height)
-    TADDR = Bits[ addr_width ]
-    TDATA = Bits[ width ]
+    TADDR = Bits[addr_width]
+    TDATA = Bits[width]
 
     class _DualRAM(Circuit):
         name = f'DualRAM{height}x{width}'
-        IO = ['RADDR0', In(TADDR),
-              'RDATA0', Out(TDATA),
-              'RADDR1', In(TADDR),
-              'RDATA1', Out(TDATA),
-              'WADDR', In(TADDR),
-              'WDATA', In(TDATA),
-              'WE', In(Bit),
-              'CLK', In(Clock)]
+        io = m.IO(RADDR0=In(TADDR),
+                  RDATA0=Out(TDATA),
+                  RADDR1=In(TADDR),
+                  RDATA1=Out(TDATA),
+                  WADDR=In(TADDR),
+                  WDATA=In(TDATA),
+                  WE=In(Bit),
+                  CLK=In(Clock))
 
         @classmethod
         def definition(io):
             regs = REGs(n, width, has_ce=True)
             writeport(addr_width, width, regs, io.WADDR, io.WDATA, io.WE)
-            wire( readport(addr_width, width, regs, io.RADDR0), io.RDATA0 )
-            wire( readport(addr_width, width, regs, io.RADDR1), io.RDATA1 )
+            wire(readport(addr_width, width, regs, io.RADDR0), io.RDATA0)
+            wire(readport(addr_width, width, regs, io.RADDR1), io.RDATA1)
 
     return _DualRAM

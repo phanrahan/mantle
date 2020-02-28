@@ -6,7 +6,7 @@ from hwtypes import BitVector
 
 def test_dyanmic_mux_getitem():
     class TestDynamicMuxGetItem(m.Circuit):
-        IO = ["I", m.In(m.Bits[ 2 ]), "S", m.In(m.Bit), "O", m.Out(m.Bit)]
+        io = m.IO(I=m.In(m.Bits[2]), S=m.In(m.Bit), O=m.Out(m.Bit))
 
         @classmethod
         def definition(io):

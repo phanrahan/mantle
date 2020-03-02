@@ -11,28 +11,36 @@ from .util import DeclareCoreirCircuit
 def get_length(value):
     if isinstance(value, m.Digital):
         return None
-    elif isinstance(value, m.Array):
+    if isinstance(value, m.Array):
         return len(value)
-    else:
-        raise NotImplementedError("Cannot get_length of"
-                " {}".format(type(value)))
+    raise NotImplementedError(f"Cannot get_length of {type(value)}")
+
+
+def _make_lambda(op):
+    return lambda x, y: op()(x, y)
 
 
 def DefineFoldOp(DefineOp, name, height, width):
-    if width is None:
-        T = Bit
-    else:
-        T = Bits[width]
-    IO = []
-    for i in range(height):
-        IO += ["I{}".format(i), In(T)]
-    IO += ["O", Out(T)]
-    circ = DefineCircuit("fold_{}{}{}".format(name, height, width), *IO)
-    reduce_args = [getattr(circ, "I{}".format(i)) for i in range(height)]
-    Op2 = DefineOp(2, width)
-    wire(reduce(lambda x, y: Op2()(x, y), reduce_args), circ.O)
-    EndDefine()
-    return circ
+    T = Bit if width is None else Bits[width]
+    args = {f"I{i}": In(T) for i in range(height)}
+    args.update({"O": Out(T)})
+    name_ = name
+
+    class _FoldOp(m.Circuit):
+        name = f"fold_{name_}{height}{width}"
+        io = m.IO(**args)
+
+        # NOTE(rsetaluri): Because of scoping rules in the class definition, we
+        # can not use 'io' neither in list comprehensions nor as a captured
+        # variable in a lambda. Therfore we use simple iteration-based list
+        # construction and delegate lambda construction to a helper function.
+        reduce_args = []
+        for i in range(height):
+            reduce_args.append(getattr(io, f"I{i}"))
+        Op2 = DefineOp(2, width)
+        wire(reduce(_make_lambda(Op2), reduce_args), io.O)
+
+    return _FoldOp
 
 
 def declare_bit_binop(name, python_op):

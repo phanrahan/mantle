@@ -113,28 +113,27 @@ def declare_bits_binop(name, python_op):
 
 @cache_definition
 def DefineOp(op_name, DefineCoreirReduce, height, width):
-    if width is None:
-        T = Bit
-    else:
-        T = Bits[width]
-    IO = []
-    for i in range(height):
-        IO += ["I{}".format(i), In(T)]
-    IO += ["O", Out(T)]
-    circ = DefineCircuit(f"{op_name}{height}x{width}", *IO)
-    if width is None:
-        reduce = DefineCoreirReduce(height)()
-        for j in range(height):
-            wire(reduce.I[j], getattr(circ, f"I{j}"))
-        wire(reduce.O, circ.O)
-    else:
-        for i in range(width):
-            reduce = DefineCoreirReduce(height)()
+    T = Bit if width is None else Bits[width]
+    args = {f"I{i}": In(T) for i in range(height)}
+    args.update({"O": Out(T)})
+
+    class _Op(m.Circuit):
+        name = f"{op_name}{height}x{width}"
+        io = m.IO(**args)
+
+        if width is None:
+            reduce_ = DefineCoreirReduce(height)()
             for j in range(height):
-                wire(reduce.I[j], getattr(circ, f"I{j}")[i])
-            wire(reduce.O, circ.O[i])
-    EndDefine()
-    return circ
+                wire(reduce_.I[j], getattr(io, f"I{j}"))
+            wire(reduce_.O, io.O)
+        else:
+            for i in range(width):
+                reduce_ = DefineCoreirReduce(height)()
+                for j in range(height):
+                    wire(reduce_.I[j], getattr(io, f"I{j}")[i])
+                wire(reduce_.O, io.O[i])
+
+    return _Op
 
 def DefineAnd(height=2, width=None):
     if height is 2:

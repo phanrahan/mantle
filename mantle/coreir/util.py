@@ -1,6 +1,7 @@
 import magma as m
 from hwtypes import SIntVector, UIntVector
 
+
 default_port_mapping = {
     "I": "in",
     "I0": "in0",
@@ -9,11 +10,6 @@ default_port_mapping = {
     "S": "sel",
     "CLK": "clk",
 }
-
-
-def DefineCoreirCircuit(*args, **kwargs):
-    return m.DefineCircuit(*args, **kwargs,
-                           renamed_ports=default_port_mapping)
 
 
 def DeclareCoreirCircuit(*args, **kwargs):

@@ -1,10 +1,11 @@
-from magma import *
+import math
+import magma as m
 from mantle import And, DefineAdd
 from mantle import Mux
 from mantle import Add
 from mantle import Register
 from mantle import Decode
-import math
+
 
 __all__  = ['DefineCounter', 'Counter']
 __all__ += ['DefineUpCounter', 'UpCounter']
@@ -12,7 +13,7 @@ __all__ += ['DefineDownCounter', 'DownCounter']
 __all__ += ['DefineUpDownCounter', 'UpDownCounter']
 
 
-def _CounterName(name, incr, has_ce, has_reset, cin, cout):
+def counter_name(name, incr, has_ce, has_reset, cin, cout):
     if incr != 1: name += f'_{incr}'
     if has_ce: name += 'CE'
     if has_reset:  name += 'R'
@@ -20,167 +21,160 @@ def _CounterName(name, incr, has_ce, has_reset, cin, cout):
     if cout: name += '_COUT'
     return name
 
-#
-# Create an n-bit counter with a given increment.
-#
-# O : Out(UInt(n)), COUT : Out(Bit)
-#
-def DefineCounter(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False):
 
-    name = _CounterName(f'Counter{n}', incr, has_ce, has_reset, cin, cout)
+def DefineCounter(n, cin=False, cout=True, incr=1,
+                  has_ce=False, has_reset=False):
+    """
+    Create an n-bit counter with a given increment.
 
-    args = []
+    O : m.Out(m.UInt(n)), COUT : m.Out(m.Bit)
+    """
+    name_ = counter_name(f'Counter{n}', incr, has_ce, has_reset, cin, cout)
+    args = {}
     if cin:
-        args += ['CIN', In(Bit)]
-
-    args += ["O", Out(UInt[ n ])]
+        args["CIN"] = m.In(m.Bit)
+    args["O"] = m.Out(m.UInt[n])
     if cout:
-        args += ["COUT", Out(Bit)]
+        args["COUT"] = m.Out(m.Bit)
 
-    args += ClockInterface(has_ce, has_reset)
+    class _Counter(m.Circuit):
+        name = name_
+        io = m.IO(**args)
+        io += m.ClockIO(has_ce, has_reset)
 
-    Counter = DefineCircuit(name, *args)
+        add = DefineAdd(n, cin=cin, cout=cout)()
+        reg = Register(n, has_ce=has_ce, has_reset=has_reset)
 
-    add = DefineAdd(n, cin=cin, cout=cout)()
-    reg = Register(n, has_ce=has_ce, has_reset=has_reset)
+        m.wire(reg.O, add.I0)
+        m.wire(m.array(incr, n), add.I1)
+        reg(add.O)
 
-    wire( reg.O, add.I0 )
-    wire( array(incr, n), add.I1 )
+        next = False
+        if next:
+            m.wire(add.O, io.O)
+        else:
+            m.wire(reg.O, io.O)
+        if cin:
+            m.wire(io.CIN, add.CIN)
+        if cout:
+            m.wire(add.COUT, io.COUT)
 
-    reg(add.O)
+    return _Counter
 
-    next = False
-    if next:
-        wire( add.O, Counter.O )
-    else:
-        wire( reg.O, Counter.O )
-
-    if cin:
-        wire( Counter.CIN, add.CIN )
-
-    if cout:
-        wire( add.COUT, Counter.COUT )
-
-    wireclock(Counter, reg)
-    wiredefaultclock(Counter, reg)
-
-    EndCircuit()
-
-    return Counter
 
 def Counter(n, cin=False, cout=True, incr=1,
-             has_ce=False, has_reset=False, **kwargs):
-    """Construct a n-bit up counter."""
-    return DefineUpCounter(n, cin=cin, cout=cout, incr=incr,
-               has_ce=has_ce, has_reset=has_reset)(**kwargs)
+            has_ce=False, has_reset=False, **kwargs):
+    """Construct a n-bit up counter"""
+    defn = DefineUpCounter(n, cin=cin, cout=cout, incr=incr, has_ce=has_ce,
+                           has_reset=has_reset)
+    return defn(**kwargs)
+
 
 DefineUpCounter = DefineCounter
 UpCounter = Counter
 
-#
-# Create an n-bit down counter.
-#
-# O : Out(UInt(n)), COUT : Out(Bit)
-#
+
 def DefineDownCounter(n, cin=False, cout=True, decr=1,
-    has_ce=False, has_reset=False):
+                      has_ce=False, has_reset=False):
+    """
+    Create an n-bit down counter.
+
+    O : m.Out(m.UInt(n)), COUT : m.Out(m.Bit)
+    """
     incr = (1 << n) - (decr)
-    return DefineCounter(n, cin=cin, cout=cout, incr=incr,
-               has_ce=has_ce, has_reset=has_reset)
+    return DefineCounter(n, cin=cin, cout=cout, incr=incr, has_ce=has_ce,
+                         has_reset=has_reset)
+
 
 def DownCounter(n, cin=False, cout=True, decr=1,
-    has_ce=False, has_reset=False, **kwargs):
-    return DefineDownCounter(n, cin=cin, cout=cout, decr=decr,
-               has_ce=has_ce, has_reset=has_reset)(**kwargs)
+                has_ce=False, has_reset=False, **kwargs):
+    defn = DefineDownCounter(n, cin=cin, cout=cout, decr=decr,
+                             has_ce=has_ce, has_reset=has_reset)
+    return defn(**kwargs)
 
 
-#
-# Create an n-bit up-down counter.
-#
-# U : In(Bit), D : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
-#
 def DefineUpDownCounter(n, cout=True, has_ce=False, has_reset=False):
+    """
+    Create an n-bit up-down counter.
 
-    name = _CounterName(f'UpDownCounter{n}', 1, has_ce, has_reset, False, cout)
+    U : In(Bit), D : In(Bit), O : Out(UInt(n)), COUT : Out(Bit)
+    """
+    name_ = counter_name(f'UpDownCounter{n}', 1, has_ce,
+                         has_reset, False, cout)
 
-    args = []
-
-    args += ["U", In(Bit)]
-    args += ["D", In(Bit)]
-
-    args += ["O", Out(UInt[ n ])]
+    args = {"U": m.In(m.Bit), "D": m.In(m.Bit), "O": m.Out(m.UInt[n])}
     if cout:
-        args += ["COUT", Out(Bit)]
+        args["COUT"] = m.Out(m.Bit)
 
-    args += ClockInterface(has_ce, has_reset)
+    class _Counter(m.Circuit):
+        name = name_
+        io = m.IO(**args)
+        io += m.ClockIO(has_ce, has_reset)
 
-    Counter = DefineCircuit(name, *args)
+        add = Add(n, cin=True, cout=cout)
+        reg = Register(n, has_ce=has_ce, has_reset=has_reset)
+    
+        m.wire(reg.O, add.I0)
+        m.wire(m.array(n * [io.D]), add.I1)
+        m.wire(io.U, add.CIN)
+    
+        reg(add)
+    
+        next = False
+        if next:
+            m.wire(add.O, io.O)
+        else:
+            m.wire(reg.O, io.O)
+        if cout:
+            m.wire(add.COUT, io.COUT)
+    
+    return _Counter
 
-    add = Add(n, cin=True, cout=cout)
-    reg = Register(n, has_ce=has_ce, has_reset=has_reset)
-
-    wire( reg.O, add.I0 )
-    wire( array(n*[Counter.D]), add.I1 )
-    wire( Counter.U, add.CIN )
-
-    reg(add)
-
-    next = False
-    if next:
-        wire( add.O, Counter.O )
-    else:
-        wire( reg.O, Counter.O )
-
-    if cout:
-        wire( add.COUT, Counter.COUT )
-
-    wireclock(Counter, reg)
-
-    EndCircuit()
-
-    return Counter
 
 def UpDownCounter(n, cout=True, has_ce=False, has_reset=False, **kwargs):
     """Construct an n-bit updown counter."""
-    return DefineUpDownCounter(n, cout=cout,
-              has_ce=has_ce, has_reset=has_reset)(**kwargs)
+    defn = DefineUpDownCounter(n, cout=cout,
+                               has_ce=has_ce, has_reset=has_reset)
+    return defn(**kwargs)
 
 
-def DefineCeilFloorUpDownCounter(m, has_ce=False, has_reset=False):
+def DefineCeilFloorUpDownCounter(n, has_ce=False, has_reset=False):
     """
-    Counter between 0 and m - 1 that uses the minimum number of bits.
-    
-    This counter counts up by 1 if U is True and D is False, down by 1 if U is False and D is True,
-    no change if both are False or True
-    
-    Also, unlike normal updown counter, up by 1 has no effect if already at m - 1 and
-    down by 1 has nefect if already at 0.
-    
-    :param m: The value the counter counts up to
+    Counter between 0 and n - 1 that uses the minimum number of bits.
+
+    This counter counts up by 1 if U is True and D is False, down by 1 if U is
+    False and D is True, no change if both are False or True.
+
+    Also, unlike normal updown counter, up by 1 has no effect if already at (n -
+    1) and down by 1 has nefect if already at 0.
+
+    :param n: The value the counter counts up to
     :param has_ce: Whether this counter should a clock-enable input
     :return: An updown counter circuit
     """
-    class CeilFloorUpDownCounter(Circuit):
-        num_bits = math.ceil(math.log(m, 2))
-        name = "CeilFloorUpDownCounter_m{}_hasCE{}_hasReset{}".format(str(m), str(has_ce), str(has_reset))
-        IO = ['U', In(Bit), 'D', In(Bit), 'O', Out(UInt[num_bits])] + ClockInterface(has_ce, has_reset)
+    num_bits = math.ceil(math.log(n, 2))
 
-        @classmethod
-        def definition(ceilFloorUpDownCounter):
-            up_down_counter = UpDownCounter(ceilFloorUpDownCounter.num_bits, False, has_ce, has_reset)
-            at_max = Decode(m - 1, up_down_counter.O.N)(up_down_counter.O)
-            at_min = Decode(0, up_down_counter.O.N)(up_down_counter.O)
+    class _Counter(m.Circuit):
+        name = (f"CeilFloorUpDownCounter_m{str(n)}_hasCE{str(has_ce)}_"
+                f"hasReset{str(has_reset)}")
+        io = m.IO(U=m.In(m.Bit), D=m.In(m.Bit), O=m.Out(m.UInt[num_bits]))
+        io += m.ClockIO(has_ce, has_reset)
 
-            # only increase counter if input says to increase and not at max
-            should_increase = ~at_max & ceilFloorUpDownCounter.U & ~ceilFloorUpDownCounter.D
-            wire(should_increase, up_down_counter.U)
-            # only decrease counter if input says to decrease and not at min
-            should_decrease = ~at_min & ~ceilFloorUpDownCounter.U & ceilFloorUpDownCounter.D
-            wire(should_decrease, up_down_counter.D)
+        up_down_counter = UpDownCounter(num_bits, False, has_ce, has_reset)
+        at_max = Decode(n - 1, up_down_counter.O.N)(up_down_counter.O)
+        at_min = Decode(0, up_down_counter.O.N)(up_down_counter.O)
 
-            wire(up_down_counter.O, ceilFloorUpDownCounter.O)
+        # Only increase counter if input says to increase and not at max.
+        should_increase = ~at_max & io.U & ~io.D
+        m.wire(should_increase, up_down_counter.U)
+        # Only decrease counter if input says to decrease and not at min.
+        should_decrease = ~at_min & ~io.U & io.D
+        m.wire(should_decrease, up_down_counter.D)
 
-    return CeilFloorUpDownCounter
+        m.wire(up_down_counter.O, io.O)
+
+    return _Counter
+
 
 def CeilFloorUpDownCounter(m, has_ce=False, has_reset=False):
     return DefineCeilFloorUpDownCounter(m, has_ce, has_reset)()

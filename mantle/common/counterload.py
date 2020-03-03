@@ -2,7 +2,7 @@ from magma import *
 from mantle import And, DefineAdd
 from mantle import Mux
 from .register import Register
-from .counter import _CounterName
+from .counter import counter_name
 
 __all__ = ['DefineCounterLoad', 'CounterLoad']
 
@@ -13,7 +13,7 @@ __all__ = ['DefineCounterLoad', 'CounterLoad']
 #
 def DefineCounterLoad(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=False):
 
-    name = _CounterName(f'CounterLoad{n}', incr, has_ce, has_reset, cin, cout)
+    name = counter_name(f'CounterLoad{n}', incr, has_ce, has_reset, cin, cout)
 
     args = []
     args += ['DATA', In(UInt[ n ])]

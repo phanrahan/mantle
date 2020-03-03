@@ -3,7 +3,7 @@ from hwtypes import BitVector
 from .arith import declare_binop, get_length
 from .logic import not_, XOr
 import operator
-from .util import DefineCoreirCircuit, DeclareCoreirCircuit
+from .util import DeclareCoreirCircuit
 
 
 def DefineEQ(width):

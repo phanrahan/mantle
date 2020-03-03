@@ -1,18 +1,18 @@
 import math
 from magma import *
 from mantle import And, Decode, Or
-from .counter import Counter, _CounterName
+from .counter import Counter, counter_name
+
 
 __all__ = ['DefineUpCounterModM', 'UpCounterModM']
 __all__ += ['DefineCounterModM', 'CounterModM', 'SizedCounterModM']
 
-#
-# Create an n-bit mod-m counter
-#
-def DefineCounterModM(m, n, cin=False, cout=True, incr=1, 
-    has_ce=False, has_reset=False):
 
-    name = _CounterName(f'Counter{n}_Mod{m}', incr, has_ce, has_reset, cin, cout)
+def DefineCounterModM(m, n, cin=False, cout=True, incr=1,
+                      has_ce=False, has_reset=False):
+    """Create an n-bit mod-m counter"""
+
+    name = counter_name(f'Counter{n}_Mod{m}', incr, has_ce, has_reset, cin, cout)
     args = []
     if cin:
         args += ['CIN', In(Bit)]

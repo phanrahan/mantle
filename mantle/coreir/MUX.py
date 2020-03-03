@@ -76,49 +76,55 @@ def DefineMux(height=2, width=None, T=None):
         else:
             T = Bits[width]
 
-    io = []
+    decl = []
     for i in range(height):
-        io += ["I{}".format(i), In(T)]
+        decl += ["I{}".format(i), In(T)]
     if height == 2:
         select_type = Bit
     else:
         select_type = Bits[m.bitutils.clog2(height)]
-    io += ['S', In(select_type)]
-    io += ['O', Out(T)]
+    decl += ['S', In(select_type)]
+    decl += ['O', Out(T)]
 
     class _Mux(Circuit):
         name = "Mux{}x{}".format(height, suffix)
-        IO = io
-        @classmethod
-        def definition(interface):
-            if T is not None and not (issubclass(T, m.Digital) or issubclass(T, m.Array) and issubclass(T.T, m.Bit)):
-                if issubclass(T, m.Tuple):
-                    for i in range(len(T.keys())):
-                        Is = [getattr(interface, f"I{j}")[list(T.keys())[i]] for j in range(height)]
-                        interface.O[i] <= DefineMux(height, T=list(T.types())[i])()(*Is, interface.S)
-                else:
-                    assert issubclass(T, m.Array), f"Expected array or type type, got {T}, type is {type(T)}"
-                    for i in range(len(T)):
-                        Is = [getattr(interface, f"I{j}")[i] for j in range(height)]
-                        interface.O[i] <= DefineMux(height, T=type(Is[0]))()(*Is, interface.S)
+        io = m.IO(**dict(zip(decl[::2], decl[1::2])))
+
+        # NOTE(rsetaluri): Because of scoping rules in the class definition, we
+        # can not use 'io' in list comprehensions. Therfore we use simple
+        # iteration-based list construction.
+        if T is not None and not (issubclass(T, m.Digital) or issubclass(T, m.Array) and issubclass(T.T, m.Bit)):
+            if issubclass(T, m.Tuple):
+                for i in range(len(T.keys())):
+                    Is = []
+                    for j in range(height):
+                        Is.append(getattr(io, f"I{j}")[list(T.keys())[i]])
+                    io.O[i] <= DefineMux(height, T=list(T.types())[i])()(*Is, io.S)
             else:
+                assert issubclass(T, m.Array), f"Expected array or type type, got {T}, type is {type(T)}"
+                for i in range(len(T)):
+                    Is = []
+                    for j in range(height):
+                        Is.append(getattr(io, f"I{j}")[i])
+                    io.O[i] <= DefineMux(height, T=type(Is[0]))()(*Is, io.S)
+        else:
+            if T is None and width is None or issubclass(T, m.Digital):
+                mux = _declare_muxn(height, 1)()
+            else:
+                mux = _declare_muxn(height, width if T is None else len(T))()
+            for i in range(height):
                 if T is None and width is None or issubclass(T, m.Digital):
-                    mux = _declare_muxn(height, 1)()
+                    m.wire(getattr(io, f"I{i}"), mux.I.data[i][0])
                 else:
-                    mux = _declare_muxn(height, width if T is None else len(T))()
-                for i in range(height):
-                    if T is None and width is None or issubclass(T, m.Digital):
-                        m.wire(getattr(interface, f"I{i}"), mux.I.data[i][0])
-                    else:
-                        m.wire(getattr(interface, f"I{i}"), mux.I.data[i])
-                if height == 2:
-                    m.wire(interface.S, mux.I.sel[0])
-                else:
-                    m.wire(interface.S, mux.I.sel)
-                if T is None and width is None or issubclass(T, m.Digital):
-                    wire(mux.O[0], interface.O)
-                else:
-                    wire(mux.O, interface.O)
+                    m.wire(getattr(io, f"I{i}"), mux.I.data[i])
+            if height == 2:
+                m.wire(io.S, mux.I.sel[0])
+            else:
+                m.wire(io.S, mux.I.sel)
+            if T is None and width is None or issubclass(T, m.Digital):
+                wire(mux.O[0], io.O)
+            else:
+                wire(mux.O, io.O)
     return _Mux
 
 

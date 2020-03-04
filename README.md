@@ -41,20 +41,20 @@ Documentation is hosted at http://magma-mantle.readthedocs.io/
 You can also browse the markdown files contained in `docs/` directly.
 
 - Combinational logic
-  - [Logical Operators](doc/logic.md)
-  - [Arithmetic Operators](doc/arith.md)
-  - [Comparison Operators](doc/compare.md)
-  - [Multiplexers](doc/mux.md)
-  - [Decoders, Encoders, and Arbiters](doc/decode.md)
+  - [Logical Operators](docs/logic.md)
+  - [Arithmetic Operators](docs/arith.md)
+  - [Comparison Operators](docs/compare.md)
+  - [Multiplexers](docs/mux.md)
+  - [Decoders, Encoders, and Arbiters](docs/decode.md)
 - Sequential logic
-  - [Flip-flops and Register](doc/register.md)
-  - [Counters](doc/counter.md)
-  - [Shift Registers](doc/shift.md)
-- [Memory](doc/memory.md)
+  - [Flip-flops and Register](docs/register.md)
+  - [Counters](docs/counter.md)
+  - [Shift Registers](docs/shift.md)
+- [Memory](docs/memory.md)
 
 There also exist libraries for low-level FPGA-specific primitives.
 
-- [ICE40 Primitives](doc/ice40.md)
+- [ICE40 Primitives](docs/ice40.md)
 
 ## Configuring Mantle
 

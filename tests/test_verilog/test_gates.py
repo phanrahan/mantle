@@ -1,19 +1,22 @@
 from magma import *
+import magma as m
 from magma.backend.verilog import compile
 from magma.testing import check_files_equal
 from mantle.verilog import gates
 
 def test_args():
-    a = gates.And(2, name='a')
-    assert repr(a) == 'a = and(name="a")'
-    assert repr(a[0]) == 'a[0]'
-    assert repr(a[1]) == 'a[1]'
-    assert repr(a[2]) == 'a[2]'
+    class Main(m.Circuit):
+        a = gates.And(2, name='a')
+        assert repr(a) == 'a = and(name="a")'
+        assert repr(a[0]) == 'a[0]'
+        assert repr(a[1]) == 'a[1]'
+        assert repr(a[2]) == 'a[2]'
 
 def test_wire():
-    a = gates.And(2, name='a')
-    wire(a[0], a[1])
-    wire(a[0], a[2])
+    class Main(m.Circuit):
+        a = gates.And(2, name='a')
+        m.wire(a[0], a[1])
+        m.wire(a[0], a[2])
 
 def test_and2():
     And2 = DefineCircuit("And2", "I0", In(Bit), "I1", In(Bit), "O", Out(Bit))

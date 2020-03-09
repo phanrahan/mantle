@@ -2,7 +2,7 @@ import re
 from collections import namedtuple
 import operator
 import pytest
-import magm as m
+import magma as m
 import magma
 
 if magma.mantle_target == "coreir":

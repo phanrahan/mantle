@@ -218,10 +218,11 @@ def test_arith(op, cin, cout, width):
 def test_negate(width):
     if magma.mantle_target == "coreir":
         pytest.skip("Negate circuits are wrappers around coreir declarations, cannot compile")
-    Define = mantle.Negate
-    Test = Define(width)
-    #sim( Test, operator.neg)
-    com( Test, f'Negate{width}' )
+    class Main(m.Circuit):
+        Define = mantle.Negate
+        Test = Define(width)
+        #sim( Test, operator.neg)
+        com( Test, f'Negate{width}' )
 
 @pytest.mark.parametrize("op", [
     op('DefineEQ',  operator.eq),

@@ -260,10 +260,11 @@ def test_shift(op, width):
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_dff():
-    DFF = mantle.DFF
-    Test = DFF()
-    #sim( Test, None)
-    com( Test, 'DFF' )
+    class Main(m.Circuit):
+        DFF = mantle.DFF
+        Test = DFF()
+        #sim( Test, None)
+        com( Test, 'DFF' )
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 @pytest.mark.parametrize("op", [
@@ -273,10 +274,11 @@ def test_dff():
     op('TFF',  None),
 ])
 def test_ff(op):
-    FF = getattr(mantle, op.name)
-    Test = FF()
-    ##sim( Test, op.func)
-    com( Test, f'{op.name}' )
+    class Main(m.Circuit):
+        FF = getattr(mantle, op.name)
+        Test = FF()
+        ##sim( Test, op.func)
+        com( Test, f'{op.name}' )
 
 @pytest.mark.parametrize("op", [
     op('DefineRegister', None),

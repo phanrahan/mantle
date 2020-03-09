@@ -2,6 +2,7 @@ import re
 from collections import namedtuple
 import operator
 import pytest
+import magm as m
 import magma
 
 if magma.mantle_target == "coreir":
@@ -62,56 +63,60 @@ def strip_anonymous_circuits(string):
 
 def test_lut1():
     target = magma.mantle_target
-    if target == 'coreir':
-        test = mantle.LUT([0,1], 1)
-    else:
-        test = mantle.LUT1([0,1])
-    if target == 'spartan3' or target == 'spartan6':
-        assert 'LUT1(INIT=0x2)' == repr(test)
-    elif target == 'ice40':
-        assert 'AnonymousCircuitType("I0", .I0, "O", .O)' == strip_anonymous_circuits(repr(test))
-    elif target == 'coreir':
-        assert 'LUT1_2()' == repr(test)
+    class Main(m.Circuit):
+        if target == 'coreir':
+            test = mantle.LUT([0,1], 1)
+        else:
+            test = mantle.LUT1([0,1])
+        if target == 'spartan3' or target == 'spartan6':
+            assert 'LUT1(INIT=0x2)' == repr(test)
+        elif target == 'ice40':
+            assert 'AnonymousCircuitType("I0", .I0, "O", .O)' == strip_anonymous_circuits(repr(test))
+        elif target == 'coreir':
+            assert 'LUT1_2()' == repr(test)
 
 
 def test_lut2():
     target = magma.mantle_target
-    if target == 'coreir':
-        test = mantle.LUT([0,0,0,1], 2)
-    else:
-        test = mantle.LUT2([0,0,0,1])
-    if target == 'spartan3' or target == 'spartan6':
-        assert 'LUT2(INIT=0x8)' == repr(test)
-    elif target == 'ice40':
-        assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "O", .O)' == strip_anonymous_circuits(repr(test))
-    elif target == 'coreir':
-        assert 'LUT2_8()' == repr(test)
+    class Main(m.Circuit):
+        if target == 'coreir':
+            test = mantle.LUT([0,0,0,1], 2)
+        else:
+            test = mantle.LUT2([0,0,0,1])
+        if target == 'spartan3' or target == 'spartan6':
+            assert 'LUT2(INIT=0x8)' == repr(test)
+        elif target == 'ice40':
+            assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "O", .O)' == strip_anonymous_circuits(repr(test))
+        elif target == 'coreir':
+            assert 'LUT2_8()' == repr(test)
 
 def test_lut3():
     target = magma.mantle_target
-    if target == 'coreir':
-        test = mantle.LUT([0, 0, 0, 0, 0,0,0,1], 3)
-    else:
-        test = mantle.LUT3([0, 0, 0, 0, 0,0,0,1])
-    if target == 'spartan3' or target == 'spartan6':
-        assert 'LUT3(INIT=0x80)' == repr(test)
-    elif target == 'ice40':
-        assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "I2", .I2, "O", .O)' == strip_anonymous_circuits(repr(test))
-    elif target == 'coreir':
-        assert 'LUT3_128()' == repr(test)
+    class Main(m.Circuit):
+        if target == 'coreir':
+            test = mantle.LUT([0, 0, 0, 0, 0,0,0,1], 3)
+        else:
+            test = mantle.LUT3([0, 0, 0, 0, 0,0,0,1])
+        if target == 'spartan3' or target == 'spartan6':
+            assert 'LUT3(INIT=0x80)' == repr(test)
+        elif target == 'ice40':
+            assert 'AnonymousCircuitType("I0", .I0, "I1", .I1, "I2", .I2, "O", .O)' == strip_anonymous_circuits(repr(test))
+        elif target == 'coreir':
+            assert 'LUT3_128()' == repr(test)
 
 def test_lut4():
     target = magma.mantle_target
-    if target == 'coreir':
-        test = mantle.LUT(15*[0] + [1], 4)
-    else:
-        test = mantle.LUT4(15*[0] + [1])
-    if target == 'spartan3' or target == 'spartan6':
-        assert 'LUT4(INIT=0x8000)' == repr(test)
-    elif target == 'ice40':
-        assert 'SB_LUT4(LUT_INIT=0x8000)' == repr(test)
-    elif target == 'coreir':
-        assert 'LUT4_32768()' == repr(test)
+    class Main(m.Circuit):
+        if target == 'coreir':
+            test = mantle.LUT(15*[0] + [1], 4)
+        else:
+            test = mantle.LUT4(15*[0] + [1])
+        if target == 'spartan3' or target == 'spartan6':
+            assert 'LUT4(INIT=0x8000)' == repr(test)
+        elif target == 'ice40':
+            assert 'SB_LUT4(LUT_INIT=0x8000)' == repr(test)
+        elif target == 'coreir':
+            assert 'LUT4_32768()' == repr(test)
 
 def test_mux2():
     Test = mantle.Mux2

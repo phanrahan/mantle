@@ -80,7 +80,7 @@ def DefineCoreirAdd(width, T=m.Bits):
             coreir_genargs=coreir_genargs,
             simulate=simulate_coreir_add)
 
-@circuit_generator
+@cache_definition
 def DefineAdd(N=None, cout=False, cin=False, width=None, T=m.Bits):
     if N is None:
         if width is None:
@@ -123,7 +123,7 @@ def DefineAdd(N=None, cout=False, cin=False, width=None, T=m.Bits):
     return Add
 
 
-@circuit_generator
+@cache_definition
 def DefineSub(N, cout=False, cin=False, T=m.Bits):
     has_cout = cout
     has_cin = cin
@@ -147,30 +147,46 @@ def DefineSub(N, cout=False, cin=False, T=m.Bits):
 
 def DefineNegate(width):
     T = Bits[width]
+
     class _Negate(mantle.primitives.DeclareNegate(width)):
         @classmethod
         def definition(neg):
-            CoreirNeg = DeclareCircuit("coreir_neg", "in", In(T),
-                    "out", Out(T), coreir_name="neg", coreir_lib="coreir",
-                    coreir_genargs={"width": width})
-            coreir_neg = CoreirNeg()
+            args = {"in": In(T), "out": Out(T)}
+
+            class _CoreirNeg(Circuit):
+                name = "coreir_neg"
+                io = m.IO(**args)
+                coreir_name = "neg"
+                coreir_lib = "coreir"
+                coreir_genargs = {"width": width}
+
+            coreir_neg = _CoreirNeg()
             wire(neg.I, getattr(coreir_neg, "in"))
             wire(neg.O, coreir_neg.out)
+
     return _Negate
 
 
 def DefineASR(width):
     T = Bits[width]
+
     class _ASR(mantle.primitives.DeclareASR(width)):
         @classmethod
         def definition(asr):
-            CoreirASR = DeclareCircuit("coreir_" + asr.name, "in0", In(T),
-                    "in1", In(T), "out", Out(T), coreir_name="ashr",
-                    coreir_lib="coreir", coreir_genargs={"width": width})
-            coreir_asr = CoreirASR()
+            args = {"in0": In(T), "in1": In(T), "out": Out(T)}
+
+            class _CoreirASR(Circuit):
+                name = "coreir_" + asr.name
+                io = m.IO(**args)
+                coreir_name="ashr"
+                coreir_lib="coreir"
+                coreir_genargs={"width": width}
+
+            coreir_asr = _CoreirASR()
             wire(asr.I0, coreir_asr.in0)
             wire(asr.I1, coreir_asr.in1)
             wire(asr.O, coreir_asr.out)
+
     return _ASR
 
 def ASR(width, **kwargs):

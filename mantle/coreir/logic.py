@@ -20,6 +20,10 @@ def _make_lambda(op):
     return lambda x, y: op()(x, y)
 
 
+def _get_inputs(io, height):
+    return [getattr(io, f"I{i}") for i in range(height)]
+
+
 def DefineFoldOp(DefineOp, name, height, width):
     T = Bit if width is None else Bits[width]
     args = {f"I{i}": In(T) for i in range(height)}
@@ -156,21 +160,23 @@ def DefineNAnd(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    decl = []
     for i in range(height):
-        IO += ["I{}".format(i), In(T)]
-    IO += ["O", Out(T)]
-    circ = DefineCircuit("NAnd{}{}".format(height, width),
-        *IO)
-    inputs = [getattr(circ, 'I{}'.format(i)) for i in range(height)]
-    if width is None:
-        inv = Not()
-    else:
-        inv = Invert(width)
-    O = inv(And(height, width)(*inputs))
-    wire(O, circ.O)
-    EndDefine()
-    return circ
+        decl += ["I{}".format(i), In(T)]
+    decl += ["O", Out(T)]
+
+    class _NAnd(Circuit):
+        name = f"NAnd{height}{width}"
+        io = IO(**dict(zip(decl[::2], decl[1::2])))
+        inputs = _get_inputs(io, height)
+        if width is None:
+            inv = Not()
+        else:
+            inv = Invert(width)
+        O = inv(And(height, width)(*inputs))
+        wire(O, io.O)
+
+    return _NAnd
 
 
 def NAnd(height, width=None, **kwargs):
@@ -216,21 +222,23 @@ def DefineNOr(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    decl = []
     for i in range(height):
-        IO += ["I{}".format(i), In(T)]
-    IO += ["O", Out(T)]
-    circ = DefineCircuit("NOr{}{}".format(height, width),
-        *IO)
-    inputs = [getattr(circ, 'I{}'.format(i)) for i in range(height)]
-    if width is None:
-        inv = Not()
-    else:
-        inv = Invert(width)
-    O = inv(Or(height, width)(*inputs))
-    wire(O, circ.O)
-    EndDefine()
-    return circ
+        decl += ["I{}".format(i), In(T)]
+    decl += ["O", Out(T)]
+
+    class _NOr(Circuit):
+        name = f"NOr{height}{width}"
+        io = IO(**dict(zip(decl[::2], decl[1::2])))
+        inputs = _get_inputs(io, height)
+        if width is None:
+            inv = Not()
+        else:
+            inv = Invert(width)
+        O = inv(Or(height, width)(*inputs))
+        wire(O, io.O)
+
+    return _NOr
 
 
 def NOr(height, width=None, **kwargs):
@@ -262,21 +270,23 @@ def DefineNXOr(height=2, width=None):
         T = Bit
     else:
         T = Bits[width]
-    IO = []
+    decl = []
     for i in range(height):
-        IO += ["I{}".format(i), In(T)]
-    IO += ["O", Out(T)]
-    circ = DefineCircuit("NXOr{}{}".format(height, width),
-        *IO)
-    inputs = [getattr(circ, 'I{}'.format(i)) for i in range(height)]
-    if width is None:
-        inv = Not()
-    else:
-        inv = Invert(width)
-    O = inv(XOr(height, width)(*inputs))
-    wire(O, circ.O)
-    EndDefine()
-    return circ
+        decl += ["I{}".format(i), In(T)]
+    decl += ["O", Out(T)]
+
+    class _NXOr(Circuit):
+        name = f"NXOr{height}{width}"
+        io = IO(**dict(zip(decl[::2], decl[1::2])))
+        inputs = _get_inputs(io, height)
+        if width is None:
+            inv = Not()
+        else:
+            inv = Invert(width)
+        O = inv(XOr(height, width)(*inputs))
+        wire(O, io.O)
+
+    return _NXOr
 
 
 def NXOr(height, width=None, **kwargs):

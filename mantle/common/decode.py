@@ -1,15 +1,20 @@
 import magma as m
-from mantle import LUT
-from mantle import EQ
+from mantle import EQ, LUT
+
 
 __all__  = ['DefineDecode', 'Decode', 'decode']
 
+
 @m.cache_definition
 def DefineDecode(i, n):
-    circ = m.DefineCircuit(f"Decode{i}{n}", "I", m.In(m.Bits[n]), "O", m.Out(m.Bit))
-    m.wire(circ.O, EQ(n)(circ.I, m.bits(i, n)))
-    m.EndDefine()
-    return circ
+
+    class _Decode(m.Circuit):
+        name = f"Decode{i}{n}"
+        io = m.IO(I=m.In(m.Bits[n]), O=m.Out(m.Bit))
+        m.wire(io.O, EQ(n)(io.I, m.bits(i, n)))
+
+    return _Decode
+
 
 def Decode(i, n, invert=False, **kwargs):
     """
@@ -27,6 +32,6 @@ def Decode(i, n, invert=False, **kwargs):
 
     return DefineDecode(i, n)()
 
+
 def decode(I, i, invert=False, **kwargs):
     return Decode(i, len(I), invert=invert, **kwargs)(I)
-

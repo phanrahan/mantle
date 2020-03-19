@@ -1,4 +1,4 @@
-import tempfile
+import fault
 import magma as m
 from magma.testing import check_files_equal
 import mantle
@@ -25,10 +25,6 @@ def test_basic():
                              "build/test_regfile_basic.json",
                              "gold/test_regfile_basic.json")
 
-    try:
-        import fault
-    except ImportError:
-        return
     tester = fault.Tester(_Main, _Main.CLK)
     tester.circuit.CLK = 0
     for i in range(4):
@@ -39,9 +35,7 @@ def test_basic():
         tester.circuit.read_addr = i
         tester.eval()
         tester.circuit.read_data.expect(i)
-    with tempfile.TemporaryDirectory() as dir_:
-        tester.compile_and_run("verilator", directory=dir_,
-                               flags=['-Wno-unused'])
+    tester.compile_and_run(target="coreir")
 
 
 def test_two_ports():
@@ -71,10 +65,6 @@ def test_two_ports():
                              "build/test_regfile_two_ports.json",
                              "gold/test_regfile_two_ports.json")
 
-    try:
-        import fault
-    except ImportError:
-        return
     tester = fault.Tester(_Main, _Main.CLK)
     tester.circuit.CLK = 0
     for i in range(4):
@@ -99,6 +89,4 @@ def test_two_ports():
     tester.circuit.read_addr0 = 3
     tester.eval()
     tester.circuit.read_data0.expect(4)
-    with tempfile.TemporaryDirectory() as dir_:
-        tester.compile_and_run("verilator", directory=dir_,
-                               flags=['-Wno-unused'])
+    tester.compile_and_run("coreir")

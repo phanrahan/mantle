@@ -7,18 +7,25 @@ from collections.abc import Sequence
 from hwtypes import BitVector
 
 
-@circuit_generator
+@cache_definition
 def DeclareCoreirLUT(N, init):
-    def simulate(self, value_store, state_store):
+
+    def _simulate(self, value_store, state_store):
         in_ = value_store.get_value(getattr(self, "in"))
         value_store.set_value(self.out, [bool(i) for i in int2seq(init, 2 ** N)][seq2int(in_)])
-    return DeclareCircuit("coreir_lut{}".format(N),
-            'in', In(Bits[ N ]), 'out', Out(Bit),
-            simulate=simulate,
-            coreir_name = "lutN",
-            coreir_lib  = "commonlib",
-            coreir_genargs = {"N": N},
-            coreir_configargs = {"init": BitVector[1 << N](init)})
+
+    args = {'in': In(Bits[N]), 'out': Out(Bit)}
+
+    class _coreir_lut(Circuit):
+        name = "coreir_lut{}".format(N)
+        io = IO(**args)
+        simulate = _simulate
+        coreir_name = "lutN"
+        coreir_lib  = "commonlib"
+        coreir_genargs = {"N": N}
+        coreir_configargs = {"init": BitVector[1 << N](init)}
+
+    return _coreir_lut
 
 def DefineLUT(init, N):
     io = []

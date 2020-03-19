@@ -2,7 +2,7 @@ from magma import *
 import magma as m
 
 
-@circuit_generator
+@cache_definition
 def DeclareAdd(N, cin=False, cout=False):
     has_cin = cin
     has_cout = cout
@@ -46,7 +46,7 @@ def add(*args, **kwargs):
     return curr.O
 
 
-@circuit_generator
+@cache_definition
 def DeclareSub(N, cin=False, cout=False, T=m.Bits):
     has_cin = cin
     has_cout = cout

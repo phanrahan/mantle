@@ -12,7 +12,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1,
                       has_ce=False, has_reset=False):
     """Create an n-bit mod-m counter"""
 
-    name = counter_name(f'Counter{n}_Mod{m}', incr, has_ce, has_reset, cin, cout)
+    name_ = counter_name(f'Counter{n}_Mod{m}', incr, has_ce, has_reset, cin, cout)
     args = []
     if cin:
         args += ['CIN', In(Bit)]
@@ -23,45 +23,45 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1,
 
     args += ClockInterface(has_ce, has_reset)
 
-    CounterModM = DefineCircuit(name, *args)
+    class CounterModM(Circuit):
+        name = name_
+        io = IO(**dict(zip(args[::2], args[1::2])))
 
-    counter = Counter(n, cin=cin, cout=False, incr=incr, 
-                   has_ce=has_ce, has_reset=True)
-    reset = Decode(m - 1, n)(counter.O)
+        counter = Counter(n, cin=cin, cout=False, incr=incr,
+                       has_ce=has_ce, has_reset=True)
+        reset = Decode(m - 1, n)(counter.O)
 
-    if has_reset:
-        reset = Or(2)(reset, CounterModM.RESET)
+        if has_reset:
+            reset = Or(2)(reset, io.RESET)
 
-    if has_ce:
-        CE = CounterModM.CE
-        reset = And(2)(reset, CE)
-        # reset is sometimes called rollover or RO
-        # note that we don't return RO in Counter
+        if has_ce:
+            CE = io.CE
+            reset = And(2)(reset, CE)
+            # reset is sometimes called rollover or RO
+            # note that we don't return RO in Counter
 
-        # should also handle r in the definition
+            # should also handle r in the definition
 
-    wire(reset, counter.RESET) # synchronous reset
+        wire(reset, counter.RESET) # synchronous reset
 
-    if has_ce:
-        wire(CE, counter.CE)
+        if has_ce:
+            wire(CE, counter.CE)
 
-    if cin:
-        wire( CounterModM.CIN, counter.CIN )
+        if cin:
+            wire( io.CIN, counter.CIN )
 
-    wire( counter.O, CounterModM.O )
+        wire( counter.O, io.O )
 
-    if cout:
-        wire( reset, CounterModM.COUT )
-
-    EndCircuit()
+        if cout:
+            wire( reset, io.COUT )
 
     return CounterModM
 
-def CounterModM(m, n, cin=False, cout=True, incr=1, 
+def CounterModM(m, n, cin=False, cout=True, incr=1,
     has_ce=False, has_reset=False, **kwargs):
     return DefineCounterModM(m, n, cin, cout, incr, has_ce, has_reset=has_reset)(**kwargs)
 
-def SizedCounterModM(m, cin=False, cout=False, incr=1, 
+def SizedCounterModM(m, cin=False, cout=False, incr=1,
     has_ce=False, has_reset=False, **kwargs):
     """
     This is that counts from 0 to m - 1 that uses the minimum number of bits

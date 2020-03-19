@@ -36,19 +36,25 @@ def gen_sim_mem(depth, width):
 
 @lru_cache(maxsize=None)
 def DefineCoreirMem(depth, width):
-    name = "coreir_mem{}x{}".format(depth,width)
+    name_ = "coreir_mem{}x{}".format(depth,width)
     addr_width = getRAMAddrWidth(depth)
-    IO = ["raddr", In(Bits[ addr_width ]),
+    decl = ["raddr", In(Bits[ addr_width ]),
           "rdata", Out(Bits[ width ]),
           "waddr", In(Bits[ addr_width ]),
           "wdata", In(Bits[ width ]),
           "clk", In(Clock),
           "wen", In(Bit) ]
-    return DeclareCircuit(name, *IO, verilog_name="coreir_mem",
-            coreir_name="mem", coreir_lib="coreir",
-            simulate=gen_sim_mem(depth, width),
-            coreir_genargs={"width": width, "depth": depth})
-            # coreir_configargs={"init": "0"})
+
+    class _coreir_mem(Circuit):
+        name = name_
+        io = IO(**dict(zip(decl[::2], decl[1::2])))
+        verilog_name = "coreir_mem"
+        coreir_name = "mem"
+        coreir_lib = "coreir"
+        simulate = gen_sim_mem(depth, width)
+        coreir_genargs = {"width": width, "depth": depth}
+
+    return _coreir_mem
 
 def CoreirMem(depth, width):
     return CircuitInstanceFromGeneratorWrapper(GetCoreIRBackend(), "coreir", "mem", "CoreIRmem_w{}_d{}".format(width, depth),
@@ -66,29 +72,30 @@ def getRAMAddrWidth(height):
 @lru_cache(maxsize=None)
 def DefineRAM(height, width, read_latency=0):
     addr_width = getRAMAddrWidth(height)
-    circ = DefineCircuit("RAM{}x{}".format(height, width),
-        "RADDR", In(Bits[ addr_width ]),
-        "RDATA", Out(Bits[ width ]),
-        "WADDR", In(Bits[ addr_width ]),
-        "WDATA", In(Bits[ width ]),
-        "CLK",   In(Clock),
-        "WE",    In(Bit),
-    )
-    coreir_mem = DefineCoreirMem(height, width)()
-    wire(circ.RADDR, coreir_mem.raddr)
-    wire(circ.CLK, coreir_mem.clk)
-    wire(circ.WADDR, coreir_mem.waddr)
-    wire(circ.WDATA, coreir_mem.wdata)
-    wire(circ.WE, coreir_mem.wen)
-    
-    #Register chain for memory
-    rd_out = coreir_mem.rdata
-    for i in range(read_latency):
-        rd_out = register(rd_out)
-    wire(circ.RDATA, rd_out)
-    
-    EndDefine()
-    return circ
+
+    class _RAM(Circuit):
+        name = f"RAM{height}x{width}"
+        io = IO(RADDR=In(Bits[ addr_width ]),
+                RDATA=Out(Bits[ width ]),
+                WADDR=In(Bits[ addr_width ]),
+                WDATA=In(Bits[ width ]),
+                CLK=In(Clock),
+                WE=In(Bit))
+        coreir_mem = DefineCoreirMem(height, width)()
+        wire(io.RADDR, coreir_mem.raddr)
+        wire(io.CLK, coreir_mem.clk)
+        wire(io.WADDR, coreir_mem.waddr)
+        wire(io.WDATA, coreir_mem.wdata)
+        wire(io.WE, coreir_mem.wen)
+
+        #Register chain for memory
+        rd_out = coreir_mem.rdata
+        for i in range(read_latency):
+            rd_out = register(rd_out)
+        wire(io.RDATA, rd_out)
+
+    return _RAM
+
 
 @lru_cache(maxsize=None)
 def DefineMemory(height, width, readonly=False, read_latency=0):

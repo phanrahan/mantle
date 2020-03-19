@@ -106,18 +106,22 @@ def DefineCoreirReg(width, init=0, has_async_reset=False,
     )
 
 def define_wrap(type_, type_name, in_type):
-    def sim_wrap(self, value_store, state_store):
+
+    def _sim_wrap(self, value_store, state_store):
         input_val = value_store.get_value(getattr(self, "in"))
         value_store.set_value(self.out, input_val)
 
-    return DeclareCircuit(
-        f'coreir_wrap{type_name}',
-        "in", In(in_type), "out", Out(type_),
-        coreir_genargs = {"type": AsyncReset},
-        coreir_name="wrap",
-        coreir_lib="coreir",
-        simulate=sim_wrap
-    )
+    args = {"in": In(in_type), "out": Out(type_)}
+
+    class _coreir_wrap(Circuit):
+        name = f'coreir_wrap{type_name}'
+        io = IO(**args)
+        coreir_genargs = {"type": AsyncReset}
+        coreir_name = "wrap"
+        coreir_lib = "coreir"
+        simulate = _sim_wrap
+
+    return _coreir_wrap
 
 @m.cache_definition
 def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False, has_async_resetn=False):

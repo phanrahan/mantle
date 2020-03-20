@@ -67,7 +67,7 @@ class RegFileBuilder(m.CircuitBuilder):
                     value = reg.O
                 mux = m.operators.Mux(2, m.Bits[self._data_width])()
                 sel = port.addr == i
-                reg.I @= mux(reg.O, port.data, sel)
+                reg.I @= mux(value, port.data, sel)
             for name in self._read_ports:  # forward write
                 read_port = self._port(name)
                 value = read_port.data.value()

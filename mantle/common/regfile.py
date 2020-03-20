@@ -1,5 +1,5 @@
 import magma as m
-from mantle import DefineRegister
+from mantle.coreir import DefineRegister
 
 
 def _make_read_type(data_width, addr_width):

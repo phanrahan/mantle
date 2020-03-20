@@ -37,5 +37,5 @@ modules = [
     "primitives",
     "operator",
 
-    "regfile",
+    "reg_file",
 ]

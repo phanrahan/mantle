@@ -52,26 +52,26 @@ class RegFileBuilder(m.CircuitBuilder):
     def _finalize(self):
         registers = [DefineRegister(self._data_width, has_async_reset=True)()
                      for _ in range(self._height)]
+        read_data = {name: None for name in self._read_ports}
         for name in self._read_ports:
             port = self._port(name)
             mux = m.operators.Mux(self._height, m.Bits[self._data_width])()
             values = [reg.O for reg in registers]
-            port.data @= mux(*values, port.addr)
+            read_data[name] = mux(*values, port.addr)
+        reg_data = [reg.O for reg in registers]
         for name in self._write_ports:
             port = self._port(name)
             for i, reg in enumerate(registers):
-                if reg.I.driven():
-                    value = reg.I.value()
-                    reg.I.unwire(value)
-                else:
-                    value = reg.O
                 mux = m.operators.Mux(2, m.Bits[self._data_width])()
-                sel = port.addr == i
-                reg.I @= mux(value, port.data, sel)
-            for name in self._read_ports:  # forward write
-                read_port = self._port(name)
-                value = read_port.data.value()
-                read_port.data.unwire(value)
+                reg_data[i] = mux(reg_data[i], port.data, port.addr == i)
+            for read_name in self._read_ports:  # forward write
+                read_port = self._port(read_name)
                 mux = m.operators.Mux(2, m.Bits[self._data_width])()
-                sel = port.addr == read_port.addr
-                read_port.data @= mux(value, port.data, sel)
+                read_data[read_name] = mux(read_data[read_name], port.data,
+                                           port.addr == read_port.addr)
+        # Commit staged reads and writes.
+        for i, reg in enumerate(registers):
+            reg.I @= reg_data[i]
+        for name in self._read_ports:
+            port = self._port(name)
+            port.data @= read_data[name]

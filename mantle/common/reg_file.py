@@ -22,7 +22,7 @@ class RegFileBuilder(m.CircuitBuilder):
         self._write_ports = []
         self._readT = _make_read_type(self._data_width, self._addr_width)
         self._writeT = _make_write_type(self._data_width, self._addr_width)
-        clocks = m.ClockInterface(has_async_reset=True)
+        clocks = m.ClockIO(has_async_reset=True).decl()
         for name, typ in zip(clocks[::2], clocks[1::2]):
             self._add_port(name, typ)
 

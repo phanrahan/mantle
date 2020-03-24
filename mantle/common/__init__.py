@@ -35,5 +35,7 @@ modules = [
     "ROM",
 
     "primitives",
-    "operator"
+    "operator",
+
+    "reg_file",
 ]

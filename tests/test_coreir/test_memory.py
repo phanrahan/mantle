@@ -46,5 +46,5 @@ def test_ram_latency1():
 
 
 def test_generic_memory_import():
-    class Main(m.Circuit):
+    class Main(Circuit):
         assert type(RAM(8, 8)) == DefineRAM(8, 8)

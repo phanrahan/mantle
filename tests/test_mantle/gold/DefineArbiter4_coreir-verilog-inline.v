@@ -51,7 +51,7 @@ LUT2_2 LUT2_2_inst3 (
     .I1(coreir_add4_inst0_out[3]),
     .O(LUT2_2_inst3_O)
 );
-assign coreir_add4_inst0_out = I + 4'hf;
+assign coreir_add4_inst0_out = 4'(I + 4'hf);
 assign O = {LUT2_2_inst3_O,LUT2_2_inst2_O,LUT2_2_inst1_O,LUT2_2_inst0_O};
 endmodule
 

@@ -4,7 +4,7 @@ module Add2_cin (
     output [1:0] O,
     input CIN
 );
-assign O = (({1'b0,CIN}) + I0) + I1;
+assign O = 2'((2'(({1'b0,CIN}) + I0)) + I1);
 endmodule
 
 module Sub2_cin (

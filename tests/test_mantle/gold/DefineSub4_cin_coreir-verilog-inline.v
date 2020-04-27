@@ -4,7 +4,7 @@ module Add4_cin (
     output [3:0] O,
     input CIN
 );
-assign O = (({1'b0,1'b0,1'b0,CIN}) + I0) + I1;
+assign O = 4'((4'(({1'b0,1'b0,1'b0,CIN}) + I0)) + I1);
 endmodule
 
 module Sub4_cin (

@@ -75,7 +75,7 @@ LUT2_2 LUT2_2_inst7 (
     .I1(coreir_add8_inst0_out[7]),
     .O(LUT2_2_inst7_O)
 );
-assign coreir_add8_inst0_out = I + 8'hff;
+assign coreir_add8_inst0_out = 8'(I + 8'hff);
 assign O = {LUT2_2_inst7_O,LUT2_2_inst6_O,LUT2_2_inst5_O,LUT2_2_inst4_O,LUT2_2_inst3_O,LUT2_2_inst2_O,LUT2_2_inst1_O,LUT2_2_inst0_O};
 endmodule
 

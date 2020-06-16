@@ -55,18 +55,18 @@ class RegFileBuilder(m.CircuitBuilder):
         read_data = {name: None for name in self._read_ports}
         for name in self._read_ports:
             port = self._port(name)
-            mux = m.operators.Mux(self._height, m.Bits[self._data_width])()
+            mux = m.Mux(self._height, m.Bits[self._data_width])()
             values = [reg.O for reg in registers]
             read_data[name] = mux(*values, port.addr)
         reg_data = [reg.O for reg in registers]
         for name in self._write_ports:
             port = self._port(name)
             for i, reg in enumerate(registers):
-                mux = m.operators.Mux(2, m.Bits[self._data_width])()
+                mux = m.Mux(2, m.Bits[self._data_width])()
                 reg_data[i] = mux(reg_data[i], port.data, port.addr == i)
             for read_name in self._read_ports:  # forward write
                 read_port = self._port(read_name)
-                mux = m.operators.Mux(2, m.Bits[self._data_width])()
+                mux = m.Mux(2, m.Bits[self._data_width])()
                 read_data[read_name] = mux(read_data[read_name], port.data,
                                            port.addr == read_port.addr)
         # Commit staged reads and writes.

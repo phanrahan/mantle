@@ -4,11 +4,11 @@ from magma.backend.verilog import bstr
 __all__ = ['SB_PLL', 'SB_PLL40_CORE']
 
 SB_PLL40_CORE = DeclareCircuit('SB_PLL40_CORE',
-            "REFERENCECLK", In(Bit),
+            "REFERENCECLK", In(Clock),
             "RESETB", In(Bit),
             "BYPASS", In(Bit),
             "PLLOUTCORE", Out(Bit),
-            "PLLOUTGLOBAL", Out(Bit),
+            "PLLOUTGLOBAL", Out(Clock),
             coreir_lib='ice40')
 
 def SB_PLL( freqout, freqin=12000000 ):

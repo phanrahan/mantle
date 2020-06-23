@@ -1,0 +1,43 @@
+{"top":"global.TestPLL",
+"namespaces":{
+  "global":{
+    "modules":{
+      "SB_PLL40_CORE":{
+        "type":["Record",[
+          ["REFERENCECLK",["Named","coreir.clkIn"]],
+          ["RESETB","BitIn"],
+          ["BYPASS","BitIn"],
+          ["PLLOUTCORE","Bit"],
+          ["PLLOUTGLOBAL",["Named","coreir.clk"]]
+        ]]
+      },
+      "TestPLL":{
+        "type":["Record",[
+          ["CLKIN",["Named","coreir.clkIn"]],
+          ["CLKOUT",["Named","coreir.clk"]]
+        ]],
+        "instances":{
+          "SB_PLL40_CORE_inst0":{
+            "modref":"ice40.SB_PLL40_CORE",
+            "modargs":{"DIVF":[["BitVector",7],"7'h3f"], "DIVQ":[["BitVector",3],"3'h5"], "DIVR":[["BitVector",4],"4'h0"], "FEEDBACK_PATH":["String","SIMPLE"], "FILTER_RANGE":[["BitVector",3],"3'h1"], "PLLOUT_SELECT":["String","GENCLK"]}
+          },
+          "bit_const_0_None":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",false]}
+          },
+          "bit_const_1_None":{
+            "modref":"corebit.const",
+            "modargs":{"value":["Bool",true]}
+          }
+        },
+        "connections":[
+          ["bit_const_0_None.out","SB_PLL40_CORE_inst0.BYPASS"],
+          ["self.CLKOUT","SB_PLL40_CORE_inst0.PLLOUTGLOBAL"],
+          ["self.CLKIN","SB_PLL40_CORE_inst0.REFERENCECLK"],
+          ["bit_const_1_None.out","SB_PLL40_CORE_inst0.RESETB"]
+        ]
+      }
+    }
+  }
+}
+}

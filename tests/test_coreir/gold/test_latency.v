@@ -18,6 +18,7 @@ endmodule
 
 module coreir_mem #(
     parameter has_init = 1'b0,
+    parameter sync_read = 1'b0,
     parameter depth = 1,
     parameter width = 1
 ) (
@@ -44,7 +45,17 @@ module coreir_mem #(
       data[waddr] <= wdata;
     end
   end
+  generate if (sync_read) begin
+  reg [width-1:0] rdata_reg;
+  always @(posedge clk) begin
+    rdata_reg <= data[raddr];
+  end
+  assign rdata = rdata_reg;
+  end else begin
   assign rdata = data[raddr];
+  end
+  endgenerate
+
 endmodule
 
 module RAM256x16 (
@@ -60,6 +71,7 @@ wire [15:0] reg_P_inst0_out;
 coreir_mem #(
     .depth(256),
     .has_init(1'b0),
+    .sync_read(1'b0),
     .width(16)
 ) coreir_mem256x16_inst0 (
     .clk(CLK),

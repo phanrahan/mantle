@@ -72,7 +72,7 @@
         "instances":{
           "coreir_mem4x1_inst0":{
             "genref":"coreir.mem",
-            "genargs":{"depth":["Int",4], "has_init":["Bool",false], "width":["Int",1]}
+            "genargs":{"depth":["Int",4], "has_init":["Bool",false], "sync_read":["Bool",false], "width":["Int",1]}
           }
         },
         "connections":[

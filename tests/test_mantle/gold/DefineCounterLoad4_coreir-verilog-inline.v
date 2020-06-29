@@ -16,27 +16,22 @@ module coreir_reg #(
   assign out = outReg;
 endmodule
 
-module commonlib_muxn__N2__width4 (
-    input [3:0] in_data_0,
-    input [3:0] in_data_1,
-    input [0:0] in_sel,
-    output [3:0] out
-);
-assign out = in_sel[0] ? in_data_1 : in_data_0;
-endmodule
-
 module Mux2x4 (
     input [3:0] I0,
     input [3:0] I1,
     input S,
     output [3:0] O
 );
-commonlib_muxn__N2__width4 coreir_commonlib_mux2x4_inst0 (
-    .in_data_0(I0),
-    .in_data_1(I1),
-    .in_sel(S),
-    .out(O)
-);
+reg [3:0] coreir_commonlib_mux2x4_inst0_out;
+always @(*) begin
+if (S == 0) begin
+    coreir_commonlib_mux2x4_inst0_out = I0;
+end else begin
+    coreir_commonlib_mux2x4_inst0_out = I1;
+end
+end
+
+assign O = coreir_commonlib_mux2x4_inst0_out;
 endmodule
 
 module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (
@@ -96,8 +91,8 @@ module Add4_cout (
     output COUT
 );
 wire [4:0] coreir_add5_inst0_out;
-assign coreir_add5_inst0_out = 5'(({1'b0,I0[3],I0[2],I0[1],I0[0]}) + ({1'b0,I1[3],I1[2],I1[1],I1[0]}));
-assign O = {coreir_add5_inst0_out[3],coreir_add5_inst0_out[2],coreir_add5_inst0_out[1],coreir_add5_inst0_out[0]};
+assign coreir_add5_inst0_out = 5'(({1'b0,I0[3:0]}) + ({1'b0,I1[3:0]}));
+assign O = coreir_add5_inst0_out[3:0];
 assign COUT = coreir_add5_inst0_out[4];
 endmodule
 

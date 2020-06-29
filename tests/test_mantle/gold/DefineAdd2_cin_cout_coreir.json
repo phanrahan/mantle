@@ -30,14 +30,11 @@
           ["coreir_add3_inst1.in0.2","bit_const_0_None.out"],
           ["coreir_add3_inst1.in1.2","bit_const_0_None.out"],
           ["coreir_add3_inst1.out","coreir_add3_inst0.in0"],
-          ["self.I1.0","coreir_add3_inst0.in1.0"],
-          ["self.I1.1","coreir_add3_inst0.in1.1"],
-          ["self.O.0","coreir_add3_inst0.out.0"],
-          ["self.O.1","coreir_add3_inst0.out.1"],
+          ["self.I1.0:2","coreir_add3_inst0.in1.0:2"],
+          ["self.O.0:2","coreir_add3_inst0.out.0:2"],
           ["self.COUT","coreir_add3_inst0.out.2"],
           ["self.CIN","coreir_add3_inst1.in0.0"],
-          ["self.I0.0","coreir_add3_inst1.in1.0"],
-          ["self.I0.1","coreir_add3_inst1.in1.1"]
+          ["self.I0.0:2","coreir_add3_inst1.in1.0:2"]
         ]
       }
     }

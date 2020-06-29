@@ -16,8 +16,7 @@
         "connections":[
           ["self.O.2","bit_const_0_None.out"],
           ["self.O.3","bit_const_0_None.out"],
-          ["self.O.0","self.I.2"],
-          ["self.O.1","self.I.3"]
+          ["self.O.0:2","self.I.2:4"]
         ]
       },
       "StaticRightShift_43":{

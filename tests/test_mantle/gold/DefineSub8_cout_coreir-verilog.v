@@ -44,17 +44,17 @@ coreir_add #(
     .width(9)
 ) coreir_add9_inst0 (
     .in0(coreir_add9_inst1_out),
-    .in1({bit_const_0_None_out,I1[7],I1[6],I1[5],I1[4],I1[3],I1[2],I1[1],I1[0]}),
+    .in1({bit_const_0_None_out,I1[7:0]}),
     .out(coreir_add9_inst0_out)
 );
 coreir_add #(
     .width(9)
 ) coreir_add9_inst1 (
     .in0({bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,CIN}),
-    .in1({bit_const_0_None_out,I0[7],I0[6],I0[5],I0[4],I0[3],I0[2],I0[1],I0[0]}),
+    .in1({bit_const_0_None_out,I0[7:0]}),
     .out(coreir_add9_inst1_out)
 );
-assign O = {coreir_add9_inst0_out[7],coreir_add9_inst0_out[6],coreir_add9_inst0_out[5],coreir_add9_inst0_out[4],coreir_add9_inst0_out[3],coreir_add9_inst0_out[2],coreir_add9_inst0_out[1],coreir_add9_inst0_out[0]};
+assign O = coreir_add9_inst0_out[7:0];
 assign COUT = coreir_add9_inst0_out[8];
 endmodule
 

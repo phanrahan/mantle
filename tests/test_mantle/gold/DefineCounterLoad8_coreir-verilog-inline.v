@@ -16,27 +16,22 @@ module coreir_reg #(
   assign out = outReg;
 endmodule
 
-module commonlib_muxn__N2__width8 (
-    input [7:0] in_data_0,
-    input [7:0] in_data_1,
-    input [0:0] in_sel,
-    output [7:0] out
-);
-assign out = in_sel[0] ? in_data_1 : in_data_0;
-endmodule
-
 module Mux2x8 (
     input [7:0] I0,
     input [7:0] I1,
     input S,
     output [7:0] O
 );
-commonlib_muxn__N2__width8 coreir_commonlib_mux2x8_inst0 (
-    .in_data_0(I0),
-    .in_data_1(I1),
-    .in_sel(S),
-    .out(O)
-);
+reg [7:0] coreir_commonlib_mux2x8_inst0_out;
+always @(*) begin
+if (S == 0) begin
+    coreir_commonlib_mux2x8_inst0_out = I0;
+end else begin
+    coreir_commonlib_mux2x8_inst0_out = I1;
+end
+end
+
+assign O = coreir_commonlib_mux2x8_inst0_out;
 endmodule
 
 module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (
@@ -120,8 +115,8 @@ module Add8_cout (
     output COUT
 );
 wire [8:0] coreir_add9_inst0_out;
-assign coreir_add9_inst0_out = 9'(({1'b0,I0[7],I0[6],I0[5],I0[4],I0[3],I0[2],I0[1],I0[0]}) + ({1'b0,I1[7],I1[6],I1[5],I1[4],I1[3],I1[2],I1[1],I1[0]}));
-assign O = {coreir_add9_inst0_out[7],coreir_add9_inst0_out[6],coreir_add9_inst0_out[5],coreir_add9_inst0_out[4],coreir_add9_inst0_out[3],coreir_add9_inst0_out[2],coreir_add9_inst0_out[1],coreir_add9_inst0_out[0]};
+assign coreir_add9_inst0_out = 9'(({1'b0,I0[7:0]}) + ({1'b0,I1[7:0]}));
+assign O = coreir_add9_inst0_out[7:0];
 assign COUT = coreir_add9_inst0_out[8];
 endmodule
 

@@ -32,11 +32,11 @@ corebit_const #(
 coreir_add #(
     .width(5)
 ) coreir_add5_inst0 (
-    .in0({bit_const_0_None_out,I0[3],I0[2],I0[1],I0[0]}),
-    .in1({bit_const_0_None_out,I1[3],I1[2],I1[1],I1[0]}),
+    .in0({bit_const_0_None_out,I0[3:0]}),
+    .in1({bit_const_0_None_out,I1[3:0]}),
     .out(coreir_add5_inst0_out)
 );
-assign O = {coreir_add5_inst0_out[3],coreir_add5_inst0_out[2],coreir_add5_inst0_out[1],coreir_add5_inst0_out[0]};
+assign O = coreir_add5_inst0_out[3:0];
 assign COUT = coreir_add5_inst0_out[4];
 endmodule
 

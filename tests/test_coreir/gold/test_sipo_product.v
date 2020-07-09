@@ -37,15 +37,15 @@ module Register (
     output O_X,
     output [4:0] O_Y
 );
-wire [4:0] _$0_out;
-wire [4:0] _$1_in;
+wire [4:0] _$_U1_out;
+wire [4:0] _$_U2_in;
 wire [5:0] reg_P_inst0_out;
-mantle_wire__typeBit5 _$0 (
+mantle_wire__typeBit5 _$_U1 (
     .in(I_Y),
-    .out(_$0_out)
+    .out(_$_U1_out)
 );
-mantle_wire__typeBitIn5 _$1 (
-    .in(_$1_in),
+mantle_wire__typeBitIn5 _$_U2 (
+    .in(_$_U2_in),
     .out(reg_P_inst0_out[5:1])
 );
 coreir_reg #(
@@ -54,11 +54,11 @@ coreir_reg #(
     .width(6)
 ) reg_P_inst0 (
     .clk(CLK),
-    .in({_$0_out[4:0],I_X}),
+    .in({_$_U1_out[4:0],I_X}),
     .out(reg_P_inst0_out)
 );
 assign O_X = reg_P_inst0_out[0];
-assign O_Y = _$1_in;
+assign O_Y = _$_U2_in;
 endmodule
 
 module SIPO5 (

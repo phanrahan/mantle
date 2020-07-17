@@ -90,3 +90,43 @@ def test_two_ports():
     tester.eval()
     tester.circuit.read_data0.expect(4)
     tester.compile_and_run("coreir")
+
+
+def test_write_enable():
+    height = 4
+    data_width = 4
+    addr_width = m.bitutils.clog2(height)
+
+    class _Main(m.Circuit):
+        io = m.IO(
+            write_addr=m.In(m.Bits[addr_width]),
+            write_data=m.In(m.Bits[data_width]),
+            write_enable=m.In(m.Enable),
+            read_addr=m.In(m.Bits[addr_width]),
+            read_data=m.Out(m.Bits[data_width])
+        ) + m.ClockIO(has_async_reset=True)
+        reg_file = mantle.RegFileBuilder("my_regfile", height, data_width)
+        reg_file.write(io.write_addr, io.write_data, enable=io.write_enable)
+        io.read_data @= reg_file[io.read_addr]
+
+    m.compile("build/test_regfile_enable", _Main, output="coreir")
+    assert check_files_equal(__file__,
+                             "build/test_regfile_enable.json",
+                             "gold/test_regfile_enable.json")
+
+    tester = fault.Tester(_Main, _Main.CLK)
+    tester.circuit.CLK = 0
+    for i in range(4):
+        tester.circuit.write_enable = 1
+        tester.circuit.write_addr = i
+        tester.circuit.write_data = i
+        tester.step(2)
+        # Write enable low should not change the value
+        tester.circuit.write_enable = 0
+        tester.circuit.write_data = 0
+        tester.step(2)
+    for i in range(4):
+        tester.circuit.read_addr = i
+        tester.eval()
+        tester.circuit.read_data.expect(i)
+    tester.compile_and_run(target="coreir")

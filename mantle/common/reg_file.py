@@ -20,6 +20,7 @@ class RegFileBuilder(m.CircuitBuilder):
         self._addr_width = m.bitutils.clog2(height)
         self._read_ports = []
         self._write_ports = []
+        self._enable_ports = {}
         self._readT = _make_read_type(self._data_width, self._addr_width)
         self._writeT = _make_write_type(self._data_width, self._addr_width)
         clocks = m.ClockIO(has_async_reset=True).decl()
@@ -37,8 +38,7 @@ class RegFileBuilder(m.CircuitBuilder):
         m.wire(addr, port.addr)
         return port.data
 
-    @m.builder_method
-    def __setitem__(self, addr, data):
+    def _add_write_port(self, addr, data):
         """Add a write port"""
         count = len(self._write_ports)
         name = f"write_{count}"
@@ -47,6 +47,24 @@ class RegFileBuilder(m.CircuitBuilder):
         port = getattr(self, name)
         m.wire(addr, port.addr)
         m.wire(data, port.data)
+        return name
+
+    @m.builder_method
+    def __setitem__(self, addr, data):
+        self._add_write_port(addr, data)
+
+    def _add_enable(self, port_name, enable):
+        enable_name = f"{port_name}_en"
+        self._add_port(enable_name, m.In(m.Enable))
+        self._enable_ports[port_name] = enable_name
+        port = getattr(self, enable_name)
+        m.wire(enable, port)
+
+    @m.builder_method
+    def write(self, addr, data, enable=None):
+        name = self._add_write_port(addr, data)
+        if enable is not None:
+            self._add_enable(name, enable)
 
     @m.builder_method
     def _finalize(self):
@@ -61,14 +79,23 @@ class RegFileBuilder(m.CircuitBuilder):
         reg_data = [reg.O for reg in registers]
         for name in self._write_ports:
             port = self._port(name)
+            enable = None
+            if name in self._enable_ports:
+                enable = m.bit(self._port(self._enable_ports[name]))
             for i, reg in enumerate(registers):
                 mux = m.Mux(2, m.Bits[self._data_width])()
-                reg_data[i] = mux(reg_data[i], port.data, port.addr == i)
+                cond = port.addr == i
+                if enable is not None:
+                    cond &= enable
+                reg_data[i] = mux(reg_data[i], port.data, cond)
             for read_name in self._read_ports:  # forward write
                 read_port = self._port(read_name)
                 mux = m.Mux(2, m.Bits[self._data_width])()
+                cond = port.addr == read_port.addr
+                if enable is not None:
+                    cond &= enable
                 read_data[read_name] = mux(read_data[read_name], port.data,
-                                           port.addr == read_port.addr)
+                                           cond)
         # Commit staged reads and writes.
         for i, reg in enumerate(registers):
             reg.I @= reg_data[i]

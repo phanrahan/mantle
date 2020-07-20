@@ -13,7 +13,7 @@ def _make_write_type(data_width, addr_width):
 
 
 class RegFileBuilder(m.CircuitBuilder):
-    def __init__(self, name, height: int, width: int):
+    def __init__(self, name, height: int, width: int, backend: str = "magma"):
         super().__init__(name)
         self._data_width = width
         self._height = height
@@ -26,6 +26,7 @@ class RegFileBuilder(m.CircuitBuilder):
         clocks = m.ClockIO(has_async_reset=True).decl()
         for name, typ in zip(clocks[::2], clocks[1::2]):
             self._add_port(name, typ)
+        self.backend = backend
 
     @m.builder_method
     def __getitem__(self, addr):
@@ -66,17 +67,15 @@ class RegFileBuilder(m.CircuitBuilder):
         if enable is not None:
             self._add_enable(name, enable)
 
-    @m.builder_method
-    def _finalize(self):
+    def _finalize_magma(self):
         registers = [DefineRegister(self._data_width, has_async_reset=True)()
                      for _ in range(self._height)]
         read_data = {name: None for name in self._read_ports}
+        reg_data = [reg.O for reg in registers]
         for name in self._read_ports:
             port = self._port(name)
             mux = m.Mux(self._height, m.Bits[self._data_width])()
-            values = [reg.O for reg in registers]
-            read_data[name] = mux(*values, port.addr)
-        reg_data = [reg.O for reg in registers]
+            read_data[name] = mux(*reg_data, port.addr)
         for name in self._write_ports:
             port = self._port(name)
             enable = None
@@ -102,3 +101,55 @@ class RegFileBuilder(m.CircuitBuilder):
         for name in self._read_ports:
             port = self._port(name)
             port.data @= read_data[name]
+
+    def _finalize_verilog(self):
+        # TODO: Use inline verilog for safety? Ideally we'd avoid generating
+        # verilog at this level, so not a priority (long term fix would be to
+        # move this logic to the compiler internals somehow)
+        read_data = {}
+        for name in self._read_ports:
+            self._port(name).data.undriven()
+            self._port(name).addr.unused()
+            read_data[name] = f"data[{name}_addr]"
+
+        write_port_str = ""
+        for name in self._write_ports:
+            self._port(name).unused()
+            has_enable = name in self._enable_ports
+            enable_name = self._enable_ports.get(name, None)
+            write_str = f"data[{name}_addr] <= {name}_data;"
+            if enable_name:
+                write_str = f"""\
+if ({enable_name}) begin
+    {write_str}
+end\
+"""
+            write_port_str += write_str + "\n"
+            for read_name in self._read_ports:
+                cond = f"{name}_addr == {read_name}_addr"
+                if enable_name:
+                    cond += f" & {enable_name}"
+                read_data[read_name] = \
+                    f"{cond} ? {name}_data : {read_data[read_name]}"
+        write_port_str = "\n    ".join(write_port_str.splitlines())
+
+        read_port_str = ""
+        for name, data in read_data.items():
+            read_port_str += f"assign {name}_data = {data};"
+
+        m.inline_verilog(f"""
+reg [{self._data_width - 1}:0] data [{self._height - 1}:0];
+always @(posedge CLK) begin
+    {write_port_str}
+end
+{read_port_str}
+""")
+
+    @m.builder_method
+    def _finalize(self):
+        if self.backend == "magma":
+            self._finalize_magma()
+        elif self.backend == "verilog":
+            self._finalize_verilog()
+        else:
+            raise ValueError(f"Unsupported backend: {self.backend}")

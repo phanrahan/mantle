@@ -44,7 +44,8 @@ def test_basic(backend):
         tester.circuit.read_data.expect(i)
     build_dir = os.path.join(os.path.dirname(__file__), "build")
     tester.compile_and_run(target="verilator", directory=build_dir,
-                           flags=["-Wno-unused", "-Wno-undriven"])
+                           skip_compile=True, flags=["-Wno-unused",
+                                                     "-Wno-undriven"])
 
 
 @pytest.mark.parametrize("backend", ["magma", "verilog"])
@@ -103,7 +104,8 @@ def test_two_ports(backend):
     tester.circuit.read_data0.expect(4)
     build_dir = os.path.join(os.path.dirname(__file__), "build")
     tester.compile_and_run(target="verilator", directory=build_dir,
-                           flags=["-Wno-unused", "-Wno-undriven"])
+                           skip_compile=True, flags=["-Wno-unused",
+                                                     "-Wno-undriven"])
 
 
 @pytest.mark.parametrize("backend", ["magma", "verilog"])
@@ -148,4 +150,5 @@ def test_write_enable(backend):
         tester.circuit.read_data.expect(i)
     build_dir = os.path.join(os.path.dirname(__file__), "build")
     tester.compile_and_run(target="verilator", directory=build_dir,
-                           flags=["-Wno-unused", "-Wno-undriven"])
+                           skip_compile=True, flags=["-Wno-unused",
+                                                     "-Wno-undriven"])

@@ -74,6 +74,7 @@ always @(posedge CLK) begin
 end
 assign read_0_data = write_0_addr == read_0_addr & write_0_en ? write_0_data : data[read_0_addr];
 
+
 endmodule
 
 module test_regfile_enable_verilog (

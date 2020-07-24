@@ -96,7 +96,9 @@ always @(posedge CLK) begin
     data[write_0_addr] <= write_0_data;
     data[write_1_addr] <= write_1_data;
 end
-assign read_0_data = write_1_addr == read_0_addr ? write_1_data : write_0_addr == read_0_addr ? write_0_data : data[read_0_addr];assign read_1_data = write_1_addr == read_1_addr ? write_1_data : write_0_addr == read_1_addr ? write_0_data : data[read_1_addr];
+assign read_0_data = write_1_addr == read_0_addr ? write_1_data : write_0_addr == read_0_addr ? write_0_data : data[read_0_addr];
+assign read_1_data = write_1_addr == read_1_addr ? write_1_data : write_0_addr == read_1_addr ? write_0_data : data[read_1_addr];
+
 
 endmodule
 

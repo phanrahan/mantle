@@ -135,7 +135,7 @@ end\
 
         read_port_str = ""
         for name, data in read_data.items():
-            read_port_str += f"assign {name}_data = {data};"
+            read_port_str += f"assign {name}_data = {data};\n"
 
         m.inline_verilog(f"""
 reg [{self._data_width - 1}:0] data [{self._height - 1}:0];

@@ -339,7 +339,7 @@ coreir_reg_arst #(
 assign read_0_data = Mux2xBits4_inst4_O;
 endmodule
 
-module test_regfile_basic_magma (
+module test_regfile_basic_magma_True (
     input [1:0] write_addr,
     input [3:0] write_data,
     input [1:0] read_addr,

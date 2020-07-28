@@ -13,7 +13,14 @@ def _make_write_type(data_width, addr_width):
 
 
 class RegFileBuilder(m.CircuitBuilder):
-    def __init__(self, name, height: int, width: int, backend: str = "magma"):
+    def __init__(self, name, height: int, width: int, backend: str = "magma",
+                 write_forward=True):
+        """
+        write_forward: (bool, default True) selects whether a read of a written
+                       address returns the new value to be written
+                       (combinational forward from write port) or the old value
+                       at the address (current register output)
+        """
         super().__init__(name)
         self._data_width = width
         self._height = height
@@ -27,6 +34,7 @@ class RegFileBuilder(m.CircuitBuilder):
         for name, typ in zip(clocks[::2], clocks[1::2]):
             self._add_port(name, typ)
         self.backend = backend
+        self.write_forward = write_forward
 
     @m.builder_method
     def __getitem__(self, addr):
@@ -87,7 +95,10 @@ class RegFileBuilder(m.CircuitBuilder):
                 if enable is not None:
                     cond &= enable
                 reg_data[i] = mux(reg_data[i], port.data, cond)
-            for read_name in self._read_ports:  # forward write
+            if not self.write_forward:
+                continue
+            # write forwarding logic
+            for read_name in self._read_ports:
                 read_port = self._port(read_name)
                 mux = m.Mux(2, m.Bits[self._data_width])()
                 cond = port.addr == read_port.addr
@@ -129,8 +140,9 @@ end\
                 cond = f"{name}_addr == {read_name}_addr"
                 if enable_name:
                     cond += f" & {enable_name}"
-                read_data[read_name] = \
-                    f"{cond} ? {name}_data : {read_data[read_name]}"
+                if self.write_forward:
+                    read_data[read_name] = \
+                        f"{cond} ? {name}_data : {read_data[read_name]}"
         write_port_str = "\n    ".join(write_port_str.splitlines())
 
         read_port_str = ""

@@ -9,13 +9,15 @@ import mantle
 
 
 @pytest.mark.parametrize("backend", ["magma", "verilog"])
-def test_basic(backend):
+@pytest.mark.parametrize("write_forward", [True, False])
+def test_basic(backend, write_forward):
     height = 4
     data_width = 4
     addr_width = m.bitutils.clog2(height)
 
+    _name = f"test_regfile_basic_{backend}_{write_forward}"
     class _Main(m.Circuit):
-        name = f"test_regfile_basic_{backend}"
+        name = _name
         io = m.IO(
             write_addr=m.In(m.Bits[addr_width]),
             write_data=m.In(m.Bits[data_width]),
@@ -23,14 +25,13 @@ def test_basic(backend):
             read_data=m.Out(m.Bits[data_width])
         ) + m.ClockIO(has_async_reset=True)
         reg_file = mantle.RegFileBuilder("my_regfile",  height, data_width,
-                                         backend=backend)
+                                         backend=backend,
+                                         write_forward=write_forward)
         reg_file[io.write_addr] = io.write_data
         io.read_data @= reg_file[io.read_addr]
 
-    m.compile(f"build/test_regfile_basic_{backend}", _Main)
-    assert check_files_equal(__file__,
-                             f"build/test_regfile_basic_{backend}.v",
-                             f"gold/test_regfile_basic_{backend}.v")
+    m.compile(f"build/{_name}", _Main)
+    assert check_files_equal(__file__, f"build/{_name}.v", f"gold/{_name}.v")
 
     tester = fault.Tester(_Main, _Main.CLK)
     tester.circuit.CLK = 0
@@ -42,6 +43,15 @@ def test_basic(backend):
         tester.circuit.read_addr = i
         tester.eval()
         tester.circuit.read_data.expect(i)
+    for i in range(4):
+        tester.circuit.write_addr = i
+        tester.circuit.write_data = 4 - i
+        tester.circuit.read_addr = i
+        tester.eval()
+        if write_forward:
+            tester.circuit.read_data.expect(4 - i)
+        else:
+            tester.circuit.read_data.expect(i)
     build_dir = os.path.join(os.path.dirname(__file__), "build")
     tester.compile_and_run(target="verilator", directory=build_dir,
                            skip_compile=True, flags=["-Wno-unused",

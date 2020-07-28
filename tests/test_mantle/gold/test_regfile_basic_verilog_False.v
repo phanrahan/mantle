@@ -69,12 +69,12 @@ reg [3:0] data [3:0];
 always @(posedge CLK) begin
     data[write_0_addr] <= write_0_data;
 end
-assign read_0_data = write_0_addr == read_0_addr ? write_0_data : data[read_0_addr];
+assign read_0_data = data[read_0_addr];
 
 
 endmodule
 
-module test_regfile_basic_verilog (
+module test_regfile_basic_verilog_False (
     input [1:0] write_addr,
     input [3:0] write_data,
     input [1:0] read_addr,

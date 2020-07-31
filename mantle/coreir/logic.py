@@ -140,7 +140,7 @@ def DefineOp(op_name, DefineCoreirReduce, height, width):
     return _Op
 
 def DefineAnd(height=2, width=None):
-    if height is 2:
+    if height == 2:
         if width is None:
             return declare_bit_binop("and", operator.and_)
         else:
@@ -202,7 +202,7 @@ def not_(arg, **kwargs):
 
 
 def DefineOr(height=2, width=None):
-    if height is 2:
+    if height == 2:
         if width is None:
             return declare_bit_binop("or", operator.or_)
         else:
@@ -249,7 +249,7 @@ def ReduceNOr(height=2, **kwargs):
 
 
 def DefineXOr(height=2, width=None):
-    if height is 2:
+    if height == 2:
         if width is None:
             return declare_bit_binop("xor", operator.xor)
         else:

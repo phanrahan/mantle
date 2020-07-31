@@ -37,7 +37,7 @@ def _RegisterName(name, n, init, ce, r):
 
     if isinstance(init, Sequence):
          init = seq2int(init)
-    if init is not 0: name += "_%04X" % init
+    if init != 0: name += "_%04X" % init
 
     return name
 

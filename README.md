@@ -2,8 +2,7 @@
 [![Documentation Status](https://readthedocs.org/projects/magma-mantle/badge/?version=latest)](https://magma-mantle.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/phanrahan/mantle.svg?branch=master)](https://travis-ci.org/phanrahan/mantle)
 
-Mantle is part of the Magma ecosystem
-of python programming tools for FPGAs.
+Mantle is part of the Magma ecosystem of Python hardware contruction tools.
 
 [Magma](https://github.com/phanrahan/magma)
 is a programming model for building hardware.

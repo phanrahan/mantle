@@ -15,28 +15,40 @@ module fold_xor42 (
     input [1:0] I3,
     output [1:0] O
 );
+wire [1:0] xor2_inst0_in0;
+wire [1:0] xor2_inst0_in1;
 wire [1:0] xor2_inst0_out;
+wire [1:0] xor2_inst1_in0;
+wire [1:0] xor2_inst1_in1;
 wire [1:0] xor2_inst1_out;
+wire [1:0] xor2_inst2_in0;
+wire [1:0] xor2_inst2_in1;
 wire [1:0] xor2_inst2_out;
+assign xor2_inst0_in0 = I0;
+assign xor2_inst0_in1 = I1;
 coreir_xor #(
     .width(2)
 ) xor2_inst0 (
-    .in0(I0),
-    .in1(I1),
+    .in0(xor2_inst0_in0),
+    .in1(xor2_inst0_in1),
     .out(xor2_inst0_out)
 );
+assign xor2_inst1_in0 = xor2_inst0_out;
+assign xor2_inst1_in1 = I2;
 coreir_xor #(
     .width(2)
 ) xor2_inst1 (
-    .in0(xor2_inst0_out),
-    .in1(I2),
+    .in0(xor2_inst1_in0),
+    .in1(xor2_inst1_in1),
     .out(xor2_inst1_out)
 );
+assign xor2_inst2_in0 = xor2_inst1_out;
+assign xor2_inst2_in1 = I3;
 coreir_xor #(
     .width(2)
 ) xor2_inst2 (
-    .in0(xor2_inst1_out),
-    .in1(I3),
+    .in0(xor2_inst2_in0),
+    .in1(xor2_inst2_in1),
     .out(xor2_inst2_out)
 );
 assign O = xor2_inst2_out;

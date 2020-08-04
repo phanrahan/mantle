@@ -28,18 +28,23 @@ module coreir_mux #(
 endmodule
 
 module commonlib_muxn__N2__width1 (
-    input [0:0] in_data_0,
-    input [0:0] in_data_1,
+    input [0:0] in_data [1:0],
     input [0:0] in_sel,
     output [0:0] out
 );
+wire [0:0] _join_in0;
+wire [0:0] _join_in1;
+wire _join_sel;
 wire [0:0] _join_out;
+assign _join_in0 = in_data[0];
+assign _join_in1 = in_data[1];
+assign _join_sel = in_sel[0];
 coreir_mux #(
     .width(1)
 ) _join (
-    .in0(in_data_0),
-    .in1(in_data_1),
-    .sel(in_sel[0]),
+    .in0(_join_in0),
+    .in1(_join_in1),
+    .sel(_join_sel),
     .out(_join_out)
 );
 assign out = _join_out;
@@ -51,11 +56,14 @@ module Mux2xOutBits1 (
     input S,
     output [0:0] O
 );
+wire [0:0] coreir_commonlib_mux2x1_inst0_in_data [1:0];
+wire [0:0] coreir_commonlib_mux2x1_inst0_in_sel;
 wire [0:0] coreir_commonlib_mux2x1_inst0_out;
+assign coreir_commonlib_mux2x1_inst0_in_data = '{I1,I0};
+assign coreir_commonlib_mux2x1_inst0_in_sel = S;
 commonlib_muxn__N2__width1 coreir_commonlib_mux2x1_inst0 (
-    .in_data_0(I0),
-    .in_data_1(I1),
-    .in_sel(S),
+    .in_data(coreir_commonlib_mux2x1_inst0_in_data),
+    .in_sel(coreir_commonlib_mux2x1_inst0_in_sel),
     .out(coreir_commonlib_mux2x1_inst0_out)
 );
 assign O = coreir_commonlib_mux2x1_inst0_out;
@@ -67,21 +75,31 @@ module Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_rese
     input CLK,
     input CE
 );
+wire [0:0] enable_mux_I0;
+wire [0:0] enable_mux_I1;
+wire enable_mux_S;
 wire [0:0] enable_mux_O;
+wire value_clk;
+wire [0:0] value_in;
 wire [0:0] value_out;
+assign enable_mux_I0 = value_out;
+assign enable_mux_I1 = I;
+assign enable_mux_S = CE;
 Mux2xOutBits1 enable_mux (
-    .I0(value_out),
-    .I1(I),
-    .S(CE),
+    .I0(enable_mux_I0),
+    .I1(enable_mux_I1),
+    .S(enable_mux_S),
     .O(enable_mux_O)
 );
+assign value_clk = CLK;
+assign value_in = enable_mux_O;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(1'h0),
     .width(1)
 ) value (
-    .clk(CLK),
-    .in(enable_mux_O),
+    .clk(value_clk),
+    .in(value_in),
     .out(value_out)
 );
 assign O = value_out;
@@ -94,12 +112,18 @@ module test (
     input CLK,
     input CE
 );
+wire [0:0] Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_I;
 wire [0:0] Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_O;
+wire Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_CLK;
+wire Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_CE;
+assign Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_I = In0;
+assign Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_CLK = clk;
+assign Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_CE = CE;
 Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1 Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0 (
-    .I(In0),
+    .I(Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_I),
     .O(Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_O),
-    .CLK(clk),
-    .CE(CE)
+    .CLK(Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_CLK),
+    .CE(Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_CE)
 );
 assign Out0 = Register_has_ce_True_has_reset_False_has_async_reset_False_has_async_resetn_False_type_Bits_n_1_inst0_O;
 endmodule

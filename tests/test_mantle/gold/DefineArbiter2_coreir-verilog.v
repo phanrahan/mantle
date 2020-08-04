@@ -32,12 +32,14 @@ module LUT2_2 (
     input I1,
     output O
 );
+wire [1:0] coreir_lut2_inst0_in;
 wire coreir_lut2_inst0_out;
+assign coreir_lut2_inst0_in = {I1,I0};
 lutN #(
     .init(4'h2),
     .N(2)
 ) coreir_lut2_inst0 (
-    .in({I1,I0}),
+    .in(coreir_lut2_inst0_in),
     .out(coreir_lut2_inst0_out)
 );
 assign O = coreir_lut2_inst0_out;
@@ -47,18 +49,28 @@ module Arbiter2 (
     input [1:0] I,
     output [1:0] O
 );
+wire LUT2_2_inst0_I0;
+wire LUT2_2_inst0_I1;
 wire LUT2_2_inst0_O;
+wire LUT2_2_inst1_I0;
+wire LUT2_2_inst1_I1;
 wire LUT2_2_inst1_O;
 wire [1:0] const_3_2_out;
+wire [1:0] coreir_add2_inst0_in0;
+wire [1:0] coreir_add2_inst0_in1;
 wire [1:0] coreir_add2_inst0_out;
+assign LUT2_2_inst0_I0 = I[0];
+assign LUT2_2_inst0_I1 = coreir_add2_inst0_out[0];
 LUT2_2 LUT2_2_inst0 (
-    .I0(I[0]),
-    .I1(coreir_add2_inst0_out[0]),
+    .I0(LUT2_2_inst0_I0),
+    .I1(LUT2_2_inst0_I1),
     .O(LUT2_2_inst0_O)
 );
+assign LUT2_2_inst1_I0 = I[1];
+assign LUT2_2_inst1_I1 = coreir_add2_inst0_out[1];
 LUT2_2 LUT2_2_inst1 (
-    .I0(I[1]),
-    .I1(coreir_add2_inst0_out[1]),
+    .I0(LUT2_2_inst1_I0),
+    .I1(LUT2_2_inst1_I1),
     .O(LUT2_2_inst1_O)
 );
 coreir_const #(
@@ -67,11 +79,13 @@ coreir_const #(
 ) const_3_2 (
     .out(const_3_2_out)
 );
+assign coreir_add2_inst0_in0 = I;
+assign coreir_add2_inst0_in1 = const_3_2_out;
 coreir_add #(
     .width(2)
 ) coreir_add2_inst0 (
-    .in0(I),
-    .in1(const_3_2_out),
+    .in0(coreir_add2_inst0_in0),
+    .in1(coreir_add2_inst0_in1),
     .out(coreir_add2_inst0_out)
 );
 assign O = {LUT2_2_inst1_O,LUT2_2_inst0_O};

@@ -41,34 +41,46 @@ module Register (
     output O_1_X,
     output [4:0] O_1_Y
 );
+wire [4:0] _$_U1_in;
 wire [4:0] _$_U1_out;
+wire [4:0] _$_U2_in;
 wire [4:0] _$_U2_out;
 wire [4:0] _$_U3_in;
+wire [4:0] _$_U3_out;
 wire [4:0] _$_U4_in;
+wire [4:0] _$_U4_out;
+wire reg_P_inst0_clk;
+wire [11:0] reg_P_inst0_in;
 wire [11:0] reg_P_inst0_out;
+assign _$_U1_in = I_0_Y;
 mantle_wire__typeBit5 _$_U1 (
-    .in(I_0_Y),
+    .in(_$_U1_in),
     .out(_$_U1_out)
 );
+assign _$_U2_in = I_1_Y;
 mantle_wire__typeBit5 _$_U2 (
-    .in(I_1_Y),
+    .in(_$_U2_in),
     .out(_$_U2_out)
 );
+assign _$_U3_out = reg_P_inst0_out[5:1];
 mantle_wire__typeBitIn5 _$_U3 (
     .in(_$_U3_in),
-    .out(reg_P_inst0_out[5:1])
+    .out(_$_U3_out)
 );
+assign _$_U4_out = reg_P_inst0_out[11:7];
 mantle_wire__typeBitIn5 _$_U4 (
     .in(_$_U4_in),
-    .out(reg_P_inst0_out[11:7])
+    .out(_$_U4_out)
 );
+assign reg_P_inst0_clk = CLK;
+assign reg_P_inst0_in = {_$_U2_out[4:0],I_1_X,_$_U1_out[4:0],I_0_X};
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(12'h000),
     .width(12)
 ) reg_P_inst0 (
-    .clk(CLK),
-    .in({_$_U2_out[4:0],I_1_X,_$_U1_out[4:0],I_0_X}),
+    .clk(reg_P_inst0_clk),
+    .in(reg_P_inst0_in),
     .out(reg_P_inst0_out)
 );
 assign O_0_X = reg_P_inst0_out[0];
@@ -104,76 +116,126 @@ module SIPO5 (
     output O_4_1_X,
     output [4:0] O_4_1_Y
 );
+wire Register_inst0_CLK;
+wire Register_inst0_I_0_X;
+wire [4:0] Register_inst0_I_0_Y;
+wire Register_inst0_I_1_X;
+wire [4:0] Register_inst0_I_1_Y;
 wire Register_inst0_O_0_X;
 wire [4:0] Register_inst0_O_0_Y;
 wire Register_inst0_O_1_X;
 wire [4:0] Register_inst0_O_1_Y;
+wire Register_inst1_CLK;
+wire Register_inst1_I_0_X;
+wire [4:0] Register_inst1_I_0_Y;
+wire Register_inst1_I_1_X;
+wire [4:0] Register_inst1_I_1_Y;
 wire Register_inst1_O_0_X;
 wire [4:0] Register_inst1_O_0_Y;
 wire Register_inst1_O_1_X;
 wire [4:0] Register_inst1_O_1_Y;
+wire Register_inst2_CLK;
+wire Register_inst2_I_0_X;
+wire [4:0] Register_inst2_I_0_Y;
+wire Register_inst2_I_1_X;
+wire [4:0] Register_inst2_I_1_Y;
 wire Register_inst2_O_0_X;
 wire [4:0] Register_inst2_O_0_Y;
 wire Register_inst2_O_1_X;
 wire [4:0] Register_inst2_O_1_Y;
+wire Register_inst3_CLK;
+wire Register_inst3_I_0_X;
+wire [4:0] Register_inst3_I_0_Y;
+wire Register_inst3_I_1_X;
+wire [4:0] Register_inst3_I_1_Y;
 wire Register_inst3_O_0_X;
 wire [4:0] Register_inst3_O_0_Y;
 wire Register_inst3_O_1_X;
 wire [4:0] Register_inst3_O_1_Y;
+wire Register_inst4_CLK;
+wire Register_inst4_I_0_X;
+wire [4:0] Register_inst4_I_0_Y;
+wire Register_inst4_I_1_X;
+wire [4:0] Register_inst4_I_1_Y;
 wire Register_inst4_O_0_X;
 wire [4:0] Register_inst4_O_0_Y;
 wire Register_inst4_O_1_X;
 wire [4:0] Register_inst4_O_1_Y;
+assign Register_inst0_CLK = CLK;
+assign Register_inst0_I_0_X = I_0_X;
+assign Register_inst0_I_0_Y = I_0_Y;
+assign Register_inst0_I_1_X = I_1_X;
+assign Register_inst0_I_1_Y = I_1_Y;
 Register Register_inst0 (
-    .CLK(CLK),
-    .I_0_X(I_0_X),
-    .I_0_Y(I_0_Y),
-    .I_1_X(I_1_X),
-    .I_1_Y(I_1_Y),
+    .CLK(Register_inst0_CLK),
+    .I_0_X(Register_inst0_I_0_X),
+    .I_0_Y(Register_inst0_I_0_Y),
+    .I_1_X(Register_inst0_I_1_X),
+    .I_1_Y(Register_inst0_I_1_Y),
     .O_0_X(Register_inst0_O_0_X),
     .O_0_Y(Register_inst0_O_0_Y),
     .O_1_X(Register_inst0_O_1_X),
     .O_1_Y(Register_inst0_O_1_Y)
 );
+assign Register_inst1_CLK = CLK;
+assign Register_inst1_I_0_X = Register_inst0_O_0_X;
+assign Register_inst1_I_0_Y = Register_inst0_O_0_Y;
+assign Register_inst1_I_1_X = Register_inst0_O_1_X;
+assign Register_inst1_I_1_Y = Register_inst0_O_1_Y;
 Register Register_inst1 (
-    .CLK(CLK),
-    .I_0_X(Register_inst0_O_0_X),
-    .I_0_Y(Register_inst0_O_0_Y),
-    .I_1_X(Register_inst0_O_1_X),
-    .I_1_Y(Register_inst0_O_1_Y),
+    .CLK(Register_inst1_CLK),
+    .I_0_X(Register_inst1_I_0_X),
+    .I_0_Y(Register_inst1_I_0_Y),
+    .I_1_X(Register_inst1_I_1_X),
+    .I_1_Y(Register_inst1_I_1_Y),
     .O_0_X(Register_inst1_O_0_X),
     .O_0_Y(Register_inst1_O_0_Y),
     .O_1_X(Register_inst1_O_1_X),
     .O_1_Y(Register_inst1_O_1_Y)
 );
+assign Register_inst2_CLK = CLK;
+assign Register_inst2_I_0_X = Register_inst1_O_0_X;
+assign Register_inst2_I_0_Y = Register_inst1_O_0_Y;
+assign Register_inst2_I_1_X = Register_inst1_O_1_X;
+assign Register_inst2_I_1_Y = Register_inst1_O_1_Y;
 Register Register_inst2 (
-    .CLK(CLK),
-    .I_0_X(Register_inst1_O_0_X),
-    .I_0_Y(Register_inst1_O_0_Y),
-    .I_1_X(Register_inst1_O_1_X),
-    .I_1_Y(Register_inst1_O_1_Y),
+    .CLK(Register_inst2_CLK),
+    .I_0_X(Register_inst2_I_0_X),
+    .I_0_Y(Register_inst2_I_0_Y),
+    .I_1_X(Register_inst2_I_1_X),
+    .I_1_Y(Register_inst2_I_1_Y),
     .O_0_X(Register_inst2_O_0_X),
     .O_0_Y(Register_inst2_O_0_Y),
     .O_1_X(Register_inst2_O_1_X),
     .O_1_Y(Register_inst2_O_1_Y)
 );
+assign Register_inst3_CLK = CLK;
+assign Register_inst3_I_0_X = Register_inst2_O_0_X;
+assign Register_inst3_I_0_Y = Register_inst2_O_0_Y;
+assign Register_inst3_I_1_X = Register_inst2_O_1_X;
+assign Register_inst3_I_1_Y = Register_inst2_O_1_Y;
 Register Register_inst3 (
-    .CLK(CLK),
-    .I_0_X(Register_inst2_O_0_X),
-    .I_0_Y(Register_inst2_O_0_Y),
-    .I_1_X(Register_inst2_O_1_X),
-    .I_1_Y(Register_inst2_O_1_Y),
+    .CLK(Register_inst3_CLK),
+    .I_0_X(Register_inst3_I_0_X),
+    .I_0_Y(Register_inst3_I_0_Y),
+    .I_1_X(Register_inst3_I_1_X),
+    .I_1_Y(Register_inst3_I_1_Y),
     .O_0_X(Register_inst3_O_0_X),
     .O_0_Y(Register_inst3_O_0_Y),
     .O_1_X(Register_inst3_O_1_X),
     .O_1_Y(Register_inst3_O_1_Y)
 );
+assign Register_inst4_CLK = CLK;
+assign Register_inst4_I_0_X = Register_inst3_O_0_X;
+assign Register_inst4_I_0_Y = Register_inst3_O_0_Y;
+assign Register_inst4_I_1_X = Register_inst3_O_1_X;
+assign Register_inst4_I_1_Y = Register_inst3_O_1_Y;
 Register Register_inst4 (
-    .CLK(CLK),
-    .I_0_X(Register_inst3_O_0_X),
-    .I_0_Y(Register_inst3_O_0_Y),
-    .I_1_X(Register_inst3_O_1_X),
-    .I_1_Y(Register_inst3_O_1_Y),
+    .CLK(Register_inst4_CLK),
+    .I_0_X(Register_inst4_I_0_X),
+    .I_0_Y(Register_inst4_I_0_Y),
+    .I_1_X(Register_inst4_I_1_X),
+    .I_1_Y(Register_inst4_I_1_Y),
     .O_0_X(Register_inst4_O_0_X),
     .O_0_Y(Register_inst4_O_0_Y),
     .O_1_X(Register_inst4_O_1_X),
@@ -228,6 +290,11 @@ module test_sipo_arr (
     output O_4_1_X,
     output [4:0] O_4_1_Y
 );
+wire SIPO5_inst0_CLK;
+wire SIPO5_inst0_I_0_X;
+wire [4:0] SIPO5_inst0_I_0_Y;
+wire SIPO5_inst0_I_1_X;
+wire [4:0] SIPO5_inst0_I_1_Y;
 wire SIPO5_inst0_O_0_0_X;
 wire [4:0] SIPO5_inst0_O_0_0_Y;
 wire SIPO5_inst0_O_0_1_X;
@@ -248,12 +315,17 @@ wire SIPO5_inst0_O_4_0_X;
 wire [4:0] SIPO5_inst0_O_4_0_Y;
 wire SIPO5_inst0_O_4_1_X;
 wire [4:0] SIPO5_inst0_O_4_1_Y;
+assign SIPO5_inst0_CLK = CLK;
+assign SIPO5_inst0_I_0_X = I_0_X;
+assign SIPO5_inst0_I_0_Y = I_0_Y;
+assign SIPO5_inst0_I_1_X = I_1_X;
+assign SIPO5_inst0_I_1_Y = I_1_Y;
 SIPO5 SIPO5_inst0 (
-    .CLK(CLK),
-    .I_0_X(I_0_X),
-    .I_0_Y(I_0_Y),
-    .I_1_X(I_1_X),
-    .I_1_Y(I_1_Y),
+    .CLK(SIPO5_inst0_CLK),
+    .I_0_X(SIPO5_inst0_I_0_X),
+    .I_0_Y(SIPO5_inst0_I_0_Y),
+    .I_1_X(SIPO5_inst0_I_1_X),
+    .I_1_Y(SIPO5_inst0_I_1_Y),
     .O_0_0_X(SIPO5_inst0_O_0_0_X),
     .O_0_0_Y(SIPO5_inst0_O_0_0_Y),
     .O_0_1_X(SIPO5_inst0_O_0_1_X),

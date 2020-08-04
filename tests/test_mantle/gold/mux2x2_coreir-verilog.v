@@ -10,18 +10,23 @@ module coreir_mux #(
 endmodule
 
 module commonlib_muxn__N2__width2 (
-    input [1:0] in_data_0,
-    input [1:0] in_data_1,
+    input [1:0] in_data [1:0],
     input [0:0] in_sel,
     output [1:0] out
 );
+wire [1:0] _join_in0;
+wire [1:0] _join_in1;
+wire _join_sel;
 wire [1:0] _join_out;
+assign _join_in0 = in_data[0];
+assign _join_in1 = in_data[1];
+assign _join_sel = in_sel[0];
 coreir_mux #(
     .width(2)
 ) _join (
-    .in0(in_data_0),
-    .in1(in_data_1),
-    .sel(in_sel[0]),
+    .in0(_join_in0),
+    .in1(_join_in1),
+    .sel(_join_sel),
     .out(_join_out)
 );
 assign out = _join_out;
@@ -33,11 +38,14 @@ module Mux2x2 (
     input S,
     output [1:0] O
 );
+wire [1:0] coreir_commonlib_mux2x2_inst0_in_data [1:0];
+wire [0:0] coreir_commonlib_mux2x2_inst0_in_sel;
 wire [1:0] coreir_commonlib_mux2x2_inst0_out;
+assign coreir_commonlib_mux2x2_inst0_in_data = '{I1,I0};
+assign coreir_commonlib_mux2x2_inst0_in_sel = S;
 commonlib_muxn__N2__width2 coreir_commonlib_mux2x2_inst0 (
-    .in_data_0(I0),
-    .in_data_1(I1),
-    .in_sel(S),
+    .in_data(coreir_commonlib_mux2x2_inst0_in_data),
+    .in_sel(coreir_commonlib_mux2x2_inst0_in_sel),
     .out(coreir_commonlib_mux2x2_inst0_out)
 );
 assign O = coreir_commonlib_mux2x2_inst0_out;

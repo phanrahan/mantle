@@ -28,16 +28,22 @@ module test (
     input CLK,
     input ASYNCRESETN
 );
+wire reg_PR_inst0_clk;
+wire reg_PR_inst0_arst;
+wire [0:0] reg_PR_inst0_in;
 wire [0:0] reg_PR_inst0_out;
+assign reg_PR_inst0_clk = clk;
+assign reg_PR_inst0_arst = ASYNCRESETN;
+assign reg_PR_inst0_in = In0;
 coreir_reg_arst #(
     .arst_posedge(1'b0),
     .clk_posedge(1'b1),
     .init(1'h0),
     .width(1)
 ) reg_PR_inst0 (
-    .clk(clk),
-    .arst(ASYNCRESETN),
-    .in(In0),
+    .clk(reg_PR_inst0_clk),
+    .arst(reg_PR_inst0_arst),
+    .in(reg_PR_inst0_in),
     .out(reg_PR_inst0_out)
 );
 assign Out0 = reg_PR_inst0_out;

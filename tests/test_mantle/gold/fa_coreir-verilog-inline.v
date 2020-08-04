@@ -23,16 +23,28 @@ module FullAdder (
     output O,
     output COUT
 );
+wire Or3xNone_inst0_I0;
+wire Or3xNone_inst0_I1;
+wire Or3xNone_inst0_I2;
+wire fold_xor3None_inst0_I0;
+wire fold_xor3None_inst0_I1;
+wire fold_xor3None_inst0_I2;
+assign Or3xNone_inst0_I0 = I0 & I1;
+assign Or3xNone_inst0_I1 = I1 & CIN;
+assign Or3xNone_inst0_I2 = I0 & CIN;
 Or3xNone Or3xNone_inst0 (
-    .I0(I0 & I1),
-    .I1(I1 & CIN),
-    .I2(I0 & CIN),
+    .I0(Or3xNone_inst0_I0),
+    .I1(Or3xNone_inst0_I1),
+    .I2(Or3xNone_inst0_I2),
     .O(COUT)
 );
+assign fold_xor3None_inst0_I0 = I0;
+assign fold_xor3None_inst0_I1 = I1;
+assign fold_xor3None_inst0_I2 = CIN;
 fold_xor3None fold_xor3None_inst0 (
-    .I0(I0),
-    .I1(I1),
-    .I2(CIN),
+    .I0(fold_xor3None_inst0_I0),
+    .I1(fold_xor3None_inst0_I1),
+    .I2(fold_xor3None_inst0_I2),
     .O(O)
 );
 endmodule

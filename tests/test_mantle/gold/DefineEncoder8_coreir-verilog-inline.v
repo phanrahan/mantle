@@ -12,28 +12,52 @@ module Encoder8 (
     input [7:0] I,
     output [2:0] O
 );
+wire Or4xNone_inst0_I0;
+wire Or4xNone_inst0_I1;
+wire Or4xNone_inst0_I2;
+wire Or4xNone_inst0_I3;
 wire Or4xNone_inst0_O;
+wire Or4xNone_inst1_I0;
+wire Or4xNone_inst1_I1;
+wire Or4xNone_inst1_I2;
+wire Or4xNone_inst1_I3;
 wire Or4xNone_inst1_O;
+wire Or4xNone_inst2_I0;
+wire Or4xNone_inst2_I1;
+wire Or4xNone_inst2_I2;
+wire Or4xNone_inst2_I3;
 wire Or4xNone_inst2_O;
+assign Or4xNone_inst0_I0 = I[1];
+assign Or4xNone_inst0_I1 = I[3];
+assign Or4xNone_inst0_I2 = I[5];
+assign Or4xNone_inst0_I3 = I[7];
 Or4xNone Or4xNone_inst0 (
-    .I0(I[1]),
-    .I1(I[3]),
-    .I2(I[5]),
-    .I3(I[7]),
+    .I0(Or4xNone_inst0_I0),
+    .I1(Or4xNone_inst0_I1),
+    .I2(Or4xNone_inst0_I2),
+    .I3(Or4xNone_inst0_I3),
     .O(Or4xNone_inst0_O)
 );
+assign Or4xNone_inst1_I0 = I[2];
+assign Or4xNone_inst1_I1 = I[3];
+assign Or4xNone_inst1_I2 = I[6];
+assign Or4xNone_inst1_I3 = I[7];
 Or4xNone Or4xNone_inst1 (
-    .I0(I[2]),
-    .I1(I[3]),
-    .I2(I[6]),
-    .I3(I[7]),
+    .I0(Or4xNone_inst1_I0),
+    .I1(Or4xNone_inst1_I1),
+    .I2(Or4xNone_inst1_I2),
+    .I3(Or4xNone_inst1_I3),
     .O(Or4xNone_inst1_O)
 );
+assign Or4xNone_inst2_I0 = I[4];
+assign Or4xNone_inst2_I1 = I[5];
+assign Or4xNone_inst2_I2 = I[6];
+assign Or4xNone_inst2_I3 = I[7];
 Or4xNone Or4xNone_inst2 (
-    .I0(I[4]),
-    .I1(I[5]),
-    .I2(I[6]),
-    .I3(I[7]),
+    .I0(Or4xNone_inst2_I0),
+    .I1(Or4xNone_inst2_I1),
+    .I2(Or4xNone_inst2_I2),
+    .I3(Or4xNone_inst2_I3),
     .O(Or4xNone_inst2_O)
 );
 assign O = {Or4xNone_inst2_O,Or4xNone_inst1_O,Or4xNone_inst0_O};

@@ -13,12 +13,16 @@ module xor2_wrapped (
     input [1:0] I1,
     output [1:0] O
 );
+wire [1:0] xor2_inst0_in0;
+wire [1:0] xor2_inst0_in1;
 wire [1:0] xor2_inst0_out;
+assign xor2_inst0_in0 = I0;
+assign xor2_inst0_in1 = I1;
 coreir_xor #(
     .width(2)
 ) xor2_inst0 (
-    .in0(I0),
-    .in1(I1),
+    .in0(xor2_inst0_in0),
+    .in1(xor2_inst0_in1),
     .out(xor2_inst0_out)
 );
 assign O = xor2_inst0_out;

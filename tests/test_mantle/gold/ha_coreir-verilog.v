@@ -20,16 +20,24 @@ module HalfAdder (
     output O,
     output COUT
 );
+wire and_inst0_in0;
+wire and_inst0_in1;
 wire and_inst0_out;
+wire xor_inst0_in0;
+wire xor_inst0_in1;
 wire xor_inst0_out;
+assign and_inst0_in0 = I;
+assign and_inst0_in1 = CIN;
 corebit_and and_inst0 (
-    .in0(I),
-    .in1(CIN),
+    .in0(and_inst0_in0),
+    .in1(and_inst0_in1),
     .out(and_inst0_out)
 );
+assign xor_inst0_in0 = I;
+assign xor_inst0_in1 = CIN;
 corebit_xor xor_inst0 (
-    .in0(I),
-    .in1(CIN),
+    .in0(xor_inst0_in0),
+    .in1(xor_inst0_in1),
     .out(xor_inst0_out)
 );
 assign O = xor_inst0_out;

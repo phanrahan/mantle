@@ -50,17 +50,21 @@ module Add8_cout (
     output COUT
 );
 wire bit_const_0_None_out;
+wire [8:0] coreir_add9_inst0_in0;
+wire [8:0] coreir_add9_inst0_in1;
 wire [8:0] coreir_add9_inst0_out;
 corebit_const #(
     .value(1'b0)
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
+assign coreir_add9_inst0_in0 = {bit_const_0_None_out,I0[7:0]};
+assign coreir_add9_inst0_in1 = {bit_const_0_None_out,I1[7:0]};
 coreir_add #(
     .width(9)
 ) coreir_add9_inst0 (
-    .in0({bit_const_0_None_out,I0[7:0]}),
-    .in1({bit_const_0_None_out,I1[7:0]}),
+    .in0(coreir_add9_inst0_in0),
+    .in1(coreir_add9_inst0_in1),
     .out(coreir_add9_inst0_out)
 );
 assign O = coreir_add9_inst0_out[7:0];
@@ -72,13 +76,19 @@ module Counter8_COUT (
     output COUT,
     input CLK
 );
+wire [7:0] Add8_cout_inst0_I0;
+wire [7:0] Add8_cout_inst0_I1;
 wire [7:0] Add8_cout_inst0_O;
 wire Add8_cout_inst0_COUT;
 wire [7:0] const_1_8_out;
+wire reg_P_inst0_clk;
+wire [7:0] reg_P_inst0_in;
 wire [7:0] reg_P_inst0_out;
+assign Add8_cout_inst0_I0 = reg_P_inst0_out;
+assign Add8_cout_inst0_I1 = const_1_8_out;
 Add8_cout Add8_cout_inst0 (
-    .I0(reg_P_inst0_out),
-    .I1(const_1_8_out),
+    .I0(Add8_cout_inst0_I0),
+    .I1(Add8_cout_inst0_I1),
     .O(Add8_cout_inst0_O),
     .COUT(Add8_cout_inst0_COUT)
 );
@@ -88,13 +98,15 @@ coreir_const #(
 ) const_1_8 (
     .out(const_1_8_out)
 );
+assign reg_P_inst0_clk = CLK;
+assign reg_P_inst0_in = Add8_cout_inst0_O;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(8'h00),
     .width(8)
 ) reg_P_inst0 (
-    .clk(CLK),
-    .in(Add8_cout_inst0_O),
+    .clk(reg_P_inst0_clk),
+    .in(reg_P_inst0_in),
     .out(reg_P_inst0_out)
 );
 assign O = reg_P_inst0_out;

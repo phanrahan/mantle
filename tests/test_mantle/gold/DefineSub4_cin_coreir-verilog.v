@@ -39,25 +39,33 @@ module Add4_cin (
     input CIN
 );
 wire bit_const_0_None_out;
+wire [3:0] coreir_add4_inst0_in0;
+wire [3:0] coreir_add4_inst0_in1;
 wire [3:0] coreir_add4_inst0_out;
+wire [3:0] coreir_add4_inst1_in0;
+wire [3:0] coreir_add4_inst1_in1;
 wire [3:0] coreir_add4_inst1_out;
 corebit_const #(
     .value(1'b0)
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
+assign coreir_add4_inst0_in0 = coreir_add4_inst1_out;
+assign coreir_add4_inst0_in1 = I1;
 coreir_add #(
     .width(4)
 ) coreir_add4_inst0 (
-    .in0(coreir_add4_inst1_out),
-    .in1(I1),
+    .in0(coreir_add4_inst0_in0),
+    .in1(coreir_add4_inst0_in1),
     .out(coreir_add4_inst0_out)
 );
+assign coreir_add4_inst1_in0 = {bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,CIN};
+assign coreir_add4_inst1_in1 = I0;
 coreir_add #(
     .width(4)
 ) coreir_add4_inst1 (
-    .in0({bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,CIN}),
-    .in1(I0),
+    .in0(coreir_add4_inst1_in0),
+    .in1(coreir_add4_inst1_in1),
     .out(coreir_add4_inst1_out)
 );
 assign O = coreir_add4_inst0_out;
@@ -69,23 +77,33 @@ module Sub4_cin (
     output [3:0] O,
     input CIN
 );
+wire [3:0] Add4_cin_inst0_I0;
+wire [3:0] Add4_cin_inst0_I1;
 wire [3:0] Add4_cin_inst0_O;
+wire Add4_cin_inst0_CIN;
+wire [3:0] Invert4_inst0_in;
 wire [3:0] Invert4_inst0_out;
+wire not_inst0_in;
 wire not_inst0_out;
+assign Add4_cin_inst0_I0 = I0;
+assign Add4_cin_inst0_I1 = Invert4_inst0_out;
+assign Add4_cin_inst0_CIN = not_inst0_out;
 Add4_cin Add4_cin_inst0 (
-    .I0(I0),
-    .I1(Invert4_inst0_out),
+    .I0(Add4_cin_inst0_I0),
+    .I1(Add4_cin_inst0_I1),
     .O(Add4_cin_inst0_O),
-    .CIN(not_inst0_out)
+    .CIN(Add4_cin_inst0_CIN)
 );
+assign Invert4_inst0_in = I1;
 coreir_not #(
     .width(4)
 ) Invert4_inst0 (
-    .in(I1),
+    .in(Invert4_inst0_in),
     .out(Invert4_inst0_out)
 );
+assign not_inst0_in = CIN;
 corebit_not not_inst0 (
-    .in(CIN),
+    .in(not_inst0_in),
     .out(not_inst0_out)
 );
 assign O = Add4_cin_inst0_O;

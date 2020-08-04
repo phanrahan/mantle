@@ -55,18 +55,23 @@ module corebit_const #(
 endmodule
 
 module commonlib_muxn__N2__width4 (
-    input [3:0] in_data_0,
-    input [3:0] in_data_1,
+    input [3:0] in_data [1:0],
     input [0:0] in_sel,
     output [3:0] out
 );
+wire [3:0] _join_in0;
+wire [3:0] _join_in1;
+wire _join_sel;
 wire [3:0] _join_out;
+assign _join_in0 = in_data[0];
+assign _join_in1 = in_data[1];
+assign _join_sel = in_sel[0];
 coreir_mux #(
     .width(4)
 ) _join (
-    .in0(in_data_0),
-    .in1(in_data_1),
-    .sel(in_sel[0]),
+    .in0(_join_in0),
+    .in1(_join_in1),
+    .sel(_join_sel),
     .out(_join_out)
 );
 assign out = _join_out;
@@ -78,11 +83,14 @@ module Mux2x4 (
     input S,
     output [3:0] O
 );
+wire [3:0] coreir_commonlib_mux2x4_inst0_in_data [1:0];
+wire [0:0] coreir_commonlib_mux2x4_inst0_in_sel;
 wire [3:0] coreir_commonlib_mux2x4_inst0_out;
+assign coreir_commonlib_mux2x4_inst0_in_data = '{I1,I0};
+assign coreir_commonlib_mux2x4_inst0_in_sel = S;
 commonlib_muxn__N2__width4 coreir_commonlib_mux2x4_inst0 (
-    .in_data_0(I0),
-    .in_data_1(I1),
-    .in_sel(S),
+    .in_data(coreir_commonlib_mux2x4_inst0_in_data),
+    .in_sel(coreir_commonlib_mux2x4_inst0_in_sel),
     .out(coreir_commonlib_mux2x4_inst0_out)
 );
 assign O = coreir_commonlib_mux2x4_inst0_out;
@@ -93,14 +101,18 @@ module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (
     output O,
     input CLK
 );
+wire reg_P_inst0_clk;
+wire [0:0] reg_P_inst0_in;
 wire [0:0] reg_P_inst0_out;
+assign reg_P_inst0_clk = CLK;
+assign reg_P_inst0_in = I;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(1'h0),
     .width(1)
 ) reg_P_inst0 (
-    .clk(CLK),
-    .in(I),
+    .clk(reg_P_inst0_clk),
+    .in(reg_P_inst0_in),
     .out(reg_P_inst0_out)
 );
 assign O = reg_P_inst0_out[0];
@@ -111,29 +123,45 @@ module Register4 (
     output [3:0] O,
     input CLK
 );
+wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_I;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O;
+wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_CLK;
+wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_I;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O;
+wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_CLK;
+wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_I;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O;
+wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_CLK;
+wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_I;
 wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O;
+wire DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_CLK;
+assign DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_I = I[0];
+assign DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_CLK = CLK;
 DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0 (
-    .I(I[0]),
+    .I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_I),
     .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O),
-    .CLK(CLK)
+    .CLK(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_CLK)
 );
+assign DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_I = I[1];
+assign DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_CLK = CLK;
 DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1 (
-    .I(I[1]),
+    .I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_I),
     .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O),
-    .CLK(CLK)
+    .CLK(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_CLK)
 );
+assign DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_I = I[2];
+assign DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_CLK = CLK;
 DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2 (
-    .I(I[2]),
+    .I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_I),
     .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O),
-    .CLK(CLK)
+    .CLK(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_CLK)
 );
+assign DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_I = I[3];
+assign DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_CLK = CLK;
 DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3 (
-    .I(I[3]),
+    .I(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_I),
     .O(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O),
-    .CLK(CLK)
+    .CLK(DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_CLK)
 );
 assign O = {DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst3_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst2_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst1_O,DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse_inst0_O};
 endmodule
@@ -145,17 +173,21 @@ module Add4_cout (
     output COUT
 );
 wire bit_const_0_None_out;
+wire [4:0] coreir_add5_inst0_in0;
+wire [4:0] coreir_add5_inst0_in1;
 wire [4:0] coreir_add5_inst0_out;
 corebit_const #(
     .value(1'b0)
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
+assign coreir_add5_inst0_in0 = {bit_const_0_None_out,I0[3:0]};
+assign coreir_add5_inst0_in1 = {bit_const_0_None_out,I1[3:0]};
 coreir_add #(
     .width(5)
 ) coreir_add5_inst0 (
-    .in0({bit_const_0_None_out,I0[3:0]}),
-    .in1({bit_const_0_None_out,I1[3:0]}),
+    .in0(coreir_add5_inst0_in0),
+    .in1(coreir_add5_inst0_in1),
     .out(coreir_add5_inst0_out)
 );
 assign O = coreir_add5_inst0_out[3:0];
@@ -169,27 +201,41 @@ module CounterLoad4_COUT (
     output COUT,
     input CLK
 );
+wire [3:0] Add4_cout_inst0_I0;
+wire [3:0] Add4_cout_inst0_I1;
 wire [3:0] Add4_cout_inst0_O;
 wire Add4_cout_inst0_COUT;
+wire [3:0] Mux2x4_inst0_I0;
+wire [3:0] Mux2x4_inst0_I1;
+wire Mux2x4_inst0_S;
 wire [3:0] Mux2x4_inst0_O;
+wire [3:0] Register4_inst0_I;
 wire [3:0] Register4_inst0_O;
+wire Register4_inst0_CLK;
 wire [3:0] const_1_4_out;
+assign Add4_cout_inst0_I0 = Register4_inst0_O;
+assign Add4_cout_inst0_I1 = const_1_4_out;
 Add4_cout Add4_cout_inst0 (
-    .I0(Register4_inst0_O),
-    .I1(const_1_4_out),
+    .I0(Add4_cout_inst0_I0),
+    .I1(Add4_cout_inst0_I1),
     .O(Add4_cout_inst0_O),
     .COUT(Add4_cout_inst0_COUT)
 );
+assign Mux2x4_inst0_I0 = Add4_cout_inst0_O;
+assign Mux2x4_inst0_I1 = DATA;
+assign Mux2x4_inst0_S = LOAD;
 Mux2x4 Mux2x4_inst0 (
-    .I0(Add4_cout_inst0_O),
-    .I1(DATA),
-    .S(LOAD),
+    .I0(Mux2x4_inst0_I0),
+    .I1(Mux2x4_inst0_I1),
+    .S(Mux2x4_inst0_S),
     .O(Mux2x4_inst0_O)
 );
+assign Register4_inst0_I = Mux2x4_inst0_O;
+assign Register4_inst0_CLK = CLK;
 Register4 Register4_inst0 (
-    .I(Mux2x4_inst0_O),
+    .I(Register4_inst0_I),
     .O(Register4_inst0_O),
-    .CLK(CLK)
+    .CLK(Register4_inst0_CLK)
 );
 coreir_const #(
     .value(4'h1),

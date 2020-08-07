@@ -21,14 +21,18 @@ module Register (
     output O,
     input CLK
 );
+wire reg_P_inst0_clk;
+wire [0:0] reg_P_inst0_in;
 wire [0:0] reg_P_inst0_out;
+assign reg_P_inst0_clk = CLK;
+assign reg_P_inst0_in[0] = I;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(1'h0),
     .width(1)
 ) reg_P_inst0 (
-    .clk(CLK),
-    .in(I),
+    .clk(reg_P_inst0_clk),
+    .in(reg_P_inst0_in),
     .out(reg_P_inst0_out)
 );
 assign O = reg_P_inst0_out[0];
@@ -39,35 +43,55 @@ module SIPO5 (
     output [4:0] O,
     input CLK
 );
+wire Register_inst0_I;
 wire Register_inst0_O;
+wire Register_inst0_CLK;
+wire Register_inst1_I;
 wire Register_inst1_O;
+wire Register_inst1_CLK;
+wire Register_inst2_I;
 wire Register_inst2_O;
+wire Register_inst2_CLK;
+wire Register_inst3_I;
 wire Register_inst3_O;
+wire Register_inst3_CLK;
+wire Register_inst4_I;
 wire Register_inst4_O;
+wire Register_inst4_CLK;
+assign Register_inst0_I = I;
+assign Register_inst0_CLK = CLK;
 Register Register_inst0 (
-    .I(I),
+    .I(Register_inst0_I),
     .O(Register_inst0_O),
-    .CLK(CLK)
+    .CLK(Register_inst0_CLK)
 );
+assign Register_inst1_I = Register_inst0_O;
+assign Register_inst1_CLK = CLK;
 Register Register_inst1 (
-    .I(Register_inst0_O),
+    .I(Register_inst1_I),
     .O(Register_inst1_O),
-    .CLK(CLK)
+    .CLK(Register_inst1_CLK)
 );
+assign Register_inst2_I = Register_inst1_O;
+assign Register_inst2_CLK = CLK;
 Register Register_inst2 (
-    .I(Register_inst1_O),
+    .I(Register_inst2_I),
     .O(Register_inst2_O),
-    .CLK(CLK)
+    .CLK(Register_inst2_CLK)
 );
+assign Register_inst3_I = Register_inst2_O;
+assign Register_inst3_CLK = CLK;
 Register Register_inst3 (
-    .I(Register_inst2_O),
+    .I(Register_inst3_I),
     .O(Register_inst3_O),
-    .CLK(CLK)
+    .CLK(Register_inst3_CLK)
 );
+assign Register_inst4_I = Register_inst3_O;
+assign Register_inst4_CLK = CLK;
 Register Register_inst4 (
-    .I(Register_inst3_O),
+    .I(Register_inst4_I),
     .O(Register_inst4_O),
-    .CLK(CLK)
+    .CLK(Register_inst4_CLK)
 );
 assign O = {Register_inst4_O,Register_inst3_O,Register_inst2_O,Register_inst1_O,Register_inst0_O};
 endmodule
@@ -77,11 +101,15 @@ module test_sipo_basic (
     output [4:0] O,
     input CLK
 );
+wire SIPO5_inst0_I;
 wire [4:0] SIPO5_inst0_O;
+wire SIPO5_inst0_CLK;
+assign SIPO5_inst0_I = I;
+assign SIPO5_inst0_CLK = CLK;
 SIPO5 SIPO5_inst0 (
-    .I(I),
+    .I(SIPO5_inst0_I),
     .O(SIPO5_inst0_O),
-    .CLK(CLK)
+    .CLK(SIPO5_inst0_CLK)
 );
 assign O = SIPO5_inst0_O;
 endmodule

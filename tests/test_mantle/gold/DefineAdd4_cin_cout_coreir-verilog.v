@@ -24,25 +24,33 @@ module Add4_cout_cin (
     input CIN
 );
 wire bit_const_0_None_out;
+wire [4:0] coreir_add5_inst0_in0;
+wire [4:0] coreir_add5_inst0_in1;
 wire [4:0] coreir_add5_inst0_out;
+wire [4:0] coreir_add5_inst1_in0;
+wire [4:0] coreir_add5_inst1_in1;
 wire [4:0] coreir_add5_inst1_out;
 corebit_const #(
     .value(1'b0)
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
+assign coreir_add5_inst0_in0 = coreir_add5_inst1_out;
+assign coreir_add5_inst0_in1 = {bit_const_0_None_out,I1[3:0]};
 coreir_add #(
     .width(5)
 ) coreir_add5_inst0 (
-    .in0(coreir_add5_inst1_out),
-    .in1({bit_const_0_None_out,I1[3:0]}),
+    .in0(coreir_add5_inst0_in0),
+    .in1(coreir_add5_inst0_in1),
     .out(coreir_add5_inst0_out)
 );
+assign coreir_add5_inst1_in0 = {bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,CIN};
+assign coreir_add5_inst1_in1 = {bit_const_0_None_out,I0[3:0]};
 coreir_add #(
     .width(5)
 ) coreir_add5_inst1 (
-    .in0({bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,CIN}),
-    .in1({bit_const_0_None_out,I0[3:0]}),
+    .in0(coreir_add5_inst1_in0),
+    .in1(coreir_add5_inst1_in1),
     .out(coreir_add5_inst1_out)
 );
 assign O = coreir_add5_inst0_out[3:0];

@@ -13,11 +13,17 @@ module Sub4_cin (
     output [3:0] O,
     input CIN
 );
+wire [3:0] Add4_cin_inst0_I0;
+wire [3:0] Add4_cin_inst0_I1;
+wire Add4_cin_inst0_CIN;
+assign Add4_cin_inst0_I0 = I0;
+assign Add4_cin_inst0_I1 = ~ I1;
+assign Add4_cin_inst0_CIN = ~ CIN;
 Add4_cin Add4_cin_inst0 (
-    .I0(I0),
-    .I1(~ I1),
+    .I0(Add4_cin_inst0_I0),
+    .I1(Add4_cin_inst0_I1),
     .O(O),
-    .CIN(~ CIN)
+    .CIN(Add4_cin_inst0_CIN)
 );
 endmodule
 

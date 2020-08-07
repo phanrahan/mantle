@@ -21,11 +21,31 @@ module test_romb_coreir (
     input CLK
 );
 wire [15:0] SB_RAM40_4K_inst0_RDATA;
+wire [10:0] SB_RAM40_4K_inst0_RADDR;
+wire SB_RAM40_4K_inst0_RCLK;
+wire SB_RAM40_4K_inst0_RCLKE;
+wire SB_RAM40_4K_inst0_RE;
+wire SB_RAM40_4K_inst0_WCLK;
+wire SB_RAM40_4K_inst0_WCLKE;
+wire SB_RAM40_4K_inst0_WE;
+wire [10:0] SB_RAM40_4K_inst0_WADDR;
+wire [15:0] SB_RAM40_4K_inst0_MASK;
+wire [15:0] SB_RAM40_4K_inst0_WDATA;
 wire bit_const_0_None_out;
 wire bit_const_1_None_out;
 wire [10:0] const_0_11_out;
 wire [15:0] const_0_16_out;
 wire [10:0] const_1_11_out;
+assign SB_RAM40_4K_inst0_RADDR = const_1_11_out;
+assign SB_RAM40_4K_inst0_RCLK = CLK;
+assign SB_RAM40_4K_inst0_RCLKE = bit_const_1_None_out;
+assign SB_RAM40_4K_inst0_RE = bit_const_1_None_out;
+assign SB_RAM40_4K_inst0_WCLK = CLK;
+assign SB_RAM40_4K_inst0_WCLKE = bit_const_0_None_out;
+assign SB_RAM40_4K_inst0_WE = bit_const_0_None_out;
+assign SB_RAM40_4K_inst0_WADDR = const_0_11_out;
+assign SB_RAM40_4K_inst0_MASK = const_0_16_out;
+assign SB_RAM40_4K_inst0_WDATA = const_0_16_out;
 SB_RAM40_4K #(
     .INIT_0(256'h0000000000000000000000000000000000000000000000000000000000ff0001),
     .INIT_1(256'h0000000000000000000000000000000000000000000000000000000000000000),
@@ -47,16 +67,16 @@ SB_RAM40_4K #(
     .WRITE_MODE(0)
 ) SB_RAM40_4K_inst0 (
     .RDATA(SB_RAM40_4K_inst0_RDATA),
-    .RADDR(const_1_11_out),
-    .RCLK(CLK),
-    .RCLKE(bit_const_1_None_out),
-    .RE(bit_const_1_None_out),
-    .WCLK(CLK),
-    .WCLKE(bit_const_0_None_out),
-    .WE(bit_const_0_None_out),
-    .WADDR(const_0_11_out),
-    .MASK(const_0_16_out),
-    .WDATA(const_0_16_out)
+    .RADDR(SB_RAM40_4K_inst0_RADDR),
+    .RCLK(SB_RAM40_4K_inst0_RCLK),
+    .RCLKE(SB_RAM40_4K_inst0_RCLKE),
+    .RE(SB_RAM40_4K_inst0_RE),
+    .WCLK(SB_RAM40_4K_inst0_WCLK),
+    .WCLKE(SB_RAM40_4K_inst0_WCLKE),
+    .WE(SB_RAM40_4K_inst0_WE),
+    .WADDR(SB_RAM40_4K_inst0_WADDR),
+    .MASK(SB_RAM40_4K_inst0_MASK),
+    .WDATA(SB_RAM40_4K_inst0_WDATA)
 );
 corebit_const #(
     .value(1'b0)

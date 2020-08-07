@@ -23,25 +23,33 @@ module Add2_cin (
     input CIN
 );
 wire bit_const_0_None_out;
+wire [1:0] coreir_add2_inst0_in0;
+wire [1:0] coreir_add2_inst0_in1;
 wire [1:0] coreir_add2_inst0_out;
+wire [1:0] coreir_add2_inst1_in0;
+wire [1:0] coreir_add2_inst1_in1;
 wire [1:0] coreir_add2_inst1_out;
 corebit_const #(
     .value(1'b0)
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
+assign coreir_add2_inst0_in0 = coreir_add2_inst1_out;
+assign coreir_add2_inst0_in1 = I1;
 coreir_add #(
     .width(2)
 ) coreir_add2_inst0 (
-    .in0(coreir_add2_inst1_out),
-    .in1(I1),
+    .in0(coreir_add2_inst0_in0),
+    .in1(coreir_add2_inst0_in1),
     .out(coreir_add2_inst0_out)
 );
+assign coreir_add2_inst1_in0 = {bit_const_0_None_out,CIN};
+assign coreir_add2_inst1_in1 = I0;
 coreir_add #(
     .width(2)
 ) coreir_add2_inst1 (
-    .in0({bit_const_0_None_out,CIN}),
-    .in1(I0),
+    .in0(coreir_add2_inst1_in0),
+    .in1(coreir_add2_inst1_in1),
     .out(coreir_add2_inst1_out)
 );
 assign O = coreir_add2_inst0_out;

@@ -13,12 +13,16 @@ module coreir_sgt8_wrapped (
     input [7:0] I1,
     output O
 );
+wire [7:0] coreir_sgt8_inst0_in0;
+wire [7:0] coreir_sgt8_inst0_in1;
 wire coreir_sgt8_inst0_out;
+assign coreir_sgt8_inst0_in0 = I0;
+assign coreir_sgt8_inst0_in1 = I1;
 coreir_sgt #(
     .width(8)
 ) coreir_sgt8_inst0 (
-    .in0(I0),
-    .in1(I1),
+    .in0(coreir_sgt8_inst0_in0),
+    .in1(coreir_sgt8_inst0_in1),
     .out(coreir_sgt8_inst0_out)
 );
 assign O = coreir_sgt8_inst0_out;

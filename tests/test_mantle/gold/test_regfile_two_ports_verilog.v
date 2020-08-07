@@ -41,6 +41,13 @@ module my_regfile (
     input [3:0] write_1_data
 );
 wire bit_const_0_None_out;
+wire my_regfile_inline_verilog_inst_0_I;
+wire [1:0] term_inst0_in;
+wire [1:0] term_inst1_in;
+wire [3:0] term_inst2_in;
+wire [1:0] term_inst3_in;
+wire [3:0] term_inst4_in;
+wire [1:0] term_inst5_in;
 wire [3:0] undriven_inst0_out;
 wire [3:0] undriven_inst1_out;
 corebit_const #(
@@ -48,35 +55,42 @@ corebit_const #(
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
+assign my_regfile_inline_verilog_inst_0_I = bit_const_0_None_out;
+assign term_inst0_in = read_0_addr;
 coreir_term #(
     .width(2)
 ) term_inst0 (
-    .in(read_0_addr)
+    .in(term_inst0_in)
 );
+assign term_inst1_in = read_1_addr;
 coreir_term #(
     .width(2)
 ) term_inst1 (
-    .in(read_1_addr)
+    .in(term_inst1_in)
 );
+assign term_inst2_in = write_0_data;
 coreir_term #(
     .width(4)
 ) term_inst2 (
-    .in(write_0_data)
+    .in(term_inst2_in)
 );
+assign term_inst3_in = write_0_addr;
 coreir_term #(
     .width(2)
 ) term_inst3 (
-    .in(write_0_addr)
+    .in(term_inst3_in)
 );
+assign term_inst4_in = write_1_data;
 coreir_term #(
     .width(4)
 ) term_inst4 (
-    .in(write_1_data)
+    .in(term_inst4_in)
 );
+assign term_inst5_in = write_1_addr;
 coreir_term #(
     .width(2)
 ) term_inst5 (
-    .in(write_1_addr)
+    .in(term_inst5_in)
 );
 coreir_undriven #(
     .width(4)
@@ -114,19 +128,35 @@ module test_regfile_two_ports_verilog (
     input CLK,
     input ASYNCRESET
 );
+wire my_regfile_ASYNCRESET;
+wire my_regfile_CLK;
+wire [1:0] my_regfile_read_0_addr;
 wire [3:0] my_regfile_read_0_data;
+wire [1:0] my_regfile_read_1_addr;
 wire [3:0] my_regfile_read_1_data;
+wire [1:0] my_regfile_write_0_addr;
+wire [3:0] my_regfile_write_0_data;
+wire [1:0] my_regfile_write_1_addr;
+wire [3:0] my_regfile_write_1_data;
+assign my_regfile_ASYNCRESET = ASYNCRESET;
+assign my_regfile_CLK = CLK;
+assign my_regfile_read_0_addr = read_addr0;
+assign my_regfile_read_1_addr = read_addr1;
+assign my_regfile_write_0_addr = write_addr0;
+assign my_regfile_write_0_data = write_data0;
+assign my_regfile_write_1_addr = write_addr1;
+assign my_regfile_write_1_data = write_data1;
 my_regfile my_regfile (
-    .ASYNCRESET(ASYNCRESET),
-    .CLK(CLK),
-    .read_0_addr(read_addr0),
+    .ASYNCRESET(my_regfile_ASYNCRESET),
+    .CLK(my_regfile_CLK),
+    .read_0_addr(my_regfile_read_0_addr),
     .read_0_data(my_regfile_read_0_data),
-    .read_1_addr(read_addr1),
+    .read_1_addr(my_regfile_read_1_addr),
     .read_1_data(my_regfile_read_1_data),
-    .write_0_addr(write_addr0),
-    .write_0_data(write_data0),
-    .write_1_addr(write_addr1),
-    .write_1_data(write_data1)
+    .write_0_addr(my_regfile_write_0_addr),
+    .write_0_data(my_regfile_write_0_data),
+    .write_1_addr(my_regfile_write_1_addr),
+    .write_1_data(my_regfile_write_1_data)
 );
 assign read_data0 = my_regfile_read_0_data;
 assign read_data1 = my_regfile_read_1_data;

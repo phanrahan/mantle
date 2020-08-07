@@ -22,14 +22,18 @@ module test (
     output [0:0] Out0,
     input CLK
 );
+wire reg_P_inst0_clk;
+wire [0:0] reg_P_inst0_in;
 wire [0:0] reg_P_inst0_out;
+assign reg_P_inst0_clk = clk;
+assign reg_P_inst0_in = In0;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(1'h0),
     .width(1)
 ) reg_P_inst0 (
-    .clk(clk),
-    .in(In0),
+    .clk(reg_P_inst0_clk),
+    .in(reg_P_inst0_in),
     .out(reg_P_inst0_out)
 );
 assign Out0 = reg_P_inst0_out;

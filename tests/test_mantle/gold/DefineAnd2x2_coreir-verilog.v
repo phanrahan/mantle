@@ -13,12 +13,16 @@ module and2_wrapped (
     input [1:0] I1,
     output [1:0] O
 );
+wire [1:0] and2_inst0_in0;
+wire [1:0] and2_inst0_in1;
 wire [1:0] and2_inst0_out;
+assign and2_inst0_in0 = I0;
+assign and2_inst0_in1 = I1;
 coreir_and #(
     .width(2)
 ) and2_inst0 (
-    .in0(I0),
-    .in1(I1),
+    .in0(and2_inst0_in0),
+    .in1(and2_inst0_in1),
     .out(and2_inst0_out)
 );
 assign O = and2_inst0_out;

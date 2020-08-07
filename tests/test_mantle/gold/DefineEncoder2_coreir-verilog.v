@@ -11,11 +11,13 @@ module Or1xNone (
     input I0,
     output O
 );
+wire [0:0] orr_inst0_in;
 wire orr_inst0_out;
+assign orr_inst0_in[0] = I0;
 coreir_orr #(
     .width(1)
 ) orr_inst0 (
-    .in(I0),
+    .in(orr_inst0_in),
     .out(orr_inst0_out)
 );
 assign O = orr_inst0_out;
@@ -25,11 +27,13 @@ module Encoder2 (
     input [1:0] I,
     output [0:0] O
 );
+wire Or1xNone_inst0_I0;
 wire Or1xNone_inst0_O;
+assign Or1xNone_inst0_I0 = I[1];
 Or1xNone Or1xNone_inst0 (
-    .I0(I[1]),
+    .I0(Or1xNone_inst0_I0),
     .O(Or1xNone_inst0_O)
 );
-assign O = Or1xNone_inst0_O;
+assign O[0] = Or1xNone_inst0_O;
 endmodule
 

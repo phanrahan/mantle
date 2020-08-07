@@ -10,10 +10,12 @@ module Encoder2 (
     output [0:0] O
 );
 wire Or1xNone_inst0_I0;
+wire Or1xNone_inst0_O;
 assign Or1xNone_inst0_I0 = I[1];
 Or1xNone Or1xNone_inst0 (
     .I0(Or1xNone_inst0_I0),
-    .O(O)
+    .O(Or1xNone_inst0_O)
 );
+assign O[0] = Or1xNone_inst0_O;
 endmodule
 

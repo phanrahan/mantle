@@ -73,14 +73,16 @@ coreir_mux #(
     .sel(_join_sel),
     .out(_join_out)
 );
-assign muxN_0_in_data = '{in_data[1],in_data[0]};
+assign muxN_0_in_data[1] = in_data[1];
+assign muxN_0_in_data[0] = in_data[0];
 assign muxN_0_in_sel = sel_slice0_out;
 commonlib_muxn__N2__width4 muxN_0 (
     .in_data(muxN_0_in_data),
     .in_sel(muxN_0_in_sel),
     .out(muxN_0_out)
 );
-assign muxN_1_in_data = '{in_data[3],in_data[2]};
+assign muxN_1_in_data[1] = in_data[3];
+assign muxN_1_in_data[0] = in_data[2];
 assign muxN_1_in_sel = sel_slice1_out;
 commonlib_muxn__N2__width4 muxN_1 (
     .in_data(muxN_1_in_data),
@@ -138,14 +140,20 @@ coreir_mux #(
     .sel(_join_sel),
     .out(_join_out)
 );
-assign muxN_0_in_data = '{in_data[3],in_data[2],in_data[1],in_data[0]};
+assign muxN_0_in_data[3] = in_data[3];
+assign muxN_0_in_data[2] = in_data[2];
+assign muxN_0_in_data[1] = in_data[1];
+assign muxN_0_in_data[0] = in_data[0];
 assign muxN_0_in_sel = sel_slice0_out;
 commonlib_muxn__N4__width4 muxN_0 (
     .in_data(muxN_0_in_data),
     .in_sel(muxN_0_in_sel),
     .out(muxN_0_out)
 );
-assign muxN_1_in_data = '{in_data[7],in_data[6],in_data[5],in_data[4]};
+assign muxN_1_in_data[3] = in_data[7];
+assign muxN_1_in_data[2] = in_data[6];
+assign muxN_1_in_data[1] = in_data[5];
+assign muxN_1_in_data[0] = in_data[4];
 assign muxN_1_in_sel = sel_slice1_out;
 commonlib_muxn__N4__width4 muxN_1 (
     .in_data(muxN_1_in_data),
@@ -188,7 +196,14 @@ module Mux8x4 (
 wire [3:0] coreir_commonlib_mux8x4_inst0_in_data [7:0];
 wire [2:0] coreir_commonlib_mux8x4_inst0_in_sel;
 wire [3:0] coreir_commonlib_mux8x4_inst0_out;
-assign coreir_commonlib_mux8x4_inst0_in_data = '{I7,I6,I5,I4,I3,I2,I1,I0};
+assign coreir_commonlib_mux8x4_inst0_in_data[7] = I7;
+assign coreir_commonlib_mux8x4_inst0_in_data[6] = I6;
+assign coreir_commonlib_mux8x4_inst0_in_data[5] = I5;
+assign coreir_commonlib_mux8x4_inst0_in_data[4] = I4;
+assign coreir_commonlib_mux8x4_inst0_in_data[3] = I3;
+assign coreir_commonlib_mux8x4_inst0_in_data[2] = I2;
+assign coreir_commonlib_mux8x4_inst0_in_data[1] = I1;
+assign coreir_commonlib_mux8x4_inst0_in_data[0] = I0;
 assign coreir_commonlib_mux8x4_inst0_in_sel = S;
 commonlib_muxn__N8__width4 coreir_commonlib_mux8x4_inst0 (
     .in_data(coreir_commonlib_mux8x4_inst0_in_data),

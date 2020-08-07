@@ -13,7 +13,7 @@ module Or1xNone (
 );
 wire [0:0] orr_inst0_in;
 wire orr_inst0_out;
-assign orr_inst0_in = I0;
+assign orr_inst0_in[0] = I0;
 coreir_orr #(
     .width(1)
 ) orr_inst0 (
@@ -34,6 +34,6 @@ Or1xNone Or1xNone_inst0 (
     .I0(Or1xNone_inst0_I0),
     .O(Or1xNone_inst0_O)
 );
-assign O = Or1xNone_inst0_O;
+assign O[0] = Or1xNone_inst0_O;
 endmodule
 

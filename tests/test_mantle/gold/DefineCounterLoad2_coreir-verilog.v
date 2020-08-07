@@ -86,8 +86,9 @@ module Mux2x2 (
 wire [1:0] coreir_commonlib_mux2x2_inst0_in_data [1:0];
 wire [0:0] coreir_commonlib_mux2x2_inst0_in_sel;
 wire [1:0] coreir_commonlib_mux2x2_inst0_out;
-assign coreir_commonlib_mux2x2_inst0_in_data = '{I1,I0};
-assign coreir_commonlib_mux2x2_inst0_in_sel = S;
+assign coreir_commonlib_mux2x2_inst0_in_data[1] = I1;
+assign coreir_commonlib_mux2x2_inst0_in_data[0] = I0;
+assign coreir_commonlib_mux2x2_inst0_in_sel[0] = S;
 commonlib_muxn__N2__width2 coreir_commonlib_mux2x2_inst0 (
     .in_data(coreir_commonlib_mux2x2_inst0_in_data),
     .in_sel(coreir_commonlib_mux2x2_inst0_in_sel),
@@ -105,7 +106,7 @@ wire reg_P_inst0_clk;
 wire [0:0] reg_P_inst0_in;
 wire [0:0] reg_P_inst0_out;
 assign reg_P_inst0_clk = CLK;
-assign reg_P_inst0_in = I;
+assign reg_P_inst0_in[0] = I;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(1'h0),

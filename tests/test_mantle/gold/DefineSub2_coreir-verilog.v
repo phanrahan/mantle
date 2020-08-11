@@ -32,33 +32,27 @@ module Add2_cin (
     input CIN
 );
 wire bit_const_0_None_out;
-wire [1:0] coreir_add2_inst0_in0;
-wire [1:0] coreir_add2_inst0_in1;
 wire [1:0] coreir_add2_inst0_out;
-wire [1:0] coreir_add2_inst1_in0;
-wire [1:0] coreir_add2_inst1_in1;
 wire [1:0] coreir_add2_inst1_out;
 corebit_const #(
     .value(1'b0)
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
-assign coreir_add2_inst0_in0 = coreir_add2_inst1_out;
-assign coreir_add2_inst0_in1 = I1;
 coreir_add #(
     .width(2)
 ) coreir_add2_inst0 (
-    .in0(coreir_add2_inst0_in0),
-    .in1(coreir_add2_inst0_in1),
+    .in0(coreir_add2_inst1_out),
+    .in1(I1),
     .out(coreir_add2_inst0_out)
 );
+wire [1:0] coreir_add2_inst1_in0;
 assign coreir_add2_inst1_in0 = {bit_const_0_None_out,CIN};
-assign coreir_add2_inst1_in1 = I0;
 coreir_add #(
     .width(2)
 ) coreir_add2_inst1 (
     .in0(coreir_add2_inst1_in0),
-    .in1(coreir_add2_inst1_in1),
+    .in1(I0),
     .out(coreir_add2_inst1_out)
 );
 assign O = coreir_add2_inst0_out;
@@ -69,27 +63,19 @@ module Sub2 (
     input [1:0] I1,
     output [1:0] O
 );
-wire [1:0] Add2_cin_inst0_I0;
-wire [1:0] Add2_cin_inst0_I1;
 wire [1:0] Add2_cin_inst0_O;
-wire Add2_cin_inst0_CIN;
-wire [1:0] Invert2_inst0_in;
 wire [1:0] Invert2_inst0_out;
 wire bit_const_1_None_out;
-assign Add2_cin_inst0_I0 = I0;
-assign Add2_cin_inst0_I1 = Invert2_inst0_out;
-assign Add2_cin_inst0_CIN = bit_const_1_None_out;
 Add2_cin Add2_cin_inst0 (
-    .I0(Add2_cin_inst0_I0),
-    .I1(Add2_cin_inst0_I1),
+    .I0(I0),
+    .I1(Invert2_inst0_out),
     .O(Add2_cin_inst0_O),
-    .CIN(Add2_cin_inst0_CIN)
+    .CIN(bit_const_1_None_out)
 );
-assign Invert2_inst0_in = I1;
 coreir_not #(
     .width(2)
 ) Invert2_inst0 (
-    .in(Invert2_inst0_in),
+    .in(I1),
     .out(Invert2_inst0_out)
 );
 corebit_const #(

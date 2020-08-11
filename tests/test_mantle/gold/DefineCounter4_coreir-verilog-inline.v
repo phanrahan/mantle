@@ -33,29 +33,25 @@ module Counter4_COUT (
     output COUT,
     input CLK
 );
-wire [3:0] Add4_cout_inst0_I0;
-wire [3:0] Add4_cout_inst0_I1;
 wire [3:0] Add4_cout_inst0_O;
-wire reg_P_inst0_clk;
-wire [3:0] reg_P_inst0_in;
-assign Add4_cout_inst0_I0 = O;
-assign Add4_cout_inst0_I1 = 4'h1;
+wire [3:0] const_1_4_out;
+wire [3:0] reg_P_inst0_out;
 Add4_cout Add4_cout_inst0 (
-    .I0(Add4_cout_inst0_I0),
-    .I1(Add4_cout_inst0_I1),
+    .I0(reg_P_inst0_out),
+    .I1(const_1_4_out),
     .O(Add4_cout_inst0_O),
     .COUT(COUT)
 );
-assign reg_P_inst0_clk = CLK;
-assign reg_P_inst0_in = Add4_cout_inst0_O;
+assign const_1_4_out = 4'h1;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(4'h0),
     .width(4)
 ) reg_P_inst0 (
-    .clk(reg_P_inst0_clk),
-    .in(reg_P_inst0_in),
-    .out(O)
+    .clk(CLK),
+    .in(Add4_cout_inst0_O),
+    .out(reg_P_inst0_out)
 );
+assign O = reg_P_inst0_out;
 endmodule
 

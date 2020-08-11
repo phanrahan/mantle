@@ -8,6 +8,8 @@ from magma.testing import check_files_equal
 import mantle
 
 
+@pytest.mark.skipif(m.mantle_target != 'coreir',
+                    reason="Only tested on coreir backend")
 @pytest.mark.parametrize("backend", ["magma", "verilog"])
 @pytest.mark.parametrize("write_forward", [True, False])
 def test_basic(backend, write_forward):
@@ -58,6 +60,8 @@ def test_basic(backend, write_forward):
                                                      "-Wno-undriven"])
 
 
+@pytest.mark.skipif(m.mantle_target != 'coreir',
+                    reason="Only tested on coreir backend")
 @pytest.mark.parametrize("backend", ["magma", "verilog"])
 def test_two_ports(backend):
     height = 4
@@ -118,6 +122,8 @@ def test_two_ports(backend):
                                                      "-Wno-undriven"])
 
 
+@pytest.mark.skipif(m.mantle_target != 'coreir',
+                    reason="Only tested on coreir backend")
 @pytest.mark.parametrize("backend", ["magma", "verilog"])
 def test_write_enable(backend):
     height = 4

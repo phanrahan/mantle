@@ -66,42 +66,28 @@ module RAM256x16 (
     input CLK,
     input WE
 );
-wire coreir_mem256x16_inst0_clk;
-wire [15:0] coreir_mem256x16_inst0_wdata;
-wire [7:0] coreir_mem256x16_inst0_waddr;
-wire coreir_mem256x16_inst0_wen;
 wire [15:0] coreir_mem256x16_inst0_rdata;
-wire [7:0] coreir_mem256x16_inst0_raddr;
-wire reg_P_inst0_clk;
-wire [15:0] reg_P_inst0_in;
 wire [15:0] reg_P_inst0_out;
-assign coreir_mem256x16_inst0_clk = CLK;
-assign coreir_mem256x16_inst0_wdata = WDATA;
-assign coreir_mem256x16_inst0_waddr = WADDR;
-assign coreir_mem256x16_inst0_wen = WE;
-assign coreir_mem256x16_inst0_raddr = RADDR;
 coreir_mem #(
     .depth(256),
     .has_init(1'b0),
     .sync_read(1'b0),
     .width(16)
 ) coreir_mem256x16_inst0 (
-    .clk(coreir_mem256x16_inst0_clk),
-    .wdata(coreir_mem256x16_inst0_wdata),
-    .waddr(coreir_mem256x16_inst0_waddr),
-    .wen(coreir_mem256x16_inst0_wen),
+    .clk(CLK),
+    .wdata(WDATA),
+    .waddr(WADDR),
+    .wen(WE),
     .rdata(coreir_mem256x16_inst0_rdata),
-    .raddr(coreir_mem256x16_inst0_raddr)
+    .raddr(RADDR)
 );
-assign reg_P_inst0_clk = CLK;
-assign reg_P_inst0_in = coreir_mem256x16_inst0_rdata;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(16'h0000),
     .width(16)
 ) reg_P_inst0 (
-    .clk(reg_P_inst0_clk),
-    .in(reg_P_inst0_in),
+    .clk(CLK),
+    .in(coreir_mem256x16_inst0_rdata),
     .out(reg_P_inst0_out)
 );
 assign RDATA = reg_P_inst0_out;

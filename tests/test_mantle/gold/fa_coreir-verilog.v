@@ -21,24 +21,16 @@ module fold_xor3None (
     input I2,
     output O
 );
-wire xor_inst0_in0;
-wire xor_inst0_in1;
 wire xor_inst0_out;
-wire xor_inst1_in0;
-wire xor_inst1_in1;
 wire xor_inst1_out;
-assign xor_inst0_in0 = I0;
-assign xor_inst0_in1 = I1;
 corebit_xor xor_inst0 (
-    .in0(xor_inst0_in0),
-    .in1(xor_inst0_in1),
+    .in0(I0),
+    .in1(I1),
     .out(xor_inst0_out)
 );
-assign xor_inst1_in0 = xor_inst0_out;
-assign xor_inst1_in1 = I2;
 corebit_xor xor_inst1 (
-    .in0(xor_inst1_in0),
-    .in1(xor_inst1_in1),
+    .in0(xor_inst0_out),
+    .in1(I2),
     .out(xor_inst1_out)
 );
 assign O = xor_inst1_out;
@@ -58,8 +50,8 @@ module Or3xNone (
     input I2,
     output O
 );
-wire [2:0] orr_inst0_in;
 wire orr_inst0_out;
+wire [2:0] orr_inst0_in;
 assign orr_inst0_in = {I2,I1,I0};
 coreir_orr #(
     .width(3)
@@ -77,60 +69,36 @@ module FullAdder (
     output O,
     output COUT
 );
-wire Or3xNone_inst0_I0;
-wire Or3xNone_inst0_I1;
-wire Or3xNone_inst0_I2;
 wire Or3xNone_inst0_O;
-wire and_inst0_in0;
-wire and_inst0_in1;
 wire and_inst0_out;
-wire and_inst1_in0;
-wire and_inst1_in1;
 wire and_inst1_out;
-wire and_inst2_in0;
-wire and_inst2_in1;
 wire and_inst2_out;
-wire fold_xor3None_inst0_I0;
-wire fold_xor3None_inst0_I1;
-wire fold_xor3None_inst0_I2;
 wire fold_xor3None_inst0_O;
-assign Or3xNone_inst0_I0 = and_inst0_out;
-assign Or3xNone_inst0_I1 = and_inst1_out;
-assign Or3xNone_inst0_I2 = and_inst2_out;
 Or3xNone Or3xNone_inst0 (
-    .I0(Or3xNone_inst0_I0),
-    .I1(Or3xNone_inst0_I1),
-    .I2(Or3xNone_inst0_I2),
+    .I0(and_inst0_out),
+    .I1(and_inst1_out),
+    .I2(and_inst2_out),
     .O(Or3xNone_inst0_O)
 );
-assign and_inst0_in0 = I0;
-assign and_inst0_in1 = I1;
 corebit_and and_inst0 (
-    .in0(and_inst0_in0),
-    .in1(and_inst0_in1),
+    .in0(I0),
+    .in1(I1),
     .out(and_inst0_out)
 );
-assign and_inst1_in0 = I1;
-assign and_inst1_in1 = CIN;
 corebit_and and_inst1 (
-    .in0(and_inst1_in0),
-    .in1(and_inst1_in1),
+    .in0(I1),
+    .in1(CIN),
     .out(and_inst1_out)
 );
-assign and_inst2_in0 = I0;
-assign and_inst2_in1 = CIN;
 corebit_and and_inst2 (
-    .in0(and_inst2_in0),
-    .in1(and_inst2_in1),
+    .in0(I0),
+    .in1(CIN),
     .out(and_inst2_out)
 );
-assign fold_xor3None_inst0_I0 = I0;
-assign fold_xor3None_inst0_I1 = I1;
-assign fold_xor3None_inst0_I2 = CIN;
 fold_xor3None fold_xor3None_inst0 (
-    .I0(fold_xor3None_inst0_I0),
-    .I1(fold_xor3None_inst0_I1),
-    .I2(fold_xor3None_inst0_I2),
+    .I0(I0),
+    .I1(I1),
+    .I2(CIN),
     .O(fold_xor3None_inst0_O)
 );
 assign O = fold_xor3None_inst0_O;

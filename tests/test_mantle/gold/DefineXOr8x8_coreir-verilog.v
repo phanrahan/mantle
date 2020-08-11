@@ -19,88 +19,60 @@ module fold_xor88 (
     input [7:0] I7,
     output [7:0] O
 );
-wire [7:0] xor8_inst0_in0;
-wire [7:0] xor8_inst0_in1;
 wire [7:0] xor8_inst0_out;
-wire [7:0] xor8_inst1_in0;
-wire [7:0] xor8_inst1_in1;
 wire [7:0] xor8_inst1_out;
-wire [7:0] xor8_inst2_in0;
-wire [7:0] xor8_inst2_in1;
 wire [7:0] xor8_inst2_out;
-wire [7:0] xor8_inst3_in0;
-wire [7:0] xor8_inst3_in1;
 wire [7:0] xor8_inst3_out;
-wire [7:0] xor8_inst4_in0;
-wire [7:0] xor8_inst4_in1;
 wire [7:0] xor8_inst4_out;
-wire [7:0] xor8_inst5_in0;
-wire [7:0] xor8_inst5_in1;
 wire [7:0] xor8_inst5_out;
-wire [7:0] xor8_inst6_in0;
-wire [7:0] xor8_inst6_in1;
 wire [7:0] xor8_inst6_out;
-assign xor8_inst0_in0 = I0;
-assign xor8_inst0_in1 = I1;
 coreir_xor #(
     .width(8)
 ) xor8_inst0 (
-    .in0(xor8_inst0_in0),
-    .in1(xor8_inst0_in1),
+    .in0(I0),
+    .in1(I1),
     .out(xor8_inst0_out)
 );
-assign xor8_inst1_in0 = xor8_inst0_out;
-assign xor8_inst1_in1 = I2;
 coreir_xor #(
     .width(8)
 ) xor8_inst1 (
-    .in0(xor8_inst1_in0),
-    .in1(xor8_inst1_in1),
+    .in0(xor8_inst0_out),
+    .in1(I2),
     .out(xor8_inst1_out)
 );
-assign xor8_inst2_in0 = xor8_inst1_out;
-assign xor8_inst2_in1 = I3;
 coreir_xor #(
     .width(8)
 ) xor8_inst2 (
-    .in0(xor8_inst2_in0),
-    .in1(xor8_inst2_in1),
+    .in0(xor8_inst1_out),
+    .in1(I3),
     .out(xor8_inst2_out)
 );
-assign xor8_inst3_in0 = xor8_inst2_out;
-assign xor8_inst3_in1 = I4;
 coreir_xor #(
     .width(8)
 ) xor8_inst3 (
-    .in0(xor8_inst3_in0),
-    .in1(xor8_inst3_in1),
+    .in0(xor8_inst2_out),
+    .in1(I4),
     .out(xor8_inst3_out)
 );
-assign xor8_inst4_in0 = xor8_inst3_out;
-assign xor8_inst4_in1 = I5;
 coreir_xor #(
     .width(8)
 ) xor8_inst4 (
-    .in0(xor8_inst4_in0),
-    .in1(xor8_inst4_in1),
+    .in0(xor8_inst3_out),
+    .in1(I5),
     .out(xor8_inst4_out)
 );
-assign xor8_inst5_in0 = xor8_inst4_out;
-assign xor8_inst5_in1 = I6;
 coreir_xor #(
     .width(8)
 ) xor8_inst5 (
-    .in0(xor8_inst5_in0),
-    .in1(xor8_inst5_in1),
+    .in0(xor8_inst4_out),
+    .in1(I6),
     .out(xor8_inst5_out)
 );
-assign xor8_inst6_in0 = xor8_inst5_out;
-assign xor8_inst6_in1 = I7;
 coreir_xor #(
     .width(8)
 ) xor8_inst6 (
-    .in0(xor8_inst6_in0),
-    .in1(xor8_inst6_in1),
+    .in0(xor8_inst5_out),
+    .in1(I7),
     .out(xor8_inst6_out)
 );
 assign O = xor8_inst6_out;

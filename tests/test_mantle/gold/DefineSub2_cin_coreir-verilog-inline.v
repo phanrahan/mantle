@@ -13,17 +13,15 @@ module Sub2_cin (
     output [1:0] O,
     input CIN
 );
-wire [1:0] Add2_cin_inst0_I0;
-wire [1:0] Add2_cin_inst0_I1;
-wire Add2_cin_inst0_CIN;
-assign Add2_cin_inst0_I0 = I0;
-assign Add2_cin_inst0_I1 = ~ I1;
-assign Add2_cin_inst0_CIN = ~ CIN;
+wire [1:0] Invert2_inst0_out;
+wire not_inst0_out;
 Add2_cin Add2_cin_inst0 (
-    .I0(Add2_cin_inst0_I0),
-    .I1(Add2_cin_inst0_I1),
+    .I0(I0),
+    .I1(Invert2_inst0_out),
     .O(O),
-    .CIN(Add2_cin_inst0_CIN)
+    .CIN(not_inst0_out)
 );
+assign Invert2_inst0_out = ~ I1;
+assign not_inst0_out = ~ CIN;
 endmodule
 

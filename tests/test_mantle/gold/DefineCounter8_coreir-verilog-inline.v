@@ -33,29 +33,25 @@ module Counter8_COUT (
     output COUT,
     input CLK
 );
-wire [7:0] Add8_cout_inst0_I0;
-wire [7:0] Add8_cout_inst0_I1;
 wire [7:0] Add8_cout_inst0_O;
-wire reg_P_inst0_clk;
-wire [7:0] reg_P_inst0_in;
-assign Add8_cout_inst0_I0 = O;
-assign Add8_cout_inst0_I1 = 8'h01;
+wire [7:0] const_1_8_out;
+wire [7:0] reg_P_inst0_out;
 Add8_cout Add8_cout_inst0 (
-    .I0(Add8_cout_inst0_I0),
-    .I1(Add8_cout_inst0_I1),
+    .I0(reg_P_inst0_out),
+    .I1(const_1_8_out),
     .O(Add8_cout_inst0_O),
     .COUT(COUT)
 );
-assign reg_P_inst0_clk = CLK;
-assign reg_P_inst0_in = Add8_cout_inst0_O;
+assign const_1_8_out = 8'h01;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(8'h00),
     .width(8)
 ) reg_P_inst0 (
-    .clk(reg_P_inst0_clk),
-    .in(reg_P_inst0_in),
-    .out(O)
+    .clk(CLK),
+    .in(Add8_cout_inst0_O),
+    .out(reg_P_inst0_out)
 );
+assign O = reg_P_inst0_out;
 endmodule
 

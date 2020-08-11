@@ -13,16 +13,12 @@ module or4_wrapped (
     input [3:0] I1,
     output [3:0] O
 );
-wire [3:0] or4_inst0_in0;
-wire [3:0] or4_inst0_in1;
 wire [3:0] or4_inst0_out;
-assign or4_inst0_in0 = I0;
-assign or4_inst0_in1 = I1;
 coreir_or #(
     .width(4)
 ) or4_inst0 (
-    .in0(or4_inst0_in0),
-    .in1(or4_inst0_in1),
+    .in0(I0),
+    .in1(I1),
     .out(or4_inst0_out)
 );
 assign O = or4_inst0_out;

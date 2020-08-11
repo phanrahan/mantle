@@ -23,15 +23,15 @@ module Add8_cout (
     output COUT
 );
 wire bit_const_0_None_out;
-wire [8:0] coreir_add9_inst0_in0;
-wire [8:0] coreir_add9_inst0_in1;
 wire [8:0] coreir_add9_inst0_out;
 corebit_const #(
     .value(1'b0)
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
+wire [8:0] coreir_add9_inst0_in0;
 assign coreir_add9_inst0_in0 = {bit_const_0_None_out,I0[7:0]};
+wire [8:0] coreir_add9_inst0_in1;
 assign coreir_add9_inst0_in1 = {bit_const_0_None_out,I1[7:0]};
 coreir_add #(
     .width(9)

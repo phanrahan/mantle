@@ -21,18 +21,14 @@ module reg_P_wrapped (
     input CLK,
     output [1:0] O
 );
-wire reg_P_inst0_clk;
-wire [1:0] reg_P_inst0_in;
 wire [1:0] reg_P_inst0_out;
-assign reg_P_inst0_clk = CLK;
-assign reg_P_inst0_in = I;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(2'h0),
     .width(2)
 ) reg_P_inst0 (
-    .clk(reg_P_inst0_clk),
-    .in(reg_P_inst0_in),
+    .clk(CLK),
+    .in(I),
     .out(reg_P_inst0_out)
 );
 assign O = reg_P_inst0_out;

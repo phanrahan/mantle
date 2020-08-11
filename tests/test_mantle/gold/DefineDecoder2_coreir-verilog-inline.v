@@ -76,44 +76,28 @@ module Decoder2 (
     input [1:0] I,
     output [3:0] O
 );
-wire LUT2_1_inst0_I0;
-wire LUT2_1_inst0_I1;
 wire LUT2_1_inst0_O;
-wire LUT2_2_inst0_I0;
-wire LUT2_2_inst0_I1;
 wire LUT2_2_inst0_O;
-wire LUT2_4_inst0_I0;
-wire LUT2_4_inst0_I1;
 wire LUT2_4_inst0_O;
-wire LUT2_8_inst0_I0;
-wire LUT2_8_inst0_I1;
 wire LUT2_8_inst0_O;
-assign LUT2_1_inst0_I0 = I[0];
-assign LUT2_1_inst0_I1 = I[1];
 LUT2_1 LUT2_1_inst0 (
-    .I0(LUT2_1_inst0_I0),
-    .I1(LUT2_1_inst0_I1),
+    .I0(I[0]),
+    .I1(I[1]),
     .O(LUT2_1_inst0_O)
 );
-assign LUT2_2_inst0_I0 = I[0];
-assign LUT2_2_inst0_I1 = I[1];
 LUT2_2 LUT2_2_inst0 (
-    .I0(LUT2_2_inst0_I0),
-    .I1(LUT2_2_inst0_I1),
+    .I0(I[0]),
+    .I1(I[1]),
     .O(LUT2_2_inst0_O)
 );
-assign LUT2_4_inst0_I0 = I[0];
-assign LUT2_4_inst0_I1 = I[1];
 LUT2_4 LUT2_4_inst0 (
-    .I0(LUT2_4_inst0_I0),
-    .I1(LUT2_4_inst0_I1),
+    .I0(I[0]),
+    .I1(I[1]),
     .O(LUT2_4_inst0_O)
 );
-assign LUT2_8_inst0_I0 = I[0];
-assign LUT2_8_inst0_I1 = I[1];
 LUT2_8 LUT2_8_inst0 (
-    .I0(LUT2_8_inst0_I0),
-    .I1(LUT2_8_inst0_I1),
+    .I0(I[0]),
+    .I1(I[1]),
     .O(LUT2_8_inst0_O)
 );
 assign O = {LUT2_8_inst0_O,LUT2_4_inst0_O,LUT2_2_inst0_O,LUT2_1_inst0_O};

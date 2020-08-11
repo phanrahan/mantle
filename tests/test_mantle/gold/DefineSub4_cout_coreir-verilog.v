@@ -33,27 +33,25 @@ module Add4_cout_cin (
     input CIN
 );
 wire bit_const_0_None_out;
-wire [4:0] coreir_add5_inst0_in0;
-wire [4:0] coreir_add5_inst0_in1;
 wire [4:0] coreir_add5_inst0_out;
-wire [4:0] coreir_add5_inst1_in0;
-wire [4:0] coreir_add5_inst1_in1;
 wire [4:0] coreir_add5_inst1_out;
 corebit_const #(
     .value(1'b0)
 ) bit_const_0_None (
     .out(bit_const_0_None_out)
 );
-assign coreir_add5_inst0_in0 = coreir_add5_inst1_out;
+wire [4:0] coreir_add5_inst0_in1;
 assign coreir_add5_inst0_in1 = {bit_const_0_None_out,I1[3:0]};
 coreir_add #(
     .width(5)
 ) coreir_add5_inst0 (
-    .in0(coreir_add5_inst0_in0),
+    .in0(coreir_add5_inst1_out),
     .in1(coreir_add5_inst0_in1),
     .out(coreir_add5_inst0_out)
 );
+wire [4:0] coreir_add5_inst1_in0;
 assign coreir_add5_inst1_in0 = {bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,CIN};
+wire [4:0] coreir_add5_inst1_in1;
 assign coreir_add5_inst1_in1 = {bit_const_0_None_out,I0[3:0]};
 coreir_add #(
     .width(5)
@@ -72,29 +70,21 @@ module Sub4_cout (
     output [3:0] O,
     output COUT
 );
-wire [3:0] Add4_cout_cin_inst0_I0;
-wire [3:0] Add4_cout_cin_inst0_I1;
 wire [3:0] Add4_cout_cin_inst0_O;
 wire Add4_cout_cin_inst0_COUT;
-wire Add4_cout_cin_inst0_CIN;
-wire [3:0] Invert4_inst0_in;
 wire [3:0] Invert4_inst0_out;
 wire bit_const_1_None_out;
-assign Add4_cout_cin_inst0_I0 = I0;
-assign Add4_cout_cin_inst0_I1 = Invert4_inst0_out;
-assign Add4_cout_cin_inst0_CIN = bit_const_1_None_out;
 Add4_cout_cin Add4_cout_cin_inst0 (
-    .I0(Add4_cout_cin_inst0_I0),
-    .I1(Add4_cout_cin_inst0_I1),
+    .I0(I0),
+    .I1(Invert4_inst0_out),
     .O(Add4_cout_cin_inst0_O),
     .COUT(Add4_cout_cin_inst0_COUT),
-    .CIN(Add4_cout_cin_inst0_CIN)
+    .CIN(bit_const_1_None_out)
 );
-assign Invert4_inst0_in = I1;
 coreir_not #(
     .width(4)
 ) Invert4_inst0 (
-    .in(Invert4_inst0_in),
+    .in(I1),
     .out(Invert4_inst0_out)
 );
 corebit_const #(

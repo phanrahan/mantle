@@ -17,18 +17,16 @@ module Sub8_cout (
     output [7:0] O,
     output COUT
 );
-wire [7:0] Add8_cout_cin_inst0_I0;
-wire [7:0] Add8_cout_cin_inst0_I1;
-wire Add8_cout_cin_inst0_CIN;
-assign Add8_cout_cin_inst0_I0 = I0;
-assign Add8_cout_cin_inst0_I1 = ~ I1;
-assign Add8_cout_cin_inst0_CIN = 1'b1;
+wire [7:0] Invert8_inst0_out;
+wire bit_const_1_None_out;
 Add8_cout_cin Add8_cout_cin_inst0 (
-    .I0(Add8_cout_cin_inst0_I0),
-    .I1(Add8_cout_cin_inst0_I1),
+    .I0(I0),
+    .I1(Invert8_inst0_out),
     .O(O),
     .COUT(COUT),
-    .CIN(Add8_cout_cin_inst0_CIN)
+    .CIN(bit_const_1_None_out)
 );
+assign Invert8_inst0_out = ~ I1;
+assign bit_const_1_None_out = 1'b1;
 endmodule
 

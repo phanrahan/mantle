@@ -14,10 +14,9 @@ module And4x2 (
     input [1:0] I3,
     output [1:0] O
 );
-wire [3:0] andr_inst0_in;
 wire andr_inst0_out;
-wire [3:0] andr_inst1_in;
 wire andr_inst1_out;
+wire [3:0] andr_inst0_in;
 assign andr_inst0_in = {I3[0],I2[0],I1[0],I0[0]};
 coreir_andr #(
     .width(4)
@@ -25,6 +24,7 @@ coreir_andr #(
     .in(andr_inst0_in),
     .out(andr_inst0_out)
 );
+wire [3:0] andr_inst1_in;
 assign andr_inst1_in = {I3[1],I2[1],I1[1],I0[1]};
 coreir_andr #(
     .width(4)

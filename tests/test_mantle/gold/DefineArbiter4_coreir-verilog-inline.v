@@ -28,45 +28,29 @@ module Arbiter4 (
     input [3:0] I,
     output [3:0] O
 );
-wire LUT2_2_inst0_I0;
-wire LUT2_2_inst0_I1;
 wire LUT2_2_inst0_O;
-wire LUT2_2_inst1_I0;
-wire LUT2_2_inst1_I1;
 wire LUT2_2_inst1_O;
-wire LUT2_2_inst2_I0;
-wire LUT2_2_inst2_I1;
 wire LUT2_2_inst2_O;
-wire LUT2_2_inst3_I0;
-wire LUT2_2_inst3_I1;
 wire LUT2_2_inst3_O;
 wire [3:0] coreir_add4_inst0_out;
-assign LUT2_2_inst0_I0 = I[0];
-assign LUT2_2_inst0_I1 = coreir_add4_inst0_out[0];
 LUT2_2 LUT2_2_inst0 (
-    .I0(LUT2_2_inst0_I0),
-    .I1(LUT2_2_inst0_I1),
+    .I0(I[0]),
+    .I1(coreir_add4_inst0_out[0]),
     .O(LUT2_2_inst0_O)
 );
-assign LUT2_2_inst1_I0 = I[1];
-assign LUT2_2_inst1_I1 = coreir_add4_inst0_out[1];
 LUT2_2 LUT2_2_inst1 (
-    .I0(LUT2_2_inst1_I0),
-    .I1(LUT2_2_inst1_I1),
+    .I0(I[1]),
+    .I1(coreir_add4_inst0_out[1]),
     .O(LUT2_2_inst1_O)
 );
-assign LUT2_2_inst2_I0 = I[2];
-assign LUT2_2_inst2_I1 = coreir_add4_inst0_out[2];
 LUT2_2 LUT2_2_inst2 (
-    .I0(LUT2_2_inst2_I0),
-    .I1(LUT2_2_inst2_I1),
+    .I0(I[2]),
+    .I1(coreir_add4_inst0_out[2]),
     .O(LUT2_2_inst2_O)
 );
-assign LUT2_2_inst3_I0 = I[3];
-assign LUT2_2_inst3_I1 = coreir_add4_inst0_out[3];
 LUT2_2 LUT2_2_inst3 (
-    .I0(LUT2_2_inst3_I0),
-    .I1(LUT2_2_inst3_I1),
+    .I0(I[3]),
+    .I1(coreir_add4_inst0_out[3]),
     .O(LUT2_2_inst3_O)
 );
 assign coreir_add4_inst0_out = 4'(I + 4'hf);

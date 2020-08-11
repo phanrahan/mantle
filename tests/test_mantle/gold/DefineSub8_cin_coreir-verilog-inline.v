@@ -13,17 +13,15 @@ module Sub8_cin (
     output [7:0] O,
     input CIN
 );
-wire [7:0] Add8_cin_inst0_I0;
-wire [7:0] Add8_cin_inst0_I1;
-wire Add8_cin_inst0_CIN;
-assign Add8_cin_inst0_I0 = I0;
-assign Add8_cin_inst0_I1 = ~ I1;
-assign Add8_cin_inst0_CIN = ~ CIN;
+wire [7:0] Invert8_inst0_out;
+wire not_inst0_out;
 Add8_cin Add8_cin_inst0 (
-    .I0(Add8_cin_inst0_I0),
-    .I1(Add8_cin_inst0_I1),
+    .I0(I0),
+    .I1(Invert8_inst0_out),
     .O(O),
-    .CIN(Add8_cin_inst0_CIN)
+    .CIN(not_inst0_out)
 );
+assign Invert8_inst0_out = ~ I1;
+assign not_inst0_out = ~ CIN;
 endmodule
 

@@ -18,18 +18,16 @@ module Sub4_cout_cin (
     output COUT,
     input CIN
 );
-wire [3:0] Add4_cout_cin_inst0_I0;
-wire [3:0] Add4_cout_cin_inst0_I1;
-wire Add4_cout_cin_inst0_CIN;
-assign Add4_cout_cin_inst0_I0 = I0;
-assign Add4_cout_cin_inst0_I1 = ~ I1;
-assign Add4_cout_cin_inst0_CIN = ~ CIN;
+wire [3:0] Invert4_inst0_out;
+wire not_inst0_out;
 Add4_cout_cin Add4_cout_cin_inst0 (
-    .I0(Add4_cout_cin_inst0_I0),
-    .I1(Add4_cout_cin_inst0_I1),
+    .I0(I0),
+    .I1(Invert4_inst0_out),
     .O(O),
     .COUT(COUT),
-    .CIN(Add4_cout_cin_inst0_CIN)
+    .CIN(not_inst0_out)
 );
+assign Invert4_inst0_out = ~ I1;
+assign not_inst0_out = ~ CIN;
 endmodule
 

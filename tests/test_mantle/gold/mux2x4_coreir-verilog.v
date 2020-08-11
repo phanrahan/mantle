@@ -14,19 +14,13 @@ module commonlib_muxn__N2__width4 (
     input [0:0] in_sel,
     output [3:0] out
 );
-wire [3:0] _join_in0;
-wire [3:0] _join_in1;
-wire _join_sel;
 wire [3:0] _join_out;
-assign _join_in0 = in_data[0];
-assign _join_in1 = in_data[1];
-assign _join_sel = in_sel[0];
 coreir_mux #(
     .width(4)
 ) _join (
-    .in0(_join_in0),
-    .in1(_join_in1),
-    .sel(_join_sel),
+    .in0(in_data[0]),
+    .in1(in_data[1]),
+    .sel(in_sel[0]),
     .out(_join_out)
 );
 assign out = _join_out;
@@ -38,11 +32,11 @@ module Mux2x4 (
     input S,
     output [3:0] O
 );
-wire [3:0] coreir_commonlib_mux2x4_inst0_in_data [1:0];
-wire [0:0] coreir_commonlib_mux2x4_inst0_in_sel;
 wire [3:0] coreir_commonlib_mux2x4_inst0_out;
+wire [3:0] coreir_commonlib_mux2x4_inst0_in_data [1:0];
 assign coreir_commonlib_mux2x4_inst0_in_data[1] = I1;
 assign coreir_commonlib_mux2x4_inst0_in_data[0] = I0;
+wire [0:0] coreir_commonlib_mux2x4_inst0_in_sel;
 assign coreir_commonlib_mux2x4_inst0_in_sel[0] = S;
 commonlib_muxn__N2__width4 coreir_commonlib_mux2x4_inst0 (
     .in_data(coreir_commonlib_mux2x4_inst0_in_data),

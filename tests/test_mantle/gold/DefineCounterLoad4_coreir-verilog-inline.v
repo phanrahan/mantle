@@ -40,15 +40,13 @@ module DFF_init0_has_ceFalse_has_resetFalse_has_async_resetFalse (
     input CLK
 );
 wire [0:0] reg_P_inst0_out;
-wire [0:0] reg_P_inst0_in;
-assign reg_P_inst0_in[0] = I;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(1'h0),
     .width(1)
 ) reg_P_inst0 (
     .clk(CLK),
-    .in(reg_P_inst0_in),
+    .in(I),
     .out(reg_P_inst0_out)
 );
 assign O = reg_P_inst0_out[0];

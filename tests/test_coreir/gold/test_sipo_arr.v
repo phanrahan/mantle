@@ -41,29 +41,13 @@ module Register (
     output O_1_X,
     output [4:0] O_1_Y
 );
-wire [4:0] _$_U1_out;
-wire [4:0] _$_U2_out;
-wire [4:0] _$_U3_in;
-wire [4:0] _$_U4_in;
 wire [11:0] reg_P_inst0_out;
-mantle_wire__typeBit5 _$_U1 (
-    .in(I_0_Y),
-    .out(_$_U1_out)
-);
-mantle_wire__typeBit5 _$_U2 (
-    .in(I_1_Y),
-    .out(_$_U2_out)
-);
-mantle_wire__typeBitIn5 _$_U3 (
-    .in(_$_U3_in),
-    .out(reg_P_inst0_out[5:1])
-);
-mantle_wire__typeBitIn5 _$_U4 (
-    .in(_$_U4_in),
-    .out(reg_P_inst0_out[11:7])
-);
+wire [4:0] self_I_0_Y_out;
+wire [4:0] self_I_1_Y_out;
+wire [4:0] self_O_0_Y_in;
+wire [4:0] self_O_1_Y_in;
 wire [11:0] reg_P_inst0_in;
-assign reg_P_inst0_in = {_$_U2_out[4:0],I_1_X,_$_U1_out[4:0],I_0_X};
+assign reg_P_inst0_in = {self_I_1_Y_out[4:0],I_1_X,self_I_0_Y_out[4:0],I_0_X};
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(12'h000),
@@ -73,10 +57,26 @@ coreir_reg #(
     .in(reg_P_inst0_in),
     .out(reg_P_inst0_out)
 );
+mantle_wire__typeBit5 self_I_0_Y (
+    .in(I_0_Y),
+    .out(self_I_0_Y_out)
+);
+mantle_wire__typeBit5 self_I_1_Y (
+    .in(I_1_Y),
+    .out(self_I_1_Y_out)
+);
+mantle_wire__typeBitIn5 self_O_0_Y (
+    .in(self_O_0_Y_in),
+    .out(reg_P_inst0_out[5:1])
+);
+mantle_wire__typeBitIn5 self_O_1_Y (
+    .in(self_O_1_Y_in),
+    .out(reg_P_inst0_out[11:7])
+);
 assign O_0_X = reg_P_inst0_out[0];
-assign O_0_Y = _$_U3_in;
+assign O_0_Y = self_O_0_Y_in;
 assign O_1_X = reg_P_inst0_out[6];
-assign O_1_Y = _$_U4_in;
+assign O_1_Y = self_O_1_Y_in;
 endmodule
 
 module SIPO5 (

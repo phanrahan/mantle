@@ -1,5 +1,5 @@
-import types
 from magma import *
+import types
 from magma.bitutils import lutinit, int2seq
 from magma.compatibility import IntegerTypes
 from .CLB import _LUT6x2

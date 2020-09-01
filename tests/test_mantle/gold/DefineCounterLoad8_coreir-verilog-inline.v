@@ -129,11 +129,9 @@ module CounterLoad8_COUT (
 );
 wire [7:0] Add8_cout_inst0_O;
 wire [7:0] Mux2x8_inst0_O;
-wire [7:0] Register8_inst0_O;
-wire [7:0] const_1_8_out;
 Add8_cout Add8_cout_inst0 (
-    .I0(Register8_inst0_O),
-    .I1(const_1_8_out),
+    .I0(O),
+    .I1(8'h01),
     .O(Add8_cout_inst0_O),
     .COUT(COUT)
 );
@@ -145,10 +143,8 @@ Mux2x8 Mux2x8_inst0 (
 );
 Register8 Register8_inst0 (
     .I(Mux2x8_inst0_O),
-    .O(Register8_inst0_O),
+    .O(O),
     .CLK(CLK)
 );
-assign const_1_8_out = 8'h01;
-assign O = Register8_inst0_O;
 endmodule
 

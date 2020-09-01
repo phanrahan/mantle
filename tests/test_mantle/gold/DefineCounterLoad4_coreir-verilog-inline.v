@@ -105,11 +105,9 @@ module CounterLoad4_COUT (
 );
 wire [3:0] Add4_cout_inst0_O;
 wire [3:0] Mux2x4_inst0_O;
-wire [3:0] Register4_inst0_O;
-wire [3:0] const_1_4_out;
 Add4_cout Add4_cout_inst0 (
-    .I0(Register4_inst0_O),
-    .I1(const_1_4_out),
+    .I0(O),
+    .I1(4'h1),
     .O(Add4_cout_inst0_O),
     .COUT(COUT)
 );
@@ -121,10 +119,8 @@ Mux2x4 Mux2x4_inst0 (
 );
 Register4 Register4_inst0 (
     .I(Mux2x4_inst0_O),
-    .O(Register4_inst0_O),
+    .O(O),
     .CLK(CLK)
 );
-assign const_1_4_out = 4'h1;
-assign O = Register4_inst0_O;
 endmodule
 

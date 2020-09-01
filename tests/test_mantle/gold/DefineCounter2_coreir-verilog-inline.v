@@ -34,15 +34,12 @@ module Counter2_COUT (
     input CLK
 );
 wire [1:0] Add2_cout_inst0_O;
-wire [1:0] const_1_2_out;
-wire [1:0] reg_P_inst0_out;
 Add2_cout Add2_cout_inst0 (
-    .I0(reg_P_inst0_out),
-    .I1(const_1_2_out),
+    .I0(O),
+    .I1(2'h1),
     .O(Add2_cout_inst0_O),
     .COUT(COUT)
 );
-assign const_1_2_out = 2'h1;
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(2'h0),
@@ -50,8 +47,7 @@ coreir_reg #(
 ) reg_P_inst0 (
     .clk(CLK),
     .in(Add2_cout_inst0_O),
-    .out(reg_P_inst0_out)
+    .out(O)
 );
-assign O = reg_P_inst0_out;
 endmodule
 

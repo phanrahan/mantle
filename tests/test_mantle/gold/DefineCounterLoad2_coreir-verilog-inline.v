@@ -93,11 +93,9 @@ module CounterLoad2_COUT (
 );
 wire [1:0] Add2_cout_inst0_O;
 wire [1:0] Mux2x2_inst0_O;
-wire [1:0] Register2_inst0_O;
-wire [1:0] const_1_2_out;
 Add2_cout Add2_cout_inst0 (
-    .I0(Register2_inst0_O),
-    .I1(const_1_2_out),
+    .I0(O),
+    .I1(2'h1),
     .O(Add2_cout_inst0_O),
     .COUT(COUT)
 );
@@ -109,10 +107,8 @@ Mux2x2 Mux2x2_inst0 (
 );
 Register2 Register2_inst0 (
     .I(Mux2x2_inst0_O),
-    .O(Register2_inst0_O),
+    .O(O),
     .CLK(CLK)
 );
-assign const_1_2_out = 2'h1;
-assign O = Register2_inst0_O;
 endmodule
 

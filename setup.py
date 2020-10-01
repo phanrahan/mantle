@@ -5,6 +5,7 @@ setup(
     version='2.0.11',
     url='https://github.com/phanrahan/mantle',
     license='MIT',
+    author='Leonard Truong',
     maintainer='Lenny Truong',
     maintainer_email='lenny@cs.stanford.edu',
     description='The magma standard library',

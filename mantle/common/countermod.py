@@ -1,4 +1,5 @@
 import math
+import magma
 from magma import *
 from mantle import And, Decode, Or
 from .counter import Counter, counter_name
@@ -42,7 +43,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1,
 
             # should also handle r in the definition
 
-        wire(reset, counter.RESET) # synchronous reset
+        wire(magma.reset(reset), counter.RESET) # synchronous reset
 
         if has_ce:
             wire(CE, counter.CE)

@@ -1,4 +1,4 @@
-import magma
+import magma as m
 
 from magma import DefineCircuit, EndCircuit, In, Out, Bit, Clock, wire
 from magma.backend.verilog import compile

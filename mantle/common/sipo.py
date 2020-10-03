@@ -5,9 +5,9 @@ import magma as m
 
 def _zero_init_args(T):
     if issubclass(T, m.Tuple):
-        return [_zero_init_args(v) for v in T.types()]
+        return [v(*_zero_init_args(v)) for v in T.types()]
     if issubclass(T, m.Array):
-        return [_zero_init_args(T.T) for _ in range(len(T))]
+        return [T.T(*_zero_init_args(T.T)) for _ in range(len(T))]
     return [0]
 
 

@@ -13,7 +13,7 @@ def DFF(init=0, has_ce=False, has_reset=False, has_set=False):
 
     args = ['I', ff.D]
     if not has_reset:
-        wire(0, ff.R)
+        wire(enable(0), ff.R)
     else:
         args += ['RESET', ff.R]
     if not has_set:

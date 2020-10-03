@@ -7,7 +7,7 @@ from mantle.xilinx.spartan3 import FDCE
 def test_fdce():
     main = DefineCircuit('main', 'I', In(Bit), "O", Out(Bit), "CLK", In(Clock))
     dff = FDCE()
-    wire(1, dff.CE)
+    wire(m.enable(1), dff.CE)
     wire(0, dff.CLR)
     wire(main.I, dff.D)
     wire(dff.Q, main.O)

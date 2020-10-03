@@ -13,15 +13,15 @@ def DFF(init=0, has_ce=False, has_reset=False, has_set=False):
 
     args = ['I', ff.D]
     if not has_reset:
-        wire(enable(0), ff.R)
+        wire(reset(0), ff.R)
     else:
         args += ['RESET', ff.R]
     if not has_set:
-        wire(0, ff.S)
+        wire(reset(0), ff.S)
     else:
         args += ['SET', ff.S]
     if not has_ce:
-        wire(1, ff.CE)
+        wire(enable(1), ff.CE)
     else:
         args += ['CE', ff.CE]
     args += ['CLK', ff.C]

@@ -1,3 +1,4 @@
+import magma as m
 from .register import Register
 from .decoder import Decoder
 from mantle import And, Mux

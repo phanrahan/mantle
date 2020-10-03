@@ -39,7 +39,7 @@ def writeport(addr_width, width, regs, WADDR, I, WE):
     enable(decoder(WADDR), repeat(WE, n))
 
     for i in range(n):
-        regs[i](I, CE=enable.O[i])
+        regs[i](I, CE=m.enable(enable.O[i]))
 
 
 def DefineRAM(height, width):

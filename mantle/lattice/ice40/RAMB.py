@@ -147,11 +147,11 @@ def _RAMB(height, width, rom=None, readonly=False):
             ram40.WDATA = array([WDATA[3], WDATA[11]])
 
     if readonly:
-        wire( 0, ram40.WE    )
+        wire( enable(0), ram40.WE    )
         wire( array(11*[0]), ram40.WADDR )
         wire( array(16*[0]), ram40.WDATA )
-    wire(0 if readonly else 1, ram40.WCLKE )
-    wire(1, ram40.RCLKE)
+    wire(enable(0 if readonly else 1), ram40.WCLKE )
+    wire(enable(1), ram40.RCLKE)
     wire(array(16*[0]), ram40.MASK)
     if readonly:
         return AnonymousCircuit("RADDR", ram40.RADDR,

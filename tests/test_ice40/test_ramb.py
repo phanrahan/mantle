@@ -13,7 +13,7 @@ def test_romb():
     romb = ROMB(512, 8, [0b00000001, 0b11111111] + [0] * 510)
     wire(romb.RADDR, uint(1, 9))
     wire(romb.RCLK, main.CLK)
-    wire(romb.RE, 1)
+    wire(romb.RE, enable(1))
 
     wire(romb.RDATA, main.RDATAOUT)
     EndCircuit()
@@ -30,12 +30,12 @@ def test_ramb():
     main = DefineCircuit("test_ramb",
                          "RDATA", Out(Bits[ 8 ]),
                          "WDATA", In(Bits[ 8 ]),
-                         "WE",   In(Bit),
+                         "WE",   In(Enable),
                          "CLK", In(Clock))
     ramb = RAMB(512, 8, [0b00000001, 0b11111111] + [0] * 510)
     wire(ramb.RADDR, uint(1, 9))
     wire(ramb.RCLK, main.CLK)
-    wire(ramb.RE, 1)
+    wire(ramb.RE, enable(1))
     wire(ramb.WADDR, uint(1, 9))
     wire(ramb.WCLK, main.CLK)
     wire(ramb.WE, main.WE)
@@ -74,7 +74,7 @@ def test_romb_coreir():
     romb = ROMB(256, 16, [0b00000001, 0b11111111] + [0] * 254)
     wire(romb.RADDR, uint(1, 8))
     wire(romb.RCLK, main.CLK)
-    wire(romb.RE, 1)
+    wire(romb.RE, enable(1))
     wire(romb.RDATA, main.RDATAOUT)
     EndCircuit()
 

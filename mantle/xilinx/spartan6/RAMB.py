@@ -120,7 +120,7 @@ def RAMB16(rom, width, init=None):
     IP = array([ram.DIPB[i] for i in range(ram.DIPB.N)])
 
     wire(array([0,0,0,0]), ram.WEB)
-    wire(0, ram.CLKB)
+    wire(clock(0), ram.CLKB)
     wire(0, ram.RSTB)
     wire(0, ram.REGCEB)
     wire(0, ram.ENB)

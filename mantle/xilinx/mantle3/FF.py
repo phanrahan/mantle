@@ -21,7 +21,7 @@ def DFF(init=0, has_ce=False, has_reset=False, has_set=False):
     else:
         args += ['SET', ff.S]
     if not has_ce:
-        wire(1, ff.CE)
+        wire(m.enable(1), ff.CE)
     else:
         args += ['CE', ff.CE]
     args += ['CLK', ff.C]

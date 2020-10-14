@@ -28,20 +28,16 @@ def DeclareCoreirLUT(N, init):
     return _coreir_lut
 
 def DefineLUT(init, N):
-    io = []
-    for i in range(N):
-        io += ["I{}".format(i), In(Bit)]
-    io += ["O", Out(Bit)]
+    ports = {f"I{i}": In(Bit) for i in range(N)}
+    ports["O"] = Out(Bit)
 
     class LUT(Circuit):
-        name = "LUT{}_{}".format(N, init)
-        IO = io
-        @classmethod
-        def definition(cls):
-            lutN = DeclareCoreirLUT(N, init)()
-            for i in range(N):
-                wire(getattr(lutN, "in")[i], getattr(cls, "I{}".format(i)))
-            wire(lutN.out, cls.O)
+        name = f"LUT{N}_{init}"
+        io = IO(**ports)
+        lutN = DeclareCoreirLUT(N, init)()
+        for i in range(N):
+            wire(getattr(lutN, "in")[i], getattr(io, "I{}".format(i)))
+        wire(lutN.out, io.O)
 
     return LUT
 

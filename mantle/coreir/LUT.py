@@ -33,15 +33,15 @@ def DefineLUT(init, N):
         io += ["I{}".format(i), In(Bit)]
     io += ["O", Out(Bit)]
 
+    ports = {key: value for key, value in zip(io[::2], io[1::2])}
+
     class LUT(Circuit):
         name = "LUT{}_{}".format(N, init)
-        IO = io
-        @classmethod
-        def definition(cls):
-            lutN = DeclareCoreirLUT(N, init)()
-            for i in range(N):
-                wire(getattr(lutN, "in")[i], getattr(cls, "I{}".format(i)))
-            wire(lutN.out, cls.O)
+        io = IO(**ports)
+        lutN = DeclareCoreirLUT(N, init)()
+        for i in range(N):
+            wire(getattr(lutN, "in")[i], getattr(io, "I{}".format(i)))
+        wire(lutN.out, io.O)
 
     return LUT
 

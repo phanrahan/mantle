@@ -28,12 +28,8 @@ def DeclareCoreirLUT(N, init):
     return _coreir_lut
 
 def DefineLUT(init, N):
-    io = []
-    for i in range(N):
-        io += ["I{}".format(i), In(Bit)]
-    io += ["O", Out(Bit)]
-
-    ports = {key: value for key, value in zip(io[::2], io[1::2])}
+    ports = {f"I{i}": In(Bit) for i in range(N)}
+    ports["O"] = Out(Bit)
 
     class LUT(Circuit):
         name = f"LUT{N}_{init}"

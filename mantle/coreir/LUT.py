@@ -36,7 +36,7 @@ def DefineLUT(init, N):
     ports = {key: value for key, value in zip(io[::2], io[1::2])}
 
     class LUT(Circuit):
-        name = "LUT{}_{}".format(N, init)
+        name = f"LUT{N}_{init}"
         io = IO(**ports)
         lutN = DeclareCoreirLUT(N, init)()
         for i in range(N):

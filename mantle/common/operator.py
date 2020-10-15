@@ -294,30 +294,3 @@ def mux(I, S, **kwargs):
             issubclass(S.T, m.Digital) and len(S) == 1:
         S = S[0]
     return Mux(len(I), T=T, **kwargs)(*I, S)
-
-
-orig_get_item = m.Array.__getitem__
-
-
-def dynamic_mux_select(self, S):
-    if isinstance(S, m.Type):
-        if issubclass(self.T, m.Digital):
-            length = None
-        else:
-            length = len(self.T)
-        height = len(self)
-        inputs = self.ts[:]
-        if m.mantle_target == "ice40" and height not in [2, 4, 8, 16]:
-            if height > 16:
-                raise NotImplementedError()
-            orig_height = height
-            height = 2 ** m.bitutils.clog2(height)
-            if not isinstance(inputs[0], m.Digital):
-                raise NotImplementedError(type(inputs[0]))
-            inputs.extend([m.bit(0) for _ in range(height - orig_height)])
-
-        return Mux(height, length)(*inputs, S)
-    return orig_get_item(self, S)
-
-
-setattr(m.Array, "__getitem__", dynamic_mux_select)

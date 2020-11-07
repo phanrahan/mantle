@@ -1,5 +1,4 @@
 import magma as m
-from mantle.coreir import DefineRegister
 
 
 def _make_read_type(data_width, addr_width):
@@ -14,7 +13,7 @@ def _make_write_type(data_width, addr_width):
 
 class RegFileBuilder(m.CircuitBuilder):
     def __init__(self, name, height: int, width: int, backend: str = "magma",
-                 write_forward=True):
+                 write_forward=True, reset_type=m.AsyncReset):
         """
         write_forward: (bool, default True) selects whether a read of a written
                        address returns the new value to be written
@@ -22,6 +21,7 @@ class RegFileBuilder(m.CircuitBuilder):
                        at the address (current register output)
         """
         super().__init__(name)
+        self.reset_type = reset_type
         self._data_width = width
         self._height = height
         self._addr_width = m.bitutils.clog2(height)
@@ -30,7 +30,7 @@ class RegFileBuilder(m.CircuitBuilder):
         self._enable_ports = {}
         self._readT = _make_read_type(self._data_width, self._addr_width)
         self._writeT = _make_write_type(self._data_width, self._addr_width)
-        clocks = m.ClockIO(has_async_reset=True).decl()
+        clocks = m.clock_io.gen_clock_io(reset_type).decl()
         for name, typ in zip(clocks[::2], clocks[1::2]):
             self._add_port(name, typ)
         self.backend = backend
@@ -76,7 +76,8 @@ class RegFileBuilder(m.CircuitBuilder):
             self._add_enable(name, enable)
 
     def _finalize_magma(self):
-        registers = [DefineRegister(self._data_width, has_async_reset=True)()
+        registers = [m.Register(m.Bits[self._data_width],
+                                reset_type=self.reset_type)()
                      for _ in range(self._height)]
         read_data = {name: None for name in self._read_ports}
         reg_data = [reg.O for reg in registers]

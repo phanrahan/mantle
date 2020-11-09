@@ -140,6 +140,27 @@ coreir_slice #(
 assign out = _join_out;
 endmodule
 
+module Register (
+    input [3:0] I,
+    output [3:0] O,
+    input CLK,
+    input ASYNCRESET
+);
+wire [3:0] reg_PR_inst0_out;
+coreir_reg_arst #(
+    .arst_posedge(1'b1),
+    .clk_posedge(1'b1),
+    .init(4'h0),
+    .width(4)
+) reg_PR_inst0 (
+    .clk(CLK),
+    .arst(ASYNCRESET),
+    .in(I),
+    .out(reg_PR_inst0_out)
+);
+assign O = reg_PR_inst0_out;
+endmodule
+
 module Mux4xBits4 (
     input [3:0] I0,
     input [3:0] I1,
@@ -195,6 +216,10 @@ wire [3:0] Mux2xBits4_inst2_O;
 wire [3:0] Mux2xBits4_inst3_O;
 wire [3:0] Mux2xBits4_inst4_O;
 wire [3:0] Mux4xBits4_inst0_O;
+wire [3:0] Register_inst0_O;
+wire [3:0] Register_inst1_O;
+wire [3:0] Register_inst2_O;
+wire [3:0] Register_inst3_O;
 wire [1:0] const_0_2_out;
 wire [1:0] const_1_2_out;
 wire [1:0] const_2_2_out;
@@ -209,30 +234,26 @@ wire magma_Bits_2_eq_inst1_out;
 wire magma_Bits_2_eq_inst2_out;
 wire magma_Bits_2_eq_inst3_out;
 wire magma_Bits_2_eq_inst4_out;
-wire [3:0] reg_PR_inst0_out;
-wire [3:0] reg_PR_inst1_out;
-wire [3:0] reg_PR_inst2_out;
-wire [3:0] reg_PR_inst3_out;
 Mux2xBits4 Mux2xBits4_inst0 (
-    .I0(reg_PR_inst0_out),
+    .I0(Register_inst0_O),
     .I1(write_0_data),
     .S(magma_Bit_and_inst0_out),
     .O(Mux2xBits4_inst0_O)
 );
 Mux2xBits4 Mux2xBits4_inst1 (
-    .I0(reg_PR_inst1_out),
+    .I0(Register_inst1_O),
     .I1(write_0_data),
     .S(magma_Bit_and_inst1_out),
     .O(Mux2xBits4_inst1_O)
 );
 Mux2xBits4 Mux2xBits4_inst2 (
-    .I0(reg_PR_inst2_out),
+    .I0(Register_inst2_O),
     .I1(write_0_data),
     .S(magma_Bit_and_inst2_out),
     .O(Mux2xBits4_inst2_O)
 );
 Mux2xBits4 Mux2xBits4_inst3 (
-    .I0(reg_PR_inst3_out),
+    .I0(Register_inst3_O),
     .I1(write_0_data),
     .S(magma_Bit_and_inst3_out),
     .O(Mux2xBits4_inst3_O)
@@ -244,12 +265,36 @@ Mux2xBits4 Mux2xBits4_inst4 (
     .O(Mux2xBits4_inst4_O)
 );
 Mux4xBits4 Mux4xBits4_inst0 (
-    .I0(reg_PR_inst0_out),
-    .I1(reg_PR_inst1_out),
-    .I2(reg_PR_inst2_out),
-    .I3(reg_PR_inst3_out),
+    .I0(Register_inst0_O),
+    .I1(Register_inst1_O),
+    .I2(Register_inst2_O),
+    .I3(Register_inst3_O),
     .S(read_0_addr),
     .O(Mux4xBits4_inst0_O)
+);
+Register Register_inst0 (
+    .I(Mux2xBits4_inst0_O),
+    .O(Register_inst0_O),
+    .CLK(CLK),
+    .ASYNCRESET(ASYNCRESET)
+);
+Register Register_inst1 (
+    .I(Mux2xBits4_inst1_O),
+    .O(Register_inst1_O),
+    .CLK(CLK),
+    .ASYNCRESET(ASYNCRESET)
+);
+Register Register_inst2 (
+    .I(Mux2xBits4_inst2_O),
+    .O(Register_inst2_O),
+    .CLK(CLK),
+    .ASYNCRESET(ASYNCRESET)
+);
+Register Register_inst3 (
+    .I(Mux2xBits4_inst3_O),
+    .O(Register_inst3_O),
+    .CLK(CLK),
+    .ASYNCRESET(ASYNCRESET)
 );
 coreir_const #(
     .value(2'h0),
@@ -334,50 +379,6 @@ coreir_eq #(
     .in0(write_0_addr),
     .in1(read_0_addr),
     .out(magma_Bits_2_eq_inst4_out)
-);
-coreir_reg_arst #(
-    .arst_posedge(1'b1),
-    .clk_posedge(1'b1),
-    .init(4'h0),
-    .width(4)
-) reg_PR_inst0 (
-    .clk(CLK),
-    .arst(ASYNCRESET),
-    .in(Mux2xBits4_inst0_O),
-    .out(reg_PR_inst0_out)
-);
-coreir_reg_arst #(
-    .arst_posedge(1'b1),
-    .clk_posedge(1'b1),
-    .init(4'h0),
-    .width(4)
-) reg_PR_inst1 (
-    .clk(CLK),
-    .arst(ASYNCRESET),
-    .in(Mux2xBits4_inst1_O),
-    .out(reg_PR_inst1_out)
-);
-coreir_reg_arst #(
-    .arst_posedge(1'b1),
-    .clk_posedge(1'b1),
-    .init(4'h0),
-    .width(4)
-) reg_PR_inst2 (
-    .clk(CLK),
-    .arst(ASYNCRESET),
-    .in(Mux2xBits4_inst2_O),
-    .out(reg_PR_inst2_out)
-);
-coreir_reg_arst #(
-    .arst_posedge(1'b1),
-    .clk_posedge(1'b1),
-    .init(4'h0),
-    .width(4)
-) reg_PR_inst3 (
-    .clk(CLK),
-    .arst(ASYNCRESET),
-    .in(Mux2xBits4_inst3_O),
-    .out(reg_PR_inst3_out)
 );
 assign read_0_data = Mux2xBits4_inst4_O;
 endmodule

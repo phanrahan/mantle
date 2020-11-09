@@ -29,8 +29,8 @@ module corebit_const #(
 endmodule
 
 module my_regfile (
-    input ASYNCRESET,
     input CLK,
+    input RESET,
     input [1:0] read_0_addr,
     output [3:0] read_0_data,
     input [1:0] write_0_addr,
@@ -74,18 +74,18 @@ assign read_0_data = data[read_0_addr];
 
 endmodule
 
-module test_regfile_basic_verilog_False (
+module test_regfile_basic_verilog_False_Reset (
     input [1:0] write_addr,
     input [3:0] write_data,
     input [1:0] read_addr,
     output [3:0] read_data,
     input CLK,
-    input ASYNCRESET
+    input RESET
 );
 wire [3:0] my_regfile_read_0_data;
 my_regfile my_regfile (
-    .ASYNCRESET(ASYNCRESET),
     .CLK(CLK),
+    .RESET(RESET),
     .read_0_addr(read_addr),
     .read_0_data(my_regfile_read_0_data),
     .write_0_addr(write_addr),

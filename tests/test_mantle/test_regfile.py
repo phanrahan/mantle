@@ -12,12 +12,13 @@ import mantle
                     reason="Only tested on coreir backend")
 @pytest.mark.parametrize("backend", ["magma", "verilog"])
 @pytest.mark.parametrize("write_forward", [True, False])
-def test_basic(backend, write_forward):
+@pytest.mark.parametrize("reset_type", [m.AsyncReset, m.Reset])
+def test_basic(backend, write_forward, reset_type):
     height = 4
     data_width = 4
     addr_width = m.bitutils.clog2(height)
 
-    _name = f"test_regfile_basic_{backend}_{write_forward}"
+    _name = f"test_regfile_basic_{backend}_{write_forward}_{reset_type.__name__}"
     class _Main(m.Circuit):
         name = _name
         io = m.IO(
@@ -25,10 +26,11 @@ def test_basic(backend, write_forward):
             write_data=m.In(m.Bits[data_width]),
             read_addr=m.In(m.Bits[addr_width]),
             read_data=m.Out(m.Bits[data_width])
-        ) + m.ClockIO(has_async_reset=True)
+        ) + m.clock_io.gen_clock_io(reset_type)
         reg_file = mantle.RegFileBuilder("my_regfile",  height, data_width,
                                          backend=backend,
-                                         write_forward=write_forward)
+                                         write_forward=write_forward,
+                                         reset_type=reset_type)
         reg_file[io.write_addr] = io.write_data
         io.read_data @= reg_file[io.read_addr]
 

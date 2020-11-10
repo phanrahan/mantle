@@ -12,6 +12,7 @@ echo repository=https://upload.pypi.org/legacy/  >> ~/.pypirc
 echo username=leonardt                           >> ~/.pypirc
 echo password=$PYPI_PASSWORD                     >> ~/.pypirc
 
+pip install --upgrade importlib-metadata
 pip install twine
 python setup.py sdist build
 

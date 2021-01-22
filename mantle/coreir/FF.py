@@ -141,7 +141,7 @@ def DefineDFF(init=0, has_ce=False, has_reset=False, has_async_reset=False, has_
         if has_async_resetn and has_async_reset:
             raise ValueError("Cannot have posedge and negedge asynchronous reset")
         if has_reset:
-            I = Mux()(io.I, bit(init), io.RESET)
+            I = Mux()(io.I, bit(init), m.bit(io.RESET))
         if has_ce:
             I = Mux()(value.O[0], I, io.CE)
         wire(I, value.I[0])

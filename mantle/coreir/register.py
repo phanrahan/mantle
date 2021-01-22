@@ -36,14 +36,14 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False,
             if has_reset and has_ce:
                 if reset_priority:
                     I = mantle.mux([O, I], io.CE, name="enable_mux")
-                    I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                    I = mantle.mux([I, m.bits(init, n)], m.bit(io.RESET))
                 else:
-                    I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                    I = mantle.mux([I, m.bits(init, n)], m.bit(io.RESET))
                     I = mantle.mux([O, I], io.CE, name="enable_mux")
             elif has_ce:
                 I = mantle.mux([O, I], io.CE, name="enable_mux")
             elif has_reset:
-                I = mantle.mux([I, m.bits(init, n)], io.RESET)
+                I = mantle.mux([I, m.bits(init, n)], m.bit(io.RESET))
             if n is None:
                 m.wire(I, reg.I[0])
             else:

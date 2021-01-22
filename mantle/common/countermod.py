@@ -33,7 +33,7 @@ def DefineCounterModM(m, n, cin=False, cout=True, incr=1,
         reset = Decode(m - 1, n)(counter.O)
 
         if has_reset:
-            reset = Or(2)(reset, io.RESET)
+            reset = Or(2)(reset, m.bit(io.RESET))
 
         if has_ce:
             CE = io.CE

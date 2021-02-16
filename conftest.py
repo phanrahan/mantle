@@ -1,6 +1,5 @@
 import pytest
 import magma
-import magma.backend.coreir_
 
 def pytest_addoption(parser):
     parser.addoption("--target", action="store", default="coreir")
@@ -35,5 +34,5 @@ def mantle_test():
     from magma import clear_cachedFunctions
     clear_cachedFunctions()
 
-    magma.backend.coreir_.CoreIRContextSingleton().reset_instance()
-
+    magma.frontend.coreir_.ResetCoreIR()
+    magma.generator.reset_generator_cache()

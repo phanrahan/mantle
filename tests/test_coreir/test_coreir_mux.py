@@ -3,7 +3,6 @@ coreir = pytest.importorskip("coreir")
 from magma import *
 from magma.testing import check_files_equal
 from mantle.coreir.MUX import DefineMux, DefineCoreirMux, CommonlibMuxN
-from magma.backend.coreir_ import CoreIRBackend
 from magma.simulator.coreir_simulator import CoreIRSimulator
 from magma.scope import Scope
 

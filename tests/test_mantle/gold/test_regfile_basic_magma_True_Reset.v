@@ -175,7 +175,7 @@ module Register (
 );
 wire [3:0] Mux2xBits4_inst0_O;
 wire [3:0] const_0_4_out;
-wire [3:0] reg_P_inst0_out;
+wire [3:0] reg_P4_inst0_out;
 Mux2xBits4 Mux2xBits4_inst0 (
     .I0(I),
     .I1(const_0_4_out),
@@ -192,12 +192,12 @@ coreir_reg #(
     .clk_posedge(1'b1),
     .init(4'h0),
     .width(4)
-) reg_P_inst0 (
+) reg_P4_inst0 (
     .clk(CLK),
     .in(Mux2xBits4_inst0_O),
-    .out(reg_P_inst0_out)
+    .out(reg_P4_inst0_out)
 );
-assign O = reg_P_inst0_out;
+assign O = reg_P4_inst0_out;
 endmodule
 
 module my_regfile (

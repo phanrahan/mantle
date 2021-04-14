@@ -146,19 +146,19 @@ module Register (
     input CLK,
     input ASYNCRESET
 );
-wire [3:0] reg_PR_inst0_out;
+wire [3:0] reg_PR4_inst0_out;
 coreir_reg_arst #(
     .arst_posedge(1'b1),
     .clk_posedge(1'b1),
     .init(4'h0),
     .width(4)
-) reg_PR_inst0 (
+) reg_PR4_inst0 (
     .clk(CLK),
     .arst(ASYNCRESET),
     .in(I),
-    .out(reg_PR_inst0_out)
+    .out(reg_PR4_inst0_out)
 );
-assign O = reg_PR_inst0_out;
+assign O = reg_PR4_inst0_out;
 endmodule
 
 module Mux4xBits4 (

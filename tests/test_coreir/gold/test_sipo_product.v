@@ -37,19 +37,19 @@ module Register (
     output O_X,
     output [4:0] O_Y
 );
-wire [5:0] reg_P_inst0_out;
+wire [5:0] reg_P6_inst0_out;
 wire [4:0] self_I_Y_out;
 wire [4:0] self_O_Y_in;
-wire [5:0] reg_P_inst0_in;
-assign reg_P_inst0_in = {self_I_Y_out[4:0],I_X};
+wire [5:0] reg_P6_inst0_in;
+assign reg_P6_inst0_in = {self_I_Y_out[4:0],I_X};
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(6'h00),
     .width(6)
-) reg_P_inst0 (
+) reg_P6_inst0 (
     .clk(CLK),
-    .in(reg_P_inst0_in),
-    .out(reg_P_inst0_out)
+    .in(reg_P6_inst0_in),
+    .out(reg_P6_inst0_out)
 );
 mantle_wire__typeBit5 self_I_Y (
     .in(I_Y),
@@ -57,9 +57,9 @@ mantle_wire__typeBit5 self_I_Y (
 );
 mantle_wire__typeBitIn5 self_O_Y (
     .in(self_O_Y_in),
-    .out(reg_P_inst0_out[5:1])
+    .out(reg_P6_inst0_out[5:1])
 );
-assign O_X = reg_P_inst0_out[0];
+assign O_X = reg_P6_inst0_out[0];
 assign O_Y = self_O_Y_in;
 endmodule
 

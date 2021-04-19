@@ -147,14 +147,13 @@ end\
         for name, data in read_data.items():
             read_port_str += f"assign {name}_data = {data};\n"
 
-        # TODO: Add CircuitBuilder API for adding verilog
-        self._dct['verilog'] = f"""
+        self._set_definition_attr('verilog', f"""
 reg [{self._data_width - 1}:0] data [{self._height - 1}:0];
 always @(posedge CLK) begin
     {write_port_str}
 end
 {read_port_str}
-"""
+""")
 
     @m.builder_method
     def _finalize(self):

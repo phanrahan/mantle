@@ -120,13 +120,10 @@ class RegFileBuilder(m.CircuitBuilder):
         # move this logic to the compiler internals somehow)
         read_data = {}
         for name in self._read_ports:
-            self._port(name).data.undriven()
-            self._port(name).addr.unused()
             read_data[name] = f"data[{name}_addr]"
 
         write_port_str = ""
         for name in self._write_ports:
-            self._port(name).unused()
             has_enable = name in self._enable_ports
             enable_name = self._enable_ports.get(name, None)
             write_str = f"data[{name}_addr] <= {name}_data;"
@@ -150,13 +147,14 @@ end\
         for name, data in read_data.items():
             read_port_str += f"assign {name}_data = {data};\n"
 
-        m.inline_verilog(f"""
+        # TODO: Add CircuitBuilder API for adding verilog
+        self._dct['verilog'] = f"""
 reg [{self._data_width - 1}:0] data [{self._height - 1}:0];
 always @(posedge CLK) begin
     {write_port_str}
 end
 {read_port_str}
-""")
+"""
 
     @m.builder_method
     def _finalize(self):

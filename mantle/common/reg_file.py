@@ -115,9 +115,6 @@ class RegFileBuilder(m.CircuitBuilder):
             port.data @= read_data[name]
 
     def _finalize_verilog(self):
-        # TODO: Use inline verilog for safety? Ideally we'd avoid generating
-        # verilog at this level, so not a priority (long term fix would be to
-        # move this logic to the compiler internals somehow)
         read_data = {}
         for name in self._read_ports:
             read_data[name] = f"data[{name}_addr]"

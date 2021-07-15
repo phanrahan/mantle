@@ -216,8 +216,8 @@ def test_arith(op, cin, cout, width):
 
 @pytest.mark.parametrize("width", WIDTHS)
 def test_negate(width):
-    if magma.mantle_target == "coreir":
-        pytest.skip("Negate circuits are wrappers around coreir declarations, cannot compile")
+    if magma.mantle_target in ["spartan6", "ice40", "coreir", "spartan3"]:
+        pytest.skip("Negate circuits are wrappers around declarations, cannot compile")
     class Main(m.Circuit):
         Define = mantle.Negate
         Test = Define(width)
@@ -261,6 +261,8 @@ def test_shift(op, width):
 
 @pytest.mark.skipif(magma.mantle_target == 'coreir',   reason='NYI')
 def test_dff():
+    if magma.mantle_target in ["spartan6", "ice40", "spartan3"]:
+        pytest.skip("DFF circuits are wrappers around declarations, cannot compile")
     class Main(m.Circuit):
         DFF = mantle.DFF
         Test = DFF()
@@ -275,6 +277,8 @@ def test_dff():
     op('TFF',  None),
 ])
 def test_ff(op):
+    if magma.mantle_target in ["spartan6", "ice40", "spartan3"]:
+        pytest.skip("FF circuits are wrappers around declarations, cannot compile")
     class Main(m.Circuit):
         FF = getattr(mantle, op.name)
         Test = FF()

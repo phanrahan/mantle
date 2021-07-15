@@ -1,4 +1,5 @@
 from magma import *
+from magma.wire_clock import wireclock
 from mantle import Mux
 from .register import _RegisterName, Register
 

@@ -1,5 +1,6 @@
 from magma import *
 from mantle import And, DefineAdd
+from magma.wire_clock import wireclock
 from mantle import Mux
 from .register import Register
 from .counter import counter_name

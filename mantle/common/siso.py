@@ -1,4 +1,5 @@
 from magma import *
+from magma.wire_clock import wireclock, wiredefaultclock
 from .register import _RegisterName, FFs
 
 __all__ = ['DefineSISO', 'SISO']

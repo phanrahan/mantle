@@ -1,5 +1,5 @@
 from magma import *
-from magma.wire_clock import wireclock
+from magma.passes.clock import drive_undriven_other_clock_types_in_inst
 from mantle import Not
 from .register import _RegisterName, FFs
 
@@ -21,7 +21,7 @@ def DefineJohnson(n, has_ce=False, has_reset=False):
             ffs = FFs(n, has_ce=has_ce, has_reset=has_reset)
             reg = scan(ffs, scanargs={"I":"O"})
             johnson.O(reg(Not()(reg.O[n-1])))
-            wireclock(johnson, reg)
+            drive_undriven_other_clock_types_in_inst(johnson, reg)
     return Johnson
 
 def Johnson(n, has_ce=False, has_reset=False, **kwargs):

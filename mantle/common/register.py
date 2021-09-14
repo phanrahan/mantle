@@ -1,7 +1,9 @@
 from magma import *
-from magma.wire_clock import wiredefaultclock, wireclock
 from magma.compatibility import IntegerTypes
 from magma.bitutils import int2seq, seq2int
+from magma.passes.clock import (
+    drive_undriven_clock_types_in_inst,
+    drive_undriven_other_clock_types_in_inst)
 from mantle import FF
 from collections.abc import Sequence
 
@@ -66,8 +68,8 @@ def DefineRegister(n, init=0, has_ce=False, has_reset=False, has_async_reset=Fal
             ffs = join(FFs(n, init, has_ce, has_reset, has_async_reset))
             wire(reg.I, ffs.I)
             wire(ffs.O, reg.O)
-            wireclock(reg, ffs)
-            wiredefaultclock(reg, ffs)
+            drive_undriven_clock_types_in_inst(reg, ffs)
+            drive_undriven_other_clock_types_in_inst(reg, ffs)
     return _Register
 
 def Register(n, init=0, has_ce=False, has_reset=False, has_async_reset=False, _type=Bits, **kwargs):

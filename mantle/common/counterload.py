@@ -1,6 +1,6 @@
 from magma import *
 from mantle import And, DefineAdd
-from magma.wire_clock import wireclock
+from magma.passes.clock import drive_undriven_other_clock_types_in_inst
 from mantle import Mux
 from .register import Register
 from .counter import counter_name
@@ -57,7 +57,7 @@ def DefineCounterLoad(n, cin=False, cout=True, incr=1, has_ce=False, has_reset=F
         if cout:
             wire( add.COUT, io.COUT ) # this is fishy because of the LOAD
 
-    wireclock(Counter, Counter.reg)
+    drive_undriven_other_clock_types_in_inst(Counter, Counter.reg)
 
     return Counter
 

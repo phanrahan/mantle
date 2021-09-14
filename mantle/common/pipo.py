@@ -1,5 +1,5 @@
 from magma import *
-from magma.wire_clock import wireclock
+from magma.passes.clock import drive_undriven_other_clock_types_in_inst
 from mantle import Mux
 from .register import _RegisterName, Register
 
@@ -30,7 +30,7 @@ def DefinePIPO(n, init=0, has_ce=False, has_reset=False):
             mux(si, pipo.PI, pipo.LOAD)
             reg(mux)
             wire(reg.O, pipo.O)
-            wireclock(pipo, reg)
+            drive_undriven_other_clock_types_in_inst(pipo, reg)
 
     return _PIPO
 

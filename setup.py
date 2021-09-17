@@ -28,7 +28,7 @@ setup(
     install_requires=[
         "six",
         "fault>=1.0.*",
-        "magma-lang>=2.0.0",
+        "magma-lang>=2.1.52",
     ],
     python_requires='>=3.6'
 )

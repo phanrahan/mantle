@@ -1,5 +1,5 @@
 from magma import *
-from magma.wire_clock import wireclock
+from magma.passes.clock import drive_undriven_other_clock_types_in_inst
 from .register import _RegisterName, FFs
 
 __all__  = ['DefineRing', 'Ring']
@@ -19,7 +19,7 @@ def DefineRing(n, init=1, has_ce=False, has_reset=False):
             reg = scan(ffs, scanargs={"I":"O"})
             reg(reg.O[n-1])
             wire(reg.O, ring.O)
-            wireclock(ring, reg)
+            drive_undriven_other_clock_types_in_inst(ring, reg)
     return Ring
 
 def Ring(n, init=1, has_ce=False, has_reset=False, **kwargs):

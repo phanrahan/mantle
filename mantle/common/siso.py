@@ -1,5 +1,7 @@
 from magma import *
-from magma.wire_clock import wireclock, wiredefaultclock
+from magma.passes.clock import (
+    drive_undriven_clock_types_in_inst,
+    drive_undriven_other_clock_types_in_inst)
 from .register import _RegisterName, FFs
 
 __all__ = ['DefineSISO', 'SISO']
@@ -21,8 +23,8 @@ def DefineSISO(n, init=0, has_ce=False, has_reset=False):
             reg = braid(ffs, foldargs={"I":"O"})
             reg(siso.I)
             wire(reg.O, siso.O)
-            wireclock(siso, reg)
-            wiredefaultclock(siso, reg)
+            drive_undriven_clock_types_in_inst(siso, reg)
+            drive_undriven_other_clock_types_in_inst(siso, reg)
     return _SISO
 
 def SISO(n, init=0, has_ce=False, has_reset=False, **kwargs):

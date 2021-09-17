@@ -1,5 +1,5 @@
 from magma import *
-from magma.wire_clock import wireclock
+from magma.passes.clock import drive_undriven_other_clock_types_in_inst
 from mantle import Mux
 from .register import _RegisterName, Register, FFs
 
@@ -30,7 +30,7 @@ def DefinePISO(n, init=0, has_ce=False, has_reset=False):
             mux(si, piso.PI, piso.LOAD)
             reg(mux)
             wire(reg.O[n-1], piso.O)
-            wireclock(piso, reg)
+            drive_undriven_other_clock_types_in_inst(piso, reg)
 
     return _PISO
 

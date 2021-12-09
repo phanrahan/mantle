@@ -44,10 +44,12 @@ def DefineCounter(n, cin=False, cout=True, incr=1,
 
         add = DefineAdd(n, cin=cin, cout=cout)()
         reg = Register(n, has_ce=has_ce, has_reset=has_reset)
+        if has_ce:
+            reg.CE @= io.CE
 
         m.wire(reg.O, add.I0)
         m.wire(m.array(incr, n), add.I1)
-        reg(add.O)
+        reg.I @= add.O
 
         next = False
         if next:
@@ -113,13 +115,13 @@ def DefineUpDownCounter(n, cout=True, has_ce=False, has_reset=False):
 
         add = Add(n, cin=True, cout=cout)
         reg = Register(n, has_ce=has_ce, has_reset=has_reset)
-    
+
         m.wire(reg.O, add.I0)
         m.wire(m.array(n * [io.D]), add.I1)
         m.wire(io.U, add.CIN)
-    
+
         reg(add)
-    
+
         next = False
         if next:
             m.wire(add.O, io.O)
@@ -127,7 +129,7 @@ def DefineUpDownCounter(n, cout=True, has_ce=False, has_reset=False):
             m.wire(reg.O, io.O)
         if cout:
             m.wire(add.COUT, io.COUT)
-    
+
     return _Counter
 
 

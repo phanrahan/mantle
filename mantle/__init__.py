@@ -1,6 +1,9 @@
 import mantle
 import magma as m
 import importlib
+import mantle.bitutils
+for func in mantle.bitutils.__all__:
+    setattr(m.bitutils, func, getattr(mantle.bitutils, func))
 
 
 def weak_import(module, scope):

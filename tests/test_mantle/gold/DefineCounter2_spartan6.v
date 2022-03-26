@@ -29,7 +29,7 @@ module Counter2_COUT (output [1:0] O, output  COUT, input  CLK);
 wire [1:0] Add2_cout_inst0_O;
 wire  Add2_cout_inst0_COUT;
 wire [1:0] Register2_inst0_O;
-Add2_cout Add2_cout_inst0 (.I0(Register2_inst0_O), .I1({1'b0,1'b1}), .O(Add2_cout_inst0_O), .COUT(Add2_cout_inst0_COUT));
+Add2_cout Add2_cout_inst0 (.I0(Register2_inst0_O), .I1(2'd1'), .O(Add2_cout_inst0_O), .COUT(Add2_cout_inst0_COUT));
 Register2 Register2_inst0 (.I(Add2_cout_inst0_O), .O(Register2_inst0_O), .CLK(CLK));
 assign O = Register2_inst0_O;
 assign COUT = Add2_cout_inst0_COUT;

@@ -86,9 +86,9 @@ Register1CE Register1CE_inst2 (.I(WDATA), .O(Register1CE_inst2_O), .CLK(CLK), .C
 Register1CE Register1CE_inst3 (.I(WDATA), .O(Register1CE_inst3_O), .CLK(CLK), .CE(And2x4_inst0_O[3]));
 Decoder2 Decoder2_inst0 (.I(WADDR), .O(Decoder2_inst0_O));
 And2x4 And2x4_inst0 (.I0(Decoder2_inst0_O), .I1({WE,WE,WE,WE}), .O(And2x4_inst0_O));
-Mux2x1 Mux2x1_inst0 (.I0(Register1CE_inst0_O), .I1(Register1CE_inst1_O), .S(RADDR[0]), .O(Mux2x1_inst0_O));
-Mux2x1 Mux2x1_inst1 (.I0(Register1CE_inst2_O), .I1(Register1CE_inst3_O), .S(RADDR[0]), .O(Mux2x1_inst1_O));
-Mux2x1 Mux2x1_inst2 (.I0(Mux2x1_inst0_O), .I1(Mux2x1_inst1_O), .S(RADDR[1]), .O(Mux2x1_inst2_O));
+Mux2x1 Mux2x1_inst0 (.S(RADDR[0]), .O(Mux2x1_inst0_O));
+Mux2x1 Mux2x1_inst1 (.S(RADDR[0]), .O(Mux2x1_inst1_O));
+Mux2x1 Mux2x1_inst2 (.S(RADDR[1]), .O(Mux2x1_inst2_O));
 assign RDATA = Mux2x1_inst2_O;
 endmodule
 
@@ -119,7 +119,7 @@ endmodule
 module Counter2 (output [1:0] O, input  CLK);
 wire [1:0] Add2_inst0_O;
 wire [1:0] Register2_inst0_O;
-Add2 Add2_inst0 (.I0(Register2_inst0_O), .I1({1'b0,1'b1}), .O(Add2_inst0_O));
+Add2 Add2_inst0 (.I0(Register2_inst0_O), .I1(2'd1'), .O(Add2_inst0_O));
 Register2 Register2_inst0 (.I(Add2_inst0_O), .O(Register2_inst0_O), .CLK(CLK));
 assign O = Register2_inst0_O;
 endmodule
@@ -143,7 +143,7 @@ endmodule
 module Counter1 (output [0:0] O, input  CLK);
 wire [0:0] Add1_inst0_O;
 wire [0:0] Register1_inst0_O;
-Add1 Add1_inst0 (.I0(Register1_inst0_O), .I1({1'b1}), .O(Add1_inst0_O));
+Add1 Add1_inst0 (.I0(Register1_inst0_O), .I1(1'd1'), .O(Add1_inst0_O));
 Register1 Register1_inst0 (.I(Add1_inst0_O), .O(Register1_inst0_O), .CLK(CLK));
 assign O = Register1_inst0_O;
 endmodule

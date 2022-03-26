@@ -15,7 +15,7 @@ def test_ram():
     we = 1
     raddr = mantle.Counter(2, cout=False)
 
-    ram(raddr, waddr, wdata, we, CLK=main.CLKIN)
+    ram(raddr.O, waddr.O, wdata.O, we, CLK=main.CLKIN)
 
     m.wire(ram.RDATA[0], main.rdata)
     m.EndDefine()

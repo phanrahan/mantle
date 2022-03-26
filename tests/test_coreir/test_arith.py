@@ -24,7 +24,6 @@ def test_add_cout_one():
     wire(testcircuit.O, add.O)
     wire(testcircuit.COUT, add.COUT)
     EndCircuit()
-    sim = CoreIRSimulator(testcircuit, testcircuit.CLK)
 
 
 def test_add_cout_two():

@@ -40,7 +40,7 @@ module Counter4_COUT (output [3:0] O, output  COUT, input  CLK);
 wire [3:0] Add4_COUT_inst0_O;
 wire  Add4_COUT_inst0_COUT;
 wire [3:0] Register4_inst0_O;
-Add4_COUT Add4_COUT_inst0 (.I0(Register4_inst0_O), .I1({1'b0,1'b0,1'b0,1'b1}), .O(Add4_COUT_inst0_O), .COUT(Add4_COUT_inst0_COUT));
+Add4_COUT Add4_COUT_inst0 (.I0(Register4_inst0_O), .I1(4'd1'), .O(Add4_COUT_inst0_O), .COUT(Add4_COUT_inst0_COUT));
 Register4 Register4_inst0 (.I(Add4_COUT_inst0_O), .O(Register4_inst0_O), .CLK(CLK));
 assign O = Register4_inst0_O;
 assign COUT = Add4_COUT_inst0_COUT;

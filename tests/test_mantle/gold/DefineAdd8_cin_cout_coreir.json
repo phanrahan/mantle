@@ -36,11 +36,11 @@
           ["coreir_add9_inst1.in0.8","bit_const_0_None.out"],
           ["coreir_add9_inst1.in1.8","bit_const_0_None.out"],
           ["coreir_add9_inst1.out","coreir_add9_inst0.in0"],
-          ["self.I1.0:8","coreir_add9_inst0.in1.0:8"],
-          ["self.O.0:8","coreir_add9_inst0.out.0:8"],
+          ["self.I1","coreir_add9_inst0.in1.0:8"],
+          ["self.O","coreir_add9_inst0.out.0:8"],
           ["self.COUT","coreir_add9_inst0.out.8"],
           ["self.CIN","coreir_add9_inst1.in0.0"],
-          ["self.I0.0:8","coreir_add9_inst1.in1.0:8"]
+          ["self.I0","coreir_add9_inst1.in1.0:8"]
         ]
       }
     }

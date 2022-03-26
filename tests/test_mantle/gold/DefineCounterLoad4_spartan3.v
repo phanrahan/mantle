@@ -62,7 +62,7 @@ wire [3:0] Add4_cout_inst0_O;
 wire  Add4_cout_inst0_COUT;
 wire [3:0] Mux2x4_inst0_O;
 wire [3:0] Register4_inst0_O;
-Add4_cout Add4_cout_inst0 (.I0(Register4_inst0_O), .I1({1'b0,1'b0,1'b0,1'b1}), .O(Add4_cout_inst0_O), .COUT(Add4_cout_inst0_COUT));
+Add4_cout Add4_cout_inst0 (.I0(Register4_inst0_O), .I1(4'd1'), .O(Add4_cout_inst0_O), .COUT(Add4_cout_inst0_COUT));
 Mux2x4 Mux2x4_inst0 (.I0(Add4_cout_inst0_O), .I1(DATA), .S(LOAD), .O(Mux2x4_inst0_O));
 Register4 Register4_inst0 (.I(Mux2x4_inst0_O), .O(Register4_inst0_O), .CLK(CLK));
 assign O = Register4_inst0_O;

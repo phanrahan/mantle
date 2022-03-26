@@ -32,7 +32,7 @@ wire  LUT2_inst0_O;
 wire  LUT2_inst1_O;
 wire  LUT2_inst2_O;
 wire  LUT2_inst3_O;
-Add4_cin0 Add4_cin0_inst0 (.I0(I), .I1({1'b1,1'b1,1'b1,1'b1}), .O(Add4_cin0_inst0_O));
+Add4_cin0 Add4_cin0_inst0 (.I0(I), .I1(4'd15'), .O(Add4_cin0_inst0_O));
 LUT2 #(.INIT(4'h2)) LUT2_inst0 (.I0(I[0]), .I1(Add4_cin0_inst0_O[0]), .O(LUT2_inst0_O));
 LUT2 #(.INIT(4'h2)) LUT2_inst1 (.I0(I[1]), .I1(Add4_cin0_inst0_O[1]), .O(LUT2_inst1_O));
 LUT2 #(.INIT(4'h2)) LUT2_inst2 (.I0(I[2]), .I1(Add4_cin0_inst0_O[2]), .O(LUT2_inst2_O));

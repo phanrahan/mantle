@@ -45,7 +45,7 @@ wire  SB_LUT4_inst4_O;
 wire  SB_LUT4_inst5_O;
 wire  SB_LUT4_inst6_O;
 wire  SB_LUT4_inst7_O;
-Add8 Add8_inst0 (.I0(I), .I1({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}), .O(Add8_inst0_O));
+Add8 Add8_inst0 (.I0(I), .I1(8'd255'), .O(Add8_inst0_O));
 SB_LUT4 #(.LUT_INIT(16'h0002)) SB_LUT4_inst0 (.I0(I[0]), .I1(Add8_inst0_O[0]), .I2(1'b0), .I3(1'b0), .O(SB_LUT4_inst0_O));
 SB_LUT4 #(.LUT_INIT(16'h0002)) SB_LUT4_inst1 (.I0(I[1]), .I1(Add8_inst0_O[1]), .I2(1'b0), .I3(1'b0), .O(SB_LUT4_inst1_O));
 SB_LUT4 #(.LUT_INIT(16'h0002)) SB_LUT4_inst2 (.I0(I[2]), .I1(Add8_inst0_O[2]), .I2(1'b0), .I3(1'b0), .O(SB_LUT4_inst2_O));

@@ -41,7 +41,7 @@ corebit_const #(
     .out(bit_const_0_None_out)
 );
 wire [8:0] coreir_add9_inst0_in1;
-assign coreir_add9_inst0_in1 = {bit_const_0_None_out,I1[7:0]};
+assign coreir_add9_inst0_in1 = {bit_const_0_None_out,I1};
 coreir_add #(
     .width(9)
 ) coreir_add9_inst0 (
@@ -52,7 +52,7 @@ coreir_add #(
 wire [8:0] coreir_add9_inst1_in0;
 assign coreir_add9_inst1_in0 = {bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,CIN};
 wire [8:0] coreir_add9_inst1_in1;
-assign coreir_add9_inst1_in1 = {bit_const_0_None_out,I0[7:0]};
+assign coreir_add9_inst1_in1 = {bit_const_0_None_out,I0};
 coreir_add #(
     .width(9)
 ) coreir_add9_inst1 (

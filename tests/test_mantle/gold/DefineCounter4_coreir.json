@@ -22,9 +22,9 @@
         "connections":[
           ["coreir_add5_inst0.in0.4","bit_const_0_None.out"],
           ["coreir_add5_inst0.in1.4","bit_const_0_None.out"],
-          ["self.I0.0:4","coreir_add5_inst0.in0.0:4"],
-          ["self.I1.0:4","coreir_add5_inst0.in1.0:4"],
-          ["self.O.0:4","coreir_add5_inst0.out.0:4"],
+          ["self.I0","coreir_add5_inst0.in0.0:4"],
+          ["self.I1","coreir_add5_inst0.in1.0:4"],
+          ["self.O","coreir_add5_inst0.out.0:4"],
           ["self.COUT","coreir_add5_inst0.out.4"]
         ]
       },

@@ -21,7 +21,7 @@ module Arbiter2 (input [1:0] I, output [1:0] O);
 wire [1:0] Add2_inst0_O;
 wire  SB_LUT4_inst0_O;
 wire  SB_LUT4_inst1_O;
-Add2 Add2_inst0 (.I0(I), .I1({1'b1,1'b1}), .O(Add2_inst0_O));
+Add2 Add2_inst0 (.I0(I), .I1(2'd3'), .O(Add2_inst0_O));
 SB_LUT4 #(.LUT_INIT(16'h0002)) SB_LUT4_inst0 (.I0(I[0]), .I1(Add2_inst0_O[0]), .I2(1'b0), .I3(1'b0), .O(SB_LUT4_inst0_O));
 SB_LUT4 #(.LUT_INIT(16'h0002)) SB_LUT4_inst1 (.I0(I[1]), .I1(Add2_inst0_O[1]), .I2(1'b0), .I3(1'b0), .O(SB_LUT4_inst1_O));
 assign O = {SB_LUT4_inst1_O,SB_LUT4_inst0_O};

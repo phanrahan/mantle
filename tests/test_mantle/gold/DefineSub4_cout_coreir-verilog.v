@@ -41,7 +41,7 @@ corebit_const #(
     .out(bit_const_0_None_out)
 );
 wire [4:0] coreir_add5_inst0_in1;
-assign coreir_add5_inst0_in1 = {bit_const_0_None_out,I1[3:0]};
+assign coreir_add5_inst0_in1 = {bit_const_0_None_out,I1};
 coreir_add #(
     .width(5)
 ) coreir_add5_inst0 (
@@ -52,7 +52,7 @@ coreir_add #(
 wire [4:0] coreir_add5_inst1_in0;
 assign coreir_add5_inst1_in0 = {bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,bit_const_0_None_out,CIN};
 wire [4:0] coreir_add5_inst1_in1;
-assign coreir_add5_inst1_in1 = {bit_const_0_None_out,I0[3:0]};
+assign coreir_add5_inst1_in1 = {bit_const_0_None_out,I0};
 coreir_add #(
     .width(5)
 ) coreir_add5_inst1 (

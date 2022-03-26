@@ -141,9 +141,9 @@ corebit_const #(
     .out(bit_const_0_None_out)
 );
 wire [2:0] coreir_add3_inst0_in0;
-assign coreir_add3_inst0_in0 = {bit_const_0_None_out,I0[1:0]};
+assign coreir_add3_inst0_in0 = {bit_const_0_None_out,I0};
 wire [2:0] coreir_add3_inst0_in1;
-assign coreir_add3_inst0_in1 = {bit_const_0_None_out,I1[1:0]};
+assign coreir_add3_inst0_in1 = {bit_const_0_None_out,I1};
 coreir_add #(
     .width(3)
 ) coreir_add3_inst0 (

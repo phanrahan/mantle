@@ -6,7 +6,7 @@ module Add8_cout_cin (
     input CIN
 );
 wire [8:0] coreir_add9_inst0_out;
-assign coreir_add9_inst0_out = 9'((9'(({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,CIN}) + ({1'b0,I0[7:0]}))) + ({1'b0,I1[7:0]}));
+assign coreir_add9_inst0_out = 9'((9'(({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,CIN}) + ({1'b0,I0}))) + ({1'b0,I1}));
 assign O = coreir_add9_inst0_out[7:0];
 assign COUT = coreir_add9_inst0_out[8];
 endmodule

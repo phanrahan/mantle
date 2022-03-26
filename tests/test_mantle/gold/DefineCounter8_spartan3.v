@@ -75,7 +75,7 @@ module Counter8_COUT (output [7:0] O, output  COUT, input  CLK);
 wire [7:0] Add8_cout_inst0_O;
 wire  Add8_cout_inst0_COUT;
 wire [7:0] Register8_inst0_O;
-Add8_cout Add8_cout_inst0 (.I0(Register8_inst0_O), .I1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1}), .O(Add8_cout_inst0_O), .COUT(Add8_cout_inst0_COUT));
+Add8_cout Add8_cout_inst0 (.I0(Register8_inst0_O), .I1(8'd1'), .O(Add8_cout_inst0_O), .COUT(Add8_cout_inst0_COUT));
 Register8 Register8_inst0 (.I(Add8_cout_inst0_O), .O(Register8_inst0_O), .CLK(CLK));
 assign O = Register8_inst0_O;
 assign COUT = Add8_cout_inst0_COUT;

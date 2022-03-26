@@ -45,7 +45,7 @@ wire [1:0] Add2_COUT_inst0_O;
 wire  Add2_COUT_inst0_COUT;
 wire [1:0] Mux2x2_inst0_O;
 wire [1:0] Register2_inst0_O;
-Add2_COUT Add2_COUT_inst0 (.I0(Register2_inst0_O), .I1({1'b0,1'b1}), .O(Add2_COUT_inst0_O), .COUT(Add2_COUT_inst0_COUT));
+Add2_COUT Add2_COUT_inst0 (.I0(Register2_inst0_O), .I1(2'd1'), .O(Add2_COUT_inst0_O), .COUT(Add2_COUT_inst0_COUT));
 Mux2x2 Mux2x2_inst0 (.I0(Add2_COUT_inst0_O), .I1(DATA), .S(LOAD), .O(Mux2x2_inst0_O));
 Register2 Register2_inst0 (.I(Mux2x2_inst0_O), .O(Register2_inst0_O), .CLK(CLK));
 assign O = Register2_inst0_O;

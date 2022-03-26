@@ -110,7 +110,7 @@ wire [7:0] Add8_cout_inst0_O;
 wire  Add8_cout_inst0_COUT;
 wire [7:0] Mux2x8_inst0_O;
 wire [7:0] Register8_inst0_O;
-Add8_cout Add8_cout_inst0 (.I0(Register8_inst0_O), .I1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1}), .O(Add8_cout_inst0_O), .COUT(Add8_cout_inst0_COUT));
+Add8_cout Add8_cout_inst0 (.I0(Register8_inst0_O), .I1(8'd1'), .O(Add8_cout_inst0_O), .COUT(Add8_cout_inst0_COUT));
 Mux2x8 Mux2x8_inst0 (.I0(Add8_cout_inst0_O), .I1(DATA), .S(LOAD), .O(Mux2x8_inst0_O));
 Register8 Register8_inst0 (.I(Mux2x8_inst0_O), .O(Register8_inst0_O), .CLK(CLK));
 assign O = Register8_inst0_O;

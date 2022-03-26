@@ -20,7 +20,7 @@ module Arbiter2 (input [1:0] I, output [1:0] O);
 wire [1:0] Add2_inst0_O;
 wire  LUT2_inst0_O;
 wire  LUT2_inst1_O;
-Add2 Add2_inst0 (.I0(I), .I1({1'b1,1'b1}), .O(Add2_inst0_O));
+Add2 Add2_inst0 (.I0(I), .I1(2'd3'), .O(Add2_inst0_O));
 LUT2 #(.INIT(4'h2)) LUT2_inst0 (.I0(I[0]), .I1(Add2_inst0_O[0]), .O(LUT2_inst0_O));
 LUT2 #(.INIT(4'h2)) LUT2_inst1 (.I0(I[1]), .I1(Add2_inst0_O[1]), .O(LUT2_inst1_O));
 assign O = {LUT2_inst1_O,LUT2_inst0_O};

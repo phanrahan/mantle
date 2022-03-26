@@ -1,17 +1,3 @@
-module mantle_wire__typeBitIn5 (
-    output [4:0] in,
-    input [4:0] out
-);
-assign in = out;
-endmodule
-
-module mantle_wire__typeBit5 (
-    input [4:0] in,
-    output [4:0] out
-);
-assign out = in;
-endmodule
-
 module coreir_reg #(
     parameter width = 1,
     parameter clk_posedge = 1,
@@ -42,12 +28,8 @@ module Register (
     output [4:0] O_1_Y
 );
 wire [11:0] reg_P12_inst0_out;
-wire [4:0] self_I_0_Y_out;
-wire [4:0] self_I_1_Y_out;
-wire [4:0] self_O_0_Y_in;
-wire [4:0] self_O_1_Y_in;
 wire [11:0] reg_P12_inst0_in;
-assign reg_P12_inst0_in = {self_I_1_Y_out[4:0],I_1_X,self_I_0_Y_out[4:0],I_0_X};
+assign reg_P12_inst0_in = {I_1_Y,I_1_X,I_0_Y,I_0_X};
 coreir_reg #(
     .clk_posedge(1'b1),
     .init(12'h000),
@@ -57,26 +39,10 @@ coreir_reg #(
     .in(reg_P12_inst0_in),
     .out(reg_P12_inst0_out)
 );
-mantle_wire__typeBit5 self_I_0_Y (
-    .in(I_0_Y),
-    .out(self_I_0_Y_out)
-);
-mantle_wire__typeBit5 self_I_1_Y (
-    .in(I_1_Y),
-    .out(self_I_1_Y_out)
-);
-mantle_wire__typeBitIn5 self_O_0_Y (
-    .in(self_O_0_Y_in),
-    .out(reg_P12_inst0_out[5:1])
-);
-mantle_wire__typeBitIn5 self_O_1_Y (
-    .in(self_O_1_Y_in),
-    .out(reg_P12_inst0_out[11:7])
-);
 assign O_0_X = reg_P12_inst0_out[0];
-assign O_0_Y = self_O_0_Y_in;
+assign O_0_Y = {reg_P12_inst0_out[5],reg_P12_inst0_out[4],reg_P12_inst0_out[3],reg_P12_inst0_out[2],reg_P12_inst0_out[1]};
 assign O_1_X = reg_P12_inst0_out[6];
-assign O_1_Y = self_O_1_Y_in;
+assign O_1_Y = {reg_P12_inst0_out[11],reg_P12_inst0_out[10],reg_P12_inst0_out[9],reg_P12_inst0_out[8],reg_P12_inst0_out[7]};
 endmodule
 
 module SIPO5 (
